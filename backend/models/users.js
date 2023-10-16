@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-
+const jwt = require("jsonwebtoken");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -17,20 +17,31 @@ const userSchema = new mongoose.Schema({
       }
     },
   },
-  phone: {
-    type: Number,
-    min: 10,
-    max: 10,
-    required: true,
-    unique: true,
-  },
-  address: {
+  // phone: {
+  //   type: Number,
+  //   min: 10,
+  //   max: 10,
+  //   required: true,
+  //   unique: true,
+  // },
+  // address: {
+  //   type: String,
+  //   required: true,
+  // },
+  password: {
     type: String,
-    required: true,
-  },
+    min: 6,
+    required: true
+  }
 });
 
 // we will create new collection 
 const Users = new mongoose.model("Users",userSchema);
+const secretKey = process.env.JWT_SECRET;
+userSchema.methods.generateAuthToken = async function() {
+  const user = this;
+  const token = jwt.sign({ _id: user._id.toString() }, secretKey);
+  return token;
+};
 
 module.exports=Users;
