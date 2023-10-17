@@ -98,7 +98,7 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     gap: 12px;
     list-style: none;
-    justify-content: end;
+    justify-content: flex-end;
     margin: 0;
 }
 
