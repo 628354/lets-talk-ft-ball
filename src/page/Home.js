@@ -1,7 +1,7 @@
 import React from 'react';
 import Headerslider from '../components/Headerslider';
 import Container from 'react-bootstrap/Container';
-import Leagues_slider from '../components/Leagues_slider';
+import LeaguesSlider from '../components/Leagues_slider';
 
 
 
@@ -18,7 +18,7 @@ export default function Home() {
             <div className='leagues_cont'>
               <h2>Leagues</h2>
               <div className='leagues_slider'>
-                <Leagues_slider/>
+                <LeaguesSlider />
 
                 <div className='sp_botton'>
                   <button className='spc_button'>MORE LEAGUES WILL BE ADDED</button>
