@@ -1,0 +1,451 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+    
+}
+h1 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 40px;
+}
+h2 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 40px;
+}
+h3 {
+    margin: 0px;
+    padding: 0px;
+}
+h4 {
+    margin: 0px;
+    padding: 0px;
+}
+h5 {
+    margin: 0px;
+    padding: 0px;
+}
+h6 {
+    margin: 0px;
+    padding: 0px;
+}
+p {
+    margin: 0px;
+    padding: 0px;
+
+}
+body::-webkit-scrollbar {
+    width: 10px;
+}
+body::-webkit-scrollbar-track {
+    background-color: var(--there-color);
+}
+body::-webkit-scrollbar-thumb {
+    background-color: var(--text-color);
+    border-radius: 20px;
+}
+
+:root {
+    --primary-color: #f20032;
+    --secondary-color: #000;
+    --there-color: #ffffff;
+    --text-color: #040525;
+    --back-g-color: #f5f5f5;
+    /* Add more colors as needed */
+  }
+
+
+/* button */
+.spc_button {
+    background: #fff;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    width: 244px !important;
+    float: none;
+    text-align: center;
+    padding: 14px 0;
+    border: 2px solid var(--primary-color);
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0 auto;
+    display: block;
+    clear: both;
+}
+.sp_botton {
+    padding-top: 50px;
+}
+._2p3a {
+    width: 100% !important;
+}
+.iframe {
+    width: 800px !important; /* Width as per your requirements */
+  }
+/* button */
+
+
+
+
+/* top header css */
+.es_media {
+    display: flex;
+    gap: 12px;
+    list-style: none;
+    justify-content: end;
+    margin: 0;
+}
+
+.es_topheader {
+    background: #000;
+    padding: 10px 0;
+}
+img.brand-rearth {
+    padding: 0px 6px;
+}
+.ar_icon a {
+    color:  var(--there-color);
+}
+.es_media li a i {
+    background-color: var(--primary-color);
+    color:  var(--there-color);
+    width: 20px !important;
+    float: left;
+    text-align: center;
+    border-radius: 50px;
+    font-size: 12px;
+    height: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.estest {
+    /* line-height: 28px; */
+    padding-top: 3px;
+}
+.sticky-top {
+    position: absolute;
+    top: 43px;
+    /* background-color: #000; */
+    border-top: 1px solid #524f4f;
+    width: 100%;
+}
+
+.esmenuitem.navbar-nav a {
+    color:  var(--there-color) !important;
+    display: block;
+    position: relative;
+    padding: 9px 26px !important;
+    transition: 0.3s;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+ul.en_media li a {
+    color:  var(--there-color);
+    font-size: 13px;
+    text-transform: capitalize;
+    font-weight: normal;
+    padding: 0px 0px 7px 5px;
+    float: left;
+    text-decoration: underline;
+}
+/* top header css end */
+
+/* footer css start */
+.en_footer.ar_footer {
+    background-color: var(--text-color);
+    padding: 35px 0;
+}
+
+ul.en_footer_menu.ar_footer_menu li a {
+    color:  var(--there-color);
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 32px;
+}
+.en_footercontantin p {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+    color:  var(--there-color);
+}
+ul.en_media li {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+ul.en_media {
+    margin: 0 !important;
+    padding: 0;
+    margin-bottom: 8px !important;
+    font-size: 13px;
+    color:  var(--there-color);
+}
+
+.enfooter {
+    justify-content: start;
+    margin: 0;
+    padding: 0;
+}
+.enfooter li a {
+    padding-left: 0 !important;
+}
+
+button.button_search {
+    background-color:  var(--primary-color);
+    border: none;
+    line-height: 1;
+    color:  var(--there-color);
+    font-size: 14px;
+    padding: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: 0.5s;
+    position: relative;
+    z-index: 9;
+    float: right;
+    margin-top: 0;
+    width: 100px;
+    line-height: 54px;
+    position: absolute;
+    right: 0;
+}
+input.search_bar_input {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    background-color:  var(--there-color);
+    padding: 0;
+    height: 54px;
+    color: var(--text-color);
+    padding-left: 15px;
+    width: 100%;
+    border-bottom: 0;
+}
+.en_button_search_bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 22px;
+}
+.en_line {
+    border-right: 1px solid #6a6b89;
+}
+.en_footer_menu {
+    margin: 0;
+    padding-left: 15px;
+}
+.en_footercontantin {
+    padding-left: 20px;
+}
+
+.last_to_footer {
+    background-color:  var(--primary-color);
+    padding: 10px 0;
+}
+.last_footer p {
+    font-size: 13px;
+    text-transform: capitalize;
+    color:  var(--there-color);
+    font-weight: normal;
+    text-align: center;
+}
+.last_footer p a {
+    color:  var(--there-color);
+    position: relative;
+}
+.last_footer p a:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background:  var(--there-color);
+    left: 0;
+    bottom: 0;
+}
+.iconhover li a i:hover {
+    background-color: var(--there-color);
+    color: var(--primary-color);
+}
+
+
+/* footer css end */
+/* header slider */
+.image_sty {
+    height: 70vh;
+    background-size: cover;
+    background-position: center;
+    align-items: center;
+    display: flex;
+}
+.clscomimage img {
+    width: auto !important;
+    height: 150px !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+}
+.en_fis_slider {
+    background-image: url(../img/header-01.jpg);
+   
+}
+
+.en_sec_slider {
+    background-image: url(../img/header-03.jpg);
+  
+}
+
+
+
+.en_there_slider {
+    background-image: url(../img/header-02.jpg);
+  
+}
+
+/* img.en-bc-image-left-side {
+    width: 180px;
+}
+
+.en-header-image-right-side {
+    width: 166px;
+    float: right;
+}
+
+img.en-fc-image-left-side {
+    width: 100px;
+}
+.en-header-image-left-side {
+    width: 100px;
+    float: left;
+} */
+
+.en_slider_contant_text h1 {
+    color:  var(--there-color);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.more_button {
+    background-color:  var(--primary-color);
+    cursor: pointer;
+    color:  var(--there-color);
+    padding: 10px 20px;
+    text-transform: capitalize;
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+}
+.en_slider_contant_text {
+    text-align: center;
+}
+
+.ft_icon .slick-slider.slick-initialized  .slick-arrow.slick-next {
+    position: absolute;
+    right: 20px;
+}
+.ft_icon .slick-slider.slick-initialized  .slick-arrow.slick-prev {
+    position: absolute;
+    z-index: 1;
+    left: 20px;
+}
+.ft_icon .slick-dots {
+    position: absolute;
+    bottom: 20px;
+}
+
+
+.ft_icon .slick-dots li button:before {
+    font-size: 18px;
+    line-height: 21px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    content: '•';
+    text-align: center;
+    color: #ffffff80 !important;
+}
+
+
+img.en-sec-image-left-side {
+    width: 175px;
+}
+
+img.en-sec-image-right-side {
+    width: 128px;
+    float: right;
+}
+/* header slider */
+
+
+.sticky-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color:  var(--there-color); /* Set the background color as needed */
+    z-index: 1000; /* Set a higher z-index to ensure it appears above other elements */
+  }
+  .sticky-header {
+    background-color: var(--secondary-color);
+}
+
+/* leaues section css */
+
+.slider_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider_box img {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+}
+
+.leagues_cont h2 {
+    text-align: center;
+    font-weight: 600;
+    padding-bottom: 40px;
+    position: relative;
+}
+
+.leagues_cont h2:after {
+    width: 120px;
+    position: sticky;
+    content: '';
+    background-color: var(--primary-color);
+    height: 3px;
+    text-align: center;
+    clear: both;
+    margin: 10px auto;
+    display: block;
+}
+section.leagues_section {
+    padding: 70px 0;
+}
+
+
+/* leaues section css end */
+
+/* iframe css start */
+.en_ifarme_fb {
+    background-color: var(--back-g-color);
+    width: 100%;
+    padding: 60px 0 40px 0;
+}
+
+/* iframe css start */

@@ -32,7 +32,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     min: 6,
     required: true
-  }
+  },
+  authToken: {
+    type: String,
+  },
 });
 
 // we will create new collection 
