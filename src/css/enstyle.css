@@ -41,6 +41,7 @@ h5 {
 h6 {
     margin: 0px;
     padding: 0px;
+    font-size: 19px;
 }
 p {
     margin: 0px;
@@ -565,7 +566,7 @@ ul.en_creat_nav li a {
 .en_about_contant h5 {
     line-height: 37px;
     width: 545px;
-    border-left: 4px solid var(--primary-color);;
+    border-left: 4px solid var(--primary-color);
     padding-left: 22px;
     font-weight: 400;
     margin-left: 10px;
@@ -592,3 +593,45 @@ ul.en_creat_nav li a {
     line-height: 25px;
 }
 /* about page css end */
+
+/* cafe css start */
+
+.en_cafe_contant {
+    text-align: center;
+    padding: 0px 85px 0 85px;
+}
+.en_cafe_contant p {
+    padding-bottom: 30px;
+}
+
+.en_blog_img {
+    width: 100%;
+}
+
+
+.en_main_contant h6 a {
+    color: var(--secondary-color);
+}
+.en_main_contant h6 a:hover {
+    color: var(--primary-color);
+}
+.en_bolg_date {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    padding: 11px 0;
+}
+.en_bolg_date p i {
+    color:  var(--primary-color);
+    font-size: 19px;
+}
+.en_red_button a {
+    font-size: 14px;
+    color: var(--primary-color);
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 30px 0;
+    display: block;
+}
+
+/* cafe css start */

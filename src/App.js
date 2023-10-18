@@ -15,6 +15,7 @@ import Contact from "./page/Contact";
 import Login from "./page/Login";
 import Signup from "./page/Signup";
 import Forgot from "./page/Forgot";
+import Blog from "./components/Blog";
 
 function App() {
   return (
@@ -47,6 +48,9 @@ function App() {
             {" "}
           </Route>
           <Route path="/Forgot" element={<Forgot />}>
+            {" "}
+          </Route>
+          <Route path="/blog" element={<Blog />}>
             {" "}
           </Route>
         </Routes>
