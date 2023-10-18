@@ -6,7 +6,7 @@ import React from 'react';
            imgsrc:"",
            title:"Top Statistics for players in Major European Leagues 2022-23",
            sname:"Read More",
-           paragraph:"Top Statistics for players in Major fsdkhsdif European Leagues 2022-23",
+           sparagraph:"Top Statistics for players in Major fsdkhsdif European Leagues 2022-23",
            link:"#",
         },
         

@@ -55,6 +55,7 @@ export default function Cafe() {
               <Blog imgsrc={sdata[0].imgsrc}
                 title={sdata[0].title}
                 sname={sdata[0].sname}
+                sparagraph={sdata[0].sparagraph}
                 link={sdata[0].link}/>
                 
             </div>

@@ -17,7 +17,7 @@ export default function Blog(props) {
                     <p><i className="ri-user-fill en_date ar_date"></i> By Afafe</p>
                     <p><i className="ri-message-2-fill en_date ar_date"></i> 0</p>
                 </div>
-                <p>Top goalscorers in the biggest European Leagues Player Club GS/G Goals ...</p>
+                <p>{props.sparagraph}</p>
                 <div className='en_red_button'>
                     <Link to={props.link}>{props.sname}<i className="ri-arrow-right-s-line en_arrow_line ar_arrow_line"></i> </Link>
                 </div>
