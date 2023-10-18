@@ -4,7 +4,7 @@ export default function About() {
   return (
 
     <div>
-      <h1>hello chandan about</h1>
+      <h1>hhhhhh</h1>
     </div>
 
   )
