@@ -9,6 +9,8 @@ a {
 }
 ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
     
 }
 h1 {
@@ -34,6 +36,7 @@ h4 {
 h5 {
     margin: 0px;
     padding: 0px;
+    font-size: 23px;
 }
 h6 {
     margin: 0px;
@@ -533,3 +536,59 @@ section.leagues_section {
 }
 
 /* forgot password css end  */
+
+/* about page css start */
+
+.en_hero_about {
+    background-image: url(../img/about-header.jpg);
+    height: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+}
+.en_creat_nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ul.en_creat_nav li a {
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.en_bread_crumb {
+    padding: 20px 0;
+}
+
+.en_about_contant h5 {
+    line-height: 37px;
+    width: 545px;
+    border-left: 4px solid var(--primary-color);;
+    padding-left: 22px;
+    font-weight: 400;
+    margin-left: 10px;
+}
+
+.en_Our_section {
+    background-image: url(../img/vm-bg.png);
+    height: 483px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 140px;
+    padding-left: 130px;
+   
+}
+
+.en_our_contant h4 {
+    color: #fff;
+    font-weight: 600;
+}
+.en_our_contant p {
+    color: #fff;
+    margin-bottom: 24px;
+    line-height: 25px;
+}
+/* about page css end */
