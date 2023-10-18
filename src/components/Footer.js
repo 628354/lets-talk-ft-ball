@@ -68,7 +68,7 @@ export default function Footer() {
                 <div className='row'>
                     <div className='col-lg-12'>
                         <div className='last_footer'>
-                            <p>Copyright © 2023 Let's Talk ft Ball. | All Rights Reserved. | Powered By <Link to="https://www.nardagency.com/">NARD</Link></p>
+                            <p>Copyright © 2023 Let's Talk ft Ball. | All Rights Reserved. | Powered By <Link to="https://dightinfotech.com/">Dightinfotech</Link></p>
                         </div>
                     </div>
                 </div>
