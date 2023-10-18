@@ -28,7 +28,9 @@ h3 {
 h4 {
     margin: 0px;
     padding: 0px;
+    font-size: 28px;
 }
+
 h5 {
     margin: 0px;
     padding: 0px;
@@ -40,6 +42,7 @@ h6 {
 p {
     margin: 0px;
     padding: 0px;
+    font-size: 15px;
 
 }
 body::-webkit-scrollbar {
@@ -61,6 +64,20 @@ body::-webkit-scrollbar-thumb {
     --back-g-color: #f5f5f5;
     /* Add more colors as needed */
   }
+
+/* button */
+.spy_button {
+    padding: 10px 40px;
+    border: none;
+    background-color: var(--text-color);
+    color: var(--there-color);
+    border-radius: 7px;
+    font-size: 18px;
+}
+.spy_button:hover {
+    background-color: var(--primary-color);
+    color: var(--there-color);
+}
 
 
 /* button */
@@ -449,3 +466,70 @@ section.leagues_section {
 }
 
 /* iframe css start */
+
+/* login page css start */
+.en_hero_image {
+    background-image: url(../img/header-01.jpg);
+    height: 120px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+}
+
+.en_bckg {
+    background-image: url(../img/pexels-wallace-chuck.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.en_login_contant {
+    padding: 180px 50px;
+}
+
+.en_login {
+    padding: 100px 0;
+}
+.en_login_box {
+    box-shadow: 0px 0px 10px -1px;
+    margin: 0px 120px;
+}
+
+.password_formt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+
+.password_formt a {
+    font-size: 14px;
+    color: var(--text-color);
+    text-decoration: underline;
+}
+.password_formt a:hover {
+    color: var(--primary-color);
+}
+
+
+
+/* login page css end */
+
+/* signup page css start */
+
+.en_login_signup {
+    padding: 70px 30px;
+}
+
+/* signup page css end */
+
+/* forgot password css start */
+
+.en_forgotpass {
+    padding-bottom: 40px;
+}
+
+/* forgot password css end  */

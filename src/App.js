@@ -12,6 +12,9 @@ import Leagues from "./page/Leagues";
 import Cafe from "./page/Cafe";
 import Definition from "./page/Definition";
 import Contact from "./page/Contact";
+import Login from "./page/Login";
+import Signup from "./page/Signup";
+import Forgot from "./page/Forgot";
 
 function App() {
   return (
@@ -37,7 +40,17 @@ function App() {
           <Route path="/Contact" element={<Contact />}>
             {" "}
           </Route>
+          <Route path="/Login" element={<Login />}>
+            {" "}
+          </Route>
+          <Route path="/Signup" element={<Signup />}>
+            {" "}
+          </Route>
+          <Route path="/Forgot" element={<Forgot />}>
+            {" "}
+          </Route>
         </Routes>
+       
     
 
       <Footer />
