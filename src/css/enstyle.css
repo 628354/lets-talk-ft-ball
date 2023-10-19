@@ -611,6 +611,16 @@ ul.en_creat_nav li a {
 
 .en_main_contant h6 a {
     color: var(--secondary-color);
+    position: relative;
+}
+.en_main_contant h6 a:after {
+    content: "";
+    position: absolute;
+    width: 40%;
+    height: 3px;
+    bottom: -7px;
+    background-color: var(--primary-color);
+    left: 0;
 }
 .en_main_contant h6 a:hover {
     color: var(--primary-color);
@@ -619,10 +629,10 @@ ul.en_creat_nav li a {
     display: flex;
     align-items: center;
     gap: 26px;
-    padding: 11px 0;
+    padding: 20px 0;
 }
 .en_bolg_date p i {
-    color:  var(--primary-color);
+    color: var(--primary-color);
     font-size: 19px;
 }
 .en_red_button a {
@@ -634,4 +644,106 @@ ul.en_creat_nav li a {
     display: block;
 }
 
-/* cafe css start */
+
+.en_blog_main {
+    padding: 0px 50px;
+}
+.en_pagintion {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+}
+.en_pagintion .pagination li a:hover {
+    background-color: var(--primary-color);
+    color: var(--there-color);
+}
+
+.en_pagintion .pagination li a {
+    background-color: var(--back-g-color);
+    color: var(--secondary-color);
+    font-size: 16px;
+    padding: 10px 20px;
+}
+.en_abo_section {
+    padding-bottom: 50px;
+}
+/* cafe css end*/
+
+/* definition css start */
+span.en_number_pass {
+    background: var(--primary-color);
+    margin-right: 13px;
+    width: 35px;
+    text-align: center;
+    color: var(--there-color);
+    display: inline-flex;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+}
+.en_defintion_contant h5 {
+    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+
+.en_defintion_contant {
+    padding-bottom: 50px;
+    border-bottom: 1px solid #ccc;;
+    height: 100%;
+    margin: 0px 50px;
+    padding-top: 50px;
+}
+
+.en_defintion_r {
+    padding-bottom: 50px;
+}
+.leagues_cont {
+    padding-top: 12px;
+}
+
+/* definition css end */
+
+/* contact css start */
+.en_section_contact {
+    background-image: url(../img/bback-min.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 28px 0;
+   
+}
+
+.en_contact_contant {
+    padding-left: 30px;
+}
+
+.en_contact_contant h4 {
+    color: var(--there-color);
+}
+
+
+.en_conact_form .form-label {
+    margin: 0;
+    color: white;
+    font-size: 15px;
+}
+.en_conact_form {
+    padding: 40px 0;
+}
+.en_send_m {
+    border: 1px solid #790019;
+    width: 100%;
+    padding: 10px 0;
+    background: #790019;
+    color: var(--there-color);
+    margin-top: 20px;
+}
+
+.en_send_m:hover {
+    border: 1px solid var(--there-color);
+    background-color: var(--primary-color);
+}
+/* contact css start */

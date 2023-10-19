@@ -13,9 +13,9 @@ export default function Blog(props) {
 
                 </h6>
                 <div className='en_bolg_date'>
-                    <p><i className="ri-calendar-2-line en_date ar_date"></i> 2023-06-23</p>
-                    <p><i className="ri-user-fill en_date ar_date"></i> By Afafe</p>
-                    <p><i className="ri-message-2-fill en_date ar_date"></i> 0</p>
+                    <p><i className="ri-calendar-2-line en_date ar_date"></i> {props.azdate}</p>
+                    <p><i className="ri-user-fill en_date ar_date"></i> {props.username}</p>
+                    <p><i className="ri-message-2-fill en_date ar_date"></i> {props.usermsg}</p>
                 </div>
                 <p>{props.sparagraph}</p>
                 <div className='en_red_button'>
