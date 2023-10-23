@@ -16,6 +16,7 @@ export default function Leagues_slider() {
         autoplaySpeed: 1000,
         cssEase: "linear",
         arrows: false,
+        rtl: true,
       };
 
   return (

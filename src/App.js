@@ -1,8 +1,10 @@
 /** @format */
 
 import "./App.css";
-import "./css/arstyle.css";
+// import "./css/arstyle.css";
 import "./css/enstyle.css";
+import "./responsive/arstyle.css";
+import "./responsive/enstyle.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import {  Routes, Route } from "react-router-dom";
@@ -16,11 +18,17 @@ import Login from "./page/Login";
 import Signup from "./page/Signup";
 import Forgot from "./page/Forgot";
 import Blog from "./components/Blog";
+import Headerar from "./components/Headerar";
+import Footerar from "./components/Footerar";
 
 function App() {
   return (
     <div className="App">
       <Header />
+      {/* <Headerar/> */}
+      
+     
+      
 
         <Routes>
           <Route path="/" element={<Home />}>
@@ -58,6 +66,7 @@ function App() {
     
 
       <Footer />
+      {/* <Footerar/> */}
     </div>
   );
 }

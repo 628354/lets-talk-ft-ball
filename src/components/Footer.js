@@ -39,7 +39,6 @@ export default function Footer() {
                         <li><Link to="https://www.facebook.com/profile.php?id=100065165853408" target='_blank'><i class="ri-facebook-fill"></i></Link></li>
                         <li><Link to="https://twitter.com/LetstalkftballA" target='_blank'><i class="ri-twitter-fill"></i></Link></li>
                         <li><Link to="https://www.instagram.com/letstalkftball_/" target='_blank'><i class="ri-instagram-line"></i></Link></li>
-
                     </ul>
                         </ul>
                     </div>
@@ -68,7 +67,7 @@ export default function Footer() {
                 <div className='row'>
                     <div className='col-lg-12'>
                         <div className='last_footer'>
-                            <p>Copyright © 2023 Let's Talk ft Ball. | All Rights Reserved. | Powered By <Link to="https://dightinfotech.com/">Dightinfotech</Link></p>
+                            <p>Copyright © 2023 Let's Talk ft Ball. | All Rights Reserved. | Powered By <Link to="https://dightinfotech.com/" target="_blank">Dightinfotech</Link></p>
                         </div>
                     </div>
                 </div>
