@@ -33,14 +33,14 @@ export default function Headerar() {
     <div className='es_topheader topheadero'>
     <Container  dir="rtl">
     <div className='row ar_flex'>
-        <div className='col-lg-6 col-md-6 col-sm-6'>
+        <div className='col-lg-6 col-md-6 col-6'>
             <div className='ar_icon'>
                 <Link to="/"> <img src={require('../img/earth-icon.png')} alt="earth" className="brand-rearth"/> English</Link>
                
                 
             </div>
         </div>
-        <div className='col-lg-6 col-md-6 col-sm-6'>
+        <div className='col-lg-6 col-md-6 col-6'>
             <div className='artest estest'>
                 <ul className='armedia es_media iconhover'>
                     <li><Link to="https://www.facebook.com/profile.php?id=100065165853408" target='_blank'><i class="ri-facebook-fill"></i></Link></li>

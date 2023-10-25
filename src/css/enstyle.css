@@ -127,7 +127,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .es_topheader {
-    background-color: var(--text-color);
+    background-color: var(--secondary-color);
     padding: 10px 0;
     position: fixed;
     top:0;
@@ -807,4 +807,18 @@ span.en_number_pass {
     border: 1px solid var(--there-color);
     background-color: var(--primary-color);
 }
+
 /* contact css start */
+
+/* premier league css start */
+.en-leagues-text p {
+    font-size: 16px;
+    line-height: 23px;
+    padding: 50px 0;
+}
+
+.en-leagues-img {
+    text-align: center;
+}
+
+/* premier league css end */
