@@ -1,0 +1,27 @@
+const mongoose = require("mongoose")
+const validator = require('validator');
+
+
+const contactusSchema = mongoose.Schema({
+
+    name: { type: String, require: true },
+
+    email: {
+        type: String,
+        validate: {
+            validator: validator.isEmail,
+            message: '{VALUE} is not a valid email',
+            isAsync: false
+        }
+    },
+
+    subject: { type: String, require: true },
+
+    message: { type: String, require: true }
+
+},
+    { timestamps: true }
+)
+
+module.exports = mongoose.model("contactus", contactusSchema)
+
