@@ -1,0 +1,57 @@
+.topheader.navbar {
+    display: none;
+}
+.es_topheader.topheadero {
+    display: none;
+}
+section.en_footer.ar_footer {
+    display: none;
+}
+section.last_to_footer {
+    display: none;
+}
+
+.container-fluid {
+}
+
+section.navheader {
+    background-color: black;
+    padding: 20px 0;
+}
+
+.navmenu_login {
+    display: flex;
+    justify-content: end;
+    padding-right: 60px;
+}
+
+.navmenu_login a {
+    color: white;
+}
+
+/* slider bar menu start css */
+
+section.navslide {
+    /* background: black; */
+    border-top: 1px solid #767676;
+    width: 100%;
+    position: fixed;
+    /* top: 68px; */
+    left: 0;
+    height: 100vh;
+}
+
+.header_text_sid h3 {
+    color: white;
+    padding-left: 21px;
+    font-size: 24px;
+}
+
+.menuitem_s li a {
+    color: white;
+}
+.menuitem_s li a:hover {
+    color: white;
+}
+
+/* slider bar menu end  css */

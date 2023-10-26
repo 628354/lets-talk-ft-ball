@@ -24,7 +24,7 @@ export default function BrazilSerieA() {
            <i className="ri-arrow-right-s-line"></i>
            </li>
            <li>
-           <Link to="/EgyptPL">Brazil Serie A</Link>
+           <Link to="/BrazilSerieA">Brazil Serie A</Link>
            </li>
        </ul>
        

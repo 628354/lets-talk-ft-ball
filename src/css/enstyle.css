@@ -821,4 +821,18 @@ span.en_number_pass {
     text-align: center;
 }
 
+
 /* premier league css end */
+
+/* premier leadgueague table css start */
+
+.en_table_text h6 {
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.en_table_text {
+    padding-bottom: 35px;
+}
+
+/* premier leadgueague table css start */

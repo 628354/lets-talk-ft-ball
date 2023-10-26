@@ -24,7 +24,7 @@ export default function BotolaPro() {
            <i className="ri-arrow-right-s-line"></i>
            </li>
            <li>
-           <Link to="/EgyptPL">Botola ProL</Link>
+           <Link to="/BotolaProL">Botola ProL</Link>
            </li>
        </ul>
        

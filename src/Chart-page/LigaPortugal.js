@@ -24,7 +24,7 @@ export default function LigaPortugal() {
                 <i className="ri-arrow-right-s-line"></i>
                 </li>
                 <li>
-                <Link to="/NetherlandEredivisie">Liga Portugal</Link>
+                <Link to="/LigaPortugal">Liga Portugal</Link>
                 </li>
             </ul>
             
