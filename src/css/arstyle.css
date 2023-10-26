@@ -1,0 +1,161 @@
+
+ @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/*  */
+h2 {
+  font-family: var(--nato-font);
+}
+/*  */
+
+
+
+/* about page start */
+.ar_creat_nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ul.ar_creat_nav li a {
+  color: var(--secondary-color);
+  text-transform: uppercase;
+  font-size: 14px;
+  font-family: var(--nato-font)!important;
+
+}
+
+.leagues_cont h3 {
+  text-align: center;
+  font-weight: 600;
+  padding-bottom: 40px;
+  position: relative;
+  font-family: var(--nato-font)!important;
+}
+
+.leagues_cont h3:after {
+  width: 120px;
+  position: sticky;
+  content: '';
+  background-color: var(--primary-color);
+  height: 3px;
+  text-align: center;
+  clear: both;
+  margin: 10px auto;
+  display: block;
+}
+
+.ar_about_img{
+  text-align: end;
+}
+
+.ar_about_contant h5{
+
+  line-height: 37px;
+  width: 545px;
+  border-right: 4px solid var(--border-color);
+  font-family: "Arial","sans-serif"!important;
+  padding:0px 22px 0px 10px;
+  font-weight: 400;
+  margin-left: 10px;
+}
+
+.ar_Our_section {
+  background: url(../img/ar-vm-bg.png) no-repeat center top;
+  width: 100%;
+  height: 483px;
+  padding-top: 140px;
+}
+
+.ar_Our_section h4,p {
+ font-family: var(--nato-font)!important;
+}
+/* about page end */
+
+/* definition page start */
+span.ar_number_pass {
+  background: var(--primary-color);
+  margin-left: 13px;
+  width: 35px;
+  text-align: center;
+  color: var(--there-color);
+  display: inline-flex;
+  height: 35px;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-family: var(--nato-font)!important;
+}
+
+.ar_defintion_contant h5 {
+ font-family: var(--nato-font)!important;
+}
+
+.ar_defintion_contant h5 {
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+
+.ar_defintion_contant {
+  padding-bottom: 50px;
+  border-bottom: 1px solid #ccc;;
+  height: 100%;
+  margin: 0px 50px;
+  padding-top: 50px;
+}
+/* definition page end */
+@media (max-width: 767px) {
+.ar_defintion_contant {
+  margin: 0px 10px;
+  padding-top: 40px;
+}
+
+.leagues_cont h3 {
+  padding-bottom: 0px;
+
+}
+
+}
+
+/* contact page css */
+
+.en_section_contact {
+  background-image: url("../Ar.img/bback-ar-min.png")!important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 28px 0;
+}
+.en_conact_form .form-label {
+  font-family: var(--nato-font);
+}
+.ar_send_m {
+  font-family: var(--nato-font);
+}
+.ar_main_contant h6 a {
+  font-family: var(--nato-font);
+}
+.ar_red_button a {
+  font-family: var(--nato-font);
+}
+.more_button {
+  font-family: var(--nato-font);
+}
+
+.spc_button {
+  font-family: var(--nato-font);
+}
+
+.ar_footer_menu li a {
+  font-family: var(--nato-font);
+}
+.ar_media li {
+  font-family: var(--nato-font);
+}
+
+.ar_dropdown_press {
+  border-left: none !important;
+  border-right: 4px solid red;
+}
+

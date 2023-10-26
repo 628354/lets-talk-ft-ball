@@ -2,18 +2,17 @@ import React from 'react';
 import Slider from "react-slick";
 import Container from 'react-bootstrap/Container';
 
-export default function Headerslider() {
+export default function Headersliderar() {
     const settings = {
         dots: true,
         infinite: true,
-        speed: 2000,
+        speed: 3000,
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
+      
         
       };
-
-
   return (
     <div className='ft_icon'>
          <Slider {...settings}>
@@ -28,8 +27,8 @@ export default function Headerslider() {
                 </div>
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
-                        <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <h1>الزعيم والوصيف</h1>
+                        <button className='more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -56,8 +55,8 @@ export default function Headerslider() {
                 </div>
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
-                        <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <h1>الزعيم والوصيف</h1>
+                        <button className='more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -83,8 +82,8 @@ export default function Headerslider() {
                 </div>
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
-                        <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <h1>الزعيم والوصيف</h1>
+                        <button className='more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -110,8 +109,8 @@ export default function Headerslider() {
                 </div>
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
-                        <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <h1>الزعيم والوصيف</h1>
+                        <button className='more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -137,8 +136,8 @@ export default function Headerslider() {
                 </div>
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
-                        <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <h1>الزعيم والوصيف</h1>
+                        <button className='more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -164,8 +163,8 @@ export default function Headerslider() {
                 </div>
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
-                        <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <h1>الزعيم والوصيف</h1>
+                        <button className='more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -191,8 +190,8 @@ export default function Headerslider() {
                 </div>
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
-                        <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <h1>الزعيم والوصيف</h1>
+                        <button className='more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -218,8 +217,8 @@ export default function Headerslider() {
                 </div>
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
-                        <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <h1>الزعيم والوصيف</h1>
+                        <button className='more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -245,8 +244,8 @@ export default function Headerslider() {
                 </div>
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
-                        <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <h1>الزعيم والوصيف</h1>
+                        <button className='more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -272,8 +271,8 @@ export default function Headerslider() {
                 </div>
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
-                        <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <h1>الزعيم والوصيف</h1>
+                        <button className='more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -298,7 +297,7 @@ export default function Headerslider() {
                 </div>
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
-                        <h1>leader and runner-up</h1>
+                        <h1>الزعيم والوصيف</h1>
                         <button className='more_button'>More Info</button>
                     
                     </div>

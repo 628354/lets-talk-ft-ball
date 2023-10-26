@@ -26,6 +26,7 @@ h2 {
 h3 {
     margin: 0px;
     padding: 0px;
+    font-size: 30px;
 }
 h4 {
     margin: 0px;
@@ -66,6 +67,8 @@ body::-webkit-scrollbar-thumb {
     --there-color: #ffffff;
     --text-color: #040525;
     --back-g-color: #f5f5f5;
+    --border-color:#d50006;
+    --nato-font:'Noto Kufi Arabic';
     /* Add more colors as needed */
   }
 
@@ -86,7 +89,7 @@ body::-webkit-scrollbar-thumb {
 
 /* button */
 .spc_button {
-    background: #fff;
+    background-color: var(--there-color);
     color: var(--primary-color);
     text-transform: uppercase;
     width: 244px !important;
@@ -124,12 +127,18 @@ body::-webkit-scrollbar-thumb {
 }
 
 .es_topheader {
-    background: #000;
+    background-color: var(--secondary-color);
     padding: 10px 0;
+    position: fixed;
+    top:0;
+    width:100%;
+    z-index: 2;
 }
+
 img.brand-rearth {
     padding: 0px 6px;
 }
+
 .ar_icon a {
     color:  var(--there-color);
 }
@@ -163,7 +172,7 @@ img.brand-rearth {
     color:  var(--there-color) !important;
     display: block;
     position: relative;
-    padding: 9px 26px !important;
+    /* padding: 9px 26px !important; */
     transition: 0.3s;
     font-size: 14px;
     font-weight: 600;
@@ -178,6 +187,55 @@ ul.en_media li a {
     padding: 0px 0px 7px 5px;
     float: left;
     text-decoration: underline;
+}
+.en_drop_item li a {
+    padding: 10px 0;
+}
+
+/* dropdwon css */
+
+
+.esmenuitem .en_leagues_nav:hover .en_dropdown-content {
+    display: block;
+}
+.esmenuitem .en_leagues_nav .en_dropdown-content {
+    display: none;
+}
+.esmenuitem .en_leagues_nav .en_dropdown-content a {
+    color: #040404 !important;
+}
+.en_leagues_nav .en_dropdown-content {
+    position: absolute;
+    left: 0;
+    width: 500px;
+    background: var(--there-color);
+    top: 39px;
+    border-left: 5px solid var(--primary-color);
+}
+.en_h_drop {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+ul.en_drop_item li a span img {
+    height: 40px;
+}
+.en_drop_item {
+    width: 50%;
+}
+ul.en_drop_item li a {
+    /* background: red; */
+    border-bottom: 1px solid  var(--primary-color);
+    /* width: 77%; */
+    margin: 8px 16px;
+}
+ul.en_drop_item li a {
+    /* padding: 11px 0px !important; */
+    padding-left: 0px !important;
+}
+ul.en_drop_item li a span img {
+    padding-right: 10px;
 }
 /* top header css end */
 
@@ -413,15 +471,18 @@ img.en-sec-image-right-side {
 
 .sticky-header {
     position: fixed;
-    top: 0;
     width: 100%;
-    background-color:  var(--there-color); /* Set the background color as needed */
-    z-index: 1000; /* Set a higher z-index to ensure it appears above other elements */
+    background-color:  var(--there-color);
+    z-index: 1000; 
   }
   .sticky-header {
     background-color: var(--secondary-color);
 }
 
+.spc_button:hover {
+    background-color: var(--primary-color);
+    color: var(--there-color);
+}
 /* leaues section css */
 
 .slider_box {
@@ -566,7 +627,7 @@ ul.en_creat_nav li a {
 .en_about_contant h5 {
     line-height: 37px;
     width: 545px;
-    border-left: 4px solid var(--primary-color);
+    border-left: 4px solid var(--border-color);
     padding-left: 22px;
     font-weight: 400;
     margin-left: 10px;
@@ -584,11 +645,11 @@ ul.en_creat_nav li a {
 }
 
 .en_our_contant h4 {
-    color: #fff;
+    color: var(--there-color);
     font-weight: 600;
 }
 .en_our_contant p {
-    color: #fff;
+    color: var(--there-color);
     margin-bottom: 24px;
     line-height: 25px;
 }
@@ -727,7 +788,7 @@ span.en_number_pass {
 
 .en_conact_form .form-label {
     margin: 0;
-    color: white;
+    color: var(--there-color);
     font-size: 15px;
 }
 .en_conact_form {
@@ -746,4 +807,18 @@ span.en_number_pass {
     border: 1px solid var(--there-color);
     background-color: var(--primary-color);
 }
+
 /* contact css start */
+
+/* premier league css start */
+.en-leagues-text p {
+    font-size: 16px;
+    line-height: 23px;
+    padding: 50px 0;
+}
+
+.en-leagues-img {
+    text-align: center;
+}
+
+/* premier league css end */
