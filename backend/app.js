@@ -12,6 +12,7 @@ app.use(express.json())
 
 const path = require('path');
 
+const admin = require("./router/admin")
 const user = require("./router/user")
 const league = require("./router/league")
 const team = require("./router/team")
@@ -35,6 +36,7 @@ mongoose.connect("mongodb://0.0.0.0:27017/Leagues",
 app.use("/", user)
 app.use("/", league)
 app.use("/", team)
+app.use("/" , admin)
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 

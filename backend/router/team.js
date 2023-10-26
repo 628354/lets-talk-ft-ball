@@ -19,6 +19,8 @@ const storage = multer.diskStorage({
 
 router.post("/addteam" ,upload.single("image") ,teamController.addTeam)
 
+router.get("/getTeams" , teamController.getTeams)
+
 
 
 module.exports = router

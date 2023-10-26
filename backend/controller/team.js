@@ -26,7 +26,9 @@ exports.addTeam = async (req, res) => {
 
 exports.getTeams = async (req,res)=>{
     try {
-        const getTeams = await 
+        const getTeams = await teammodel.find().select({teamName : 1 , image : 1})
+
+        res.send({status : true , message : "Successfully get teams" , teamdetails : getTeams})
 
     } catch (error) {
         res.send({status : true , message : "Something went wrong !!"})

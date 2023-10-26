@@ -3,16 +3,16 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  service: 'YourEmailService', // e.g., 'Gmail', 'Outlook', etc.
+  service: 'Gmail', // e.g., 'Gmail', 'Outlook', etc.
   auth: {
-    user: 'your_email@example.com',
-    pass: 'your_email_password'
+    user: 'arvind.kumar@dightinfotech.com',
+    pass: 'dzxbyyfyxhhxhxks'
   }
 });
 
 function sendResetPasswordEmail(email, userId) {
   const mailOptions = {
-    from: 'your_email@example.com',
+    from: 'arvind.kumar@dightinfotech.com',
     to: email,
     subject: 'Password Reset Link',
     text: `Click the following link to reset your password: http://localhost:5000/forget-password/${userId}`
