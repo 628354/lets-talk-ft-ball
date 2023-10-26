@@ -32,6 +32,7 @@ import SaudiPro from "./Chart-page/SaudiPro";
 import EgyptPL from "./Chart-page/EgyptPL";
 import BotolaPro from "./Chart-page/BotolaPro";
 import BrazilSerieA from "./Chart-page/BrazilSerieA";
+import Dashboard from "./dashboard/Dashboard";
 
 function App() {
   return (
@@ -107,6 +108,9 @@ function App() {
             {" "}
           </Route>
           <Route path="/BrazilSerieA" element={<BrazilSerieA/>}>
+            {" "}
+          </Route>
+          <Route path="/Dashboard" element={<Dashboard/>}>
             {" "}
           </Route>
 

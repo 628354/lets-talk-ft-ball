@@ -24,7 +24,7 @@ export default function SaudiPro() {
            <i className="ri-arrow-right-s-line"></i>
            </li>
            <li>
-           <Link to="/NetherlandEredivisie">Saudi Pro</Link>
+           <Link to="/SaudiPro">Saudi Pro</Link>
            </li>
        </ul>
        
@@ -52,16 +52,16 @@ export default function SaudiPro() {
                        <div className='col-lg-10 col-md-10 col-sm-12'>
                            <div className='en-leagues-text ar-leagues-text'>
                                <p>Below is the league standings table, teams ranking graphs and league overall stats at the bottom of
-                                 the table. The overall stats are meant to give you an overview of the league entertainment level
-                                  (goals scored per game and % win) and to see how competitive is the league (Points Standard Deviation).
-                                   If you like to see a specific season, use the "season" pull-down menu. Click on any team’s name to go to 
-                                   the team specific page to see performance trends over the season. You can compare any two teams, or same 
-                                   team from different seasons, from any of the leagues or seasons available in the website. Click “Compare”, 
-                                   select Season, League and Team. The graphs are interactive. You can adjust scale and hover-over data points 
-                                   to get specific numbers. If you need help with definition of terms used, click on “Definition” in the top menu.
-                                    Have fun and do not forget to visit our social media accounts (links in the top bar). Note that data is updated 
-                                    only after games completion and number of games 
-                                played is not used in table sorting since its impact is just temporary. </p>
+                                  the table. The overall stats are meant to give you an overview of the league entertainment level
+                                 (goals scored per game and % win) and to see how competitive is the league (Points Standard Deviation).
+                                  If you like to see a specific season, use the "season" pull-down menu. Click on any team’s name to go to 
+                                  the team specific page to see performance trends over the season. You can compare any two teams, or same 
+                                  team from different seasons, from any of the leagues or seasons available in the website. Click “Compare”, 
+                                  select Season, League and Team. The graphs are interactive. You can adjust scale and hover-over data points 
+                                  to get specific numbers. If you need help with definition of terms used, click on “Definition” in the top menu.
+                                  Have fun and do not forget to visit our social media accounts (links in the top bar). Note that data is updated 
+                                  only after games completion and number of games 
+                                  played is not used in table sorting since its impact is just temporary. </p>
                                
                            </div>
                            
