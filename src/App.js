@@ -21,17 +21,17 @@ import Blog from "./components/Blog";
 import Headerar from "./components/Headerar";
 import Footerar from "./components/Footerar";
 import Chart from "./components/Chart";
-import PremierLeague from "./Chart-page/PremierLeague";
-import Laliga from "./Chart-page/Laliga";
-import SerieA from "./Chart-page/SerieA";
-import Bundesliga from "./Chart-page/Bundesliga";
-import Ligue1 from "./Chart-page/Ligue1";
-import NetherlandEredivisie from "./Chart-page/NetherlandEredivisie";
-import LigaPortugal from "./Chart-page/LigaPortugal";
-import SaudiPro from "./Chart-page/SaudiPro";
-import EgyptPL from "./Chart-page/EgyptPL";
-import BotolaPro from "./Chart-page/BotolaPro";
-import BrazilSerieA from "./Chart-page/BrazilSerieA";
+import PremierLeague from "./Leagues-page/PremierLeague";
+import Laliga from "./Leagues-page/Laliga";
+import SerieA from "./Leagues-page/SerieA";
+import Bundesliga from "./Leagues-page/Bundesliga";
+import Ligue1 from "./Leagues-page/Ligue1";
+import NetherlandEredivisie from "./Leagues-page/NetherlandEredivisie";
+import LigaPortugal from "./Leagues-page/LigaPortugal";
+import SaudiPro from "./Leagues-page/SaudiPro";
+import EgyptPL from "./Leagues-page/EgyptPL";
+import BotolaPro from "./Leagues-page/BotolaPro";
+import BrazilSerieA from "./Leagues-page/BrazilSerieA";
 import Dashboard from "./dashboard/Dashboard";
 
 function App() {
