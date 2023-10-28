@@ -10,11 +10,11 @@ import Footer from "./components/Footer";
 import {  Routes, Route } from "react-router-dom";
 import Home from "./page/Home";
 import About from "./page/About";
-import Leagues from "./page/Leagues";
 import Cafe from "./page/Cafe";
 import Definition from "./page/Definition";
 import Contact from "./page/Contact";
 import Login from "./page/Login";
+import Adminlogin from "./page/Admin"
 import Signup from "./page/Signup";
 import Forgot from "./page/Forgot";
 import Blog from "./components/Blog";
@@ -33,6 +33,7 @@ import EgyptPL from "./Chart-page/EgyptPL";
 import BotolaPro from "./Chart-page/BotolaPro";
 import BrazilSerieA from "./Chart-page/BrazilSerieA";
 import Dashboard from "./dashboard/Dashboard";
+import League from "./page/league"
 
 function App() {
   return (
@@ -50,7 +51,7 @@ function App() {
           <Route path="/About" element={<About />}>
             {" "}
           </Route>
-          <Route path="/Leagues" element={<Leagues />}>
+          <Route path="/League" element={<League />}>
             {" "}
           </Route>
           <Route path="/Cafe" element={<Cafe />}>
@@ -63,6 +64,9 @@ function App() {
             {" "}
           </Route>
           <Route path="/Login" element={<Login />}>
+            {" "}
+          </Route>
+          <Route path="/adminLogin" element= {<Adminlogin />}>
             {" "}
           </Route>
           <Route path="/Signup" element={<Signup />}>

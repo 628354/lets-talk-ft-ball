@@ -21,7 +21,7 @@ export default function Signup() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/register', formData); // Replace with your API endpoint (add http://)
+      const response = await axios.post('http://localhost:5000/register', formData); 
       console.log('Registration successful', response.data);
       // You can redirect the user or perform other actions on success
     } catch (error) {
