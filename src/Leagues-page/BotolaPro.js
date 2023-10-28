@@ -1,8 +1,10 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import PremierLeaguetable from '../Leagues-components/PremierLeaguetable';
+import Iframesecttion from '../Leagues-components/Iframesecttion';
 
-export default function BrazilSerieA() {
+export default function BotolaPro() {
   return (
     <div>
     <section className='en_hero_about en_hero_about'>
@@ -24,7 +26,7 @@ export default function BrazilSerieA() {
            <i className="ri-arrow-right-s-line"></i>
            </li>
            <li>
-           <Link to="/BrazilSerieA">Brazil Serie A</Link>
+           <Link to="/BotolaProL">Botola ProL</Link>
            </li>
        </ul>
        
@@ -37,7 +39,7 @@ export default function BrazilSerieA() {
            <div className='col-lg-12 col-md-12 col-sm-12'>
                    <div className='en-premier-contant ar-premier-contant'>
                    <div className='leagues_cont'>
-                       <h2>Brazil Serie A</h2>
+                       <h2>Botola Pro</h2>
                    </div>
                  </div>
                </div>
@@ -45,7 +47,7 @@ export default function BrazilSerieA() {
                    <Row >
                    <div className='col-lg-2 col-md-2 col-sm-12 m-auto'>
                            <div className='en-leagues-img'>
-                            <img src={require('../img/Bra Serie_A.png')} alt="earth" className="img-premier-press"/>
+                            <img src={require('../img/BOTOLAinwi-134x136.png')} alt="earth" className="img-premier-press"/>
 
                            </div>
                        </div>
@@ -72,6 +74,20 @@ export default function BrazilSerieA() {
            
        </Container>
     </section>
+    <section className='league_table'>
+          <Container>
+            <Row>
+              <div className='en_table_text ar_table_text'>
+                <h6>Scroll Down To See Charts</h6>
+              </div>
+              <div className='en_main_table ar_main_table'>
+                <PremierLeaguetable/>
+                
+              </div>
+            </Row>
+          </Container>
+         </section>
+         <Iframesecttion/>
 </div>
   )
 }
