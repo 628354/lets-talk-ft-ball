@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import PremierLeaguetable from '../Leagues-components/PremierLeaguetable';
+import Iframesecttion from '../Leagues-components/Iframesecttion';
 
 export default function EgyptPL() {
   return (
@@ -72,6 +74,21 @@ export default function EgyptPL() {
            
        </Container>
     </section>
+
+    <section className='league_table'>
+          <Container>
+            <Row>
+              <div className='en_table_text ar_table_text'>
+                <h6>Scroll Down To See Charts</h6>
+              </div>
+              <div className='en_main_table ar_main_table'>
+                <PremierLeaguetable/>
+                
+              </div>
+            </Row>
+          </Container>
+         </section>
+         <Iframesecttion/>
 </div>
   )
 }

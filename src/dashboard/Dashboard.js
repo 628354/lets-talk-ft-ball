@@ -47,7 +47,7 @@ export default function Dashboard() {
                     </li>
                     <li>
                         <Link to="#submenu2"  data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
-                          <i class="ri-article-line"></i>  <span className="ms-1 d-none d-sm-inline">Page</span><i className="ri-arrow-down-s-line"></i> </Link>
+                          <span className="ms-1 d-none d-sm-inline">Page</span><i className="ri-arrow-down-s-line"></i> </Link>
                         <ul className="collapse nav flex-column ms-5" id="submenu2" data-bs-parent="#menu">
                             <li className="w-100">
                                 <Link to="#" className="nav-link px-0"> <span className="d-none d-sm-inline">About us</span></Link>
