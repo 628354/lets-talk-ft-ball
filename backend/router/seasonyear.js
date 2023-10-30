@@ -8,7 +8,9 @@ router.post("/addseasonyear", seasonyearController.addleagueyear)
 
 router.get("/getyears", seasonyearController.getyears)
 
-router.post("/updateSeasonyear/:seasonId" , seasonyearController.updateyears)
+router.post("/updateSeasonyear/:yearId" , seasonyearController.updateyears)
+
+router.delete("/removeyear/:yearId" , seasonyearController.removeyear)
 
 
 

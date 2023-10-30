@@ -3,8 +3,7 @@ const teammodel = require("../model/team")
 exports.addTeam = async (req, res) => {
     try {
 
-        const { teamName, graph_Title1, graph_Title2, graph_Title3, graph_Title4, description, meta_Tag_Description,
-            meta_Tag_Keywords, team_Tags, leagues, status } = req.body
+        const { teamName, short_name, graph_Title1, graph_Title2, graph_Title3, graph_Title4, description, meta_Tag_Description, meta_Tag_Keywords, team_Tags, leagues, status } = req.body
 
         const protocol = req.protocol
         const host = req.host
@@ -13,7 +12,8 @@ exports.addTeam = async (req, res) => {
         const addTeam = await teammodel.create({
 
             teamName: teamName,
-            image: url + "/uploads/" + req.file.filename,
+            short_name: short_name,
+            image: req.file ? url + "/uploads/" + req.file.filename : " ",
             graph_Title1: graph_Title1,
             graph_Title2: graph_Title2,
             graph_Title3: graph_Title3,
@@ -49,7 +49,7 @@ exports.getTeams = async (req, res) => {
 
 exports.updateteams = async (req, res) => {
     try {
-        const { teamName, graph_Title1, graph_Title2, graph_Title3, graph_Title4, description, meta_Tag_Description,
+        const { teamName, short_name, graph_Title1, graph_Title2, graph_Title3, graph_Title4, description, meta_Tag_Description,
             meta_Tag_Keywords, team_Tags, leagues, status } = req.body
 
         const findteam = await teammodel.findById(req.params.teamId)
@@ -66,6 +66,7 @@ exports.updateteams = async (req, res) => {
         const updateteam = await teammodel.findByIdAndUpdate(req.params.teamId, {
 
             teamName: teamName,
+            short_name: short_name,
             image: req.file ? url + "/uploads/" + req.file.filename : findteam.image,
             graph_Title1: graph_Title1,
             graph_Title2: graph_Title2,
@@ -89,13 +90,13 @@ exports.updateteams = async (req, res) => {
 }
 
 
-exports.removeteam = async (req,res)=>{
+exports.removeteam = async (req, res) => {
     try {
         const removeteam = await teammodel.findByIdAndDelete(req.params.teamId)
 
-        res.send({status : true , message : "Successfully remove teams", removedetails : removeteam})
+        res.send({ status: true, message: "Successfully remove teams", removedetails: removeteam })
 
     } catch (error) {
-        res.send({status : false , message : "Something went wrong !!"})
+        res.send({ status: false, message: "Something went wrong !!" })
     }
 }

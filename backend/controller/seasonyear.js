@@ -1,11 +1,10 @@
-const { syncIndexes } = require("mongoose")
 const seasonyearmodel = require("../model/seasonyear")
 
 exports.addleagueyear = async (req, res) => {
     try {
-        const { name, startDate, endDate } = req.body
+        const { season_Title , status } = req.body
 
-        const find = await seasonyearmodel.findOne({ name: name })
+        const find = await seasonyearmodel.findOne({ season_Title: season_Title })
 
         if (find) {
             res.send({ status: false, message: "season allready added" })
@@ -14,22 +13,21 @@ exports.addleagueyear = async (req, res) => {
 
         const addleagueyear = await seasonyearmodel.create({
 
-            name: name,
-            startDate: startDate,
-            endDate: endDate,
-            active: true
+            season_Title: season_Title,
+            status: status
         })
 
         res.send({ status: true, message: "Successfully add seasonyear", seasonyears: addleagueyear })
 
     } catch (error) {
+        console.log(error)
         res.send({ status: false, message: "Something went wrong!!" })
     }
 }
 
 exports.getyears = async (req, res) => {
     try {
-        const getyears = await seasonyearmodel.find().select({ name: 1, active: 1 }).sort({ name: 1 })
+        const getyears = await seasonyearmodel.find().select({ season_Title: 1, status: 1 }).sort({ season_Title: 1 })
 
 
         res.send({ status: true, message: "Successfully get seasonyears", seasonyears: getyears })
@@ -42,13 +40,11 @@ exports.getyears = async (req, res) => {
 exports.updateyears = async (req, res) => {
     try {
 
-        const { name, startDate, endDate } = req.body
+        const { season_Title ,status} = req.body
 
         const updateyears = await seasonyearmodel.findByIdAndUpdate({
-            name: name,
-            startDate: startDate,
-            endDate: endDate,
-            active: req.body.active
+            season_Title: season_Title,
+            status: status
         }, { new: true })
 
         await updateyears.save()
@@ -57,5 +53,17 @@ exports.updateyears = async (req, res) => {
 
     } catch (error) {
         res.send({ status: false, message: "Something went wrong !!" })
+    }
+}
+
+
+exports.removeyear = async (req,res)=>{
+    try {
+        const removeyear = await seasonyearmodel.findByIdAndDelete(req.params.yearId)
+
+        res.send({status : true , message : "Successfully seasonyear" , removeyear : removeyear })
+
+    } catch (error) {
+        res.send({status : false , message : "Something went wrong !!"})
     }
 }

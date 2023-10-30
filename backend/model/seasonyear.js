@@ -2,9 +2,9 @@ const mongoose = require("mongoose")
 
 const seasonSchema = mongoose.Schema({
 
-    name: { type: String, require: true },
-    startDate: { type: Date, require: true },
-    endDate: { type: Date, require: true },
+    season_Title: { type: String, require: true },
+    // startDate: { type: Date, require: true },
+    // endDate: { type: Date, require: true },
     // matches: [
     //   {
     //     type: mongoose.Schema.Types.ObjectId,
@@ -12,11 +12,11 @@ const seasonSchema = mongoose.Schema({
     //   },
     // ]
 
-    active: { type: Boolean, default : true }
+    status: { type : String , enum :["active" , "inactive"] , default : "active"}
 
 }, {
     timestamps: true
 })
 
 
-module.exports = mongoose.model("seasons", seasonSchema)
+module.exports = mongoose.model("season", seasonSchema)

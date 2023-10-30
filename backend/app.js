@@ -17,6 +17,8 @@ const user = require("./router/user")
 const league = require("./router/league")
 const team = require("./router/team")
 const seasonyear = require("./router/seasonyear")
+const leaguedata = require("./router/leaguedata")
+const aboutus = require("./router/aboutus")
 
 const mongoose = require("mongoose")
 
@@ -39,6 +41,8 @@ app.use("/", league)
 app.use("/", team)
 app.use("/" , admin)
 app.use("/" , seasonyear)
+app.use("/" , leaguedata)
+app.use("/" , aboutus)
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 

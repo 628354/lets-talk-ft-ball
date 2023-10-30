@@ -4,6 +4,8 @@ const teamSchema = mongoose.Schema({
 
     teamName: { type: String, require: true },
 
+    short_name: { type: String, require: true },
+
     image: { type: String, require: true },
 
     graph_Title1: { type: String, require: true },
@@ -22,7 +24,7 @@ const teamSchema = mongoose.Schema({
 
     team_Tags: { type: String, require: true },
 
-    leagues: [{ type: mongoose.Schema.Types.ObjectId, ref : "league" }],
+    leagues: [{ type: mongoose.Schema.Types.ObjectId, ref: "league" }],
 
     status: { type: String, enum: ["active", "inactive"], default: "active" }
 },

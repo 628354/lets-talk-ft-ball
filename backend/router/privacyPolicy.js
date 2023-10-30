@@ -1,0 +1,27 @@
+const express = require("express")
+const router = express.Router()
+
+const multer = require("multer")
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+const privacyController = require("../controller/privacypolicy");
+
+router.post("/addpolicy"  , upload.single("image"), privacyController.addpolicy)
+
+router.get("/getpolicy" , privacyController.getPolicy)
+
+router.post("/updatePolicy" ,upload.single("image")  ,privacyController.updatepolicy)
+
+
+
+
+module.exports = router
