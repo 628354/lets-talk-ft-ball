@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import {  Routes, Route } from "react-router-dom";
 import Home from "./page/Home";
 import About from "./page/About";
+import League from "./page/Leagues"
 import Cafe from "./page/Cafe";
 import Definition from "./page/Definition";
 import Contact from "./page/Contact";
@@ -33,7 +34,6 @@ import EgyptPL from "./Leagues-page/EgyptPL";
 import BotolaPro from "./Leagues-page/BotolaPro";
 import BrazilSerieA from "./Leagues-page/BrazilSerieA";
 
-import League from "./page/Leagues"
 
 function App() {
   return (
