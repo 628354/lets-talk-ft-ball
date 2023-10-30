@@ -1,4 +1,7 @@
-/* .topheader.navbar {
+
+
+
+.topheader.navbar {
     display: none;
 }
 .es_topheader.topheadero {
@@ -9,14 +12,11 @@ section.en_footer.ar_footer {
 }
 section.last_to_footer {
     display: none;
-} */
-
-
-
-section.navheader {
-    background-color: black;
-    padding: 20px 0;
 }
+
+
+
+
 
 .navmenu_login {
     display: flex;
@@ -33,9 +33,9 @@ section.navheader {
 section.navslide {
     /* background: black; */
     border-top: 1px solid #767676;
-    width: 100%;
+    /* width: 100%; */
     position: fixed;
-    /* top: 68px; */
+    top: 68px;
     left: 0;
     height: 100vh;
 }
@@ -52,5 +52,204 @@ section.navslide {
 .menuitem_s li a:hover {
     color: white;
 }
+.left-side-contant {
+    width: 200px;
+}
 
+.right-side-contant.py-3 {
+    width: calc(90% - 38px);
+    margin: 92px 0px 0px 218px;
+}
+
+section.navheader {
+    background-color: black;
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    /* margin-bottom: 20px; */
+    width: 100%;
+    z-index: 9;
+}
 /* slider bar menu end  css */
+
+
+/* deashboard page css start */
+
+.season-link-part {
+    display: flex;
+    align-items: end;
+    gap: 10px;
+}
+ul.season-link {
+    display: flex;
+}
+
+.season-link-part h3 {
+    font-weight: 300;
+}
+ul.season-link li a {
+    font-size: 14px;
+    color: #999999;
+}
+
+ul.add-button-min {
+    display: flex;
+    justify-content: end;
+    padding-right: 25px;
+    align-items: center;
+    gap: 10px;
+}
+
+li.add-button-fis a {
+    background: #1e91cf;
+    color: white;
+    /* padding: 4px 8px; */
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+}
+
+.add-button-sec button {
+    background: #e3503e;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 15px;
+    border-radius: 4px;
+    
+}
+
+.add-button-cencel a {
+    border: 1px solid #c3c0c0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 15px;
+    border-radius: 4px;
+}
+
+table.tablepress, thead, tr, th {
+    text-align: end;
+}
+
+table.tablepress, thead, tr, th:nth-child(1) {
+    text-align: left;
+}
+table.tablepress, thead, tr, th:nth-child(2) {
+    text-align: left;
+}
+tbody.table-list-one, tr, td {
+    text-align: end;
+}
+tbody.table-list-one, tr, td:nth-child(1) {
+    text-align: left;
+}
+tbody.table-list-one, tr, td:nth-child(2) {
+    text-align: left;
+}
+
+.add-button-fis a {
+    background: #1e91cf;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.add-button-fis {
+    display: flex;
+    justify-content: end;
+}
+
+.tablepress thead tr th {
+    color: #1e91cf;
+    font-size: 13px;
+    font-weight: 600;
+}
+tbody.table-list-one tr {
+    vertical-align: middle !important;
+}
+.season-table-list {
+    padding-bottom: 15px;
+}
+.table-footer-f {
+    display: flex;
+    justify-content: end;
+    padding-right: 20px;
+}
+/* deashboard page css start */
+
+
+/* add season css strat */
+.generalone li button {
+    color: #a5a5a5;
+}
+
+.general-part {
+    padding: 20px 30px;
+}
+
+/* .tab-content {
+    padding: 20px 0px 10px 80px;
+} */
+
+.addsection-open {
+    padding: 30px 25px;
+}
+.date-for-section {
+    padding: 23px 30px 3px 104px;
+}
+
+.Add-Season-open {
+    padding: 20px;
+    box-shadow: 0px 0px 10px -3px;
+    border-radius: 10px;
+}
+/* add season css strat */
+
+/* edit home css */
+.general-part-home {
+    margin-top: 60px;
+    box-shadow: 0px 0px 15px -2px;
+    padding: 45px 60px;
+    border-radius: 7px;
+}
+
+.sanson-title {
+    padding-top: 30px;
+}
+.quill.edit-text .ql-container.ql-snow {
+    height: 200px;
+}
+.button-press {
+    display: flex;
+    gap: 13px;
+    justify-content: end;
+}
+.button-press Button {
+    background: #1e91cf;
+    border: none;
+    padding: 10px 20px;
+}
+/* edit home css end  */
+
+

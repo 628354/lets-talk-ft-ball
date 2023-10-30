@@ -10,7 +10,6 @@ import Footer from "./components/Footer";
 import {  Routes, Route } from "react-router-dom";
 import Home from "./page/Home";
 import About from "./page/About";
-import Leagues from "./page/Leagues";
 import Cafe from "./page/Cafe";
 import Definition from "./page/Definition";
 import Contact from "./page/Contact";
@@ -32,7 +31,16 @@ import SaudiPro from "./Leagues-page/SaudiPro";
 import EgyptPL from "./Leagues-page/EgyptPL";
 import BotolaPro from "./Leagues-page/BotolaPro";
 import BrazilSerieA from "./Leagues-page/BrazilSerieA";
-import Dashboard from "./dashboard/Dashboard";
+import Season from "./page-dashboard/Season";
+import Menubar from "./dashboard/Menubar";
+import Dashboard from "./dashboard/Menubar"
+import Addseason from "./page-dashboard/Addseason";
+import Editseason from "./page-dashboard/Editseason";
+import Leagues from "./page-dashboard/Leagues";
+import Addleagues from "./page-dashboard/Addleagues";
+import Editleagues from "./page-dashboard/Editleagues";
+import Edithome from "./Dashboard-edit-page/Edithome";
+import Editabout from "./Dashboard-edit-page/Editabout";
 
 function App() {
   return (
@@ -111,6 +119,33 @@ function App() {
             {" "}
           </Route>
           <Route path="/Dashboard" element={<Dashboard/>}>
+            {" "}
+          </Route>
+          <Route path="/Season" element={<Season/>}>
+            {" "}
+          </Route>
+          <Route path="/Menubar" element={<Menubar/>}>
+            {" "}
+          </Route>
+          <Route path="/Addseason" element={<Addseason/>}>
+            {" "}
+          </Route>
+          <Route path="/Editseason" element={<Editseason/>}>
+            {" "}
+          </Route>
+          <Route path="/Leagues" element={<Leagues/>}>
+            {" "}
+          </Route>
+          <Route path="/Addleagues" element={<Addleagues/>}>
+            {" "}
+          </Route>
+          <Route path="/Editleagues" element={<Editleagues/>}>
+            {" "}
+          </Route>
+          <Route path="/Edithome" element={<Edithome/>}>
+            {" "}
+          </Route>
+          <Route path="/Editabout" element={<Editabout/>}>
             {" "}
           </Route>
 
