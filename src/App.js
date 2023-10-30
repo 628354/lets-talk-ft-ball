@@ -33,7 +33,7 @@ import EgyptPL from "./Leagues-page/EgyptPL";
 import BotolaPro from "./Leagues-page/BotolaPro";
 import BrazilSerieA from "./Leagues-page/BrazilSerieA";
 import Dashboard from "./dashboard/Dashboard";
-import League from "./page/league"
+import League from "./page/Leagues"
 
 function App() {
   return (
