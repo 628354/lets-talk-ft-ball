@@ -16,11 +16,11 @@ const upload = multer({ storage: storage });
 
 const aboutController = require("../controller/aboutus")
 
-router.post("/addAboutus", upload.fields([{ name: 'image' }, { name: 'image1' }, { name: 'image2' }]), aboutController.addaboutus)
+router.post("/addAboutus", upload.fields([{ name: 'bannerImage' }, { name: 'aboutSectionImage' }, { name: 'visionSectionImage' }]), aboutController.addaboutus)
 
 router.get("/getAboutus", aboutController.getaboutus)
 
-router.post("/updateAboutus/:Id", upload.fields([{ name: 'image1' }, { name: 'image2' }]), aboutController.updateAboutus)
+router.post("/updateAboutus/:Id",  upload.fields([{ name: 'bannerImage' }, { name: 'aboutSectionImage' }, { name: 'visionSectionImage' }]), aboutController.updateAboutus)
 
 
 

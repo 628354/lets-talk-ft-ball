@@ -4,7 +4,7 @@ const aboutusmodel = require("../model/aboutus")
 
 exports.addaboutus = async (req, res) => {
     try {
-        const { para1, para2 } = req.body
+        const { aboutTitle, aboutText, visionTitle } = req.body
         const files = req.files
 
         const protocol = req.protocol
@@ -12,11 +12,12 @@ exports.addaboutus = async (req, res) => {
         const url = `${protocol}//${host}`
 
         const addaboutus = await aboutusmodel.create({
-            image: req.files.image ? url + "/uploads/" + files.image[0].filename : "",
-            para1: para1,
-            image1: req.files.image1 ? url + "/uploads/" + files.image1[0].filename : "",
-            para2: para2,
-            image2: req.files.image2 ? url + "/uploads/" + files.image2[0].filename : "",
+            bannerImage: req.files.image ? url + "/uploads/" + files.bannerImage[0].filename : "",
+            aboutTitle: aboutTitle,
+            aboutText: aboutText,
+            aboutSectionImage: req.files.image1 ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
+            visionSectionImage: req.files.image2 ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
+            visionTitle: visionTitle,
 
         })
 
@@ -48,7 +49,7 @@ exports.getaboutus = async (req, res) => {
 exports.updateAboutus = async (req, res) => {
     try {
 
-        const { para1, para2 } = req.body
+        const { aboutTitle, aboutText, visionTitle } = req.body
         const files = req.files
 
         const protocol = req.protocol
@@ -58,13 +59,14 @@ exports.updateAboutus = async (req, res) => {
         const finddata = await aboutusmodel.findById(req.params.Id)
 
 
-
         const updateaboutus = await aboutusmodel.findByIdAndUpdate(req.params.Id, {
-            image: req.files.image ? url + "/uploads/" + files.image[0].filename : finddata.image,
-            para1: para1,
-            image1: req.files.image1 ? url + "/uploads/" + files.image1[0].filename : finddata.image1,
-            para2: para2,
-            image2: req.files.image2 ? url + "/uploads/" + files.image2[0].filename : finddata.image2,
+            bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : finddata.bannerImage,
+            aboutTitle: aboutTitle,
+            aboutText: aboutText,
+            aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : finddata.aboutSectionImage,
+            visionSectionImage: files && files.visionSectionImage ? url + "/uploads/" + files.visionSectionImage[0].filename : finddata.visionSectionImage,
+            visionTitle: visionTitle,
+
         }, { new: true })
 
         await updateaboutus.save()
@@ -72,6 +74,7 @@ exports.updateAboutus = async (req, res) => {
         res.send({ status: true, message: "Successfully update aboutus content", aboutusdetails: updateaboutus })
 
     } catch (error) {
+        console.log(error)
         res.send({ status: false, message: "Something went wrong !!" })
     }
 }
