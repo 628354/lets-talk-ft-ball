@@ -1,6 +1,5 @@
 /** @format */
 
-import "./App.css";
 // import "./css/arstyle.css";
 import "./css/enstyle.css";
 import "./responsive/arstyle.css";
