@@ -20,7 +20,6 @@ export default function Iframesecttion() {
             </Row>
         </Container>
         </section>
-        
     </div>
   )
 }
