@@ -2,7 +2,7 @@ const seasonyearmodel = require("../model/seasonyear")
 
 exports.addleagueyear = async (req, res) => {
     try {
-        const { season_Title , status } = req.body
+        const { season_Title , status ,sort_Order } = req.body
 
         const find = await seasonyearmodel.findOne({ season_Title: season_Title })
 
@@ -14,6 +14,7 @@ exports.addleagueyear = async (req, res) => {
         const addleagueyear = await seasonyearmodel.create({
 
             season_Title: season_Title,
+            sort_Order : sort_Order , 
             status: status
         })
 
@@ -27,7 +28,7 @@ exports.addleagueyear = async (req, res) => {
 
 exports.getyears = async (req, res) => {
     try {
-        const getyears = await seasonyearmodel.find().select({ season_Title: 1, status: 1 }).sort({ season_Title: 1 })
+        const getyears = await seasonyearmodel.find().sort({ season_Title: 1 })
 
 
         res.send({ status: true, message: "Successfully get seasonyears", seasonyears: getyears })
@@ -37,13 +38,27 @@ exports.getyears = async (req, res) => {
     }
 }
 
+exports.getById = async (req,res)=>{
+    try {
+        const getById = await seasonyearmodel.findById(req.params.yearId)
+
+        res.send({status : true , message : "Successfully get seasonyear data" , seasonyears : getById})
+
+    } catch (error) {
+        res.send({status : false , message : "Something went wrong !!"})
+    }
+}
+
+
 exports.updateyears = async (req, res) => {
     try {
 
-        const { season_Title ,status} = req.body
+        const { season_Title ,status , sort_Order} = req.body
+        console.log(req.body)
 
-        const updateyears = await seasonyearmodel.findByIdAndUpdate({
+        const updateyears = await seasonyearmodel.findByIdAndUpdate(req.params.yearId , {
             season_Title: season_Title,
+            sort_Order : sort_Order ,
             status: status
         }, { new: true })
 

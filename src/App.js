@@ -135,7 +135,7 @@ function App() {
           <Route path="/Addseason" element={<Addseason/>}>
             {" "}
           </Route>
-          <Route path="/Editseason" element={<Editseason/>}>
+          <Route path="/Editseason/:id" element={<Editseason/>}>
             {" "}
           </Route>
           <Route path="/Leagues" element={<Leagues/>}>
@@ -144,7 +144,7 @@ function App() {
           <Route path="/Addleagues" element={<Addleagues/>}>
             {" "}
           </Route>
-          <Route path="/Editleagues" element={<Editleagues/>}>
+          <Route path="/Editleagues/:id" element={<Editleagues/>}>
             {" "}
           </Route>
           <Route path="/Edithome" element={<Edithome/>}>

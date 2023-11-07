@@ -61,6 +61,7 @@ exports.updatepolicy = async (req, res) => {
         })
 
     } catch (error) {
+        console.log(error)
         res.send({ status: false, message: "Something went wrong!!" })
     }
 }

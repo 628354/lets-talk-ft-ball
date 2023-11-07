@@ -8,8 +8,8 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + '-' + file.originalname);  },
 });
 
 const upload = multer({ storage: storage });
@@ -19,7 +19,7 @@ router.post("/addpolicy"  , upload.single("image"), privacyController.addpolicy)
 
 router.get("/getpolicy" , privacyController.getPolicy)
 
-router.post("/updatePolicy" ,upload.single("image")  ,privacyController.updatepolicy)
+router.post("/updatePolicy/:policyId" ,upload.single("image")  ,privacyController.updatepolicy)
 
 
 

@@ -22,6 +22,8 @@ router.post("/addleague", upload.single("image"), leaguecontroller.addleague)
 
 router.get("/getleagues", leaguecontroller.getleagues)
 
+router.get("/getleagueById/:leagueId" , leaguecontroller.getById)
+
 router.post("/updateLeague/:leagueId", upload.single("image"), leaguecontroller.update)
 
 router.delete("/removeLeague/:leagueId" , leaguecontroller.delete)

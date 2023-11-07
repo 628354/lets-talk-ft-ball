@@ -12,11 +12,13 @@ import axios from 'axios';
 
 
 export default function Editabout() {
+    const [isEditing, setIsEditing] = useState(false);
+
     const [aboutData, setAboutData] = useState({
         aboutTitle: '',
         aboutText: '',
         visionTitle: '',
-        bannerImage : ''
+        bannerImage: ''
     });
     const [itemId, setItemId] = useState(0); // Initialize with a default value
 
@@ -74,12 +76,14 @@ export default function Editabout() {
         formData.append('aboutSectionImage', aboutData.aboutSectionImage);
         formData.append('visionSectionImage', aboutData.visionSectionImage);
 
-        axios.post('http://localhost:5000/updateAboutus/' + itemId, formData ,{
+        axios.post('http://localhost:5000/updateAboutus/' + itemId, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         })
             .then((response) => {
+                setIsEditing(false); // Disable editing after saving
+
                 // Handle success, e.g., show a success message
             })
             .catch((error) => {
@@ -166,12 +170,12 @@ export default function Editabout() {
                                                         </Form.Group>
                                                         <Form.Group controlId="formFile" className="mb-3">
                                                             <Form.Label>About section image upload </Form.Label>
-                                                            <Form.Control type="file"onChange={(e) => handleFileChange('aboutSectionImage', e.target.files[0])} />
+                                                            <Form.Control type="file" onChange={(e) => handleFileChange('aboutSectionImage', e.target.files[0])} />
                                                         </Form.Group>
 
                                                         <Form.Group controlId="formFile" className="mb-3">
                                                             <Form.Label>Our Vision section image upload </Form.Label>
-                                                            <Form.Control type="file"onChange={(e) => handleFileChange('visionSectionImage', e.target.files[0])} />
+                                                            <Form.Control type="file" onChange={(e) => handleFileChange('visionSectionImage', e.target.files[0])} />
                                                         </Form.Group>
                                                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                                             <Form.Label>Our Vision Title</Form.Label>
@@ -183,8 +187,11 @@ export default function Editabout() {
                                                         </Form.Group>
                                                     </Form>
                                                     <div className='button-press'>
-                                                        {/* <Button>Edit</Button> */}
-                                                        <Button onClick={handleUpdateData}>save</Button>
+                                                        {isEditing ? (
+                                                            <Button onClick={handleUpdateData}>Save</Button>
+                                                        ) : (
+                                                            <Button onClick={() => setIsEditing(true)}>Edit</Button>
+                                                        )}
                                                     </div>
 
 

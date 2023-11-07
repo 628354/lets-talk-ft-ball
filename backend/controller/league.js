@@ -1,4 +1,3 @@
-const league = require("../model/league")
 const leaguemodel = require("../model/league")
 
 
@@ -21,7 +20,7 @@ exports.addleague = async (req, res) => {
 
         const addleage = await leaguemodel.create({
             leaguename: leaguename,
-            image: url + "/uploads/" + req.file.filename,
+            image:req.file? url + "/uploads/" + req.file.filename : "",
             description: description,
             meta_Tag_Title: meta_Tag_Title,
             meta_Tag_Description: meta_Tag_Description,
@@ -34,6 +33,7 @@ exports.addleague = async (req, res) => {
         res.send({ status: true, message: "Successfully add league", leaguedetails: addleage })
 
     } catch (error) {
+        console.log(error)
         res.send({ status: false, message: "Something went wrong!!" })
     }
 }
@@ -49,6 +49,17 @@ exports.getleagues = async (req, res) => {
 
     } catch (error) {
         res.send({ status: false, message: "Something went wrong !!" })
+    }
+}
+
+exports.getById = async (req,res)=>{
+    try {
+        const getById = await leaguemodel.findById(req.params.leagueId)
+
+        res.send({status : true , message : "Successfully get league data" , leaguedetails : getById})
+
+    } catch (error) {
+        res.send({status : false , message : "Something went wrong !!"})
     }
 }
 
@@ -89,6 +100,7 @@ exports.update = async (req, res) => {
 
 
     } catch (error) {
+        console.log(error)
         res.send({ status: false, message: "Something went wrong !!" })
     }
 }
