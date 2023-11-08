@@ -57,34 +57,46 @@ export default function Menubar() {
                             <Link to="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Leagues</span></Link>
                         </li>
                         <li>
-                            <Link to="" className="nav-link px-0"> <span className="d-none d-sm-inline">Cafe</span></Link>
+                            <Link to="/Editdefinition" className="nav-link px-0"> <span className="d-none d-sm-inline">Definition </span></Link>
                         </li>
                         <li>
-                            <Link to="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Definition </span></Link>
+                            <Link to="/Editcontact" className="nav-link px-0"> <span className="d-none d-sm-inline">Contact Us </span></Link>
                         </li>
                         <li>
-                            <Link to="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Contact Us </span></Link>
+                            <Link to="/Editprivacypolicy" className="nav-link px-0"> <span className="d-none d-sm-inline">Terms and Privacy</span></Link>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <Link to="#submenu3" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                        <span className="ms-1 d-none d-sm-inline"> Catalog</span> <i class="ri-arrow-down-s-line"></i>  </Link>
-                        <ul className="collapse nav flex-column ms-5" id="submenu3" data-bs-parent="#menu">
+                        <Link to="#submenu4" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
+                        <span className="ms-1 d-none d-sm-inline">Cafe</span> <i class="ri-arrow-down-s-line"></i>  </Link>
+                        <ul className="collapse nav flex-column ms-5" id="submenu4" data-bs-parent="#menu">
                         <li className="w-100">
-                            <Link to="/Season" className="nav-link px-0"> <span className="d-none d-sm-inline">Season</span></Link>
+                        <Link to="/Addcafe" className="nav-link px-0"> <span className="d-none d-sm-inline">Add New</span></Link>
                         </li>
                         <li className="w-100">
-                            <Link to="/Leagues" className="nav-link px-0"> <span className="d-none d-sm-inline">Leagues</span></Link>
+                        <Link to="/Cafeview" className="nav-link px-0"> <span className="d-none d-sm-inline">View All</span></Link>
+                        </li>
+                             </ul>
+                        </li>
+                <li>
+                        <Link to="#submenu3" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
+                        <span className="ms-1 d-none d-sm-inline"> Catalog</span> <i class="ri-arrow-down-s-line"></i> </Link>
+                        <ul className="collapse nav flex-column ms-5" id="submenu3" data-bs-parent="#menu">
+                        <li className="w-100">
+                        <Link to="/Season" className="nav-link px-0"> <span className="d-none d-sm-inline">Season</span></Link>
+                        </li>
+                        <li className="w-100">
+                        <Link to="/Leagues" className="nav-link px-0"> <span className="d-none d-sm-inline">Leagues</span></Link>
                         </li>
                         
                     </ul>
                 </li>
                 <li>
-                    <Link to="#" className="nav-link px-0 align-middle">
-                       <span className="ms-1 d-none d-sm-inline">Customers</span></Link>
+                        <Link to="#" className="nav-link px-0 align-middle">
+                        <span className="ms-1 d-none d-sm-inline">Customers</span></Link>
                 </li>
-                <li>
+                {/* <li>
                     <Link to="#submenu4" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
                          <span className="ms-1 d-none d-sm-inline">Products</span> <i class="ri-arrow-down-s-line"></i>  </Link>
                         <ul className="collapse nav flex-column ms-5" id="submenu4" data-bs-parent="#menu">
@@ -93,7 +105,7 @@ export default function Menubar() {
                         </li>
                         
                     </ul>
-                </li>
+                </li> */}
             </ul>
             <hr />
             
@@ -104,10 +116,8 @@ export default function Menubar() {
 </div>
     </section>
 
-    
 
-
-    
+  
 
 </div>
   )

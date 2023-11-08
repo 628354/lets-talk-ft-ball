@@ -50,20 +50,16 @@ export default function Editseason() {
                     </div>
                     </Row>
                 </Container>
-               
-                
-               </section>
+                </section>
                <hr/>
                <section className='Add-Season-open'>
-                <Container fluid>
+                 <Container fluid>
                     <Row>
                         <div className='main_add_season'>
                             <div className='main-ad-sea'>
                                 <p><i class="ri-pencil-fill"></i> Edit Season</p>
                             </div>
                             <hr/>
-
-
                             <div className='addsection-open'>
                             <div className='add-genral'>
                                 <h6>General</h6>
@@ -111,27 +107,47 @@ export default function Editseason() {
                             </div>
                             <hr/>
                             <div className='date-for-section'>
-                            <div className='sanson-title'>
-                                <Form>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                        <Form.Label column sm="1">
-                                        Status
-                                        </Form.Label>
-                                        <Col sm="11">
-                                        <Form.Select>
-                                            <option>Disabled</option>
-                                            <option>Enabled</option>
+                        <div className='sanson-title'>
+                            <Form>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    Status
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Select>
+                                        <option>Enabled</option>
+                                        <option>Disabled</option>
 
-                                        </Form.Select>
-                                        </Col>
-                                    </Form.Group>
-                                    </Form>
-                                </div>
+                                    </Form.Select>
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    Acive
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Select>
+                                        <option>Enabled</option>
+                                        <option>Disabled</option>
+
+                                    </Form.Select>
+                                    </Col>
+                                </Form.Group>
+                                
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    Sort Order
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Control type="number" placeholder="League Namee" />
+                                    </Col>
+                                </Form.Group>
+                                </Form>
                             </div>
+                        </div>
                             </div>
                             
                         </div>
-
                     </Row>
                 </Container>
                </section>

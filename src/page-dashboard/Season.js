@@ -41,9 +41,10 @@ export default function Season() {
                               <Link to="/Addseason"><i className="ri-add-line"></i></Link>
                              
                             </li>
-                            <li className='add-button-sec'>
+                            <li class="add-button-cencel"><a href=""><i className="ri-refresh-line"></i></a></li>
+                            {/* <li className='add-button-sec'>
                               <button> <i className="ri-delete-bin-line"></i></button>
-                            </li>
+                            </li> */}
                           </ul>
                         </div>
                       
@@ -59,12 +60,12 @@ export default function Season() {
                   <Row>
                     <div className='season_list_table'>
                       <div className='season-table-list'>
-                        <h6><i class="ri-list-check"></i> Season List</h6>
+                        <h6><i class="ri-list-check"></i>Season List</h6>
                       </div>
                       <Table  bordered hover className='tablepress'>
                         <thead>
                           <tr>
-                            <th><Form.Check aria-label="option 1" /></th>
+                            {/* <th><Form.Check aria-label="option 1" /></th> */}
                             <th colspan="2">Season Title</th>
                             <th colspan="2">Sort Order</th>
                             <th colspan="2">Action</th>
@@ -72,57 +73,81 @@ export default function Season() {
                         </thead>
                         <tbody className='table-list-one'>
                           <tr>
-                            <td><Form.Check aria-label="option 1" /></td>
+                            {/* <td><Form.Check aria-label="option 1" /></td> */}
                             <td colspan="2">12</td>
                             <td colspan="2">1</td>
                             <td colspan="2">
                             
                             <div className='add-button-fis'>
-                            <Link to="/Editseason"><i className="ri-pencil-fill"></i></Link>
+                            <ul className='but-delet'>
+                              <li><Link to="/Editseason"><i className="ri-pencil-fill"></i></Link></li>
+                              <li className='add-button-sec'>
+                                <button><i className="ri-delete-bin-line"></i></button>
+                                </li>
+                            </ul>
                             </div>
                             </td>
                           </tr>
                           <tr>
-                            <td><Form.Check aria-label="option 1" /></td>
+                            {/* <td><Form.Check aria-label="option 1" /></td> */}
                             <td colspan="2">12</td>
                             <td colspan="2">1</td>
                             <td colspan="2">
                             
                             <div className='add-button-fis'>
-                            <Link to="/Editseason"><i className="ri-pencil-fill"></i></Link>
+                            <ul className='but-delet'>
+                              <li><Link to="/Editseason"><i className="ri-pencil-fill"></i></Link></li>
+                              <li className='add-button-sec'>
+                                <button><i className="ri-delete-bin-line"></i></button>
+                                </li>
+                            </ul>
                             </div>
                             </td>
                           </tr>
                           <tr>
-                            <td><Form.Check aria-label="option 1" /></td>
+                            {/* <td><Form.Check aria-label="option 1" /></td> */}
                             <td colspan="2">12</td>
                             <td colspan="2">1</td>
                             <td colspan="2">
                             
                             <div className='add-button-fis'>
-                            <Link to="/Editseason"><i className="ri-pencil-fill"></i></Link>
+                            <ul className='but-delet'>
+                              <li><Link to="/Editseason"><i className="ri-pencil-fill"></i></Link></li>
+                              <li className='add-button-sec'>
+                                <button><i className="ri-delete-bin-line"></i></button>
+                                </li>
+                            </ul>
                             </div>
                             </td>
                           </tr>
                           <tr>
-                            <td><Form.Check aria-label="option 1" /></td>
+                            {/* <td><Form.Check aria-label="option 1" /></td> */}
                             <td colspan="2">12</td>
                             <td colspan="2">1</td>
                             <td colspan="2">
                             
                             <div className='add-button-fis'>
-                            <Link to="/Editseason"><i className="ri-pencil-fill"></i></Link>
+                            <ul className='but-delet'>
+                              <li><Link to="/Editseason"><i className="ri-pencil-fill"></i></Link></li>
+                              <li className='add-button-sec'>
+                                <button><i className="ri-delete-bin-line"></i></button>
+                                </li>
+                            </ul>
                             </div>
                             </td>
                           </tr>
                           <tr>
-                            <td><Form.Check aria-label="option 1" /></td>
+                            {/* <td><Form.Check aria-label="option 1" /></td> */}
                             <td colspan="2">12</td>
                             <td colspan="2">1</td>
                             <td colspan="2">
-                            
                             <div className='add-button-fis'>
-                            <Link to="/Editseason"><i className="ri-pencil-fill"></i></Link>
+                            <ul className='but-delet'>
+                              <li><Link to="/Editseason"><i className="ri-pencil-fill"></i></Link></li>
+                              <li className='add-button-sec'>
+                                <button><i className="ri-delete-bin-line"></i></button>
+                                </li>
+                            </ul>
                             </div>
                             </td>
                           </tr>

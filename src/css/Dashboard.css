@@ -250,6 +250,19 @@ tbody.table-list-one tr {
     border: none;
     padding: 10px 20px;
 }
+.otherview, thead, tr, th, tbody, tr, td {
+    text-align: center;
+}
+
+.cafe-view-List {
+    padding: 20px;
+    border: 1px solid #e3e3e3;
+    margin: 20px;
+}
+ul.but-delet {
+    display: flex;
+    gap: 10px;
+}
 /* edit home css end  */
 
 

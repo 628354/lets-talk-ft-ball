@@ -9,12 +9,8 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useState } from 'react';
 
+export default function Editdefinition() {
 
-
-export default function Editabout() {
-
-
-  
     const [text, setText] = useState('');
 
     const handleTextChange = (value) => {
@@ -36,7 +32,7 @@ export default function Editabout() {
         ['link', 'image', 'video'],
       ],
     };
-  
+
 
   return (
     <div>
@@ -49,7 +45,7 @@ export default function Editabout() {
                     <div className='season-us'>
                       
                       <div className='season-link-part'>
-                        <h3>Edit About</h3>
+                        <h3>Edit Definition</h3>
                       <ul className='season-link'>
                         <li>
                           <Link>Home</Link>
@@ -58,7 +54,7 @@ export default function Editabout() {
                         <i className="ri-arrow-right-s-line"></i>
                         </li>
                         <li>
-                          <Link>Edit Home</Link>
+                          <Link>Edit Definition</Link>
                         </li>
                       </ul>
                       </div>
@@ -69,19 +65,15 @@ export default function Editabout() {
                       <ul className='add-button-min'>
                         <li className='add-button-fis'>
                           <Link to=""><i className="ri-save-3-line"></i></Link>
-                         
                         </li>
                         <li className='add-button-cencel'>
-                          <Link to="/Leagues"><i className="ri-reply-fill"></i></Link>
+                          <Link to=""><i className="ri-reply-fill"></i></Link>
                         </li>
                       </ul>
                     </div>
-                  
                 </div>
                 </Row>
             </Container>
-           
-            
            </section>
            <section className='tab-section'>
             <Container>
@@ -98,28 +90,11 @@ export default function Editabout() {
                                 <div className='bannerimage'>
                                 <Form>
                                     <Form.Group controlId="formFile" className="mb-3">
-                                        <Form.Label>banner upload </Form.Label>
+                                        <Form.Label>Banner Upload </Form.Label>
                                         <Form.Control type="file" />
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>About Title</Form.Label>
-                                        <Form.Control type="text" placeholder="About Title" />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>About textarea</Form.Label>
-                                        <ReactQuill className='edit-text' value={text} onChange={handleTextChange} />
-                                    </Form.Group>
-                                    <Form.Group controlId="formFile" className="mb-3">
-                                        <Form.Label>About section image upload </Form.Label>
-                                        <Form.Control type="file" />
-                                    </Form.Group>
-
-                                    <Form.Group controlId="formFile" className="mb-3">
-                                        <Form.Label>Our Vision section image upload </Form.Label>
-                                        <Form.Control type="file" />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Our Vision Title</Form.Label>
+                                        <Form.Label>Definition Textarea</Form.Label>
                                         <ReactQuill className='edit-text' value={text} onChange={handleTextChange} />
                                     </Form.Group>
                                  </Form>
@@ -127,12 +102,8 @@ export default function Editabout() {
                                     <Button>Edit</Button>
                                     <Button>seve</Button>
                                     </div>
-                                 
-                                
-
                                 </div>
                             </div>
-                            
                             </div>
                             </Tab>
                             <Tab eventKey="profile2" title={<span><img src={require('../img/ar.png')} alt="General" /> العربية</span>}>
@@ -141,47 +112,25 @@ export default function Editabout() {
                                 <div className='bannerimage'>
                                 <Form>
                                     <Form.Group controlId="formFile" className="mb-3">
-                                        <Form.Label>banner upload </Form.Label>
+                                        <Form.Label>Banner Upload </Form.Label>
                                         <Form.Control type="file" />
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>About Title</Form.Label>
-                                        <Form.Control type="text" placeholder="About Title" />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>About textarea</Form.Label>
-                                        <ReactQuill className='edit-text' value={text} onChange={handleTextChange} />
-                                    </Form.Group>
-                                    <Form.Group controlId="formFile" className="mb-3">
-                                        <Form.Label>About section image upload </Form.Label>
-                                        <Form.Control type="file" />
-                                    </Form.Group>
-
-                                    <Form.Group controlId="formFile" className="mb-3">
-                                        <Form.Label>Our Vision section image upload </Form.Label>
-                                        <Form.Control type="file" />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Our Vision Title</Form.Label>
+                                        <Form.Label>Definition Textarea</Form.Label>
                                         <ReactQuill className='edit-text' value={text} onChange={handleTextChange} />
                                     </Form.Group>
                                  </Form>
                                  <div className='button-press'>
                                     <Button>Edit</Button>
                                     <Button>seve</Button>
-                                  </div>
-                                 
+                                </div>
                                 </div>
                             </div>
-                            
                             </div>
-                            
                             </Tab>
                             </Tabs>
                         </div>
-
-                        
-                </Row>
+                    </Row>
             </Container>
            </section>
            

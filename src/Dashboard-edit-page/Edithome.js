@@ -1,16 +1,46 @@
 import React from 'react';
 import Menubar from '../dashboard/Menubar';
-import { Container, Row } from 'react-bootstrap';
+import { Button, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import Form from 'react-bootstrap/Form';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { useState } from 'react';
 
 export default function Edithome() {
+ 
+
+  const [text, setText] = useState('');
+
+    const handleTextChange = (value) => {
+      setText(value);
+    };
+  
+    const formats = [
+      'header', 'font', 'size',
+      'bold', 'italic', 'underline', 'strike', 'blockquote',
+      'list', 'bullet', 'indent',
+      'link', 'image', 'video'
+    ];
+  
+    const modules = {
+      toolbar: [
+        [{ 'header': '1' }, { 'header': '2' }, { 'header': '3' }, { 'header': '4' }, { 'header': '5' }, { 'header': '6' }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        ['link', 'image', 'video'],
+      ],
+    };
+  
+
+
   return (
     <div>
     <Menubar/>
-    <div className='right-side-contant py-3'>
-    <section className='min-section-one'>
+      <div className='right-side-contant py-3'>
+      <section className='min-section-one'>
             <Container fluid>
                 <Row>
                 <div className="col-lg-6 col-md-6 col-6">
@@ -49,7 +79,6 @@ export default function Edithome() {
                 </Row>
             </Container>
            
-            
            </section>
            <section className='tab-section'>
             <Container>
@@ -62,16 +91,81 @@ export default function Edithome() {
                             >
                             <Tab className='tabevent' eventKey="profile" title={<span><img src={require('../img/en.png')} alt="General" /> General</span>}>
                             <div className='sanson-title'>
-                            <div className='edithome'>
-                                <h3>twygqgsuyhgsygwiug </h3>
-                            </div>
-                            
-                            </div>
+                             <div className='edithome'>
+                                <div className='bannerimage'>
+                                <Form>
+                                    <Form.Group controlId="formFile" className="mb-3">
+                                        <Form.Label>banner upload </Form.Label>
+                                        <Form.Control type="file" />
+                                    </Form.Group>
+                                    <Form.Group controlId="formFile" className="mb-3">
+                                        <Form.Label>Left side logo upload </Form.Label>
+                                        <Form.Control type="file" />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>About Title</Form.Label>
+                                        <Form.Control type="text" placeholder="About Title" />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Button Text url</Form.Label>
+                                        <Form.Control type="text" placeholder="Text" /><br/>
+                                        <Form.Control type="url" placeholder="Url" />
+                                    </Form.Group>
+                                    <Form.Group controlId="formFile" className="mb-3">
+                                        <Form.Label>Right side logo upload </Form.Label>
+                                        <Form.Control type="file" />
+                                    </Form.Group>
+                                    <Form.Group controlId="formFile" className="mb-3">
+                                        <Form.Label>Leagues Logo </Form.Label>
+                                        <Form.Control type="file" />
+                                    </Form.Group>
+                                 </Form>
+                                 <div className='button-press'>
+                                    <Button>Edit</Button>
+                                    <Button>seve</Button>
+                                  </div>
+                                   </div>
+                                </div>
+                             </div>
                             </Tab>
                             <Tab eventKey="profile2" title={<span><img src={require('../img/ar.png')} alt="General" /> العربية</span>}>
                             <div className='sanson-title'>
-                            <h1>tesst 2</h1>
-                            </div>
+                             <div className='edithome'>
+                                <div className='bannerimage'>
+                                <Form>
+                                    <Form.Group controlId="formFile" className="mb-3">
+                                        <Form.Label>banner upload </Form.Label>
+                                        <Form.Control type="file" />
+                                    </Form.Group>
+                                    <Form.Group controlId="formFile" className="mb-3">
+                                        <Form.Label>Left side logo upload </Form.Label>
+                                        <Form.Control type="file" />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>About Title</Form.Label>
+                                        <Form.Control type="text" placeholder="About Title" />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Button Text url</Form.Label>
+                                        <Form.Control type="text" placeholder="Text" /><br/>
+                                        <Form.Control type="url" placeholder="Url" />
+                                    </Form.Group>
+                                    <Form.Group controlId="formFile" className="mb-3">
+                                        <Form.Label>Right side logo upload </Form.Label>
+                                        <Form.Control type="file" />
+                                    </Form.Group>
+                                    <Form.Group controlId="formFile" className="mb-3">
+                                        <Form.Label>Leagues Logo </Form.Label>
+                                        <Form.Control type="file" />
+                                    </Form.Group>
+                                 </Form>
+                                 <div className='button-press'>
+                                    <Button>Edit</Button>
+                                    <Button>seve</Button>
+                                  </div>
+                                   </div>
+                                </div>
+                             </div>
                             </Tab>
                             </Tabs>
                         </div>

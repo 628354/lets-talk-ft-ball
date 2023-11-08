@@ -6,9 +6,35 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { useState } from 'react';
 
 
 export default function Editleagues() {
+
+  const [text, setText] = useState('');
+
+  const handleTextChange = (value) => {
+    setText(value);
+  };
+
+  const formats = [
+    'header', 'font', 'size',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image', 'video'
+  ];
+
+  const modules = {
+    toolbar: [
+      [{ 'header': '1' }, { 'header': '2' }, { 'header': '3' }, { 'header': '4' }, { 'header': '5' }, { 'header': '6' }],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      ['link', 'image', 'video'],
+    ],
+  };
+
   return (
     <div>
     <Menubar/>
@@ -18,7 +44,6 @@ export default function Editleagues() {
                 <Row>
                 <div className="col-lg-6 col-md-6 col-6">
                     <div className='season-us'>
-                      
                       <div className='season-link-part'>
                         <h3> League</h3>
                       <ul className='season-link'>
@@ -46,19 +71,17 @@ export default function Editleagues() {
                       <ul className='add-button-min'>
                         <li className='add-button-fis'>
                           <Link to=""><i className="ri-save-3-line"></i></Link>
-                         
                         </li>
                         <li className='add-button-cencel'>
                           <Link to="/Leagues"><i className="ri-reply-fill"></i></Link>
                         </li>
                       </ul>
                     </div>
-                  
                 </div>
+
                 </Row>
             </Container>
-           
-            
+
            </section>
            <hr/>
            <section className='Add-Season-open'>
@@ -69,8 +92,6 @@ export default function Editleagues() {
                             <p><i class="ri-pencil-fill"></i> Edit League</p>
                         </div>
                         <hr/>
-
-
                         <div className='addsection-open'>
                         <div className='add-genral'>
                             <h6>General</h6>
@@ -90,7 +111,60 @@ export default function Editleagues() {
                                     League Name
                                     </Form.Label>
                                     <Col sm="10">
-                                    <Form.Control type="text" placeholder="League Name" value="Botola Pro"/>
+                                    <Form.Control type="text" placeholder="League Namee" />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    Image
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Control type="file" />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    League Description
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <ReactQuill className='edit-text' value={text} onChange={handleTextChange} />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    League Meta Tag Title
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Control type="text" placeholder="Meta Tag Title" />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    League Meta Tag Description
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Control as="textarea" rows={3} />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    League Meta Tag Keywords
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Control as="textarea" rows={3} />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    League Blog Category
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Select aria-label="Default select example">
+                                        <option>Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </Form.Select>
                                     </Col>
                                 </Form.Group>
                                 </Form>
@@ -101,10 +175,63 @@ export default function Editleagues() {
                             <Form>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                     <Form.Label column sm="2">
-                                    Season Title
+                                    League Name
                                     </Form.Label>
                                     <Col sm="10">
-                                    <Form.Control type="text" placeholder="Season Title" value="Botola Pro" />
+                                    <Form.Control type="text" placeholder="League Namee" />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    Image
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Control type="file" />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    League Description
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <ReactQuill className='edit-text' value={text} onChange={handleTextChange} />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    League Meta Tag Title
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Control type="text" placeholder="Meta Tag Title" />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    League Meta Tag Description
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Control as="textarea" rows={3} />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    League Meta Tag Keywords
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Control as="textarea" rows={3} />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    League Blog Category
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Select aria-label="Default select example">
+                                        <option>Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </Form.Select>
                                     </Col>
                                 </Form.Group>
                                 </Form>
@@ -119,17 +246,26 @@ export default function Editleagues() {
                         <hr/>
                         <div className='date-for-section'>
                         <div className='sanson-title'>
-                            <Form>
+                        <Form>
                                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                    <Form.Label column sm="1">
+                                    <Form.Label column sm="2">
                                     Status
                                     </Form.Label>
-                                    <Col sm="11">
+                                    <Col sm="10">
                                     <Form.Select>
-                                        <option>Disabled</option>
                                         <option>Enabled</option>
+                                        <option>Disabled</option>
 
                                     </Form.Select>
+                                    </Col>
+                                </Form.Group>
+                                
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    Sort Order
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Control type="number" placeholder="League Namee" />
                                     </Col>
                                 </Form.Group>
                                 </Form>

@@ -111,23 +111,32 @@ export default function Addseason() {
                             </div>
                             <hr/>
                             <div className='date-for-section'>
-                            <div className='sanson-title'>
-                                <Form>
-                                    <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                        <Form.Label column sm="1">
-                                        Status
-                                        </Form.Label>
-                                        <Col sm="11">
-                                        <Form.Select>
-                                            <option>Enabled</option>
-                                            <option>Disabled</option>
+                        <div className='sanson-title'>
+                            <Form>
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    Status
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Select>
+                                        <option>Enabled</option>
+                                        <option>Disabled</option>
 
-                                        </Form.Select>
-                                        </Col>
-                                    </Form.Group>
-                                    </Form>
-                                </div>
+                                    </Form.Select>
+                                    </Col>
+                                </Form.Group>
+                                
+                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                    <Form.Label column sm="2">
+                                    Sort Order
+                                    </Form.Label>
+                                    <Col sm="10">
+                                    <Form.Control type="number" placeholder="League Namee" />
+                                    </Col>
+                                </Form.Group>
+                                </Form>
                             </div>
+                        </div>
                             </div>
                             
                         </div>

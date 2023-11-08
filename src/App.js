@@ -41,6 +41,13 @@ import Addleagues from "./page-dashboard/Addleagues";
 import Editleagues from "./page-dashboard/Editleagues";
 import Edithome from "./Dashboard-edit-page/Edithome";
 import Editabout from "./Dashboard-edit-page/Editabout";
+import Privacypolicy from "./page/Privacypolicy";
+import Editprivacypolicy from "./Dashboard-edit-page/Editprivacypolicy";
+import Editdefinition from "./Dashboard-edit-page/Editdefinition";
+import Editcontact from "./Dashboard-edit-page/Editcontact";
+import Addcafe from "./page-dashboard/Addcafe";
+import Cafeview from "./page-dashboard/Cafeview";
+
 
 function App() {
   return (
@@ -146,6 +153,24 @@ function App() {
             {" "}
           </Route>
           <Route path="/Editabout" element={<Editabout/>}>
+            {" "}
+          </Route>
+          <Route path="/Privacypolicy" element={<Privacypolicy/>}>
+            {" "}
+          </Route>
+          <Route path="/Editprivacypolicy" element={<Editprivacypolicy/>}>
+            {" "}
+          </Route>
+          <Route path="/Editdefinition" element={<Editdefinition/>}>
+            {" "}
+          </Route>
+          <Route path="/Editcontact" element={<Editcontact/>}>
+            {" "}
+          </Route>
+          <Route path="/Addcafe" element={<Addcafe/>}>
+            {" "}
+          </Route>
+          <Route path="/Cafeview" element={<Cafeview/>}>
             {" "}
           </Route>
 

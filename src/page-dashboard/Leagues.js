@@ -41,17 +41,15 @@ export default function Leagues() {
                               <Link to="/Addleagues"><i className="ri-add-line"></i></Link>
                               </li>
                                 <li class="add-button-cencel"><a href=""><i className="ri-refresh-line"></i></a></li>
-                                <li className='add-button-sec'>
+                                {/* <li className='add-button-sec'>
                                 <button><i className="ri-delete-bin-line"></i></button>
-                                </li>
+                                </li> */}
                           </ul>
                         </div>
                       
                     </div>
                     </Row>
                 </Container>
-               
-                
                </section>
                <hr/>
                <section className='Season-List'>
@@ -64,7 +62,7 @@ export default function Leagues() {
                       <Table  bordered hover className='tablepress'>
                         <thead>
                           <tr>
-                            <th><Form.Check aria-label="option 1" /></th>
+                            {/* <th><Form.Check aria-label="option 1" /></th> */}
                             <th colspan="2">League Name</th>
                             <th colspan="2">Sort Order</th>
                             <th colspan="2">Action</th>
@@ -72,57 +70,82 @@ export default function Leagues() {
                         </thead>
                         <tbody className='table-list-one'>
                           <tr>
-                            <td><Form.Check aria-label="option 1" /></td>
+                            {/* <td><Form.Check aria-label="option 1" /></td> */}
                             <td colspan="2">Botola Pro</td>
                             <td colspan="2">10</td>
                             <td colspan="2">
                             
                             <div className='add-button-fis'>
-                            <Link to="/Editleagues"><i className="ri-pencil-fill"></i></Link>
+                            <ul className='but-delet'>
+                              <li><Link to="/Editleagues"><i className="ri-pencil-fill"></i></Link></li>
+                              <li className='add-button-sec'>
+                                <button><i className="ri-delete-bin-line"></i></button>
+                                </li>
+                            </ul>
                             </div>
                             </td>
                           </tr>
                           <tr>
-                            <td><Form.Check aria-label="option 1" /></td>
+                            {/* <td><Form.Check aria-label="option 1" /></td> */}
                             <td colspan="2">Brazil Serie A</td>
                             <td colspan="2">1</td>
                             <td colspan="2">
                             
                             <div className='add-button-fis'>
-                            <Link to="/Editleagues"><i className="ri-pencil-fill"></i></Link>
+                            <ul className='but-delet'>
+                              <li><Link to="/Editleagues"><i className="ri-pencil-fill"></i></Link></li>
+                              <li className='add-button-sec'>
+                                <button><i className="ri-delete-bin-line"></i></button>
+                                </li>
+                            </ul>
                             </div>
                             </td>
                           </tr>
                           <tr>
-                            <td><Form.Check aria-label="option 1" /></td>
+                            {/* <td><Form.Check aria-label="option 1" /></td> */}
                             <td colspan="2">Bundesliga</td>
                             <td colspan="2">1</td>
                             <td colspan="2">
                             
                             <div className='add-button-fis'>
-                            <Link to="/Editleagues"><i className="ri-pencil-fill"></i></Link>
+                            <ul className='but-delet'>
+                              <li><Link to="/Editleagues"><i className="ri-pencil-fill"></i></Link></li>
+                              <li className='add-button-sec'>
+                                <button><i className="ri-delete-bin-line"></i></button>
+                                </li>
+                            </ul>
                             </div>
                             </td>
                           </tr>
                           <tr>
-                            <td><Form.Check aria-label="option 1" /></td>
+                            {/* <td><Form.Check aria-label="option 1" /></td> */}
                             <td colspan="2">Egypt PL</td>
                             <td colspan="2">1</td>
                             <td colspan="2">
                             
                             <div className='add-button-fis'>
-                            <Link to="/Editleagues"><i className="ri-pencil-fill"></i></Link>
+                            <ul className='but-delet'>
+                              <li><Link to="/Editleagues"><i className="ri-pencil-fill"></i></Link></li>
+                              <li className='add-button-sec'>
+                                <button><i className="ri-delete-bin-line"></i></button>
+                                </li>
+                            </ul>
                             </div>
                             </td>
                           </tr>
                           <tr>
-                            <td><Form.Check aria-label="option 1" /></td>
+                            {/* <td><Form.Check aria-label="option 1" /></td> */}
                             <td colspan="2">Eredivisie</td>
                             <td colspan="2">1</td>
                             <td colspan="2">
                             
                             <div className='add-button-fis'>
-                            <Link to="/Editleagues"><i className="ri-pencil-fill"></i></Link>
+                            <ul className='but-delet'>
+                              <li><Link to="/Editleagues"><i className="ri-pencil-fill"></i></Link></li>
+                              <li className='add-button-sec'>
+                                <button><i className="ri-delete-bin-line"></i></button>
+                                </li>
+                            </ul>
                             </div>
                             </td>
                           </tr>

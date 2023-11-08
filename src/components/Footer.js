@@ -16,7 +16,7 @@ export default function Footer() {
                     <ul className='en_footer_menu ar_footer_menu'>
                         <li><Link to="about">About Us</Link></li>
                         <li><Link to="contact">Contact Us</Link></li>
-                        <li><Link to="">Terms and Privacy</Link></li>
+                        <li><Link to="Privacypolicy">Terms and Privacy</Link></li>
                     </ul>
                     </div>
                 </div>

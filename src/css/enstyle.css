@@ -1009,12 +1009,42 @@ tr.filter-fir {
     position: sticky;
     bottom: 0;
 }
-section.league_table {
+.league_table {
     padding-bottom: 50px;
 }
-section.ifr-section {
+.ifr-section {
     background: #f5f5f5;
     padding: 60px 0 40px 0;
 }
 
+
 /* premier leadgueague table css start */
+
+
+/*  */
+
+.letball {
+    padding-left: 75px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.letball li {
+    list-style: auto;
+}
+
+.infocation-site {
+    padding-left: 45px;
+    padding-top: 15px;
+}
+
+.infocation-site li {
+    list-style: lower-alpha;
+}
+
+.editcafe {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
