@@ -6,7 +6,8 @@ import "./responsive/arstyle.css";
 import "./responsive/enstyle.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import {  Routes, Route } from "react-router-dom";
+import {  Routes, Route, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Home from "./page/Home";
 import About from "./page/About";
 import Cafe from "./page/Cafe";
@@ -46,17 +47,21 @@ import Editdefinition from "./Dashboard-edit-page/Editdefinition";
 import Editcontact from "./Dashboard-edit-page/Editcontact";
 import Addcafe from "./page-dashboard/Addcafe";
 
-
 function App() {
+  const navigate = useNavigate(); 
+  const handleSuccessfulLogin = () => {
+    setIsLoggedIn(true);
+    navigate('/dashboard');
+  };
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div className="App">
       <Header />
       {/* <Headerar/> */}
-      
-     
-      
 
         <Routes>
+          
+        <Route path="/login" element={<Login onSuccessfulLogin={handleSuccessfulLogin} />} />
           <Route path="/" element={<Home />}>
             {" "}
           </Route>
@@ -73,9 +78,6 @@ function App() {
             {" "}
           </Route>
           <Route path="/Contact" element={<Contact />}>
-            {" "}
-          </Route>
-          <Route path="/Login" element={<Login />}>
             {" "}
           </Route>
           <Route path="/Signup" element={<Signup />}>
@@ -168,12 +170,7 @@ function App() {
           <Route path="/Addcafe" element={<Addcafe/>}>
             {" "}
           </Route>
-
-         
         </Routes>
-       
-    
-
       <Footer />
       {/* <Footerar/> */}
     </div>
