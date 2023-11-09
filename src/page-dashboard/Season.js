@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Menubar from '../dashboard/Menubar';
@@ -6,6 +7,33 @@ import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 
 export default function Season() {
+  const [aboutData, setAboutData] = useState([]);
+  const [itemId, setItemId] = useState(0); // Initialize with a default value
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/getyears')
+      .then((response) => {
+        const aboutInfo = response.data.seasonyears
+        setAboutData(aboutInfo);
+        setItemId(aboutInfo._id); // Assuming 'id' is the key for the ID
+
+
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:5000/removeyear/${id}`)
+      .then((response) => {
+        // Assuming a successful deletion, you can update your state to remove the deleted item
+        setAboutData(aboutData.filter(season => season._id !== id));
+      })
+      .catch((error) => {
+        console.error('Error deleting data:', error);
+      });
+  };
   return (
     <div>
         
@@ -62,102 +90,47 @@ export default function Season() {
                       <div className='season-table-list'>
                         <h6><i class="ri-list-check"></i>Season List</h6>
                       </div>
-                      <Table  bordered hover className='tablepress'>
-                        <thead>
-                          <tr>
-                            {/* <th><Form.Check aria-label="option 1" /></th> */}
-                            <th colspan="2">Season Title</th>
-                            <th colspan="2">Sort Order</th>
-                            <th colspan="2">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody className='table-list-one'>
-                          <tr>
-                            {/* <td><Form.Check aria-label="option 1" /></td> */}
-                            <td colspan="2">12</td>
-                            <td colspan="2">1</td>
-                            <td colspan="2">
+                      <Table bordered hover className='tablepress'>
+                  <thead>
+                    <tr>
+                      <th><Form.Check aria-label="option 1" /></th>
+                      <th>League Name</th>
+                      <th>Sort Order</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody className='table-list-one'>
+                    {aboutData.map((season) => (
+                      <tr key={season._id}>
+                        <td><Form.Check aria-label="option 1" /></td>
+                        <td>{season.season_Title}</td>
+                        <td>{season.sort_Order}</td>
+                        <td>
+                          <div className='add-button-fis'>
                             
-                            <div className='add-button-fis'>
-                            <ul className='but-delet'>
-                              <li><Link to="/Editseason"><i className="ri-pencil-fill"></i></Link></li>
-                              <li className='add-button-sec'>
-                                <button><i className="ri-delete-bin-line"></i></button>
-                                </li>
+                            <ul className="but-delet">
+                              <li>
+                              <Link to={`/Editseason/${season._id}`}>
+                              <i className="ri-pencil-fill"></i>
+                            </Link>
+                             </li>
+                             <li className="add-button-sec">
+                             <button onClick={() => handleDelete(season._id)}>
+                              <i className="ri-delete-bin-line"></i>
+                            </button>
+                             </li>
                             </ul>
-                            </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            {/* <td><Form.Check aria-label="option 1" /></td> */}
-                            <td colspan="2">12</td>
-                            <td colspan="2">1</td>
-                            <td colspan="2">
-                            
-                            <div className='add-button-fis'>
-                            <ul className='but-delet'>
-                              <li><Link to="/Editseason"><i className="ri-pencil-fill"></i></Link></li>
-                              <li className='add-button-sec'>
-                                <button><i className="ri-delete-bin-line"></i></button>
-                                </li>
-                            </ul>
-                            </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            {/* <td><Form.Check aria-label="option 1" /></td> */}
-                            <td colspan="2">12</td>
-                            <td colspan="2">1</td>
-                            <td colspan="2">
-                            
-                            <div className='add-button-fis'>
-                            <ul className='but-delet'>
-                              <li><Link to="/Editseason"><i className="ri-pencil-fill"></i></Link></li>
-                              <li className='add-button-sec'>
-                                <button><i className="ri-delete-bin-line"></i></button>
-                                </li>
-                            </ul>
-                            </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            {/* <td><Form.Check aria-label="option 1" /></td> */}
-                            <td colspan="2">12</td>
-                            <td colspan="2">1</td>
-                            <td colspan="2">
-                            
-                            <div className='add-button-fis'>
-                            <ul className='but-delet'>
-                              <li><Link to="/Editseason"><i className="ri-pencil-fill"></i></Link></li>
-                              <li className='add-button-sec'>
-                                <button><i className="ri-delete-bin-line"></i></button>
-                                </li>
-                            </ul>
-                            </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            {/* <td><Form.Check aria-label="option 1" /></td> */}
-                            <td colspan="2">12</td>
-                            <td colspan="2">1</td>
-                            <td colspan="2">
-                            <div className='add-button-fis'>
-                            <ul className='but-delet'>
-                              <li><Link to="/Editseason"><i className="ri-pencil-fill"></i></Link></li>
-                              <li className='add-button-sec'>
-                                <button><i className="ri-delete-bin-line"></i></button>
-                                </li>
-                            </ul>
-                            </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </Table>
-                      <div className='table-footer-f'>
-                        <div className='table-footer-s'>
-                          <p>Showing 1 to 12 of 12 (1 Pages)</p>
-                        </div>
-                      </div>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+                <div className='table-footer-f'>
+                  <div className='table-footer-s'>
+                    <p>Showing 1 to {aboutData.length} of {aboutData.length} (1 Pages)</p>
+                  </div>
+                </div>
                     </div>
 
                   </Row>

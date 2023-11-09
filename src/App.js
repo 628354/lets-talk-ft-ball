@@ -1,13 +1,13 @@
 /** @format */
 
-import "./App.css";
 // import "./css/arstyle.css";
 import "./css/enstyle.css";
 import "./responsive/arstyle.css";
 import "./responsive/enstyle.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import {  Routes, Route } from "react-router-dom";
+import {  Routes, Route, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Home from "./page/Home";
 import About from "./page/About";
 import Cafe from "./page/Cafe";
@@ -46,19 +46,22 @@ import Editprivacypolicy from "./Dashboard-edit-page/Editprivacypolicy";
 import Editdefinition from "./Dashboard-edit-page/Editdefinition";
 import Editcontact from "./Dashboard-edit-page/Editcontact";
 import Addcafe from "./page-dashboard/Addcafe";
-import Cafeview from "./page-dashboard/Cafeview";
-
 
 function App() {
+  const navigate = useNavigate(); 
+  const handleSuccessfulLogin = () => {
+    setIsLoggedIn(true);
+    navigate('/dashboard');
+  };
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div className="App">
       <Header />
       {/* <Headerar/> */}
-      
-     
-      
 
         <Routes>
+          
+        <Route path="/login" element={<Login onSuccessfulLogin={handleSuccessfulLogin} />} />
           <Route path="/" element={<Home />}>
             {" "}
           </Route>
@@ -75,9 +78,6 @@ function App() {
             {" "}
           </Route>
           <Route path="/Contact" element={<Contact />}>
-            {" "}
-          </Route>
-          <Route path="/Login" element={<Login />}>
             {" "}
           </Route>
           <Route path="/Signup" element={<Signup />}>
@@ -137,7 +137,7 @@ function App() {
           <Route path="/Addseason" element={<Addseason/>}>
             {" "}
           </Route>
-          <Route path="/Editseason" element={<Editseason/>}>
+          <Route path="/Editseason/:id" element={<Editseason/>}>
             {" "}
           </Route>
           <Route path="/Leagues" element={<Leagues/>}>
@@ -146,7 +146,7 @@ function App() {
           <Route path="/Addleagues" element={<Addleagues/>}>
             {" "}
           </Route>
-          <Route path="/Editleagues" element={<Editleagues/>}>
+          <Route path="/Editleagues/:id" element={<Editleagues/>}>
             {" "}
           </Route>
           <Route path="/Edithome" element={<Edithome/>}>
@@ -170,15 +170,7 @@ function App() {
           <Route path="/Addcafe" element={<Addcafe/>}>
             {" "}
           </Route>
-          <Route path="/Cafeview" element={<Cafeview/>}>
-            {" "}
-          </Route>
-
-         
         </Routes>
-       
-    
-
       <Footer />
       {/* <Footerar/> */}
     </div>

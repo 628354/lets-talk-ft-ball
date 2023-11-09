@@ -12,9 +12,17 @@ app.use(express.json())
 
 const path = require('path');
 
+const admin = require("./router/admin")
 const user = require("./router/user")
 const league = require("./router/league")
 const team = require("./router/team")
+const seasonyear = require("./router/seasonyear")
+const leaguedata = require("./router/leaguedata")
+const aboutus = require("./router/aboutus")
+const privacy_policy = require("./router/privacyPolicy")
+const contactus = require("./router/contactus")
+const definition = require("./router/definition")
+const cafe = require("./router/cafe")
 
 const mongoose = require("mongoose")
 
@@ -35,6 +43,14 @@ mongoose.connect("mongodb://0.0.0.0:27017/Leagues",
 app.use("/", user)
 app.use("/", league)
 app.use("/", team)
+app.use("/" , admin)
+app.use("/" , seasonyear)
+app.use("/" , leaguedata)
+app.use("/" , aboutus)
+app.use("/" , privacy_policy)
+app.use("/" , contactus)
+app.use("/" , definition)
+app.use("/" , cafe)
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 

@@ -1023,28 +1023,19 @@ tr.filter-fir {
 
 /*  */
 
-.letball {
+ul.letball {
     padding-left: 75px;
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
-.letball li {
+ul.letball li {
     list-style: auto;
 }
-
-.infocation-site {
+ul.infocation-site {
     padding-left: 45px;
     padding-top: 15px;
 }
-
-.infocation-site li {
+ul.infocation-site li {
     list-style: lower-alpha;
 }
-
-.editcafe {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-

@@ -4,6 +4,11 @@ const validator = require('validator');
 
 const contactusSchema = mongoose.Schema({
 
+    logo : {type : String , require : true} ,
+
+    image : {type : String , require : true} ,
+
+
     name: { type: String, require: true },
 
     email: {
