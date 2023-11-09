@@ -51,7 +51,7 @@ exports.login = async (req, res) => {
 
         if (match) {
             const token = await jwt.sign({ _id: findadmin._id, email: findadmin.email }, process.env.Secret_key, { expiresIn: "2d" })
-
+            findadmin.password = "";
             res.set({ token: token })
 
 
