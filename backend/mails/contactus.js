@@ -10,12 +10,18 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-function sendResetPasswordEmail(email, userId) {
+function sendContactusEmail(data) {
   const mailOptions = {
     from: 'arvind.kumar@dightinfotech.com',
-    to: email,
-    subject: 'Password Reset Link',
-    text: `Click the following link to reset your password: http://localhost:5000/forget-password/${userId}`
+    to: "arvind.kumar@dightinfotech.com",
+    subject: 'user Contactus',
+    text: `
+           user wants to Contact with admin...
+           user=${data.name}
+           email=${data.email}
+           subject=${data.subject}
+           message=${data.message}
+    `
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -28,5 +34,5 @@ function sendResetPasswordEmail(email, userId) {
 }
 
 module.exports = {
-  sendResetPasswordEmail
+    sendContactusEmail
 };

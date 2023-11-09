@@ -8,6 +8,7 @@ pipelines:
           - node
         script:
           - npm install
+          - unset CI
           - npm run build
           - apt-get update && apt-get -y install sshpass
           - sshpass -p $CLOUDWAYS_SSH_PASSWORD scp -r build/* $CLOUDWAYS_SSH_USER@$CLOUDWAYS_SSH_IP:applications/kwmyphykha/public_html

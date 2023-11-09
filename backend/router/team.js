@@ -7,17 +7,23 @@ const teamController = require("../controller/team")
 const multer = require("multer")
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'uploads/'); 
-    },
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname)); 
-    },
-  });
-  
-  const upload = multer({ storage: storage });
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
 
-router.post("/addteam" ,upload.single("image") ,teamController.addTeam)
+const upload = multer({ storage: storage });
+
+router.post("/addteam", upload.single("image"), teamController.addTeam)
+
+router.get("/getTeams", teamController.getTeams)
+
+router.post("/updateteam/:teamId" , upload.single("image"), teamController.updateteams )
+
+router.delete("/removeteam/:teamId" , teamController.removeteam)
 
 
 

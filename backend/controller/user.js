@@ -9,7 +9,7 @@ const { sendResetPasswordEmail } = require("../mails/forget")
 
 exports.register = async (req, res) => {
     try {
-        const { name, email, password, type } = req.body
+        const { firstName,lastName , email, password } = req.body
 
         const finduser = await usermodel.findOne({ email: email })
 
@@ -22,10 +22,10 @@ exports.register = async (req, res) => {
 
         const adduser = await usermodel.create({
 
-            name: name,
+            firstName: firstName,
+            lastName : lastName ,
             email: email,
             password: hash,
-            type: type
         })
 
 
@@ -52,7 +52,6 @@ exports.login = async (req, res) => {
             return
         }
 
-
         const match = await bcrypt.compare(password, finduser.password)
 
         if (match) {
@@ -70,6 +69,7 @@ exports.login = async (req, res) => {
         } else {
             res.send({ status: false, message: "Password dont match!!" })
         }
+ 
     } catch (error) {
         res.send({ status: false, message: "Something went wrong !!" })
     }
