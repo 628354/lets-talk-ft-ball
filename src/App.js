@@ -47,6 +47,7 @@ import Editdefinition from "./Dashboard-edit-page/Editdefinition";
 import Editcontact from "./Dashboard-edit-page/Editcontact";
 import Addcafe from "./page-dashboard/Addcafe";
 import Cafeview from "./page-dashboard/Cafeview";
+import Editviewdefinition from "./Dashboard-edit-page/Editviewdefinition";
 
 
 function App() {
@@ -173,6 +174,9 @@ function App() {
             {" "}
           </Route>
           <Route path="/Cafeview" element={<Cafeview/>}>
+            {" "}
+          </Route>
+          <Route path="/Editviewdefinition" element={<Editviewdefinition/>}>
             {" "}
           </Route>
 

@@ -9,8 +9,13 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useState } from 'react';
 
-export default function Editprivacypolicy() {
+ 
+
+export default function Editviewdefinition() {
+  
+   
     const [text, setText] = useState('');
+
     const handleTextChange = (value) => {
       setText(value);
     };
@@ -30,7 +35,7 @@ export default function Editprivacypolicy() {
         ['link', 'image', 'video'],
       ],
     };
-
+   
 
 
   return (
@@ -44,7 +49,7 @@ export default function Editprivacypolicy() {
                     <div className='season-us'>
                       
                       <div className='season-link-part'>
-                        <h3>Privacy & Usage Terms</h3>
+                        <h3>Edit Definition</h3>
                       <ul className='season-link'>
                         <li>
                           <Link>Home</Link>
@@ -53,7 +58,7 @@ export default function Editprivacypolicy() {
                         <i className="ri-arrow-right-s-line"></i>
                         </li>
                         <li>
-                          <Link>PRIVACY & USAGE TERMS</Link>
+                          <Link>Edit Definition</Link>
                         </li>
                       </ul>
                       </div>
@@ -64,15 +69,19 @@ export default function Editprivacypolicy() {
                       <ul className='add-button-min'>
                         <li className='add-button-fis'>
                           <Link to=""><i className="ri-save-3-line"></i></Link>
+                         
                         </li>
                         <li className='add-button-cencel'>
-                          <Link to=""><i className="ri-reply-fill"></i></Link>
+                          <Link to="/Editdefinition"><i className="ri-reply-fill"></i></Link>
                         </li>
                       </ul>
                     </div>
+                  
                 </div>
                 </Row>
             </Container>
+           
+            
            </section>
            <section className='tab-section'>
             <Container>
@@ -88,21 +97,25 @@ export default function Editprivacypolicy() {
                             <div className='edithome'>
                                 <div className='bannerimage'>
                                 <Form>
-                                    <Form.Group controlId="formFile" className="mb-3">
-                                        <Form.Label>Banner Upload </Form.Label>
-                                        <Form.Control type="file" />
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Definition Title</Form.Label>
+                                        <Form.Control type="text" placeholder="About Title" />
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Privacy & Usage Terms Textarea</Form.Label>
+                                        <Form.Label>Definition textarea</Form.Label>
                                         <ReactQuill className='edit-text' value={text} onChange={handleTextChange} />
                                     </Form.Group>
                                  </Form>
                                  <div className='button-press'>
-                                    <Button>Edit</Button>
+                                    {/* <Button>Edit</Button> */}
                                     <Button>seve</Button>
                                     </div>
+                                 
+                                
+
                                 </div>
                             </div>
+                            
                             </div>
                             </Tab>
                             <Tab eventKey="profile2" title={<span><img src={require('../img/ar.png')} alt="General" /> العربية</span>}>
@@ -110,25 +123,30 @@ export default function Editprivacypolicy() {
                             <div className='edithome'>
                                 <div className='bannerimage'>
                                 <Form>
-                                    <Form.Group controlId="formFile" className="mb-3">
-                                        <Form.Label>Banner Upload </Form.Label>
-                                        <Form.Control type="file" />
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Definition Title</Form.Label>
+                                        <Form.Control type="text" placeholder="About Title" />
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Privacy & Usage Terms Textarea</Form.Label>
+                                        <Form.Label>Definition textarea</Form.Label>
                                         <ReactQuill className='edit-text' value={text} onChange={handleTextChange} />
                                     </Form.Group>
                                  </Form>
                                  <div className='button-press'>
-                                    <Button>Edit</Button>
+                                    {/* <Button>Edit</Button> */}
                                     <Button>seve</Button>
-                                    </div>
+                                  </div>
+                                 
                                 </div>
                             </div>
+                            
                             </div>
+                            
                             </Tab>
-                          </Tabs>
+                            </Tabs>
                         </div>
+
+                        
                 </Row>
             </Container>
            </section>
