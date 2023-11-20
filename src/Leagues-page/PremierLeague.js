@@ -3,6 +3,9 @@ import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PremierLeaguetable from '../Leagues-components/PremierLeaguetable';
 import Iframesecttion from '../Leagues-components/Iframesecttion';
+import Premierchart from '../Leagues-components/Premierchart';
+import Goalsconchart from '../Leagues-components/Goalsconchart';
+import CahrtGsGc from '../Leagues-components/CahrtGsGc';
 
 export default function PremierLeague() {
   return (
@@ -88,7 +91,30 @@ export default function PremierLeague() {
           </Container>
          </section>
 
+        <section className='chart-press'>
+          <Container>
+            <Row>
+              <Premierchart/>
+            </Row>
+          </Container>
+        </section>
+
+        <section className='chart-press'>
+          <Container>
+            <Row>
+              <Goalsconchart/>
+            </Row>
+          </Container>
+        </section>
+        <section className='chart-press'>
+          <Container>
+            <Row>
+              <CahrtGsGc/>
+            </Row>
+          </Container>
+        </section>
         <Iframesecttion/>
+
           
 
     </div>

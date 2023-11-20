@@ -1039,3 +1039,27 @@ ul.infocation-site {
 ul.infocation-site li {
     list-style: lower-alpha;
 }
+
+
+/* chart css 16-11-23  start*/
+.chart-areaa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-press {
+    padding: 70px 0;
+}
+
+.recharts-default-legend {
+    display: none;
+}
+.premier-textare h3 {
+    text-align: center;
+    padding-bottom: 60px;
+}
+
+
+
+/* chart css 16-11-23  start*/

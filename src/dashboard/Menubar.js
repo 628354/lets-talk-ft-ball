@@ -1,18 +1,34 @@
 import React from "react";
 import "../css/Dashboard.css";
-import { useState } from "react";
+import { useEffect,useState} from "react";
 import { Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Login from "../page/Login";
+import axios from 'axios';
+
+ ///here we get data and store in variable 
+//  const chandn = "https://jsonplaceholder.typicode.com/posts";
+
+
 
 
 export default function Menubar() {
+
+  // const [post, setPost] = React.useState([]);
+  // React.useEffect(() => {
+  //   axios.get(chandn).then((response) => {
+  //     setPost(response.data);
+  //   });
+  // }, []);
+
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleDropdownClick = () => {
     setShowDropdown(!showDropdown);
   };
+
+ 
   return (
     <div>
       <section className="navheader">
@@ -174,6 +190,20 @@ export default function Menubar() {
           </div>
         </div>
       </section>
+
+     {/* <div className="row">
+     {post.slice(0, 10).map((post, index) => (
+      <div className='col-lg-6 col-md-6 col-sm-12' key={post.id}>
+      <div className='en_defintion_contant ar_defintion_contant'>
+        <h5><span className='en_number_pass'>{index + 1}</span>{post.title}</h5>
+        <p>{post.body}</p>
+      </div>
+
+
+</div>
+))}
+     </div> */}
+
     </div>
   );
 }

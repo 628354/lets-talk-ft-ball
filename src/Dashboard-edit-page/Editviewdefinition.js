@@ -2,24 +2,18 @@ import React from 'react';
 import Menubar from '../dashboard/Menubar';
 import { Button, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
-import 'react-quill/dist/quill.snow.css';
-import Table from 'react-bootstrap/Table';
-import Modal from 'react-bootstrap/Modal';
-
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Form from 'react-bootstrap/Form';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-
 import { useState } from 'react';
 
-export default function Editdefinition() {
+ 
 
-
-  const [lgShow, setLgShow] = useState(false);
-
+export default function Editviewdefinition() {
+  
+   
     const [text, setText] = useState('');
 
     const handleTextChange = (value) => {
@@ -41,11 +35,8 @@ export default function Editdefinition() {
         ['link', 'image', 'video'],
       ],
     };
+   
 
-
-  const deleteClick = () => {
-    alert('Do you want to delete?');
-  };
 
   return (
     <div>
@@ -77,86 +68,21 @@ export default function Editdefinition() {
                     <div className='add-part'>
                       <ul className='add-button-min'>
                         <li className='add-button-fis'>
-
-                          <Link to=""  onClick={() => setLgShow(true)} ><i className="ri-add-line"></i></Link>
-
                           <Link to=""><i className="ri-save-3-line"></i></Link>
-
+                         
                         </li>
-                        {/* <li className='add-button-cencel'>
-                          <Link to=""><i className="ri-reply-fill"></i></Link>
-                        </li> */}
+                        <li className='add-button-cencel'>
+                          <Link to="/Editdefinition"><i className="ri-reply-fill"></i></Link>
+                        </li>
                       </ul>
                     </div>
+                  
                 </div>
                 </Row>
-
-
-               
-
             </Container>
-           </section>
-           <section className='cafe-view-List'>
-                <Container fluid>
-                  <Row>
-                    <div className='season_list_table'>
-                      <div className='season-table-list'>
-                        <h6><i class="ri-list-check"></i> View</h6>
-                      </div>
-                      <Table  bordered hover className='tablepress otherview'>
-                        <thead>
-                          <tr>
-                            <th colspan="2">SQ</th>
-                            <th colspan="2">Definition Type</th>
-                            <th colspan="2">Contant</th>
-                            <th colspan="2">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody className='table-list-one'>
-                          
-                          <tr>
-                            <td colspan="2">1</td>
-                            <td colspan="2"><p>Top Statistics for players in Major European Leagues</p></td>
-                            <td colspan="2"><p>Top Statistics for players in Major European Leagues</p></td>
-                            <td colspan="2">
-                            <div className='add-button-fis'>
-                                <ul className='editcafe'>
-                                    <li><Link to="/Editseason"><i className="ri-pencil-fill"></i></Link></li>
-                                    <li className='add-button-sec'>
-                                    <button><i className="ri-delete-bin-line"></i></button>
-                                </li>
-                                </ul>
-                            </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                       
-                      </Table>
-                      <div className='table-footer-f'>
-                        <div className='table-footer-s'>
-                          <p>Showing 1 to 12 of 12 (1 Pages)</p>
-                        
-                        </div>
-                      </div>
-                    </div>
-                  </Row>
-                </Container>
-               </section>
            
-    </div>
-
-
-    
-      <Modal size="lg" show={lgShow} onHide={() => setLgShow(false)} aria-labelledby="example-modal-sizes-title-lg" >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-lg">
-            Large Modal
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>test my home </Modal.Body>
-      </Modal>
-
-
+            
+           </section>
            <section className='tab-section'>
             <Container>
                 <Row>
@@ -171,21 +97,25 @@ export default function Editdefinition() {
                             <div className='edithome'>
                                 <div className='bannerimage'>
                                 <Form>
-                                    <Form.Group controlId="formFile" className="mb-3">
-                                        <Form.Label>Banner Upload </Form.Label>
-                                        <Form.Control type="file" />
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Definition Title</Form.Label>
+                                        <Form.Control type="text" placeholder="About Title" />
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Definition Textarea</Form.Label>
+                                        <Form.Label>Definition textarea</Form.Label>
                                         <ReactQuill className='edit-text' value={text} onChange={handleTextChange} />
                                     </Form.Group>
                                  </Form>
                                  <div className='button-press'>
-                                    <Button>Edit</Button>
+                                    {/* <Button>Edit</Button> */}
                                     <Button>seve</Button>
                                     </div>
+                                 
+                                
+
                                 </div>
                             </div>
+                            
                             </div>
                             </Tab>
                             <Tab eventKey="profile2" title={<span><img src={require('../img/ar.png')} alt="General" /> العربية</span>}>
@@ -193,31 +123,35 @@ export default function Editdefinition() {
                             <div className='edithome'>
                                 <div className='bannerimage'>
                                 <Form>
-                                    <Form.Group controlId="formFile" className="mb-3">
-                                        <Form.Label>Banner Upload </Form.Label>
-                                        <Form.Control type="file" />
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Definition Title</Form.Label>
+                                        <Form.Control type="text" placeholder="About Title" />
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Definition Textarea</Form.Label>
+                                        <Form.Label>Definition textarea</Form.Label>
                                         <ReactQuill className='edit-text' value={text} onChange={handleTextChange} />
                                     </Form.Group>
                                  </Form>
                                  <div className='button-press'>
-                                    <Button>Edit</Button>
+                                    {/* <Button>Edit</Button> */}
                                     <Button>seve</Button>
-                                </div>
+                                  </div>
+                                 
                                 </div>
                             </div>
+                            
                             </div>
+                            
                             </Tab>
                             </Tabs>
                         </div>
-                    </Row>
+
+                        
+                </Row>
             </Container>
            </section>
            
     </div>
-
-
+</div>
   )
 }

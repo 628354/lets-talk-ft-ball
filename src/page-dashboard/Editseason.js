@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Menubar from '../dashboard/Menubar';
 import { Container, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, json } from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Col from 'react-bootstrap/Col';
@@ -11,6 +11,8 @@ import { useParams } from 'react-router-dom';
 
 
 export default function Editseason() {
+
+
   const { id } = useParams();
 
 
