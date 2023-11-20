@@ -109,7 +109,6 @@ export default function Addcafe() {
                                         <Form.Label>Cafe image upload </Form.Label>
                                         <Form.Control type="file" />
                                     </Form.Group>
-
                                  </Form>
                                  <div className='button-press'>
                                     <Button>Edit</Button>
@@ -141,7 +140,6 @@ export default function Addcafe() {
                                         <Form.Label>Cafe image upload </Form.Label>
                                         <Form.Control type="file" />
                                     </Form.Group>
-
                                  </Form>
                                  <div className='button-press'>
                                     <Button>Edit</Button>

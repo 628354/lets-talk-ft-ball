@@ -1009,10 +1009,10 @@ tr.filter-fir {
     position: sticky;
     bottom: 0;
 }
-section.league_table {
+.league_table {
     padding-bottom: 50px;
 }
-section.ifr-section {
+.ifr-section {
     background: #f5f5f5;
     padding: 60px 0 40px 0;
 }
