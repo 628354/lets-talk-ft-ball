@@ -46,8 +46,11 @@ import Editprivacypolicy from "./Dashboard-edit-page/Editprivacypolicy";
 import Editdefinition from "./Dashboard-edit-page/Editdefinition";
 import Editcontact from "./Dashboard-edit-page/Editcontact";
 import Addcafe from "./page-dashboard/Addcafe";
+
 import Cafeview from "./page-dashboard/Cafeview";
-import Editviewdefinition from "./Dashboard-edit-page/Editviewdefinition";
+import Dataapi from "./Dashboard-edit-page/Dataapi";
+import Premierchart from "./Leagues-components/Premierchart";
+
 
 
 function App() {
@@ -140,7 +143,11 @@ function App() {
           <Route path="/Addseason" element={<Addseason/>}>
             {" "}
           </Route>
+
           <Route path="/Editseason" element={<Editseason/>}>
+</Route>
+          <Route path="/Editseason/:id" element={<Editseason/>}>
+
             {" "}
           </Route>
           <Route path="/Leagues" element={<Leagues/>}>
@@ -149,7 +156,11 @@ function App() {
           <Route path="/Addleagues" element={<Addleagues/>}>
             {" "}
           </Route>
+
           <Route path="/Editleagues" element={<Editleagues/>}>
+</Route>
+          <Route path="/Editleagues/:id" element={<Editleagues/>}>
+
             {" "}
           </Route>
           <Route path="/Edithome" element={<Edithome/>}>
@@ -173,19 +184,24 @@ function App() {
           <Route path="/Addcafe" element={<Addcafe/>}>
             {" "}
           </Route>
+
           <Route path="/Cafeview" element={<Cafeview/>}>
             {" "}
           </Route>
-          <Route path="/Editviewdefinition" element={<Editviewdefinition/>}>
+          <Route path="/Dataapi" element={<Dataapi/>}>
+            {" "}
+          </Route>
+          <Route path="/Premierchart" element={<Premierchart/>}>
             {" "}
           </Route>
 
-         
+
         </Routes>
       <Footer />
       {/* <Footerar/> */}
     </div>
   );
 }
+
 
 export default App;

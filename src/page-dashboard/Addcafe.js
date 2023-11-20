@@ -43,6 +43,7 @@ export default function Addcafe() {
                 <Row>
                 <div className="col-lg-6 col-md-6 col-6">
                     <div className='season-us'>
+                      
                       <div className='season-link-part'>
                         <h3>Add New</h3>
                       <ul className='season-link'>
@@ -64,17 +65,20 @@ export default function Addcafe() {
                       <ul className='add-button-min'>
                         <li className='add-button-fis'>
                           <Link to=""><i className="ri-save-3-line"></i></Link>
+                         
                         </li>
                         <li className='add-button-cencel'>
                           <Link to="/Leagues"><i className="ri-reply-fill"></i></Link>
                         </li>
                       </ul>
                     </div>
+                  
                 </div>
                 </Row>
             </Container>
+           
+            
            </section>
-
            <section className='tab-section'>
             <Container>
                 <Row>
@@ -144,12 +148,16 @@ export default function Addcafe() {
                                 </div>
                             </div>
                     </div>
+                            
                             </Tab>
                             </Tabs>
-                        </div>  
+                        </div>
+
+                        
                 </Row>
             </Container>
            </section>
+           
     </div>
 </div>
   )

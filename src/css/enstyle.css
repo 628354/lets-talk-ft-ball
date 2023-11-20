@@ -1023,28 +1023,43 @@ tr.filter-fir {
 
 /*  */
 
-.letball {
+ul.letball {
     padding-left: 75px;
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
-.letball li {
+ul.letball li {
     list-style: auto;
 }
-
-.infocation-site {
+ul.infocation-site {
     padding-left: 45px;
     padding-top: 15px;
 }
-
-.infocation-site li {
+ul.infocation-site li {
     list-style: lower-alpha;
 }
 
-.editcafe {
+
+/* chart css 16-11-23  start*/
+.chart-areaa {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 5px;
 }
 
+.chart-press {
+    padding: 70px 0;
+}
+
+.recharts-default-legend {
+    display: none;
+}
+.premier-textare h3 {
+    text-align: center;
+    padding-bottom: 60px;
+}
+
+
+
+/* chart css 16-11-23  start*/
