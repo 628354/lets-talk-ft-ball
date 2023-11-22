@@ -35,6 +35,7 @@ import Season from "./page-dashboard/Season";
 import Menubar from "./dashboard/Menubar";
 import Dashboard from "./dashboard/Menubar"
 import Addseason from "./page-dashboard/Addseason";
+import LeaguesBluk from "./page-dashboard/LeaguesBluk";
 import Editseason from "./page-dashboard/Editseason";
 import Leagues from "./page-dashboard/Leagues";
 import Addleagues from "./page-dashboard/Addleagues";
@@ -150,6 +151,11 @@ function App() {
 
             {" "}
           </Route>
+
+          <Route path="/Bulk-Leagues" element={<LeaguesBluk/>}>
+            {" "}
+          </Route>
+
           <Route path="/Leagues" element={<Leagues/>}>
             {" "}
           </Route>

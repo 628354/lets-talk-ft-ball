@@ -149,6 +149,12 @@ export default function Menubar() {
                         </Link>
                       </li>
                       <li className="w-100">
+                      <Link to="/Bulk-Leagues" className="nav-link px-0">
+                          {" "}
+                          <span className="d-none d-sm-inline">Bulk Leagues</span>
+                        </Link>
+                      </li>
+                      <li className="w-100">
                         <Link to="/Leagues" className="nav-link px-0">
                           {" "}
                           <span className="d-none d-sm-inline">Leagues</span>

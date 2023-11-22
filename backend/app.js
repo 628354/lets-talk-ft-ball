@@ -23,6 +23,8 @@ const privacy_policy = require("./router/privacyPolicy")
 const contactus = require("./router/contactus")
 const definition = require("./router/definition")
 const cafe = require("./router/cafe")
+const imagesRoute = require('./router/images');
+const blukImportRouter = require('./router/bluk')
 
 const mongoose = require("mongoose")
 
@@ -51,6 +53,8 @@ app.use("/" , privacy_policy)
 app.use("/" , contactus)
 app.use("/" , definition)
 app.use("/" , cafe)
+app.use("/" , imagesRoute)
+app.use("/", blukImportRouter);
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
