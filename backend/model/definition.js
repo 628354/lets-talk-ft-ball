@@ -2,7 +2,6 @@ const mongoose = require("mongoose")
 
 
 const definitionSchema = mongoose.Schema({
-
     image: { type: String, require: true },
     definition: [{
         type: { type: String, require: true },

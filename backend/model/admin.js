@@ -6,7 +6,6 @@ const adminSchema = mongoose.Schema({
 
  
     name : {type : String , require : true} ,
-
     email: {
         type: String,
         validate: {
@@ -16,7 +15,6 @@ const adminSchema = mongoose.Schema({
         }
     },
     password: { type: String, require: true },
-
     status: { type: String, enum: ["active", "inactive"], default: "active" },
 
 },

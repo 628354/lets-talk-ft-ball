@@ -22,6 +22,7 @@ router.post("/addDefinition", upload.single("image"), definitionController.addde
 router.post("/adddefinitionInexisting/:id" , definitionController.adddefinitiontype)
 
 router.post("/updatedata/:objectId/:arrayElementId" , definitionController.updatedata)
+router.delete('/definitionDelete/:id', definitionController.definitionDelete)
 
 
 module.exports = router

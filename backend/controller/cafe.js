@@ -3,9 +3,7 @@ const cafemodel = require("../model/cafe")
 exports.addcafedata = async (req, res) => {
     try {
         const { details, title, content, league_name } = req.body
-
         const finddata = await cafemodel.findOne({ league_name: league_name })
-
         if (finddata) {
             res.send({ status: true, message: "league data allready present" })
             return
@@ -47,11 +45,8 @@ exports.addcafeleaguesdata = async (req, res) => {
         const protocol = req.protocol
         const host = req.host
         const url = `${protocol}//${host}`
-
         const date = new Date()
-
         const finddata = await cafemodel.findById(cafe_id)
-
         if (!finddata) {
             res.send({ status: false, message: "cafe data not found" })
             return
@@ -78,13 +73,8 @@ exports.addcafeleaguesdata = async (req, res) => {
                 }
             }
         }, { new: true })
-
         await findAndAddData.save()
-
         res.send({ status: true, message: "Successfully add cafe content", cafedetails: findAndAddData })
-
-
-
     } catch (error) {
         res.send({ status: false, message: "Something went wrong !!" })
     }

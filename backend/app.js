@@ -33,7 +33,7 @@ mongoose.connect("mongodb://0.0.0.0:27017/Leagues",
     }
 
 ).then(() => {
-    console.log("Database is connected")
+    console.log("conntect to db")
 }).catch((error) => {
     console.log("not connected", error)
 })
