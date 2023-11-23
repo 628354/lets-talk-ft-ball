@@ -3,7 +3,7 @@ const app = express()
 
 const dotenv = require("dotenv")
 dotenv.config()
-const PORT = process.env.PORT
+const port = process.env.PORT 
 
 const cors = require("cors")
 app.use(cors())
@@ -56,6 +56,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 
-app.listen(PORT, () => {
-    console.log(`Server is running at ${PORT}`)
+app.listen(port, () => {
+    console.log(`Server is running at ${port}`)
 })
