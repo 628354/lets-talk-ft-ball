@@ -26,7 +26,7 @@ const cafe = require("./router/cafe")
 
 const mongoose = require("mongoose")
 
-mongoose.connect("mongodb://0.0.0.0:27017/Leagues",
+mongoose.connect(process.env.MONGO_URI,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
