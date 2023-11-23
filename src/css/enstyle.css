@@ -814,6 +814,9 @@ span.en_number_pass {
 .en-leagues-text p {
     font-size: 16px;
     line-height: 23px;
+}
+
+.en_main_leagues.one {
     padding: 50px 0;
 }
 
@@ -1063,3 +1066,39 @@ ul.infocation-site li {
 
 
 /* chart css 16-11-23  start*/
+
+
+/* team delails */
+.imageline {
+    border-right: 1px solid #cdced8;
+}
+.livepool {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 23px;
+}
+
+
+table.aline_tablel, thead, tr, th:nth-child(1) {
+    text-align: center;
+}
+
+td.imagelive_city span {
+    display: block;
+    text-align: center;
+}
+
+table.aline_tablel tbody td {
+    vertical-align: middle !important;
+    text-align: center;
+}
+table.aline_tablel thead tr th {
+    background: var(--text-color);
+    border: 2px solid var(--there-color);
+    color: var(--there-color);
+    padding: 16px 15px;
+    text-align: center;
+}
+/* team delails */
+

@@ -50,6 +50,7 @@ import Addcafe from "./page-dashboard/Addcafe";
 import Cafeview from "./page-dashboard/Cafeview";
 import Dataapi from "./Dashboard-edit-page/Dataapi";
 import Premierchart from "./Leagues-components/Premierchart";
+import Teamdetailsl from "./Chart-filter-page/Teamdetailsl";
 
 
 
@@ -192,6 +193,9 @@ function App() {
             {" "}
           </Route>
           <Route path="/Premierchart" element={<Premierchart/>}>
+            {" "}
+          </Route>
+          <Route path="/Teamdetailsl" element={<Teamdetailsl/>}>
             {" "}
           </Route>
 
