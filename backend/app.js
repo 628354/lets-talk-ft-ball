@@ -3,7 +3,7 @@ const app = express()
 
 const dotenv = require("dotenv")
 dotenv.config()
-const port = process.env.PORT 
+const port = process.env.PORT  || 5000
 
 const cors = require("cors")
 app.use(cors())
@@ -25,7 +25,6 @@ const definition = require("./router/definition")
 const cafe = require("./router/cafe")
 
 const mongoose = require("mongoose")
-
 mongoose.connect(process.env.MONGO_URI,
     {
         useNewUrlParser: true,
