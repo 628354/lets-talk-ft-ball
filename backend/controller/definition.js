@@ -98,3 +98,16 @@ exports.definitionDelete = async (req,res)=>{
         res.send({status : false , message : "Something went wrong !!"})
     }
 }
+
+exports.getAllDefinition = async(req, res) => {
+    try {
+        const getAll = await definitionmodel.find()
+        res.status(200).send({
+            body:getAll,
+            message:"Get All Definition Successfully",
+            success:true
+        })
+    } catch (error) {
+       console.log(error.mesasge) 
+    }
+}

@@ -1,5 +1,4 @@
-const teammodel = require("../model/team")
-
+const teammodel = require('../model/team')
 
 exports.addTeam = async (req, res) => {
     try {
@@ -45,10 +44,7 @@ exports.addTeam = async (req, res) => {
            
         });
     } catch (error) {
-        res.send({
-            status: false,
-            message: "Something went wrong!!"
-        });
+       console.log(error.message)
     }
 };
 
@@ -61,20 +57,20 @@ exports.getTeams = async (req, res) => {
         const getTeams = await teammodel.find().populate("leagues")
         res.send({ status: true, message: "Successfully get teams", teamdetails: getTeams })
     } catch (error) {
-        res.send({ status: true, message: "Something went wrong !!" })
+        console.log(error.message)
     }
 }
 
 exports.teamdetails = async(req, res) => {
     try {
-        const getTeams = await teammodel.findById({_id:req.params.id})
+        const getTeams = await teammodel.findById({_id:req.params.id}).populate("leagues")
         if(getTeams) {
             res.send({status:true, message:"Team Details Get Successfully",teamdetails:getTeams })
         } else {
             res.send({message:'Team Id not Found'})
         }
     } catch (error) {
-        res.send({status:true, message:"Something went wrong"})
+        throw Error
     }
 }
 
@@ -123,9 +119,13 @@ exports.updateteams = async (req, res) => {
 
 exports.removeteam = async (req, res) => {
     try {
-        const removeteam = await teammodel.findByIdAndDelete(req.params.teamId)
-        res.send({ status: true, message: "Successfully remove teams", removedetails: removeteam })
+        const removeteam = await teammodel.findByIdAndDelete({_id:req.params.id})
+        if(removeteam) {
+            res.send({ status: true, message: "Successfully remove teams", removedetails: removeteam })
+        } else {
+            res.send({status:false, message:'TeamId Not Found'})
+        }
     } catch (error) {
-        res.send({ status: false, message: "Something went wrong !!" })
+        console.log(error.message)
     }
 }

@@ -21,5 +21,11 @@ router.post("/addcafedata" ,upload.fields([{name : "logo"} , {name : "cafe_image
 
 router.post("/addCafeleaguedata/:cafe_id" , upload.single("cafe_image") , cafecontroller.addcafeleaguesdata)
 
+router.get('/cafe_details/:id', cafecontroller.cafe_details)
+
+router.get('/getAllCafe', cafecontroller.getAllCafe)
+
+router.delete('/deleteCafe/:id',cafecontroller.deleteCafe )
+
 
 module.exports = router

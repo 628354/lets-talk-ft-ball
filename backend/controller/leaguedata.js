@@ -40,7 +40,6 @@ exports.importleaguedata = async (req, res) => {
                   });
                 });
             } else {
-              // Data already exists
               res.status(200).send({
                 message: "Data already exists in the database",
                 data: existingData

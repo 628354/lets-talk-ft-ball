@@ -14,8 +14,8 @@ exports.addpolicy = async (req, res) => {
 
         res.send({ status: true, message: "Successfully add policy", policydetails: addpolicy })
     } catch (error) {
-        res.send({ status: false, message: "Something went wrong !!" })
-    }
+        console.log(error.message)
+        }
 }
 
 exports.getPolicy = async (req, res) => {
@@ -23,7 +23,7 @@ exports.getPolicy = async (req, res) => {
         const getpolicy = await policymodel.find()
         res.send({ status: true, message: "Successfully get policy", policydetails: getpolicy })
     } catch (error) {
-        res.send({ status: false, message: "Something went wrong !!" })
+        console.log(error.message)
     }
 }
 
@@ -48,7 +48,6 @@ exports.updatepolicy = async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error)
-        res.send({ status: false, message: "Something went wrong!!" })
+        console.log(error.message)
     }
 }

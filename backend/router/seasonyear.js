@@ -6,9 +6,9 @@ const seasonyearController = require("../controller/seasonyear")
 
 router.post("/addseasonyear", seasonyearController.addleagueyear)
 router.get("/getyears", seasonyearController.getyears)
-router.get("/getseasonById/:yearId" , seasonyearController.getById)
+router.get("/getseasonById/:id" , seasonyearController.getById)
 router.post("/updateSeasonyear/:yearId" , seasonyearController.updateyears)
-router.delete("/removeyear/:yearId" , seasonyearController.removeyear)
+router.delete("/removeyear/:id" , seasonyearController.removeyear)
 
 
 

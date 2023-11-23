@@ -24,7 +24,7 @@ const teamSchema = mongoose.Schema({
 
     team_Tags: { type: String, require: true },
 
-    leagues: [{ type: mongoose.Schema.Types.ObjectId, ref: "league" }],
+    leagues: { type: mongoose.Schema.Types.ObjectId, ref: "league" },
 
     status: { type: String, enum: ["active", "inactive"], default: "active" }
 },

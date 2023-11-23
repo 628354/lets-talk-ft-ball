@@ -20,7 +20,7 @@ router.post("/addteam", upload.single("image"), teamController.addTeam)
 router.get("/getTeams", teamController.getTeams)
 router.get('/teamdetails/:id', teamController.teamdetails)
 router.post("/updateteam/:teamId" , upload.single("image"), teamController.updateteams )
-router.delete("/removeteam/:teamId" , teamController.removeteam)
+router.delete("/removeteam/:id" , teamController.removeteam)
 
 
 

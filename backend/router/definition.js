@@ -24,5 +24,7 @@ router.post("/adddefinitionInexisting/:id" , definitionController.adddefinitiont
 router.post("/updatedata/:objectId/:arrayElementId" , definitionController.updatedata)
 router.delete('/definitionDelete/:id', definitionController.definitionDelete)
 
+router.get('/getAllDefinition', definitionController.getAllDefinition)
+
 
 module.exports = router
