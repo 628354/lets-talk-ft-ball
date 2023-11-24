@@ -198,6 +198,9 @@ function App() {
           <Route path="/Teamdetailsl" element={<Teamdetailsl/>}>
             {" "}
           </Route>
+          <Route path="/Login" element={<Login/>}>
+            {" "}
+          </Route>
 
 
         </Routes>

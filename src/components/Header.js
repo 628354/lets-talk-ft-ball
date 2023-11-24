@@ -105,6 +105,7 @@ export default function Header() {
             <Nav.Link  className='me-3 ms-3' as={Link} to="/Cafe">Cafe</Nav.Link>
             <Nav.Link  className='me-3 ms-3' as={Link} to="/Definition">Definition </Nav.Link>
             <Nav.Link  className=' ms-3' as={Link} to="/Contact">Contact Us </Nav.Link>
+            <Nav.Link  className=' ms-3' as={Link} to="/Contact">Login </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
