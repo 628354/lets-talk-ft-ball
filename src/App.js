@@ -58,7 +58,7 @@ function App() {
   const navigate = useNavigate(); 
   const handleSuccessfulLogin = () => {
     setIsLoggedIn(true);
-    navigate('/dashboard');
+    navigate('/Dashboard');
   };
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
@@ -79,7 +79,7 @@ function App() {
 
         <Routes>
           
-        <Route path="/login" element={<Login onSuccessfulLogin={handleSuccessfulLogin} />} />
+        <Route path="/Login" element={<Login onSuccessfulLogin={handleSuccessfulLogin} />} />
           <Route path="/" element={<Home />}>
             {" "}
           </Route>
