@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, default: "" },
     password: { type: String, default: "" },
     phone: { type: String, default: "" },
+    image:{type:String, default:''},
     country: { type: String, default: "" },
     countryCode: { type: String, default: "" },
     location: { type: String, default: '' },

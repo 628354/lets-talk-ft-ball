@@ -1,6 +1,6 @@
 const usermodel = require("../model/user")
 const bcrypt = require("bcrypt")
-
+const path = require('path')
 const jwt = require("jsonwebtoken")
 const mongoose = require("mongoose")
 const ObjectId = mongoose.Types.ObjectId
@@ -8,37 +8,54 @@ const { sendResetPasswordEmail } = require("../mails/forget")
 
 exports.register = async (req, res) => {
     try {
-        const finduser = await usermodel.findOne({ email:req.body.email})
-        if (finduser) {
-            res.send('Email Already Exist')
+        var image = req.files.image.name;
+        var uploadDir = path.join(__dirname, "../uploads", image);
+        if (req.files.image) {
+            req.files.image.mv(uploadDir, (err) => {
+                if (err) return res.status(500).send(err);
+            });
         }
-        const ExistPhone = await usermodel.findOne({phone:req.body.phone})
-        if(ExistPhone) {
-            res.send('Phone Number already exist')
+
+        const findUser = await usermodel.findOne({ email: req.body.email });
+        if (findUser) {
+            return res.status(400).send('Email Already Exists');
         }
-        const hashpassword = await bcrypt.hashSync(req.body.password, 10)
-        const adduser = await usermodel.create({
+
+        const phoneExist = await usermodel.findOne({ phone: req.body.phone });
+        if (phoneExist) {
+            return res.status(400).send('Phone Number Already Exists');
+        }
+
+        const hashPassword =  bcrypt.hashSync(req.body.password, 10);
+        const addUser = await usermodel.create({
             firstName: req.body.firstName,
-            lastName : req.body.lastName ,
+            lastName: req.body.lastName,
             email: req.body.email,
-            password: hashpassword,
-            role:req.body.role
-        })
-        const result = await adduser.save()
-        res.status(200).send({
-            body:result,
-            message:'Signup Successfully',
-            success:true
-        })
+            phone: req.body.phone,
+            role: req.body.role,
+            image: image,
+            password: hashPassword,
+        });
+
+        const result = await addUser.save();
+        return res.status(200).send({
+            body: result,
+            message: 'Signup Successfully',
+            success: true
+        });
     } catch (error) {
-        console.log(error.message)
+        return res.status(500).send({
+            message: 'Internal Server Error',
+            success: false,
+            error: error.message
+        });
     }
-}
+};
+
 
 exports.login = async (req, res) => {
     try {
-        const { email, password } = req.body
-        const finduser = await usermodel.findOne({ email: email })
+        const finduser = await usermodel.findOne({email:req.body.email })
         if (!finduser) {
             res.send({ status: false, message: "User not found!!" })
             return
