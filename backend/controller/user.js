@@ -108,3 +108,8 @@ exports.getAllUser = async(req, res) => {
         console.log(error.message)
     }
 }
+
+
+const permission = require('../model/permission')
+const user = require('../model/user')
+
