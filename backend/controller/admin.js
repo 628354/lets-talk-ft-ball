@@ -20,8 +20,7 @@ exports.register = async (req, res) => {
         })
         res.send({ status: true, message: "Admin Add Successfully", admindetails: addadmin })
     } catch (error) {
-        console.log(error)
-        res.send({ status: false, message: "Something went wrong!!" })
+        console.log(error.message)
     }
 }
 
@@ -51,7 +50,6 @@ exports.login = async (req, res) => {
         }
  
     } catch (error) {
-        console.log(error)
-        res.send({ status: false, message: "Something went wrong !!" })
+        console.log(error.message)
     }
 }

@@ -51,7 +51,7 @@ exports.login = async (req, res) => {
         }
  
     } catch (error) {
-        res.send({ status: false, message: "Something went wrong !!" })
+        console.log(error.message)
     }
 }
 
