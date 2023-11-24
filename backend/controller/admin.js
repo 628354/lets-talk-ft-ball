@@ -28,26 +28,31 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     try {
-        const { email, password } = req.body
-        const findadmin = await adminmodel.findOne({ email: email })
-        if (!findadmin) {
-            res.send({ status: false, message: "admin not found!!" })
-            return
-        }
-        const match = await bcrypt.compare(password, findadmin.password)
-        if (match) {
-            const token =  jwt.sign({ _id: findadmin._id, email: findadmin.email }, process.env.Secret_key, { expiresIn: "2d" })
-            findadmin.password = "";
-            res.set({ token: token })
-            res.send({
-                status: true,
-                message: "admin login Successfully",
-                userdetails: findadmin,
-                token: token
-            })
+        if(req.body.role == 0) {
+            const { email, password } = req.body
+            const findadmin = await adminmodel.findOne({ email: email })
+            if (!findadmin) {
+                res.send({ status: false, message: "admin not found!!" })
+                return
+            }
+            const match = await bcrypt.compare(password, findadmin.password)
+            if (match) {
+                const token =  jwt.sign({ _id: findadmin._id, email: findadmin.email }, process.env.Secret_key, { expiresIn: "2d" })
+                findadmin.password = "";
+                res.set({ token: token })
+                res.send({
+                    status: true,
+                    message: "admin login Successfully",
+                    userdetails: findadmin,
+                    token: token
+                })
+            } else {
+                res.send({ status: false, message: "Password dont match!!" })
+            }
         } else {
-            res.send({ status: false, message: "Password dont match!!" })
+            res.send({status:false, message:'Admin not found'})
         }
+       
  
     } catch (error) {
         console.log(error.message)
