@@ -9,6 +9,7 @@ export default function Home() {
  
   return (
     <div>
+    
      <Headerslider/>
 
      <section className='leagues_section'>

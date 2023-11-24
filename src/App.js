@@ -6,7 +6,7 @@ import "./responsive/arstyle.css";
 import "./responsive/enstyle.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import {  Routes, Route, useNavigate } from "react-router-dom";
+import {  Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import Home from "./page/Home";
 import About from "./page/About";
@@ -61,9 +61,20 @@ function App() {
     navigate('/dashboard');
   };
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const location = useLocation();
+ 
+  // Array of routes where the Header should not be displayed
+  const noHeaderRoutes = ["/Login", "/Dashboard", "/Signup", "/Forgot", "/Editseason", "/Season", "/Edithome", "/Editabout", "/Editprivacypolicy", "/Leagues", "/Editcontact", "/Editdefinition", "/Addcafe", "/Cafeview", ];
+  // Get the current route
+  const currentRoute = location.pathname;
+  // Check if the current route is in the array of routes where Header should not be displayed
+  const shouldDisplayHeader = !noHeaderRoutes.includes(currentRoute);
+  
+
   return (
     <div className="App">
-      <Header />
+       {shouldDisplayHeader && <Header />}
+      {/* <Header /> */}
       {/* <Headerar/> */}
 
         <Routes>
@@ -201,7 +212,8 @@ function App() {
 
 
         </Routes>
-      <Footer />
+        {shouldDisplayHeader && <Footer />}
+      {/* <Footer /> */}
       {/* <Footerar/> */}
     </div>
   );
