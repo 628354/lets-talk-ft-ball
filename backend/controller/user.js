@@ -8,23 +8,30 @@ const { sendResetPasswordEmail } = require("../mails/forget")
 
 exports.register = async (req, res) => {
     try {
-        const { firstName,lastName , email, password } = req.body
-        const finduser = await usermodel.findOne({ email: email })
+        const finduser = await usermodel.findOne({ email:req.body.email})
         if (finduser) {
-            res.send({ status: true, message: "user allready exist" })
-            return
+            res.send('Email Already Exist')
         }
-        const hash = bcrypt.hashSync(req.body.password, 10)
+        const ExistPhone = await usermodel.findOne({phone:req.body.phone})
+        if(ExistPhone) {
+            res.send('Phone Number already exist')
+        }
+        const hashpassword = await bcrypt.hashSync(req.body.password, 10)
         const adduser = await usermodel.create({
-            firstName: firstName,
-            lastName : lastName ,
-            email: email,
-            password: hash,
+            firstName: req.body.firstName,
+            lastName : req.body.lastName ,
+            email: req.body.email,
+            password: hashpassword,
+            role:req.body.role
         })
-        res.send({ status: true, message: "Signup Successfully", userdetails: adduser })
+        const result = await adduser.save()
+        res.status(200).send({
+            body:result,
+            message:'Signup Successfully',
+            success:true
+        })
     } catch (error) {
-        console.log(error)
-        res.send({ status: false, message: "Something went wrong!!" })
+        console.log(error.message)
     }
 }
 
