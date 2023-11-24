@@ -96,3 +96,15 @@ exports.forgetpassword = async (req, res) => {
         res.send({ status: false, message: "something went wrong !!" })
     }
 }
+exports.getAllUser = async(req, res) => {
+    try {
+        const userData = await usermodel.find()
+        res.status(200).send({
+            body:userData,
+            mesage:'Get All User Successfully',
+            success:true
+        })
+    } catch (error) {
+        console.log(error.message)
+    }
+}
