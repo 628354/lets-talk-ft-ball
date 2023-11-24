@@ -153,11 +153,8 @@ export default function Editdefinition() {
             Large Modal
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>test my home </Modal.Body>
-      </Modal>
-
-
-           <section className='tab-section'>
+        <Modal.Body>
+        {/* <section className='tab-section'>
             <Container>
                 <Row>
                 <div className='general-part-home'>
@@ -214,7 +211,12 @@ export default function Editdefinition() {
                         </div>
                     </Row>
             </Container>
-           </section>
+           </section> */}
+        </Modal.Body>
+      </Modal>
+
+
+           
            
     </div>
 

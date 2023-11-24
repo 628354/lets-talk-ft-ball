@@ -4,6 +4,8 @@ import Nav from 'react-bootstrap/Nav';
 import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import  { useState } from 'react';
+import {useNavigate } from 'react-router-dom';
+
 
 
 
@@ -65,6 +67,7 @@ export default function Header() {
       </Container>
         </div>
         </div>
+        
            <Navbar sticky="top" expand="lg" className="bg-body-tertiary topheader">
       <Container>
         <Navbar.Brand><Link to="/"><img src={require('../img/ft-logo.png')} alt="earth" className="logo-rearth"/></Link></Navbar.Brand>
