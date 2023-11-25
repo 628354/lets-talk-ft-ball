@@ -1100,5 +1100,53 @@ table.aline_tablel thead tr th {
     padding: 16px 15px;
     text-align: center;
 }
+
+.chart-opt-table h5 {
+    text-align: center;
+    font-weight: 600;
+}
+
+.linechart svg {
+    width: 100%;
+}
+.linechart {
+    width: 100% !important;
+}
+
+.chart-opt-table {
+    padding: 25px;
+    border: 1px solid #cdcdcd;
+    height: 100%;
+}
+
 /* team delails */
 
+
+/*Team Comparision start  */
+
+.main-compari-select {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.compari-logo {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.en-right-line {
+    border-right: 1px solid #bfbaba;
+}
+
+.form-select {
+    width: 186px;
+    max-width: 186px;
+    min-width: 186px;
+}
+
+.chart-compari {
+    padding-bottom: 60px;
+}
+/*Team Comparision css end  */
