@@ -51,7 +51,7 @@ import Cafeview from "./page-dashboard/Cafeview";
 import Dataapi from "./Dashboard-edit-page/Dataapi";
 import Premierchart from "./Leagues-components/Premierchart";
 import Teamdetailsl from "./Chart-filter-page/Teamdetailsl";
-
+import Teamcomparision from "./Chart-filter-page/Teamcomparision";
 
 
 function App() {
@@ -212,7 +212,9 @@ function App() {
           <Route path="/Login" element={<Login/>}>
             {" "}
           </Route>
-
+<Route path="/Teamcomparision" element={<Teamcomparision/>}>
+            {" "}
+          </Route>
 
         </Routes>
         {shouldDisplayHeader && <Footer />}
