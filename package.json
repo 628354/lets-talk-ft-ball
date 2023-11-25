@@ -2,7 +2,7 @@
   "name": "letstalkftball-local",
   "version": "0.1.0",
   "private": true,
-
+  "homepage": "http://phpstack-1140615-3967632.cloudwaysapps.com/",
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.38",
     "@testing-library/jest-dom": "^5.17.0",
