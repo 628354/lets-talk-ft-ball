@@ -57,7 +57,6 @@ import Cafeview from "./page-dashboard/Cafeview";
 import Dataapi from "./Dashboard-edit-page/Dataapi";
 import Premierchart from "./Leagues-components/Premierchart";
 import Teamdetailsl from "./Chart-filter-page/Teamdetailsl";
-import Teamcomparision from "./Chart-filter-page/Teamcomparision";
 
 function App() {
 	// const navigate = useNavigate();
@@ -186,14 +185,25 @@ function App() {
 				<Route path="/Editcontact" element={<Editcontact />}></Route>
 				<Route path="/Addcafe" element={<Addcafe />}></Route>
 
-				<Route path="/Cafeview" element={<Cafeview />}></Route>
-				<Route path="/Dataapi" element={<Dataapi />}></Route>
-				<Route path="/Premierchart" element={<Premierchart />}></Route>
-				<Route path="/Teamdetailsl" element={<Teamdetailsl />}></Route>
-				<Route path="/Login" element={<Login />}></Route>
-				<Route path="/Teamcomparision" element={<Teamcomparision />}></Route>
+				<Route path="/Cafeview" element={<Cafeview />}>
+					{" "}
+				</Route>
+				<Route path="/Dataapi" element={<Dataapi />}>
+					{" "}
+				</Route>
+				<Route path="/Premierchart" element={<Premierchart />}>
+					{" "}
+				</Route>
+				<Route path="/Teamdetailsl" element={<Teamdetailsl />}>
+					{" "}
+				</Route>
+				<Route path="/Login" element={<Login />}>
+					{" "}
+				</Route>
 			</Routes>
-			{shouldDisplayHeader && FooterComponent && <FooterComponent />}
+			{shouldDisplayHeader && <Footer />}
+			{/* <Footer /> */}
+			{/* <Footerar/> */}
 		</div>
 	);
 }
