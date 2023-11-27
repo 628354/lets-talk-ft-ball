@@ -62,7 +62,7 @@ exports.login = async (req, res) => {
         }
         const match = await bcrypt.compare(password, finduser.password)
         if (match) {
-            const token = await jwt.sign({ _id: finduser._id, email: finduser.email }, process.env.Secret_key, { expiresIn: "365d" })
+            const token =  jwt.sign({ _id: finduser._id, email: finduser.email }, process.env.Secret_key, { expiresIn: "365d" })
             res.set({ token: token })
             res.send({
                 status: true,
