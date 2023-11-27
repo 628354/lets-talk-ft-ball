@@ -8,14 +8,14 @@ const { sendResetPasswordEmail } = require("../mails/forget");
 
 exports.register = async (req, res) => {
   try {
+   
     var image = req.files.image.name;
-    var uploadDir = path.join(__dirname, "../uploads", image);
+    var uploadDir = path.join(__dirname, "../uploads", image)
     if (req.files.image) {
-      req.files.image.mv(uploadDir, (err) => {
-        if (err) return res.status(500).send(err);
-      });
+        req.files.image.mv(uploadDir, (err) => {
+            if (err) return res.status(500).send(err)
+        })
     }
-
     const findUser = await usermodel.findOne({ email: req.body.email });
     if (findUser) {
       return res.status(400).send("Email Already Exists");
@@ -25,7 +25,6 @@ exports.register = async (req, res) => {
     if (phoneExist) {
       return res.status(400).send("Phone Number Already Exists");
     }
-
     const hashPassword = bcrypt.hashSync(req.body.password, 10);
     const addUser = await usermodel.create({
       firstName: req.body.firstName,
@@ -33,8 +32,8 @@ exports.register = async (req, res) => {
       email: req.body.email,
       phone: req.body.phone,
       role: req.body.role,
-      image: image,
       password: hashPassword,
+      image:image
     });
 
     const result = await addUser.save();
@@ -140,4 +139,56 @@ exports.getAllUser = async (req, res) => {
   }
 };
 
-const user = require("../model/user");
+exports.updateUser = async (req, res) => {
+  try {
+    const { id, firstName, lastName, phone, country, countryCode } = req.body;
+    const updateUser = await usermodel.findByIdAndUpdate(
+      { _id: req.params.id },
+      { firstName, lastName, phone, country, countryCode }
+    );
+    if (updateUser) {
+      res.status(200).send({
+        body: updateUser,
+        message: "User Updated Successfully",
+        success: true,
+      });
+    } else {
+      res.status(300).send({
+        message: "User Id Not Found",
+        success: false,
+      });
+    }
+  } catch (error) {
+    res.status(500).send({
+      message: "User Updated Successfully",
+      success: true,
+      error: error.message,
+    });
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const deleteUser = await usermodel.findByIdAndDelete({
+      _id: req.params.id,
+    });
+    if (deleteUser) {
+      res.status(200).send({
+        body: deleteUser,
+        message: "User Deleted Successfully",
+        success: true,
+      });
+    } else {
+      res.status(300).send({
+        message: "User Id Not Found",
+        success: false,
+      });
+    }
+  } catch (error) {
+    res.status(500).send({
+      message: "User Updated Successfully",
+      success: true,
+      error: error.message,
+    });
+  }
+};
