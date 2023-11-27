@@ -10,7 +10,7 @@ export const IMAGES={
 
 
 export const LEAGUES_BULK_IMPORT = {
-  upload: `${SERVER_LINK}leageBluk`,
+  upload: `${SERVER_LINK}teadBulk`,
 };
 
 export const SESSION = {
