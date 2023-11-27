@@ -1,14 +1,13 @@
-const express = require("express")
-const router = express.Router()
-const path = require('path');
-const csvtojson = require('csvtojson');
+const express = require("express");
+const router = express.Router();
+const path = require("path");
+const csvtojson = require("csvtojson");
 
-
-const multer = require("multer")
+const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
@@ -18,63 +17,66 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const leaguecontroller = require("../controller/league");
 
-router.post("/addleague", upload.single("image"), leaguecontroller.addleague)
+router.post("/addleague", upload.single("image"), leaguecontroller.addleague);
 
-router.get("/getleagues", leaguecontroller.getleagues)
+router.get("/getleagues", leaguecontroller.getleagues);
 
-router.get("/getleagueById/:leagueId" , leaguecontroller.getById)
+router.get("/getleagueById/:leagueId", leaguecontroller.getById);
 
-router.post("/updateLeague/:leagueId", upload.single("image"), leaguecontroller.update)
+router.post(
+  "/updateLeague/:leagueId",
+  upload.single("image"),
+  leaguecontroller.update
+);
 
-router.delete("/removeLeague/:leagueId" , leaguecontroller.delete)
+router.delete("/removeLeague/:leagueId", leaguecontroller.delete);
 
 const storages = multer.memoryStorage();
 const uploads = multer({ storage: storages });
 
-const seasonmodel = require("../model/leaguedata")
+const seasonmodel = require("../model/leaguedata");
 // Route for file upload
-router.post('/upload', uploads.single('csvfile'), async (req, res) => {
+router.post("/upload", uploads.single("csvfile"), async (req, res) => {
   if (!req.file) {
-    return res.status(400).send('No file uploaded.');
+    return res.status(400).send("No file uploaded.");
   }
 
-
   // Convert the CSV file to JSON
-  const csvBuffer = req.file.buffer.toString('utf8');
+  const csvBuffer = req.file.buffer.toString("utf8");
 
   await csvtojson()
     .fromString(csvBuffer)
     .then((jsonArrayObj) => {
-
       var army = [];
       for (var i = 0; i < jsonArrayObj.length; i++) {
         var obj = {};
-        obj.games = jsonArrayObj[i]['games'];
-        obj.win = jsonArrayObj[i]['win'];
+        obj.games = jsonArrayObj[i]["games"];
+        obj.win = jsonArrayObj[i]["win"];
         // obj.house=jsonObj[i]['House'];
         army.push(obj);
       }
-      console.log(army)
-      const data = seasonmodel.insertMany(army).then(function () {
-        res.status(200).send({
-          message: "Successfully Uploaded!",
-          data: data
+      console.log(army);
+      const data = seasonmodel
+        .insertMany(army)
+        .then(function () {
+          res.status(200).send({
+            message: "Successfully Uploaded!",
+            data: data,
+          });
+        })
+        .catch(function (error) {
+          res.status(500).send({
+            message: "failure",
+            error,
+          });
         });
-      }).catch(function (error) {
-        res.status(500).send({
-          message: "failure",
-          error
-        });
-      });
       // res.json(jsonArrayObj);
     })
 
-
     .catch((error) => {
-      console.log(error)
-      res.status(500).send('Error converting CSV to JSON.');
+      console.log(error);
+      res.status(500).send("Error converting CSV to JSON.");
     });
 });
 
-
-module.exports = router
+module.exports = router;

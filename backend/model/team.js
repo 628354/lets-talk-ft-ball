@@ -1,7 +1,7 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const teamSchema = mongoose.Schema({
-
+const teamSchema = mongoose.Schema(
+  {
     teamName: { type: String, require: true },
 
     short_name: { type: String, require: true },
@@ -26,11 +26,9 @@ const teamSchema = mongoose.Schema({
 
     leagues: { type: mongoose.Schema.Types.ObjectId, ref: "league" },
 
-    status: { type: String, enum: ["active", "inactive"], default: "active" }
-},
-    { timestamps: true }
+    status: { type: String, enum: ["active", "inactive"], default: "active" },
+  },
+  { timestamps: true }
+);
 
-)
-
-
-module.exports = mongoose.model("team", teamSchema)
+module.exports = mongoose.model("team", teamSchema);
