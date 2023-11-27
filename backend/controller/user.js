@@ -134,6 +134,5 @@ exports.getAllUser = async(req, res) => {
 }
 
 
-const permission = require('../model/permission')
 const user = require('../model/user')
 
