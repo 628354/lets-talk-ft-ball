@@ -37,7 +37,7 @@ mongoose.connect(process.env.MONGO_URI,
 ).then(() => {
     console.log("conntect to db")
 }).catch((error) => {
-    console.log("not connected", error)
+    console.log("not connected test", error)
 })
 
 
