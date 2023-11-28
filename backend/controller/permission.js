@@ -111,10 +111,10 @@ module.exports = {
     },
     statusUpdate: async (req, res) => {
         try {
-            const { status } = req.body;
+            const { type } = req.body;
             const updatedPermission = await permission.findByIdAndUpdate(
                 { _id: req.params.id },
-                { status: status }
+                { type: type }
             );
             if (!updatedPermission) {
                 return res.status(404).send({
@@ -124,9 +124,9 @@ module.exports = {
             }
 
             let responseMessage = 'Status Updated Successfully';
-            if (status == 1) {
+            if (type == 1) {
                 responseMessage += ' - Author';
-            } else if (status == 2) {
+            } else if (type == 2) {
                 responseMessage += ' - Editor';
             }
 

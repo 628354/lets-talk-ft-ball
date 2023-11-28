@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const permissionSchema = new mongoose.Schema({
-  status: {
+  type: {
     type: String,
     enum: ["1", "2"],  // 1 = author, 2 = editor
     default: "",

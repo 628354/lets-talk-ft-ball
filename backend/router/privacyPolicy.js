@@ -26,4 +26,5 @@ router.post(
   privacyController.updatepolicy
 );
 
+router.delete('/deletePrivacy/:id', privacyController.deletePrivacy)
 module.exports = router;
