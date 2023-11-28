@@ -14,7 +14,7 @@ exports.leagedBlukImport = async (req, res) => {
   const workbook = XLSX.readFile(filePath);
 
   const sheetNames = workbook.SheetNames;
-  
+
   const allData = [];
 
   sheetNames.forEach(async sheetName => {
@@ -31,12 +31,12 @@ exports.leagedBlukImport = async (req, res) => {
         goals_scored: data[i].GS,
         goals_conceded: data[i].GC,
         points: data[i].P,
-        point_gap: (data[i]['POINTS GAIN %']) ?data[i]['POINTS GAIN %'] : " ",
+        point_gap: (data[i]['POINTS GAIN %']) ? data[i]['POINTS GAIN %'] : " ",
         gs_gc: (data[i]['GOALS SCORED/GAME']) ? data[i]['GOALS SCORED/GAME'] : " ",
-        win_precent: (data[i]['WIN%']) ?  data[i]['WIN%'] : " "
+        win_precent: (data[i]['WIN%']) ? data[i]['WIN%'] : " "
       })
-    
-    } 
+
+    }
     allData.push({
       seasonid: req.body.season,
       leagueid: req.body.league,
@@ -53,15 +53,15 @@ exports.leagedBlukImport = async (req, res) => {
 
 //---------------------------------- TEAM BULK IMPORT -------------------------------------
 
-exports.teamBulkImport = async (req, res) =>{
- 
+exports.teamBulkImport = async (req, res) => {
+
   const filePath = req.file.path;
 
   // Read the uploaded file
   const workbook = XLSX.readFile(filePath);
 
   const sheetNames = workbook.SheetNames;
-  
+
   const allData = [];
 
   sheetNames.forEach(async sheetName => {
@@ -69,14 +69,14 @@ exports.teamBulkImport = async (req, res) =>{
     const worksheet = workbook.Sheets[sheetName];
     const data = XLSX.utils.sheet_to_json(worksheet);
     for (let i = 0; i < data.length; i++) {
-      let myData =[];
-        const map = new Map(Object.entries(data[i]));
-        const keys = map.keys(data[i])
+      let myData = [];
+      const map = new Map(Object.entries(data[i]));
+      const keys = map.keys(data[i])
       for (const key of map.keys(data[i])) {
         const words = key.split(' ');
         words.shift();
         const modifiedString = words.join('_');
-  
+
         myData[modifiedString] = data[i][key]
         // data[i][modifiedString]= data[i][key];
       }
@@ -86,16 +86,16 @@ exports.teamBulkImport = async (req, res) =>{
         POINTS_ACCUMULATED: myData.POINTS_ACCUMULATED,
         POINTS_GAINING_RATE: myData.POINTS_GAINING_RATE,
         GS_inG: myData.GS_inG,
-        GS_cum: myData. GS_cum,
+        GS_cum: myData.GS_cum,
         GS_rate: myData.GS_rate,
         GC_inG: myData.GC_inG,
         GC_cum: myData.GC_cum,
         GC_rate: myData.GC_rate,
-        GS_GC: (myData['GS/GC']) ?  myData['GS/GC'] : " ",
+        GS_GC: (myData['GS/GC']) ? myData['GS/GC'] : " ",
         Poverty_Line: myData.Line
       })
-    
-    } 
+
+    }
     allData.push({
       seasonid: req.body.season,
       leagueid: req.body.league,
@@ -132,14 +132,14 @@ exports.teamBulkImport = async (req, res) =>{
 
 const sendError = (Response, Error) => {
   if (Error.errno === 500) {
-      responseHelper[500].data = [];
-      Response.send(responseHelper[500]);
+    responseHelper[500].data = [];
+    Response.send(responseHelper[500]);
   } else {
-      const errorObj = {};
-      errorObj.status = Error.errno;
-      errorObj.message = Error.sqlMessage ? Error.sqlMessage : Error.code;
-      errorObj.hasError = true;
-      errorObj.data = Error.sql;
-      Response.send(errorObj);
+    const errorObj = {};
+    errorObj.status = Error.errno;
+    errorObj.message = Error.sqlMessage ? Error.sqlMessage : Error.code;
+    errorObj.hasError = true;
+    errorObj.data = Error.sql;
+    Response.send(errorObj);
   }
 }
