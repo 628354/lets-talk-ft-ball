@@ -4,7 +4,7 @@ module.exports = {
     create: async (req, res) => {
         try {
             const permissions = await permission.create(req.body);
-            const result = await permissions.save();
+            const result = await permissions.save();           
             res.status(200).send({
                 body: result,
                 message: "Permission Create Successfully",

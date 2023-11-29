@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const permissionSchema = new mongoose.Schema({
-  type: {
+  userId:{type:mongoose.Schema.Types.ObjectId, ref:'user'},
+  role: {
     type: String,
-    enum: ["1", "2"],  // 1 = author, 2 = editor
-    default: "",
+    default: "author",
     lowercase: true,
     trim: true,
   },

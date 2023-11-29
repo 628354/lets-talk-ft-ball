@@ -27,6 +27,7 @@ const contactus = require("./router/contactus")
 const definition = require("./router/definition")
 const cafe = require("./router/cafe")
 const permission = require('./router/permission')
+const routes = require('./router/routes')
 
 const mongoose = require("mongoose")
 mongoose.connect(process.env.MONGO_URI,
@@ -55,6 +56,7 @@ app.use("/" , contactus)
 app.use("/" , definition)
 app.use("/" , cafe)
 app.use('/', permission)
+app.use('/', routes)
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
