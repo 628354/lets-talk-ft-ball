@@ -1,22 +1,28 @@
 const leaguemodel = require("../model/league")
-
+const path = require("path");
 
 exports.addleague = async (req, res) => {
     try {
+        
+        var image = req.files.image.name;
+        var uploadDir = path.join(__dirname, "../uploads", image)
+        if (req.files.image) {
+            req.files.image.mv(uploadDir, (err) => {
+                if (err) return res.status(500).send(err)
+            })
+        }
         const { leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
             sort_Order, status } = req.body
+
         const find = await leaguemodel.findOne({ leaguename: leaguename })
         if (find) {
             res.send({ status: true, message: "league allready present" })
             return
         }
 
-        const protocol = req.protocol
-        const host = req.host
-        const url = `${protocol}//${host}`
         const addleage = await leaguemodel.create({
             leaguename: leaguename,
-            image:req.file? url + "/uploads/" + req.file.filename : "",
+            image:image,
             description: description,
             meta_Tag_Title: meta_Tag_Title,
             meta_Tag_Description: meta_Tag_Description,
@@ -25,10 +31,18 @@ exports.addleague = async (req, res) => {
             sort_Order: sort_Order,
             status: status
         })
-        res.send({ status: true, message: "Successfully add league", leaguedetails: addleage })
+        const result = await addleage.save()
+        res.status(200).send({
+            body:result,
+            message:'League Add Successfully',
+            success:true
+        })
     } catch (error) {
-        console.log(error)
-        res.send({ status: false, message: "Something went wrong!!" })
+        res.status(500).send({
+            message:'Enternal Server Error',
+            success:false,
+            error:error.message
+        })
     }
 }
 
@@ -58,12 +72,20 @@ exports.getById = async (req,res)=>{
 
 exports.update = async (req, res) => {
     try {
+
+        var image = req.files.image.name;
+        var uploadDir = path.join(__dirname, "../uploads", image)
+        if (req.files.image) {
+            req.files.image.mv(uploadDir, (err) => {
+                if (err) return res.status(500).send(err)
+            })
+        }
         const { leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
             sort_Order, status } = req.body
 
-        const protocol = req.protocol
-        const host = req.host
-        const url = `${protocol}//${host}`
+        // const protocol = req.protocol
+        // const host = req.host
+        // const url = `${protocol}//${host}`
         const findleague = await leaguemodel.findById(req.params.leagueId)
         if (!findleague) {
             res.send({ status: true, message: "league data not found!!" })
@@ -72,7 +94,8 @@ exports.update = async (req, res) => {
 
         const update = await leaguemodel.findByIdAndUpdate(req.params.leagueId, {
             leaguename: leaguename,
-            image: req.file ? url + "/uploads/" + req.file.filename : findleague.image ,
+            // image: req.file ? url + "/uploads/" + req.file.filename : findleague.image ,
+            image:image,
             description: description,
             meta_Tag_Title: meta_Tag_Title,
             meta_Tag_Description: meta_Tag_Description,

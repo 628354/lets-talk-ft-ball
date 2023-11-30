@@ -35,5 +35,6 @@ router.post(
 router.delete("/definitionDelete/:id", definitionController.definitionDelete);
 
 router.get("/getAllDefinition", definitionController.getAllDefinition);
+router.get('/getDefinitionById/:id', definitionController.getDefinitionById)
 
 module.exports = router;

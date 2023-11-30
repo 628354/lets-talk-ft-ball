@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const leagueSchema = mongoose.Schema(
   {
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
     leaguename: { type: String, require: true },
     image: { type: String, require: true },
     description: { type: String, require: true },

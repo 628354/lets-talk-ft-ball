@@ -6,7 +6,7 @@ exports.adddefinitions = async (req, res) => {
     try {
         const { type, content } = req.body
         const protocol = req.protocol
-        const host = req.host
+        const host = req.hostname
         const url = `${protocol}//${host}`
         const adddefinitions = await definitionmodel.create({
             image: req.file ? url + "/uploads/" + req.file.filename : "",
@@ -15,12 +15,16 @@ exports.adddefinitions = async (req, res) => {
                 content: content
             }
         })
-        res.send({ status: true, mesasge: "Successfully add definition", details: adddefinitions })
+        const result = await adddefinitions.save()
+        res.send({ status: true, mesasge: "Successfully add definition", body: result })
     } catch (error) {
-        res.send({ status: false, message: "Something went wrong !!" })
+        res.status(200).send({
+            mesasge:'Enternal Server Error',
+            success:false,
+            error:error.mesasge
+        })
     }
 }
-
 
 exports.adddefinitiontype = async (req, res) => {
     try {
@@ -108,6 +112,33 @@ exports.getAllDefinition = async(req, res) => {
             success:true
         })
     } catch (error) {
-       console.log(error.mesasge) 
+      res.status(500).send({
+        message:'Enternal Server Error',
+        success:true,
+        error:error.mesasge
+      })
+    }
+}
+exports.getDefinitionById = async(req, res) => {
+    try {
+        const definitions = await definitionmodel.findById({_id:req.params.id})
+        if(definitions){
+            res.status(200).send({
+                body:definitions,
+                message:'Definition detatails get Successfully',
+                success:true
+            })
+        } else {
+            res.status(300).send({
+                message:'Definition Id Not Found',
+                success:false
+            })
+        }
+    } catch (error) {
+        res.status(500).send({
+            message:'Enternal Server Error',
+            success:true,
+            error:error.mesasge
+          })
     }
 }

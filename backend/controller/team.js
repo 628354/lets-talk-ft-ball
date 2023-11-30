@@ -3,17 +3,12 @@ const teammodel = require("../model/team")
 
 exports.addTeam = async (req, res) => {
     try {
-
-
-        
         const { teamName, short_name, graph_Title1, graph_Title2, graph_Title3, graph_Title4, description, meta_Tag_Description, meta_Tag_Keywords, team_Tags, leagues, status } = req.body
-
         const protocol = req.protocol
         const host = req.host
         const url = `${protocol}//${host}`
 
         const addTeam = await teammodel.create({
-
             teamName: teamName,
             short_name: short_name,
             image: req.file ? url + "/uploads/" + req.file.filename : " ",
@@ -28,7 +23,6 @@ exports.addTeam = async (req, res) => {
             leagues: leagues,
             status: status
         })
-
         res.send({ status: true, message: "Successfully add team", teamdetails: addTeam })
     } catch (error) {
         res.send({ status: false, message: "Something went wrong!!" })
