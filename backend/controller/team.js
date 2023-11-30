@@ -1,3 +1,4 @@
+
 const teammodel = require("../model/team")
 
 exports.addTeam = async (req, res) => {
@@ -42,6 +43,20 @@ exports.getTeams = async (req, res) => {
 
     } catch (error) {
         res.send({ status: true, message: "Something went wrong !!" })
+    }
+}
+
+exports.teamdetails = async(req, res) => {
+    try {
+        const teams  = await teammodel.findById({_id:req.params.id})
+        if(teams) {
+            res.send({status:true, message:'Team details Get Successfully', body:teams})
+        } else {
+            res.send({status:false, message:'team Id not found'})
+        }
+        
+    } catch (error) {
+        console.log(error.message)
     }
 }
 

@@ -15,7 +15,7 @@ const data = [
     uv: 5000,
     pv: 10000,
     amt: 2400,
-    icon: "https://www.amcharts.com/wp-content/uploads/flags/spain.svg",
+    icon: '/path/to/icon1.png',
     
   },
   {

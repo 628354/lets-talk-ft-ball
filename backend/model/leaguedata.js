@@ -1,17 +1,17 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const leaguedataSchema = mongoose.Schema({
-
+const leaguedataSchema = mongoose.Schema(
+  {
     team: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "team"
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "team",
     },
 
    
 
     league: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "league"
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "league",
     },
 
     seasonid: { type: String, require: true },
@@ -47,4 +47,4 @@ const leaguedataSchema = mongoose.Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model("leaguedata", leaguedataSchema)
+module.exports = mongoose.model("leaguedata", leaguedataSchema);

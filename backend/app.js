@@ -1,11 +1,13 @@
 const express = require("express")
 const app = express()
+const fileupload = require("express-fileupload");
+
 
 const dotenv = require("dotenv")
 dotenv.config()
 const PORT = process.env.PORT
 const bodyParser = require('body-parser');
-
+const port = process.env.PORT  || 5000
 const cors = require("cors")
 app.use(cors())
 
@@ -13,6 +15,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(fileupload());
 
 const path = require('path');
 
@@ -30,19 +33,20 @@ const cafe = require("./router/cafe")
 const imagesRoute = require('./router/images');
 const blukImportRouter = require('./router/bluk')
 const TableRoute = require('./router/Table_graph');
+const permission = require('./router/permission')
+const routes = require('./router/routes')
 
 const mongoose = require("mongoose")
-
-mongoose.connect("mongodb://0.0.0.0:27017/Leagues",
+mongoose.connect(process.env.MONGO_URI,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }
 
 ).then(() => {
-    console.log("Database is connected")
+    console.log("conntect to db")
 }).catch((error) => {
-    console.log("not connected", error)
+    console.log("not connected test", error)
 })
 
 
@@ -61,11 +65,14 @@ app.use("/" , cafe)
 app.use("/" , imagesRoute)
 app.use("/", blukImportRouter);
 app.use('/api/v1/graph',TableRoute);
+app.use('/', permission)
+app.use('/', routes)
+
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 
-app.listen(PORT, () => {
-    console.log(`Server is running at ${PORT}`)
+app.listen(port, () => {
+    console.log(`Server is running at ${port}`)
 })

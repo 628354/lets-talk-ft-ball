@@ -25,7 +25,8 @@ export default function PremierLeaguetable() {
       </thead>
       <tbody className='team_poin'>
       <tr class="filter">
-       <td colspan="7"><div class="inside-filter"> <span>Filter By Season </span>
+       <td colspan="7">
+        <div class="inside-filter"> <span>Filter By Season </span>
        <div class="dropdown_filter">
           <button class="dropbtn"> <span>2023-24 </span> <span><i class="ri-arrow-down-s-line"></i></span> </button>
           <div class="dropdown-content">
@@ -40,12 +41,13 @@ export default function PremierLeaguetable() {
           </div>
           </div>
 
-       </div></td>
+       </div>
+       </td>
       <td colspan="6"><div class="team-btn"> <Link to="">Compare Now</Link> </div></td>
      </tr>
         <tr>
           <td>1</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/tottenham-hotspur-fc-logo.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Tottenham</span></td>
+          <td className='imagetext_city'><Link to="/TeamDetailsl"><span className='overimage'><img src={require('../img/tottenham-hotspur-fc-logo.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Tottenham</span></Link></td>
           <td>9</td>
           <td>7</td>
           <td>2</td>
@@ -60,7 +62,7 @@ export default function PremierLeaguetable() {
         </tr>
         <tr>
           <td>2</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/manchester-city-logo.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Man City</span></td>
+          <td className='imagetext_city'><Link to='/TeamDetailsl'><span className='overimage'><img src={require('../img/manchester-city-logo.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Man City</span></Link></td>
           <td>9</td>
           <td>7</td>
           <td>0</td>
@@ -75,92 +77,93 @@ export default function PremierLeaguetable() {
         </tr>
         <tr>
           <td>3</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
-          <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
+          <td className='imagetext_city'><Link to=""><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
+          <td>9</td><
+            td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>4</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>5</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>6</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>7</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>8</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>9</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>10</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>11</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>12</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>13</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>14</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>15</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>16</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>17</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>18</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>19</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr>
           <td>20</td>
-          <td className='imagetext_city'><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></td>
+          <td className='imagetext_city'><Link to=''><span className='overimage'><img src={require('../img/arsenal-logo-vector.png')} alt="earth" className="logo-rearth-table"/></span> <span className='toearth'>Arsenal</span></Link></td>
           <td>9</td><td>7</td> <td>0</td><td>2</td><td>19</td><td>7</td> <td>21</td><td>2</td><td>10</td> <td>77.78%</td>
         </tr>
         <tr class="filter-fir">
@@ -187,6 +190,6 @@ export default function PremierLeaguetable() {
     
 
         </div>
-    </div>
+  </div>
   )
 }

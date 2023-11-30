@@ -6,13 +6,19 @@ import "./responsive/arstyle.css";
 import "./responsive/enstyle.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import {  Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useLanguage } from "./languages/LanguageContext";
 import Home from "./page/Home";
+import HomeAr from "./arpage/Home";
 import About from "./page/About";
+import AboutAr from "./arpage/About";
 import Cafe from "./page/Cafe";
+import CafeAr from "./arpage/Cafe";
 import Definition from "./page/Definition";
+import DefinitionAr from "./arpage/Definition";
 import Contact from "./page/Contact";
+import ContactAr from "./arpage/Contact";
 import Login from "./page/Login";
 import Signup from "./page/Signup";
 import Forgot from "./page/Forgot";
@@ -33,7 +39,7 @@ import BotolaPro from "./Leagues-page/BotolaPro";
 import BrazilSerieA from "./Leagues-page/BrazilSerieA";
 import Season from "./page-dashboard/Season";
 import Menubar from "./dashboard/Menubar";
-import Dashboard from "./dashboard/Menubar"
+import Dashboard from "./dashboard/Menubar";
 import Addseason from "./page-dashboard/Addseason";
 import LeaguesBluk from "./page-dashboard/LeaguesBluk";
 import Editseason from "./page-dashboard/Editseason";
@@ -51,163 +57,145 @@ import Addcafe from "./page-dashboard/Addcafe";
 import Cafeview from "./page-dashboard/Cafeview";
 import Dataapi from "./Dashboard-edit-page/Dataapi";
 import Premierchart from "./Leagues-components/Premierchart";
-
-
-
+import Teamdetailsl from "./Chart-filter-page/Teamdetailsl";
+import Teamcomparison from "./Chart-filter-page/Teamcomparison";
 function App() {
-  const navigate = useNavigate(); 
-  const handleSuccessfulLogin = () => {
-    setIsLoggedIn(true);
-    navigate('/dashboard');
-  };
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  return (
-    <div className="App">
-      <Header />
-      {/* <Headerar/> */}
+	// const navigate = useNavigate();
+	const location = useLocation();
+	// const [isLoggedIn, setIsLoggedIn] = useState(false);
+	// const handleSuccessfulLogin = () => {
+	// 	setIsLoggedIn(true);
+	// 	navigate("/Dashboard");
+	// };
+	// Array of routes where the Header should not be displayed
+	const noHeaderRoutes = [
+		"/Login",
+		"/Dashboard",
+		"/Signup",
+		"/Forgot",
+		"/Editseason",
+		"/Season",
+		"/Edithome",
+		"/Editabout",
+		"/Editprivacypolicy",
+		"/Leagues",
+		"/Editcontact",
+		"/Editdefinition",
+		"/Addcafe",
+		"/Cafeview",
+	];
+	// Get the current route
+	const currentRoute = location.pathname;
+	// Check if the current route is in the array of routes where Header should not be displayed
+	const shouldDisplayHeader = !noHeaderRoutes.includes(currentRoute);
 
-        <Routes>
-          
-        <Route path="/login" element={<Login onSuccessfulLogin={handleSuccessfulLogin} />} />
-          <Route path="/" element={<Home />}>
-            {" "}
-          </Route>
-          <Route path="/About" element={<About />}>
-            {" "}
-          </Route>
-          <Route path="/Leagues" element={<Leagues />}>
-            {" "}
-          </Route>
-          <Route path="/Cafe" element={<Cafe />}>
-            {" "}
-          </Route>
-          <Route path="/Definition" element={<Definition />}>
-            {" "}
-          </Route>
-          <Route path="/Contact" element={<Contact />}>
-            {" "}
-          </Route>
-          <Route path="/Signup" element={<Signup />}>
-            {" "}
-          </Route>
-          <Route path="/Forgot" element={<Forgot />}>
-            {" "}
-          </Route>
-          <Route path="/blog" element={<Blog />}>
-            {" "}
-          </Route>
-          <Route path="/Chart" element={<Chart/>}>
-            {" "}
-          </Route>
-          <Route path="/PremierLeague" element={<PremierLeague/>}>
-            {" "}
-          </Route>
-          <Route path="/Laliga" element={<Laliga/>}>
-            {" "}
-          </Route>
-          <Route path="/SerieA" element={<SerieA/>}>
-            {" "}
-          </Route>
-          <Route path="/Bundesliga" element={<Bundesliga/>}>
-            {" "}
-          </Route>
-          <Route path="/Ligue1" element={<Ligue1/>}>
-            {" "}
-          </Route>
-          <Route path="/NetherlandEredivisie" element={<NetherlandEredivisie/>}>
-            {" "}
-          </Route>
-          <Route path="/LigaPortugal" element={<LigaPortugal/>}>
-            {" "}
-          </Route>
-          <Route path="/SaudiPro" element={<SaudiPro/>}>
-            {" "}
-          </Route>
-          <Route path="/EgyptPL" element={<EgyptPL/>}>
-            {" "}
-          </Route>
-          <Route path="/BotolaPro" element={<BotolaPro/>}>
-            {" "}
-          </Route>
-          <Route path="/BrazilSerieA" element={<BrazilSerieA/>}>
-            {" "}
-          </Route>
-          <Route path="/Dashboard" element={<Dashboard/>}>
-            {" "}
-          </Route>
-          <Route path="/Season" element={<Season/>}>
-            {" "}
-          </Route>
-          <Route path="/Menubar" element={<Menubar/>}>
-            {" "}
-          </Route>
-          <Route path="/Addseason" element={<Addseason/>}>
-            {" "}
-          </Route>
+	const { language } = useLanguage();
+	let HeaderComponent;
+	let FooterComponent;
+	let HomeComponent,
+		AboutComponent,
+		CafeComponent,
+		DefinitionComponent,
+		ContactComponent;
+	switch (language) {
+		case "en":
+			HeaderComponent = Header;
+			FooterComponent = Footer;
+			HomeComponent = Home;
+			AboutComponent = About;
+			CafeComponent = Cafe;
+			DefinitionComponent = Definition;
+			ContactComponent = Contact;
+			break;
+		case "ar":
+			HeaderComponent = Headerar;
+			FooterComponent = Footerar;
+			HomeComponent = HomeAr;
+			AboutComponent = AboutAr;
+			CafeComponent = CafeAr;
+			DefinitionComponent = DefinitionAr;
+			ContactComponent = ContactAr;
+			break;
+		// Add more cases for other languages if needed
+		default:
+			HeaderComponent = Headerar;
+			FooterComponent = Footerar;
+			HomeComponent = HomeAr;
+			AboutComponent = AboutAr;
+			CafeComponent = CafeAr;
+			DefinitionComponent = DefinitionAr;
+			ContactComponent = ContactAr;
+			break;
+	}
+	return (
+		<div className="App">
+			{shouldDisplayHeader && HeaderComponent && <HeaderComponent />}
 
-          <Route path="/Editseason" element={<Editseason/>}>
-</Route>
-          <Route path="/Editseason/:id" element={<Editseason/>}>
+			<Routes>
+				<Route path="/Login" element={<Login />} />
+				<Route path="/" element={HomeComponent && <HomeComponent />}></Route>
+				<Route
+					path="/About"
+					element={AboutComponent && <AboutComponent />}></Route>
+				<Route path="/Leagues" element={<Leagues />}></Route>
+				<Route
+					path="/Cafe"
+					element={CafeComponent && <CafeComponent />}></Route>
+				<Route
+					path="/Definition"
+					element={DefinitionComponent && <DefinitionComponent />}></Route>
+				<Route
+					path="/Contact"
+					element={ContactComponent && <ContactComponent />}></Route>
+				<Route path="/Signup" element={<Signup />}></Route>
+				<Route path="/Forgot" element={<Forgot />}></Route>
+				<Route path="/blog" element={<Blog />}></Route>
+				<Route path="/Chart" element={<Chart />}></Route>
+				<Route path="/PremierLeague" element={<PremierLeague />}></Route>
+				<Route path="/Laliga" element={<Laliga />}></Route>
+				<Route path="/SerieA" element={<SerieA />}></Route>
+				<Route path="/Bundesliga" element={<Bundesliga />}></Route>
+				<Route path="/Ligue1" element={<Ligue1 />}></Route>
+				<Route
+					path="/NetherlandEredivisie"
+					element={<NetherlandEredivisie />}></Route>
+				<Route path="/LigaPortugal" element={<LigaPortugal />}></Route>
+				<Route path="/SaudiPro" element={<SaudiPro />}></Route>
+				<Route path="/EgyptPL" element={<EgyptPL />}></Route>
+				<Route path="/BotolaPro" element={<BotolaPro />}></Route>
+				<Route path="/BrazilSerieA" element={<BrazilSerieA />}></Route>
+				<Route path="/Dashboard" element={<Dashboard />}></Route>
+				<Route path="/Season" element={<Season />}></Route>
+				<Route path="/Menubar" element={<Menubar />}></Route>
+				<Route path="/Addseason" element={<Addseason />}></Route>
 
-            {" "}
-          </Route>
+				<Route path="/Editseason" element={<Editseason />}></Route>
+				<Route path="/Editseason/:id" element={<Editseason />}></Route>
+				<Route path="/Leagues" element={<Leagues />}></Route>
+				<Route path="/Addleagues" element={<Addleagues />}></Route>
 
-          <Route path="/Bulk-Leagues" element={<LeaguesBluk/>}>
-            {" "}
-          </Route>
+				<Route path="/Editleagues" element={<Editleagues />}></Route>
+				<Route path="/Editleagues/:id" element={<Editleagues />}></Route>
+				<Route path="/Edithome" element={<Edithome />}></Route>
+				<Route path="/Editabout" element={<Editabout />}></Route>
+				<Route path="/Privacypolicy" element={<Privacypolicy />}></Route>
+				<Route
+					path="/Editprivacypolicy"
+					element={<Editprivacypolicy />}></Route>
+				<Route path="/Editdefinition" element={<Editdefinition />}></Route>
+				<Route path="/Editcontact" element={<Editcontact />}></Route>
+				<Route path="/Addcafe" element={<Addcafe />}></Route>
 
-          <Route path="/Leagues" element={<Leagues/>}>
-            {" "}
-          </Route>
-          <Route path="/Addleagues" element={<Addleagues/>}>
-            {" "}
-          </Route>
-
-          <Route path="/Editleagues" element={<Editleagues/>}>
-</Route>
-          <Route path="/Editleagues/:id" element={<Editleagues/>}>
-
-            {" "}
-          </Route>
-          <Route path="/Edithome" element={<Edithome/>}>
-            {" "}
-          </Route>
-          <Route path="/Editabout" element={<Editabout/>}>
-            {" "}
-          </Route>
-          <Route path="/Privacypolicy" element={<Privacypolicy/>}>
-            {" "}
-          </Route>
-          <Route path="/Editprivacypolicy" element={<Editprivacypolicy/>}>
-            {" "}
-          </Route>
-          <Route path="/Editdefinition" element={<Editdefinition/>}>
-            {" "}
-          </Route>
-          <Route path="/Editcontact" element={<Editcontact/>}>
-            {" "}
-          </Route>
-          <Route path="/Addcafe" element={<Addcafe/>}>
-            {" "}
-          </Route>
-
-          <Route path="/Cafeview" element={<Cafeview/>}>
-            {" "}
-          </Route>
-          <Route path="/Dataapi" element={<Dataapi/>}>
-            {" "}
-          </Route>
-          <Route path="/Premierchart" element={<Premierchart/>}>
-            {" "}
-          </Route>
-
-
-        </Routes>
-      <Footer />
-      {/* <Footerar/> */}
-    </div>
-  );
+				<Route path="/Cafeview" element={<Cafeview />}></Route>
+				<Route path="/Dataapi" element={<Dataapi />}></Route>
+				<Route path="/Premierchart" element={<Premierchart />}></Route>
+				<Route path="/Teamdetailsl" element={<Teamdetailsl />}></Route>
+				<Route path="/Login" element={<Login />}></Route>
+				<Route path="/Teamcomparison" element={<Teamcomparison />}></Route>
+			</Routes>
+			{shouldDisplayHeader && FooterComponent && <FooterComponent />}
+		</div>
+	);
 }
-
 
 export default App;

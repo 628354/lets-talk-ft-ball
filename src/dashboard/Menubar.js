@@ -91,19 +91,19 @@ export default function Menubar() {
                         </Link>
                       </li>
                       <li className="w-100">
-                        <Link to="#" className="nav-link px-0">
+                        <Link to="/Leagues" className="nav-link px-0">
                           {" "}
                           <span className="d-none d-sm-inline">Leagues</span>
                         </Link>
                       </li>
-                      <li>
+                      {/* <li>
                         <Link to="" className="nav-link px-0">
                           {" "}
                           <span className="d-none d-sm-inline">Cafe</span>
                         </Link>
-                      </li>
+                      </li> */}
                       <li>
-                        <Link to="#" className="nav-link px-0">
+                        <Link to="/Editdefinition" className="nav-link px-0">
                           {" "}
                           <span className="d-none d-sm-inline">
                             Definition{" "}
@@ -111,7 +111,7 @@ export default function Menubar() {
                         </Link>
                       </li>
                       <li>
-                        <Link to="#" className="nav-link px-0">
+                        <Link to="/Editcontact" className="nav-link px-0">
                           {" "}
                           <span className="d-none d-sm-inline">
                             Contact Us{" "}
@@ -130,6 +130,34 @@ export default function Menubar() {
                   </li>
                   <li>
                     <Link
+                      to="#submenu33"
+                      data-bs-toggle="collapse"
+                      className="nav-link px-0 align-middle"
+                    >
+                      <span className="ms-1 d-none d-sm-inline"> Cafe</span>{" "}
+                      <i class="ri-arrow-down-s-line"></i>{" "}
+                    </Link>
+                    <ul
+                      className="collapse nav flex-column ms-5"
+                      id="submenu33"
+                      data-bs-parent="#menu"
+                    >
+                      <li className="w-100">
+                        <Link to="/Addcafe" className="nav-link px-0">
+                          {" "}
+                          <span className="d-none d-sm-inline">Add Cafe</span>
+                        </Link>
+                      </li>
+                      <li className="w-100">
+                        <Link to="/Cafeview" className="nav-link px-0">
+                          {" "}
+                          <span className="d-none d-sm-inline"> Cafe View</span>
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <Link
                       to="#submenu3"
                       data-bs-toggle="collapse"
                       className="nav-link px-0 align-middle"
@@ -137,6 +165,7 @@ export default function Menubar() {
                       <span className="ms-1 d-none d-sm-inline"> Catalog</span>{" "}
                       <i class="ri-arrow-down-s-line"></i>{" "}
                     </Link>
+                   
                     <ul
                       className="collapse nav flex-column ms-5"
                       id="submenu3"

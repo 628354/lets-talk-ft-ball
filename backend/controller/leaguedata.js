@@ -23,11 +23,9 @@ exports.importleaguedata = async (req, res) => {
         }
         console.log(army);
 
-        // Check if the data already exists in the database
         leaguedatamodel.find({ league: req.body.league, games: { $in: army.map(item => item.games) } })
           .then((existingData) => {
             if (existingData.length === 0) {
-              // Data doesn't exist, insert it into the database
               leaguedatamodel.insertMany(army)
                 .then((data) => {
                   res.status(200).send({
@@ -42,7 +40,6 @@ exports.importleaguedata = async (req, res) => {
                   });
                 });
             } else {
-              // Data already exists
               res.status(200).send({
                 message: "Data already exists in the database",
                 data: existingData

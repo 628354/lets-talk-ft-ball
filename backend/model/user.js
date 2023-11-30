@@ -1,27 +1,25 @@
-const mongoose = require("mongoose")
-const validator = require('validator');
-
-
-const userSchema = mongoose.Schema({
-
-    firstName: { type: String, require: true },
-    lastName: { type: String, require: true },
-
-    email: {
-        type: String,
-        validate: {
-            validator: validator.isEmail,
-            message: '{VALUE} is not a valid email',
-            isAsync: false
-        }
+const mongoose = require("mongoose");
+const userSchema = new mongoose.Schema(
+  {
+    role: {
+      type: String,
+      enum: ["0", "1", "2", "3"], // 0 = admin, 1 = user , 2 = author, 3 = editor
+      default: "",
     },
-    password: { type: String, require: true },
-
+    firstName: { type: String, default: "" },
+    lastName: { type: String, default: "" },
+    email: { type: String, default: "" },
+    password: { type: String, default: "" },
+    phone: { type: String, default: "" },
+    image: { type: String, default: "" },
+    country: { type: String, default: "" },
+    countryCode: { type: String, default: "" },
+    location: { type: String, default: "" },
+    latitude: { type: String, default: "" },
+    longitude: { type: String, default: "" },
     status: { type: String, enum: ["active", "inactive"], default: "active" },
-
-},
-    { timestamps: true }
-)
-
-module.exports = mongoose.model("user", userSchema)
-
+  },
+  { timestamps: true }
+);
+const user = mongoose.model("user", userSchema);
+module.exports = user;
