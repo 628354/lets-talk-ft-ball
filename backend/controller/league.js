@@ -40,16 +40,19 @@ exports.getleagues = async (req, res) => {
         const getleagues = await leaguemodel.find()
         res.send({ status: true, message: "Successfully get leaguedetails", leaguedetails: getleagues })
     } catch (error) {
-        res.send({ status: false, message: "Something went wrong !!" })
+        console.log(error.message)
     }
 }
 
 exports.getById = async (req,res)=>{
     try {
-        const getById = await leaguemodel.findById(req.params.leagueId)
-        res.send({status : true , message : "Successfully get league data" , leaguedetails : getById})
+        const getById = await leaguemodel.findById({_id:req.params.id})
+        if(getById) {
+            res.send({status : true , message : "Successfully get league data" , leaguedetails : getById})
+        } else {
+            res.send({status:false, messages:'League Id not found'})
+        }
     } catch (error) {
-        res.send({status : false , message : "Something went wrong !!"})
     }
 }
 
@@ -93,7 +96,6 @@ exports.delete = async (req, res) => {
     try {
         const remove = await leaguemodel.findByIdAndDelete(req.params.leagueId)
         res.send({ status: true, message: "Successfully remove leaguedata", removedetails: remove })
-
     } catch (error) {
         res.send({ status: false, message: "Something went wrong !!" })
     }

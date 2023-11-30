@@ -1,14 +1,8 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-const contactusController = require("../controller/contactus")
+const contactusController = require("../controller/contactus");
 
+router.post("/sendcontactusToadmin", contactusController.sendContactus);
 
-router.post("/sendcontactusToadmin" , contactusController.sendContactus)
-
-
-
-
-
-
-module.exports = router
+module.exports = router;

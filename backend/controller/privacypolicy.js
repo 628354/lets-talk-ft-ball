@@ -51,3 +51,23 @@ exports.updatepolicy = async (req, res) => {
         console.log(error.message)
     }
 }
+
+exports.deletePrivacy = async(req, res) => {
+    try {
+        const privacy_policy = await policymodel.findByIdAndDelete({_id:req.params.id})
+        if(privacy_policy) {
+            res.send(200).send({
+                body:privacy_policy,
+                message:'Privacy Policy Deleted Successfully',
+                success:true
+            })
+        } else {
+            res.send(300).send({
+                message:'Privacy Policy Id Not Found',
+                success:false
+            })
+        }
+    } catch (error) {
+        console.log(error.message)
+    }
+}
