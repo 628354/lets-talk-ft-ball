@@ -4,6 +4,8 @@ const teammodel = require("../model/team")
 exports.addTeam = async (req, res) => {
     try {
 
+
+        
         const { teamName, short_name, graph_Title1, graph_Title2, graph_Title3, graph_Title4, description, meta_Tag_Description, meta_Tag_Keywords, team_Tags, leagues, status } = req.body
 
         const protocol = req.protocol

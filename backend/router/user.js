@@ -13,6 +13,7 @@ router.post(
   authentication,
   usercontroller.forgetpassword
 );
+
 router.get("/getAllUser", authentication, usercontroller.getAllUser);
 router.put('/updateUser/:id', usercontroller.updateUser )
 router.delete('/deleteUser/:id', usercontroller.deleteUser)
