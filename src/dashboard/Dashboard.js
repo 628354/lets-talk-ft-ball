@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
+import LeaguesBluk from '../page-dashboard/LeaguesBluk';
 
 
 export default function Dashboard() {
@@ -96,7 +97,7 @@ export default function Dashboard() {
             </div>
         </div>
         <div className="col py-3">
-            Content area...
+        
         </div>
     </div>
 </div>

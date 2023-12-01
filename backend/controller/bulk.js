@@ -3,18 +3,16 @@ const XLSX = require('xlsx');
 const upload = multer({ dest: 'uploads/xlsx/bulk' });
 const leaguedata = require('../model/leaguedata');
 const teadData = require('../model/teamdata');
-// const helper = require('../Helpers/Helpers')
+const path = require('path')
+const helper = require('../Helpers/Helpers')
 const responseHelper = require('../Helpers/Response')
 
 exports.leagedBlukImport = async (req, res) => {
+  console.log(req, "DFVDFVDFVDFV");
 
   const filePath = req.file.path;
-
-  // Read the uploaded file
   const workbook = XLSX.readFile(filePath);
-
   const sheetNames = workbook.SheetNames;
-
   const allData = [];
 
   sheetNames.forEach(async sheetName => {
@@ -57,7 +55,6 @@ exports.teamBulkImport = async (req, res) => {
 
   const filePath = req.file.path;
 
-  // Read the uploaded file
   const workbook = XLSX.readFile(filePath);
 
   const sheetNames = workbook.SheetNames;

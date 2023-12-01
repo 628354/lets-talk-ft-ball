@@ -1,9 +1,11 @@
 const leaguemodel = require("../model/league")
 const path = require("path");
+const mongoose = require('mongoose');
+
 
 exports.addleague = async (req, res) => {
     try {
-        
+
         var image = req.files.image.name;
         var uploadDir = path.join(__dirname, "../uploads", image)
         if (req.files.image) {
@@ -11,7 +13,7 @@ exports.addleague = async (req, res) => {
                 if (err) return res.status(500).send(err)
             })
         }
-        const { leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
+        const { teamId,sessionId, leaguedataId, leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
             sort_Order, status } = req.body
 
         const find = await leaguemodel.findOne({ leaguename: leaguename })
@@ -21,8 +23,11 @@ exports.addleague = async (req, res) => {
         }
 
         const addleage = await leaguemodel.create({
+            leaguedataId: leaguedataId,
+            teamId: teamId,
+            sessionId:sessionId,
             leaguename: leaguename,
-            image:image,
+            image: image,
             description: description,
             meta_Tag_Title: meta_Tag_Title,
             meta_Tag_Description: meta_Tag_Description,
@@ -33,15 +38,15 @@ exports.addleague = async (req, res) => {
         })
         const result = await addleage.save()
         res.status(200).send({
-            body:result,
-            message:'League Add Successfully',
-            success:true
+            body: result,
+            message: 'League Add Successfully',
+            success: true
         })
     } catch (error) {
         res.status(500).send({
-            message:'Enternal Server Error',
-            success:false,
-            error:error.message
+            message: 'Enternal Server Error',
+            success: false,
+            error: error.message
         })
     }
 }
@@ -58,17 +63,34 @@ exports.getleagues = async (req, res) => {
     }
 }
 
-exports.getById = async (req,res)=>{
+exports.getById = async (req, res) => {
     try {
-        const getById = await leaguemodel.findById({_id:req.params.id})
+        const getById = await leaguemodel.findById({ _id: req.params.id })
+        .populate("leaguedataId")
+        .populate("teamId")
+        .populate('sessionId')
         if(getById) {
-            res.send({status : true , message : "Successfully get league data" , leaguedetails : getById})
+            res.status(200).send({
+                body:getById,
+                message:'Successfully get league data',
+                success:true
+            })
         } else {
-            res.send({status:false, messages:'League Id not found'})
+            res.status(300).send({
+                message:'Leagues Id Not Found',
+                success:false,
+            })
         }
     } catch (error) {
+        res.status(500).send({
+            message:'Enternal Server Error',
+            success:false,
+            error:error.message
+        })
     }
 }
+
+
 
 exports.update = async (req, res) => {
     try {
@@ -95,7 +117,7 @@ exports.update = async (req, res) => {
         const update = await leaguemodel.findByIdAndUpdate(req.params.leagueId, {
             leaguename: leaguename,
             // image: req.file ? url + "/uploads/" + req.file.filename : findleague.image ,
-            image:image,
+            image: image,
             description: description,
             meta_Tag_Title: meta_Tag_Title,
             meta_Tag_Description: meta_Tag_Description,

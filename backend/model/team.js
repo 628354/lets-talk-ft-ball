@@ -4,7 +4,7 @@ const teamSchema = mongoose.Schema(
   {
     teamName: { type: String, require: true },
 
-    short_name: { type: String, require: true },
+    games: { type: String, require: true },
 
     image: { type: String, require: true },
 

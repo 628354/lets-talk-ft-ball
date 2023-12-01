@@ -1,15 +1,15 @@
 const express =  require('express');
-const Route = express.Router();
+const router = express.Router();
 const GraphController = require('../controller/GraphController');
 
 
-Route.get('/scrolldown/find/:leagueId',GraphController.ScrollDown)
-Route.get('/teamname/find',GraphController.findByteamName)
-Route.get('/goals-scored/find',GraphController.Goals_Scored)
-Route.get('/goals-con/find',GraphController.Goals_Con)
-Route.get('/gs-gc/find',GraphController.gs_gc)
+router.get('/scrolldown/find/:leagueId',GraphController.ScrollDown)
+router.get('/teamname/find',GraphController.findByteamName)
+router.get('/goals-scored/find',GraphController.Goals_Scored)
+router.get('/goals-con/find',GraphController.Goals_Con)
+router.get('/gs-gc/find',GraphController.gs_gc)
 
 
 
 
-module.exports = Route;
+module.exports = router;

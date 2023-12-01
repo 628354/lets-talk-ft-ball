@@ -3,6 +3,7 @@ const permissionSchema = new mongoose.Schema({
   userId:{type:mongoose.Schema.Types.ObjectId, ref:'user'},
   role: {
     type: String,
+    enum:["author","editor"],
     default: "author",
     lowercase: true,
     trim: true,
