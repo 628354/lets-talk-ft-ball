@@ -18,7 +18,7 @@ exports.addaboutus = async (req, res) => {
             visionTitle: visionTitle,
 
         })
-        res.send({ status: true, message: "Successfully add aboutus content", aboutusdetails: addaboutus })
+        res.send({ status: true, message: "Successfully add aboutus content", body: addaboutus })
 
     } catch (error) {
         res.send({ status: false, message: "Something went wrong !!" })
@@ -41,7 +41,6 @@ exports.getaboutus = async (req, res) => {
 
 exports.updateAboutus = async (req, res) => {
     try {
-        checkPermission('author')(req, res, async () => {
             const { aboutTitle, aboutText, visionTitle } = req.body;
             const files = req.files;
             const protocol = req.protocol;
@@ -59,11 +58,10 @@ exports.updateAboutus = async (req, res) => {
             }, { new: true });
 
             await updateaboutus.save();
-            res.send({ status: true, message: "Successfully update aboutus content", aboutusdetails: updateaboutus });
-        }
-        ); 
+       
     } catch (error) {
         console.log(error);
         res.send({ status: false, message: "Something went wrong !!" });
     }
 };
+

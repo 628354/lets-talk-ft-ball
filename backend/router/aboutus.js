@@ -30,7 +30,7 @@ router.post(
 router.get("/getAboutus", aboutController.getaboutus);
 
 router.post(
-  "/updateAboutus/:Id",checkPermission('updateAboutus'),
+  "/updateAboutus/:Id",
   upload.fields([
     { name: "bannerImage" },
     { name: "aboutSectionImage" },

@@ -16,6 +16,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
 router.post("/addteam", upload.single("image"), teamController.addTeam);
 router.get("/getTeams", teamController.getTeams);
 router.get("/teamdetails/:id", teamController.teamdetails);

@@ -83,6 +83,7 @@ function App() {
 		"/Editdefinition",
 		"/Addcafe",
 		"/Cafeview",
+		"/LeaguesBluk",
 	];
 	// Get the current route
 	const currentRoute = location.pathname;
@@ -192,6 +193,9 @@ function App() {
 				<Route path="/Teamdetailsl" element={<Teamdetailsl />}></Route>
 				<Route path="/Login" element={<Login />}></Route>
 				<Route path="/Teamcomparison" element={<Teamcomparison />}></Route>
+				<Route path="/LeaguesBluk" element={<LeaguesBluk />}></Route>
+
+			
 			</Routes>
 			{shouldDisplayHeader && FooterComponent && <FooterComponent />}
 		</div>

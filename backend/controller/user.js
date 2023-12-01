@@ -35,7 +35,7 @@ exports.register = async (req, res) => {
       password: hashPassword,
       image:image
     });
-
+    
     const result = await addUser.save();
     return res.status(200).send({
       body: result,
