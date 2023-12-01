@@ -59,6 +59,9 @@ import Dataapi from "./Dashboard-edit-page/Dataapi";
 import Premierchart from "./Leagues-components/Premierchart";
 import Teamdetailsl from "./Chart-filter-page/Teamdetailsl";
 import Teamcomparison from "./Chart-filter-page/Teamcomparison";
+import ImportBulk from "./page-dashboard/LeaguesBluk";
+import TeamImportBulk from "./page-dashboard/TeamBluk";
+
 function App() {
 	// const navigate = useNavigate();
 	const location = useLocation();
@@ -173,6 +176,9 @@ function App() {
 				<Route path="/Editseason/:id" element={<Editseason />}></Route>
 				<Route path="/Leagues" element={<Leagues />}></Route>
 				<Route path="/Addleagues" element={<Addleagues />}></Route>
+
+				<Route path="/Bulk-Leagues" element={<ImportBulk />} > </Route>
+				<Route path="/Bulk-teams" element={<TeamImportBulk />} > </Route>
 
 				<Route path="/Editleagues" element={<Editleagues />}></Route>
 				<Route path="/Editleagues/:id" element={<Editleagues />}></Route>

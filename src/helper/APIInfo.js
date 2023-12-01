@@ -13,6 +13,10 @@ export const LEAGUES_BULK_IMPORT = {
   upload: `${SERVER_LINK}leageBluk`,
 };
 
+export const TEAM_BULK_IMPORT = {
+  upload: `${SERVER_LINK}teadBulk`,
+};
+
 export const SESSION = {
   year: `${SERVER_LINK}getyears`,
 };
