@@ -5,12 +5,16 @@ const fileupload = require("express-fileupload");
 
 const dotenv = require("dotenv")
 dotenv.config()
+const PORT = process.env.PORT
+const bodyParser = require('body-parser');
 const port = process.env.PORT  || 5000
-
 const cors = require("cors")
 app.use(cors())
 
-app.use(express.json())
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.json({limit: '50mb', extended: true}));
 app.use(fileupload());
 
 const path = require('path');
@@ -26,6 +30,9 @@ const privacy_policy = require("./router/privacyPolicy")
 const contactus = require("./router/contactus")
 const definition = require("./router/definition")
 const cafe = require("./router/cafe")
+const imagesRoute = require('./router/images');
+const blukImportRouter = require('./router/bluk')
+const TableRoute = require('./router/Table_graph');
 const permission = require('./router/permission')
 const routes = require('./router/routes')
 
@@ -55,8 +62,12 @@ app.use("/" , privacy_policy)
 app.use("/" , contactus)
 app.use("/" , definition)
 app.use("/" , cafe)
+app.use("/" , imagesRoute)
+app.use("/", blukImportRouter);
+app.use('/api/v1/graph',TableRoute);
 app.use('/', permission)
 app.use('/', routes)
+
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 

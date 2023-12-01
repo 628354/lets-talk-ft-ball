@@ -11,6 +11,7 @@ exports.register = async (req, res) => {
             res.send({ status: true, message: "admin allready exist" })
         }
         const salt = await bcrypt.genSalt(10)
+        console.log(password, salt);
         const hash = await bcrypt.hash(password, salt)
         const addadmin = await adminmodel.create({
             name : name ,
