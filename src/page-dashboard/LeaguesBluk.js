@@ -15,6 +15,7 @@ export default function LeaguesBluk() {
 	const [getSession, setSession] = useState();
 	const [getleagues, setleagues] = useState();
 
+
 	const SessionCall = () => {
 		apiCall(SESSION.year, REQUEST_TYPE.GET).then((results) => {
 			setSession(results.response.data.seasonyears)
@@ -43,6 +44,7 @@ export default function LeaguesBluk() {
 	};
 
 	const handleChangeFile = (e) => {
+		console.log(e.target.files[0] );
 		setFormData(preState => ({ ...preState, [e.target.name]: e.target.files[0] }));
 	};
 
@@ -50,8 +52,8 @@ export default function LeaguesBluk() {
 	const handleSave = async (event) => {
 		event.preventDefault();
 		const formDatas = new FormData();
-
-
+		// console.log(files);
+		// return false;
 		if (formData?.season === '') {
 			setErrorMessage('Please fill in all required fields.');
 			clearMessages();
@@ -60,9 +62,18 @@ export default function LeaguesBluk() {
 			clearMessages();
 		} else {
 			try {
-				formDatas.append('excelFile', formData.file);
+				formDatas.append('excelFile', formData.excelFile);
+				formDatas.append('teamexcelFile', formData.teamexcelFile);
 				formDatas.append('season', formData.season);
 				formDatas.append('league', formData.league);
+				// console.log(JSON.stringify(formData));
+				// console.log(JSON.stringify(formData));
+				// for (let i = 0; i < files.length; i++) {
+				// 	formData.append('files', files[i]);
+				//   }
+				//return false;
+				// console.log(files);
+				// return false
 				apiCallFile(LEAGUES_BULK_IMPORT.upload, REQUEST_TYPE.POST, formDatas).then((results) => {
 					setSuccessMessage("Successfully import bluk League data");
 					clearMessages();
@@ -183,10 +194,19 @@ export default function LeaguesBluk() {
 												</Form.Group>
 												<Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
 													<Form.Label column sm="2">
-														File Name
+														League File Name
 													</Form.Label>
 													<Col sm="10">
-														<Form.Control type="file" name="file" placeholder="Season Title"
+														<Form.Control type="file" name="excelFile" placeholder="Season Title"
+															onChange={handleChangeFile} />
+													</Col>
+												</Form.Group>
+												<Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+													<Form.Label column sm="2">
+													Team File Name
+													</Form.Label>
+													<Col sm="10">
+														<Form.Control type="file" name="teamexcelFile" placeholder="Season Title"
 															onChange={handleChangeFile} />
 													</Col>
 												</Form.Group>
