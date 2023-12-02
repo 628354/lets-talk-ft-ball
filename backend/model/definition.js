@@ -1,15 +1,18 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
+const definitionSchema = mongoose.Schema(
+  {
+    image: { type: String, required: true, default:"" },
+    definition: [
+      {
+        type: { type: String, required: true, default:"" },
+        content: { type: String, required: true, default:"" },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const definitionSchema = mongoose.Schema({
-    image: { type: String, require: true },
-    definition: [{
-        type: { type: String, require: true },
-        content: { type: String, require: true }
-    }]
-}, {
-    timestamps: true
-})
-
-
-module.exports = mongoose.model("definition", definitionSchema)
+module.exports = mongoose.model("definition", definitionSchema);

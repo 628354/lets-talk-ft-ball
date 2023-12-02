@@ -9,9 +9,9 @@ exports.register = async (req, res) => {
         const findadmin = await adminmodel.findOne({ email: email })
         if (findadmin) {
             res.send({ status: true, message: "admin allready exist" })
-            return
         }
         const salt = await bcrypt.genSalt(10)
+        console.log(password, salt);
         const hash = await bcrypt.hash(password, salt)
         const addadmin = await adminmodel.create({
             name : name ,
@@ -23,6 +23,7 @@ exports.register = async (req, res) => {
         console.log(error.message)
     }
 }
+
 
 //user login ..........................................
 

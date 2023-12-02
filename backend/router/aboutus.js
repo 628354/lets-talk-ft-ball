@@ -29,14 +29,9 @@ router.post(
 
 router.get("/getAboutus", aboutController.getaboutus);
 
-router.post(
-  "/updateAboutus/:Id",checkPermission('updateAboutus'),
-  upload.fields([
-    { name: "bannerImage" },
-    { name: "aboutSectionImage" },
-    { name: "visionSectionImage" },
-  ]),
-  authentication, aboutController.updateAboutus
-);
+router.post("/updateAboutus/:Id",  upload.fields([{ name: 'bannerImage' }, { name: 'aboutSectionImage' }, { name: 'visionSectionImage' }]), aboutController.updateAboutus)
+
+
+
 
 module.exports = router;
