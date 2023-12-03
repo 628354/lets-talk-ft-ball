@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
-const fileupload = require("express-fileupload");
-var morgan = require('morgan')
+// const fileupload = require("express-fileupload");
+// var morgan = require('morgan')
 
 
 const dotenv = require("dotenv")
@@ -66,7 +66,7 @@ app.use("/" , definition)
 app.use("/" , cafe)
 app.use("/" , imagesRoute)
 app.use("/", blukImportRouter);
-app.use('/api/v1/graph',TableRoute);
+app.use('/',TableRoute);
 app.use('/', permission)
 app.use('/', routes)
 app.use('/', teamCatlog)

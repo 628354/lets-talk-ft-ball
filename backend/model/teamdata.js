@@ -6,9 +6,12 @@ const teamSchema = mongoose.Schema({
 
     leagueid: { type: String, require: true },
 
-	teamname : { type: String, require: true },
+    teamname: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "teamCatlog"
+      },
 
-	getData : [{
+	en : [{
 
     NO_OF_GAMES: { type: String, require: true },
 
@@ -34,6 +37,32 @@ const teamSchema = mongoose.Schema({
 
     Poverty_Line: { type: String, require: true },
 	}],
+    ar : [{
+
+        NO_OF_GAMES: { type: String, require: true },
+    
+        POINTS: { type: String, require: true },
+    
+        POINTS_ACCUMULATED: { type: String, require: true },
+    
+        POINTS_GAINING_RATE: { type: String, require: true },
+    
+        GS_inG: { type: String, require: true },
+    
+        GS_cum: { type: String, require: true },
+    
+        GS_rate: { type: String, require: true },
+    
+        GC_inG: { type: String, require: true },
+    
+        GC_cum: { type: String, require: true },
+    
+        GC_rate: { type: String, require: true },
+    
+        GS_GC: { type: String, require: true },
+    
+        Poverty_Line: { type: String, require: true },
+        }],
 
     status: { type: String, enum: ["active", "inactive"], default: "active" }
 },

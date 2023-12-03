@@ -61,6 +61,7 @@ import Teamdetailsl from "./Chart-filter-page/Teamdetailsl";
 import Teamcomparison from "./Chart-filter-page/Teamcomparison";
 import ImportBulk from "./page-dashboard/LeaguesBluk";
 import TeamImportBulk from "./page-dashboard/TeamBluk";
+import Catlogs from "./page-dashboard/catLogs"
 
 function App() {
 	// const navigate = useNavigate();
@@ -180,6 +181,7 @@ function App() {
 
 				<Route path="/Bulk-Leagues" element={<ImportBulk />} > </Route>
 				<Route path="/Bulk-teams" element={<TeamImportBulk />} > </Route>
+				<Route path="/cat-logs" element={<Catlogs />} > </Route>
 
 				<Route path="/Editleagues" element={<Editleagues />}></Route>
 				<Route path="/Editleagues/:id" element={<Editleagues />}></Route>
