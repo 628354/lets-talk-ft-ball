@@ -8,7 +8,6 @@ const ScrollDown = async (Request, Response) => {
 	try {
 		const { lung, leagueId } = Request.params;
 		const { season } = Request.body;
-		// console.log(leagueId, season);
 		const data = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` },{[lung]:1}).populate("en.teamname",{[lung]:1});
 		responseHelper[200].data = data;
 		Response.send(responseHelper[200]);

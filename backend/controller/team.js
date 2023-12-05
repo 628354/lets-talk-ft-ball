@@ -1,13 +1,12 @@
 
 const teammodel = require("../model/team")
 
-exports.addTeam = async (req, res) => {
+exports.createTeam = async (req, res) => {
     try {
         const { teamName, short_name, graph_Title1, graph_Title2, graph_Title3, graph_Title4, description, meta_Tag_Description, meta_Tag_Keywords, team_Tags, leagues, status } = req.body
         const protocol = req.protocol
         const host = req.host
         const url = `${protocol}//${host}`
-
         const addTeam = await teammodel.create({
             teamName: teamName,
             short_name: short_name,
@@ -29,14 +28,11 @@ exports.addTeam = async (req, res) => {
     }
 }
 
-//get teams..........................................................
 
 exports.getTeams = async (req, res) => {
     try {
         const getTeams = await teammodel.find()
-
         res.send({ status: true, message: "Successfully get teams", teamdetails: getTeams })
-
     } catch (error) {
         res.send({ status: true, message: "Something went wrong !!" })
     }
@@ -73,9 +69,7 @@ exports.updateteams = async (req, res) => {
         const protocol = req.protocol
         const host = req.host
         const url = `${protocol}//${host}`
-
         const updateteam = await teammodel.findByIdAndUpdate(req.params.teamId, {
-
             teamName: teamName,
             short_name: short_name,
             image: req.file ? url + "/uploads/" + req.file.filename : findteam.image,
@@ -103,9 +97,12 @@ exports.updateteams = async (req, res) => {
 
 exports.removeteam = async (req, res) => {
     try {
-        const removeteam = await teammodel.findByIdAndDelete(req.params.teamId)
-
-        res.send({ status: true, message: "Successfully remove teams", removedetails: removeteam })
+        const removeteam = await teammodel.findByIdAndDelete({_id:req.params.id})
+        if(removeteam) {
+            res.send({ status: true, message: "Successfully remove teams", body: removeteam })
+        } else {
+            res.send({status:false, message:'TeamsId not found'})
+        }
 
     } catch (error) {
         res.send({ status: false, message: "Something went wrong !!" })

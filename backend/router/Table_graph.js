@@ -1,6 +1,7 @@
 const express =  require('express');
 const router = express.Router();
 const GraphController = require('../controller/GraphController');
+const authentication = require('../middleware/auth')
 
 
 router.get('/:lung/scrolldown/find/:leagueId',GraphController.ScrollDown)
