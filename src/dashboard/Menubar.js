@@ -248,6 +248,29 @@ export default function Menubar() {
                       </li>
                     </ul>
                   </li>
+                  <li>
+                    <Link
+                      to="#teams1"
+                      data-bs-toggle="collapse"
+                      className="nav-link px-0 align-middle"
+                    >
+                      <span className="ms-1 d-none d-sm-inline"> Teams</span>{" "}
+                      <i class="ri-arrow-down-s-line"></i>{" "}
+                    </Link>
+                    
+                    <ul
+                      className="collapse nav flex-column ms-5"
+                      id="teams1"
+                      data-bs-parent="#menu"
+                    >
+                      <li className="w-100">
+                        <Link to="/Teams" className="nav-link px-0">
+                          {" "}
+                          <span className="d-none d-sm-inline">TeamList</span>
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
                 <hr />
               </div>

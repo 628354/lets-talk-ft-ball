@@ -1,8 +1,22 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
-
+import { apiCall, apiCallFile } from '../helper/RequestHandler';
+import { LEAGUES, LEAGUES_BULK_IMPORT, REQUEST_TYPE, SESSION } from '../helper/APIInfo';
 export default function PremierLeaguetable() {
+
+  const getData=()=>{
+    axios.get('http://localhost:5000/api/v1/graph/scrolldown/find/6569bad8990ed9605cd647ba').then((result)=>{
+      console.log(result.data)
+    })
+  }
+
+  useEffect(()=>{
+    getData()
+
+  },[])
+
   return (
     <div>
         <div className='en-table-deta ar-table-deta'>

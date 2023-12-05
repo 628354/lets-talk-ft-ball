@@ -6,16 +6,13 @@ const mongoose = require('mongoose');
 exports.addleague = async (req, res) => {
     try {
 
-        var image = req.files.image.name;
-        var uploadDir = path.join(__dirname, "../uploads", image)
-        if (req.files.image) {
-            req.files.image.mv(uploadDir, (err) => {
-                if (err) return res.status(500).send(err)
-            })
-        }
-        const { teamId,sessionId, leaguedataId, leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
+        
+        const { teamId, sessionId, leaguedataId, leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
             sort_Order, status } = req.body
-
+            const protocol = req.protocol
+            const host = req.host
+            const url = `${protocol}//${host}`
+            
         const find = await leaguemodel.findOne({ leaguename: leaguename })
         if (find) {
             res.send({ status: true, message: "league allready present" })
@@ -25,9 +22,9 @@ exports.addleague = async (req, res) => {
         const addleage = await leaguemodel.create({
             leaguedataId: leaguedataId,
             teamId: teamId,
-            sessionId:sessionId,
+            sessionId: sessionId,
             leaguename: leaguename,
-            image: image,
+            image: req.file ? url + "/uploads/" + req.file.filename : " ",
             description: description,
             meta_Tag_Title: meta_Tag_Title,
             meta_Tag_Description: meta_Tag_Description,
@@ -57,47 +54,46 @@ exports.addleague = async (req, res) => {
 exports.getleagues = async (req, res) => {
     try {
         const getleagues = await leaguemodel.find().populate("leaguedataId")
-        .populate("teamId")
-        .populate('sessionId')
-        .sort({createdAt:-1})
+            .populate("teamId")
+            .populate('sessionId')
+            .sort({ createdAt: -1 })
         res.send({ status: true, message: "Successfully get leaguedetails", leaguedetails: getleagues })
     } catch (error) {
         console.log(error.message)
     }
 }
 
-
 exports.getById = async (req, res) => {
     try {
-        const {leagueId } = req.params
+        const { leagueId} = req.params
         const getById = await leaguemodel.aggregate([
             {
-				$match: {
-					leagueid: leagueId,
-				}
-			},
+                $match: {
+                    leagueid: leagueId,
+                }
+            },
             {
                 $lookup: {
-                    from: 'leaguedatas', 
+                    from: 'leaguedatas',
                     localField: 'leaguedataId',
                     foreignField: '_id',
-                    as: 'leaguedata',
+                    as: 'leaguedata_details',
                 },
             },
             {
                 $lookup: {
-                    from: 'teams', 
+                    from: 'teams',
                     localField: 'teamId',
                     foreignField: '_id',
-                    as: 'team',
+                    as: 'teams_details',
                 },
             },
             {
                 $lookup: {
-                    from: 'seasons', 
+                    from: 'seasons',
                     localField: 'sessionId',
                     foreignField: '_id',
-                    as: 'session',
+                    as: 'session_details',
                 },
             },
         ]);

@@ -1,12 +1,13 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLanguage } from "../languages/LanguageContext";
+import axios from "axios";
 export default function Header() {
 	window.addEventListener("scroll", function () {
 		const header = document.querySelector(".topheader");
@@ -32,6 +33,53 @@ export default function Header() {
 	const handleLanguageChange = (newLanguage) => {
 		switchLanguage(newLanguage);
 	};
+
+	//  const apiEndpoint = 'http://localhost:5000/api/v1/graph/teamname/find/';
+	// // const apiEndpoint = 'http://localhost:5000/api/v1/graph/scrolldown/find/';
+	// const queryParams = {
+	// 	leagueId: "6569bad8990ed9605cd647ba",
+	// 	seasonId: "655de01a96b5977b5dcf0e8e",
+		
+	//   };
+	// axios.get(apiEndpoint, { params: queryParams })
+	// .then(response => {
+	//   // Handle the API response here
+	//   console.log('API Response:', response.data);
+	// })
+	// .catch(error => {
+	//   // Handle errors
+	//   console.error('Error making API request:', error.message);
+	// });
+  
+	//const apiEndpoint = 'http://localhost:5000/api/v1/graph/goals-scored/find/';
+	 const apiEndpoint = 'http://localhost:5000/api/v1/graph/scrolldown/find/';
+	const queryParams = {
+		leagueId: "6569bb4feab54a3cf2de7d8d",
+		seasonId: "6543540800a9854ab865c8e2",
+		
+	  };
+	axios.get(apiEndpoint,{ params: queryParams })
+	.then(response => {
+	  // Handle the API response here
+	  console.log('API Response:', response.data);
+	})
+	.catch(error => {
+	  // Handle errors
+	  console.error('Error making API request:', error.message);
+	});
+  
+  
+
+
+	const [getTeamName,setTeamName]=useState([])
+	const getTeams=async()=>{
+		const response = await axios.get(`https://localhost:5000/getleagues`)
+		console.log(response)
+		
+	}
+	useEffect(()=>{
+		 getTeams()
+	},[])
 	return (
 		<div>
 			<div>
