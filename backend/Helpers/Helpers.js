@@ -37,6 +37,7 @@ const generateJWT = (email, firstname, lastname) => {
 
 }
 
+
 module.exports = {
     encrypt,
     decrypt,

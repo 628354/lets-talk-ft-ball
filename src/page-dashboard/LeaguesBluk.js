@@ -19,6 +19,7 @@ export default function LeaguesBluk() {
 	const SessionCall = () => {
 		apiCall(SESSION.year, REQUEST_TYPE.GET).then((results) => {
 			setSession(results.response.data.seasonyears)
+			console.log(results.response.data.seasonyears)
 		})
 	}
 
@@ -77,6 +78,7 @@ export default function LeaguesBluk() {
 				apiCallFile(LEAGUES_BULK_IMPORT.upload, REQUEST_TYPE.POST, formDatas).then((results) => {
 					setSuccessMessage("Successfully import bluk League data");
 					clearMessages();
+					console.log("yes data add")
 				})// Clear messages after 3 seconds
 
 

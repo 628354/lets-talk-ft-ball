@@ -2,27 +2,27 @@ const mongoose = require("mongoose");
 
 const teamSchema = mongoose.Schema(
   {
-    teamName: { type: String, require: true },
+    teamName: { type: String, default: "" },
 
-    games: { type: String, require: true },
+    games: { type: String, default: "" },
 
-    image: { type: String, require: true },
+    image: { type: String, default: "" },
 
-    graph_Title1: { type: String, require: true },
+    graph_Title1: { type: String, default: "" },
 
-    graph_Title2: { type: String, require: true },
+    graph_Title2: { type: String, default: "" },
 
-    graph_Title3: { type: String, require: true },
+    graph_Title3: { type: String, default: "" },
 
-    graph_Title4: { type: String, require: true },
+    graph_Title4: { type: String, default: "" },
 
-    description: { type: String, require: true },
+    description: { type: String, default: "" },
 
-    meta_Tag_Description: { type: String, require: true },
+    meta_Tag_Description: { type: String, default: "" },
 
-    meta_Tag_Keywords: { type: String, require: true },
+    meta_Tag_Keywords: { type: String, default: "" },
 
-    team_Tags: { type: String, require: true },
+    team_Tags: { type: String, default: "" },
 
     leagues: { type: mongoose.Schema.Types.ObjectId, ref: "league" },
 

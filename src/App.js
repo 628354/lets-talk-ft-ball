@@ -61,6 +61,8 @@ import Teamdetailsl from "./Chart-filter-page/Teamdetailsl";
 import Teamcomparison from "./Chart-filter-page/Teamcomparison";
 import ImportBulk from "./page-dashboard/LeaguesBluk";
 import TeamImportBulk from "./page-dashboard/TeamBluk";
+import Catlogs from "./page-dashboard/catLogs"
+import Teams from "./page-dashboard/Teams"
 
 function App() {
 	// const navigate = useNavigate();
@@ -87,6 +89,10 @@ function App() {
 		"/Addcafe",
 		"/Cafeview",
 		"/LeaguesBluk",
+		"/cat-logs",
+		"/Bulk-teams",
+		"/Bulk-Leagues",
+		"/Teams"
 	];
 	// Get the current route
 	const currentRoute = location.pathname;
@@ -180,6 +186,7 @@ function App() {
 
 				<Route path="/Bulk-Leagues" element={<ImportBulk />} > </Route>
 				<Route path="/Bulk-teams" element={<TeamImportBulk />} > </Route>
+				<Route path="/cat-logs" element={<Catlogs />} > </Route>
 
 				<Route path="/Editleagues" element={<Editleagues />}></Route>
 				<Route path="/Editleagues/:id" element={<Editleagues />}></Route>
@@ -200,6 +207,9 @@ function App() {
 				<Route path="/Login" element={<Login />}></Route>
 				<Route path="/Teamcomparison" element={<Teamcomparison />}></Route>
 				<Route path="/LeaguesBluk" element={<LeaguesBluk />}></Route>
+				<Route path="/Teams" element={<Teams />}></Route>
+
+
 
 			
 			</Routes>

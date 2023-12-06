@@ -1,13 +1,13 @@
 import React from "react";
 import "../css/Dashboard.css";
-import { useEffect,useState} from "react";
+import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Login from "../page/Login";
 import axios from 'axios';
 
- ///here we get data and store in variable 
+///here we get data and store in variable 
 //  const chandn = "https://jsonplaceholder.typicode.com/posts";
 
 
@@ -28,7 +28,7 @@ export default function Menubar() {
     setShowDropdown(!showDropdown);
   };
 
- 
+
   return (
     <div>
       <section className="navheader">
@@ -158,6 +158,41 @@ export default function Menubar() {
                   </li>
                   <li>
                     <Link
+                      to="#bulkimp"
+                      data-bs-toggle="collapse"
+                      className="nav-link px-0 align-middle"
+                    >
+                      <span className="ms-1 d-none d-sm-inline"> Bulk Upload</span>{" "}
+                      <i class="ri-arrow-down-s-line"></i>{" "}
+                    </Link>
+                    <ul
+                      className="collapse nav flex-column ms-5"
+                      id="bulkimp"
+                      data-bs-parent="#menu"
+                    >
+                      <li className="w-100">
+                        <Link to="/LeaguesBluk" className="nav-link px-0">
+                          {" "}
+                          <span className="d-none d-sm-inline">Bulk Leagues</span>
+                        </Link>
+                      </li>
+                      <li className="w-100">
+                        <Link to="/Bulk-teams" className="nav-link px-0">
+                          {" "}
+                          <span className="d-none d-sm-inline">Bulk Team</span>
+                        </Link>
+                      </li>
+                      <li className="w-100">
+                        <Link to="/cat-logs" className="nav-link px-0">
+                          {" "}
+                          <span className="d-none d-sm-inline">Catalogs</span>
+                        </Link>
+                      </li>
+
+                    </ul>
+                  </li>
+                  <li>
+                    <Link
                       to="#submenu3"
                       data-bs-toggle="collapse"
                       className="nav-link px-0 align-middle"
@@ -165,7 +200,7 @@ export default function Menubar() {
                       <span className="ms-1 d-none d-sm-inline"> Catalog</span>{" "}
                       <i class="ri-arrow-down-s-line"></i>{" "}
                     </Link>
-                   
+                    
                     <ul
                       className="collapse nav flex-column ms-5"
                       id="submenu3"
@@ -177,18 +212,7 @@ export default function Menubar() {
                           <span className="d-none d-sm-inline">Season</span>
                         </Link>
                       </li>
-                      <li className="w-100">
-                      <Link to="/LeaguesBluk" className="nav-link px-0">
-                          {" "}
-                          <span className="d-none d-sm-inline">Bulk Leagues</span>
-                        </Link>
-                      </li>
-                      <li className="w-100">
-                      <Link to="/Bulk-teams" className="nav-link px-0">
-                          {" "}
-                          <span className="d-none d-sm-inline">Bulk Team</span>
-                        </Link>
-                      </li>
+                      
                       <li className="w-100">
                         <Link to="/Leagues" className="nav-link px-0">
                           {" "}
@@ -224,6 +248,29 @@ export default function Menubar() {
                       </li>
                     </ul>
                   </li>
+                  <li>
+                    <Link
+                      to="#teams1"
+                      data-bs-toggle="collapse"
+                      className="nav-link px-0 align-middle"
+                    >
+                      <span className="ms-1 d-none d-sm-inline"> Teams</span>{" "}
+                      <i class="ri-arrow-down-s-line"></i>{" "}
+                    </Link>
+                    
+                    <ul
+                      className="collapse nav flex-column ms-5"
+                      id="teams1"
+                      data-bs-parent="#menu"
+                    >
+                      <li className="w-100">
+                        <Link to="/Teams" className="nav-link px-0">
+                          {" "}
+                          <span className="d-none d-sm-inline">TeamList</span>
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
                 <hr />
               </div>
@@ -232,7 +279,7 @@ export default function Menubar() {
         </div>
       </section>
 
-     {/* <div className="row">
+      {/* <div className="row">
      {post.slice(0, 10).map((post, index) => (
       <div className='col-lg-6 col-md-6 col-sm-12' key={post.id}>
       <div className='en_defintion_contant ar_defintion_contant'>

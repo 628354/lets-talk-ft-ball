@@ -24,3 +24,7 @@ export const SESSION = {
 export const LEAGUES = {
   league: `${SERVER_LINK}getleagues`,
 };
+
+export const CATLOGS = {
+  upload: `${SERVER_LINK}uploadCatLog`,
+};
