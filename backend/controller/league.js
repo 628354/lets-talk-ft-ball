@@ -80,6 +80,7 @@ exports.getById = async (req, res) => {
                     as: 'leaguedata_details',
                 },
             },
+            
             {
                 $lookup: {
                     from: 'teams',
