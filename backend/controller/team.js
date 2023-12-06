@@ -97,12 +97,9 @@ exports.updateteams = async (req, res) => {
 
 exports.removeteam = async (req, res) => {
     try {
-        const removeteam = await teammodel.findByIdAndDelete({_id:req.params.id})
-        if(removeteam) {
-            res.send({ status: true, message: "Successfully remove teams", body: removeteam })
-        } else {
-            res.send({status:false, message:'TeamsId not found'})
-        }
+        const removeteam = await teammodel.findByIdAndDelete(req.params.teamId)
+
+        res.send({ status: true, message: "Successfully remove teams", removedetails: removeteam })
 
     } catch (error) {
         res.send({ status: false, message: "Something went wrong !!" })

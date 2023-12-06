@@ -27,7 +27,7 @@ exports.register = async (req, res) => {
       phone: req.body.phone,
       role: req.body.role,
       password: hashPassword,
-      image:req.body.image
+      image:image
     });
     
     const result = await addUser.save();
@@ -47,11 +47,12 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const finduser = await usermodel.findOne({ email: req.body.email });
+    const finduser = await usermodel.findOne({ email: req.body.email })
     if (!finduser) {
       res.send({ status: false, message: "User not found!!" });
       return;
     }
+  
     const match = await bcrypt.compare(req.body.password, finduser.password);
     if (match) {
       const token = jwt.sign(
