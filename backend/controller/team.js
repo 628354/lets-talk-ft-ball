@@ -104,9 +104,7 @@ exports.updateteams = async (req, res) => {
 exports.removeteam = async (req, res) => {
     try {
         const removeteam = await teammodel.findByIdAndDelete(req.params.teamId)
-
         res.send({ status: true, message: "Successfully remove teams", removedetails: removeteam })
-
     } catch (error) {
         res.send({ status: false, message: "Something went wrong !!" })
     }

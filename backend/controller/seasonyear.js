@@ -2,7 +2,7 @@ const seasonyearmodel = require("../model/seasonyear");
 
 exports.addleagueyear = async (req, res) => {
   try {
-    const { season_Title, status, sort_Order } = req.body;
+    const { teamsId, teamdataId, season_Title, status, sort_Order } = req.body;
     const find = await seasonyearmodel.findOne({ season_Title: season_Title });
     if (find) {
       res.send({ status: false, message: "season allready added" });
@@ -10,6 +10,8 @@ exports.addleagueyear = async (req, res) => {
     }
 
     const addleagueyear = await seasonyearmodel.create({
+      teamsId: teamsId,
+      teamdataId: teamdataId,
       season_Title: season_Title,
       sort_Order: sort_Order,
       status: status,
@@ -97,5 +99,54 @@ exports.removeyear = async (req, res) => {
     }
   } catch (error) {
     console.log(error.message);
+  }
+};
+exports.getsessonYear = async (req, res) => {
+  try {
+    const { season_Title } = req.query;
+    const season_Filter = {};
+    if (season_Title) {
+      season_Filter.season_Title = new RegExp(season_Title, 'i');
+    }
+    const seasonyear = await seasonyearmodel.aggregate([
+      {
+        $match: season_Filter,
+      },
+      {
+        $lookup: {
+          from: 'teams',
+          localField: 'teamsId',
+          foreignField: '_id',
+          as: 'teams_details',
+        },
+      },
+      {
+        $lookup: {
+          from: 'teamdatas',
+          localField: 'teamdataId',
+          foreignField: "_id",
+          as: "teamdata_details"
+        }
+
+      },
+      {
+        $sort: {
+          createdAt: -1,
+        },
+      },
+
+    ]);
+
+    res.status(200).send({
+      body: seasonyear,
+      message: `Get Data for Season ${season_Title || 'All Seasons'} Successfully`,
+      success: true,
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({
+      message: 'Internal Server Error',
+      success: false,
+    });
   }
 };
