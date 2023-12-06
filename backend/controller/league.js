@@ -65,7 +65,7 @@ exports.getleagues = async (req, res) => {
 
 exports.getById = async (req, res) => {
     try {
-        const { leagueId} = req.params
+        const { leagueId } = req.params;
         const getById = await leaguemodel.aggregate([
             {
                 $match: {
@@ -80,7 +80,6 @@ exports.getById = async (req, res) => {
                     as: 'leaguedata_details',
                 },
             },
-            
             {
                 $lookup: {
                     from: 'teams',
@@ -118,10 +117,7 @@ exports.getById = async (req, res) => {
             error: error.message,
         });
     }
-}
-
-
-
+};
 
 exports.update = async (req, res) => {
     try {

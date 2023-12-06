@@ -1,22 +1,19 @@
 const express = require("express")
 const app = express()
-// const fileupload = require("express-fileupload");
-// var morgan = require('morgan')
 
 
 const dotenv = require("dotenv")
 dotenv.config()
 const PORT = process.env.PORT
 const bodyParser = require('body-parser');
-const port = process.env.PORT  || 5000
+const port = process.env.PORT || 5000
 const cors = require("cors")
 app.use(cors())
 
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
-app.use(bodyParser.json({limit: '50mb', extended: true}));
-// app.use(fileupload());
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyParser.json({ limit: '50mb', extended: true }));
 
 const path = require('path');
 
@@ -42,7 +39,7 @@ const mongoose = require("mongoose")
 mongoose.connect(process.env.MONGO_URI,
     {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
     }
 
 ).then(() => {
@@ -56,17 +53,17 @@ mongoose.connect(process.env.MONGO_URI,
 app.use("/", user)
 app.use("/", league)
 app.use("/", team)
-app.use("/" , admin)
-app.use("/" , seasonyear)
-app.use("/" , leaguedata)
-app.use("/" , aboutus)
-app.use("/" , privacy_policy)
-app.use("/" , contactus)
-app.use("/" , definition)
-app.use("/" , cafe)
-app.use("/" , imagesRoute)
+app.use("/", admin)
+app.use("/", seasonyear)
+app.use("/", leaguedata)
+app.use("/", aboutus)
+app.use("/", privacy_policy)
+app.use("/", contactus)
+app.use("/", definition)
+app.use("/", cafe)
+app.use("/", imagesRoute)
 app.use("/", blukImportRouter);
-app.use('/',TableRoute);
+app.use('/', TableRoute);
 app.use('/', permission)
 app.use('/', routes)
 app.use('/', teamCatlog)
