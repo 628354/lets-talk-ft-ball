@@ -27,7 +27,7 @@ exports.register = async (req, res) => {
       phone: req.body.phone,
       role: req.body.role,
       password: hashPassword,
-      image:image
+      // image:image
     });
     
     const result = await addUser.save();
