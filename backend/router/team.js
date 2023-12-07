@@ -21,7 +21,7 @@ router.post("/createTeam", upload.single("image"), teamController.createTeam);
 router.get("/getTeams", teamController.getTeams);
 router.get("/teamdetails/:id", teamController.teamdetails);
 router.post(
-  "/updateteam/:teamId",
+  "/updateteams/:id",
   upload.single("image"),
   teamController.updateteams
 );
