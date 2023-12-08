@@ -10,22 +10,35 @@ import Form from 'react-bootstrap/Form';
 
 export default function Teams() {
   const [teamsData, setTeamsData] = useState([]);
-  const [itemId, setItemId] = useState(0); 
+  const [itemId, setItemId] = useState(0);
+
 
   useEffect(() => {
     axios.get('http://localhost:5000/getTeams')
       .then((response) => {
-        const teamsInfo = response.data.teamsDetails
-        setTeamsData(teamsInfo);
-        setItemId(teamsInfo._id); 
-
-
+        const teamsInfo = response.data.teamdetails;
+        console.log(teamsInfo, "teams data")
+        setTeamsData(teamsInfo || []); 
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, []);
-
+  
+  
+  
+  
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:5000/removeteam/${id}`)
+      .then((response) => {
+        console.log('Delete response:', response.data);
+        setTeamsData(teamsData.filter(team => team._id !== id));
+      })
+      .catch((error) => {
+        console.log('Error Deleting data', error);
+      });
+  };
+  
   return (
     <div>
 
@@ -58,12 +71,9 @@ export default function Teams() {
                 <div className='add-part'>
                   <ul className='add-button-min'>
                     <li className='add-button-fis'>
-                      <Link to=""><i className="ri-add-line"></i></Link>
+                      <Link to="/Addteams"><i className="ri-add-line"></i></Link>
                     </li>
                     <li class="add-button-cencel"><a href=""><i className="ri-refresh-line"></i></a></li>
-                    {/* <li className='add-button-sec'>
-                      <button><i className="ri-delete-bin-line"></i></button>
-                    </li> */}
                   </ul>
                 </div>
 
@@ -74,11 +84,11 @@ export default function Teams() {
 
         </section>
         <hr />
-        <section className='Season-List'>
+        <section className='teams-List'>
           <Container fluid>
             <Row>
-              <div className='season_list_table'>
-                <div className='season-table-list'>
+              <div className='teams_list_table'>
+                <div className='teams-table-list'>
                   <h6><i class="ri-list-check"></i> Teams List</h6>
                 </div>
                 <Table bordered hover className='tablepress'>
@@ -91,20 +101,24 @@ export default function Teams() {
                     </tr>
                   </thead>
                   <tbody className='table-list-one'>
-                    {teamsData.map((teams) => (
-                      <tr key={teams._id}>
+                    {teamsData.map((team) => (
+                      <tr key={team._id}>
                         <td><Form.Check aria-label="option 1" /></td>
-                        <td>{teams.teamName}</td>
-                        <td>{teams.short_name}</td>
+                        <td>{team.teamName}</td>
+                        <td>{team.short_name}</td>
                         <td>
                           <div className='add-button-fis'>
-                            
                             <ul className="but-delet">
                               <li>
-                              <Link>
-                              <i className="ri-pencil-fill"></i>
-                            </Link>
-                             </li>
+                                <Link to={`/EditTeams/${team._id}`}>
+                                  <i className="ri-pencil-fill"></i>
+                                </Link>
+                              </li>
+                              <li className="add-button-sec">
+                                <button onClick={() => handleDelete(team._id)}>
+                                  <i className="ri-delete-bin-line"></i>
+                                </button>
+                              </li>
                             </ul>
                           </div>
                         </td>

@@ -5,7 +5,7 @@ exports.createTeam = async (req, res) => {
     try {
         const { teamName, short_name, graph_Title1, graph_Title2, graph_Title3, graph_Title4, description, meta_Tag_Description, meta_Tag_Keywords, team_Tags, leagues, status } = req.body
         const protocol = req.protocol
-        const host = req.host
+        const host = req.hostname
         const url = `${protocol}//${host}`
         const addTeam = await teammodel.create({
             teamName: teamName,
@@ -56,51 +56,41 @@ exports.teamdetails = async(req, res) => {
 
 exports.updateteams = async (req, res) => {
     try {
-        const { teamName, short_name, graph_Title1, graph_Title2, graph_Title3, graph_Title4, description, meta_Tag_Description,
+        const {id, teamName, short_name, description, meta_Tag_Description,
             meta_Tag_Keywords, team_Tags, leagues, status } = req.body
 
-        const findteam = await teammodel.findById(req.params.teamId)
-
-        if (!findteam) {
-            res.send({ status: false, message: "Team not found" })
-            return
-        }
-
         const protocol = req.protocol
-        const host = req.host
+        const host = req.hostname
         const url = `${protocol}//${host}`
-        const updateteam = await teammodel.findByIdAndUpdate(req.params.teamId, {
+
+        const updateteam = await teammodel.findByIdAndUpdate({_id:req.params.id}, {
             teamName: teamName,
             short_name: short_name,
-            image: req.file ? url + "/uploads/" + req.file.filename : findteam.image,
-            graph_Title1: graph_Title1,
-            graph_Title2: graph_Title2,
-            graph_Title3: graph_Title3,
-            graph_Title4: graph_Title4,
+            image: req.file ? url + "/uploads/" + req.file.filename : "",
             description: description,
             meta_Tag_Description: meta_Tag_Description,
             meta_Tag_Keywords: meta_Tag_Keywords,
             team_Tags: team_Tags,
             leagues: leagues,
             status: status
-        }, { new: true })
-
-        await updateteam.save()
-
-        res.send({ status: true, message: "Successfully update team data", teamdetails: updateteam })
-
+        })
+        if(updateteam) {
+            res.send({ status: true, message: "Successfully update team data", teamdetails: updateteam })
+        } 
     } catch (error) {
-        res.send({ status: false, message: "Something went wrong !!" })
+        console.log(error.message)
     }
-}
+},
 
 
 exports.removeteam = async (req, res) => {
     try {
-        const removeteam = await teammodel.findByIdAndDelete(req.params.teamId)
-
-        res.send({ status: true, message: "Successfully remove teams", removedetails: removeteam })
-
+        const removeteam = await teammodel.findByIdAndDelete({_id:req.params.id})
+        if(removeteam) {
+            res.send({ status: true, message: "Successfully remove teams", removedetails: removeteam })
+        } else {
+        res.send({ status: true, message: "Teams Id Not Found", success: false })
+        }
     } catch (error) {
         res.send({ status: false, message: "Something went wrong !!" })
     }

@@ -1,5 +1,5 @@
 const SERVER_LINK = "http://localhost:5000/";
-const SERVER_IMAGES = "http://localhost:5000";
+const SERVER_IMAGES = "http://localhost:5000/";
 export const REQUEST_TYPE = {
   GET: "GET",
   POST: "POST",

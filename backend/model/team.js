@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const teamSchema = mongoose.Schema(
   {
     teamName: { type: String, default: "" },
+    
+    short_name: { type: String, default: "" },
 
     games: { type: String, default: "" },
 

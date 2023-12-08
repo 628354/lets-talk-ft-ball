@@ -10,7 +10,6 @@ const teamdata = require('../model/teamdata');
 const teamCatlog = require('../model/teamCatlog')
 
 exports.leagedBlukImport = async (req, res) => {
-  console.log(req, "DFVDFVDFVDFV");
 
   // const filePath = req.file.path;//
   const languageFile = req.files['excelFile'][0].path;
