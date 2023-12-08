@@ -39,7 +39,9 @@ export default function Header() {
 	/// get leagus  start
 
 	const getLeagueName = () => {
-		const apiUrl = "http://localhost:5000/getleagues";
+		// const apiUrl = "http://localhost:5000/getleagues";
+		const apiUrl =
+			"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues";
 		const obj = {
 			maxBodyLength: Infinity,
 			headers: {
