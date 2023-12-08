@@ -32,6 +32,7 @@ export default function Editseason() {
   useEffect(() => {
     axios.get(`http://localhost:5000/getseasonById/${id}`)
       .then((response) => {
+        console.log(response)
         const aboutInfo = response.data.seasonyears
         setAboutData(aboutInfo);
 
@@ -43,9 +44,9 @@ export default function Editseason() {
 
   const handleUpdateData = () => {
     const updatedData = {
-      season_Title: aboutData.season_Title,
-      sort_Order: aboutData.sort_Order,
-      status: aboutData.status,
+      season_Title: aboutData?.season_Title,
+      sort_Order: aboutData?.sort_Order,
+      status: aboutData?.status,
     };
   
     axios.post(`http://localhost:5000/updateSeasonyear/${id}`, updatedData, {
@@ -54,6 +55,7 @@ export default function Editseason() {
       },
     })
       .then((response) => {
+        console.log(response)
       })
       .catch((error) => {
         console.error('Error updating data:', error);
@@ -132,8 +134,9 @@ export default function Editseason() {
                                 Season Title
                               </Form.Label>
                               <Col sm="11">
-                                <Form.Control type="text" placeholder="Season Title"value={aboutData.season_Title}
-                               onChange={(e) => handleTextChange('season_Title', e.target.value)}  />
+                                <Form.Control type="text" placeholder="Season Title" value={aboutData?.season_Title}
+                             //  onChange={(e) => handleTextChange({season_Title}, e.target.value)} 
+                                />
                               </Col>
                             </Form.Group>
                           </Form>
@@ -169,7 +172,7 @@ export default function Editseason() {
                           </Form.Label>
                           <Col sm="10">
                             <Form.Select
-                               value={aboutData.status}
+                               value={aboutData?.status}
                                onChange={(e) => handleTextChange('status', e.target.value)}
                               name="status"
                             >
@@ -183,7 +186,7 @@ export default function Editseason() {
                             Sort Order
                           </Form.Label>
                           <Col sm="10">
-                            <Form.Control type="number" placeholder="sort_Order"value={aboutData.sort_Order}
+                            <Form.Control type="number" placeholder="sort_Order"value={aboutData?.sort_Order}
                                onChange={(e) => handleTextChange('sort_Order', e.target.value)} />
                           </Col>
                         </Form.Group>
