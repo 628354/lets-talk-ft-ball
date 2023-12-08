@@ -30,7 +30,7 @@ export default function Editseason() {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/getseasonById/${id}`)
+    axios.get(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getseasonById/${id}`)
       .then((response) => {
         const aboutInfo = response.data.seasonyears
         setAboutData(aboutInfo);
@@ -48,7 +48,7 @@ export default function Editseason() {
       status: aboutData.status,
     };
   
-    axios.post(`http://localhost:5000/updateSeasonyear/${id}`, updatedData, {
+    axios.post(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/updateSeasonyear/${id}`, updatedData, {
       headers: {
         'Content-Type': 'application/json',
       },
