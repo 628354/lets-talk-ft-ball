@@ -63,6 +63,9 @@ import ImportBulk from "./page-dashboard/LeaguesBluk";
 import TeamImportBulk from "./page-dashboard/TeamBluk";
 import Catlogs from "./page-dashboard/catLogs";
 import Teams from "./page-dashboard/Teams";
+import DashboardPage from "./page-dashboard/DashboardPage";
+import Addteams from "./page-dashboard/Addteams"
+import EditTeams from "./page-dashboard/EditTeams"
 
 function App() {
 	// const navigate = useNavigate();
@@ -84,6 +87,7 @@ function App() {
 		"/Editabout",
 		"/Editprivacypolicy",
 		"/Leagues",
+		"/Editleagues",
 		"/Editcontact",
 		"/Editdefinition",
 		"/Addcafe",
@@ -93,12 +97,17 @@ function App() {
 		"/Bulk-teams",
 		"/Bulk-Leagues",
 		"/Teams",
+		"/EditTeams",
+		"/Addteams",
+		"/DashboardPage",
+		
 	];
 	// Get the current route
 	const currentRoute = location.pathname;
 	// Check if the current route is in the array of routes where Header should not be displayed
-	const shouldDisplayHeader = !noHeaderRoutes.includes(currentRoute);
-
+	const shouldDisplayHeader = !noHeaderRoutes.some((route) => currentRoute.startsWith(route));
+	console.log("Current Route:", currentRoute);
+	console.log("Should Display Header:", shouldDisplayHeader);
 	const { language } = useLanguage();
 	let HeaderComponent;
 	let FooterComponent;
@@ -137,6 +146,7 @@ function App() {
 			ContactComponent = ContactAr;
 			break;
 	}
+
 	return (
 		<div className="App">
 			{shouldDisplayHeader && HeaderComponent && <HeaderComponent />}
@@ -197,7 +207,7 @@ function App() {
 					{" "}
 				</Route>
 
-				<Route path="/Editleagues" element={<Editleagues />}></Route>
+				{/* <Route path="/Editleagues" element={<Editleagues />}></Route> */}
 				<Route path="/Editleagues/:id" element={<Editleagues />}></Route>
 				<Route path="/Edithome" element={<Edithome />}></Route>
 				<Route path="/Editabout" element={<Editabout />}></Route>
@@ -217,6 +227,10 @@ function App() {
 				<Route path="/Teamcomparison" element={<Teamcomparison />}></Route>
 				<Route path="/LeaguesBluk" element={<LeaguesBluk />}></Route>
 				<Route path="/Teams" element={<Teams />}></Route>
+				<Route path="/EditTeams/:id" element={<EditTeams />}></Route>
+				<Route path="/Addteams" element={<Addteams />}></Route>
+				<Route path="/DashboardPage" element={<DashboardPage />}></Route>
+
 			</Routes>
 
 			{shouldDisplayHeader && FooterComponent && <FooterComponent />}
