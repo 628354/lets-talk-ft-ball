@@ -30,9 +30,9 @@ export default function EditTeams() {
         status:setTeams.status
     }
     axios.post(`http://localhost:5000/updateteams/${id}`, updatedData, {
-        headers:{
-            'Content-Type':'application/json'
-        }
+        // headers:{
+        //     'Content-Type':'application/json'
+        // }
     })
     .then((response) => {
 
@@ -52,17 +52,6 @@ export default function EditTeams() {
 
                   <div className='teams-link-part'>
                     <h3> Teams</h3>
-                    {/* <ul className='teams-link'>
-                      <li>
-                        <Link>Home</Link>
-                      </li>
-                      <li>
-                        <i className="ri-arrow-right-s-line"></i>
-                      </li>
-                      <li>
-                        <Link>Teams</Link>
-                      </li>
-                    </ul> */}
                   </div>
                 </div>
               </div>
@@ -85,10 +74,10 @@ export default function EditTeams() {
           </Container>
         </section>
         <hr />
-        <section className='Add-Season-open'>
+        <section className='teams-open'>
           <Container fluid>
             <Row>
-              <div className='main_add_season'>
+              <div className='main_teams'>
                 <div className='main-ad-sea'>
                   <p><i class="ri-pencil-fill"></i> Edit Teams</p>
                 </div>
