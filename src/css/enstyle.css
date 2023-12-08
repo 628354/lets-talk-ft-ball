@@ -196,7 +196,7 @@ ul.en_media li a {
 
 
 .esmenuitem .en_leagues_nav:hover .en_dropdown-content {
-    display: block;
+    display: block !important;
 }
 .esmenuitem .en_leagues_nav .en_dropdown-content {
     display: none;
