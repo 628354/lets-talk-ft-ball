@@ -63,9 +63,6 @@ import ImportBulk from "./page-dashboard/LeaguesBluk";
 import TeamImportBulk from "./page-dashboard/TeamBluk";
 import Catlogs from "./page-dashboard/catLogs";
 import Teams from "./page-dashboard/Teams";
-import Addteams from "./page-dashboard/Addteams"
-import EditTeams from "./page-dashboard/EditTeams";
-
 
 function App() {
 	// const navigate = useNavigate();
@@ -96,8 +93,6 @@ function App() {
 		"/Bulk-teams",
 		"/Bulk-Leagues",
 		"/Teams",
-		"/EditTeams",
-		"/Addteams",
 	];
 	// Get the current route
 	const currentRoute = location.pathname;
@@ -166,7 +161,10 @@ function App() {
 				<Route path="/Forgot" element={<Forgot />}></Route>
 				<Route path="/blog" element={<Blog />}></Route>
 				<Route path="/Chart" element={<Chart />}></Route>
-				<Route path="/PremierLeague" element={<PremierLeague />}></Route>
+				<Route path="/headers" element={<Header />}></Route>
+
+				<Route path="/league/:leagueId" element={<PremierLeague />}></Route>
+
 				<Route path="/Laliga" element={<Laliga />}></Route>
 				<Route path="/SerieA" element={<SerieA />}></Route>
 				<Route path="/Bundesliga" element={<Bundesliga />}></Route>
@@ -189,9 +187,15 @@ function App() {
 				<Route path="/Leagues" element={<Leagues />}></Route>
 				<Route path="/Addleagues" element={<Addleagues />}></Route>
 
-				<Route path="/Bulk-Leagues" element={<ImportBulk />} > </Route>
-				<Route path="/Bulk-teams" element={<TeamImportBulk />} > </Route>
-				<Route path="/cat-logs" element={<Catlogs />} > </Route>
+				<Route path="/Bulk-Leagues" element={<ImportBulk />}>
+					{" "}
+				</Route>
+				<Route path="/Bulk-teams" element={<TeamImportBulk />}>
+					{" "}
+				</Route>
+				<Route path="/cat-logs" element={<Catlogs />}>
+					{" "}
+				</Route>
 
 				<Route path="/Editleagues" element={<Editleagues />}></Route>
 				<Route path="/Editleagues/:id" element={<Editleagues />}></Route>
@@ -213,14 +217,8 @@ function App() {
 				<Route path="/Teamcomparison" element={<Teamcomparison />}></Route>
 				<Route path="/LeaguesBluk" element={<LeaguesBluk />}></Route>
 				<Route path="/Teams" element={<Teams />}></Route>
-				<Route path="/EditTeams/:id" element={<EditTeams/>}></Route>
-				<Route path="/Addteams" element={<Addteams />}></Route>
-
-
-
-
-			
 			</Routes>
+
 			{shouldDisplayHeader && FooterComponent && <FooterComponent />}
 		</div>
 	);

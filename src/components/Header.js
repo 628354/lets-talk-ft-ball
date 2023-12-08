@@ -9,6 +9,8 @@ import { useState } from "react";
 import { useLanguage } from "../languages/LanguageContext";
 import axios from "axios";
 export default function Header() {
+	const [leagueNames, setLeagueNames] = useState([]);
+
 	window.addEventListener("scroll", function () {
 		const header = document.querySelector(".topheader");
 		const scrollY = window.scrollY;
@@ -34,52 +36,25 @@ export default function Header() {
 		switchLanguage(newLanguage);
 	};
 
-	//  const apiEndpoint = 'http://localhost:5000/api/v1/graph/teamname/find/';
-	// // const apiEndpoint = 'http://localhost:5000/api/v1/graph/scrolldown/find/';
-	// const queryParams = {
-	// 	leagueId: "6569bad8990ed9605cd647ba",
-	// 	seasonId: "655de01a96b5977b5dcf0e8e",
-		
-	//   };
-	// axios.get(apiEndpoint, { params: queryParams })
-	// .then(response => {
-	//   // Handle the API response here
-	//   console.log('API Response:', response.data);
-	// })
-	// .catch(error => {
-	//   // Handle errors
-	//   console.error('Error making API request:', error.message);
-	// });
-  
-	//const apiEndpoint = 'http://localhost:5000/api/v1/graph/goals-scored/find/';
-	 const apiEndpoint = 'http://localhost:5000/api/v1/graph/scrolldown/find/';
-	const queryParams = {
-		leagueId: "6569bb4feab54a3cf2de7d8d",
-		seasonId: "6543540800a9854ab865c8e2",
-		
-	  };
-	axios.get(apiEndpoint,{ params: queryParams })
-	.then(response => {
-	  // Handle the API response here
-	  console.log('API Response:', response.data);
-	})
-	.catch(error => {
-	  // Handle errors
-	  console.error('Error making API request:', error.message);
-	});
-  
-  
+	/// get leagus  start
 
+	const getLeagueName = () => {
+		const apiUrl = "http://localhost:5000/getleagues";
+		const obj = {
+			maxBodyLength: Infinity,
+			headers: {
+				"Content-Type": "application/json",
+			},
+		};
+		axios.get(apiUrl, obj).then((response) => {
+			console.log(response.data.leaguedetails);
+			setLeagueNames(response.data.leaguedetails);
+		});
+	};
+	useEffect(() => {
+		getLeagueName();
+	}, []);
 
-	const [getTeamName,setTeamName]=useState([])
-	const getTeams=async()=>{
-		const response = await axios.get(`https://localhost:5000/getleagues`)
-		console.log(response)
-		
-	}
-	useEffect(()=>{
-		 getTeams()
-	},[])
 	return (
 		<div>
 			<div>
@@ -107,21 +82,21 @@ export default function Header() {
 											<Link
 												to="https://www.facebook.com/profile.php?id=100065165853408"
 												target="_blank">
-												<i class="ri-facebook-fill"></i>
+												<i className="ri-facebook-fill"></i>
 											</Link>
 										</li>
 										<li>
 											<Link
 												to="https://twitter.com/LetstalkftballA"
 												target="_blank">
-												<i class="ri-twitter-fill"></i>
+												<i className="ri-twitter-fill"></i>
 											</Link>
 										</li>
 										<li>
 											<Link
 												to="https://www.instagram.com/letstalkftball_/"
 												target="_blank">
-												<i class="ri-instagram-line"></i>
+												<i className="ri-instagram-line"></i>
 											</Link>
 										</li>
 									</ul>
@@ -153,141 +128,23 @@ export default function Header() {
 								Leagues
 								<div className="en_dropdown-content">
 									<div className="en_h_drop">
-										<ul className="en_drop_item">
-											<li>
-												<Link to="PremierLeague">
-													<span>
-														<img
-															src={require("../img/premier-league-logo-vector.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													PREMIER LEAGUE
-												</Link>
-											</li>
-											<li>
-												<Link to="SerieA">
-													<span>
-														<img
-															src={require("../img/Serie_A_logo.jpg")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													SERIE A
-												</Link>
-											</li>
-											<li>
-												<Link to="Ligue1">
-													<span>
-														<img
-															src={require("../img/Ligue_1_Uber_Eats.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													LIGUE 1
-												</Link>
-											</li>
-											<li>
-												<Link to="LigaPortugal">
-													<span>
-														<img
-															src={require("../img/Liga Port.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													LIGA PORTUGAL
-												</Link>
-											</li>
-											<li>
-												<Link to="EgyptPL">
-													<span>
-														<img
-															src={require("../img/Egypet League cafe logo.jpg")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													EGYPT PL
-												</Link>
-											</li>
-											<li>
-												<Link to="BrazilSerieA">
-													<span>
-														<img
-															src={require("../img/Bra Serie_A.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													BRAZIL SERIE A
-												</Link>
-											</li>
-										</ul>
-										<ul className="en_drop_item">
-											<li>
-												<Link to="Laliga">
-													<span>
-														<img
-															src={require("../img/laliga-logo-plain.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													LALIGA
-												</Link>
-											</li>
-											<li>
-												<Link to="Bundesliga">
-													<span>
-														<img
-															src={require("../img/Bundesliga-primary.gif")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													BUNDESLIGA
-												</Link>
-											</li>
-											<li>
-												<Link to="NetherlandEredivisie">
-													<span>
-														<img
-															src={require("../img/Eredivisie.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													EREDIVISIE
-												</Link>
-											</li>
-											<li>
-												<Link to="SaudiPro">
-													<span>
-														<img
-															src={require("../img/Roshn_Saud.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													SAUDI PRO
-												</Link>
-											</li>
-											<li>
-												<Link to="BotolaPro">
-													<span>
-														<img
-															src={require("../img/BOTOLAinwi-134x136.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													BOTOLA PRO
-												</Link>
-											</li>
+										<ul className="en_drop_item  row w-100">
+											{leagueNames.map((data) => (
+												<li className="col-md-6" key={data._id}>
+													<Link to={`/league/${data._id}`}>
+														<span>
+															<img
+																src={
+																	"http://localhost:5000/uploads/" + data.image
+																}
+																alt=""
+																className="logo-navd"
+															/>
+														</span>
+														{data.leaguename}
+													</Link>
+												</li>
+											))}
 										</ul>
 									</div>
 								</div>

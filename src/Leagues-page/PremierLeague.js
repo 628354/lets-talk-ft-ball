@@ -1,122 +1,171 @@
-import React from 'react';
-import { Container, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import PremierLeaguetable from '../Leagues-components/PremierLeaguetable';
-import Iframesecttion from '../Leagues-components/Iframesecttion';
-import Premierchart from '../Leagues-components/Premierchart';
-import Goalsconchart from '../Leagues-components/Goalsconchart';
-import CahrtGsGc from '../Leagues-components/CahrtGsGc';
+/** @format */
 
+import React, { useEffect, useState } from "react";
+import { Container, Row } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import PremierLeaguetable from "../Leagues-components/PremierLeaguetable";
+import Iframesecttion from "../Leagues-components/Iframesecttion";
+import Premierchart from "../Leagues-components/Premierchart";
+import Goalsconchart from "../Leagues-components/Goalsconchart";
+import CahrtGsGc from "../Leagues-components/CahrtGsGc";
+import axios from "axios";
 export default function PremierLeague() {
-  return (
-    <div>
-      
-         <section className='en_hero_about en_hero_about'>
-          <Container>
-            <Row>
-                <div className='col-lg-12 col-md-12 col-sm-12'>
+	const baseUrl = "https://phpstack-1140615-3967632.cloudwaysapps.com/backend/";
+	const [leagueDetails, setLeagueDetails] = useState([]);
+	const { leagueId } = useParams();
 
-                </div>
-            </Row>
-          </Container>
-         </section>
-         <div className='en_bread_crumb ar_bread_crumb'>
-            <Container>
-            <ul className='en_creat_nav ar_creat_nav'>
-                <li>
-                <Link to="/">Home</Link>
-                </li>
-                <li>
-                <i className="ri-arrow-right-s-line"></i>
-                </li>
-                <li>
-                <Link to="/PremierLeague">Premier League</Link>
-                </li>
-            </ul>
-            
-            </Container>
-         </div>
+	const [currentLeagueId, setCurrentLeagueId] = useState("");
+	const [seasonId, setSeasonId] = useState("");
+	const [teamId, setTeamId] = useState("");
+	const getLeagueDetails = () => {
+		const apiUrl = `http://localhost:5000/getleagueById/${leagueId}`;
 
-         <section className='en-premier ar-premier'>
-            <Container>
-                <Row>
-                <div className='col-lg-12 col-md-12 col-sm-12'>
-                        <div className='en-premier-contant ar-premier-contant'>
-                        <div className='leagues_cont'>
-                            <h2>Premier League</h2>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='en_main_leagues one '>
-                        <Row >
-                        <div className='col-lg-2 col-md-2 col-sm-12 m-auto'>
-                                <div className='en-leagues-img'>
-                                 <img src={require('../img/premier-league-logo-vector.png')} alt="earth" className="img-premier-press"/>
+		axios.get(apiUrl).then((response) => {
+			console.log(response.data);
+			const allRecords = response.data.body;
 
-                                </div>
-                            </div>
-                            <div className='col-lg-10 col-md-10 col-sm-12'>
-                                <div className='en-leagues-text ar-leagues-text'>
-                                    <p>Below is the league standings table, teams ranking graphs and league overall stats at the bottom of the table.
-                                         The overall stats are meant to give you an overview of the league entertainment level 
-                                         (goals scored per game and % win) and to see how competitive is the league (Points Standard Deviation). 
-                                         If you like to see a specific season, use the "season" pull-down menu. Click on any team’s name to go to
-                                          the team specific page to see performance trends over the season. You can compare any two teams, or same 
-                                          team from different seasons, from any of the leagues or seasons available in the website. Click “Compare”, 
-                                          select Season, League and Team. The graphs are interactive. You can adjust scale and hover-over data points 
-                                          to get specific numbers. If you need help with definition of terms used, click on “Definition” in the top menu. 
-                                          Have fun and do not forget to visit our social media accounts (links in the top bar). Note that data is updated only 
-                                          after games completion and number of games played is not used in table sorting since its impact is just temporary. </p>
-                                    
-                                </div>
-                                
-                            </div>
-                        </Row>
-                    </div>
-                </Row>
-                
-            </Container>
-         </section>
-         <section className='league_table'>
-          <Container>
-            <Row>
-              <div className='en_table_text ar_table_text'>
-                <h6>Scroll Down To See Charts</h6>
-              </div>
-              <div className='en_main_table ar_main_table'>
-                <PremierLeaguetable/>
-                
-              </div>
-            </Row>
-          </Container>
-         </section>
+			const filteredRecords = allRecords.filter((record) => {
+				// console.log("record.id:", record);
+				// console.log("leagueId:", leagueId);
+				return record._id === leagueId;
+			});
 
-        <section className='chart-press'>
-          <Container>
-            <Row>
-              <Premierchart/>
-            </Row>
-          </Container>
-        </section>
+			//	console.log(filteredRecords);
+			// setLeagueDetails(response.data.leaguedetails);
+			if (filteredRecords.length === 0) {
+				console.log("No matching records found.");
+			} else {
+				//console.log(filteredRecords[0].sessionId);
+				setTeamId(filteredRecords[0].teamId);
+				setCurrentLeagueId(filteredRecords[0]._id);
+				setSeasonId(filteredRecords[0].sessionId);
+				setLeagueDetails(filteredRecords);
+			}
+		});
+	};
+	console.log(leagueDetails);
+	useEffect(() => {
+		getLeagueDetails();
+	}, [leagueId]);
+	return (
+		<div>
+			<section className="en_hero_about en_hero_about">
+				<Container>
+					<Row>
+						<div className="col-lg-12 col-md-12 col-sm-12"></div>
+					</Row>
+				</Container>
+			</section>
+			<div className="en_bread_crumb ar_bread_crumb">
+				<Container>
+					<ul className="en_creat_nav ar_creat_nav">
+						<li>
+							<Link to="/">Home</Link>
+						</li>
+						<li>
+							<i className="ri-arrow-right-s-line"></i>
+						</li>
+						{leagueDetails.map((data) => (
+							<Link to="">{data.leaguename}</Link>
+						))}
+					</ul>
+				</Container>
+			</div>
 
-        <section className='chart-press'>
-          <Container>
-            <Row>
-              <Goalsconchart/>
-            </Row>
-          </Container>
-        </section>
-        <section className='chart-press'>
-          <Container>
-            <Row>
-              <CahrtGsGc/>
-            </Row>
-          </Container>
-        </section>
-        <Iframesecttion/>
+			<section className="en-premier ar-premier">
+				<Container>
+					<Row>
+						{leagueDetails.map((data) => (
+							<Row key={data._id}>
+								<div className="col-lg-12 col-md-12 col-sm-12">
+									<div className="en-premier-contant ar-premier-contant">
+										<div className="leagues_cont">
+											<h2>{data.leaguename}</h2>
+										</div>
+									</div>
+								</div>
+								<div className="en_main_leagues one ">
+									<Row>
+										<div className="col-lg-2 col-md-2 col-sm-12 m-auto">
+											<div className="en-leagues-img">
+												<img
+													src={"http://localhost:5000/uploads/" + data.image}
+													alt="earth"
+													className="img-premier-press"
+												/>
+											</div>
+										</div>
+										<div className="col-lg-10 col-md-10 col-sm-12">
+											<div className="en-leagues-text ar-leagues-text">
+												<p>{data.description}</p>
+											</div>
+										</div>
+									</Row>
+								</div>
+							</Row>
+						))}
+						{/* <div className="col-lg-12 col-md-12 col-sm-12">
+							<div className="en-premier-contant ar-premier-contant">
+								<div className="leagues_cont">
+									<h2>Premier League</h2>
+								</div>
+							</div>
+						</div> */}
+					</Row>
+				</Container>
+			</section>
+			<section className="league_table">
+				<Container>
+					<Row>
+						<div className="en_table_text ar_table_text">
+							<h6>Scroll Down To See Charts</h6>
+						</div>
+						<div className="en_main_table ar_main_table">
+							<PremierLeaguetable
+								currentLeagueId={currentLeagueId}
+								seasonId={seasonId}
+								teamId={teamId}
+							/>
+						</div>
+					</Row>
+				</Container>
+			</section>
 
-          
+			<section className="chart-press">
+				<Container>
+					<Row>
+						<Premierchart
+							currentLeagueId={currentLeagueId}
+							seasonId={seasonId}
+							teamId={teamId}
+						/>
+					</Row>
+				</Container>
+			</section>
 
-    </div>
-  )
+			<section className="chart-press">
+				<Container>
+					<Row>
+						<Goalsconchart
+							currentLeagueId={currentLeagueId}
+							seasonId={seasonId}
+							teamId={teamId}
+						/>
+					</Row>
+				</Container>
+			</section>
+			<section className="chart-press">
+				<Container>
+					<Row>
+						<CahrtGsGc
+							currentLeagueId={currentLeagueId}
+							seasonId={seasonId}
+							teamId={teamId}
+						/>
+					</Row>
+				</Container>
+			</section>
+			<Iframesecttion />
+		</div>
+	);
 }
