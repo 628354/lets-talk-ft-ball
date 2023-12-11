@@ -1,6 +1,6 @@
 const express = require("express")
 const app = express()
-const Validator = require("node-validator");
+const { Validator } = require('node-input-validator');
 
 const dotenv = require("dotenv")
 dotenv.config()
