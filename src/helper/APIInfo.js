@@ -2,7 +2,7 @@
 
 const SERVER_LINK =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/";
 // const SERVER_LINK = "http://localhost:5000/";
-// const SERVER_IMAGES = "http://localhost:5000";
+// const SERVER_IMAGES = "http://localhost:5000/";
 const SERVER_IMAGES =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/"
 export const REQUEST_TYPE = {
 	GET: "GET",

@@ -10,8 +10,8 @@ const { Validator } = require("node-input-validator");
 
 exports.register = async (req, res) => {
   try {
-   
-  
+
+
     const findUser = await usermodel.findOne({ email: req.body.email });
     if (findUser) {
       return res.status(400).send("Email Already Exists");
@@ -33,9 +33,9 @@ exports.register = async (req, res) => {
       role: req.body.role,
       password: hashPassword,
       image: req.file ? url + "/uploads/" + req.file.filename : " ",
-      
+
     });
-    
+
     const result = await addUser.save();
     return res.status(200).send({
       body: result,
@@ -138,16 +138,33 @@ exports.forgetpassword = async (req, res) => {
 };
 exports.getAllUser = async (req, res) => {
   try {
-    const userData = await usermodel.find();
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 10;
+    const skip = (page - 1) * pageSize;
+    const userData = await usermodel.find().skip(skip).limit(pageSize);
+    const totalUsers = await usermodel.countDocuments();
     res.status(200).send({
-      body: userData,
-      mesage: "Get All User Successfully",
-      success: true,
+      pageInfo: {
+        currentPage: page,
+        pageSize: pageSize,
+        totalPages: Math.ceil(totalUsers / pageSize),
+        totalRecords: totalUsers,
+        body: userData,
+        message: "Get All Users Successfully",
+        success: true,
+
+      },
+
     });
   } catch (error) {
     console.log(error.message);
+    res.status(500).send({
+      message: "Internal Server Error",
+      success: false,
+    });
   }
 };
+;
 
 exports.updateUser = async (req, res) => {
   try {
