@@ -13,7 +13,7 @@ export default function Leagues() {
   const [itemId, setItemId] = useState(0); // Initialize with a default value
 
   useEffect(() => {
-    axios.get('http://localhost:5000/getleagues')
+    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues')
       .then((response) => {
         const aboutInfo = response.data.leaguedetails
         setAboutData(aboutInfo);
@@ -27,7 +27,7 @@ export default function Leagues() {
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:5000/removeLeague/${id}`)
+    axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeLeague/${id}`)
       .then((response) => {
         // Assuming a successful deletion, you can update your state to remove the deleted item
         setAboutData(aboutData.filter(league => league._id !== id));

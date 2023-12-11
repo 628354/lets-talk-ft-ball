@@ -31,7 +31,7 @@ export default function Addseason() {
       clearMessages();
     } else {
     try {
-      const response = await axios.post('http://localhost:5000/addseasonyear', formData);
+      const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/addseasonyear', formData);
       console.log(response.data);
       setSuccessMessage(response.data.message);
       clearMessages(); // Clear messages after 3 seconds

@@ -80,7 +80,7 @@ export default function Editleagues() {
     formData.append('status', aboutData.status);
 
 
-    axios.post('http://localhost:5000/updateLeague/' + id, formData, {
+    axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/updateLeague    ' + id, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
