@@ -1,40 +1,36 @@
 const cafemodel = require("../model/cafe")
 
 exports.addcafedata = async (req, res) => {
+
     try {
-        const { details, title, content, league_name } = req.body;
-        const finddata = await cafemodel.findOne({ league_name: league_name });
+        const { details, title, content, league_name } = req.body
+        const finddata = await cafemodel.findOne({ league_name: league_name })
         if (finddata) {
-            return res.send({ status: true, message: "League data already present" });
+            res.send({ status: true, message: "league data allready present" })
+            return
         }
-
-        const protocol = req.protocol;
-        const host = req.hostname;
-        const url = `${protocol}://${host}`;
-        const date = new Date();
-
-        const logoPath = req.files?.logo ? url + "/uploads/" + req.files.logo[0].filename : "";
-        const cafeImagePath = req.files?.cafe_image ? url + "/uploads/" + req.files.cafe_image[0].filename : "";
+        const protocol = req.protocol
+        const host = req.hostname
+        const url = `${protocol}//${host}`
+        const date = new Date()
 
         const adddcafe = await cafemodel.create({
             details: details,
-            logo: logoPath,
+            // logo: req.files || req.files.logo ? url + "/uploads/" + req.files.logo[0].filename : "",
             league_name: league_name,
             cafecontent: {
                 title: title,
-                cafe_image: cafeImagePath,
+                cafe_image: req.files || req.files.cafe_image ? url + "/uploads/" + req.files.cafe_image[0].filename : "",
                 date: date,
-                content: content,
-            },
-        });
+                content: content
+            }
+        })
+        res.send({ status: true, message: "cafe details added successfully!!", cafedetails: adddcafe })
 
-        res.send({ status: true, message: "Cafe details added successfully!!", cafedetails: adddcafe });
     } catch (error) {
-        console.error(error.message);
-        res.status(500).send({ status: false, message: "Internal server error" });
+        console.log(error.message)
     }
-};
-
+}
 
 //add data in  cafe leagues .....................................................
 

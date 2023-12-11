@@ -90,12 +90,12 @@ export default function Menubar() {
                           <span className="d-none d-sm-inline">About us</span>
                         </Link>
                       </li>
-                      <li className="w-100">
+                      {/* <li className="w-100">
                         <Link to="/Leagues" className="nav-link px-0">
                           {" "}
                           <span className="d-none d-sm-inline">Leagues</span>
                         </Link>
-                      </li>
+                      </li> */}
                       {/* <li>
                         <Link to="" className="nav-link px-0">
                           {" "}
@@ -219,12 +219,6 @@ export default function Menubar() {
                           <span className="d-none d-sm-inline">Leagues</span>
                         </Link>
                       </li>
-                      <li className="w-100">
-                        <Link to="/Teams" className="nav-link px-0">
-                          {" "}
-                          <span className="d-none d-sm-inline">Teams</span>
-                        </Link>
-                      </li>
                     </ul>
                   </li>
                   <li>
@@ -232,7 +226,7 @@ export default function Menubar() {
                       <span className="ms-1 d-none d-sm-inline">Customers</span>
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link
                       to="#submenu4"
                       data-bs-toggle="collapse"
@@ -253,8 +247,8 @@ export default function Menubar() {
                         </Link>
                       </li>
                     </ul>
-                  </li>
-                  {/* <li>
+                  </li> */}
+                  <li>
                     <Link
                       to="#teams1"
                       data-bs-toggle="collapse"
@@ -276,7 +270,7 @@ export default function Menubar() {
                         </Link>
                       </li>
                     </ul>
-                  </li> */}
+                  </li>
                 </ul>
                 <hr />
               </div>

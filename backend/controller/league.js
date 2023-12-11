@@ -132,9 +132,9 @@ exports.update = async (req, res) => {
         const { leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
             sort_Order, status } = req.body
 
-        const protocol = req.protocol
-        const host = req.host
-        const url = `${protocol}//${host}`
+        // const protocol = req.protocol
+        // const host = req.host
+        // const url = `${protocol}//${host}`
         const findleague = await leaguemodel.findById(req.params.leagueId)
         if (!findleague) {
             res.send({ status: true, message: "league data not found!!" })
@@ -143,7 +143,7 @@ exports.update = async (req, res) => {
 
         const update = await leaguemodel.findByIdAndUpdate(req.params.leagueId, {
             leaguename: leaguename,
-            image: req.file ? url + "/uploads/" + req.file.filename : "" ,
+            // image: req.file ? url + "/uploads/" + req.file.filename : findleague.image ,
             image: image,
             description: description,
             meta_Tag_Title: meta_Tag_Title,

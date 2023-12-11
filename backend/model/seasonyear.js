@@ -5,8 +5,8 @@ const seasonSchema = mongoose.Schema(
     teamsId:{type:mongoose.Schema.Types.ObjectId, ref:'team'},
     teamdataId:{type:mongoose.Schema.Types.ObjectId, ref:'teamdata'},
     season_Title: { type: String, require: true },
-    startDate: { type: Date, default: Date.now },
-    endDate: { type: Date, default: Date.now },
+    // startDate: { type: Date, require: true },
+    // endDate: { type: Date, require: true },
     // matches: [
     //   {
     //     type: mongoose.Schema.Types.ObjectId,
