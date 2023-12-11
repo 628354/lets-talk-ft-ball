@@ -3,17 +3,19 @@ const bcrypt = require("bcrypt");
 const path = require("path");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const { Validator } = require("node-input-validator");
 const ObjectId = mongoose.Types.ObjectId;
 const { sendResetPasswordEmail } = require("../mails/forget");
-const Helpers = require('../Helpers/Helpers')
-const Joi = require("joi");
-
-
 
 exports.register = async (req, res) => {
   try {
-
+   
+    // var image = req.files.image.name;
+    // var uploadDir = path.join(__dirname, "../uploads", image)
+    // if (req.files.image) {
+    //     req.files.image.mv(uploadDir, (err) => {
+    //         if (err) return res.status(500).send(err)
+    //     })
+    // }
     const findUser = await usermodel.findOne({ email: req.body.email });
     if (findUser) {
       return res.status(400).send("Email Already Exists");
@@ -23,9 +25,6 @@ exports.register = async (req, res) => {
     if (phoneExist) {
       return res.status(400).send("Phone Number Already Exists");
     }
-    const protocol = req.protocol
-    const host = req.hostname
-    const url = `${protocol}//${host}`
     const hashPassword = bcrypt.hashSync(req.body.password, 10);
     const addUser = await usermodel.create({
       firstName: req.body.firstName,
@@ -34,10 +33,9 @@ exports.register = async (req, res) => {
       phone: req.body.phone,
       role: req.body.role,
       password: hashPassword,
-      image: req.file ? url + "/uploads/" + req.file.filename : " ",
-
+      // image:image
     });
-
+    
     const result = await addUser.save();
     return res.status(200).send({
       body: result,
@@ -55,15 +53,6 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const v = new Validator(req.body, {
-      email: "string|required|email",
-      password: "string|required",
-    });
-    const errorResponse = await Helpers.checkValidation(v);
-    if (errorResponse) {
-      return Helpers.failed(res, errorResponse);
-    }
-
     const finduser = await usermodel.findOne({ email: req.body.email });
     if (!finduser) {
       res.send({ status: false, message: "User not found!!" });
@@ -150,48 +139,36 @@ exports.getAllUser = async (req, res) => {
   }
 };
 
-
 exports.updateUser = async (req, res) => {
   try {
     const { id, firstName, lastName, phone, country, countryCode } = req.body;
     const updateUser = await usermodel.findByIdAndUpdate(
       { _id: req.params.id },
-      { firstName, lastName, phone, country, countryCode },
-      { new: true }
+      { firstName, lastName, phone, country, countryCode }
     );
-
     if (updateUser) {
       res.status(200).send({
-        success: true,
-        message: "User Updated Successfully",
         body: updateUser,
+        message: "User Updated Successfully",
+        success: true,
       });
     } else {
-      res.status(404).send({
-        success: false,
+      res.status(300).send({
         message: "User Id Not Found",
+        success: false,
       });
     }
   } catch (error) {
-    console.error(error.message);
     res.status(500).send({
-      success: false,
-      message: "Internal Server Error",
+      message: "User Updated Successfully",
+      success: true,
       error: error.message,
     });
   }
-}
+};
 
 exports.deleteUser = async (req, res) => {
   try {
-
-    const v = new Validator(req.params, {
-      id: "string|required"
-    });
-    const errorResponse = await Helpers.checkValidation(v);
-    if (errorResponse) {
-      return Helpers.failed(res, errorResponse);
-    }
     const deleteUser = await usermodel.findByIdAndDelete({
       _id: req.params.id,
     });

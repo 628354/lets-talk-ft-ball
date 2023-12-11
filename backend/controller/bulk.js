@@ -150,19 +150,18 @@ const saveTeam = async (allDataTeam) => {
 
 exports.teamBulkImport = async (req, res) => {
 
-  const TeamFile = req.file.path;
-  const workbookTeam = XLSX.readFile(TeamFile);
+  const filePath = req.file.path;
 
-  const sheetNamesTeam = workbookTeam.SheetNames;
-  // console.log(sheetNamesTeam);
-  const allDataTeam = [];
-  const updateData = [];
-  sheetNamesTeam.forEach(async sheetName => {
+  const workbook = XLSX.readFile(filePath);
+
+  const sheetNames = workbook.SheetNames;
+  console.log(sheetNames);
+  const allData = [];
+
+  sheetNames.forEach(async sheetName => {
     const sheetsTeamData = [];
-    const udpateRecords = [];
-    const worksheetS = workbookTeam.Sheets[sheetName];
-    const data = XLSX.utils.sheet_to_json(worksheetS);
-
+    const worksheet = workbook.Sheets[sheetName];
+    const data = XLSX.utils.sheet_to_json(worksheet);
     for (let i = 0; i < data.length; i++) {
       let myData = [];
       const map = new Map(Object.entries(data[i]));
@@ -175,9 +174,6 @@ exports.teamBulkImport = async (req, res) => {
         myData[modifiedString] = data[i][key]
         // data[i][modifiedString]= data[i][key];
       }
-
-
-      if(myData['GS/GC'] != ""){
       sheetsTeamData.push({
         NO_OF_GAMES: myData['NO._OF_GAMES'],
         POINTS: myData.POINTS,
@@ -192,22 +188,20 @@ exports.teamBulkImport = async (req, res) => {
         GS_GC: (myData['GS/GC']) ? myData['GS/GC'] : " ",
         Poverty_Line: myData.Line
       })
-    }
-    }
 
-
-    const teamId = await teamCatlog.findOne({ "en.Team_Name_English": sheetName });
-    if (await teamId?._id) {
-      await saveTeam([{
-        seasonid: req.body.season,
-        leagueid: req.body.league,
-        teamname: teamId,
-        en: sheetsTeamData,
-        ar: sheetsTeamData
-      }])
     }
+    allData.push({
+      seasonid: req.body.season,
+      leagueid: req.body.league,
+      teamname: sheetName,
+      getData: sheetsTeamData
+    })
+
   });
-  responseHelper[200].data = "Successflly updated team";
+
+
+  const addleage = await teadData.create(allData)
+  responseHelper[200].data = addleage;
   res.send(responseHelper[200]);
 
 }

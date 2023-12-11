@@ -4,7 +4,7 @@ const path = require("path");
 const csvtojson = require("csvtojson");
 
 const multer = require("multer");
-const {authentication} = require('../middleware/auth')
+const authentication = require('../middleware/auth')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -18,18 +18,18 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const leaguecontroller = require("../controller/league");
 
-router.post("/addleague",authentication,upload.single("image"), leaguecontroller.addleague);
+router.post("/addleague",upload.single("image"), leaguecontroller.addleague);
 
-router.get("/getleagues",authentication, leaguecontroller.getleagues);
+router.get("/getleagues", leaguecontroller.getleagues);
 
-router.get("/getleagueById/:id",authentication, leaguecontroller.getById);
+router.get("/getleagueById/:id", leaguecontroller.getById);
 
 router.post(
-  "/updateLeague/:leagueId",authentication,
+  "/updateLeague/:leagueId",
   leaguecontroller.update
 );
 
-router.delete("/removeLeague/:leagueId",authentication, leaguecontroller.delete);
+router.delete("/removeLeague/:leagueId", leaguecontroller.delete);
 
 const storages = multer.memoryStorage();
 const uploads = multer({ storage: storages });

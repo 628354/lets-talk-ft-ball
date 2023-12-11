@@ -8,6 +8,6 @@ router.get("/getyears", seasonyearController.getyears);
 router.get("/getseasonById/:id", seasonyearController.getById);
 router.post("/updateSeasonyear/:yearId", seasonyearController.updateyears);
 router.delete("/removeyear/:id", seasonyearController.removeyear);
-router.get('/getsessonYear',authentication,seasonyearController.getsessonYear)
+router.get('/getsessonYear',seasonyearController.getsessonYear)
 
 module.exports = router;
