@@ -8,14 +8,14 @@ import Form from 'react-bootstrap/Form';
 
 export default function Season() {
   const [aboutData, setAboutData] = useState([]);
-  const [itemId, setItemId] = useState(0); // Initialize with a default value
+  const [itemId, setItemId] = useState(0); 
 
   useEffect(() => {
     axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getyears')
       .then((response) => {
-        const aboutInfo = response.data.seasonyears
+        const aboutInfo = response.data?.seasonyears
         setAboutData(aboutInfo);
-        setItemId(aboutInfo._id); // Assuming 'id' is the key for the ID
+        setItemId(aboutInfo._id); 
 
 
       })
@@ -27,7 +27,6 @@ export default function Season() {
   const handleDelete = (id) => {
     axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeyear/${id}`)
       .then((response) => {
-        // Assuming a successful deletion, you can update your state to remove the deleted item
         setAboutData(aboutData.filter(season => season._id !== id));
       })
       .catch((error) => {
