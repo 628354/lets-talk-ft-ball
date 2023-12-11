@@ -22,6 +22,7 @@ exports.createTeam = async (req, res) => {
             leagues: leagues,
             status: status
         })
+    
         res.send({ status: true, message: "Successfully add team", teamdetails: addTeam })
     } catch (error) {
         res.send({ status: false, message: "Something went wrong!!" })
