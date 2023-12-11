@@ -53,7 +53,7 @@ export default function Editleagues() {
 
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/getleagueById/${id}`)
+    axios.get(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagueById/${id}`)
       .then((response) => {
         const aboutInfo = response.data.leaguedetails
         setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
