@@ -29,7 +29,7 @@ export default function Addteams() {
             clearMessages();
         } else {
             try {
-                const response = await axios.post('http://localhost:5000/createTeam', formData);
+                const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/createTeam', formData);
                 console.log(response.data);
                 setSuccessMessage(response.data.message);
                 clearMessages(); 

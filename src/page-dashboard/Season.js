@@ -11,7 +11,7 @@ export default function Season() {
   const [itemId, setItemId] = useState(0); // Initialize with a default value
 
   useEffect(() => {
-    axios.get('http://localhost:5000/getyears')
+    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getyears')
       .then((response) => {
         const aboutInfo = response.data.seasonyears
         setAboutData(aboutInfo);
@@ -25,7 +25,7 @@ export default function Season() {
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:5000/removeyear/${id}`)
+    axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeyear/${id}`)
       .then((response) => {
         // Assuming a successful deletion, you can update your state to remove the deleted item
         setAboutData(aboutData.filter(season => season._id !== id));
