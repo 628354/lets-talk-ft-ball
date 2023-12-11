@@ -22,6 +22,7 @@ exports.createTeam = async (req, res) => {
             leagues: leagues,
             status: status
         })
+    
         res.send({ status: true, message: "Successfully add team", teamdetails: addTeam })
     } catch (error) {
         res.send({ status: false, message: "Something went wrong!!" })
@@ -31,7 +32,7 @@ exports.createTeam = async (req, res) => {
 
 exports.getTeams = async (req, res) => {
     try {
-        const getTeams = await teammodel.find().sort({createdAt:-1})
+        const getTeams = await teammodel.find().populate('leagues').sort({createdAt:-1})
         res.send({ status: true, message: "Successfully get teams", teamdetails: getTeams })
     } catch (error) {
         res.send({ status: true, message: "Something went wrong !!" })

@@ -78,7 +78,7 @@ function App() {
 	// Array of routes where the Header should not be displayed
 	const noHeaderRoutes = [
 		"/Login",
-		"/dashboard",
+		"/Dashboard",
 		"/Signup",
 		"/Forgot",
 		"/Editseason",
@@ -87,6 +87,7 @@ function App() {
 		"/Editabout",
 		"/Editprivacypolicy",
 		"/Leagues",
+		"/Editleagues",
 		"/Editcontact",
 		"/Editdefinition",
 		"/Addcafe",
@@ -99,19 +100,14 @@ function App() {
 		"/EditTeams",
 		"/Addteams",
 		"/DashboardPage",
-		"/EditLeagues",
-		"/Addleagues",
+		
 	];
 	// Get the current route
 	const currentRoute = location.pathname;
 	// Check if the current route is in the array of routes where Header should not be displayed
 	const shouldDisplayHeader = !noHeaderRoutes.some((route) => currentRoute.startsWith(route));
-
-// 	console.log("Current Route:", currentRoute);
-// console.log("noHeaderRoutes:", noHeaderRoutes);
-// console.log("Matched Route:", noHeaderRoutes.find(route => currentRoute.startsWith(route)));
-// console.log("Should Display Header:", shouldDisplayHeader);
-
+	console.log("Current Route:", currentRoute);
+	console.log("Should Display Header:", shouldDisplayHeader);
 	const { language } = useLanguage();
 	let HeaderComponent;
 	let FooterComponent;
@@ -196,7 +192,7 @@ function App() {
 				<Route path="/Menubar" element={<Menubar />}></Route>
 				<Route path="/Addseason" element={<Addseason />}></Route>
 
-				{/* <Route path="/Editseason" element={<Editseason />}></Route> */}
+				<Route path="/Editseason" element={<Editseason />}></Route>
 				<Route path="/Editseason/:id" element={<Editseason />}></Route>
 				<Route path="/Leagues" element={<Leagues />}></Route>
 				<Route path="/Addleagues" element={<Addleagues />}></Route>

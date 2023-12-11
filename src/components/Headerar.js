@@ -11,14 +11,12 @@ export default function Headerar() {
 	window.addEventListener("scroll", function () {
 		const header = document.querySelector(".topheader");
 		const scrollY = window.scrollY;
-        if(header){
-			if (scrollY > 0) {
-				header.classList.add("sticky-header");
-			} else {
-				header.classList.remove("sticky-header");
-			}
+
+		if (scrollY > 0) {
+			header.classList.add("sticky-header");
+		} else {
+			header.classList.remove("sticky-header");
 		}
-		
 	});
 
 	const [showDropdown, setShowDropdown] = useState(false);

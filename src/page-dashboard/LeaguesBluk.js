@@ -18,15 +18,15 @@ export default function LeaguesBluk() {
 
 	const SessionCall = () => {
 		apiCall(SESSION.year, REQUEST_TYPE.GET).then((results) => {
-			setSession(results.response.data?.seasonyears)
-			console.log(results.response.data?.seasonyears)
+			setSession(results.response.data.seasonyears)
+			console.log(results.response.data.seasonyears)
 		})
 	}
 
 	const LeagueCall = () => {
 		apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
 			// console.log(results.response.data.leaguedetails);
-			setleagues(results.response.data?.leaguedetails)
+			setleagues(results.response.data.leaguedetails)
 		})
 	}
 

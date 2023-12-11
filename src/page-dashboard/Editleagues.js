@@ -56,7 +56,7 @@ export default function Editleagues() {
     axios.get(`http://localhost:5000/getleagueById/${id}`)
       .then((response) => {
         const aboutInfo = response.data.leaguedetails
-        setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
+        setImageURL(aboutInfo.image); // Set the imageURL state with the fetched image URL
         setAboutData(aboutInfo);
 
 
@@ -193,7 +193,7 @@ export default function Editleagues() {
                                 League Name
                               </Form.Label>
                               <Col sm="10">
-                                <Form.Control type="text" placeholder="League Namee" value={aboutData?.leaguename}
+                                <Form.Control type="text" placeholder="League Namee" value={aboutData.leaguename}
                                   onChange={(e) => handleTextChange('leaguename', e.target.value)} />
                               </Col>
                             </Form.Group>
@@ -215,7 +215,7 @@ export default function Editleagues() {
                                 League Description
                               </Form.Label>
                               <Col sm="10">
-                                <ReactQuill className='edit-text' value={aboutData?.description}
+                                <ReactQuill className='edit-text' value={aboutData.description}
                                 onChange={(value) => handleTextChange('description', value)} />
                               </Col>
                             </Form.Group>
@@ -224,7 +224,7 @@ export default function Editleagues() {
                                 League Meta Tag Title
                               </Form.Label>
                               <Col sm="10">
-                                <Form.Control type="text" placeholder="Meta Tag Title" value={aboutData?.meta_Tag_Title}
+                                <Form.Control type="text" placeholder="Meta Tag Title" value={aboutData.meta_Tag_Title}
                                   onChange={(e) => handleTextChange('meta_Tag_Title', e.target.value)}/>
                               </Col>
                             </Form.Group>
@@ -233,7 +233,7 @@ export default function Editleagues() {
                                 League Meta Tag Description
                               </Form.Label>
                               <Col sm="10">
-                                <Form.Control as="textarea" rows={3}  value={aboutData?.meta_Tag_Description}
+                                <Form.Control as="textarea" rows={3}  value={aboutData.meta_Tag_Description}
                                   onChange={(e) => handleTextChange('meta_Tag_Description', e.target.value)} />
                               </Col>
                             </Form.Group>
@@ -242,7 +242,7 @@ export default function Editleagues() {
                                 League Meta Tag Keywords
                               </Form.Label>
                               <Col sm="10">
-                                <Form.Control as="textarea" rows={3}  value={aboutData?.meta_Tag_Keywords}
+                                <Form.Control as="textarea" rows={3}  value={aboutData.meta_Tag_Keywords}
                                   onChange={(e) => handleTextChange('meta_Tag_Keywords', e.target.value)}/>
                               </Col>
                             </Form.Group>
@@ -345,7 +345,7 @@ export default function Editleagues() {
                           </Form.Label>
                           <Col sm="10">
                             <Form.Select
-                               value={aboutData?.status}
+                               value={aboutData.status}
                                onChange={(e) => handleTextChange('status', e.target.value)}
                               name="status"
                             >
@@ -360,7 +360,7 @@ export default function Editleagues() {
                             Sort Order
                           </Form.Label>
                           <Col sm="10">
-                            <Form.Control type="number" placeholder="League Namee" value={aboutData?.sort_Order}
+                            <Form.Control type="number" placeholder="League Namee" value={aboutData.sort_Order}
                                onChange={(e) => handleTextChange('sort_Order', e.target.value)} />
                           </Col>
                         </Form.Group>

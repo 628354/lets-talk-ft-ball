@@ -13,16 +13,12 @@ export default function Header() {
 
 	window.addEventListener("scroll", function () {
 		const header = document.querySelector(".topheader");
-		//const scrollY = window.scrollY;
+		const scrollY = window.scrollY;
 
-		if (header) {
-			const scrollY = window.scrollY;
-	
-			if (scrollY > 0) {
-				header.classList.add("sticky-header");
-			} else {
-				header.classList.remove("sticky-header");
-			}
+		if (scrollY > 0) {
+			header.classList.add("sticky-header");
+		} else {
+			header.classList.remove("sticky-header");
 		}
 	});
 
@@ -43,8 +39,9 @@ export default function Header() {
 	/// get leagus  start
 
 	const getLeagueName = () => {
-		 const apiUrl = "http://localhost:5000/getleagues";
-		//const apiUrl =			"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues";
+		// const apiUrl = "http://localhost:5000/getleagues";
+		const apiUrl =
+			"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues";
 		const obj = {
 			maxBodyLength: Infinity,
 			headers: {

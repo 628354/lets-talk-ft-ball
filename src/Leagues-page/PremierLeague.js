@@ -18,8 +18,8 @@ export default function PremierLeague() {
 	const [seasonId, setSeasonId] = useState("");
 	const [teamId, setTeamId] = useState("");
 	const getLeagueDetails = () => {
-		const apiUrl = `http://localhost:5000/getleagueById/${leagueId}`;
-		//const apiUrl = `	https://phpstack-1140615-3967632.cloudwaysapps.com/backend/${leagueId}`;
+		//const apiUrl = `http://localhost:5000/getleagueById/${leagueId}`;
+		const apiUrl = `	https://phpstack-1140615-3967632.cloudwaysapps.com/backend/${leagueId}`;
 		axios.get(apiUrl).then((response) => {
 			console.log(response.data);
 			const allRecords = response.data.body;

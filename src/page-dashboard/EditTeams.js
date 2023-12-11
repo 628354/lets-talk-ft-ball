@@ -34,7 +34,6 @@ export default function EditTeams() {
         //     'Content-Type':'application/json'
         // }
     })
-    
     .then((response) => {
 
     }).catch((error) => {

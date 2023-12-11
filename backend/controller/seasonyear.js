@@ -29,7 +29,7 @@ exports.addleagueyear = async (req, res) => {
 
 exports.getyears = async (req, res) => {
   try {
-    const getyears = await seasonyearmodel.find().sort({ createdAt: -1 });
+    const getyears = await seasonyearmodel.find().sort({ season_Title: -1 });
     res.send({
       status: true,
       message: "Successfully get seasonyears",
