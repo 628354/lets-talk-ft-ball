@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const {authentication} = require('../middleware/auth')
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -18,23 +18,23 @@ const upload = multer({ storage: storage });
 const definitionController = require("../controller/definition");
 
 router.post(
-  "/addDefinition",
+  "/addDefinition",authentication,
   upload.single("image"),
   definitionController.adddefinitions
 );
 
 router.post(
-  "/adddefinitionInexisting/:id",
+  "/adddefinitionInexisting/:id",authentication,
   definitionController.adddefinitiontype
 );
 
 router.post(
-  "/updatedata/:objectId/:arrayElementId",
+  "/updatedata/:objectId/:arrayElementId",authentication,
   definitionController.updatedata
 );
-router.delete("/definitionDelete/:id", definitionController.definitionDelete);
+router.delete("/definitionDelete/:id",authentication, definitionController.definitionDelete);
 
-router.get("/getAllDefinition", definitionController.getAllDefinition);
-router.get('/getDefinitionById/:id', definitionController.getDefinitionById)
+router.get("/getAllDefinition",authentication, definitionController.getAllDefinition);
+router.get('/getDefinitionById/:id',authentication, definitionController.getDefinitionById)
 
 module.exports = router;

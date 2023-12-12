@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const {authentication} = require('../middleware/auth')
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -16,15 +16,15 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const privacyController = require("../controller/privacypolicy");
 
-router.post("/addpolicy", upload.single("image"), privacyController.addpolicy);
+router.post("/addpolicy",authentication, upload.single("image"), privacyController.addpolicy);
 
-router.get("/getpolicy", privacyController.getPolicy);
+router.get("/getpolicy",authentication, privacyController.getPolicy);
 
 router.post(
-  "/updatePolicy/:policyId",
+  "/updatePolicy/:policyId",authentication,
   upload.single("image"),
   privacyController.updatepolicy
 );
 
-router.delete('/deletePrivacy/:id', privacyController.deletePrivacy)
+router.delete('/deletePrivacy/:id',authentication, privacyController.deletePrivacy)
 module.exports = router;
