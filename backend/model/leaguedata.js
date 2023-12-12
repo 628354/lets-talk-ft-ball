@@ -14,9 +14,9 @@ const leaguedataSchema = mongoose.Schema(
       ref: "league",
     },
 
-    seasonid: { type: String, require: true },
+     seasonid: { type: String, require: true },
 
-    leagueid: { type: String, require: true },
+     leagueid: { type: String, require: true },
 
     datatype: { type: String, require: true },
 
