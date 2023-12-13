@@ -17,6 +17,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 const leaguecontroller = require("../controller/league");
+router.get('/getleagusById/:id', leaguecontroller.getleagusById)
 
 router.post("/addleague",upload.single("image"), leaguecontroller.addleague);
 

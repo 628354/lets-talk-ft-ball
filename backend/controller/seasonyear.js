@@ -150,3 +150,15 @@ exports.getsessonYear = async (req, res) => {
     });
   }
 };
+exports.getLatestYears = async (req, res) => {
+  try {
+    const getyears = await seasonyearmodel.find().sort({ age: -1 }).limit(1);
+    res.send({
+      status: true,
+      message: "Successfully get seasonyears",
+      seasonyears: getyears,
+    });
+  } catch (error) {
+    res.send({ status: false, message: "Something went wrong !!" });
+  }
+};

@@ -29,7 +29,9 @@ export default function EditTeams() {
         short_name:setTeams.short_name,
         status:setTeams.status
     }
+   
     axios.post(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/updateteams/${id}`, updatedData, {
+      //axios.post(` http://localhost:5000/updateteams/${id}`, updatedData, {
         // headers:{
         //     'Content-Type':'application/json'
         // }

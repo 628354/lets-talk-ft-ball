@@ -12,36 +12,66 @@ import {
 } from "recharts";
 
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, GS } from "../helper/APIInfo";
+import { REQUEST_TYPE, GS,SESSION } from "../helper/APIInfo";
 
-export default function Premierchart({ currentLeagueId, seasonId, teamId }) {
+export default function Premierchart({  leagueId}) {
 	const [goalScore, setGoalScore] = useState([]);
-	console.log(currentLeagueId);
-	console.log(seasonId);
+	const [seasonId, setSeasonId] = useState();
+	//console.log(currentLeagueId);
+	//console.log(seasonId);
+//get season 
+const getYears= async ()=>{
+	try{
+		const response = await apiCall(SESSION.year,REQUEST_TYPE.GET).then((response)=>{
+			//console.log(response.response.data.seasonyears)
+			
+			setSeasonId(response.response.data.seasonyears[0]._id)
+			
+		})
+	}catch(error){
+		console.log("data not found",error)
+	}
+	
+}
+
+useEffect(()=>{
+	getYears()
+	
+},[seasonId])
+
 	const getGoalScore = () => {
+		console.log(leagueId);
+		console.log(seasonId);
+		
 		let data = {
-			leagueId: { currentLeagueId },
-			season: { seasonId },
+			leagueId: leagueId ,
+			season: seasonId ,
 		};
 
 		apiCall(GS.find, REQUEST_TYPE.POST, data).then((result) => {
-			if (result.status === 200) {
-				console.log(result.response.data.data);
+			 //console.log(result.response.data.data[0].en);
+			// setGoalScore(result.response.data.data[0].en)
 
-				const extractedData = result.response.data.data.map((item) => ({
-					name: item.en[0].teamname.en.Team_Name_Short_English,
-					goalsScored: parseInt(item.en[0].goals_scored),
+			if (result.status === 200) {
+				
+
+				const extractedData = result.response.data.data[0]?.en.map((item) => ({
+					name:item.teamname.en.Team_Name_Short_English,
+					goalsScored:parseInt(item.goals_scored)
+					//goalsScored: parseInt(item.en[0].goals_scored),
+					
 				}));
+			
 
 				setGoalScore(extractedData);
 			}
 		});
 		return false;
 	};
-	//console.log(goalScore);
+	//console.log(seasonId);
 	useEffect(() => {
 		getGoalScore();
-	}, []);
+	}, [leagueId,seasonId]);
 	return (
 		<div>
 			<div className="premier-textare">

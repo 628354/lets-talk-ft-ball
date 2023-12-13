@@ -60,27 +60,8 @@ module.exports = {
 
     findTeam : async (Request,Response) =>{
         const { lung } =Request.params;
-        const { season, leagueId } = Request.body
-		const data = await teamCatlog.aggregate([
-			{
-				$unwind: "$"+lung
-			},
-			{
-				$match: {
-					leagueid: leagueId,
-					seasonid: season
-				}
-			},
-			{
-				$project: {
-					_id: 1,
-					seasonid: 1,
-					leagueid: 1,
-					datatype: 1,
-					[lung]:1
-				}
-			}
-		])
+        const {  leagueId } = Request.body
+        const data = await teamCatlog.find({leagueid:leagueId},{_id:1,seasonid:1,datatype:1,leagueid:1,[lung]:1});
 		responseHelper[200].data = data;
 		Response.send(responseHelper[200]);
 }

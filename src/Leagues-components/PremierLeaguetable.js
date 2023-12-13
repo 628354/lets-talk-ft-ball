@@ -4,68 +4,73 @@ import React, { useContext, useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, SESSION } from "../helper/APIInfo";
 
-//import LeagueContext from "./LeagueContext";
+import { apiCall } from "../helper/RequestHandler";
+import { REQUEST_TYPE, SESSION,FIND_TEAM ,GET_TEAM_ID,SESSIOND} from "../helper/APIInfo";
+
+
 export default function PremierLeaguetable({
-	currentLeagueId,
-	seasonId,
-	teamId,
+	leagueId
+	
 }) {
-	console.log(currentLeagueId);
-	console.log(seasonId);
-	// console.log(teamId);
+	//console.log(leagueId);
+	//console.log(seasonId);
+	// //console.log(teamId);
 	// const { teamdetailsData, getTeamsData, setSelectedTeamId } =
 	// 	useContext(LeagueContext);
-	const [teamDetails, setTeamDetails] = useState([]);
+	
 
-	const getTeams = () => {
-		let data = {
-			season: { seasonId },
-		};
-		const leagueId = { currentLeagueId };
-		let config = {
-			method: "post",
-			//url: `http://localhost:5000/en/scrolldown/find/${leagueId}`,
-			url: `https://phpstack-1140615-3967632.cloudwaysapps.com/backend/${leagueId}`,
-			headers: {
-				"Content-Type": "application/json",
-			},
-			data: data,
-		};
+	const [leagueDetails, setLeagueDetails] = useState([]);
+	
+	const [seasonId, setSeasonId] = useState();
+	const [allSeasson,setAllSeasson]=useState([])
 
-		axios
-			.request(config)
-			.then((response) => {
-				console.log(response.data.data);
-				setTeamDetails(response.data.data);
+	const getYears= async ()=>{
+		try{
+			const response = await apiCall(SESSION.year,REQUEST_TYPE.GET).then((response)=>{
+				console.log(response.response.data.seasonyears)
+				setAllSeasson(response.response.data.seasonyears)
+				setSeasonId(response.response.data.seasonyears[0]._id)
+			    
 			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
-	// const getGoalScore = () => {
-	// 	let data = {
-	// 		leagueId: "6569bad8990ed9605cd647ba",
-	// 		season: "655ef69a09f4db0c0444e843",
-	// 	};
+		}catch(error){
+			console.log("data not found",error)
+		}
+		
+	}
+	
 
-	// 	apiCall(SESSION.find, REQUEST_TYPE.GET, data).then((result) => {
-	// 		console.log(result);
-	// 	});
-	// 	return false;
-	// };
-	console.log(teamDetails);
+	/// get table data 
+	const getTeamsData= ()=>{			
+	try{
+			//console.log(seasonId)
+			const baseUrl = FIND_TEAM.find;
+const params={
+	season:seasonId
+}
+			const apiUrl =`${baseUrl}/${leagueId}`
+         // console.log(apiUrl,REQUEST_TYPE.POST,params)
+		apiCall(apiUrl,REQUEST_TYPE.POST,params).then((response)=>{
+				console.log(response.response.data.data[0]?.en)
+				setLeagueDetails(response.response.data.data[0]?.en)
+			})
+
+		}catch(error){
+			console.log("data not found ",error)
+		}
+
+	}
+	useEffect(()=>{
+		getYears()
+		
+	},[seasonId])
+
 	useEffect(() => {
-		getTeams();
-		//setTeamDetails(teamdetailsData);
-		//getGoalScore();
-	}, [currentLeagueId]);
-
-	// const handleTeamClick = (teamId) => {
-	// 	setSelectedTeamId(teamId);
-	// };
+		
+		getTeamsData();
+		
+	  }, [seasonId,leagueId]);
+//console.log(allSeasson)
 	return (
 		<div>
 			<div className="en-table-deta ar-table-deta">
@@ -101,14 +106,20 @@ export default function PremierLeaguetable({
 											</span>{" "}
 										</button>
 										<div class="dropdown-content">
-											<Link to="">2023-24</Link>
+											{
+												allSeasson.map((res)=>{
+													//console.log(res)
+													return(<Link to="">{res.season_Title}</Link>)
+												})
+											}
+											{/* <Link to="">2023-24</Link>
 											<Link to="">2022-23</Link>
 											<Link to="">2021-22</Link>
 											<Link to="">2020-21</Link>
 											<Link to="">2019-20</Link>
 											<Link to="">2018-19</Link>
 											<Link to="">2017-18</Link>
-											<Link to="">2016-17</Link>
+											<Link to="">2016-17</Link> */}
 										</div>
 									</div>
 								</div>
@@ -120,9 +131,9 @@ export default function PremierLeaguetable({
 								</div>
 							</td>
 						</tr>
-						{teamDetails.map((data, index) => {
-							console.log(data.en[0]);
-							const tableDAta = data.en[0];
+						{leagueDetails && leagueDetails.map((data, index) => {
+						//	console.log(data);	
+							//const tableDAta = data.en[0];
 							return (
 								<tr key={data._id}>
 									<td>{index + 1}</td>
@@ -139,20 +150,20 @@ export default function PremierLeaguetable({
 												/>
 											</span>{" "}
 											<span className="toearth">
-												{data.en[0].teamname.en.Team_Name_English}
+											{data.teamname.en.Team_Name_English}
 											</span>
 										</Link>
 									</td>
-									<td>{tableDAta.games}</td>
-									<td>{tableDAta.win}</td>
-									<td>{tableDAta.draw}</td>
-									<td>{tableDAta.lose}</td>
-									<td>{tableDAta.goals_scored}</td>
-									<td>{tableDAta.goals_conceded}</td>
-									<td>{tableDAta.points}</td>
-									<td>{tableDAta.point_gap}</td>
-									<td>{tableDAta.gs_gc}</td>
-									<td>{tableDAta.win_precent}</td>
+									<td>{data.games}</td>
+									<td>{data.win}</td>
+									<td>{data.draw}</td>
+									<td>{data.lose}</td>
+									<td>{data.goals_scored}</td>
+									<td>{data.goals_conceded}</td>
+									<td>{data.points}</td>
+									<td>{data.point_gap}</td>
+									<td>{data.gs_gc}</td>
+									<td>{data.win_precent}</td>
 								</tr>
 							);
 						})}

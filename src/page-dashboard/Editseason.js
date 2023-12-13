@@ -30,7 +30,9 @@ export default function Editseason() {
   };
 
   useEffect(() => {
+   
     axios.get(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getseasonById/${id}`)
+   // axios.get(` http://localhost:5000/getseasonById/${id}`)
       .then((response) => {
         console.log(response)
         const aboutInfo = response.data.seasonyears

@@ -102,15 +102,12 @@ function App() {
 		"/EditLeagues",
 		"/Addleagues",
 	];
-	// Get the current route
+
 	const currentRoute = location.pathname;
-	// Check if the current route is in the array of routes where Header should not be displayed
+
 	const shouldDisplayHeader = !noHeaderRoutes.some((route) => currentRoute.startsWith(route));
 
-// 	console.log("Current Route:", currentRoute);
-// console.log("noHeaderRoutes:", noHeaderRoutes);
-// console.log("Matched Route:", noHeaderRoutes.find(route => currentRoute.startsWith(route)));
-// console.log("Should Display Header:", shouldDisplayHeader);
+
 
 	const { language } = useLanguage();
 	let HeaderComponent;

@@ -174,3 +174,16 @@ exports.delete = async (req, res) => {
         res.send({ status: false, message: "Something went wrong !!" })
     }
 }
+exports.getleagusById = async(req, res) => {
+    try {
+        const league = await leaguemodel.findById({_id:req.params.id})
+        if(league) {
+            res.send({status:true, message:'league details Get Successfully', body:league})
+        } else {
+            res.send({status:false, message:'league Id not found'})
+        }
+        
+    } catch (error) {
+        console.log(error.message)
+    }
+}

@@ -9,5 +9,5 @@ router.get("/getseasonById/:id",authentication, seasonyearController.getById);
 router.post("/updateSeasonyear/:yearId",authentication, seasonyearController.updateyears);
 router.delete("/removeyear/:id",authentication, seasonyearController.removeyear);
 router.get('/getsessonYear',seasonyearController.getsessonYear)
-
+router.get("/getLatestYears", seasonyearController.getLatestYears);
 module.exports = router;
