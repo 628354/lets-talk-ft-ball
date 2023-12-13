@@ -52,10 +52,7 @@ export default function LeaguesBluk() {
 		const formDatas = new FormData();
 
 
-		if (formData?.season === '') {
-			setErrorMessage('Please fill in all required fields.');
-			clearMessages();
-		} else if (formData?.league === '') {
+		if (formData?.league === '') {
 			setErrorMessage('Please fill in all required fields.');
 			clearMessages();
 		} else {
@@ -154,10 +151,10 @@ export default function LeaguesBluk() {
 											<div className='sanson-title'>
 
 												<Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-													<Form.Label column sm="2">
+													{/* <Form.Label column sm="2">
 														Season
-													</Form.Label>
-													<Col sm="10">
+													</Form.Label> */}
+													{/* <Col sm="10">
 														<Form.Select name="season"
 															onChange={handleChange} >
 															<option value={""}>Select Season</option>
@@ -165,7 +162,7 @@ export default function LeaguesBluk() {
 																<option value={row._id}>{row.season_Title}</option>
 															))}
 														</Form.Select>
-													</Col>
+													</Col> */}
 												</Form.Group>
 												<Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
 													<Form.Label column sm="2">

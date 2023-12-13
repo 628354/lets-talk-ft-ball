@@ -41,24 +41,24 @@ exports.getaboutus = async (req, res) => {
 
 exports.updateAboutus = async (req, res) => {
     try {
-            const { aboutTitle, aboutText, visionTitle } = req.body;
-            const files = req.files;
-            const protocol = req.protocol;
-            const host = req.host;
-            const url = `${protocol}//${host}`;
+        const { aboutTitle, aboutText, visionTitle } = req.body;
+        const files = req.files;
+        const protocol = req.protocol;
+        const host = req.host;
+        const url = `${protocol}//${host}`;
 
-            const finddata = await aboutusmodel.findById(req.params.Id);
-            const updateaboutus = await aboutusmodel.findByIdAndUpdate(req.params.Id, {
-                bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : finddata.bannerImage,
-                aboutTitle: aboutTitle,
-                aboutText: aboutText,
-                aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : finddata.aboutSectionImage,
-                visionSectionImage: files && files.visionSectionImage ? url + "/uploads/" + files.visionSectionImage[0].filename : finddata.visionSectionImage,
-                visionTitle: visionTitle,
-            }, { new: true });
+        const finddata = await aboutusmodel.findById(req.params.Id);
+        const updateaboutus = await aboutusmodel.findByIdAndUpdate(req.params.Id, {
+            bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : finddata.bannerImage,
+            aboutTitle: aboutTitle,
+            aboutText: aboutText,
+            aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : finddata.aboutSectionImage,
+            visionSectionImage: files && files.visionSectionImage ? url + "/uploads/" + files.visionSectionImage[0].filename : finddata.visionSectionImage,
+            visionTitle: visionTitle,
+        }, { new: true });
 
-            await updateaboutus.save();
-       
+        await updateaboutus.save();
+
     } catch (error) {
         console.log(error);
         res.send({ status: false, message: "Something went wrong !!" });

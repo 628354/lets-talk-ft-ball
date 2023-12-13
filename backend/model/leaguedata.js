@@ -49,7 +49,7 @@ const leaguedataSchema = mongoose.Schema(
     ar: [{
       teamname: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "team"
+        ref: "teamCatlog"
       },
       games: { type: String, require: true },
 

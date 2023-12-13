@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Form } from "react-bootstrap";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,14 +8,13 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Login(props) {
 	const navigate = useNavigate();
 	const { onSuccessfulLogin } = props;
-	const [isLoggedIn, setIsLoggedIn] = useState(false); // Local state to track login status
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [formData, setFormData] = useState({
 		email: "",
 		password: "",
 	});
 
 	const { email, password } = formData;
-
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({
@@ -26,17 +25,15 @@ export default function Login(props) {
 	const baseUrl = process.env.PUBLIC_URL;
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// Send the formData to the backend using an HTTP request (e.g., Axios).
 		axios
-			.post(`${baseUrl}/backend/adminLogin`, formData)
+			.post(`http://localhost:5000/Login`, formData)
 			.then((response) => {
-				console.log(response);
+				console.log(response.data);
 				if (onSuccessfulLogin) {
 					navigate("/Dashboard");
 				}
 			})
 			.catch((error) => {
-				// Handle errors (e.g., login failure).
 				console.error("Login failed:", error);
 			});
 	};
@@ -47,7 +44,6 @@ export default function Login(props) {
 				<Container>
 					<div className="row">
 						<div className="col-lg-12 col-md-12 col-sm-12">
-							{/* ... Login form content here ... */}
 						</div>
 					</div>
 				</Container>
@@ -56,7 +52,6 @@ export default function Login(props) {
 				<Container>
 					<div className="row en_login_box">
 						<div className="col-lg-6 col-md-6 col-sm-12 en_bckg">
-							{/* ... Login form image here ... */}
 						</div>
 						<div className="col-lg-6 col-md-6 col-sm-12">
 							<div className="en_login_contant ar_login_contant">

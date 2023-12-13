@@ -73,7 +73,7 @@ exports.addcafeleaguesdata = async (req, res) => {
         await findAndAddData.save()
         res.send({ status: true, message: "Successfully add cafe content", cafedetails: findAndAddData })
     } catch (error) {
-        console.log(error.message) 
+        console.log(error.message)
     }
 }
 
@@ -105,19 +105,19 @@ exports.updatecafecontent = async (req, res) => {
     }
 }
 
-exports.cafe_details = async(req, res) => {
+exports.cafe_details = async (req, res) => {
     try {
-        const cafe = await cafemodel.findOne({_id:req.params.id})
-        if(cafe) {
+        const cafe = await cafemodel.findOne({ _id: req.params.id })
+        if (cafe) {
             res.status(200).send({
-                body:cafe,
-                message:'cafe Get By Id successfully',
-                success:true
+                body: cafe,
+                message: 'cafe Get By Id successfully',
+                success: true
             })
         } else {
             res.status(300).send({
-                message:'cafe Id Not Found',
-                success:false
+                message: 'cafe Id Not Found',
+                success: false
             })
         }
     } catch (error) {
@@ -125,32 +125,32 @@ exports.cafe_details = async(req, res) => {
     }
 }
 
-exports.getAllCafe = async(req, res) => {
+exports.getAllCafe = async (req, res) => {
     try {
         const cafe = await cafemodel.find()
         res.status(200).send({
-            body:cafe,
-            message:'All Cafe Get Successfully',
-            success:true
+            body: cafe,
+            message: 'All Cafe Get Successfully',
+            success: true
         })
     } catch (error) {
-       console.log(error.message) 
+        console.log(error.message)
     }
 }
 
-exports.deleteCafe = async(req, res) => {
+exports.deleteCafe = async (req, res) => {
     try {
-        const deleteCaf = await cafemodel.findByIdAndDelete({_id:req.params.id})
-        if(deleteCaf) {
+        const deleteCaf = await cafemodel.findByIdAndDelete({ _id: req.params.id })
+        if (deleteCaf) {
             res.send(200).send({
-                body:deleteCaf,
-                message:'Cafe Deleted Successfully',
-                success:true
+                body: deleteCaf,
+                message: 'Cafe Deleted Successfully',
+                success: true
             })
         } else {
             res.send(300).send({
-                message:'Cafe Id Not Found',
-                success:false
+                message: 'Cafe Id Not Found',
+                success: false
             })
         }
     } catch (error) {

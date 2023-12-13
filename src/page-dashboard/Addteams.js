@@ -14,13 +14,11 @@ import { apiCall } from '../helper/RequestHandler';
 export default function Addteams() {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [getSession, setSession] = useState([]);
   const [getLeagues, setLeagues] = useState([]);
   const [formData, setFormData] = useState({
     teamName: '',
     short_name: '',
     status: 'active',
-    season: '',
     league: ''
   });
 
@@ -28,15 +26,14 @@ export default function Addteams() {
     if (field) {
       setFormData((prevState) => ({ ...prevState, [field]: e.target.value }));
     } else if (e.target && e.target.name) {
-      setFormData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
+      if (e.target.name === 'league') {
+        setFormData((prevState) => ({ ...prevState, league: e.target.value }));
+      } else {
+        setFormData((prevState) => ({ ...prevState, [e.target.leaguename]: e.target.value }));
+      }
     }
   };
 
-  const SessionCall = () => {
-    apiCall(SESSION.year, REQUEST_TYPE.GET).then((results) => {
-      setSession(results.response.data.seasonyears);
-    });
-  };
 
   const LeagueCall = () => {
     apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
@@ -45,24 +42,23 @@ export default function Addteams() {
   };
 
   useEffect(() => {
-    SessionCall();
     LeagueCall();
   }, []);
 
+
+
   const handleSave = async () => {
-    if (formData.teamName.trim() === '' || formData.short_name.trim() === '' || formData.season === '' || formData.league === '') {
+    if (formData.teamName.trim() === '' || formData.short_name.trim() === '' || formData.league === '' || formData.status === '') {
       setErrorMessage('Please fill in all required fields.');
       clearMessages();
     } else {
       try {
-        const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/createTeam', formData);
-        console.log(response.data);
+        const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/ createTeam', formData);
         setSuccessMessage(response.data.message);
         clearMessages();
       } catch (error) {
         setErrorMessage('Error occurred. Please try again.');
         clearMessages();
-        console.error(error);
       }
     }
   };
@@ -146,23 +142,6 @@ export default function Addteams() {
                         <div className='sanson-title'></div>
                         <div className='date-for-section'>
                           <div className='sanson-title'>
-                            <Form>
-                              <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                <Form.Label column sm="1">
-                                  Season Name
-                                </Form.Label>
-                                <Col sm="10">
-                                  <Form.Select name="season" onChange={(e) => handleChange(e, 'season')}>
-                                    <option value={""}>Select Season</option>
-                                    {getSession?.length > 0 &&
-                                      getSession.map((row) => (
-                                        <option value={row._id} key={row._id}>{row.season_Title}</option>
-                                      ))
-                                    }
-                                  </Form.Select>
-                                </Col>
-                              </Form.Group>
-                            </Form>
                           </div>
                           <div className='sanson-title'>
                             <Form>
@@ -171,13 +150,12 @@ export default function Addteams() {
                                   League Name
                                 </Form.Label>
                                 <Col sm="10">
-                                  <Form.Select name="league" onChange={(e) => handleChange(e, 'league')}>
+                                  <Form.Select name="league"
+                                    onChange={handleChange} >
                                     <option value={""}>Select League</option>
-                                    {getLeagues?.length > 0 &&
-                                      getLeagues.map((row) => (
-                                        <option value={row._id} key={row._id}>{row.leaguename}</option>
-                                      ))
-                                    }
+                                    {getLeagues?.map((row) => (
+                                      <option value={row._id}>{row.leaguename}</option>
+                                    ))}
                                   </Form.Select>
                                 </Col>
                               </Form.Group>
