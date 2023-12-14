@@ -1161,3 +1161,25 @@ table.aline_tablel thead tr th {
 
 /* new css */
 
+.data-filter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.custom-select select {
+    width: 250px;
+    padding: 6px 6px;
+}
+.data-filter p {
+    margin: 0;
+    padding: 0;
+}
+
+.filter-part {
+    display: flex;
+    justify-content: flex-end;
+    gap: 50px;
+}
+
+
+

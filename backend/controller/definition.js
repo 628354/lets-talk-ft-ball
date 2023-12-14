@@ -19,9 +19,9 @@ exports.adddefinitions = async (req, res) => {
         res.send({ status: true, mesasge: "Successfully add definition", body: result })
     } catch (error) {
         res.status(200).send({
-            mesasge:'Enternal Server Error',
-            success:false,
-            error:error.mesasge
+            mesasge: 'Enternal Server Error',
+            success: false,
+            error: error.mesasge
         })
     }
 }
@@ -83,62 +83,62 @@ exports.updatedata = async (req, res) => {
     }
 }
 
-exports.definitionDelete = async (req,res)=>{
+exports.definitionDelete = async (req, res) => {
     try {
-        const definitions = await definitionmodel.findByIdAndDelete({_id:req.params.id})
-        if(definitions) {
+        const definitions = await definitionmodel.findByIdAndDelete({ _id: req.params.id })
+        if (definitions) {
             res.status(200).send({
-                mesasge:'Definitions Delete Successfully',
-                success:true,
-                body:definitions
+                mesasge: 'Definitions Delete Successfully',
+                success: true,
+                body: definitions
             })
         } else {
             res.status(300).send({
-                message:'definitions Id not found',
-                success:false
+                message: 'definitions Id not found',
+                success: false
             })
         }
     } catch (error) {
-        res.send({status : false , message : "Something went wrong !!"})
+        res.send({ status: false, message: "Something went wrong !!" })
     }
 }
 
-exports.getAllDefinition = async(req, res) => {
+exports.getAllDefinition = async (req, res) => {
     try {
         const getAll = await definitionmodel.find()
         res.status(200).send({
-            body:getAll,
-            message:"Get All Definition Successfully",
-            success:true
+            body: getAll,
+            message: "Get All Definition Successfully",
+            success: true
         })
     } catch (error) {
-      res.status(500).send({
-        message:'Enternal Server Error',
-        success:true,
-        error:error.mesasge
-      })
+        res.status(500).send({
+            message: 'Enternal Server Error',
+            success: true,
+            error: error.mesasge
+        })
     }
 }
-exports.getDefinitionById = async(req, res) => {
+exports.getDefinitionById = async (req, res) => {
     try {
-        const definitions = await definitionmodel.findById({_id:req.params.id})
-        if(definitions){
+        const definitions = await definitionmodel.findById({ _id: req.params.id })
+        if (definitions) {
             res.status(200).send({
-                body:definitions,
-                message:'Definition detatails get Successfully',
-                success:true
+                body: definitions,
+                message: 'Definition detatails get Successfully',
+                success: true
             })
         } else {
             res.status(300).send({
-                message:'Definition Id Not Found',
-                success:false
+                message: 'Definition Id Not Found',
+                success: false
             })
         }
     } catch (error) {
         res.status(500).send({
-            message:'Enternal Server Error',
-            success:true,
-            error:error.mesasge
-          })
+            message: 'Enternal Server Error',
+            success: true,
+            error: error.mesasge
+        })
     }
 }

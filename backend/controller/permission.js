@@ -1,21 +1,21 @@
 const checkPermission = require("../middleware/checkPermission");
 const permission = require("../model/permission");
-const  usermodel = require('../model/user')
+const usermodel = require('../model/user')
 module.exports = {
     create: async (req, res) => {
         try {
-            const finduser = await usermodel.findOne({_id:req.user.id})
-            if(finduser) {
+            const finduser = await usermodel.findOne({ _id: req.user.id })
+            if (finduser) {
                 throw new Error('User Not found')
             }
-                const permissions = await permission.create(req.body);
-                const result = await permissions.save();           
-                res.status(200).send({
-                    body: result,
-                    message: "Permission Create Successfully",
-                    success: true,
-                });
-          
+            const permissions = await permission.create(req.body);
+            const result = await permissions.save();
+            res.status(200).send({
+                body: result,
+                message: "Permission Create Successfully",
+                success: true,
+            });
+
         } catch (error) {
             res.status(500).send({
                 message: "Enternal Server Error",

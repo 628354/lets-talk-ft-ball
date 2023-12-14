@@ -15,7 +15,7 @@ exports.addpolicy = async (req, res) => {
         res.send({ status: true, message: "Successfully add policy", policydetails: addpolicy })
     } catch (error) {
         console.log(error.message)
-        }
+    }
 }
 
 exports.getPolicy = async (req, res) => {
@@ -52,19 +52,19 @@ exports.updatepolicy = async (req, res) => {
     }
 }
 
-exports.deletePrivacy = async(req, res) => {
+exports.deletePrivacy = async (req, res) => {
     try {
-        const privacy_policy = await policymodel.findByIdAndDelete({_id:req.params.id})
-        if(privacy_policy) {
+        const privacy_policy = await policymodel.findByIdAndDelete({ _id: req.params.id })
+        if (privacy_policy) {
             res.send(200).send({
-                body:privacy_policy,
-                message:'Privacy Policy Deleted Successfully',
-                success:true
+                body: privacy_policy,
+                message: 'Privacy Policy Deleted Successfully',
+                success: true
             })
         } else {
             res.send(300).send({
-                message:'Privacy Policy Id Not Found',
-                success:false
+                message: 'Privacy Policy Id Not Found',
+                success: false
             })
         }
     } catch (error) {

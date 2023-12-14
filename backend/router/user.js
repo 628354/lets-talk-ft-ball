@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const usercontroller = require("../controller/user");
 const { authentication } = require("../middleware/auth");
+const checkPermission = require('../middleware/checkPermission')
 const multer = require("multer");
 const upload = multer({
   dest: 'uploads/',

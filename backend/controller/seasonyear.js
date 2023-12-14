@@ -27,6 +27,8 @@ exports.addleagueyear = async (req, res) => {
   }
 };
 
+
+
 exports.getyears = async (req, res) => {
   try {
     const getyears = await seasonyearmodel.find().sort({ season_Title: -1 });

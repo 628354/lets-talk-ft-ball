@@ -19,8 +19,9 @@ export default function Teams() {
     axios.get(' http://localhost:5000/getTeams')
       .then((response) => {
         const teamsInfo = response.data?.teamdetails;
-        console.log(teamsInfo, "teams data")
         setTeamsData(teamsInfo || []); 
+        setItemId(teamsInfo._id); 
+
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -78,12 +79,10 @@ export default function Teams() {
                     <li class="add-button-cencel"><a href=""><i className="ri-refresh-line"></i></a></li>
                   </ul>
                 </div>
-
               </div>
+
             </Row>
           </Container>
-
-
         </section>
         <hr />
         <section className='teams-List'>
@@ -97,6 +96,7 @@ export default function Teams() {
                   <thead>
                     <tr>
                       <th><Form.Check aria-label="option 1" /></th>
+                      <th>League Name</th>
                       <th>Teams Name</th>
                       <th>Sort Name</th>
                       <th>Action</th>
@@ -106,6 +106,7 @@ export default function Teams() {
                     {teamsData.map((team) => (
                       <tr key={team._id}>
                         <td><Form.Check aria-label="option 1" /></td>
+                        <td>{team.leagues ? team.leagues.leaguename : ""}</td>
                         <td>{team.teamName}</td>
                         <td>{team.short_name}</td>
                         <td>

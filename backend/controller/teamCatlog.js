@@ -29,7 +29,6 @@ module.exports = {
 
                 allData.push({
                     leagueid: req.body.league,
-                    seasonid: req.body.season,
                     en: {
                         Team_Name_English: myData.Team_Name_English,
                         Team_Name_Short_English: myData.Team_Name_Short_English,
@@ -58,11 +57,11 @@ module.exports = {
 
     },
 
-    findTeam : async (Request,Response) =>{
-        const { lung } =Request.params;
-        const {  leagueId } = Request.body
-        const data = await teamCatlog.find({leagueid:leagueId},{_id:1,seasonid:1,datatype:1,leagueid:1,[lung]:1});
-		responseHelper[200].data = data;
-		Response.send(responseHelper[200]);
-}
+    findTeam: async (Request, Response) => {
+        const { lung } = Request.params;
+        const { leagueId } = Request.body
+        const data = await teamCatlog.find({ leagueid: leagueId }, { _id: 1, seasonid: 1, datatype: 1, leagueid: 1, [lung]: 1 });
+        responseHelper[200].data = data;
+        Response.send(responseHelper[200]);
+    }
 }

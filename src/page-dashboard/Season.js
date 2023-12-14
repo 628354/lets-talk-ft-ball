@@ -27,7 +27,7 @@ export default function Season() {
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeyear/${id}`)
+    axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/${id}`)
       .then((response) => {
         setAboutData(aboutData.filter(season => season._id !== id));
       })
