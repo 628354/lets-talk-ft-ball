@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
+
 import {
 	BarChart,
 	Bar,
@@ -11,34 +12,70 @@ import {
 	Legend,
 } from "recharts";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, GC } from "../helper/APIInfo";
+import { REQUEST_TYPE, GC,SESSION } from "../helper/APIInfo";
 
-export default function Goalsconchart({ currentLeagueId, seasonId, teamId }) {
+export default function Goalsconchart({ leagueId}) {
 	const [goalCons, setGoalCons] = useState([]);
+
+	const [seasonId, setSeasonId] = useState();
+	// console.log(leagueId);
+	// console.log(seasonId);
+//get season 
+const getYears= async ()=>{
+	try{
+		const response = await apiCall(SESSION.year,REQUEST_TYPE.GET).then((response)=>{
+			//console.log(response.response.data.seasonyears)
+			
+			setSeasonId(response.response.data.seasonyears[0]._id)
+			
+		})
+	}catch(error){
+		console.log("data not found",error)
+	}
+	
+}
+
+useEffect(()=>{
+	getYears()
+	
+},[seasonId])
+
+
+
+
 	const getGoalCons = () => {
 		let data = {
-			leagueId: { currentLeagueId },
-			season: { seasonId },
+			leagueId:  leagueId ,
+			season:  seasonId ,
 		};
 
 		apiCall(GC.find, REQUEST_TYPE.POST, data).then((result) => {
+			//console.log(result.response.data.data[0].en);
 			if (result.status === 200) {
-				//console.log(result.response.data.data);
-
-				const extractedData = result.response.data.data.map((item) => ({
-					name: item.en[0].teamname.en.Team_Name_Short_English,
-					goalsCons: parseInt(item.en[0].goals_scored),
+				
+				const extractedData = result.response.data.data[0]?.en.map((item) => ({
+					name:item.teamname.en.Team_Name_Short_English,
+					goalsCons:parseInt(item.goals_scored)
+					//goalsScored: parseInt(item.en[0].goals_scored),
+					
 				}));
+
+				// const extractedData = result.response.data.data.map((item) => ({
+				// 	name: item.en[0].teamname.en.Team_Name_Short_English,
+				// 	goalsCons: parseInt(item.en[0].goals_scored),
+				// }));
 
 				setGoalCons(extractedData);
 			}
 		});
 		return false;
 	};
-	//console.log(goalCons);
+	////console.log(goalCons);
 	useEffect(() => {
 		getGoalCons();
-	}, []);
+	}, [leagueId,seasonId]);
+
+	
 	return (
 		<div>
 			<div className="premier-textare">

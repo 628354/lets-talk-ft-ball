@@ -7,22 +7,20 @@ import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLanguage } from "../languages/LanguageContext";
-import axios from "axios";
+
+import { apiCall } from "../helper/RequestHandler";
+import { REQUEST_TYPE, LEAGUES } from "../helper/APIInfo";
 export default function Header() {
 	const [leagueNames, setLeagueNames] = useState([]);
 
 	window.addEventListener("scroll", function () {
 		const header = document.querySelector(".topheader");
-		//const scrollY = window.scrollY;
+		const scrollY = window.scrollY;
 
-		if (header) {
-			const scrollY = window.scrollY;
-	
-			if (scrollY > 0) {
-				header.classList.add("sticky-header");
-			} else {
-				header.classList.remove("sticky-header");
-			}
+		if (scrollY > 0) {
+			header.classList?.add("sticky-header");
+		} else {
+			header.classList?.remove("sticky-header");
 		}
 	});
 
@@ -43,22 +41,32 @@ export default function Header() {
 	/// get leagus  start
 
 	const getLeagueName = () => {
-		//  const apiUrl = "http://localhost:5000/getleagues";
-		const apiUrl =			"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues";
+		
 		const obj = {
 			maxBodyLength: Infinity,
 			headers: {
 				"Content-Type": "application/json",
 			},
 		};
-		axios.get(apiUrl, obj).then((response) => {
-			console.log(response.data.leaguedetails);
-			setLeagueNames(response.data.leaguedetails);
-		});
+		try{
+			apiCall(LEAGUES.league,REQUEST_TYPE.GET,obj).then((response)=>{	
+				console.log(response.response.data.leaguedetails);
+				setLeagueNames(response.response.data.leaguedetails
+						)
+					
+		
+				})
+		}catch(error){
+			console.error("An error occurred while fetching league names:", error);
+		}
+		
+		
 	};
 	useEffect(() => {
 		getLeagueName();
+		
 	}, []);
+
 
 	return (
 		<div>
@@ -134,9 +142,9 @@ export default function Header() {
 								<div className="en_dropdown-content">
 									<div className="en_h_drop">
 										<ul className="en_drop_item  row w-100">
-											{leagueNames.map((data) => (
-												<li className="col-md-6" key={data._id}>
-													<Link to={`/league/${data._id}`}>
+										{leagueNames.map((data) => (
+												<li className="col-md-6" key={data?._id}>
+													<Link to={`/league/${data?._id}`}  >
 														<span>
 															<img
 																src={

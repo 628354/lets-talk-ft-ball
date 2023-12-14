@@ -1,9 +1,10 @@
 /** @format */
 
 const SERVER_LINK =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/";
+const SERVER_IMAGES =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/"
 // const SERVER_LINK = "http://localhost:5000/";
 // const SERVER_IMAGES = "http://localhost:5000/";
-const SERVER_IMAGES =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/"
+
 export const REQUEST_TYPE = {
 	GET: "GET",
 	POST: "POST",
@@ -43,3 +44,14 @@ export const GC = {
 export const GS_GC = {
 	find: `${SERVER_LINK}en/gs-gc/find`,
 };
+export const FIND_TEAM = {
+	find: `${SERVER_LINK}en/scrolldown/find`,
+};
+export const GET_TEAM_ID = {
+	find: `${SERVER_LINK}getleagusById`,
+};
+export const SESSIOND = {
+	year: `${SERVER_LINK}getyears`,
+	LatestYears: `${SERVER_LINK}getLatestYears`,
+  };
+

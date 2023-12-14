@@ -8,45 +8,44 @@ import Iframesecttion from "../Leagues-components/Iframesecttion";
 import Premierchart from "../Leagues-components/Premierchart";
 import Goalsconchart from "../Leagues-components/Goalsconchart";
 import CahrtGsGc from "../Leagues-components/CahrtGsGc";
-import axios from "axios";
+
+import { apiCall } from "../helper/RequestHandler";
+import { REQUEST_TYPE, SESSION,FIND_TEAM ,GET_TEAM_ID,SESSIOND} from "../helper/APIInfo";
 export default function PremierLeague() {
-	const baseUrl = "https://phpstack-1140615-3967632.cloudwaysapps.com/backend/";
-	const [leagueDetails, setLeagueDetails] = useState([]);
+	
+	
+	const [leagueDecreption, setLeagueDecreption] = useState([]);
 	const { leagueId } = useParams();
+console.log(leagueId)
 
-	const [currentLeagueId, setCurrentLeagueId] = useState("");
-	const [seasonId, setSeasonId] = useState("");
-	const [teamId, setTeamId] = useState("");
-	const getLeagueDetails = () => {
-		const apiUrl = `http://localhost:5000/getleagueById/${leagueId}`;
-		//const apiUrl = `	https://phpstack-1140615-3967632.cloudwaysapps.com/backend/${leagueId}`;
-		axios.get(apiUrl).then((response) => {
-			console.log(response.data);
-			const allRecords = response.data.body;
+	// const [currentLeagueId, setCurrentLeagueId] = useState("");
+	// const [seasonId, setSeasonId] = useState();
+	// const [teamId, setTeamId] = useState("");
+	
+	
+	const getLeagueDetails=()=>{
+		const baseUrl = GET_TEAM_ID.find;
+		const apiUrl =`${baseUrl}/${leagueId}`
+		try{
+			apiCall(apiUrl,REQUEST_TYPE.GET).then((response)=>{
+				console.log(response.response.data.body)
+				setLeagueDecreption(response.response.data.body)
+			})
 
-			const filteredRecords = allRecords.filter((record) => {
-				// console.log("record.id:", record);
-				// console.log("leagueId:", leagueId);
-				return record._id === leagueId;
-			});
+		}catch(error){
+			console.log("data not ",error)
+		}
 
-			//	console.log(filteredRecords);
-			// setLeagueDetails(response.data.leaguedetails);
-			if (filteredRecords.length === 0) {
-				console.log("No matching records found.");
-			} else {
-				//console.log(filteredRecords[0].sessionId);
-				setTeamId(filteredRecords[0].teamId);
-				setCurrentLeagueId(filteredRecords[0]._id);
-				setSeasonId(filteredRecords[0].sessionId);
-				setLeagueDetails(filteredRecords);
-			}
-		});
-	};
-	console.log(leagueDetails);
-	useEffect(() => {
-		getLeagueDetails();
-	}, [leagueId]);
+	}
+
+
+
+	useEffect(()=>{
+		
+		getLeagueDetails()
+	},[leagueId])
+	
+	  
 	return (
 		<div>
 			<section className="en_hero_about en_hero_about">
@@ -65,9 +64,9 @@ export default function PremierLeague() {
 						<li>
 							<i className="ri-arrow-right-s-line"></i>
 						</li>
-						{leagueDetails.map((data) => (
-							<Link to="">{data.leaguename}</Link>
-						))}
+						
+							<Link to="">{leagueDecreption.leaguename}</Link>
+					
 					</ul>
 				</Container>
 			</div>
@@ -75,12 +74,12 @@ export default function PremierLeague() {
 			<section className="en-premier ar-premier">
 				<Container>
 					<Row>
-						{leagueDetails.map((data) => (
-							<Row key={data._id}>
+						
+							<Row key={leagueDecreption._id}>
 								<div className="col-lg-12 col-md-12 col-sm-12">
 									<div className="en-premier-contant ar-premier-contant">
 										<div className="leagues_cont">
-											<h2>{data.leaguename}</h2>
+											<h2>{leagueDecreption.leaguename}</h2>
 										</div>
 									</div>
 								</div>
@@ -89,7 +88,7 @@ export default function PremierLeague() {
 										<div className="col-lg-2 col-md-2 col-sm-12 m-auto">
 											<div className="en-leagues-img">
 												<img
-													src={"http://localhost:5000/uploads/" + data.image}
+													src={"http://localhost:5000/uploads/" + leagueDecreption.image}
 													alt="earth"
 													className="img-premier-press"
 												/>
@@ -97,13 +96,13 @@ export default function PremierLeague() {
 										</div>
 										<div className="col-lg-10 col-md-10 col-sm-12">
 											<div className="en-leagues-text ar-leagues-text">
-												<p>{data.description}</p>
+												<p>{leagueDecreption.description}</p>
 											</div>
 										</div>
 									</Row>
 								</div>
 							</Row>
-						))}
+					
 						{/* <div className="col-lg-12 col-md-12 col-sm-12">
 							<div className="en-premier-contant ar-premier-contant">
 								<div className="leagues_cont">
@@ -122,9 +121,9 @@ export default function PremierLeague() {
 						</div>
 						<div className="en_main_table ar_main_table">
 							<PremierLeaguetable
-								currentLeagueId={currentLeagueId}
-								seasonId={seasonId}
-								teamId={teamId}
+								 leagueId={leagueId}
+								// seasonId={seasonId}
+								// teamId={teamId}
 							/>
 						</div>
 					</Row>
@@ -135,9 +134,9 @@ export default function PremierLeague() {
 				<Container>
 					<Row>
 						<Premierchart
-							currentLeagueId={currentLeagueId}
-							seasonId={seasonId}
-							teamId={teamId}
+							  leagueId={leagueId}
+							// seasonId={seasonId}
+							// teamId={teamId}
 						/>
 					</Row>
 				</Container>
@@ -147,9 +146,9 @@ export default function PremierLeague() {
 				<Container>
 					<Row>
 						<Goalsconchart
-							currentLeagueId={currentLeagueId}
-							seasonId={seasonId}
-							teamId={teamId}
+						leagueId={leagueId}
+							
+							
 						/>
 					</Row>
 				</Container>
@@ -158,9 +157,8 @@ export default function PremierLeague() {
 				<Container>
 					<Row>
 						<CahrtGsGc
-							currentLeagueId={currentLeagueId}
-							seasonId={seasonId}
-							teamId={teamId}
+						leagueId={leagueId}
+							
 						/>
 					</Row>
 				</Container>

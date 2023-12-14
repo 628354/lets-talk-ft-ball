@@ -53,7 +53,9 @@ export default function Editleagues() {
 
 
   useEffect(() => {
-    axios.get(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagueById/${id}`)
+  
+   // axios.get(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagueById/${id}`)
+    axios.get(`  http://localhost:5000/getleagueById/${id}`)
       .then((response) => {
         const aboutInfo = response.data.leaguedetails
         setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
@@ -79,8 +81,9 @@ export default function Editleagues() {
     formData.append('sort_Order', aboutData.sort_Order);
     formData.append('status', aboutData.status);
 
-
+    
     axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/updateLeague    ' + id, formData, {
+   // axios.post('http://localhost:5000/updateLeague    ' + id, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

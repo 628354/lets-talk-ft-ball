@@ -11,27 +11,52 @@ import {
 	Legend,
 } from "recharts";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, GS_GC } from "../helper/APIInfo";
+import { REQUEST_TYPE, GS_GC,SESSION } from "../helper/APIInfo";
 
-export default function CahrtGsGc({ currentLeagueId, seasonId, teamId }) {
+export default function CahrtGsGc({ leagueId}) {
 	const [gsGc, setGsGc] = useState([]);
-	// console.log(currentLeagueId);
-	// console.log(seasonId);
+	const [seasonId, setSeasonId] = useState();
+	console.log(leagueId);
+	console.log(seasonId);
+
+
+	const getYears= async ()=>{
+		try{
+			const response = await apiCall(SESSION.year,REQUEST_TYPE.GET).then((response)=>{
+				//console.log(response.response.data.seasonyears)
+				
+				setSeasonId(response.response.data.seasonyears[0]._id)
+				
+			})
+		}catch(error){
+			console.log("data not found",error)
+		}
+		
+	}
+	
+	useEffect(()=>{
+		getYears()
+		
+	},[seasonId])
+	
 	const getGsGc = () => {
+
 		let data = {
-			leagueId: { currentLeagueId },
-			season: { seasonId },
+			leagueId:  leagueId ,
+			season:  seasonId ,
 		};
 
 		apiCall(GS_GC.find, REQUEST_TYPE.POST, data).then((result) => {
+			console.log(result.response.data.data[0]?.en);
 			if (result.status === 200) {
 				//console.log(result.response.data.data[0].en[0].gs_gc);
 
-				const extractedData = result.response.data.data.map((item) => ({
-					name: item.en[0].teamname.en.Team_Name_Short_English,
-					goalsCons: parseInt(item.en[0].gs_gc),
+				const extractedData = result.response.data.data[0]?.en.map((item) => ({
+					name:item.teamname.en.Team_Name_Short_English,
+					goalsCons:parseInt(item.gs_gc)
+					//goalsScored: parseInt(item.en[0].goals_scored),
+					
 				}));
-
 				setGsGc(extractedData);
 			}
 		});
@@ -40,7 +65,7 @@ export default function CahrtGsGc({ currentLeagueId, seasonId, teamId }) {
 	console.log(gsGc);
 	useEffect(() => {
 		getGsGc();
-	}, []);
+	}, [leagueId,seasonId]);
 	return (
 		<div>
 			<div className="premier-textare">
