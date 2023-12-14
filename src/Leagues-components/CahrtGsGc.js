@@ -16,8 +16,8 @@ import { REQUEST_TYPE, GS_GC,SESSION } from "../helper/APIInfo";
 export default function CahrtGsGc({ leagueId}) {
 	const [gsGc, setGsGc] = useState([]);
 	const [seasonId, setSeasonId] = useState();
-	console.log(leagueId);
-	console.log(seasonId);
+	// console.log(leagueId);
+	// console.log(seasonId);
 
 
 	const getYears= async ()=>{
@@ -62,7 +62,7 @@ export default function CahrtGsGc({ leagueId}) {
 		});
 		return false;
 	};
-	console.log(gsGc);
+	//console.log(gsGc);
 	useEffect(() => {
 		getGsGc();
 	}, [leagueId,seasonId]);

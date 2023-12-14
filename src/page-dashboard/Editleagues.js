@@ -10,8 +10,8 @@ import Form from 'react-bootstrap/Form';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useParams } from 'react-router-dom';
-
-
+import { apiCall } from '../helper/RequestHandler';
+import { REQUEST_TYPE,GET_LEAGUE_BY_ID,UPDATE_LEAGUE } from '../helper/APIInfo';
 
 export default function Editleagues() {
 
@@ -50,25 +50,27 @@ export default function Editleagues() {
   };
 
 
+const getLeagueById =async()=>{
+  try{
+    const baseUrl=GET_LEAGUE_BY_ID.getLeague;
+    const apiUrl =`${baseUrl}/${id}`
+    const response=await apiCall(apiUrl,REQUEST_TYPE.GET);
+    //console.log(response.response.data.body)
+    const aboutInfo = response.response.data.body
+    setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
+    setAboutData(aboutInfo);
 
+  }catch(error){
+    console.log("get data ",error)
+  }
 
-  useEffect(() => {
-  
-   // axios.get(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagueById/${id}`)
-    axios.get(`  http://localhost:5000/getleagueById/${id}`)
-      .then((response) => {
-        const aboutInfo = response.data.leaguedetails
-        setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
-        setAboutData(aboutInfo);
+}
+useEffect(()=>{
+  getLeagueById()
+},[])
 
-
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
-
-  const handleUpdateData = () => {
+ 
+  const handleUpdateData = async() => {
 
     const formData = new FormData();
     formData.append('leaguename', aboutData.leaguename);
@@ -81,20 +83,16 @@ export default function Editleagues() {
     formData.append('sort_Order', aboutData.sort_Order);
     formData.append('status', aboutData.status);
 
-    
-    axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/updateLeague    ' + id, formData, {
-   // axios.post('http://localhost:5000/updateLeague    ' + id, formData, {
+    const baseUrl=UPDATE_LEAGUE.upDate;
+    const apiUrl =`${baseUrl}/${id}`
+    const response = await apiCall(apiUrl,REQUEST_TYPE.POST,formData,{
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    })
-      .then((response) => {
+    });
+   // console.log(response)
 
-        // Handle success, e.g., show a success message
-      })
-      .catch((error) => {
-        console.error('Error updating data:', error);
-      });
+    
   };
 
 

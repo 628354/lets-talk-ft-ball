@@ -13,8 +13,8 @@ export default function Leagues() {
   const [itemId, setItemId] = useState(0); 
   useEffect(() => {
 
-    //axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues')
-    axios.get('http://localhost:5000/getleagues')
+    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues')
+    //axios.get('http://localhost:5000/getleagues')
       .then((response) => {
         const aboutInfo = response.data?.leaguedetails
         setAboutData(aboutInfo);

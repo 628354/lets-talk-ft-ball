@@ -8,7 +8,8 @@ import Tabs from 'react-bootstrap/Tabs';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
-
+import { apiCall } from '../helper/RequestHandler';
+import { REQUEST_TYPE,ADD_SEASON } from '../helper/APIInfo';
 export default function Addseason() {
   const [successMessage, setSuccessMessage] = useState(''); // State to hold success message
   const [errorMessage, setErrorMessage] = useState('');
@@ -31,11 +32,10 @@ export default function Addseason() {
       clearMessages();
     } else {
     try {
+      const response= await apiCall(ADD_SEASON.season,REQUEST_TYPE.POST,formData);
      
-      const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/addseasonyear', formData);
-      //const response = await axios.post(' http://localhost:5000/addseasonyear', formData);
-      console.log(response.data);
-      setSuccessMessage(response.data.message);
+     // console.log(response.response);
+      setSuccessMessage(response.response.data.message);
       clearMessages(); // Clear messages after 3 seconds
 
 

@@ -8,6 +8,7 @@ const SERVER_IMAGES =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backen
 export const REQUEST_TYPE = {
 	GET: "GET",
 	POST: "POST",
+	PUT:"PUT"
 };
 export const IMAGES = {
 	imgs: SERVER_IMAGES + "/uploads/",
@@ -54,4 +55,33 @@ export const SESSIOND = {
 	year: `${SERVER_LINK}getyears`,
 	LatestYears: `${SERVER_LINK}getLatestYears`,
   };
+  export const ADD_LEAGUES = {
+	league: `${SERVER_LINK}addleague`,
+	
+  };
+  export const ADD_SEASON = {
+	season: `${SERVER_LINK}addseasonyear`,
+	
+  };
+  export const GET_SEASON_BY_ID = {
+	getseasonById: `${SERVER_LINK}getseasonById`,
+	
+  };
+  export const UPDATE_SEASON_YEAR = {
+	updateSeason: `${SERVER_LINK}updateSeasonyear`,
+	
+  };
+  export const GET_LEAGUE_BY_ID = {
+	getLeague: `${SERVER_LINK}getleagusById`,
+	
+  };
+  export const UPDATE_LEAGUE = {
+	upDate: `${SERVER_LINK}updateLeague`,
+	
+  };
+  export const TEAM_DETAILS = {
+	details: `${SERVER_LINK}en/team_details`,
+	
+  };
+
 

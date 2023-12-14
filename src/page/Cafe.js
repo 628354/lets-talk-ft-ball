@@ -83,8 +83,8 @@ export default function Cafe() {
 						<div className="blog-container row ">
 							{blogData.map((data) => {
 								return (
-									<div className="col-lg-6 col-md-6 col-sm-12 w-50 mb-3	 ">
-										<Blog key={data.createdAt} blogData={data} />
+									<div className="col-lg-6 col-md-6 col-sm-12 w-50 mb-3	 "key={data.createdAt} >
+										<Blog blogData={data} />
 									</div>
 								);
 							})}

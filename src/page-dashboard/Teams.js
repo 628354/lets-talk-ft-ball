@@ -15,8 +15,8 @@ export default function Teams() {
 
   useEffect(() => {
    
-    // axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getTeams')
-    axios.get(' http://localhost:5000/getTeams')
+     axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getTeams')
+    //axios.get(' http://localhost:5000/getTeams')
       .then((response) => {
         const teamsInfo = response.data?.teamdetails;
         setTeamsData(teamsInfo || []); 
