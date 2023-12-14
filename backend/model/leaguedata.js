@@ -6,9 +6,6 @@ const leaguedataSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "team",
     },
-
-
-
     league: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "league",

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const {authentication} = require('../middleware/auth')
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -19,21 +19,21 @@ const upload = multer({ storage: storage });
 const cafecontroller = require("../controller/cafe");
 
 router.post(
-  "/addcafedata",
+  "/addcafedata",authentication,
   upload.fields([{ name: "logo" }, { name: "cafe_image" }]),
   cafecontroller.addcafedata
 );
 
 router.post(
-  "/addCafeleaguedata/:cafe_id",
+  "/addCafeleaguedata/:cafe_id",authentication,
   upload.single("cafe_image"),
   cafecontroller.addcafeleaguesdata
 );
 
-router.get("/cafe_details/:id", cafecontroller.cafe_details);
+router.get("/cafe_details/:id",authentication, cafecontroller.cafe_details);
 
-router.get("/getAllCafe", cafecontroller.getAllCafe);
+router.get("/getAllCafe",authentication, cafecontroller.getAllCafe);
 
-router.delete("/deleteCafe/:id", cafecontroller.deleteCafe);
+router.delete("/deleteCafe/:id",authentication, cafecontroller.deleteCafe);
 
 module.exports = router;
