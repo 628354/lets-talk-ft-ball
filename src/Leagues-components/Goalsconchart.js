@@ -21,20 +21,14 @@ export default function Goalsconchart({ leagueId}) {
 	// console.log(leagueId);
 	// console.log(seasonId);
 //get season 
-const getYears= async ()=>{
-	try{
-		const response = await apiCall(SESSION.year,REQUEST_TYPE.GET).then((response)=>{
-			//console.log(response.response.data.seasonyears)
-			
-			setSeasonId(response.response.data.seasonyears[0]._id)
-			
-		})
-	}catch(error){
-		console.log("data not found",error)
+const getYears = async () => {
+	try {
+		const response = await apiCall(SESSION.year, REQUEST_TYPE.GET);
+		setSeasonId(response.response.data.seasonyears[0]._id);
+	} catch (error) {
+		console.log("data not found", error);
 	}
-	
-}
-
+};
 useEffect(()=>{
 	getYears()
 	
@@ -43,33 +37,27 @@ useEffect(()=>{
 
 
 
-	const getGoalCons = () => {
+const getGoalCons = async () => {
+	try {
 		let data = {
-			leagueId:  leagueId ,
-			season:  seasonId ,
+			leagueId: leagueId,
+			season: seasonId,
 		};
 
-		apiCall(GC.find, REQUEST_TYPE.POST, data).then((result) => {
-			//console.log(result.response.data.data[0].en);
-			if (result.status === 200) {
-				
-				const extractedData = result.response.data.data[0]?.en.map((item) => ({
-					name:item.teamname.en.Team_Name_Short_English,
-					goalsCons:parseInt(item.goals_scored)
-					//goalsScored: parseInt(item.en[0].goals_scored),
-					
-				}));
+		const result = await apiCall(GC.find, REQUEST_TYPE.POST, data);
 
-				// const extractedData = result.response.data.data.map((item) => ({
-				// 	name: item.en[0].teamname.en.Team_Name_Short_English,
-				// 	goalsCons: parseInt(item.en[0].goals_scored),
-				// }));
+		if (result.status === 200) {
+			const extractedData = result.response.data.data[0]?.en.map((item) => ({
+				name: item.teamname.en.Team_Name_Short_English,
+				goalsCons: parseInt(item.goals_scored),
+			}));
 
-				setGoalCons(extractedData);
-			}
-		});
-		return false;
-	};
+			setGoalCons(extractedData);
+		}
+	} catch (error) {
+		console.error("An error occurred while fetching goal cons:", error);
+	}
+};
 	////console.log(goalCons);
 	useEffect(() => {
 		getGoalCons();

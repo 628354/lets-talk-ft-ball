@@ -9,7 +9,8 @@ import Form from 'react-bootstrap/Form';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useState } from 'react';
-
+import { apiCall } from '../helper/RequestHandler';
+import { REQUEST_TYPE,ADD_LEAGUES } from '../helper/APIInfo';
 export default function Addleagues() {
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -47,9 +48,10 @@ export default function Addleagues() {
 
   const handleSave = async () => {
     try {
-      const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/addleague', formData);
-      //const response = await axios.post('http://localhost:5000/addleague', formData);
-      console.log(response.data);
+      const response =  await apiCall(ADD_LEAGUES.league,REQUEST_TYPE.POST,formData)
+     // const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/addleague', formData);
+     // const response = await axios.post('http://localhost:5000/addleague', formData);
+      console.log(response);
     } catch (error) {
       console.error(error);
     }

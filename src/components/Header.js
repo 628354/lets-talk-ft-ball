@@ -18,9 +18,9 @@ export default function Header() {
 		const scrollY = window.scrollY;
 
 		if (scrollY > 0) {
-			header.classList?.add("sticky-header");
+			header?.classList?.add("sticky-header");
 		} else {
-			header.classList?.remove("sticky-header");
+			header?.classList?.remove("sticky-header");
 		}
 	});
 
@@ -40,28 +40,21 @@ export default function Header() {
 
 	/// get leagus  start
 
-	const getLeagueName = () => {
-		
-		const obj = {
+	const getLeagueName = async () => {
+		try {
+		  const obj = {
 			maxBodyLength: Infinity,
 			headers: {
-				"Content-Type": "application/json",
+			  "Content-Type": "application/json",
 			},
-		};
-		try{
-			apiCall(LEAGUES.league,REQUEST_TYPE.GET,obj).then((response)=>{	
-				console.log(response.response.data.leaguedetails);
-				setLeagueNames(response.response.data.leaguedetails
-						)
-					
-		
-				})
-		}catch(error){
-			console.error("An error occurred while fetching league names:", error);
+		  };
+		  const response = await apiCall(LEAGUES.league, REQUEST_TYPE.GET, obj);
+		  console.log(response.response.data.leaguedetails);
+		  setLeagueNames(response.response.data.leaguedetails);
+		} catch (error) {
+		  console.error("An error occurred while fetching league names:", error);
 		}
-		
-		
-	};
+	  };
 	useEffect(() => {
 		getLeagueName();
 		

@@ -6,71 +6,76 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, SESSION,FIND_TEAM ,GET_TEAM_ID,SESSIOND} from "../helper/APIInfo";
+import { REQUEST_TYPE, SESSION, FIND_TEAM, GET_TEAM_ID, SESSIOND } from "../helper/APIInfo";
 
 
 export default function PremierLeaguetable({
 	leagueId
-	
+
 }) {
-	//console.log(leagueId);
-	//console.log(seasonId);
+
 	// //console.log(teamId);
 	// const { teamdetailsData, getTeamsData, setSelectedTeamId } =
-	// 	useContext(LeagueContext);
-	
+	// 	useContext(LeagueContext); 	  
 
 	const [leagueDetails, setLeagueDetails] = useState([]);
-	
+
 	const [seasonId, setSeasonId] = useState();
-	const [allSeasson,setAllSeasson]=useState([])
-
-	const getYears= async ()=>{
-		try{
-			const response = await apiCall(SESSION.year,REQUEST_TYPE.GET).then((response)=>{
-				console.log(response.response.data.seasonyears)
-				setAllSeasson(response.response.data.seasonyears)
-				setSeasonId(response.response.data.seasonyears[0]._id)
-			    
-			})
-		}catch(error){
-			console.log("data not found",error)
+	const [allSeasson, setAllSeasson] = useState([])
+	const [currentSeasson, setCurrentSeasson] = useState()
+	const [selectedSeasonName, setSelectedSeasonName] = useState(null);
+	//console.log(allSeasson);
+	// console.log(seasonId);
+	const getYears = async () => {
+		try {
+			const response = await apiCall(SESSION.year, REQUEST_TYPE.GET);
+			setCurrentSeasson(response.response.data.seasonyears[0]);
+			setAllSeasson(response.response.data.seasonyears);
+			setSeasonId(response.response.data.seasonyears[0]?._id);
+			setSelectedSeasonName(response.response.data.seasonyears[0].season_Title);
+		} catch (error) {
+			console.log("data not found", error);
 		}
-		
 	}
-	
 
-	/// get table data 
-	const getTeamsData= ()=>{			
-	try{
-			//console.log(seasonId)
+	const getTeamsData = async (seasonId) => {
+		try {
 			const baseUrl = FIND_TEAM.find;
-const params={
-	season:seasonId
-}
-			const apiUrl =`${baseUrl}/${leagueId}`
-         // console.log(apiUrl,REQUEST_TYPE.POST,params)
-		apiCall(apiUrl,REQUEST_TYPE.POST,params).then((response)=>{
-				console.log(response.response.data.data[0]?.en)
-				setLeagueDetails(response.response.data.data[0]?.en)
-			})
-
-		}catch(error){
-			console.log("data not found ",error)
+			const params = {
+				season: seasonId
+			}
+			const apiUrl = `${baseUrl}/${leagueId}`;
+			const response = await apiCall(apiUrl, REQUEST_TYPE.POST, params);
+			setLeagueDetails(response.response.data.data[0]?.en);
+		} catch (error) {
+			console.log("data not found ", error);
 		}
-
 	}
-	useEffect(()=>{
+	useEffect(() => {
 		getYears()
-		
-	},[seasonId])
+
+	}, [seasonId])
 
 	useEffect(() => {
-		
-		getTeamsData();
-		
-	  }, [seasonId,leagueId]);
-//console.log(allSeasson)
+
+		getTeamsData(seasonId);
+
+	}, [seasonId, leagueId]);
+	//console.log(allSeasson)
+
+	const handleClick = (runingId, seasonName) => {
+
+		setSeasonId(runingId)
+		setSelectedSeasonName(seasonName);
+		getTeamsData()
+		console.log('--------------------------------------------------------')
+		console.log(seasonName)
+		console.log('--------------------------------------------------------')
+
+	}
+
+
+
 	return (
 		<div>
 			<div className="en-table-deta ar-table-deta">
@@ -100,16 +105,16 @@ const params={
 									<div class="dropdown_filter">
 										<button class="dropbtn">
 											{" "}
-											<span>2023-24 </span>{" "}
+											<span>{selectedSeasonName} </span>{" "}
 											<span>
 												<i class="ri-arrow-down-s-line"></i>
 											</span>{" "}
 										</button>
 										<div class="dropdown-content">
 											{
-												allSeasson.map((res)=>{
-													//console.log(res)
-													return(<Link to="">{res.season_Title}</Link>)
+												allSeasson.map((res) => {
+													//	console.log(res)
+													return (<Link to="" onClick={() => handleClick(res._id, res.season_Title)} >{res.season_Title}</Link>)
 												})
 											}
 											{/* <Link to="">2023-24</Link>
@@ -132,15 +137,15 @@ const params={
 							</td>
 						</tr>
 						{leagueDetails && leagueDetails.map((data, index) => {
-						//	console.log(data);	
+							//console.log(data);	
 							//const tableDAta = data.en[0];
 							return (
 								<tr key={data._id}>
 									<td>{index + 1}</td>
 									<td className="imagetext_city">
 										<Link
-											to={`/TeamDetailsl/`}
-											// onClick={() => handleTeamClick(data.en[0].teamname._id)}
+											to={`/TeamDetailsl/${data.teamname._id}`}
+										// onClick={() => handleTeamClick(data.en[0].teamname._id)}
 										>
 											<span className="overimage">
 												<img
@@ -150,7 +155,7 @@ const params={
 												/>
 											</span>{" "}
 											<span className="toearth">
-											{data.teamname.en.Team_Name_English}
+												{data.teamname.en.Team_Name_English}
 											</span>
 										</Link>
 									</td>
@@ -161,9 +166,10 @@ const params={
 									<td>{data.goals_scored}</td>
 									<td>{data.goals_conceded}</td>
 									<td>{data.points}</td>
-									<td>{data.point_gap}</td>
-									<td>{data.gs_gc}</td>
-									<td>{data.win_precent}</td>
+									<td>{Math.floor(data.point_gap)}</td>
+									<td>{Math.floor(data.gs_gc)}</td>
+									<td>{(data.win_precent * 100).toFixed(2)}%</td>
+
 								</tr>
 							);
 						})}

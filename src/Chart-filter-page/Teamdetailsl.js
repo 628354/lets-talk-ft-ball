@@ -1,11 +1,14 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import Iframesecttion from "../Leagues-components/Iframesecttion";
 import { LineChart } from "recharts";
+import { apiCall } from "../helper/RequestHandler";
+import { REQUEST_TYPE, TEAM_DETAILS,SESSION } from "../helper/APIInfo";
+
 import {
 	BarChart,
 	Bar,
@@ -17,6 +20,8 @@ import {
 	Line,
 } from "recharts";
 export default function Teamdetailsl() {
+	const { teamId } = useParams()
+	//console.log(teamId)
 	const data = [
 		{
 			name: "1",
@@ -85,6 +90,53 @@ export default function Teamdetailsl() {
 			amt: 2100,
 		},
 	];
+	const [teamDetails, setTeamDetails] = useState([])
+	const [tableData, setTableData] = useState([])	
+	const [allSeasson, setAllSeasson] = useState([])
+	const [currentSeasson, setCurrentSeasson] = useState(null)
+	//get team data table data desc
+	const getTeamDetails = async () => {
+		const baseUrl = TEAM_DETAILS.details;
+		const apiUrl = `${baseUrl}/${teamId}`
+		try {
+			const response = await apiCall(apiUrl, REQUEST_TYPE.GET)
+			console.log(response)
+			const data = response.response.data.data[0].en
+			const filterData = data.filter(item => item.teamname._id === teamId)
+			console.log(filterData[0])
+			setTeamDetails(filterData[0].teamname.en)
+			setTableData(filterData[0])
+		} catch (error) {
+			console.log("api error ", error)
+		}
+
+
+
+	}
+	useEffect(() => {
+
+		getTeamDetails()
+	}, [teamId])
+
+console.log(tableData)
+	// get year 
+	const getYears = async () => {
+		try {
+			const response = await apiCall(SESSION.year, REQUEST_TYPE.GET);
+			// setCurrentSeasson(response.response.data.seasonyears[0]);
+			setAllSeasson(response.response.data.seasonyears);
+			// setSeasonId(response.response.data.seasonyears[0]?._id);
+			//console.log(response.response.data.seasonyears[0].season_Title)
+			setCurrentSeasson(response.response.data.seasonyears[0].season_Title);
+		} catch (error) {
+			console.log("data not found", error);
+		}
+	}
+	useEffect(() => {
+		getYears()
+
+	}, [])
+	
 	return (
 		<div>
 			<section className="en_hero_about en_hero_about">
@@ -139,18 +191,9 @@ export default function Teamdetailsl() {
 								</div>
 								<div className="col-lg-10 col-md-10 col-sm-12">
 									<div className="en-leagues-text ar-leagues-text ms-4">
-										<h2>Liverpool</h2>
+										<h2>{teamDetails.Team_Name_English}</h2>
 										<p>
-											Below is your selected team’s performance trends. Here you
-											can see how a team performance is changing over the
-											season. You can compare any two teams, or same team from
-											different seasons, side by side. To do that click the
-											“Compare” button and select the Season, League and Team.
-											The graphs are interactive. You can adjust scale and
-											hover-over data points to get specific numbers. If you
-											need help with terms used, click on “Definitions” in the
-											top menu. Have fun and remember to visit the discussions
-											section below.{" "}
+											{teamDetails.Description_English}
 										</p>
 
 										<div className="livepool">
@@ -166,20 +209,19 @@ export default function Teamdetailsl() {
 												<div class="dropdown_filter">
 													<button class="dropbtn">
 														{" "}
-														<span>2023-24 </span>{" "}
+														<span>{currentSeasson} </span>{" "}
 														<span>
 															<i class="ri-arrow-down-s-line"></i>
 														</span>{" "}
 													</button>
 													<div class="dropdown-content">
-														<Link to="">2023-24</Link>
-														<Link to="">2022-23</Link>
-														<Link to="">2021-22</Link>
-														<Link to="">2020-21</Link>
-														<Link to="">2019-20</Link>
-														<Link to="">2018-19</Link>
-														<Link to="">2017-18</Link>
-														<Link to="">2016-17</Link>
+														{
+															allSeasson.map((data)=>{
+																console.log(data.season_Title)
+																return(<Link to="">{data.season_Title}</Link>)
+															})
+														}
+														
 													</div>
 												</div>
 											</div>
@@ -220,18 +262,19 @@ export default function Teamdetailsl() {
 												className="logo-rearth-table"
 											/>
 										</span>{" "}
-										<span className="toearth">Tottenham</span>
+										<span className="toearth">{teamDetails.Team_Name_English}</span>
 									</td>
-									<td>9</td>
-									<td>7</td>
-									<td>2</td>
-									<td>0</td>
-									<td>20</td>
-									<td>8</td>
-									<td>23</td>
-									<td>0</td>
-									<td>12</td>
-									<td>85.19%</td>
+									<td>{tableData.games}</td>
+									<td>{tableData.win}</td>
+									<td>{tableData.draw}</td>
+									<td>{tableData.lose}</td>
+									<td>{tableData.goals_scored}</td>
+									<td>{tableData.goals_conceded}</td>
+									<td>{tableData.points}</td>
+									<td>{Math.floor(tableData.point_gap)}</td>
+									<td>{Math.floor(tableData.gs_gc)}</td>
+									<td>{(tableData.win_precent * 100).toFixed(2)}%</td>
+									
 								</tr>
 							</tbody>
 						</Table>

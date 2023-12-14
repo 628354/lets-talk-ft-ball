@@ -8,8 +8,8 @@ import Tabs from 'react-bootstrap/Tabs';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import { useParams } from 'react-router-dom';
-
-
+import { apiCall } from '../helper/RequestHandler';
+import { REQUEST_TYPE,GET_SEASON_BY_ID,UPDATE_SEASON_YEAR } from '../helper/APIInfo';
 export default function Editseason() {
 
 
@@ -29,40 +29,42 @@ export default function Editseason() {
     });
   };
 
-  useEffect(() => {
-   
-    axios.get(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getseasonById/${id}`)
-   // axios.get(` http://localhost:5000/getseasonById/${id}`)
-      .then((response) => {
-        console.log(response)
-        const aboutInfo = response.data.seasonyears
-        setAboutData(aboutInfo);
-
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
-
-  const handleUpdateData = () => {
-    const updatedData = {
-      season_Title: aboutData?.season_Title,
-      sort_Order: aboutData?.sort_Order,
-      status: aboutData?.status,
-    };
-  
-    axios.post(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/updateSeasonyear/${id}`, updatedData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
-        console.log(response)
-      })
-      .catch((error) => {
-        console.error('Error updating data:', error);
-      });
+  const getSeasonById = async () => {
+    try {
+      const baseUrl=GET_SEASON_BY_ID.getseasonById;
+      const apiUrl =`${baseUrl}/${id}`
+      const response = await  apiCall(apiUrl,REQUEST_TYPE.GET);
+      const aboutInfo = response.response.data.body;
+      console.log(response.response.data.body);
+      setAboutData(aboutInfo);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
+
+  useEffect(() => {
+    getSeasonById();
+  }, [id]);  
+
+
+  const handleUpdateData = async () => {
+    try {
+      const updatedData = {
+        season_Title: aboutData.season_Title,
+        sort_Order: aboutData.sort_Order,
+        status: aboutData.status,
+      };
+      const baseUrl=UPDATE_SEASON_YEAR.updateSeason;
+      const apiUrl =`${baseUrl}/${id}`
+      const response = await apiCall(apiUrl,REQUEST_TYPE.POST, updatedData);
+  
+      console.log(response);
+    } catch (error) {
+      console.error('Error updating data:', error);
+    }
+  };
+  
+ // console.log(aboutData)
   
   return (
     <div>
@@ -136,8 +138,8 @@ export default function Editseason() {
                                 Season Title
                               </Form.Label>
                               <Col sm="11">
-                                <Form.Control type="text" placeholder="Season Title" value={aboutData?.season_Title}
-                             //  onChange={(e) => handleTextChange({season_Title}, e.target.value)} 
+                                <Form.Control type="text" placeholder="Season Title" value={aboutData.season_Title}
+                               onChange={(e) => handleTextChange('season_Title', e.target.value)} 
                                 />
                               </Col>
                             </Form.Group>

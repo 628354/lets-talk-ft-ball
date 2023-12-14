@@ -71,7 +71,26 @@ const gs_gc = async (Request, Response) => {
 
 }
 
+const team_details = async (Request, Response) => {
+    try {
+        const { lung, teamNameId } = Request.params; 
+        const data = await leaguedata.find(
+            {
+                $or: [
+                    { [`${lung}.teamname._id`]: teamNameId },
+                    { "ar.teamname._id": teamNameId },
+                    { "en.teamname._id": teamNameId }
+                ]
+            },
+            { [lung]: 1, datatype: 1 }
+        ).populate("en.teamname", { [lung]: 1 });
 
+        responseHelper[200].data = data;
+        Response.send(responseHelper[200]);
+    } catch (e) {
+        sendError(Response, e);
+    }
+};
 const sendError = (Response, Error) => {
 	if (Error.errno === 500) {
 		responseHelper[500].data = [];
@@ -88,5 +107,5 @@ const sendError = (Response, Error) => {
 
 
 module.exports = {
-	ScrollDown, findByteamName, Goals_Scored, Goals_Con, gs_gc
+	ScrollDown, findByteamName, Goals_Scored, Goals_Con, gs_gc,team_details
 }

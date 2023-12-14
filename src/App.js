@@ -101,6 +101,8 @@ function App() {
 		"/DashboardPage",
 		"/EditLeagues",
 		"/Addleagues",
+		"/Addseason",
+		"/dashboard"
 	];
 
 	const currentRoute = location.pathname;
@@ -223,7 +225,7 @@ function App() {
 				<Route path="/Cafeview" element={<Cafeview />}></Route>
 				<Route path="/Dataapi" element={<Dataapi />}></Route>
 				<Route path="/Premierchart" element={<Premierchart />}></Route>
-				<Route path="/Teamdetailsl" element={<Teamdetailsl />}></Route>
+				<Route path="/Teamdetailsl/:teamId" element={<Teamdetailsl />}></Route>
 				<Route path="/Login" element={<Login />}></Route>
 				<Route path="/Teamcomparison" element={<Teamcomparison />}></Route>
 				<Route path="/LeaguesBluk" element={<LeaguesBluk />}></Route>

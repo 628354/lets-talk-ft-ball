@@ -21,7 +21,7 @@ const leaguecontroller = require("../controller/league");
 router.post("/addleague",upload.single("image"), leaguecontroller.addleague);
 router.get("/getleagues", leaguecontroller.getleagues);
 router.get('/getleagusById/:id', leaguecontroller.getleagusById)
-router.put(
+router.post(
   "/updateLeague/:leagueId",upload.single("image"),
   leaguecontroller.update
 );

@@ -20,54 +20,44 @@ export default function Premierchart({  leagueId}) {
 	//console.log(currentLeagueId);
 	//console.log(seasonId);
 //get season 
-const getYears= async ()=>{
-	try{
-		const response = await apiCall(SESSION.year,REQUEST_TYPE.GET).then((response)=>{
-			//console.log(response.response.data.seasonyears)
-			
-			setSeasonId(response.response.data.seasonyears[0]._id)
-			
-		})
-	}catch(error){
-		console.log("data not found",error)
+const getYears = async () => {
+	try {
+		const response = await apiCall(SESSION.year, REQUEST_TYPE.GET);
+		setSeasonId(response.response.data.seasonyears[0]._id);
+	} catch (error) {
+		console.log("data not found", error);
 	}
-	
-}
+};
 
 useEffect(()=>{
 	getYears()
 	
 },[seasonId])
 
-	const getGoalScore = () => {
-		console.log(leagueId);
-		console.log(seasonId);
-		
+const getGoalScore = async () => {
+	try {
+		// console.log(leagueId);
+		// console.log(seasonId);
+
 		let data = {
-			leagueId: leagueId ,
-			season: seasonId ,
+			leagueId: leagueId,
+			season: seasonId,
 		};
 
-		apiCall(GS.find, REQUEST_TYPE.POST, data).then((result) => {
-			 //console.log(result.response.data.data[0].en);
-			// setGoalScore(result.response.data.data[0].en)
+		const result = await apiCall(GS.find, REQUEST_TYPE.POST, data);
 
-			if (result.status === 200) {
-				
+		if (result.status === 200) {
+			const extractedData = result.response.data.data[0]?.en.map((item) => ({
+				name: item.teamname.en.Team_Name_Short_English,
+				goalsScored: parseInt(item.goals_scored),
+			}));
 
-				const extractedData = result.response.data.data[0]?.en.map((item) => ({
-					name:item.teamname.en.Team_Name_Short_English,
-					goalsScored:parseInt(item.goals_scored)
-					//goalsScored: parseInt(item.en[0].goals_scored),
-					
-				}));
-			
-
-				setGoalScore(extractedData);
-			}
-		});
-		return false;
-	};
+			setGoalScore(extractedData);
+		}
+	} catch (error) {
+		console.error("An error occurred while fetching goal scores:", error);
+	}
+};
 	//console.log(seasonId);
 	useEffect(() => {
 		getGoalScore();
