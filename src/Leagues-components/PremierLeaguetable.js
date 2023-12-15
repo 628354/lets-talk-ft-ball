@@ -132,7 +132,7 @@ export default function PremierLeaguetable({
 							<td colspan="6">
 								<div class="team-btn">
 									{" "}
-									<Link to="">Compare Now</Link>{" "}
+									<Link to="/Teamcomparision">Compare Now</Link>{" "}
 								</div>
 							</td>
 						</tr>
@@ -178,7 +178,7 @@ export default function PremierLeaguetable({
 							<td colspan="4">
 								<div class="team-btn compare-link">
 									{" "}
-									<Link to="">Compare Now</Link>{" "}
+									<Link to="/Teamcomparision">Compare Now</Link>{" "}
 								</div>
 							</td>
 							<td colspan="9">

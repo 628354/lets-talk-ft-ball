@@ -5,6 +5,9 @@ import { Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
+import TeamComparisionChart from "../Leagues-components/TeamComparisionChart";
+import TeamComparisionTable from "../Leagues-components/TeamComparisionTable";
+import Iframesecttion from "../Leagues-components/Iframesecttion";
 
 export default function Teamcomparision() {
 	return (
@@ -86,8 +89,19 @@ export default function Teamcomparision() {
 									/>
 								</div>
 							</div>
+							<div className="team-compri-table">
+								<TeamComparisionTable/>
+							</div>
+							<div className="team-compri-chat">
+								<TeamComparisionChart/>
+							</div>
+							<div className="team-compri-chat">
+								<TeamComparisionChart/>
+							</div>
+							<div className="team-compri-chat">
+								<TeamComparisionChart/>
+							</div>
 						</div>
-
 						<div className="col-lg-6 col-md-6 col-sm-12 ps-5">
 							<div className="chart-com-select">
 								<div className="main-compari-select">
@@ -125,10 +139,24 @@ export default function Teamcomparision() {
 									/>
 								</div>
 							</div>
+
+								<div className="team-compri-table">
+									<TeamComparisionTable/>
+								</div>
+								<div className="team-compri-chat">
+									<TeamComparisionChart/>
+								</div>
+								<div className="team-compri-chat">
+									<TeamComparisionChart/>
+								</div>
+								<div className="team-compri-chat">
+									<TeamComparisionChart/>
+								</div>
 						</div>
 					</Row>
 				</Container>
 			</section>
+			<Iframesecttion/>
 		</div>
 	);
 }
