@@ -1140,11 +1140,11 @@ table.aline_tablel thead tr th {
     border-right: 1px solid #bfbaba;
 }
 
-.form-select {
+/* .form-select {
     width: 520px;
     max-width: 520px;
     min-width: 520px;
-}
+} */
 .chart-compari {
     padding-bottom: 60px;
 }
@@ -1180,6 +1180,41 @@ table.aline_tablel thead tr th {
     justify-content: flex-end;
     gap: 50px;
 }
+
+
+/* new css by cR 15/12/23 */
+
+.en-team-table-deta{
+    overflow: overlay;
+}
+
+.team-aline_table thead tr th {
+    background: var(--text-color);
+    border: 2px solid var(--there-color);
+    color: var(--there-color);
+    padding: 7px 4px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.chart-team-table h5 {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+
+.border-table-team {
+    border: 1px solid #cecece;
+}
+
+.team-main-table.chartteamcom {
+    border: 1px solid #cecece;
+}
+
+.team-main-table.chartteamcom {
+    margin: 40px 0;
+}
+/* new css by cR 15/12/23 */
 
 
 
