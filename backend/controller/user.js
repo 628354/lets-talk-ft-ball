@@ -156,35 +156,87 @@ exports.forgetpassword = async (req, res) => {
     res.send({ status: false, message: "something went wrong !!" });
   }
 };
-exports.getAllUser = async (req, res) => {
+
+exports.AddUser = async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.pageSize) || 10;
-    const skip = (page - 1) * pageSize;
-    const userData = await usermodel.find().skip(skip).limit(pageSize);
-    const totalUsers = await usermodel.countDocuments();
-    res.status(200).send({
-      pageInfo: {
-        currentPage: page,
-        pageSize: pageSize,
-        totalPages: Math.ceil(totalUsers / pageSize),
-        totalRecords: totalUsers,
-        body: userData,
-        message: "Get All Users Successfully",
-        success: true,
+    const findUser = await usermodel.findOne({ email: req.body.email });
+    if (findUser) {
+      return res.status(400).send('Email Already Exists');
+    }
 
-      },
+    const phoneExist = await usermodel.findOne({ phone: req.body.phone });
+    if (phoneExist) {
+      return res.status(400).send('Phone Number Already Exists');
+    }
 
+    const protocol = req.protocol;
+    const host = req.hostname;
+    const url = `${protocol}//${host}`;
+    const hashPassword = bcrypt.hashSync(req.body.password, 10);
+    const addUser = await usermodel.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      phone: req.body.phone,
+      password: hashPassword,
+      image: req.file ? url + '/uploads/' + req.file.filename : ' ',
+    });
+
+    const result = await addUser.save();
+    return res.status(200).send({
+      body: result,
+      message: 'User Add  Successfully',
+      success: true,
     });
   } catch (error) {
-    console.log(error.message);
     res.status(500).send({
-      message: "Internal Server Error",
+      message: "Enternal Server Error",
       success: false,
+      error: error.message,
     });
   }
-};
-;
+}
+
+exports.getAllUser = async (req, res) => {
+  try {
+    const userData = await usermodel.find()
+    res.status(200).send({
+      body: userData,
+      message: 'User Get Successfully',
+      success: true
+    })
+  } catch (error) {
+    res.status(500).send({
+      message: "Enternal Server Error",
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
+exports.GetUserById = async (req, res) => {
+  try {
+    const userData = await usermodel.findById({ _id: req.params.id })
+    if (userData) {
+      res.status(200).send({
+        body: userData,
+        message: 'Get User By Id Successfully',
+        success: true
+      })
+    } else {
+      res.status(300).send({
+        message: 'User Id Not Found',
+        success: false
+      })
+    }
+  } catch (error) {
+    res.status(500).send({
+      message: "Enternal Server Error",
+      success: false,
+      error: error.message,
+    });
+  }
+}
 
 exports.updateUser = async (req, res) => {
   try {

@@ -3,6 +3,7 @@ const teadData = require('../model/teamdata');
 const responseHelper = require('../Helpers/Response')
 const teamCatlog = require('../model/teamCatlog')
 const mongoose = require('mongoose');
+
 const ScrollDown = async (Request, Response) => {
 
 	try {
@@ -15,7 +16,6 @@ const ScrollDown = async (Request, Response) => {
 		sendError(Response, e)
 	}
 }
-
 
 const findByteamName = async (Request, Response) => {
 	try {
@@ -31,6 +31,7 @@ const findByteamName = async (Request, Response) => {
 	}
 
 }
+
 const Goals_Scored = async (Request, Response) => {
 	try {
 		const { lung } = Request.params;
@@ -44,6 +45,7 @@ const Goals_Scored = async (Request, Response) => {
 	}
 
 }
+
 const Goals_Con = async (Request, Response) => {
 	try {
 		const { lung } = Request.params;
@@ -57,6 +59,7 @@ const Goals_Con = async (Request, Response) => {
 	}
 
 }
+
 const gs_gc = async (Request, Response) => {
 	try {
 		const { lung } = Request.params;
@@ -72,25 +75,26 @@ const gs_gc = async (Request, Response) => {
 }
 
 const team_details = async (Request, Response) => {
-    try {
-        const { lung, teamNameId } = Request.params; 
-        const data = await leaguedata.find(
-            {
-                $or: [
-                    { [`${lung}.teamname._id`]: teamNameId },
-                    { "ar.teamname._id": teamNameId },
-                    { "en.teamname._id": teamNameId }
-                ]
-            },
-            { [lung]: 1, datatype: 1 }
-        ).populate("en.teamname", { [lung]: 1 });
+	try {
+		const { lung, teamNameId } = Request.params;
+		const data = await leaguedata.find(
+			{
+				$or: [
+					{ [`${lung}.teamname._id`]: teamNameId },
+					{ "ar.teamname._id": teamNameId },
+					{ "en.teamname._id": teamNameId }
+				]
+			},
+			{ [lung]: 1, datatype: 1 }
+		).populate("en.teamname", { [lung]: 1 });
 
-        responseHelper[200].data = data;
-        Response.send(responseHelper[200]);
-    } catch (e) {
-        sendError(Response, e);
-    }
+		responseHelper[200].data = data;
+		Response.send(responseHelper[200]);
+	} catch (e) {
+		sendError(Response, e);
+	}
 };
+
 const sendError = (Response, Error) => {
 	if (Error.errno === 500) {
 		responseHelper[500].data = [];
@@ -107,5 +111,5 @@ const sendError = (Response, Error) => {
 
 
 module.exports = {
-	ScrollDown, findByteamName, Goals_Scored, Goals_Con, gs_gc,team_details
+	ScrollDown, findByteamName, Goals_Scored, Goals_Con, gs_gc, team_details,
 }

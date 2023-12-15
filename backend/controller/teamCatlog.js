@@ -65,4 +65,65 @@ module.exports = {
         responseHelper[200].data = data;
         Response.send(responseHelper[200]);
     },
-}
+
+    teamMatch: async (req, res) => {
+        try {
+            const { seasons, leagues, teamname } = req.query;
+            const matchFilter = {};
+            if (seasons) {
+                matchFilter['seasons_details.name'] = new RegExp(seasons, 'i');
+            }
+
+            if (leagues) {
+                matchFilter['leagues_details.name'] = new RegExp(leagues, 'i');
+            }
+
+            if (teamname) {
+                matchFilter['teamname_details.name'] = new RegExp(teamname, 'i');
+            }
+
+            const teams = await teamdata.aggregate([
+                {
+                    $match: matchFilter,
+                },
+                {
+                    $lookup: {
+                        from: "seasons",
+                        localField: "seasonid",
+                        foreignField: "_id",
+                        as: "seasons_details"
+                    }
+                },
+                {
+                    $lookup: {
+                        from: "leagues",
+                        localField: "leagueid",
+                        foreignField: "_id",
+                        as: "leagues_details"
+                    }
+                },
+                {
+                    $lookup: {
+                        from: "teamname",
+                        localField: "teamname",
+                        foreignField: "_id",
+                        as: "teamname_details"
+                    }
+                }
+            ]);
+
+            res.status(200).send({
+                body: teams,
+                message: 'Teams Match Successfully',
+                success: true
+            });
+        } catch (error) {
+            res.status(500).send({
+                message: 'Error occurred while matching teams',
+                success: false
+            });
+        }
+    },
+};
+
+

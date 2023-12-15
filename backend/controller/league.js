@@ -118,7 +118,6 @@ exports.getleagusById = async (req, res) => {
         } else {
             res.send({ status: false, message: 'league Id not found' })
         }
-
     } catch (error) {
         console.log(error.message)
     }
