@@ -58,7 +58,7 @@ import Cafeview from "./page-dashboard/Cafeview";
 import Dataapi from "./Dashboard-edit-page/Dataapi";
 import Premierchart from "./Leagues-components/Premierchart";
 import Teamdetailsl from "./Chart-filter-page/Teamdetailsl";
-import Teamcomparison from "./Chart-filter-page/Teamcomparison";
+import Teamcomparision from "./Chart-filter-page/Teamcomparision";
 import ImportBulk from "./page-dashboard/LeaguesBluk";
 import TeamImportBulk from "./page-dashboard/TeamBluk";
 import Catlogs from "./page-dashboard/catLogs";
@@ -227,7 +227,7 @@ function App() {
 				<Route path="/Premierchart" element={<Premierchart />}></Route>
 				<Route path="/Teamdetailsl/:teamId" element={<Teamdetailsl />}></Route>
 				<Route path="/Login" element={<Login />}></Route>
-				<Route path="/Teamcomparison" element={<Teamcomparison />}></Route>
+				<Route path="/Teamcomparision" element={<Teamcomparision />}></Route>
 				<Route path="/LeaguesBluk" element={<LeaguesBluk />}></Route>
 				<Route path="/Teams" element={<Teams />}></Route>
 				<Route path="/EditTeams/:id" element={<EditTeams />}></Route>
