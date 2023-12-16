@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Menubar from '../dashboard/Menubar';
 import { Container, Row , Modal, Button, Form} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { apiCall } from '../helper/RequestHandler';
 
 function UploadMedia(props) {
     const [showModal, setShowModal] = useState(false);
@@ -21,7 +22,8 @@ function UploadMedia(props) {
     handleCloseModal();
   };
 
-    
+
+
     return (
         <div>
             <Menubar />
@@ -106,7 +108,7 @@ function UploadMedia(props) {
 
 
       ////
-      <div class="container w-50">
+      {/* <div class="container w-50">
 <div class="panel panel-default">
 <div class="panel-heading">
 <h3 class="panel-title"><i class="fa fa-list"></i> User List</h3>
@@ -147,7 +149,7 @@ function UploadMedia(props) {
 </div>
 </div>
 </div>
-</div>
+</div> */}
         </div>
     );
 }

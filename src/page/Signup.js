@@ -3,13 +3,13 @@ import { Button, Container } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import React, { useContext, useEffect, useState } from 'react';
-import AuthContext from '../auth/AuthContext';
+
 export default function Signup() {
 
    // const {register, message, setMessage} = useContext(AuthContext);
     const [formData, setFormData]=useState();
     const handleChange=(e)=>{
-        const {name, value} = e.target;
+        const {name, value} = e.target;0
         setFormData((prev)=>({
             ...prev,
             [name]: value
