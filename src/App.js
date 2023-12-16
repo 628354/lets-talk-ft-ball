@@ -66,6 +66,11 @@ import Teams from "./page-dashboard/Teams";
 import DashboardPage from "./page-dashboard/DashboardPage";
 import Addteams from "./page-dashboard/Addteams"
 import EditTeams from "./page-dashboard/EditTeams"
+import { Media } from "reactstrap";
+import UploadMedia from "./page-dashboard/UploadMedia";
+import User from "./page-dashboard/User";
+import Adduser from "./page-dashboard/Adduser";
+import EditUser from "./page-dashboard/EditUser";
 
 function App() {
 	// const navigate = useNavigate();
@@ -102,7 +107,11 @@ function App() {
 		"/EditLeagues",
 		"/Addleagues",
 		"/Addseason",
-		"/dashboard"
+		"/dashboard",
+		"/uploadMedia",
+		"/User",
+		"/addUser",
+		"/edituser" 
 	];
 
 	const currentRoute = location.pathname;
@@ -233,7 +242,10 @@ function App() {
 				<Route path="/EditTeams/:id" element={<EditTeams />}></Route>
 				<Route path="/Addteams" element={<Addteams />}></Route>
 				<Route path="/DashboardPage" element={<DashboardPage />}></Route>
-
+				<Route path="/uploadMedia" element={<UploadMedia />}></Route>
+				<Route path="/User" element={<User />}></Route>
+				<Route path="/addUser" element={<Adduser />}></Route>
+				<Route path="/edituser/:id" element={<EditUser />}></Route>
 			</Routes>
 
 			{shouldDisplayHeader && FooterComponent && <FooterComponent />}

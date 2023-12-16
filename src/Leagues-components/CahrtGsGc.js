@@ -62,7 +62,7 @@ export default function CahrtGsGc({ leagueId}) {
 		});
 		return false;
 	};
-	//console.log(gsGc);
+	console.log(gsGc);
 	useEffect(() => {
 		getGsGc();
 	}, [leagueId,seasonId]);

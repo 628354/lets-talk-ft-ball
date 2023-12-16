@@ -14,7 +14,7 @@ export default function PremierLeaguetable({
 
 }) {
 
-	// //console.log(teamId);
+	// console.log(leagueId);
 	// const { teamdetailsData, getTeamsData, setSelectedTeamId } =
 	// 	useContext(LeagueContext); 	  
 
@@ -29,6 +29,7 @@ export default function PremierLeaguetable({
 	const getYears = async () => {
 		try {
 			const response = await apiCall(SESSION.year, REQUEST_TYPE.GET);
+			console.log(response)
 			setCurrentSeasson(response.response.data.seasonyears[0]);
 			setAllSeasson(response.response.data.seasonyears);
 			setSeasonId(response.response.data.seasonyears[0]?._id);
@@ -45,7 +46,9 @@ export default function PremierLeaguetable({
 				season: seasonId
 			}
 			const apiUrl = `${baseUrl}/${leagueId}`;
-			const response = await apiCall(apiUrl, REQUEST_TYPE.POST, params);
+			const response = await apiCall(apiUrl, REQUEST_TYPE.POST, params)
+		
+			
 			setLeagueDetails(response.response.data.data[0]?.en);
 		} catch (error) {
 			console.log("data not found ", error);

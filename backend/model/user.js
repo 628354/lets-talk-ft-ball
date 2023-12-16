@@ -3,11 +3,12 @@ const userSchema = new mongoose.Schema(
   {
     role: {
       type: String,
-      enum: ["0", "1", "2", "3"], // 0 = admin, 1 = user , 2 = author, 3 = editor
-      default: "",
+      enum: ["admin", "user", "author", "editor"]
+     
     },
     firstName: { type: String, default: "" },
     lastName: { type: String, default: "" },
+    userName :{type:String, default:""},
     email: { type: String, default: "" },
     password: { type: String, default: "" },
     phone: { type: String, default: "" },
@@ -17,6 +18,11 @@ const userSchema = new mongoose.Schema(
     location: { type: String, default: "" },
     latitude: { type: String, default: "" },
     longitude: { type: String, default: "" },
+    date: { type: Date},
+    userGroup:{
+      type:String,
+      enum:["administrator", "Banner", "Cafe", "DataEntry"]
+    },
     status: { type: String, enum: ["active", "inactive"], default: "active" },
   },
   { timestamps: true }

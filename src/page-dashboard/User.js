@@ -7,16 +7,29 @@ import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 
 
+export const formatDate = (dateString) => {
+    const dateObject = new Date(dateString);
+    const formattedDate = `${dateObject.getDate()}/${dateObject.getMonth() + 1}/${dateObject.getFullYear()}`;
+    return formattedDate;
+  };
 
-export default function Leagues() {
+export default function User() {
+    let local = localStorage.getItem("token");
+    //console.log(local)
+    const axiosConfig = {
+        headers: {
+          Authorization: `Bearer ${local}`,
+        },
+      };
   const [aboutData, setAboutData] = useState([]);
   const [itemId, setItemId] = useState(0); 
   useEffect(() => {
-
+   
    // axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues')
-    axios.get('http://localhost:5000/getleagues')
+    axios.get('http://localhost:5000/getAllUser',axiosConfig)
       .then((response) => {
-        const aboutInfo = response.data?.leaguedetails
+        //console.log(response.data.pageInfo.body)
+        const aboutInfo = response.data.pageInfo.body
         setAboutData(aboutInfo);
         setItemId(aboutInfo._id); 
 
@@ -27,15 +40,25 @@ export default function Leagues() {
       });
   }, []);
 
+
+
   const handleDelete = (id) => {
-    axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeLeague/${id}`)
-      .then((response) => {
-        setAboutData(aboutData.filter(league => league._id !== id));
-      })
-      .catch((error) => {
-        console.error('Error deleting data:', error);
-      });
-  };
+    const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+
+
+    if(confirmDelete){
+        axios.delete(`http://localhost:5000/deleteUser/${id}`,axiosConfig)
+        .then((response) => {
+         
+          setAboutData(aboutData.filter(league => league._id !== id));
+        })
+        .catch((error) => {
+          console.error('Error deleting data:', error);
+        });
+    };
+
+    }
+   
 
 
   return (
@@ -51,7 +74,7 @@ export default function Leagues() {
                 <div className='season-us'>
 
                   <div className='season-link-part'>
-                    <h3>League</h3>
+                    <h3>User</h3>
                     <ul className='season-link'>
                       <li>
                         <Link>Home</Link>
@@ -60,7 +83,7 @@ export default function Leagues() {
                         <i className="ri-arrow-right-s-line"></i>
                       </li>
                       <li>
-                        <Link>League</Link>
+                        <Link>User</Link>
                       </li>
                     </ul>
                   </div>
@@ -70,7 +93,7 @@ export default function Leagues() {
                 <div className='add-part'>
                   <ul className='add-button-min'>
                     <li className='add-button-fis'>
-                      <Link to="/Addleagues"><i className="ri-add-line"></i></Link>
+                      <Link to="/addUser"><i className="ri-add-line"></i></Link>
                     </li>
                     <li class="add-button-cencel"><a href=""><i className="ri-refresh-line"></i></a></li>
                     {/* <li className='add-button-sec'>
@@ -91,34 +114,36 @@ export default function Leagues() {
             <Row>
               <div className='season_list_table'>
                 <div className='season-table-list'>
-                  <h6><i class="ri-list-check"></i> League List</h6>
+                  <h6><i class="ri-list-check"></i> User List</h6>
                 </div>
                 <Table bordered hover className='tablepress'>
                   <thead>
                     <tr>
                       <th><Form.Check aria-label="option 1" /></th>
-                      <th>League Name</th>
-                      <th>Sort Order</th>
-                      <th>Action</th>
+                      <th>User Name</th>
+                      <th>Status</th>
+                      <th>Date Addded</th>
+                      <th className=''>Action</th>
                     </tr>
                   </thead>
                   <tbody className='table-list-one'>
-                    {aboutData.map((league) => (
-                      <tr key={league._id}>
+                    {aboutData.map((user) => (
+                      <tr key={user._id}>
                         <td><Form.Check aria-label="option 1" /></td>
-                        <td>{league.leaguename}</td>
-                        <td>{league.sort_Order}</td>
+                        <td>{user.firstName}</td>
+                        <td>{user.status}</td>
+                        <td>{formatDate(user.createdAt)}</td>
                         <td>
                           <div className='add-button-fis'>
                             
                             <ul className="but-delet">
                               <li>
-                              <Link to={`/EditLeagues/${league._id}`}>
+                              <Link to={`/edituser/${user._id}`}>
                               <i className="ri-pencil-fill"></i>
                             </Link>
                              </li>
                              <li className="add-button-sec">
-                             <button onClick={() => handleDelete(league._id)}>
+                             <button onClick={() => handleDelete(user._id)}>
                               <i className="ri-delete-bin-line"></i>
                             </button>
                              </li>
@@ -131,7 +156,7 @@ export default function Leagues() {
                 </Table>
                 <div className='table-footer-f'>
                   <div className='table-footer-s'>
-                    <p>Showing 1 to {aboutData.length} of {aboutData.length} (1 Pages)</p>
+                    {/* <p>Showing 1 to {aboutData.length} of {aboutData.length} (1 Pages)</p> */}
                   </div>
                 </div>
               </div>

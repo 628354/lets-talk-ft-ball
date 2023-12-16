@@ -5,13 +5,15 @@ import Axios from "axios";
  * @Description fetch the data from the api based on the type of request
  * @returns api response
  */
-export const apiCall = async (URL, METHOD, DATA) => {
+export const apiCall = async (URL, METHOD, DATA,TOKEN=null) => {
   return new Promise((resolve, reject) => {
     let hasError = false;
     Axios({
       method: METHOD,
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${TOKEN}`
+
       },
       url: URL,
       data: JSON.stringify(DATA),

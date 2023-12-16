@@ -28,8 +28,11 @@ export default function Login(props) {
 		axios
 			.post(`http://localhost:5000/Login`, formData)
 			.then((response) => {
-				console.log(response.data);
-				if (onSuccessfulLogin) {
+				//console.log(response.data.token);
+				if (response.status === 200) {
+					const token = response.data.token;
+					localStorage.setItem('token', token);
+					setIsLoggedIn(true);
 					navigate("/Dashboard");
 				}
 			})
