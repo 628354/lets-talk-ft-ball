@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const teamCatlogSchema = mongoose.Schema(
     {
         Team_info: { type: String, require: true },
-        leagueid: { type: String, require: true },
+        leagueid: { type: mongoose.Schema.Types.ObjectId, ref: 'league' },
         seasonid: { type: String, require: true },
         en:{
         Team_Name_English: { type: String, require: true },

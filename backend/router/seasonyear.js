@@ -10,4 +10,8 @@ router.post("/updateSeasonyear/:yearId", seasonyearController.updateyears);
 router.delete("/removeyear/:id", seasonyearController.removeyear);
 router.get('/getsessonYear',seasonyearController.getsessonYear)
 router.get("/getLatestYears", seasonyearController.getLatestYears);
+
+
+
+router.delete('/deleteTableRecords',seasonyearController.deleteTableRecords);
 module.exports = router;

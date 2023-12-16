@@ -12,58 +12,64 @@ import {
 	Legend,
 } from "recharts";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, GC,SESSION } from "../helper/APIInfo";
+import { REQUEST_TYPE, GC, SESSION } from "../helper/APIInfo";
 
-export default function Goalsconchart({ leagueId}) {
+export default function Goalsconchart({ leagueId }) {
 	const [goalCons, setGoalCons] = useState([]);
 
 	const [seasonId, setSeasonId] = useState();
 	// console.log(leagueId);
 	// console.log(seasonId);
-//get season 
-const getYears = async () => {
-	try {
-		const response = await apiCall(SESSION.year, REQUEST_TYPE.GET);
-		setSeasonId(response.response.data.seasonyears[0]._id);
-	} catch (error) {
-		console.log("data not found", error);
-	}
-};
-useEffect(()=>{
-	getYears()
-	
-},[seasonId])
-
-
-
-
-const getGoalCons = async () => {
-	try {
-		let data = {
-			leagueId: leagueId,
-			season: seasonId,
-		};
-
-		const result = await apiCall(GC.find, REQUEST_TYPE.POST, data);
-
-		if (result.status === 200) {
-			const extractedData = result.response.data.data[0]?.en.map((item) => ({
-				name: item.teamname.en.Team_Name_Short_English,
-				goalsCons: parseInt(item.goals_scored),
-			}));
-
-			setGoalCons(extractedData);
+	//get season 
+	const getYears = async () => {
+		try {
+			const response = await apiCall(SESSION.year, REQUEST_TYPE.GET);
+			setSeasonId(response.response.data.seasonyears[0]._id);
+		} catch (error) {
+			console.log("data not found", error);
 		}
-	} catch (error) {
-		console.error("An error occurred while fetching goal cons:", error);
-	}
-};
+	};
+	useEffect(() => {
+		getYears()
+
+	}, [seasonId])
+
+
+
+
+	const getGoalCons = async () => {
+		try {
+			let data = {
+				leagueId: leagueId,
+				season: seasonId,
+			};
+			const lang = "en";
+			const data1 = []
+			const result = await apiCall(GC.find, REQUEST_TYPE.POST, data);
+			if (result.status === 200) {
+				result.response.data.data?.map((item, index) => {
+					return item[lang].map((results) => {
+						data1.push({
+							"goalsCons": results.goals_scored,
+							"name": results.teamname[lang].Team_Name_Short_English
+						})
+					})
+
+				})
+
+				setGoalCons(data1)
+			}
+
+		} catch (error) {
+			console.error("An error occurred while fetching goal cons:", error);
+		}
+	};
 	////console.log(goalCons);
 	useEffect(() => {
 		getGoalCons();
-	}, [leagueId,seasonId]);
+	}, [leagueId, seasonId]);
 
-	
+
 	return (
 		<div>
 			<div className="premier-textare">

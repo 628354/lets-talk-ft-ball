@@ -7,16 +7,15 @@ const leaguedataSchema = mongoose.Schema(
       ref: "team",
     },
 
+    seasonid: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "season"
+    },
 
-
-    league: {
+    leagueid: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "league",
     },
-
-     seasonid: { type: String, require: true },
-
-     leagueid: { type: String, require: true },
 
     datatype: { type: String, require: true },
 
