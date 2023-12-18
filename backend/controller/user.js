@@ -10,7 +10,7 @@ const { Validator } = require("node-input-validator");
 
 exports.register = async (req, res) => {
   try {
-    if (req.body.role == '0') {
+    if (req.body.role == 'admin') {
       const v = new Validator(req.body, {
         role: 'string|required',
         firstName: 'string|required',
@@ -159,6 +159,7 @@ exports.forgetpassword = async (req, res) => {
 
 exports.AddUser = async (req, res) => {
   try {
+
     const findUser = await usermodel.findOne({ email: req.body.email });
     if (findUser) {
       return res.status(400).send('Email Already Exists');
@@ -172,13 +173,18 @@ exports.AddUser = async (req, res) => {
     const protocol = req.protocol;
     const host = req.hostname;
     const url = `${protocol}//${host}`;
+
     const hashPassword = bcrypt.hashSync(req.body.password, 10);
     const addUser = await usermodel.create({
+      role: req.body.role,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
+      userName: req.body.userName,
+      date: req.body.date,
       email: req.body.email,
       phone: req.body.phone,
       password: hashPassword,
+      userGroup: req.body.userGroup,
       image: req.file ? url + '/uploads/' + req.file.filename : ' ',
     });
 
@@ -188,6 +194,7 @@ exports.AddUser = async (req, res) => {
       message: 'User Add  Successfully',
       success: true,
     });
+
   } catch (error) {
     res.status(500).send({
       message: "Enternal Server Error",
@@ -240,10 +247,10 @@ exports.GetUserById = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    const { id, firstName, lastName, phone, country, countryCode } = req.body;
+    const { firstName, lastName, phone, userName, date, userGroup, country, countryCode } = req.body;
     const updateUser = await usermodel.findByIdAndUpdate(
       { _id: req.params.id },
-      { firstName, lastName, phone, country, countryCode }
+      { firstName, lastName,userName,date,userGroup, phone, country, countryCode }
     );
     if (updateUser) {
       res.status(200).send({
