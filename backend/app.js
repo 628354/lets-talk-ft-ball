@@ -46,6 +46,7 @@ const TableRoute = require('./router/Table_graph');
 const permission = require('./router/permission')
 const routes = require('./router/routes')
 const teamCatlog = require('./router/teamCatlog')
+const bannerImage = require('./router/bannerImage')
 
 const mongoose = require("mongoose")
 mongoose.connect(process.env.MONGO_URI,
@@ -78,6 +79,7 @@ app.use('/', TableRoute);
 app.use('/', permission)
 app.use('/', routes)
 app.use('/', teamCatlog)
+app.use('/', bannerImage)
 
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

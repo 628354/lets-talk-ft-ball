@@ -1,5 +1,11 @@
 const seasonyearmodel = require("../model/seasonyear");
 
+exports.deleteTableRecords = () => {
+  seasonyearmodel.deleteMany({});
+  console.log("Successfully delete");
+}
+
+
 exports.addleagueyear = async (req, res) => {
   try {
     const { teamsId, teamdataId, season_Title, status, sort_Order } = req.body;
@@ -8,7 +14,6 @@ exports.addleagueyear = async (req, res) => {
       res.send({ status: false, message: "season allready added" });
       return;
     }
-
     const addleagueyear = await seasonyearmodel.create({
       teamsId: teamsId,
       teamdataId: teamdataId,
@@ -154,7 +159,7 @@ exports.getsessonYear = async (req, res) => {
 };
 exports.getLatestYears = async (req, res) => {
   try {
-    const getyears = await seasonyearmodel.find().sort({ age: -1 }).limit(1);
+    const getyears = await seasonyearmodel.find().sort({ season_Title: -1 }).limit(1);
     res.send({
       status: true,
       message: "Successfully get seasonyears",

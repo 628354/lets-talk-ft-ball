@@ -10,6 +10,6 @@ const teamCatlog = require('../controller/teamCatlog')
 
 router.post('/uploadCatLog', upload.single('excelFile'), teamCatlog.CatlogImport);
 router.get('/:lung/find', teamCatlog.findTeam);
-router.get('/:lung/teamMatch', teamCatlog.teamMatch)
+router.get("/:lung/findAll",teamCatlog.findAllTeam);
 
 module.exports = router

@@ -57,7 +57,6 @@ module.exports = {
         res.send(responseHelper[200]);
 
     },
-
     findTeam: async (Request, Response) => {
         const { lung } = Request.params;
         const { leagueId } = Request.body
@@ -65,6 +64,15 @@ module.exports = {
         responseHelper[200].data = data;
         Response.send(responseHelper[200]);
     },
+
+    findAllTeam: async (Request, Response) =>{
+        const { lung } = Request.params;
+            const data = await teamCatlog.find({},{[lung]: 1}).populate("leagueid");
+            responseHelper[200].data = data;
+            Response.send(responseHelper[200]); 
+    },
+
+ 
 
     teamMatch: async (req, res) => {
         try {

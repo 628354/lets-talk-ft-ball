@@ -1,9 +1,9 @@
 /** @format */
 
-const SERVER_LINK =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/";
-const SERVER_IMAGES =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/"
-// const SERVER_LINK = "http://localhost:5000/";
-// const SERVER_IMAGES = "http://localhost:5000/";
+// const SERVER_LINK =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/";
+// const SERVER_IMAGES =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/"
+const SERVER_LINK = "http://localhost:5000/";
+const SERVER_IMAGES = "http://localhost:5000/";
 
 export const REQUEST_TYPE = {
 	GET: "GET",
@@ -81,6 +81,18 @@ export const SESSIOND = {
   };
   export const TEAM_DETAILS = {
 	details: `${SERVER_LINK}en/team_details`,
+	
+  };
+  export const ADD_IMAGE = {
+	image: `${SERVER_LINK}addImage`,
+	
+  };
+  export const GET_USER_BY_ID = {
+	user: `${SERVER_LINK}GetUserById`,
+	
+  };
+  export const UPDATE_USER = {
+	updateuser: `${SERVER_LINK}updateUser`,
 	
   };
 

@@ -46,23 +46,26 @@ export default function CahrtGsGc({ leagueId}) {
 			season:  seasonId ,
 		};
 
+		const lang= "en";
+		const data1 = []
 		apiCall(GS_GC.find, REQUEST_TYPE.POST, data).then((result) => {
-			console.log(result.response.data.data[0]?.en);
 			if (result.status === 200) {
-				//console.log(result.response.data.data[0].en[0].gs_gc);
+			result.response.data.data?.map((item,index) =>{
+						return item[lang].map((results)=>{
+							data1.push({
+								"goalsCons" : results.gs_gc,
+								"name" : results.teamname[lang].Team_Name_Short_English
+							})
+						})
+						
+				})
 
-				const extractedData = result.response.data.data[0]?.en.map((item) => ({
-					name:item.teamname.en.Team_Name_Short_English,
-					goalsCons:parseInt(item.gs_gc)
-					//goalsScored: parseInt(item.en[0].goals_scored),
-					
-				}));
-				setGsGc(extractedData);
+				setGsGc(data1)
 			}
 		});
 		return false;
 	};
-	//console.log(gsGc);
+	console.log(gsGc);
 	useEffect(() => {
 		getGsGc();
 	}, [leagueId,seasonId]);

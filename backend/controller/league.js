@@ -6,14 +6,13 @@ const Helpers = require('../Helpers/Helpers')
 
 exports.addleague = async (req, res) => {
     try {
-        const { lung } = req.params;
         const { teamId, sessionId, leaguedataId, leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
             sort_Order, status } = req.body
         const protocol = req.protocol
-        const host = req.host
+        const host = req.hostname
         const url = `${protocol}//${host}`
 
-        const find = await leaguemodel.findOne({ leaguename: { [lung]: leaguename } });
+        const find = await leaguemodel.findOne({ leaguename: leaguename });
         if (find) {
             res.send({ status: true, message: "league already present" });
             return;
@@ -24,17 +23,15 @@ exports.addleague = async (req, res) => {
             teamId: teamId,
             sessionId: sessionId,
             image: req.file ? url + "/uploads/" + req.file.filename : " ",
-            [lung]:{
-                leaguename: leaguename,
-                description: description,
-                meta_Tag_Title: meta_Tag_Title,
-                meta_Tag_Description: meta_Tag_Description,
-                meta_Tag_Keywords: meta_Tag_Keywords,
-                blog_Category: blog_Category,
-                sort_Order: sort_Order,
-                status: status
-            },
-           
+            leaguename: leaguename,
+            description: description,
+            meta_Tag_Title: meta_Tag_Title,
+            meta_Tag_Description: meta_Tag_Description,
+            meta_Tag_Keywords: meta_Tag_Keywords,
+            blog_Category: blog_Category,
+            sort_Order: sort_Order,
+            status: status
+
         })
         const result = await addleage.save()
         res.status(200).send({
@@ -56,8 +53,7 @@ exports.addleague = async (req, res) => {
 
 exports.getleagues = async (req, res) => {
     try {
-        const { lung } = req.params;
-        const getleagues = await leaguemodel.find({},[lung]).populate("leaguedataId")
+        const getleagues = await leaguemodel.find().populate("leaguedataId")
             .populate("teamId")
             .populate('sessionId')
             .sort({ createdAt: -1 })
@@ -71,7 +67,7 @@ exports.getleagues = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
-        
+
         const { leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
             sort_Order, status } = req.body
         const protocol = req.protocol

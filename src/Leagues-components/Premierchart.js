@@ -43,17 +43,23 @@ const getGoalScore = async () => {
 			leagueId: leagueId,
 			season: seasonId,
 		};
-
+		const lang = "en";
+		const data1 = []
 		const result = await apiCall(GS.find, REQUEST_TYPE.POST, data);
-
 		if (result.status === 200) {
-			const extractedData = result.response.data.data[0]?.en.map((item) => ({
-				name: item.teamname.en.Team_Name_Short_English,
-				goalsScored: parseInt(item.goals_scored),
-			}));
+			result.response.data.data?.map((item, index) => {
+				return item[lang].map((results) => {
+					data1.push({
+						"goalsScored": results.goals_scored,
+						"name": results.teamname[lang].Team_Name_Short_English
+					})
+				})
 
-			setGoalScore(extractedData);
+			})
+
+			setGoalScore(data1)
 		}
+		
 	} catch (error) {
 		console.error("An error occurred while fetching goal scores:", error);
 	}

@@ -1,9 +1,30 @@
-import React from 'react';
+
 import { Button, Container } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 
 export default function Signup() {
+
+   // const {register, message, setMessage} = useContext(AuthContext);
+    const [formData, setFormData]=useState();
+    const handleChange=(e)=>{
+        const {name, value} = e.target;0
+        setFormData((prev)=>({
+            ...prev,
+            [name]: value
+        }))
+    }
+
+    const submitForm = (e)=>{
+        e.preventDefault();
+        //register(formData);
+    }
+
+    useEffect(()=>{
+       // setMessage("");
+    }, [])
+
   return (
     <div>
         <section className='en_hero_image en_hero_image'>

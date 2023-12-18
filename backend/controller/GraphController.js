@@ -3,13 +3,13 @@ const teadData = require('../model/teamdata');
 const responseHelper = require('../Helpers/Response')
 const teamCatlog = require('../model/teamCatlog')
 const mongoose = require('mongoose');
-
+const teamdata = require('../model/teamdata');
 const ScrollDown = async (Request, Response) => {
 
 	try {
 		const { lung, leagueId } = Request.params;
 		const { season } = Request.body;
-		const data = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` }, { [lung]: 1 }).populate("en.teamname", { [lung]: 1 });
+		const data = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` }, { [lung]: 1 }).populate("en.teamname", { [lung]: 1 })
 		responseHelper[200].data = data;
 		Response.send(responseHelper[200]);
 	} catch (e) {
@@ -71,29 +71,160 @@ const gs_gc = async (Request, Response) => {
 	} catch (e) {
 		sendError(Response, e)
 	}
-
 }
 
-const team_details = async (Request, Response) => {
+const teamSeasson = async (Request, Response) => {
 	try {
-		const { lung, teamNameId } = Request.params;
-		const data = await leaguedata.find(
-			{
-				$or: [
-					{ [`${lung}.teamname._id`]: teamNameId },
-					{ "ar.teamname._id": teamNameId },
-					{ "en.teamname._id": teamNameId }
-				]
-			},
-			{ [lung]: 1, datatype: 1 }
-		).populate("en.teamname", { [lung]: 1 });
-
+		const { lung } = Request.params;
+		const { leagueId } = Request.body
+		let d = [lung] + ".gs_gc";
+		const data = await teamdata.find({ "leagueid": `${leagueId}` }, { "season_Title": 1 }).populate("seasonid")
 		responseHelper[200].data = data;
 		Response.send(responseHelper[200]);
 	} catch (e) {
-		sendError(Response, e);
+		sendError(Response, e)
 	}
+}
+
+
+const teamSeassonName = async (Request, Response) => {
+	try {
+		const { lung } = Request.params;
+		const { leagueId, season } = Request.body
+		const data = await teamdata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` }, { "season_Title": 1 }).populate("teamname")
+		responseHelper[200].data = data;
+		Response.send(responseHelper[200]);
+	} catch (e) {
+		sendError(Response, e)
+	}
+}
+
+
+const teamSeassonGaneRate = async (Request, Response) => {
+	try {
+		const { lung } = Request.params;
+		const { leagueId, season, teamId } = Request.body
+		let gene = [lung] + ".GS_rate"
+		let teamDatas = await teamdata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}`, "teamname": `${teamId}` }, { [gene]: 1 })
+		let data1 = {}
+		const Lueagues = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` });
+		Lueagues.map((row) => {
+			row[lung].map(async (index) => {
+				if (index.teamname == teamId) {
+					data1 = index;
+				}
+			})
+		})
+		let teamname1 = await teamCatlog.findOne({ "_id": data1.teamname });
+		const api = {
+			teamDatas, data1, teamname1
+		}
+		responseHelper[200].data = api
+		Response.send(responseHelper[200]);
+	} catch (e) {
+		sendError(Response, e)
+	}
+}
+
+
+const teamSeassonGC = async (Request, Response) => {
+	try {
+		const { lung } = Request.params;
+		const { leagueId, season, teamId } = Request.body
+		let gene = [lung] + ".GC_cum"
+		let teamDatas = await teamdata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}`, "teamname": `${teamId}` }, { [gene]: 1 })
+		let data1 = {}
+		const Lueagues = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` });
+		Lueagues.map((row) => {
+			row[lung].map(async (index) => {
+				if (index.teamname == teamId) {
+					data1 = index;
+				}
+			})
+		})
+		let teamname1 = await teamCatlog.findOne({ "_id": data1.teamname });
+		const api = {
+			teamDatas, data1, teamname1
+		}
+		responseHelper[200].data = api
+		Response.send(responseHelper[200]);
+	} catch (e) {
+		sendError(Response, e)
+	}
+}
+
+
+const teamGS_inG = async (Request, Response) => {
+	try {
+		const { lung } = Request.params;
+		const { leagueId, season, teamId } = Request.body
+		let gene = [lung] + ".GS_inG"
+		let teamDatas = await teamdata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}`, "teamname": `${teamId}` }, { [gene]: 1 })
+		let data1 = {}
+		const Lueagues = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` });
+		Lueagues.map((row) => {
+			row[lung].map(async (index) => {
+				if (index.teamname == teamId) {
+					data1 = index;
+				}
+			})
+		})
+		let teamname1 = await teamCatlog.findOne({ "_id": data1.teamname });
+		const api = {
+			teamDatas, data1, teamname1
+		}
+		responseHelper[200].data = api
+		Response.send(responseHelper[200]);
+	} catch (e) {
+		sendError(Response, e)
+	}
+}
+
+const teamGS_GC = async (Request, Response) => {
+	try {
+		const { lung } = Request.params;
+		const { leagueId, season, teamId } = Request.body
+		let gene = [lung] + ".GS_GC"
+		let teamDatas = await teamdata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}`, "teamname": `${teamId}` }, { [gene]: 1 })
+		let data1 = {}
+		const Lueagues = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` });
+		Lueagues.map((row) => {
+			row[lung].map(async (index) => {
+				if (index.teamname == teamId) {
+					data1 = index;
+				}
+			})
+		})
+		let teamname1 = await teamCatlog.findOne({ "_id": data1.teamname });
+		const api = {
+			teamDatas, data1, teamname1
+		}
+		responseHelper[200].data = api
+		Response.send(responseHelper[200]);
+	} catch (e) {
+		sendError(Response, e)
+	}
+}
+const team_details = async (Request, Response) => {
+    try {
+        const { lung, teamNameId } = Request.params;
+        const data = await leaguedata.find(
+            {
+                $or: [
+                    { [`${lung}.teamname._id`]: teamNameId },
+                    { [`ar.teamname._id`]: teamNameId },
+                    { [`en.teamname._id`]: teamNameId }
+                ]
+            },
+            `${lung} datatype`,
+        ).populate(`${lung}.teamname seasonid`, `${lung} season_Title`); 
+        responseHelper[200].data = data;
+        Response.send(responseHelper[200]);
+    } catch (e) {
+        sendError(Response, e);
+    }
 };
+
 
 const sendError = (Response, Error) => {
 	if (Error.errno === 500) {
@@ -111,5 +242,5 @@ const sendError = (Response, Error) => {
 
 
 module.exports = {
-	ScrollDown, findByteamName, Goals_Scored, Goals_Con, gs_gc, team_details,
+	ScrollDown, findByteamName, Goals_Scored, Goals_Con, gs_gc, team_details, teamSeasson, teamSeassonName, teamSeassonGaneRate, teamSeassonGC, teamGS_inG, teamGS_GC
 }

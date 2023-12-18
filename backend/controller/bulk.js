@@ -26,11 +26,11 @@ exports.leagedBlukImport = async (req, res) => {
     const data = XLSX.utils.sheet_to_json(worksheet);
     for (let i = 0; i < data.length; i++) {
       const teamId = await teamCatlog.findOne({ "en.Team_Name_English": data[i].TEAM });
-
+      // console.log(teamId);
       if (await teamId?._id) {
 
         sheetsData.push({
-          teamname: await teamId,
+          teamname: await teamId?._id,
           games: data[i].GP,
           win: data[i].W,
           draw: data[i].D,
@@ -44,7 +44,7 @@ exports.leagedBlukImport = async (req, res) => {
         })
       }
     }
-
+    // console.log({sheetsData});
     await saveLeague([{
       seasonid: req.body.season,
       leagueid: req.body.league,
@@ -65,8 +65,9 @@ exports.leagedBlukImport = async (req, res) => {
   // console.log(sheetNamesTeam);
   const allDataTeam = [];
   const updateData = [];
+  const sheetsTeamData = [];
   sheetNamesTeam.forEach(async sheetName => {
-    const sheetsTeamData = [];
+
     const udpateRecords = [];
     const worksheetS = workbookTeam.Sheets[sheetName];
     const data = XLSX.utils.sheet_to_json(worksheetS);
@@ -79,36 +80,39 @@ exports.leagedBlukImport = async (req, res) => {
         const words = key.split(' ');
         words.shift();
         const modifiedString = words.join('_');
-
+        // console.log(modifiedString);
         myData[modifiedString] = data[i][key]
         // data[i][modifiedString]= data[i][key];
       }
 
-
-
-      sheetsTeamData.push({
-        NO_OF_GAMES: myData['NO._OF_GAMES'],
-        POINTS: myData.POINTS,
-        POINTS_ACCUMULATED: myData.POINTS_ACCUMULATED,
-        POINTS_GAINING_RATE: myData.POINTS_GAINING_RATE,
-        GS_inG: myData.GS_inG,
-        GS_cum: myData.GS_cum,
-        GS_rate: myData.GS_rate,
-        GC_inG: myData.GC_inG,
-        GC_cum: myData.GC_cum,
-        GC_rate: myData.GC_rate,
-        GS_GC: (myData['GS/GC']) ? myData['GS/GC'] : " ",
-        Poverty_Line: myData.Line
-      })
+      if (myData.POINTS_ACCUMULATED) {
+        sheetsTeamData.push({
+          NO_OF_GAMES: myData['NO._OF_GAMES'],
+          POINTS: myData.POINTS,
+          POINTS_ACCUMULATED: myData.POINTS_ACCUMULATED,
+          POINTS_GAINING_RATE: myData.POINTS_GAINING_RATE,
+          GS_inG: myData.GS_inG,
+          GS_cum: myData.GS_cum,
+          GS_rate: myData.GS_rate,
+          GC_inG: myData.GC_inG,
+          GC_cum: myData.GC_cum,
+          GC_rate: myData.GC_rate,
+          GS_GC: (myData['GS/GC']) ? myData['GS/GC'] : " ",
+          Poverty_Line: myData.Line
+        })
+      }
     }
 
+    // console.log(sheetsTeamData);
 
     const teamId = await teamCatlog.findOne({ "en.Team_Name_English": sheetName });
     if (await teamId?._id) {
+      // console.log(sheetName);
+      // console.log(sheetsTeamData);
       await saveTeam([{
         seasonid: req.body.season,
         leagueid: req.body.league,
-        teamname: teamId,
+        teamname: teamId?._id,
         en: sheetsTeamData,
         ar: sheetsTeamData
       }])
@@ -135,6 +139,7 @@ const saveLeague = async (body) => {
 }
 
 const saveTeam = async (allDataTeam) => {
+
   allDataTeam.map(async (rows) => {
     const getById = await teadData.findOne({ "seasonid": rows.seasonid, "leagueid": rows.leagueid, "teamname": rows.teamname })
     let addTeam

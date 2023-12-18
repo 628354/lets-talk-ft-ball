@@ -42,7 +42,7 @@ export default function Menubar() {
             <div className="col-lg-6 col-md-6 col-6">
               <div className="navmenu_login">
                 <Link to="/Login">
-                  <i class="ri-login-box-line"></i> Login
+                  <i class="ri-login-box-line"></i> Logout
                 </Link>
               </div>
             </div>
@@ -226,6 +226,16 @@ export default function Menubar() {
                         </Link>
                       </li>
                     </ul>
+                  </li>
+                  <li>
+                    <Link to="/uploadMedia" className="nav-link px-0 align-middle">
+                      <span className="ms-1 d-none d-sm-inline">Media</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/User" className="nav-link px-0 align-middle">
+                      <span className="ms-1 d-none d-sm-inline">User</span>
+                    </Link>
                   </li>
                   <li>
                     <Link to="#" className="nav-link px-0 align-middle">
