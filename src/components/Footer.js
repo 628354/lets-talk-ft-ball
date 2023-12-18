@@ -11,7 +11,7 @@ export default function Footer() {
 			<section class="en_footer ar_footer">
 				<Container>
 					<div className="row">
-						<div className="col-lg-3 col-lg-3 col-md-12 en_line">
+						<div className="col-lg-3 col-md-6 col-sm-12 en_line">
 							<div className="en_footercontant ar_footercontant">
 								<ul className="en_footer_menu ar_footer_menu">
 									<li>
@@ -23,10 +23,13 @@ export default function Footer() {
 									<li>
 										<Link to="Privacypolicy">Terms and Privacy</Link>
 									</li>
+									<li className="mobile-responsive">
+										<Link to="cafe">Cafe</Link>
+									</li>
 								</ul>
 							</div>
 						</div>
-						<div className="col-lg-3 col-lg-3 col-md-12 en_line ar_line">
+						<div className="col-lg-3 col-md-6 col-sm-12 en_line ar_line footer-responsive">
 							<div className="en_footercontant ar_footercontant">
 								<ul className="en_footer_menu ar_footer_menu">
 									<li>
@@ -35,7 +38,7 @@ export default function Footer() {
 								</ul>
 							</div>
 						</div>
-						<div className="col-lg-3 col-lg-3 col-md-12 en_line ar_line">
+						<div className="col-lg-3 col-md-6 col-sm-12 en_line ar_line">
 							<div className="en_footercontantin ar_footercontantin">
 								<p>GET IN TOUCH</p>
 								<ul className="en_media ar_media">
@@ -75,7 +78,7 @@ export default function Footer() {
 								</ul>
 							</div>
 						</div>
-						<div className="col-lg-3 col-lg-3 col-md-12 ar_line">
+						<div className="col-lg-3 col-md-12 col-sm-12 ar_line footer-resp">
 							<div className="en_footercontantin ar_footercontantin">
 								<p>SIGN UP FOR NEWSLETTER</p>
 								<ul className="en_media ar_media">
