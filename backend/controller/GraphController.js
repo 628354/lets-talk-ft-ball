@@ -205,26 +205,34 @@ const teamGS_GC = async (Request, Response) => {
 		sendError(Response, e)
 	}
 }
-const team_details = async (Request, Response) => {
-    try {
-        const { lung, teamNameId } = Request.params;
-        const data = await leaguedata.find(
-            {
-                $or: [
-                    { [`${lung}.teamname._id`]: teamNameId },
-                    { [`ar.teamname._id`]: teamNameId },
-                    { [`en.teamname._id`]: teamNameId }
-                ]
-            },
-            `${lung} datatype`,
-        ).populate(`${lung}.teamname seasonid`, `${lung} season_Title`); 
-        responseHelper[200].data = data;
-        Response.send(responseHelper[200]);
-    } catch (e) {
-        sendError(Response, e);
-    }
-};
 
+const team_details = async (req, res) => {
+	try {
+		const { lung } = req.params;
+		const { teamId } = req.body;
+		const data = await teamCatlog.findOne({ "_id": teamId }).populate('leagueid', { [lung]: 1});
+		if (data) {
+			res.status(200).send({
+				body: data,
+				message: 'Get Team By ID Successfully',
+				success: true
+			});
+		} else {
+			res.status(404).send({
+				message: 'Team ID Not Found',
+				success: false
+			});
+		}
+	} catch (error) {
+		console.log(error.message);
+		res.status(500).send({
+			message: 'Internal Server Error',
+			success: false,
+			error: error.message
+		});
+	}
+  };
+  
 
 const sendError = (Response, Error) => {
 	if (Error.errno === 500) {
