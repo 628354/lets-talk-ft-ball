@@ -9,21 +9,21 @@ exports.addleague = async (req, res) => {
         const { teamId, sessionId, leaguedataId, leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
             sort_Order, status } = req.body
         const protocol = req.protocol
-        const host = req.host
+        const host = req.hostname
         const url = `${protocol}//${host}`
 
-        const find = await leaguemodel.findOne({ leaguename: leaguename })
+        const find = await leaguemodel.findOne({ leaguename: leaguename });
         if (find) {
-            res.send({ status: true, message: "league allready present" })
-            return
+            res.send({ status: true, message: "league already present" });
+            return;
         }
 
         const addleage = await leaguemodel.create({
             leaguedataId: leaguedataId,
             teamId: teamId,
             sessionId: sessionId,
-            leaguename: leaguename,
             image: req.file ? url + "/uploads/" + req.file.filename : " ",
+            leaguename: leaguename,
             description: description,
             meta_Tag_Title: meta_Tag_Title,
             meta_Tag_Description: meta_Tag_Description,
@@ -31,6 +31,7 @@ exports.addleague = async (req, res) => {
             blog_Category: blog_Category,
             sort_Order: sort_Order,
             status: status
+
         })
         const result = await addleage.save()
         res.status(200).send({
@@ -66,7 +67,7 @@ exports.getleagues = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
-        
+
         const { leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
             sort_Order, status } = req.body
         const protocol = req.protocol
@@ -118,7 +119,6 @@ exports.getleagusById = async (req, res) => {
         } else {
             res.send({ status: false, message: 'league Id not found' })
         }
-
     } catch (error) {
         console.log(error.message)
     }

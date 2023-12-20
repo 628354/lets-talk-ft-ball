@@ -27,7 +27,9 @@ router.post(
   usercontroller.forgetpassword
 );
 
+router.post('/AddUser', usercontroller.AddUser)
 router.get("/getAllUser", authentication, usercontroller.getAllUser);
+router.get('/GetUserById/:id', authentication, usercontroller.GetUserById)
 router.put('/updateUser/:id',authentication, usercontroller.updateUser )
 router.delete('/deleteUser/:id',authentication, usercontroller.deleteUser)
 

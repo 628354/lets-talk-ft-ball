@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {authentication} = require('../middleware/auth')
+const { authentication } = require('../middleware/auth')
 const seasonyearController = require("../controller/seasonyear");
 
 router.post("/addseasonyear", seasonyearController.addleagueyear);

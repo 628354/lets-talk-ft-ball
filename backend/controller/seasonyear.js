@@ -1,9 +1,9 @@
 const seasonyearmodel = require("../model/seasonyear");
 
-exports.deleteTableRecords = () =>{
+exports.deleteTableRecords = () => {
   seasonyearmodel.deleteMany({});
   console.log("Successfully delete");
-} 
+}
 
 
 exports.addleagueyear = async (req, res) => {
@@ -159,7 +159,7 @@ exports.getsessonYear = async (req, res) => {
 };
 exports.getLatestYears = async (req, res) => {
   try {
-    const getyears = await seasonyearmodel.find().sort({ age: -1 }).limit(1);
+    const getyears = await seasonyearmodel.find().sort({ season_Title: -1 }).limit(1);
     res.send({
       status: true,
       message: "Successfully get seasonyears",
