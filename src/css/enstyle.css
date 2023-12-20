@@ -1218,6 +1218,10 @@ table.aline_tablel thead tr th {
 .mobile-responsive {
     display: none;
 }
+
+table.team-aline_table thead tr th {
+    width: 100px;
+}
 /* new css by cR 15/12/23 */
 
 

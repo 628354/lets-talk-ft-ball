@@ -246,6 +246,7 @@ function App() {
 				<Route path="/User" element={<User />}></Route>
 				<Route path="/addUser" element={<Adduser />}></Route>
 				<Route path="/edituser/:id" element={<EditUser />}></Route>
+
 			</Routes>
 
 			{shouldDisplayHeader && FooterComponent && <FooterComponent />}
