@@ -35,29 +35,35 @@ const findByteamName = async (Request, Response) => {
 const Goals_Scored = async (Request, Response) => {
 	try {
 		const { lung } = Request.params;
-		const { season, leagueId } = Request.body
+		const { season, leagueId } = Request.body;
 		let d = [lung] + ".goals_scored";
-		const data = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}`, "datatype": "gspg" }, { datatype: 1, [d]: 1 }).populate("en.teamname", { [lung]: 1 });
+		const data = await leaguedata.find(
+			{ "leagueid": `${leagueId}`, "seasonid": `${season}`, "datatype": "gspg" },
+			{ datatype: 1, [d]: 1 }
+		).populate({
+			path: "en.teamname",
+			select: [lung, "Image"]
+		});
 		responseHelper[200].data = data;
 		Response.send(responseHelper[200]);
 	} catch (e) {
-		sendError(Response, e)
+		sendError(Response, e);
 	}
-
-}
-
+};
 const Goals_Con = async (Request, Response) => {
 	try {
 		const { lung } = Request.params;
 		const { season, leagueId } = Request.body
 		let d = [lung] + ".goals_scored";
-		const data = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}`, "datatype": "gcpg" }, { [d]: 1 }).populate("en.teamname", { [lung]: 1 });
+		const data = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}`, "datatype": "gcpg" }, { [d]: 1 }).populate({
+			path: "en.teamname",
+			select: [lung, "Image"]
+		});
 		responseHelper[200].data = data;
 		Response.send(responseHelper[200]);
 	} catch (e) {
 		sendError(Response, e)
 	}
-
 }
 
 const gs_gc = async (Request, Response) => {
@@ -65,7 +71,10 @@ const gs_gc = async (Request, Response) => {
 		const { lung } = Request.params;
 		const { season, leagueId } = Request.body
 		let d = [lung] + ".gs_gc";
-		const data = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}`, "datatype": "pl" }, { [d]: 1 }).populate("en.teamname", { [lung]: 1 });
+		const data = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}`, "datatype": "pl" }, { [d]: 1 }).populate({
+			path: "en.teamname",
+			select: [lung, "Image"]
+		});
 		responseHelper[200].data = data;
 		Response.send(responseHelper[200]);
 	} catch (e) {
@@ -206,11 +215,32 @@ const teamGS_GC = async (Request, Response) => {
 	}
 }
 
+// const team_details = async (Request, Response) => {
+//     try {
+//         const { lung, teamNameId } = Request.params; 
+//         const data = await leaguedata.find(
+//             {
+//                 $or: [
+//                     { [`${lung}.teamname._id`]: teamNameId },
+//                     { "ar.teamname._id": teamNameId },
+//                     { "en.teamname._id": teamNameId }
+//                 ]
+//             },
+//             { [lung]: 1, datatype: 1 }
+//         ).populate("en.teamname", { [lung]: 1 });
+
+//         responseHelper[200].data = data;
+//         Response.send(responseHelper[200]);
+//     } catch (e) {
+//         sendError(Response, e);
+//     }
+// };
+
 const team_details = async (req, res) => {
 	try {
 		const { lung } = req.params;
 		const { teamId } = req.body;
-		const data = await teamCatlog.findOne({ "_id": teamId }).populate('leagueid', { [lung]: 1});
+		const data = await teamCatlog.findOne({ "_id": teamId }).populate('leagueid', { [lung]: 1 });
 		if (data) {
 			res.status(200).send({
 				body: data,
@@ -231,9 +261,7 @@ const team_details = async (req, res) => {
 			error: error.message
 		});
 	}
-  };
-  
-
+};
 const sendError = (Response, Error) => {
 	if (Error.errno === 500) {
 		responseHelper[500].data = [];
@@ -250,5 +278,5 @@ const sendError = (Response, Error) => {
 
 
 module.exports = {
-	ScrollDown, findByteamName, Goals_Scored, Goals_Con, gs_gc, team_details, teamSeasson, teamSeassonName, teamSeassonGaneRate, teamSeassonGC, teamGS_inG, teamGS_GC
+	ScrollDown, findByteamName, Goals_Scored, Goals_Con, gs_gc,teamGS_inG,teamGS_GC, team_details, teamSeasson, teamSeassonName, teamSeassonGaneRate, teamSeassonGC
 }

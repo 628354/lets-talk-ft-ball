@@ -15,7 +15,7 @@ import {
     Line,
 } from "recharts";
 
-export default function TeamComparisionTable({data}) {
+export default function TeamComparisionTableTwo({data}) {
 
 
   console.log(data)

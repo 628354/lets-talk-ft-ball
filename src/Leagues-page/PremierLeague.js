@@ -15,9 +15,10 @@ export default function PremierLeague() {
 	
 	
 	const [leagueDecreption, setLeagueDecreption] = useState([]);
-	const { leagueId } = useParams();
-console.log(leagueId)
+	// const { leagueId } = useParams();
 
+const leagueId = sessionStorage.getItem("selectedLeagueId")
+//console.log(leagueId)
 	// const [currentLeagueId, setCurrentLeagueId] = useState("");
 	// const [seasonId, setSeasonId] = useState();
 	// const [teamId, setTeamId] = useState("");
@@ -28,8 +29,8 @@ console.log(leagueId)
 		const apiUrl =`${baseUrl}/${leagueId}`
 		try{
 			apiCall(apiUrl,REQUEST_TYPE.GET).then((response)=>{
-				console.log(response.response.data?.body)
-				setLeagueDecreption(response.response.data?.body)
+				console.log(response.response.data.body)
+				setLeagueDecreption(response.response.data.body)
 			})
 
 		}catch(error){
@@ -75,7 +76,7 @@ console.log(leagueId)
 				<Container>
 					<Row>
 						
-							<Row key={leagueDecreption._id}>
+							<Row key={leagueDecreption?._id}>
 								<div className="col-lg-12 col-md-12 col-sm-12">
 									<div className="en-premier-contant ar-premier-contant">
 										<div className="leagues_cont">
@@ -87,8 +88,8 @@ console.log(leagueId)
 									<Row>
 										<div className="col-lg-2 col-md-2 col-sm-12 m-auto">
 											<div className="en-leagues-img">
-												{/* <img
-													src={"http://localhost:5000/uploads/" + leagueDecreption.image}
+												<img
+													src={"http://localhost:5000/uploads/" + leagueDecreption?.image}
 													alt="earth"
 													className="img-premier-press"
 												/> */}
@@ -96,7 +97,7 @@ console.log(leagueId)
 										</div>
 										<div className="col-lg-10 col-md-10 col-sm-12">
 											<div className="en-leagues-text ar-leagues-text">
-												<p>{leagueDecreption.description}</p>
+												<p>{leagueDecreption?.description}</p>
 											</div>
 										</div>
 									</Row>

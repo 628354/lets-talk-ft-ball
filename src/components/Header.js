@@ -49,8 +49,9 @@ export default function Header() {
 			},
 		  };
 		  const response = await apiCall(LEAGUES.league, REQUEST_TYPE.GET, obj);
-		  console.log(response.response.data.leaguedetails);
+		  console.log(response);
 		  setLeagueNames(response.response.data.leaguedetails);
+
 		} catch (error) {
 		  console.error("An error occurred while fetching league names:", error);
 		}
@@ -60,6 +61,11 @@ export default function Header() {
 		
 	}, []);
 
+	const handleButtonClick = (id) => {
+		// Store the id in sessionStorage
+		console.log(id)
+		sessionStorage.setItem("selectedLeagueId", id);
+	  };
 
 	return (
 		<div>
@@ -136,8 +142,8 @@ export default function Header() {
 									<div className="en_h_drop">
 										<ul className="en_drop_item  row w-100">
 										{leagueNames.map((data) => (
-												<li className="col-md-6" key={data?._id}>
-													<Link to={`/league/${data?._id}`}  >
+												<li className="col-md-6" key={data?._id}  onClick={() => handleButtonClick(data?._id)}>
+													<Link to="/league"  >
 														<span>
 															<img
 																src={

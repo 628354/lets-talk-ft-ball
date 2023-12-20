@@ -30,18 +30,18 @@ export default function Adduser() {
         });
     };
 
-    const handleImageChange = (e) => {
-        const imageFile = e.target.files[0];
-        setFormData({
-            ...formData,
-            image: imageFile,
-        });
-        const reader = new FileReader();
-        reader.onload = () => {
-            setImagePreview(reader.result);
-        };
-        reader.readAsDataURL(imageFile);
-    };
+    // const handleImageChange = (e) => {
+    //     const imageFile = e.target.files[0];
+    //     setFormData({
+    //         ...formData,
+    //         image: imageFile,
+    //     });
+    //     const reader = new FileReader();
+    //     reader.onload = () => {
+    //         setImagePreview(reader.result);
+    //     };
+    //     reader.readAsDataURL(imageFile);
+    // };
 
 
     const handleSave = async () => {
@@ -257,7 +257,7 @@ export default function Adduser() {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div class="form-group img-g">
+                                                {/* <div class="form-group img-g">
                                                     <label
                                                         class="col-sm-2 control-label"
                                                         for="input-image"
@@ -280,7 +280,7 @@ export default function Adduser() {
                                                             onChange={handleImageChange}
                                                         />
                                                     </div>
-                                                </div>
+                                                </div> */}
                                                 <div class="form-group required">
                                                     <label
                                                         class="col-sm-2 control-label"

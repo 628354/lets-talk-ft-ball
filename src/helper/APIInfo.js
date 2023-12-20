@@ -95,6 +95,38 @@ export const SESSIOND = {
 	updateuser: `${SERVER_LINK}updateUser`,
 	
   };
+  export const GAINING_RATE = {
+	gainrate: `${SERVER_LINK}en/teamSeassonGaneRate/find`,
+	
+  };
 
 
+  export const FIND_ALL = {
+	find: `${SERVER_LINK}en/findAll`,
+	
+  };
+  
+  export const GET_ALL_LEAGUE = {
+	find: `${SERVER_LINK}getleagues`,
+	
+  };
+  export const ALL_SEASON = {
+	find: `${SERVER_LINK}en/teamSeasson/find`,
+	
+  };
+  export const TEAM_NAME = {
+	find: `${SERVER_LINK}en/teamSeassonName/find`,
+	
+  };
+  export const TEAM_SEA_GC = {
+	find: `${SERVER_LINK}en/teamSeassonGC/find`,
+	
+  };
+
+  export const BASE_URL = "http://localhost:5000/uploads/";
+
+
+
+
+  
 
