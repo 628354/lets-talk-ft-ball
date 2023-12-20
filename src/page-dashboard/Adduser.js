@@ -22,7 +22,7 @@ export default function Adduser() {
         status: "",
         userGroup: "",
         userName: ""
-        });
+    });
     const handleChange = (field, value) => {
         setFormData({
             ...formData,
@@ -43,14 +43,13 @@ export default function Adduser() {
         reader.readAsDataURL(imageFile);
     };
 
-    
+
     const handleSave = async () => {
-        
         try {
             console.log("Sending request with formData:", formData);
-            const response = await axios.post("http://localhost:5000/AddUser", formData);
+            const response = await axios.post("https://phpstack-1140615-3967632.cloudwaysapps.com/backend/AddUser", formData);
             console.log("Response from server:", response);
-            
+
         } catch (error) {
             console.error(error);
         }
