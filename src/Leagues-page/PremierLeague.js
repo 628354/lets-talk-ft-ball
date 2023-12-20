@@ -29,8 +29,8 @@ const leagueId = sessionStorage.getItem("selectedLeagueId")
 		const apiUrl =`${baseUrl}/${leagueId}`
 		try{
 			apiCall(apiUrl,REQUEST_TYPE.GET).then((response)=>{
-				console.log(response.response.data.body)
-				setLeagueDecreption(response.response.data.body)
+				console.log(response.response.data?.body)
+				setLeagueDecreption(response.response.data?.body)
 			})
 
 		}catch(error){
@@ -66,7 +66,7 @@ const leagueId = sessionStorage.getItem("selectedLeagueId")
 							<i className="ri-arrow-right-s-line"></i>
 						</li>
 						
-							<Link to="">{leagueDecreption.leaguename}</Link>
+							<Link to="">{leagueDecreption?.leaguename}</Link>
 					
 					</ul>
 				</Container>
@@ -76,11 +76,11 @@ const leagueId = sessionStorage.getItem("selectedLeagueId")
 				<Container>
 					<Row>
 						
-							<Row key={leagueDecreption._id}>
+							<Row key={leagueDecreption?._id}>
 								<div className="col-lg-12 col-md-12 col-sm-12">
 									<div className="en-premier-contant ar-premier-contant">
 										<div className="leagues_cont">
-											<h2>{leagueDecreption.leaguename}</h2>
+											<h2>{leagueDecreption?.leaguename}</h2>
 										</div>
 									</div>
 								</div>
@@ -89,7 +89,7 @@ const leagueId = sessionStorage.getItem("selectedLeagueId")
 										<div className="col-lg-2 col-md-2 col-sm-12 m-auto">
 											<div className="en-leagues-img">
 												<img
-													src={"http://localhost:5000/uploads/" + leagueDecreption.image}
+													src={"http://localhost:5000/uploads/" + leagueDecreption?.image}
 													alt="earth"
 													className="img-premier-press"
 												/>
@@ -97,7 +97,7 @@ const leagueId = sessionStorage.getItem("selectedLeagueId")
 										</div>
 										<div className="col-lg-10 col-md-10 col-sm-12">
 											<div className="en-leagues-text ar-leagues-text">
-												<p>{leagueDecreption.description}</p>
+												<p>{leagueDecreption?.description}</p>
 											</div>
 										</div>
 									</Row>

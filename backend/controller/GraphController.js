@@ -278,5 +278,5 @@ const sendError = (Response, Error) => {
 
 
 module.exports = {
-	ScrollDown, findByteamName, Goals_Scored, Goals_Con, gs_gc, team_details, teamSeasson, teamSeassonName, teamSeassonGaneRate, teamSeassonGC
+	ScrollDown, findByteamName, Goals_Scored, Goals_Con, gs_gc,teamGS_inG,teamGS_GC, team_details, teamSeasson, teamSeassonName, teamSeassonGaneRate, teamSeassonGC
 }
