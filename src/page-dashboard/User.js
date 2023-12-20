@@ -8,29 +8,28 @@ import Form from 'react-bootstrap/Form';
 
 
 export const formatDate = (dateString) => {
-    const dateObject = new Date(dateString);
-    const formattedDate = `${dateObject.getDate()}/${dateObject.getMonth() + 1}/${dateObject.getFullYear()}`;
-    return formattedDate;
-  };
+  const dateObject = new Date(dateString);
+  const formattedDate = `${dateObject.getDate()}/${dateObject.getMonth() + 1}/${dateObject.getFullYear()}`;
+  return formattedDate;
+};
 
 export default function User() {
-    let local = localStorage.getItem("token");
-    //console.log(local)
-    const axiosConfig = {
-        headers: {
-          Authorization: `Bearer ${local}`,
-        },
-      };
+  let local = localStorage.getItem("token");
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${local}`,
+    },
+  };
   const [aboutData, setAboutData] = useState([]);
-  const [itemId, setItemId] = useState(0); 
+  const [itemId, setItemId] = useState(0);
   useEffect(() => {
-   
-   axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getAllUser')
-    // axios.get('http://localhost:5000/getAllUser',axiosConfig)
+
+    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getAllUser', axiosConfig)
+      // axios.get('http://localhost:5000/getAllUser',axiosConfig)
       .then((response) => {
         const aboutInfo = response.data.pageInfo.body
         setAboutData(aboutInfo);
-        setItemId(aboutInfo._id); 
+        setItemId(aboutInfo._id);
 
 
       })
@@ -45,10 +44,12 @@ export default function User() {
     const confirmDelete = window.confirm("Are you sure you want to delete this user?");
 
 
-    if(confirmDelete){
-        axios.delete(`http://localhost:5000/deleteUser/${id}`,axiosConfig)
+    if (confirmDelete) {
+      axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/deleteUser/${id}`, axiosConfig)
+      // axios.delete(`http://localhost:5000/deleteUser/${id}`, axiosConfig)
+
         .then((response) => {
-         
+
           setAboutData(aboutData.filter(league => league._id !== id));
         })
         .catch((error) => {
@@ -56,8 +57,8 @@ export default function User() {
         });
     };
 
-    }
-   
+  }
+
 
 
   return (
@@ -134,18 +135,18 @@ export default function User() {
                         <td>{formatDate(user.createdAt)}</td>
                         <td>
                           <div className='add-button-fis'>
-                            
+
                             <ul className="but-delet">
                               <li>
-                              <Link to={`/edituser/${user._id}`}>
-                              <i className="ri-pencil-fill"></i>
-                            </Link>
-                             </li>
-                             <li className="add-button-sec">
-                             <button onClick={() => handleDelete(user._id)}>
-                              <i className="ri-delete-bin-line"></i>
-                            </button>
-                             </li>
+                                <Link to={`/edituser/${user._id}`}>
+                                  <i className="ri-pencil-fill"></i>
+                                </Link>
+                              </li>
+                              <li className="add-button-sec">
+                                <button onClick={() => handleDelete(user._id)}>
+                                  <i className="ri-delete-bin-line"></i>
+                                </button>
+                              </li>
                             </ul>
                           </div>
                         </td>
