@@ -25,10 +25,9 @@ export default function User() {
   const [itemId, setItemId] = useState(0); 
   useEffect(() => {
    
-   // axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues')
-    axios.get('http://localhost:5000/getAllUser',axiosConfig)
+   axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getAllUser')
+    // axios.get('http://localhost:5000/getAllUser',axiosConfig)
       .then((response) => {
-        //console.log(response.data.pageInfo.body)
         const aboutInfo = response.data.pageInfo.body
         setAboutData(aboutInfo);
         setItemId(aboutInfo._id); 

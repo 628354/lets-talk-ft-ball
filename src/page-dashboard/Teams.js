@@ -15,8 +15,8 @@ export default function Teams() {
 
   useEffect(() => {
    
-    // axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getTeams')
-    axios.get(' http://localhost:5000/getTeams')
+    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getTeams')
+    // axios.get(' http://localhost:5000/getTeams')
       .then((response) => {
         const teamsInfo = response.data?.teamdetails;
         setTeamsData(teamsInfo || []); 
@@ -32,7 +32,8 @@ export default function Teams() {
   
   
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:5000/removeteam/${id}`)
+    axios.get(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeteam/${id}`)
+    // axios.delete(`http://localhost:5000/removeteam/${id}`)
       .then((response) => {
         console.log('Delete response:', response.data);
         setTeamsData(teamsData.filter(team => team._id !== id));
