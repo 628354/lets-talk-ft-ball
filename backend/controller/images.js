@@ -9,7 +9,6 @@ exports.addimages = async (req, res) => {
 
         const imagesUpload = await imagesModel.create({
             logo: req.file ? url + "/uploads/" + req.file.filename : "",
-            folderName: req.body.folderName
         })
 
         res.send({ status: true, mesasge: "Successfully add image", details: imagesUpload })
@@ -24,6 +23,25 @@ exports.GetImage = async (req, res) => {
         res.send({ status: true, message: 'Image Get Successfully', details: data })
     } catch (error) {
         res.send({ status: false, message: "Something went wrong !!" })
+    }
+}
+exports.updateImage = async (req, res) => {
+    try {
+        const protocol = req.protocol
+        const host = req.hostname
+        const url = `${protocol}//${host}`
+        const data = await imagesModel.findByIdAndUpdate({ _id: req.params.id }, { logo: req.file ? url + "/uploads/" + req.file.filename : "", }
+        )
+        if (data) {
+            res.send({ status: true, message: 'Image Updated Successfully', details: data })
+        } else {
+            res.send({ status: false, message: "Image Id Not Found" })
+
+        }
+
+    } catch (error) {
+        res.send({ status: false, message: "Something went wrong !!" })
+
     }
 }
 exports.deleteImage = async (req, res) => {
