@@ -7,7 +7,7 @@ import Table from "react-bootstrap/Table";
 import Iframesecttion from "../Leagues-components/Iframesecttion";
 import { LineChart } from "recharts";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, TEAM_DETAILS,SESSION } from "../helper/APIInfo";
+import { REQUEST_TYPE, TEAM_DETAILS, SESSIOND, GAINING_RATE } from "../helper/APIInfo";
 
 import {
 	BarChart,
@@ -20,7 +20,8 @@ import {
 	Line,
 } from "recharts";
 export default function Teamdetailsl() {
-	const { teamId } = useParams()
+	//const { teamId } = useParams()
+	const teamId = sessionStorage.getItem("teamId")
 	//console.log(teamId)
 	const data = [
 		{
@@ -91,21 +92,29 @@ export default function Teamdetailsl() {
 		},
 	];
 	const [teamDetails, setTeamDetails] = useState([])
-	const [tableData, setTableData] = useState([])	
+	const [tableData, setTableData] = useState([])
+	const [seasonId, setSeasonId] = useState(null);
 	const [allSeasson, setAllSeasson] = useState([])
 	const [currentSeasson, setCurrentSeasson] = useState(null)
 	//get team data table data desc
+
 	const getTeamDetails = async () => {
+		//console.log(teamId)
 		const baseUrl = TEAM_DETAILS.details;
-		const apiUrl = `${baseUrl}/${teamId}`
+		const apiUrl = `${baseUrl}`
+
+		const obj= {
+			teamId:teamId
+		}
 		try {
-			const response = await apiCall(apiUrl, REQUEST_TYPE.GET)
-			console.log(response)
-			const data = response.response.data.data[0].en
-			const filterData = data.filter(item => item.teamname._id === teamId)
-			console.log(filterData[0])
-			setTeamDetails(filterData[0].teamname.en)
-			setTableData(filterData[0])
+			const response = await apiCall(apiUrl, REQUEST_TYPE.POST,obj)
+			//console.log(response.response.data.body)
+			setTeamDetails(response.response.data.body?.en)
+			// const data = response.response.data?.data[0].en
+			// const filterData = data.filter(item => item.teamname._id === teamId)
+			// console.log(filterData[0])
+			// setTeamDetails(filterData[0].teamname.en)
+			// setTableData(filterData[0])
 		} catch (error) {
 			console.log("api error ", error)
 		}
@@ -118,25 +127,77 @@ export default function Teamdetailsl() {
 		getTeamDetails()
 	}, [teamId])
 
-console.log(tableData)
+	//console.log(tableData)
 	// get year 
-	const getYears = async () => {
+	const getLatestYear = async () => {
 		try {
-			const response = await apiCall(SESSION.year, REQUEST_TYPE.GET);
-			// setCurrentSeasson(response.response.data.seasonyears[0]);
-			setAllSeasson(response.response.data.seasonyears);
-			// setSeasonId(response.response.data.seasonyears[0]?._id);
-			//console.log(response.response.data.seasonyears[0].season_Title)
-			setCurrentSeasson(response.response.data.seasonyears[0].season_Title);
+			const response = await apiCall(SESSIOND.LatestYears, REQUEST_TYPE.GET);
+			//console.log(response.response.data.seasonyears)
+			response.response.data.seasonyears.map((year) => {
+				//console.log(year.season_Title)
+				setCurrentSeasson(year.season_Title)
+				setSeasonId(year._id)
+			})
+
+		} catch (error) {
+			console.log("data not found", error);
+		}
+	}
+
+	const getallYears = async () => {
+		try {
+			const response = await apiCall(SESSIOND.year, REQUEST_TYPE.GET);
+			//console.log(response.response.data.seasonyears)
+			setAllSeasson(response.response.data.seasonyears)
+
 		} catch (error) {
 			console.log("data not found", error);
 		}
 	}
 	useEffect(() => {
-		getYears()
-
+		getLatestYear()
+		getallYears()
 	}, [])
-	
+
+	const handleButtonClick = (seasonId,seasonName) => {
+		//console.log(seasonId);
+		///
+		 sessionStorage.setItem("teamId",teamId)
+		setCurrentSeasson(seasonName)
+
+	}
+
+
+
+	//get graph data
+	const getSeasonId = sessionStorage.getItem("runningSeason")
+	const getTeamId = sessionStorage.getItem("teamId")
+	const getLeagueId = sessionStorage.getItem("selectedLeagueId")
+
+console.log(getSeasonId);
+console.log(getTeamId);
+console.log(getLeagueId);
+	const gainingRate = async () => {
+		const obj = {
+			season: getSeasonId,
+			leagueId: getLeagueId,
+			teamId: getTeamId
+		}
+
+		try {
+			const response = await apiCall(GAINING_RATE.gainrate,REQUEST_TYPE.POST, obj)
+				console.log(response.response)
+				setTableData(response.response?.data.data.data1)
+		} catch (error) {
+			console.log("data not found", error)
+		}
+
+	}
+
+	useEffect(() => {
+		gainingRate()
+	}, [getSeasonId, getTeamId, getLeagueId])
+
 	return (
 		<div>
 			<section className="en_hero_about en_hero_about">
@@ -216,12 +277,12 @@ console.log(tableData)
 													</button>
 													<div class="dropdown-content">
 														{
-															allSeasson.map((data)=>{
-																console.log(data.season_Title)
-																return(<Link to="">{data.season_Title}</Link>)
+															allSeasson.map((data) => {
+																//console.log(data)
+																return (<Link to="" onClick={() => handleButtonClick(data._id,data.season_Title)}>{data.season_Title}</Link>)
 															})
 														}
-														
+
 													</div>
 												</div>
 											</div>
@@ -274,7 +335,7 @@ console.log(tableData)
 									<td>{Math.floor(tableData.point_gap)}</td>
 									<td>{Math.floor(tableData.gs_gc)}</td>
 									<td>{(tableData.win_precent * 100).toFixed(2)}%</td>
-									
+
 								</tr>
 							</tbody>
 						</Table>

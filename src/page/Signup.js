@@ -9,7 +9,7 @@ export default function Signup() {
    // const {register, message, setMessage} = useContext(AuthContext);
     const [formData, setFormData]=useState();
     const handleChange=(e)=>{
-        const {name, value} = e.target;0
+        const {name, value} = e.target;
         setFormData((prev)=>({
             ...prev,
             [name]: value

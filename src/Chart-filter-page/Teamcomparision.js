@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
@@ -8,8 +8,316 @@ import Form from "react-bootstrap/Form";
 import TeamComparisionChart from "../Leagues-components/TeamComparisionChart";
 import TeamComparisionTable from "../Leagues-components/TeamComparisionTable";
 import Iframesecttion from "../Leagues-components/Iframesecttion";
-
+import { apiCall } from "../helper/RequestHandler";
+import { REQUEST_TYPE, GET_ALL_LEAGUE,ALL_SEASON,TEAM_NAME ,GAINING_RATE,TEAM_SEA_GC} from "../helper/APIInfo";
+import TeamComparisionTableTwo from "../Leagues-components/TeamComparisionTableTwo";
+import TeamComparisionChartTwo from "../Leagues-components/TeamComparisionChartTwo";
+import TeamComparisionChartThree from "../Leagues-components/TeamComparisionChartThree";
+import TeamComparisionChartFour from "../Leagues-components/TeamComparisionChartFour";
+import TeamComparisionChartFive from "../Leagues-components/TeamComparisionChartFive";
+import TeamComparisionChartSix from "../Leagues-components/TeamComparisionChartSix";
 export default function Teamcomparision() {
+	const [leagueNames, setLeagueNames] = useState([]);
+	const [season, setSeason] = useState([]);
+	const [teamName, setTeamName] = useState([]);
+	
+	const [currentLeagueId,setCurrentLeagueId]=useState(null)
+	const [seasonId,setSeasonId]=useState(null)
+	const [teamId,setTeamId]=useState(null)
+
+const [graph,setGraph]=useState([])
+
+
+const [data,setData]=useState([])
+const [data2,setData2]=useState([])
+
+	/// 2nd side 
+
+
+
+	const [season2, setSeason2] = useState([]);
+	const [teamName2, setTeamName2] = useState([]);
+	
+	
+	const [
+		currentLeagueId2,setCurrentLeagueId2]=useState(null)
+	const [seasonId2,setSeasonId2]=useState(null)
+	const [teamId2,setTeamId2]=useState(null)
+
+	const getLeagueName = async () => {
+		try {
+		  
+		  	  
+		  const response = await apiCall(GET_ALL_LEAGUE.find, REQUEST_TYPE.GET);
+		 //  //console.log(response.response.data.leaguedetails)
+		  
+	
+		  setLeagueNames(response.response.data.leaguedetails);
+		} catch (error) {
+		  console.error("An error occurred while fetching league names:", error);
+		}
+	  };
+
+	  
+	
+
+	const getSeason  =async()=>{
+		// //console.log(currentLeagueId)
+		const obj={
+			leagueId:currentLeagueId
+ 
+		}
+		try{
+			const response = await apiCall(ALL_SEASON.find, REQUEST_TYPE.POST,obj);
+			// //console.log(response.response.data.data)
+				setSeason(response.response.data.data)
+
+		}catch(error){
+			 //console.log("data not get ",error)
+		}
+
+	}
+
+
+
+
+	const getTeamName = async()=>{
+		console.log(currentLeagueId);
+		console.log(seasonId);
+		const obj ={
+			leagueId:currentLeagueId,
+            season:seasonId
+		}
+
+		try{
+			const response = await apiCall(TEAM_NAME.find, REQUEST_TYPE.POST,obj);
+			  console.log(response);
+			setTeamName(response.response.data.data);
+			
+
+
+		}catch(error){
+			 //console.log("data error ",error);
+		}
+
+	}
+
+
+	
+
+
+	useEffect(() => {
+		getLeagueName();
+		
+	}, []);
+	useEffect(() => {
+	
+		getSeason()
+	}, [currentLeagueId,]);
+
+	useEffect(() => {
+	
+		getTeamName()
+	}, [currentLeagueId,seasonId]);
+	
+	const handleClick =(leagueId)=>{
+
+		// //console.log(leagueId);
+		setCurrentLeagueId(leagueId)
+	}
+
+	const handleClickSeason =(seasonId)=>{
+
+		// //console.log(seasonId);
+		setSeasonId(seasonId)
+		//setCurrentLeagueId(seasonId)
+	}
+// //console.log(season);
+	
+const handleClickTeam =(teamId)=>{
+
+	// //console.log(teamId);
+	setTeamId(teamId)
+	
+}
+
+
+
+
+///// 2nd side comparesion  
+
+const getLeagueName2 = async () => {
+	try {
+	  
+			
+	  const response = await apiCall(GET_ALL_LEAGUE.find, REQUEST_TYPE.GET);
+	  // //console.log(response.response.data.leaguedetails)
+	  
+
+	  setLeagueNames(response.response.data.leaguedetails);
+	} catch (error) {
+	  console.error("An error occurred while fetching league names:", error);
+	}
+  };
+
+
+
+const getSeason2  =async()=>{
+	 //console.log(currentLeagueId2)
+	const obj={
+		leagueId:currentLeagueId2
+
+	}
+	try{
+		const response = await apiCall(ALL_SEASON.find, REQUEST_TYPE.POST,obj);
+		 //console.log(response.response.data.data)
+			setSeason2(response.response.data.data)
+
+	}catch(error){
+		 //console.log("data not get ",error)
+	}
+
+}
+
+
+
+
+const getTeamName2 = async()=>{
+	 //console.log(currentLeagueId2);
+	 console.log(seasonId2);
+	const obj ={
+		leagueId:currentLeagueId2,
+		 season:seasonId2
+	}
+
+	try{
+		const response = await apiCall(TEAM_NAME.find, REQUEST_TYPE.POST,obj);
+		// console.log(response);
+		setTeamName2(response.response?.data?.data);
+
+
+	}catch(error){
+		 //console.log("data error ",error);
+	}
+
+}
+
+
+useEffect(() => {
+	getLeagueName2();
+	
+}, []);
+
+
+useEffect(() => {
+
+	getSeason2()
+
+	
+}, [currentLeagueId2]);
+
+
+
+useEffect(() => {
+
+
+	getTeamName2()
+
+}, [currentLeagueId2,seasonId2]);
+
+const handleClick2 =(leagueId)=>{
+
+	 //console.log(leagueId);
+	 
+	setCurrentLeagueId2(leagueId)
+}
+
+const handleClickSeason2 =(seasonId)=>{
+
+	 //console.log(seasonId);
+	setSeasonId2(seasonId)
+	//setCurrentLeagueId(seasonId)
+}
+// //console.log(season);
+
+const handleClickTeam2 =(teamId2)=>{
+
+ console.log(teamId2);
+setTeamId2(teamId2)
+
+}
+
+const gainingRate =async()=>{
+	console.log(currentLeagueId);
+	console.log(seasonId);
+	console.log(teamId);
+    const obj ={
+      leagueId:currentLeagueId,
+       season:seasonId,
+      teamId:teamId
+    }
+    
+  
+    try{
+      const response = await apiCall(GAINING_RATE.gainrate,REQUEST_TYPE.POST,obj )
+      console.log(response.response.data.data);
+    //   setTeamName(response.response.data.data?.teamname1?.en)
+    setData(response.response?.data?.data?.data1)
+  
+    }catch(error){
+      console.log("data errror ",error )
+    }
+  }
+  
+  useEffect(()=>{
+    gainingRate()
+  },[currentLeagueId,seasonId,teamId])
+
+
+  
+const gainingRate2 =async()=>{
+	console.log(currentLeagueId2);
+	console.log(seasonId2);
+	console.log(teamId2);
+    const obj ={
+      leagueId:currentLeagueId2,
+       season:seasonId2,
+      teamId:teamId2
+    }
+    
+  
+    try{
+		const lang= "en";
+		const data1 = []
+      const response = await apiCall(TEAM_SEA_GC.find,REQUEST_TYPE.POST,obj )
+      console.log(response);
+	  response.response?.data?.data.teamDatas?.map((item)=>{
+		console.log(item[lang])
+		//setGraph(item[lang])
+		// return item[lang].map((data)=>{
+		// 	console.log(data.GS_rate)
+		// 	data1.push({
+		// 		"GS_rate" : data.GS_rate,
+				
+		// 	})
+		// })
+	  })
+	  console.log(data1)
+	
+    //   setTeamName(response.response.data.data?.teamname1?.en)
+    setData2(response.response?.data?.data?.data1)
+  
+    }catch(error){
+      console.log("data errror ",error )
+    }
+  }
+  
+  useEffect(()=>{
+    gainingRate2()
+  },[currentLeagueId2,seasonId2,teamId2])
+
+
+//console.log(data);
 	return (
 		<div>
 			<section className="en_hero_about en_hero_about">
@@ -29,7 +337,7 @@ export default function Teamcomparision() {
 							<i className="ri-arrow-right-s-line"></i>
 						</li>
 						<li>
-							<Link to="/PremierLeague">TEAM COMPARISION</Link>
+							<Link to="/PremierLeague">TEAM COMPARISION </Link>
 						</li>
 					</ul>
 				</Container>
@@ -56,28 +364,37 @@ export default function Teamcomparision() {
 							<div className="chart-com-select">
 								<div className="main-compari-select">
 									<div className="col-compari">
-										<Form.Select aria-label="Default select example">
+										<Form.Select aria-label="Default select example" onChange={(e) => handleClick(e.target.value)}>
 											<option>Select League </option>
-											<option value="9">PREMIER LEAGUE</option>
-											<option value="10">LALIGA</option>
-											<option value="11">SERIE A</option>
-											<option value="12">BUNDESLIGA</option>
-											<option value="13">LIGUE 1</option>
-											<option value="17">EREDIVISIE</option>
-											<option value="14">SAUDI PRO</option>
-											<option value="15">EGYPT PL</option>
-											<option value="16">BOTOLA PRO</option>
-											<option value="19">BRAZIL SERIE A</option>
+										 {
+												leagueNames.map((item)=>{
+													// //console.log(item)
+													return(<option key={item._id} value={item._id}>{item.leaguename }</option>)
+												})
+											} 
+											
 										</Form.Select>
 									</div>
 									<div className="col-compari">
-										<Form.Select aria-label="Default select example">
+										<Form.Select aria-label="Default select example" onChange={(e) => handleClickSeason(e.target.value)}>
 											<option>Select Season</option>
+											{
+												season?.map((item)=>{
+													// //console.log(item)
+													return(	<option  key={item.seasonid._id} value={item.seasonid._id}>{item.seasonid.season_Title}</option>)
+												})
+											}
 										</Form.Select>
 									</div>
 									<div className="col-compari">
-										<Form.Select aria-label="Default select example">
+										<Form.Select aria-label="Default select example" onChange={(e)=>handleClickTeam(e.target.value)}>
 											<option>Select Team</option>
+											{
+												teamName?.map((item)=>{
+                                                // //console.log(item.teamname._id);
+													return(<option key={item.teamname._id} value={item.teamname._id} >{item.teamname.en.Team_Name_English}</option>)
+												})
+											}
 										</Form.Select>
 									</div>
 								</div>
@@ -90,44 +407,64 @@ export default function Teamcomparision() {
 								</div>
 							</div>
 							<div className="team-compri-table">
-								<TeamComparisionTable/>
+								<TeamComparisionTable   
+								data={data}
+
+								
+								
+								/>
 							</div>
 							<div className="team-compri-chat">
-								<TeamComparisionChart/>
+								<TeamComparisionChartTwo
+								
+
+								/>
 							</div>
 							<div className="team-compri-chat">
-								<TeamComparisionChart/>
+								<TeamComparisionChartFive 
+								
+								/>
 							</div>
 							<div className="team-compri-chat">
-								<TeamComparisionChart/>
+								<TeamComparisionChartSix
+								/>
 							</div>
 						</div>
 						<div className="col-lg-6 col-md-6 col-sm-12 ps-5">
 							<div className="chart-com-select">
 								<div className="main-compari-select">
 									<div className="col-compari">
-										<Form.Select aria-label="Default select example">
+									<Form.Select aria-label="Default select example" onChange={(e) => handleClick2(e.target.value)}>
 											<option>Select League </option>
-											<option value="9">PREMIER LEAGUE</option>
-											<option value="10">LALIGA</option>
-											<option value="11">SERIE A</option>
-											<option value="12">BUNDESLIGA</option>
-											<option value="13">LIGUE 1</option>
-											<option value="17">EREDIVISIE</option>
-											<option value="14">SAUDI PRO</option>
-											<option value="15">EGYPT PL</option>
-											<option value="16">BOTOLA PRO</option>
-											<option value="19">BRAZIL SERIE A</option>
+										 {
+												leagueNames.map((item)=>{
+													// //console.log(item)
+													return(<option key={item._id} value={item._id}>{item.leaguename }</option>)
+												})
+											} 
+											
 										</Form.Select>
 									</div>
 									<div className="col-compari">
-										<Form.Select aria-label="Default select example">
+									<Form.Select aria-label="Default select example" onChange={(e) => handleClickSeason2(e.target.value)}>
 											<option>Select Season</option>
+											{
+												season2?.map((item)=>{
+													 //console.log(item.seasonid._id)
+													return(	<option  key={item.seasonid._id} value={item.seasonid._id}>{item.seasonid.season_Title}</option>)
+												})
+											}
 										</Form.Select>
 									</div>
 									<div className="col-compari">
-										<Form.Select aria-label="Default select example">
+									<Form.Select aria-label="Default select example" onChange={(e)=>handleClickTeam2(e.target.value)}>
 											<option>Select Team</option>
+											{
+												teamName2?.map((item)=>{
+                                                // //console.log(item.teamname._id);
+													return(<option key={item.teamname._id} value={item.teamname._id} >{item.teamname.en.Team_Name_English}</option>)
+												})
+											}
 										</Form.Select>
 									</div>
 								</div>
@@ -141,13 +478,18 @@ export default function Teamcomparision() {
 							</div>
 
 								<div className="team-compri-table">
-									<TeamComparisionTable/>
+									<TeamComparisionTable
+								data={data2}
+									/>
+									
 								</div>
 								<div className="team-compri-chat">
-									<TeamComparisionChart/>
+									<TeamComparisionChartThree 
+									graph={graph}/>
+									
 								</div>
 								<div className="team-compri-chat">
-									<TeamComparisionChart/>
+									<TeamComparisionChartFour/>
 								</div>
 								<div className="team-compri-chat">
 									<TeamComparisionChart/>

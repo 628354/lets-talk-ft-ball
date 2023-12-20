@@ -15,9 +15,10 @@ export default function PremierLeague() {
 	
 	
 	const [leagueDecreption, setLeagueDecreption] = useState([]);
-	const { leagueId } = useParams();
-console.log(leagueId)
+	// const { leagueId } = useParams();
 
+const leagueId = sessionStorage.getItem("selectedLeagueId")
+//console.log(leagueId)
 	// const [currentLeagueId, setCurrentLeagueId] = useState("");
 	// const [seasonId, setSeasonId] = useState();
 	// const [teamId, setTeamId] = useState("");

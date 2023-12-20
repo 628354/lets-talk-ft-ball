@@ -28,7 +28,7 @@ export default function Leagues() {
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeLeague/${id}`)
+    axios.delete(`http://localhost:5000/removeLeague/${id}`)
       .then((response) => {
         setAboutData(aboutData.filter(league => league._id !== id));
       })

@@ -20,25 +20,42 @@ export default function PremierLeaguetable({
 
 	const [leagueDetails, setLeagueDetails] = useState([]);
 
-	const [seasonId, setSeasonId] = useState();
+	const [seasonId, setSeasonId] = useState(null);
 	const [allSeasson, setAllSeasson] = useState([])
-	const [currentSeasson, setCurrentSeasson] = useState()
-	const [selectedSeasonName, setSelectedSeasonName] = useState(null);
-	//console.log(allSeasson);
-	// console.log(seasonId);
-	const getYears = async () => {
+	const [currentSeasson, setCurrentSeasson] = useState(null)
+
+
+	const getLatestYear = async () => {
 		try {
-			const response = await apiCall(SESSION.year, REQUEST_TYPE.GET);
-			setCurrentSeasson(response.response.data.seasonyears[0]);
-			setAllSeasson(response.response.data.seasonyears);
-			setSeasonId(response.response.data.seasonyears[0]?._id);
-			setSelectedSeasonName(response.response.data.seasonyears[0].season_Title);
+			const response = await apiCall(SESSIOND.LatestYears, REQUEST_TYPE.GET);
+			//console.log(response.response.data.seasonyears)
+			response.response.data.seasonyears.map((year)=>{
+				//console.log(year.season_Title)
+				setCurrentSeasson(year.season_Title)
+				setSeasonId(year._id)
+				sessionStorage.setItem("runningSeason",year._id)
+			})
+		
 		} catch (error) {
 			console.log("data not found", error);
 		}
 	}
+	
+	const getallYears = async () => {
+		try {
+			const response = await apiCall(SESSIOND.year, REQUEST_TYPE.GET);
+			//console.log(response.response.data.seasonyears)
+			setAllSeasson(response.response.data.seasonyears)
+			
+		} catch (error) {
+			console.log("data not found", error);
+		}
+	}
+	
 
-	const getTeamsData = async (seasonId) => {
+console.log(seasonId);
+
+	const getTeamsData = async () => {
 		try {
 			const baseUrl = FIND_TEAM.find;
 			const params = {
@@ -46,15 +63,20 @@ export default function PremierLeaguetable({
 			}
 			const apiUrl = `${baseUrl}/${leagueId}`;
 			const response = await apiCall(apiUrl, REQUEST_TYPE.POST, params);
+			console.log(response)
+			// response.response.data.data.map((items)=>{
+			// 	console.log(items)
+			// })
 			setLeagueDetails(response.response.data.data[0]?.en);
 		} catch (error) {
 			console.log("data not found ", error);
 		}
 	}
-	useEffect(() => {
-		getYears()
 
-	}, [seasonId])
+	useEffect(() => {
+		getLatestYear()
+		getallYears()
+	}, [])
 
 	useEffect(() => {
 
@@ -64,16 +86,21 @@ export default function PremierLeaguetable({
 	//console.log(allSeasson)
 
 	const handleClick = (runingId, seasonName) => {
-
 		setSeasonId(runingId)
-		setSelectedSeasonName(seasonName);
+		console.log(runingId)
+		setCurrentSeasson(seasonName)
+		sessionStorage.setItem("runningSeason",runingId)
 		getTeamsData()
 		console.log('--------------------------------------------------------')
 		console.log(seasonName)
 		console.log('--------------------------------------------------------')
 
 	}
+const handleButtonClick=(teamId)=>{
+console.log(teamId);
+sessionStorage.setItem("teamId",teamId)
 
+}
 
 
 	return (
@@ -105,7 +132,7 @@ export default function PremierLeaguetable({
 									<div class="dropdown_filter">
 										<button class="dropbtn">
 											{" "}
-											<span>{selectedSeasonName} </span>{" "}
+											<span>{currentSeasson} </span>{" "}
 											<span>
 												<i class="ri-arrow-down-s-line"></i>
 											</span>{" "}
@@ -113,7 +140,7 @@ export default function PremierLeaguetable({
 										<div class="dropdown-content">
 											{
 												allSeasson.map((res) => {
-													//	console.log(res)
+														console.log(res)
 													return (<Link to="" onClick={() => handleClick(res._id, res.season_Title)} >{res.season_Title}</Link>)
 												})
 											}
@@ -137,14 +164,14 @@ export default function PremierLeaguetable({
 							</td>
 						</tr>
 						{leagueDetails && leagueDetails.map((data, index) => {
-							//console.log(data);	
+							//console.log(data.teamname._id);	
 							//const tableDAta = data.en[0];
 							return (
 								<tr key={data._id}>
 									<td>{index + 1}</td>
-									<td className="imagetext_city">
+									<td className="imagetext_city" onClick={()=>handleButtonClick(data.teamname._id)}>
 										<Link
-											to={`/TeamDetailsl/${data.teamname._id}`}
+											to="/TeamDetailsl"
 										// onClick={() => handleTeamClick(data.en[0].teamname._id)}
 										>
 											<span className="overimage">

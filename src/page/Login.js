@@ -31,6 +31,7 @@ export default function Login(props) {
 				
 				if (response.status === 200) {
 					const token = response.data.token;
+					console.log(response)
 					localStorage.setItem('token', token);
 					setIsLoggedIn(true);
 					navigate("/Dashboard");

@@ -30,5 +30,5 @@ router.post(
 router.get("/getAllUser", authentication, usercontroller.getAllUser);
 router.put('/updateUser/:id',authentication, usercontroller.updateUser )
 router.delete('/deleteUser/:id',authentication, usercontroller.deleteUser)
-
+router.post('/AddUser', usercontroller.AddUser)
 module.exports = router;
