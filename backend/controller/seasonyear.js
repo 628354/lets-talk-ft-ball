@@ -1,9 +1,9 @@
 const seasonyearmodel = require("../model/seasonyear");
 
-exports.deleteTableRecords = () =>{
+exports.deleteTableRecords = () => {
   seasonyearmodel.deleteMany({});
   console.log("Successfully delete");
-} 
+}
 
 
 exports.addleagueyear = async (req, res) => {

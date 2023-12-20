@@ -9,14 +9,13 @@ const ScrollDown = async (Request, Response) => {
 	try {
 		const { lung, leagueId } = Request.params;
 		const { season } = Request.body;
-		const data = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` }, { [lung]: 1 }).populate("en.teamname", { [lung]: 1 });
+		const data = await leaguedata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` }, { [lung]: 1 }).populate("en.teamname", { [lung]: 1 })
 		responseHelper[200].data = data;
 		Response.send(responseHelper[200]);
 	} catch (e) {
 		sendError(Response, e)
 	}
 }
-
 
 const findByteamName = async (Request, Response) => {
 	try {
@@ -32,6 +31,7 @@ const findByteamName = async (Request, Response) => {
 	}
 
 }
+
 const Goals_Scored = async (Request, Response) => {
 	try {
 		const { lung } = Request.params;
@@ -49,7 +49,8 @@ const Goals_Scored = async (Request, Response) => {
 	} catch (e) {
 		sendError(Response, e);
 	}
-};
+
+}
 const Goals_Con = async (Request, Response) => {
 	try {
 		const { lung } = Request.params;
@@ -65,6 +66,7 @@ const Goals_Con = async (Request, Response) => {
 		sendError(Response, e)
 	}
 }
+
 const gs_gc = async (Request, Response) => {
 	try {
 		const { lung } = Request.params;
@@ -164,52 +166,25 @@ const teamSeassonGC = async (Request, Response) => {
 
 
 
-// const team_details = async (Request, Response) => {
-//     try {
-//         const { lung, teamNameId } = Request.params; 
-//         const data = await leaguedata.find(
-//             {
-//                 $or: [
-//                     { [`${lung}.teamname._id`]: teamNameId },
-//                     { "ar.teamname._id": teamNameId },
-//                     { "en.teamname._id": teamNameId }
-//                 ]
-//             },
-//             { [lung]: 1, datatype: 1 }
-//         ).populate("en.teamname", { [lung]: 1 });
+const team_details = async (Request, Response) => {
+    try {
+        const { lung, teamNameId } = Request.params; 
+        const data = await leaguedata.find(
+            {
+                $or: [
+                    { [`${lung}.teamname._id`]: teamNameId },
+                    { "ar.teamname._id": teamNameId },
+                    { "en.teamname._id": teamNameId }
+                ]
+            },
+            { [lung]: 1, datatype: 1 }
+        ).populate("en.teamname", { [lung]: 1 });
 
-//         responseHelper[200].data = data;
-//         Response.send(responseHelper[200]);
-//     } catch (e) {
-//         sendError(Response, e);
-//     }
-// };
-
-const team_details = async (req, res) => {
-	try {
-		const { lung } = req.params;
-		const { teamId } = req.body;
-		const data = await teamCatlog.findOne({ "_id": teamId }).populate('leagueid', { [lung]: 1 });
-		if (data) {
-			res.status(200).send({
-				body: data,
-				message: 'Get Team By ID Successfully',
-				success: true
-			});
-		} else {
-			res.status(404).send({
-				message: 'Team ID Not Found',
-				success: false
-			});
-		}
-	} catch (error) {
-		console.log(error.message);
-		res.status(500).send({
-			message: 'Internal Server Error',
-			success: false,
-			error: error.message
-		});
-	}
+        responseHelper[200].data = data;
+        Response.send(responseHelper[200]);
+    } catch (e) {
+        sendError(Response, e);
+    }
 };
 const sendError = (Response, Error) => {
 	if (Error.errno === 500) {
@@ -227,5 +202,5 @@ const sendError = (Response, Error) => {
 
 
 module.exports = {
-	ScrollDown, findByteamName, Goals_Scored, Goals_Con, gs_gc, team_details, teamSeasson, teamSeassonName, teamSeassonGaneRate, teamSeassonGC
+	ScrollDown, findByteamName, Goals_Scored, Goals_Con, gs_gc,team_details, teamSeasson, teamSeassonName,teamSeassonGaneRate,teamSeassonGC
 }

@@ -1,4 +1,5 @@
 const teamCatlog = require('../model/teamCatlog')
+const teamdata = require('../model/teamdata')
 const multer = require('multer');
 const XLSX = require('xlsx');
 const upload = multer({ dest: 'uploads' });
@@ -56,6 +57,13 @@ module.exports = {
         res.send(responseHelper[200]);
 
     },
+    findTeam: async (Request, Response) => {
+        const { lung } = Request.params;
+        const { leagueId } = Request.body
+        const data = await teamCatlog.find({ leagueid: leagueId }, { _id: 1, seasonid: 1, datatype: 1, leagueid: 1, [lung]: 1 });
+        responseHelper[200].data = data;
+        Response.send(responseHelper[200]);
+    },
 
     findAllTeam: async (Request, Response) =>{
         const { lung } = Request.params;
@@ -64,11 +72,9 @@ module.exports = {
             Response.send(responseHelper[200]); 
     },
 
-    findTeam: async (Request, Response) => {
-        const { lung } = Request.params;
-        const { leagueId } = Request.body
-        const data = await teamCatlog.find({ leagueid: leagueId }, { _id: 1, seasonid: 1, datatype: 1, leagueid: 1, [lung]: 1 });
-        responseHelper[200].data = data;
-        Response.send(responseHelper[200]);
-    }
-}
+ 
+
+    
+};
+
+
