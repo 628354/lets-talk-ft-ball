@@ -44,7 +44,7 @@ module.exports = {
     folderUpdate: async (req, res) => {
         try {
             const { folderName } = req.body
-            const folders = await folder.findByIdAndUpdate({ _id: req.params.id }, { folderName }, { new: true })
+            const folders = await folder.findByIdAndUpdate({ _id: req.params.id }, { folderName })
             if (folders) {
                 res.status(200).send({
                     body: folders,
