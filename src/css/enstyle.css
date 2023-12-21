@@ -1225,6 +1225,12 @@ table.team-aline_table thead tr th {
 /* new css by cR 15/12/23 */
 
 
+#chartdiv {
+    width: 100%;
+    height: 500px;
+  }
+
+
 
   
 

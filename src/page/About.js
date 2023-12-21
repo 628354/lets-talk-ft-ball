@@ -72,19 +72,19 @@ export default function About() {
       </div>
       <div className='col-lg-7 col-md-12 col-sm-12'>
         <div className='en_our_contant ar_our_contant'>
-          <h4>Our Vision</h4>
-          <p>Our Vision is to be football’s social media preferred platform. </p>
+           <h4>Our Vision</h4>
+           <p>Our Vision is to be football’s social media preferred platform. </p>
           <div className='en_our_vision'>
-          <h4>Our Vision</h4>
-          <p>Our Mission is to create a website that presents top football leagues high level performance data in simple,
+            <h4>Our Vision</h4>
+            <p>Our Mission is to create a website that presents top football leagues high level performance data in simple,
              informative and easy way to access. Visitors can use this data to understand teams performance not just at 
              specific point in time but also to have an insight into how teams are developing overtime using the performance 
              trends. With our social media accounts integrated into the website and with the articles section of the website
              (we call it “Cafe”) we provide a platform for our visitors to engage and share.</p>
-
+             
           </div>
         </div>
-        
+
       </div>
      </div>
      </Container>

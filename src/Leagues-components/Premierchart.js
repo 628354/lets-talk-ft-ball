@@ -68,6 +68,12 @@ const getGoalScore = async () => {
 	useEffect(() => {
 		getGoalScore();
 	}, [leagueId,seasonId]);
+// 
+
+
+
+
+
 	return (
 		<div>
 			<div className="premier-textare">
@@ -77,7 +83,7 @@ const getGoalScore = async () => {
 				<BarChart
 					width={1100}
 					height={300}
-					data={goalScore}
+					
 					margin={{
 						top: 5,
 						right: 30,
@@ -93,6 +99,8 @@ const getGoalScore = async () => {
 					{/* <Bar dataKey="uv" fill="#82ca9d" /> */}
 				</BarChart>
 			</div>
+
+		
 		</div>
 	);
 }
