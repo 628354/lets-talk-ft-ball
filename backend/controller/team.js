@@ -46,9 +46,7 @@ exports.getTeams = async (req, res) => {
                     createdAt: -1
                 }
             },
-            {
-                $limit: 5
-            }
+            
         ])
         res.send({ status: true, message: "Successfully get teams", teamdetails: getTeams })
     } catch (error) {

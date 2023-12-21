@@ -22,7 +22,7 @@ export default function Adduser() {
         status: "",
         userGroup: "",
         userName: ""
-        });
+    });
     const handleChange = (field, value) => {
         setFormData({
             ...formData,
@@ -30,27 +30,26 @@ export default function Adduser() {
         });
     };
 
-    const handleImageChange = (e) => {
-        const imageFile = e.target.files[0];
-        setFormData({
-            ...formData,
-            image: imageFile,
-        });
-        const reader = new FileReader();
-        reader.onload = () => {
-            setImagePreview(reader.result);
-        };
-        reader.readAsDataURL(imageFile);
-    };
+    // const handleImageChange = (e) => {
+    //     const imageFile = e.target.files[0];
+    //     setFormData({
+    //         ...formData,
+    //         image: imageFile,
+    //     });
+    //     const reader = new FileReader();
+    //     reader.onload = () => {
+    //         setImagePreview(reader.result);
+    //     };
+    //     reader.readAsDataURL(imageFile);
+    // };
 
-    
+
     const handleSave = async () => {
-        
         try {
             console.log("Sending request with formData:", formData);
-            const response = await axios.post("http://localhost:5000/AddUser", formData);
+            const response = await axios.post("https://phpstack-1140615-3967632.cloudwaysapps.com/backend/AddUser", formData);
             console.log("Response from server:", response);
-            
+
         } catch (error) {
             console.error(error);
         }
@@ -258,7 +257,7 @@ export default function Adduser() {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div class="form-group img-g">
+                                                {/* <div class="form-group img-g">
                                                     <label
                                                         class="col-sm-2 control-label"
                                                         for="input-image"
@@ -281,7 +280,7 @@ export default function Adduser() {
                                                             onChange={handleImageChange}
                                                         />
                                                     </div>
-                                                </div>
+                                                </div> */}
                                                 <div class="form-group required">
                                                     <label
                                                         class="col-sm-2 control-label"

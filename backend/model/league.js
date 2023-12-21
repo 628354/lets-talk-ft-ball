@@ -15,6 +15,7 @@ const leagueSchema = mongoose.Schema(
     blog_Category: { type: String, default: "" },
     sort_Order: { type: String, default: "" },
     status: { type: String, enum: ["active", "inactive"], default: "active" },
+
   },
   { timestamps: true }
 );

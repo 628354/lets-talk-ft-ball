@@ -71,6 +71,7 @@ import UploadMedia from "./page-dashboard/UploadMedia";
 import User from "./page-dashboard/User";
 import Adduser from "./page-dashboard/Adduser";
 import EditUser from "./page-dashboard/EditUser";
+import { LeagueProvider } from "./Leagues-components/LeagueContext";
 
 function App() {
 	// const navigate = useNavigate();
@@ -162,7 +163,7 @@ function App() {
 	return (
 		<div className="App">
 			{shouldDisplayHeader && HeaderComponent && <HeaderComponent />}
-
+<LeagueProvider>
 			<Routes>
 				<Route path="/Login" element={<Login />} />
 				<Route path="/" element={HomeComponent && <HomeComponent />}></Route>
@@ -185,7 +186,7 @@ function App() {
 				<Route path="/Chart" element={<Chart />}></Route>
 				<Route path="/headers" element={<Header />}></Route>
 
-				<Route path="/league/:leagueId" element={<PremierLeague />}></Route>
+				<Route path="/league" element={<PremierLeague />}></Route>
 
 				<Route path="/Laliga" element={<Laliga />}></Route>
 				<Route path="/SerieA" element={<SerieA />}></Route>
@@ -234,7 +235,7 @@ function App() {
 				<Route path="/Cafeview" element={<Cafeview />}></Route>
 				<Route path="/Dataapi" element={<Dataapi />}></Route>
 				<Route path="/Premierchart" element={<Premierchart />}></Route>
-				<Route path="/Teamdetailsl/:teamId" element={<Teamdetailsl />}></Route>
+				<Route path="/Teamdetailsl" element={<Teamdetailsl />}></Route>
 				<Route path="/Login" element={<Login />}></Route>
 				<Route path="/Teamcomparision" element={<Teamcomparision />}></Route>
 				<Route path="/LeaguesBluk" element={<LeaguesBluk />}></Route>
@@ -248,7 +249,7 @@ function App() {
 				<Route path="/edituser/:id" element={<EditUser />}></Route>
 
 			</Routes>
-
+			</LeagueProvider>
 			{shouldDisplayHeader && FooterComponent && <FooterComponent />}
 		</div>
 	);
