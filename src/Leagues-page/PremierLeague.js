@@ -92,7 +92,7 @@ const leagueId = sessionStorage.getItem("selectedLeagueId")
 													src={"http://localhost:5000/uploads/" + leagueDecreption?.image}
 													alt="earth"
 													className="img-premier-press"
-												/> */}
+												/> 
 											</div>
 										</div>
 										<div className="col-lg-10 col-md-10 col-sm-12">
