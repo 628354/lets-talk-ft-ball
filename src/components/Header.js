@@ -171,9 +171,9 @@ export default function Header() {
 							<Nav.Link className=" ms-3" as={Link} to="/Contact">
 								Contact Us
 							</Nav.Link>
-							<Nav.Link className=" ms-3" as={Link} to="/Login">
+							{/* <Nav.Link className=" ms-3" as={Link} to="/Login">
 								Login
-							</Nav.Link>
+							</Nav.Link> */}
 						</Nav>
 					</Navbar.Collapse>
 				</Container>

@@ -851,21 +851,28 @@ table.aline_table thead tr th {
     background: var(--text-color);
     border: 2px solid var(--there-color);
     color: var(--there-color);
-    padding: 16px 15px;
+    padding: 8px;
     text-align: center;
+    width: 100px;
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: 600;
 }
+
 
 table.aline_table thead tr th:nth-child(1) {
     border: none;
+    width: 50px;
 }
 
 table.aline_table thead tr th:nth-child(2) {
     border: none !important;
     text-align: left;
-    padding-left: 40px;
+    /* padding-left: 40px; */
 }
 tbody.team_poin tr td:nth-child(1) {
     border: none !important;
+    text-align: center;
 }
 
 tbody.team_poin tr td:nth-child(2) {
@@ -955,12 +962,13 @@ tr.filter td:nth-child(2)  {
 td.imagetext_city {
     display: flex;
     align-items: center;
-    padding-left: 30px;
+    /* padding-left: 30px; */
     gap: 12px;
 }
 img.logo-rearth-table {
-    width: 50px;
+    width: 60px;
 }
+
 
 tbody.team_poin {
     background: #f9f9f9;
@@ -1000,9 +1008,11 @@ ul.in-footer li p {
     color: var(--there-color);
     font-size: 16px;
 }
+
 ul.in-footer li h6 {
     font-size: 16px;
 }
+
 ul.in-footer li h6 span {
     color: #b2c605;
     font-size: 24px;
@@ -1012,9 +1022,11 @@ tr.filter-fir {
     position: sticky;
     bottom: 0;
 }
+
 .league_table {
     padding-bottom: 50px;
 }
+
 .ifr-section {
     background: #f5f5f5;
     padding: 60px 0 40px 0;
@@ -1026,20 +1038,22 @@ tr.filter-fir {
 
 /*  */
 
-ul.letball {
+.letball {
     padding-left: 75px;
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
-ul.letball li {
+.letball li {
     list-style: auto;
 }
-ul.infocation-site {
+
+.infocation-site {
     padding-left: 45px;
     padding-top: 15px;
 }
-ul.infocation-site li {
+
+.infocation-site li {
     list-style: lower-alpha;
 }
 
@@ -1052,7 +1066,7 @@ ul.infocation-site li {
 }
 
 .chart-press {
-    padding: 70px 0;
+    padding: 25px 0;
 }
 
 .recharts-default-legend {
@@ -1060,7 +1074,7 @@ ul.infocation-site li {
 }
 .premier-textare h3 {
     text-align: center;
-    padding-bottom: 60px;
+    padding-bottom: 20px;
 }
 
 
@@ -1229,11 +1243,22 @@ table.team-aline_table thead tr th {
 #chartdiv {
     width: 100%;
     height: 500px;
-  }
+  } */
 
 
 
+
+.inside-filter span {
+    font-size: 22px;
+}
+.inside-filter {
+    display: flex;
+    align-items: center;
+}
   
-
+.chart-border-toll {
+    padding: 40px 20px;
+    border: 1px solid #ebebeb;
+}
 
 

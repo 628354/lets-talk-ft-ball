@@ -149,10 +149,12 @@ export default function CahrtGsGc({ leagueId}) {
 
 	return (
 		<div>
+			<div className="chart-border-toll">
 			<div className="premier-textare">
 				<h3>2023-24 GS/GC</h3>
 			</div>
 			<div id="chartdiv2" style={{ width: "100%", height: "500px" }}></div>
+			</div>
 			
 		</div>
 	);

@@ -149,10 +149,14 @@ export default function Goalsconchart({ leagueId }) {
 
 	return (
 		<div>
+
+		<div className="chart-border-toll">
 		<div className="premier-textare">
 		<h3>2023-24 Goals Con/Game</h3>
 		</div>
 		<div id="chartdiv1" style={{ width: "100%", height: "500px" }}></div>
+		</div>
+
 		</div>
 	);
 }
