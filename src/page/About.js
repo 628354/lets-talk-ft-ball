@@ -67,10 +67,10 @@ export default function About() {
      <section className='en_Our_section'>
      <Container>
      <div className='row'>
-      <div className='col-lg-5 col-md-6 col-sm-12'>
+      <div className='col-lg-5 col-md-12 col-sm-12'>
 
       </div>
-      <div className='col-lg-7 col-md-6 col-sm-12'>
+      <div className='col-lg-7 col-md-12 col-sm-12'>
         <div className='en_our_contant ar_our_contant'>
           <h4>Our Vision</h4>
           <p>Our Vision is to be football’s social media preferred platform. </p>
