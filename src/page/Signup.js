@@ -7,7 +7,7 @@ import React, { useContext, useEffect, useState } from 'react';
 export default function Signup() {
 
    // const {register, message, setMessage} = useContext(AuthContext);
-    const [formData, setFormData]=useState();
+    const [formData, setFormData] = useState();
     const handleChange=(e)=>{
         const {name, value} = e.target;
         setFormData((prev)=>({

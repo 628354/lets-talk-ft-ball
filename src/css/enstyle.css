@@ -1214,6 +1214,14 @@ table.aline_tablel thead tr th {
 .team-main-table.chartteamcom {
     margin: 40px 0;
 }
+
+.mobile-responsive {
+    display: none;
+}
+
+table.team-aline_table thead tr th {
+    width: 100px;
+}
 /* new css by cR 15/12/23 */
 
 /* .graphB{

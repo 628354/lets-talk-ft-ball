@@ -45,14 +45,14 @@ export default function Login(props) {
 
 	return (
 		<div>
-			<section className="en_hero_image en_hero_image">
+			{/* <section className="en_hero_image en_hero_image">
 				<Container>
 					<div className="row">
 						<div className="col-lg-12 col-md-12 col-sm-12">
 						</div>
 					</div>
 				</Container>
-			</section>
+			</section> */}
 			<section className="en_login ar_login">
 				<Container>
 					<div className="row en_login_box">
