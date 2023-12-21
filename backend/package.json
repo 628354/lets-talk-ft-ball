@@ -6,7 +6,7 @@
   "homepage": "http://phpstack-1140615-3967632.cloudwaysapps.com/api/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon letstalkftball.js"
   },
   "author": "",
   "license": "ISC",
