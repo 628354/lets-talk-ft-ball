@@ -39,12 +39,12 @@ export default function Contact() {
          <section className='en_section_contact'>
           <Container>
           <div className='row'>
-            <div className='col-lg-6 col-md-6 col-sm-12'>
+            <div className='col-lg-6 col-md-12 col-sm-12'>
               <div className='en_contact_img'>
               <img src={require('../img/contact-img.png')} alt="earth" className="en_contantus"/>
               </div>
             </div>
-            <div className='col-lg-6 col-md-6 col-sm-12 m-auto'>
+            <div className='col-lg-6 col-md-12 col-sm-12 m-auto'>
               <div className='en_contact_contant'>
               <h4>Have Some Question or Comment?</h4>
 

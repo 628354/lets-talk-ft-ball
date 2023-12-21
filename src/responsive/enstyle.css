@@ -1,12 +1,178 @@
+
+/* mobile responsive css start */
 @media only screen and (min-width: 320px) and (max-width: 767px) {
-    
-  }
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 26px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 18px;
+}
 
 
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
-    
+.navbar-light .navbar-toggler-icon {
+    filter: brightness(0) saturate(100%) invert(94%) sepia(100%) saturate(0%) hue-rotate(140deg) brightness(104%) contrast(102%);
+} 
+
+  .en_footer_menu {
+    padding-left: 0;
+}
+
+.en_footercontantin {
+  padding-left: 0;
+}
+
+.en_login_box {
+  margin: 0px 12px;
+}
+
+.en_login_contant {
+  padding: 50px 20px;
+}
+
+.en_bckg {
+  height: 375px;
+}
+.clscomimage img {
+  height: 72px !important;
+}
+
+.spc_button {
+  width: 222px !important;
+  padding: 10px 0;
+  font-size: 12px;
+}
+
+.en_Our_section {
+  height: 100%;
+  background-position: right;
+  padding-left: 12px;
+  padding-top: 30px;
+  background: #d50006;
+}
+
+img.about {
+  width: 100%;
+}
+
+.en_about_contant h5 {
+  width: 100%;
+  margin-bottom: 30px;
+  line-height: 26px;
+}
+
+.en_pagintion .pagination li a {
+  padding: 5px 15px;
+}
+
+.en_defintion_contant {
+  margin: 0px 12px;
+}
+img.logo-rearth {
+  width: 100px;
+}
+
+.en_cafe_contant {
+  padding: 0px 10px 0 10px;
+}
+
+.en_contact_img img {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.en_section_contact {
+  background: #f20032;
+}
+
+.en_contact_contant {
+  padding-left: 0px;
+}
+div#basic-navbar-nav {
+  background: black;
+}
+
+}
+
+/* mobile responsive css End */
+
+
+/* Tab responsive css start */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+
+  h5 {
+    font-size: 18px;
+  }
+  .navbar-light .navbar-toggler-icon {
+      filter: brightness(0) saturate(100%) invert(94%) sepia(100%) saturate(0%) hue-rotate(140deg) brightness(104%) contrast(102%);
+  } 
+  .footer-responsive {
+    display: none;
+  }
+  
+  .footer-resp {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 51px;
+  }
+  li.mobile-responsive {
+    display: block;
+  }
+  .en_login_box {
+    margin: 0px 0px;
+  }
+  .en_about_contant h5 {
+    line-height: 31px;
+    width: 100%;
+  }
+  
+  .en_Our_section {
+    height: 100%;
+    background-position: right;
+    padding-left: 12px;
+    padding-top: 30px;
+    background: #d50006;
   }
 
-  @media only screen and (min-width: 992px) and (max-width: 1199px) {
-   
-  }
+  .en_section_contact {
+    background: #f20032;
+}
+
+.en_contact_img img {
+  margin: auto;
+  display: flex;
+  margin-bottom: 50px;
+  width: 50%;
+}
+.en_about_img img {
+  width: 100%;
+}
+
+div#basic-navbar-nav {
+  background: black;
+}
+
+}
+
+/* Tab responsive css End */
+
+
+/* desktop responsive css start */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+
+
+}
+
+/* desktop responsive css end  */
