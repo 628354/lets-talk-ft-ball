@@ -9,7 +9,7 @@ import TeamComparisionChart from "../Leagues-components/TeamComparisionChart";
 import TeamComparisionTable from "../Leagues-components/TeamComparisionTable";
 import Iframesecttion from "../Leagues-components/Iframesecttion";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, GET_ALL_LEAGUE,ALL_SEASON,TEAM_NAME ,GAINING_RATE,TEAM_SEA_GC} from "../helper/APIInfo";
+import { REQUEST_TYPE, GET_ALL_LEAGUE, ALL_SEASON, TEAM_NAME, GAINING_RATE, TEAM_SEA_GC, TEAM_GS_GC,TEAM_GS_IN_G, } from "../helper/APIInfo";
 import TeamComparisionTableTwo from "../Leagues-components/TeamComparisionTableTwo";
 import TeamComparisionChartTwo from "../Leagues-components/TeamComparisionChartTwo";
 import TeamComparisionChartThree from "../Leagues-components/TeamComparisionChartThree";
@@ -20,16 +20,14 @@ export default function Teamcomparision() {
 	const [leagueNames, setLeagueNames] = useState([]);
 	const [season, setSeason] = useState([]);
 	const [teamName, setTeamName] = useState([]);
-	
-	const [currentLeagueId,setCurrentLeagueId]=useState(null)
-	const [seasonId,setSeasonId]=useState(null)
-	const [teamId,setTeamId]=useState(null)
 
-const [graph,setGraph]=useState([])
-
-
-const [data,setData]=useState([])
-const [data2,setData2]=useState([])
+	const [currentLeagueId, setCurrentLeagueId] = useState(null)
+	const [seasonId, setSeasonId] = useState(null)
+	const [teamId, setTeamId] = useState(null)
+	const [gainRate, setGainRate] = useState([])
+	const [gainRate2, setGainRate2] = useState([])
+	const [data, setData] = useState([])
+	const [data2, setData2] = useState([])
 
 	/// 2nd side 
 
@@ -37,43 +35,54 @@ const [data2,setData2]=useState([])
 
 	const [season2, setSeason2] = useState([]);
 	const [teamName2, setTeamName2] = useState([]);
-	
-	
-	const [
-		currentLeagueId2,setCurrentLeagueId2]=useState(null)
-	const [seasonId2,setSeasonId2]=useState(null)
-	const [teamId2,setTeamId2]=useState(null)
 
+
+	const [currentLeagueId2, setCurrentLeagueId2] = useState(null)
+	const [seasonId2, setSeasonId2] = useState(null)
+	const [teamId2, setTeamId2] = useState(null)
+// GS_GC 
+const [GsGc,setGsGc]=useState([])
+const [GsGc2,setGsGc2]=useState([])
+
+
+///gsGin
+
+const [GsGin,setGsGin]=useState([])
+const [GsGin2,setGsGin2]=useState([])
+//GC_cum
+
+const [gcCum, setGcCum]=useState([])
+const [gcCum2, setGcCum2]=useState([])
 	const getLeagueName = async () => {
 		try {
-		  
-		  	  
-		  const response = await apiCall(GET_ALL_LEAGUE.find, REQUEST_TYPE.GET);
-		 //  //console.log(response.response.data.leaguedetails)
-		  
-	
-		  setLeagueNames(response.response.data.leaguedetails);
+
+
+			const response = await apiCall(GET_ALL_LEAGUE.find, REQUEST_TYPE.GET);
+			//  //console.log(response.response.data.leaguedetails)
+
+
+			setLeagueNames(response.response.data.leaguedetails);
 		} catch (error) {
-		  console.error("An error occurred while fetching league names:", error);
+			console.error("An error occurred while fetching league names:", error);
 		}
-	  };
+	};
 
-	  
-	
 
-	const getSeason  =async()=>{
+
+
+	const getSeason = async () => {
 		// //console.log(currentLeagueId)
-		const obj={
-			leagueId:currentLeagueId
- 
-		}
-		try{
-			const response = await apiCall(ALL_SEASON.find, REQUEST_TYPE.POST,obj);
-			// //console.log(response.response.data.data)
-				setSeason(response.response.data.data)
+		const obj = {
+			leagueId: currentLeagueId
 
-		}catch(error){
-			 //console.log("data not get ",error)
+		}
+		try {
+			const response = await apiCall(ALL_SEASON.find, REQUEST_TYPE.POST, obj);
+			// //console.log(response.response.data.data)
+			setSeason(response.response.data.data)
+
+		} catch (error) {
+			//console.log("data not get ",error)
 		}
 
 	}
@@ -81,243 +90,459 @@ const [data2,setData2]=useState([])
 
 
 
-	const getTeamName = async()=>{
+	const getTeamName = async () => {
 		console.log(currentLeagueId);
 		console.log(seasonId);
-		const obj ={
-			leagueId:currentLeagueId,
-            season:seasonId
+		const obj = {
+			leagueId: currentLeagueId,
+			season: seasonId
 		}
 
-		try{
-			const response = await apiCall(TEAM_NAME.find, REQUEST_TYPE.POST,obj);
-			  console.log(response);
+		try {
+			const response = await apiCall(TEAM_NAME.find, REQUEST_TYPE.POST, obj);
+			console.log(response);
 			setTeamName(response.response.data.data);
-			
 
 
-		}catch(error){
-			 //console.log("data error ",error);
+
+		} catch (error) {
+			//console.log("data error ",error);
 		}
 
 	}
 
 
-	
+
 
 
 	useEffect(() => {
 		getLeagueName();
-		
+
 	}, []);
 	useEffect(() => {
-	
+
 		getSeason()
 	}, [currentLeagueId,]);
 
 	useEffect(() => {
-	
+
 		getTeamName()
-	}, [currentLeagueId,seasonId]);
-	
-	const handleClick =(leagueId)=>{
+	}, [currentLeagueId, seasonId]);
+
+	const handleClick = (leagueId) => {
 
 		// //console.log(leagueId);
 		setCurrentLeagueId(leagueId)
 	}
 
-	const handleClickSeason =(seasonId)=>{
+	const handleClickSeason = (seasonId) => {
 
 		// //console.log(seasonId);
 		setSeasonId(seasonId)
 		//setCurrentLeagueId(seasonId)
 	}
-// //console.log(season);
-	
-const handleClickTeam =(teamId)=>{
+	// //console.log(season);
 
-	// //console.log(teamId);
-	setTeamId(teamId)
-	
-}
+	const handleClickTeam = (teamId) => {
 
-
-
-
-///// 2nd side comparesion  
-
-const getLeagueName2 = async () => {
-	try {
-	  
-			
-	  const response = await apiCall(GET_ALL_LEAGUE.find, REQUEST_TYPE.GET);
-	  // //console.log(response.response.data.leaguedetails)
-	  
-
-	  setLeagueNames(response.response.data.leaguedetails);
-	} catch (error) {
-	  console.error("An error occurred while fetching league names:", error);
-	}
-  };
-
-
-
-const getSeason2  =async()=>{
-	 //console.log(currentLeagueId2)
-	const obj={
-		leagueId:currentLeagueId2
+		// //console.log(teamId);
+		setTeamId(teamId)
 
 	}
-	try{
-		const response = await apiCall(ALL_SEASON.find, REQUEST_TYPE.POST,obj);
-		 //console.log(response.response.data.data)
+
+
+
+
+	///// 2nd side comparesion  
+
+	const getLeagueName2 = async () => {
+		try {
+
+
+			const response = await apiCall(GET_ALL_LEAGUE.find, REQUEST_TYPE.GET);
+			// //console.log(response.response.data.leaguedetails)
+
+
+			setLeagueNames(response.response.data.leaguedetails);
+		} catch (error) {
+			console.error("An error occurred while fetching league names:", error);
+		}
+	};
+
+
+
+	const getSeason2 = async () => {
+		//console.log(currentLeagueId2)
+		const obj = {
+			leagueId: currentLeagueId2
+
+		}
+		try {
+			const response = await apiCall(ALL_SEASON.find, REQUEST_TYPE.POST, obj);
+			//console.log(response.response.data.data)
 			setSeason2(response.response.data.data)
 
-	}catch(error){
-		 //console.log("data not get ",error)
+		} catch (error) {
+			//console.log("data not get ",error)
+		}
+
 	}
 
-}
 
 
 
+	const getTeamName2 = async () => {
+		//console.log(currentLeagueId2);
+		console.log(seasonId2);
+		const obj = {
+			leagueId: currentLeagueId2,
+			season: seasonId2
+		}
 
-const getTeamName2 = async()=>{
-	 //console.log(currentLeagueId2);
-	 console.log(seasonId2);
-	const obj ={
-		leagueId:currentLeagueId2,
-		 season:seasonId2
+		try {
+			const response = await apiCall(TEAM_NAME.find, REQUEST_TYPE.POST, obj);
+			// console.log(response);
+			setTeamName2(response.response?.data?.data);
+
+
+		} catch (error) {
+			//console.log("data error ",error);
+		}
+
 	}
 
-	try{
-		const response = await apiCall(TEAM_NAME.find, REQUEST_TYPE.POST,obj);
-		// console.log(response);
-		setTeamName2(response.response?.data?.data);
+
+	useEffect(() => {
+		getLeagueName2();
+
+	}, []);
 
 
-	}catch(error){
-		 //console.log("data error ",error);
+	useEffect(() => {
+
+		getSeason2()
+
+
+	}, [currentLeagueId2]);
+
+
+
+	useEffect(() => {
+
+
+		getTeamName2()
+
+	}, [currentLeagueId2, seasonId2]);
+
+	const handleClick2 = (leagueId) => {
+
+		//console.log(leagueId);
+
+		setCurrentLeagueId2(leagueId)
 	}
 
-}
+	const handleClickSeason2 = (seasonId) => {
 
+		//console.log(seasonId);
+		setSeasonId2(seasonId)
+		//setCurrentLeagueId(seasonId)
+	}
+	// //console.log(season);
 
-useEffect(() => {
-	getLeagueName2();
-	
-}, []);
+	const handleClickTeam2 = (teamId2) => {
 
+		console.log(teamId2);
+		setTeamId2(teamId2)
 
-useEffect(() => {
+	}
 
-	getSeason2()
+	const gainingRate = async () => {
+		console.log(currentLeagueId);
+		console.log(seasonId);
+		console.log(teamId);
+		const obj = {
+			leagueId: currentLeagueId,
+			season: seasonId,
+			teamId: teamId
+		}
+		const data1 = []
+		try {
+			const response = await apiCall(GAINING_RATE.gainrate, REQUEST_TYPE.POST, obj)
+			console.log(response.response.data.data?.teamDatas);
+			response.response.data.data?.teamDatas.map((item) => {
+				console.log(item);
+				item?.en.map((data) => {
+					console.log(data);
+					data1.push({
+						GS_rate: parseInt(data.GS_rate, 10)
+					})
+				})
+			}
+			)
+			//   setTeamName(response.response.data.data?.teamname1?.en)
+			setData(response.response?.data?.data?.data1)
+			setGainRate(data1)
+			console.log(data1);
+		} catch (error) {
+			console.log("data errror ", error)
+		}
+	}
+	useEffect(() => {
+		gainingRate()
+	}, [currentLeagueId, seasonId, teamId])
+	console.log(gainRate);
+	const gainingRate2 = async () => {
+		console.log(currentLeagueId2);
+		console.log(seasonId2);
+		console.log(teamId2);
+		const obj = {
+			leagueId: currentLeagueId2,
+			season: seasonId2,
+			teamId: teamId2
+		}
+		try {
+			const lang = "en";
+			const data1 = []
+			const response = await apiCall(GAINING_RATE.gainrate, REQUEST_TYPE.POST, obj)
+			console.log(response);
+			response.response.data.data?.teamDatas.map((item) => {
+				console.log(item);
+				item?.en.map((data) => {
+					console.log(data);
+					data1.push({
+						GS_rate: parseInt(data.GS_rate, 10)
+					})
+				})
+			}
+			)
+			console.log(data1)
+			setGainRate2(data1)
+			//   setTeamName(response.response.data.data?.teamname1?.en)
+			setData2(response.response?.data?.data?.data1)
+		} catch (error) {
+			console.log("data errror ", error)
+		}
+	}
+	useEffect(() => {
+		gainingRate2()
+	}, [currentLeagueId2, seasonId2, teamId2])
+	console.log(gainRate2);
 
-	
-}, [currentLeagueId2]);
+	//console.log(data);
 
+///  team GS_GC GRAPh 
 
-
-useEffect(() => {
-
-
-	getTeamName2()
-
-}, [currentLeagueId2,seasonId2]);
-
-const handleClick2 =(leagueId)=>{
-
-	 //console.log(leagueId);
-	 
-	setCurrentLeagueId2(leagueId)
-}
-
-const handleClickSeason2 =(seasonId)=>{
-
-	 //console.log(seasonId);
-	setSeasonId2(seasonId)
-	//setCurrentLeagueId(seasonId)
-}
-// //console.log(season);
-
-const handleClickTeam2 =(teamId2)=>{
-
- console.log(teamId2);
-setTeamId2(teamId2)
-
-}
-
-const gainingRate =async()=>{
+const gsGc = async () => {
 	console.log(currentLeagueId);
 	console.log(seasonId);
 	console.log(teamId);
-    const obj ={
-      leagueId:currentLeagueId,
-       season:seasonId,
-      teamId:teamId
-    }
-    
-  
-    try{
-      const response = await apiCall(GAINING_RATE.gainrate,REQUEST_TYPE.POST,obj )
-      console.log(response.response.data.data);
-    //   setTeamName(response.response.data.data?.teamname1?.en)
-    setData(response.response?.data?.data?.data1)
-  
-    }catch(error){
-      console.log("data errror ",error )
-    }
-  }
-  
-  useEffect(()=>{
-    gainingRate()
-  },[currentLeagueId,seasonId,teamId])
+	const obj = {
+		leagueId: currentLeagueId,
+		season: seasonId,
+		teamId: teamId
+	}
+	const data1 = []
+	try {
+		const response = await apiCall(TEAM_GS_GC.find, REQUEST_TYPE.POST, obj)
+		console.log(response.response.data.data?.teamDatas);
+		response.response.data.data?.teamDatas.map((item) => {
+			console.log(item);
+			item?.en.map((data) => {
+				console.log(data);
+				data1.push({
+					GS_GC: parseInt(data.GS_GC, 10)
+				})
+			})
+		}
+		)
+		//   setTeamName(response.response.data.data?.teamname1?.en)
+		//setData(response.response?.data?.data?.data1)
+		setGsGc(data1)
+		//console.log(data1);
+	} catch (error) {
+		console.log("data errror ", error)
+	}
+}
+useEffect(() => {
+	gsGc()
+}, [currentLeagueId, seasonId, teamId])
 
 
-  
-const gainingRate2 =async()=>{
+
+const gsGc2 = async () => {
 	console.log(currentLeagueId2);
 	console.log(seasonId2);
 	console.log(teamId2);
-    const obj ={
-      leagueId:currentLeagueId2,
-       season:seasonId2,
-      teamId:teamId2
-    }
-    
-  
-    try{
-		const lang= "en";
-		const data1 = []
-      const response = await apiCall(TEAM_SEA_GC.find,REQUEST_TYPE.POST,obj )
-      console.log(response);
-	  response.response?.data?.data.teamDatas?.map((item)=>{
-		console.log(item[lang])
-		//setGraph(item[lang])
-		// return item[lang].map((data)=>{
-		// 	console.log(data.GS_rate)
-		// 	data1.push({
-		// 		"GS_rate" : data.GS_rate,
-				
-		// 	})
-		// })
-	  })
-	  console.log(data1)
+	const obj = {
+		leagueId: currentLeagueId2,
+		season: seasonId2,
+		teamId: teamId2
+	}
+	const data1 = []
+	try {
+		const response = await apiCall(TEAM_GS_GC.find, REQUEST_TYPE.POST, obj)
+		console.log(response.response.data.data?.teamDatas);
+		response.response.data.data?.teamDatas.map((item) => {
+			console.log(item);
+			item?.en.map((data) => {
+				console.log(data);
+				data1.push({
+					GS_GC: parseInt(data.GS_GC, 10)
+				})
+			})
+		}
+		)
+		//   setTeamName(response.response.data.data?.teamname1?.en)
+		//setData(response.response?.data?.data?.data1)
+		setGsGc2(data1)
+		//console.log(data1);
+	} catch (error) {
+		console.log("data errror ", error)
+	}
+}
+useEffect(() => {
+	gsGc2()
+}, [currentLeagueId2, seasonId2, teamId2])
+
+// gsGin 
+
+const gsGin = async () => {
 	
-    //   setTeamName(response.response.data.data?.teamname1?.en)
-    setData2(response.response?.data?.data?.data1)
-  
-    }catch(error){
-      console.log("data errror ",error )
-    }
-  }
-  
-  useEffect(()=>{
-    gainingRate2()
-  },[currentLeagueId2,seasonId2,teamId2])
+	const obj = {
+		leagueId: currentLeagueId,
+		season: seasonId,
+		teamId: teamId
+	}
+	const data1 = []
+	try {
+		const response = await apiCall(TEAM_GS_IN_G.find, REQUEST_TYPE.POST, obj)
+		console.log(response.response.data.data?.teamDatas);
+		response.response.data.data?.teamDatas.map((item) => {
+			console.log(item);
+			item?.en.map((data) => {
+				console.log(data);
+				data1.push({
+					GS_inG: parseInt(data.GS_inG, 10)
+				})
+			})
+		}
+		)
+		//   setTeamName(response.response.data.data?.teamname1?.en)
+		//setData(response.response?.data?.data?.data1)
+		setGsGin(data1)
+		//console.log(data1);
+	} catch (error) {
+		console.log("data errror ", error)
+	}
+}
+useEffect(() => {
+	gsGin()
+}, [currentLeagueId, seasonId, teamId])
+
+// gsGin2
+
+const gsGin2 = async () => {
+	
+	const obj = {
+		leagueId: currentLeagueId2,
+		season: seasonId2,
+		teamId: teamId2
+	}
+	const data1 = []
+	try {
+		const response = await apiCall(TEAM_GS_IN_G.find, REQUEST_TYPE.POST, obj)
+		console.log(response.response.data.data?.teamDatas);
+		response.response.data.data?.teamDatas.map((item) => {
+			console.log(item);
+			item?.en.map((data) => {
+				console.log(data);
+				data1.push({
+					GS_inG: parseInt(data.GS_inG, 10)
+				})
+			})
+		}
+		)
+		//   setTeamName(response.response.data.data?.teamname1?.en)
+		//setData(response.response?.data?.data?.data1)
+		setGsGin2(data1)
+		//console.log(data1);
+	} catch (error) {
+		console.log("data errror ", error)
+	}
+}
+useEffect(() => {
+	gsGin2()
+}, [currentLeagueId2, seasonId2, teamId2])
+
+// TEAM_SEA_GC
+const teamSecgc = async () => {
+	
+	const obj = {
+		leagueId: currentLeagueId,
+		season: seasonId,
+		teamId: teamId
+	}
+	const data1 = []
+	try {
+		const response = await apiCall(TEAM_SEA_GC.find, REQUEST_TYPE.POST, obj)
+		console.log(response.response.data.data?.teamDatas);
+		response.response.data.data?.teamDatas.map((item) => {
+			console.log(item);
+			item?.en.map((data) => {
+				console.log(data);
+				data1.push({
+					GC_cum: parseInt(data.GC_cum, 10)
+				})
+			})
+		}
+		)
+		//   setTeamName(response.response.data.data?.teamname1?.en)
+		//setData(response.response?.data?.data?.data1)
+		setGcCum(data1)
+		//console.log(data1);
+	} catch (error) {
+		console.log("data errror ", error)
+	}
+}
+useEffect(() => {
+	teamSecgc()
+}, [currentLeagueId, seasonId, teamId])
 
 
-//console.log(data);
+const teamSecgc2 = async () => {
+	
+	const obj = {
+		leagueId: currentLeagueId2,
+		season: seasonId2,
+		teamId: teamId2
+	}
+	const data1 = []
+	try {
+		const response = await apiCall(TEAM_SEA_GC.find, REQUEST_TYPE.POST, obj)
+		console.log(response.response.data.data?.teamDatas);
+		response.response.data.data?.teamDatas.map((item) => {
+			console.log(item);
+			item?.en.map((data) => {
+				console.log(data);
+				data1.push({
+					GC_cum: parseInt(data.GC_cum, 10)
+				})
+			})
+		}
+		)
+		//   setTeamName(response.response.data.data?.teamname1?.en)
+		//setData(response.response?.data?.data?.data1)
+		setGcCum2(data1)
+		//console.log(data1);
+	} catch (error) {
+		console.log("data errror ", error)
+	}
+}
+useEffect(() => {
+	teamSecgc2()
+}, [currentLeagueId2, seasonId2, teamId2])
+
+
 	return (
 		<div>
 			<section className="en_hero_about en_hero_about">
@@ -366,33 +591,33 @@ const gainingRate2 =async()=>{
 									<div className="col-compari">
 										<Form.Select aria-label="Default select example" onChange={(e) => handleClick(e.target.value)}>
 											<option>Select League </option>
-										 {
-												leagueNames.map((item)=>{
+											{
+												leagueNames.map((item) => {
 													// //console.log(item)
-													return(<option key={item._id} value={item._id}>{item.leaguename }</option>)
+													return (<option key={item._id} value={item._id}>{item.leaguename}</option>)
 												})
-											} 
-											
+											}
+
 										</Form.Select>
 									</div>
 									<div className="col-compari">
 										<Form.Select aria-label="Default select example" onChange={(e) => handleClickSeason(e.target.value)}>
 											<option>Select Season</option>
 											{
-												season?.map((item)=>{
+												season?.map((item) => {
 													// //console.log(item)
-													return(	<option  key={item.seasonid._id} value={item.seasonid._id}>{item.seasonid.season_Title}</option>)
+													return (<option key={item.seasonid._id} value={item.seasonid._id}>{item.seasonid.season_Title}</option>)
 												})
 											}
 										</Form.Select>
 									</div>
 									<div className="col-compari">
-										<Form.Select aria-label="Default select example" onChange={(e)=>handleClickTeam(e.target.value)}>
+										<Form.Select aria-label="Default select example" onChange={(e) => handleClickTeam(e.target.value)}>
 											<option>Select Team</option>
 											{
-												teamName?.map((item)=>{
-                                                // //console.log(item.teamname._id);
-													return(<option key={item.teamname._id} value={item.teamname._id} >{item.teamname.en.Team_Name_English}</option>)
+												teamName?.map((item) => {
+													// //console.log(item.teamname._id);
+													return (<option key={item.teamname._id} value={item.teamname._id} >{item.teamname.en.Team_Name_English}</option>)
 												})
 											}
 										</Form.Select>
@@ -407,26 +632,30 @@ const gainingRate2 =async()=>{
 								</div>
 							</div>
 							<div className="team-compri-table">
-								<TeamComparisionTable   
-								data={data}
+								<TeamComparisionTable
+									data={data}
+									gainRate={gainRate}
 
-								
-								
+
+
 								/>
 							</div>
 							<div className="team-compri-chat">
 								<TeamComparisionChartTwo
-								
+								GsGc={GsGc}
+
 
 								/>
 							</div>
 							<div className="team-compri-chat">
-								<TeamComparisionChartFive 
-								
+								<TeamComparisionChartFive
+								GsGin={GsGin}
+
 								/>
 							</div>
 							<div className="team-compri-chat">
 								<TeamComparisionChartSix
+								gcCum={gcCum}
 								/>
 							</div>
 						</div>
@@ -434,35 +663,35 @@ const gainingRate2 =async()=>{
 							<div className="chart-com-select">
 								<div className="main-compari-select">
 									<div className="col-compari">
-									<Form.Select aria-label="Default select example" onChange={(e) => handleClick2(e.target.value)}>
+										<Form.Select aria-label="Default select example" onChange={(e) => handleClick2(e.target.value)}>
 											<option>Select League </option>
-										 {
-												leagueNames.map((item)=>{
+											{
+												leagueNames.map((item) => {
 													// //console.log(item)
-													return(<option key={item._id} value={item._id}>{item.leaguename }</option>)
+													return (<option key={item._id} value={item._id}>{item.leaguename}</option>)
 												})
-											} 
-											
+											}
+
 										</Form.Select>
 									</div>
 									<div className="col-compari">
-									<Form.Select aria-label="Default select example" onChange={(e) => handleClickSeason2(e.target.value)}>
+										<Form.Select aria-label="Default select example" onChange={(e) => handleClickSeason2(e.target.value)}>
 											<option>Select Season</option>
 											{
-												season2?.map((item)=>{
-													 //console.log(item.seasonid._id)
-													return(	<option  key={item.seasonid._id} value={item.seasonid._id}>{item.seasonid.season_Title}</option>)
+												season2?.map((item) => {
+													//console.log(item.seasonid._id)
+													return (<option key={item.seasonid._id} value={item.seasonid._id}>{item.seasonid.season_Title}</option>)
 												})
 											}
 										</Form.Select>
 									</div>
 									<div className="col-compari">
-									<Form.Select aria-label="Default select example" onChange={(e)=>handleClickTeam2(e.target.value)}>
+										<Form.Select aria-label="Default select example" onChange={(e) => handleClickTeam2(e.target.value)}>
 											<option>Select Team</option>
 											{
-												teamName2?.map((item)=>{
-                                                // //console.log(item.teamname._id);
-													return(<option key={item.teamname._id} value={item.teamname._id} >{item.teamname.en.Team_Name_English}</option>)
+												teamName2?.map((item) => {
+													// //console.log(item.teamname._id);
+													return (<option key={item.teamname._id} value={item.teamname._id} >{item.teamname.en.Team_Name_English}</option>)
 												})
 											}
 										</Form.Select>
@@ -477,28 +706,33 @@ const gainingRate2 =async()=>{
 								</div>
 							</div>
 
-								<div className="team-compri-table">
-									<TeamComparisionTable
-								data={data2}
-									/>
-									
-								</div>
-								<div className="team-compri-chat">
-									<TeamComparisionChartThree 
-									graph={graph}/>
-									
-								</div>
-								<div className="team-compri-chat">
-									<TeamComparisionChartFour/>
-								</div>
-								<div className="team-compri-chat">
-									<TeamComparisionChart/>
-								</div>
+							<div className="team-compri-table">
+								<TeamComparisionTableTwo
+									data={data2}
+									gainRate={gainRate2}
+								/>
+
+							</div>
+							<div className="team-compri-chat">
+								<TeamComparisionChartThree
+								GsGc2={GsGc2}
+								/>
+
+							</div>
+							<div className="team-compri-chat">
+								<TeamComparisionChartFour
+								GsGin2={GsGin2}
+								/>
+							</div>
+							<div className="team-compri-chat">
+								<TeamComparisionChart 
+								gcCum2={gcCum2}/>
+							</div>
 						</div>
 					</Row>
 				</Container>
 			</section>
-			<Iframesecttion/>
+			<Iframesecttion />
 		</div>
 	);
 }
