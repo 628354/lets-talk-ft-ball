@@ -4,7 +4,7 @@ const multer = require('multer')
 const { authentication } = require('../middleware/auth')
 
 const upload = multer({
-  dest: 'uploads/catalog/logo/Premier L/',
+  dest: 'uploads/',
 });
 const teamCatlog = require('../controller/teamCatlog')
 

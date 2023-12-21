@@ -5,9 +5,9 @@ const path = require('path')
 const fs = require('fs')
 
 const multer = require("multer");
-const upload = multer({
-  dest: 'uploads/',
-});
+// const upload = multer({
+//   dest: 'uploads/',
+// });
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-// const upload = multer({ storage: storage });
+const upload = multer({ storage: storage });
 
 router.post("/addImage", upload.single("image"), imagesController.addimages);
 router.get('/GetImage',imagesController.GetImage)

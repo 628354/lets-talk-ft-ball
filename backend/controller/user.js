@@ -206,21 +206,30 @@ exports.AddUser = async (req, res) => {
 
 exports.getAllUser = async (req, res) => {
   try {
-    const userData = await usermodel.find()
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 10;
+    const skip = (page - 1) * pageSize;
+    const userData = await usermodel.find().skip(skip).limit(pageSize);
+    const totalUsers = await usermodel.countDocuments();
     res.status(200).send({
-      body: userData,
-      message: 'User Get Successfully',
-      success: true
-    })
+      pageInfo: {
+        currentPage: page,
+        pageSize: pageSize,
+        totalPages: Math.ceil(totalUsers / pageSize),
+        totalRecords: totalUsers,
+        body: userData,
+        message: "Get All Users Successfully",
+        success: true,
+      },
+    });
   } catch (error) {
+    console.log(error.message);
     res.status(500).send({
-      message: "Enternal Server Error",
+      message: "Internal Server Error",
       success: false,
-      error: error.message,
     });
   }
-}
-
+};
 exports.GetUserById = async (req, res) => {
   try {
     const userData = await usermodel.findById({ _id: req.params.id })
@@ -250,7 +259,7 @@ exports.updateUser = async (req, res) => {
     const { firstName, lastName, phone, userName, date, userGroup, country, countryCode } = req.body;
     const updateUser = await usermodel.findByIdAndUpdate(
       { _id: req.params.id },
-      { firstName, lastName,userName,date,userGroup, phone, country, countryCode }
+      { firstName, lastName, userName, date, userGroup, phone, country, countryCode }
     );
     if (updateUser) {
       res.status(200).send({
