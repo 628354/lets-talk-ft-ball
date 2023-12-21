@@ -123,6 +123,16 @@ export const SESSIOND = {
 	
   };
 
+  export const TEAM_GS_GC = {
+	find: `${SERVER_LINK}en/teamGS_GC/find`,
+	
+  };
+  export const TEAM_GS_IN_G = {
+    find: `${SERVER_LINK}en/teamGS_inG/find`,
+    
+    };
+
+  
   export const BASE_URL = "http://localhost:5000/uploads/";
 
 

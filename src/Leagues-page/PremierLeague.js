@@ -25,12 +25,13 @@ const leagueId = sessionStorage.getItem("selectedLeagueId")
 	
 	
 	const getLeagueDetails=()=>{
+		console.log(leagueId);
 		const baseUrl = GET_TEAM_ID.find;
 		const apiUrl =`${baseUrl}/${leagueId}`
 		try{
 			apiCall(apiUrl,REQUEST_TYPE.GET).then((response)=>{
-				console.log(response.response.data.body)
-				setLeagueDecreption(response.response.data.body)
+				console.log(response)
+				setLeagueDecreption(response.response.data?.body)
 			})
 
 		}catch(error){

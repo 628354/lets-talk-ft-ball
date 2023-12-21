@@ -1,93 +1,95 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import { Link } from 'react-router-dom';
-import { LineChart } from "recharts";
-import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE,GAINING_RATE} from "../helper/APIInfo";
-import {
-    BarChart,
-    Bar,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-    Line,
-} from "recharts";
+import * as am5 from "@amcharts/amcharts5";
+import * as am5xy from "@amcharts/amcharts5/xy";
+import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
-export default function TeamComparisionTableTwo({data}) {
+export default function TeamComparisionTable({data,gainRate}) {
 
 
-  console.log(data)
-    const data2 = [
-		{
-		
-			
-			pv: 2400,
-		
-		},
-		{
-		
-			
-			pv: 1398,
-			
-		},
-		{
-		
-		
-			pv: 9800,
-		
-		},
-		{
-		
-		
-			pv: 3908,
-		
-		},
-		{
-			
-			
-			pv: 4800,
-			
-		},
-		{
-			
-			
-			pv: 2800,
-		
-		},
-		{
-			
-			
-			pv: 4300,
-		
-		},
-		{
-			
-		
-			pv: 2300,
-		
-		},
-		{
-			
-	
-			pv: 4300,
-	
-		},
-		{
-		
-		
-			pv: 4300,
-	
-		},
-		{
-			
-		
-			pv: 9200,
-			
-		},
-	];
+useEffect(()=>{
+  if (!gainRate) return; // Handle cases where gainRate is not yet available
 
+  const root3 = am5.Root.new("chartdivN2");
+
+  const myTheme = am5.Theme.new(root3);
+  myTheme.rule("AxisLabel", ["minor"]).setAll({
+    dy: 1,
+  });
+  myTheme.rule("Grid", ["minor"]).setAll({
+    strokeOpacity: 0.08,
+  });
+
+  root3.setThemes([am5themes_Animated.new(root3), myTheme]);
+
+  const chart = root3.container.children.push(
+    am5xy.XYChart.new(root3, {
+      panX: false,
+      panY: false,
+      wheelX: "panX",
+      wheelY: "zoomX",
+      paddingLeft: 0,
+    })
+  );
+
+  const cursor = chart.set("cursor", am5xy.XYCursor.new(root3, { behavior: "zoomX" }));
+  cursor.lineY.set("visible", false);
+
+  const xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root3, {
+    renderer: am5xy.AxisRendererX.new(root3, {
+      minorGridEnabled: true,
+      minGridDistance: 200,
+      minorLabelsEnabled: true,
+    }),
+    tooltip: am5.Tooltip.new(root3, {}),
+  }));
+
+  const yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root3, { 
+    renderer: am5xy.AxisRendererY.new(root3, {}),
+    min: 0,
+    max: 2,
+  }));
+
+  const series = chart.series.push(am5xy.LineSeries.new(root3, {
+    name: "GS Rate",
+    xAxis: xAxis,
+    yAxis: yAxis,
+    valueYField: "GS_rate",
+    valueXField: "index",
+    tooltip: am5.Tooltip.new(root3, {
+      labelText: "{valueY}",
+    }),
+  }));
+
+  series.bullets.push(function () {
+    var bulletCircle = am5.Circle.new(root3, {
+      radius: 5,
+      fill: am5.color(0, 0, 255),
+    });
+    return am5.Bullet.new(root3, {
+      sprite: bulletCircle,
+    });
+  });
+
+  const dataWithIndex = gainRate.map((item, index) => ({ ...item, index: index + 1 }));
+  series.data.setAll(dataWithIndex);
+
+  chart.appear(1000, 100);
+  chart.set("scrollbarY", am5.Scrollbar.new(root3, {
+    orientation: "vertical",
+    
+    }));
+    var scrollbarX = am5.Scrollbar.new(root3, {
+    orientation: "horizontal"
+  });
+  chart.set("scrollbarX", scrollbarX);
+  chart.bottomAxesContainer.children.push(scrollbarX);
+  return () => {
+    root3.dispose();
+  };
+
+},[gainRate])
+   
 
 
   return (
@@ -133,27 +135,11 @@ export default function TeamComparisionTableTwo({data}) {
         </div>
         <div className='chart-compriision '>
             <div className="chart-team-table">
-                    <h5>-1</h5>
+            {
+                gainRate.length >0 ?( <h5>Point Gaining Rate</h5>):( <h5>-1</h5>)
+              }
                     <div className="main-charts">
-                        <LineChart
-                            className="linechart"
-                            width={730}
-                            height={250}
-                            data={data2}
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Legend verticalAlign="top" height={0} />
-                            <Line
-                                name="pv of pages"
-                                type="monotone"
-                                dataKey="pv"
-                                stroke="#040525"
-                                fill="#040525"
-                            />
-                        </LineChart>
+                    <div id="chartdivN2" style={{ width: "100%", height: "300px" }} ></div>
                     </div>
                 </div>
             </div>

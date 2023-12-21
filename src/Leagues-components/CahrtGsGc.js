@@ -68,48 +68,48 @@ export default function CahrtGsGc({ leagueId}) {
 	}, [leagueId,seasonId]);
 
 	useEffect(() => {
-		var root = am5.Root.new("chartdiv2");
+		var root1 = am5.Root.new("chartdiv2");
 	
-		root.setThemes([
-  am5themes_Animated.new(root)
+		root1.setThemes([
+  am5themes_Animated.new(root1)
 ]);
 	
-		let chart = root.container.children.push(
-		  am5xy.XYChart.new(root, {
+		let chart = root1.container.children.push(
+		  am5xy.XYChart.new(root1, {
 			panX: false,
 			panY: false,
 			wheelX: "panX",
 			wheelY: "zoomX",
 			paddingLeft: 0,
-			layout: root.verticalLayout,
+			layout: root1.verticalLayout,
 		  })
 		);
 	
-		let xRenderer = am5xy.AxisRendererX.new(root, {
+		let xRenderer = am5xy.AxisRendererX.new(root1, {
 		  minGridDistance: 30,
 		  minorGridEnabled: true,
 		});
 	
 		let yAxis = chart.yAxes.push(
-		  am5xy.ValueAxis.new(root, {
-			renderer: am5xy.AxisRendererY.new(root, {
+		  am5xy.ValueAxis.new(root1, {
+			renderer: am5xy.AxisRendererY.new(root1, {
 			  strokeOpacity: 0.1,
 			}),
 		  })
 		);
 	
 		let xAxis = chart.xAxes.push(
-		  am5xy.CategoryAxis.new(root, {
+		  am5xy.CategoryAxis.new(root1, {
 			categoryField: "name",
 			renderer: xRenderer,
 			
 		  })
 		);
-		chart.set("scrollbarY", am5.Scrollbar.new(root, {
+		chart.set("scrollbarY", am5.Scrollbar.new(root1, {
 			orientation: "vertical",
 			
 		  }));
-		  var scrollbarX = am5.Scrollbar.new(root, {
+		  var scrollbarX = am5.Scrollbar.new(root1, {
 			orientation: "horizontal"
 		});
 		chart.set("scrollbarX", scrollbarX);
@@ -119,7 +119,7 @@ export default function CahrtGsGc({ leagueId}) {
 		xAxis.data.setAll(gsGc);
 	
 		let series = chart.series.push(
-		  am5xy.ColumnSeries.new(root, {
+		  am5xy.ColumnSeries.new(root1, {
 			xAxis: xAxis,
 			yAxis: yAxis,
 			valueYField: "goalsCons",
@@ -141,7 +141,7 @@ export default function CahrtGsGc({ leagueId}) {
 	
 	
 		return () => {
-		  root.dispose();
+		  root1.dispose();
 		};
 
 	  }, [gsGc]);
@@ -149,10 +149,12 @@ export default function CahrtGsGc({ leagueId}) {
 
 	return (
 		<div>
+			<div className="chart-border-toll">
 			<div className="premier-textare">
 				<h3>2023-24 GS/GC</h3>
 			</div>
 			<div id="chartdiv2" style={{ width: "100%", height: "500px" }}></div>
+			</div>
 			
 		</div>
 	);
