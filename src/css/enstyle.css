@@ -965,10 +965,10 @@ td.imagetext_city {
     /* padding-left: 30px; */
     gap: 12px;
 }
-img.logo-rearth-table {
-    width: 60px;
-}
 
+img.logo-rearth-table {
+    width: 45px;
+}
 
 tbody.team_poin {
     background: #f9f9f9;
@@ -1106,13 +1106,19 @@ td.imagelive_city span {
 table.aline_tablel tbody td {
     vertical-align: middle !important;
     text-align: center;
+    font-size: 14px;
 }
+
 table.aline_tablel thead tr th {
     background: var(--text-color);
     border: 2px solid var(--there-color);
     color: var(--there-color);
-    padding: 16px 15px;
+    padding: 20px 5px;
     text-align: center;
+    width: 100px;
+    font-size: 13px;
+    vertical-align: middle;
+    font-weight: 600;
 }
 
 .chart-opt-table h5 {
@@ -1204,13 +1210,17 @@ table.aline_tablel thead tr th {
 
 .team-aline_table thead tr th {
     background: var(--text-color);
-    border: 2px solid var(--there-color);
+    /* border: 2px solid var(--there-color); */
     color: var(--there-color);
     padding: 7px 4px;
     text-align: center;
-    font-size: 13px;
+    font-size: 10px;
+    vertical-align: middle;
+    width: 50px !important;
 }
-
+tbody.team_poin-table tr td {
+    background: #f6f7f8;
+}
 .chart-team-table h5 {
     text-align: center;
     padding-top: 30px;
@@ -1236,9 +1246,10 @@ table.aline_tablel thead tr th {
 table.team-aline_table thead tr th {
     width: 100px;
 }
+
 /* new css by cR 15/12/23 */
 
-/* .graphB{
+/* 
 
 #chartdiv {
     width: 100%;
@@ -1261,4 +1272,28 @@ table.team-aline_table thead tr th {
     border: 1px solid #ebebeb;
 }
 
+/* 22/12/23 */
 
+.dropdown_filter .dropbtn span {
+    font-size: 15px;
+}
+
+td.clsexceldata {
+    font-size: 14px;
+}
+
+tr.table-create td {
+    font-size: 14px;
+}
+
+
+.main-charts {
+    padding: 20px 15px 20px 40px;
+}
+tbody.team_poin-table tr td {
+    vertical-align: middle;
+}
+
+.ifm iframe {
+    width: 100%;
+}

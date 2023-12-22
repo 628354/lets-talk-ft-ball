@@ -167,7 +167,7 @@ sessionStorage.setItem("teamId",teamId)
 							//console.log(data.teamname._id);	
 							//const tableDAta = data.en[0];
 							return (
-								<tr key={data._id}>
+								<tr className="table-create" key={data._id}>
 									<td>{index + 1}</td>
 									<td className="imagetext_city" onClick={()=>handleButtonClick(data.teamname._id)}>
 										<Link
