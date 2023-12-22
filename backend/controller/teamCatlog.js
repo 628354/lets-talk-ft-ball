@@ -71,10 +71,8 @@ module.exports = {
             responseHelper[200].data = data;
             Response.send(responseHelper[200]); 
     },
-
- 
-
     
+   
 };
 
 
