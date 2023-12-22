@@ -139,8 +139,8 @@ export default function LeaguesBluk() {
 						<Container fluid>
 							<Row>
 								<div className='main_add_season'>
-									<div className='main-ad-sea'>
-										<p><i class="ri-pencil-fill"></i>  Leagues Bluk</p>
+									<div className='main-ad-sea '>
+										<p><i class="ri-pencil-fill"></i>Team Bluk</p>
 									</div>
 									<hr />
 

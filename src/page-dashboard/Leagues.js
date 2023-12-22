@@ -14,7 +14,7 @@ export default function Leagues() {
   useEffect(() => {
 
    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues')
-    // axios.get('http://localhost:5000/getleagues')
+     //axios.get('http://localhost:5000/getleagues')
       .then((response) => {
         const aboutInfo = response.data?.leaguedetails
         setAboutData(aboutInfo);
@@ -29,7 +29,7 @@ export default function Leagues() {
 
   const handleDelete = (id) => {
     axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeLeague/${id}`)
-        //  axios.delete(`http://localhost:5000/removeLeague/${id}`)
+         //axios.delete(`http://localhost:5000/removeLeague/${id}`)
 
       .then((response) => {
         setAboutData(aboutData.filter(league => league._id !== id));
