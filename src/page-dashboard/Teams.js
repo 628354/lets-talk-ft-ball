@@ -14,26 +14,31 @@ export default function Teams() {
 
 
   useEffect(() => {
-   
-    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getTeams')
-    // axios.get(' http://localhost:5000/getTeams')
+
+    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/en/findAll')
+      // axios.get(' http://localhost:5000/getTeams')
       .then((response) => {
+        console.log(response.data.data);
+        // response.data.data.map((item) => {
+        //   console.log(item);
+
+        // })
         const teamsInfo = response.data?.teamdetails;
-        setTeamsData(teamsInfo || []); 
-        setItemId(teamsInfo._id); 
+        setTeamsData(response.data.data);
+        setItemId(teamsInfo._id);
 
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, []);
-  
-  
-  
-  
+
+
+
+
   const handleDelete = (id) => {
     axios.get(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeteam/${id}`)
-    // axios.delete(`http://localhost:5000/removeteam/${id}`)
+      // axios.delete(`http://localhost:5000/removeteam/${id}`)
       .then((response) => {
         console.log('Delete response:', response.data);
         setTeamsData(teamsData.filter(team => team._id !== id));
@@ -42,7 +47,7 @@ export default function Teams() {
         console.log('Error Deleting data', error);
       });
   };
-  
+
   return (
     <div>
 
@@ -100,6 +105,7 @@ export default function Teams() {
                       <th>League Name</th>
                       <th>Teams Name</th>
                       <th>Sort Name</th>
+                      <th>Status</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -107,9 +113,12 @@ export default function Teams() {
                     {teamsData.map((team) => (
                       <tr key={team._id}>
                         <td><Form.Check aria-label="option 1" /></td>
-                        <td>{team.leagues ? team.leagues.leaguename : ""}</td>
-                        <td>{team.teamName}</td>
-                        <td>{team.short_name}</td>
+                        <td>{team?.leagueid?.leaguename}</td>
+                        <td>{team.en.Team_Name_English}</td>
+                       
+                        <td>{team.en.Team_Name_Short_English}</td>
+                        <td>{team?.leagueid?.status}
+                        </td>
                         <td>
                           <div className='add-button-fis'>
                             <ul className="but-delet">
