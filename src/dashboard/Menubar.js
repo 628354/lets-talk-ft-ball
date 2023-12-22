@@ -176,18 +176,13 @@ export default function Menubar() {
                           <span className="d-none d-sm-inline">Bulk Leagues</span>
                         </Link>
                       </li>
-                      <li className="w-100">
+                      {/* <li className="w-100">
                         <Link to="/Bulk-teams" className="nav-link px-0">
                           {" "}
                           <span className="d-none d-sm-inline">Bulk Team</span>
                         </Link>
-                      </li>
-                      <li className="w-100">
-                        <Link to="/cat-logs" className="nav-link px-0">
-                          {" "}
-                          <span className="d-none d-sm-inline">Catalogs</span>
-                        </Link>
-                      </li>
+                      </li> */}
+                     
 
                     </ul>
                   </li>
@@ -223,6 +218,12 @@ export default function Menubar() {
                         <Link to="/Teams" className="nav-link px-0">
                           {" "}
                           <span className="d-none d-sm-inline">Teams</span>
+                        </Link>
+                      </li>
+                      <li className="w-100">
+                        <Link to="/cat-logs" className="nav-link px-0">
+                          {" "}
+                          <span className="d-none d-sm-inline">Catalogs</span>
                         </Link>
                       </li>
                     </ul>

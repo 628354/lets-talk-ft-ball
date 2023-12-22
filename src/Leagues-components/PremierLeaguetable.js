@@ -54,6 +54,7 @@ export default function PremierLeaguetable({
 	
 
 console.log(seasonId);
+const lang = "en"
 
 	const getTeamsData = async () => {
 		try {
@@ -61,13 +62,29 @@ console.log(seasonId);
 			const params = {
 				season: seasonId
 			}
+			const data1 = []
 			const apiUrl = `${baseUrl}/${leagueId}`;
 			const response = await apiCall(apiUrl, REQUEST_TYPE.POST, params);
-			console.log(response)
+			//console.log(response.response.data.data[3]?.en)
+			// response.response.data?.data.map((item)=>{
+			// 	console.log(item[lang]);
+			// 	item[lang].map((items)=>{
+			// 		console.log(items);
+			// 		data1.push(items);
+					
+			// 	})
+			// })
 			// response.response.data.data.map((items)=>{
 			// 	console.log(items)
 			// })
-			setLeagueDetails(response.response.data.data[0]?.en);
+			try{
+				setLeagueDetails(response.response.data.data[3]?.en);
+
+			}catch(error){
+				console.log("data not found ",error);
+			}
+			
+			//setLeagueDetails(data1)
 		} catch (error) {
 			console.log("data not found ", error);
 		}
@@ -83,8 +100,9 @@ console.log(seasonId);
 		getTeamsData(seasonId);
 
 	}, [seasonId, leagueId]);
-	//console.log(allSeasson)
 
+
+console.log(leagueDetails);
 	const handleClick = (runingId, seasonName) => {
 		setSeasonId(runingId)
 		console.log(runingId)
@@ -164,7 +182,7 @@ sessionStorage.setItem("teamId",teamId)
 							</td>
 						</tr>
 						{leagueDetails && leagueDetails.map((data, index) => {
-							//console.log(data.teamname._id);	
+							console.log(data.teamname._id);	
 							//const tableDAta = data.en[0];
 							return (
 								<tr key={data._id}>

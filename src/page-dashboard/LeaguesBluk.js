@@ -109,7 +109,7 @@ export default function LeaguesBluk() {
 									<div className='season-us'>
 
 										<div className='season-link-part'>
-											<h3> Leagues Bluk</h3>
+											<h3>  Bulk Leagues</h3>
 											<ul className='season-link'>
 												<li>
 													<Link>Home</Link>
@@ -118,7 +118,7 @@ export default function LeaguesBluk() {
 													<i className="ri-arrow-right-s-line"></i>
 												</li>
 												<li>
-													<Link>Leagues Bluk</Link>
+													<Link>Bulk Leagues</Link>
 												</li>
 											</ul>
 										</div>
@@ -156,7 +156,7 @@ export default function LeaguesBluk() {
 							<Row>
 								<div className='main_add_season'>
 									<div className='main-ad-sea'>
-										<p><i class="ri-pencil-fill"></i>  Leagues Bluk</p>
+										<p><i class="ri-pencil-fill"></i>Bulk Leagues</p>
 									</div>
 									<hr />
 
