@@ -1,9 +1,44 @@
-import React  from 'react';
+import React, { useState }  from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
-
+import { apiCall } from '../helper/RequestHandler';
+import {CONTACT_FORM, REQUEST_TYPE}  from "../helper/APIInfo";
 export default function Contact() {
+
+const [formData , setFormData]=useState([]  );
+
+
+const handleChange =(e)=>{
+  const {name,value}=e.target;
+  setFormData((prev)=>({
+    ...prev,
+    [name]:value
+  }))
+
+}
+console.log(formData);
+const getFormData = async(e) =>{
+  e.preventDefault();
+  const obj ={
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify(formData) 
+  }
+
+  const response = await apiCall(CONTACT_FORM.find,REQUEST_TYPE.POST,obj)
+  console.log(response)
+  if (response.status === 200 && response.hasError === false) {
+    console.log("Data successfully sent to the server");
+
+   
+  }
+
+  
+
+}
+
   
   return (
     <div>
@@ -52,21 +87,21 @@ export default function Contact() {
               <Form>
               <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
                   <Form.Label>Name</Form.Label>
-                  <Form.Control type="text" placeholder="" />
+                  <Form.Control type="text"  placeholder="" name="name" onChange={handleChange}/>
                 </Form.Group>
                 <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
                   <Form.Label>E-mail</Form.Label>
-                  <Form.Control type="email" placeholder="" />
+                  <Form.Control type="email" placeholder="" name="email" onChange={handleChange}/>
                 </Form.Group>
                 <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
                   <Form.Label>Subject</Form.Label>
-                  <Form.Control type="text" placeholder="" />
+                  <Form.Control type="text" placeholder="" name="subject" onChange={handleChange} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Message</Form.Label>
-                <Form.Control as="textarea" rows={3} />
+                <Form.Control as="textarea" rows={3} name="message"onChange={handleChange}/>
               </Form.Group>
-              <button className='en_send_m ar_send_m'>Send Message</button>
+              <button className='en_send_m ar_send_m' onClick={getFormData}>Send Message</button>
                 
               </Form>
               </div>

@@ -258,6 +258,7 @@ const [gcCum2, setGcCum2]=useState([])
 
 	const gainingRate = async () => {
 		console.log(currentLeagueId);
+		
 		console.log(seasonId);
 		console.log(teamId);
 		const obj = {

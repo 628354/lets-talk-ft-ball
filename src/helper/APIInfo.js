@@ -131,6 +131,10 @@ export const SESSIOND = {
     find: `${SERVER_LINK}en/teamGS_inG/find`,
     
     };
+    export const CONTACT_FORM = {
+      find: `${SERVER_LINK}sendcontactusToadmin`,
+      
+      };
 
   
   export const BASE_URL = "http://localhost:5000/uploads/";

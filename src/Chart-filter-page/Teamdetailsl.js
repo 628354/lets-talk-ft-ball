@@ -7,97 +7,27 @@ import Table from "react-bootstrap/Table";
 import Iframesecttion from "../Leagues-components/Iframesecttion";
 import { LineChart } from "recharts";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, TEAM_DETAILS, SESSIOND, GAINING_RATE } from "../helper/APIInfo";
+import { REQUEST_TYPE, TEAM_DETAILS, SESSIOND, GAINING_RATE,TEAM_GS_GC,TEAM_GS_IN_G,TEAM_SEA_GC } from "../helper/APIInfo";
 
-import {
-	BarChart,
-	Bar,
-	XAxis,
-	YAxis,
-	CartesianGrid,
-	Tooltip,
-	Legend,
-	Line,
-} from "recharts";
+import * as am5 from "@amcharts/amcharts5";
+import * as am5xy from "@amcharts/amcharts5/xy";
+import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+
 export default function Teamdetailsl() {
 	//const { teamId } = useParams()
 	const teamId = sessionStorage.getItem("teamId")
 	//console.log(teamId)
-	const data = [
-		{
-			name: "1",
-			uv: 4000,
-			pv: 2400,
-			amt: 2400,
-		},
-		{
-			name: "",
-			uv: 3000,
-			pv: 1398,
-			amt: 2210,
-		},
-		{
-			name: "2",
-			uv: 2000,
-			pv: 9800,
-			amt: 2290,
-		},
-		{
-			name: "",
-			uv: 2780,
-			pv: 3908,
-			amt: 2000,
-		},
-		{
-			name: "3",
-			uv: 1890,
-			pv: 4800,
-			amt: 2181,
-		},
-		{
-			name: "",
-			uv: 2390,
-			pv: 2800,
-			amt: 2500,
-		},
-		{
-			name: "4",
-			uv: 3490,
-			pv: 4300,
-			amt: 2100,
-		},
-		{
-			name: "",
-			uv: 3490,
-			pv: 2300,
-			amt: 2100,
-		},
-		{
-			name: "5",
-			uv: 3490,
-			pv: 4300,
-			amt: 2100,
-		},
-		{
-			name: "",
-			uv: 3490,
-			pv: 4300,
-			amt: 2100,
-		},
-		{
-			name: "6",
-			uv: 3490,
-			pv: 9200,
-			amt: 2100,
-		},
-	];
+	
 	const [teamDetails, setTeamDetails] = useState([])
 	const [tableData, setTableData] = useState([])
 	const [seasonId, setSeasonId] = useState(null);
 	const [allSeasson, setAllSeasson] = useState([])
 	const [currentSeasson, setCurrentSeasson] = useState(null)
 	//get team data table data desc
-
+	const [gainRate, setGainRate] = useState([]);
+	const [GsGc,setGsGc]=useState([]);
+	const [GsGin,setGsGin]=useState([])
+	const [gcCum, setGcCum]=useState([])
 	const getTeamDetails = async () => {
 		//console.log(teamId)
 		const baseUrl = TEAM_DETAILS.details;
@@ -110,6 +40,7 @@ export default function Teamdetailsl() {
 			const response = await apiCall(apiUrl, REQUEST_TYPE.POST,obj)
 			//console.log(response.response.data.body)
 			setTeamDetails(response.response.data.body?.en)
+
 			// const data = response.response.data?.data[0].en
 			// const filterData = data.filter(item => item.teamname._id === teamId)
 			// console.log(filterData[0])
@@ -183,20 +114,469 @@ console.log(getLeagueId);
 			leagueId: getLeagueId,
 			teamId: getTeamId
 		}
-
+		const data1 = []
 		try {
+			
 			const response = await apiCall(GAINING_RATE.gainrate,REQUEST_TYPE.POST, obj)
 				console.log(response.response)
 				setTableData(response.response?.data.data.data1)
+				response.response.data.data?.teamDatas.map((item) => {
+					console.log(item);
+					item?.en.map((data) => {
+						console.log(data);
+						data1.push({
+							GS_rate: parseInt(data.GS_rate, 10)
+						})
+					})
+				}
+				)
+				setGainRate(data1)
+
 		} catch (error) {
 			console.log("data not found", error)
 		}
 
 	}
 
+	///gsGc
+	const gsGc = async () => {
+		
+		const obj = {
+			season: getSeasonId,
+			leagueId: getLeagueId,
+			teamId: getTeamId
+		}
+		const data1 = []
+		try {
+			const response = await apiCall(TEAM_GS_GC.find, REQUEST_TYPE.POST, obj)
+			console.log(response.response.data.data?.teamDatas);
+			response.response.data.data?.teamDatas.map((item) => {
+				console.log(item);
+				item?.en.map((data) => {
+					console.log(data);
+					data1.push({
+						GS_GC: parseInt(data.GS_GC, 10)
+					})
+				})
+			}
+			)
+			//   setTeamName(response.response.data.data?.teamname1?.en)
+			//setData(response.response?.data?.data?.data1)
+			setGsGc(data1)
+			//console.log(data1);
+		} catch (error) {
+			console.log("data errror ", error)
+		}
+	}
+// gsGin 
+
+const gsGin = async () => {
+	
+	const obj = {
+		season: getSeasonId,
+		leagueId: getLeagueId,
+		teamId: getTeamId
+	}
+	const data1 = []
+	try {
+		const response = await apiCall(TEAM_GS_IN_G.find, REQUEST_TYPE.POST, obj)
+		console.log(response.response.data.data?.teamDatas);
+		response.response.data.data?.teamDatas.map((item) => {
+			console.log(item);
+			item?.en.map((data) => {
+				console.log(data);
+				data1.push({
+					GS_inG: parseInt(data.GS_inG, 10)
+				})
+			})
+		}
+		)
+		//   setTeamName(response.response.data.data?.teamname1?.en)
+		//setData(response.response?.data?.data?.data1)
+		setGsGin(data1)
+		//console.log(data1);
+	} catch (error) {
+		console.log("data errror ", error)
+	}
+}
+// TEAM_SEA_GC
+const teamSecgc = async () => {
+	
+	const obj = {
+		season: getSeasonId,
+		leagueId: getLeagueId,
+		teamId: getTeamId
+	}
+	const data1 = []
+	try {
+		const response = await apiCall(TEAM_SEA_GC.find, REQUEST_TYPE.POST, obj)
+		console.log(response.response.data.data?.teamDatas);
+		response.response.data.data?.teamDatas.map((item) => {
+			console.log(item);
+			item?.en.map((data) => {
+				console.log(data);
+				data1.push({
+					GC_cum: parseInt(data.GC_cum, 10)
+				})
+			})
+		}
+		)
+		//   setTeamName(response.response.data.data?.teamname1?.en)
+		//setData(response.response?.data?.data?.data1)
+		setGcCum(data1)
+		//console.log(data1);
+	} catch (error) {
+		console.log("data errror ", error)
+	}
+}
+
 	useEffect(() => {
-		gainingRate()
+		gainingRate();
+		gsGc();
+		gsGin();
+		teamSecgc()
 	}, [getSeasonId, getTeamId, getLeagueId])
+
+//gain rate graph 
+	useEffect(()=>{
+		if (!gainRate) return; // Handle cases where gainRate is not yet available
+	  
+		const root2 = am5.Root.new("chartdivN");
+	  
+		const myTheme = am5.Theme.new(root2);
+		myTheme.rule("AxisLabel", ["minor"]).setAll({
+		  dy: 1,
+		});
+		myTheme.rule("Grid", ["minor"]).setAll({
+		  strokeOpacity: 0.08,
+		});
+	  
+		root2.setThemes([am5themes_Animated.new(root2), myTheme]);
+	  
+		const chart = root2.container.children.push(
+		  am5xy.XYChart.new(root2, {
+			panX: false,
+			panY: false,
+			wheelX: "panX",
+			wheelY: "zoomX",
+			paddingLeft: 0,
+		  })
+		);
+	  
+		const cursor = chart.set("cursor", am5xy.XYCursor.new(root2, { behavior: "zoomX" }));
+		cursor.lineY.set("visible", false);
+	  
+		const xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root2, {
+		  renderer: am5xy.AxisRendererX.new(root2, {
+			minorGridEnabled: true,
+			minGridDistance: 200,
+			minorLabelsEnabled: true,
+		  }),
+		  tooltip: am5.Tooltip.new(root2, {}),
+		}));
+	  
+		const yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root2, { 
+		  renderer: am5xy.AxisRendererY.new(root2, {}),
+		  min: 0,
+		  max: 2,
+		}));
+	  
+		const series = chart.series.push(am5xy.LineSeries.new(root2, {
+		  name: "GS Rate",
+		  xAxis: xAxis,
+		  yAxis: yAxis,
+		  valueYField: "GS_rate",
+		  valueXField: "index",
+		  tooltip: am5.Tooltip.new(root2, {
+			labelText: "{valueY}",
+		  }),
+		}));
+	  
+		series.bullets.push(function () {
+		  var bulletCircle = am5.Circle.new(root2, {
+			radius: 5,
+			fill: am5.color(0, 0, 255),
+		  });
+		  return am5.Bullet.new(root2, {
+			sprite: bulletCircle,
+		  });
+		});
+	  
+		const dataWithIndex = gainRate.map((item, index) => ({ ...item, index: index + 1 }));
+		series.data.setAll(dataWithIndex);
+	  
+		chart.appear(1000, 100);
+	  
+		chart.set("scrollbarY", am5.Scrollbar.new(root2, {
+		  orientation: "vertical",
+		  
+		  }));
+		  var scrollbarX = am5.Scrollbar.new(root2, {
+		  orientation: "horizontal"
+		});
+		chart.set("scrollbarX", scrollbarX);
+		chart.bottomAxesContainer.children.push(scrollbarX);
+		return () => {
+		  root2.dispose();
+		};
+	  
+	  },[gainRate])
+
+	  // gsgc graph 
+	  useEffect(()=>{
+		if (!GsGc) return; // Handle cases where gainRate is not yet available
+	  
+		const root4 = am5.Root.new("chartdivC");
+	  
+		const myTheme = am5.Theme.new(root4);
+		myTheme.rule("AxisLabel", ["minor"]).setAll({
+		  dy: 1,
+		});
+		myTheme.rule("Grid", ["minor"]).setAll({
+		  strokeOpacity: 0.08,
+		});
+	  
+		root4.setThemes([am5themes_Animated.new(root4), myTheme]);
+	  
+		const chart = root4.container.children.push(
+		  am5xy.XYChart.new(root4, {
+			panX: false,
+			panY: false,
+			wheelX: "panX",
+			wheelY: "zoomX",
+			paddingLeft: 0,
+		  })
+		);
+	  
+		const cursor = chart.set("cursor", am5xy.XYCursor.new(root4, { behavior: "zoomX" }));
+		cursor.lineY.set("visible", false);
+	  
+		const xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root4, {
+		  renderer: am5xy.AxisRendererX.new(root4, {
+			minorGridEnabled: true,
+			minGridDistance: 200,
+			minorLabelsEnabled: true,
+		  }),
+		  tooltip: am5.Tooltip.new(root4, {}),
+		}));
+	  
+		const yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root4, { 
+		  renderer: am5xy.AxisRendererY.new(root4, {}),
+		  min: 0,
+		  max: 2,
+		}));
+	  
+		const series = chart.series.push(am5xy.LineSeries.new(root4, {
+		  name: "GS GC",
+		  xAxis: xAxis,
+		  yAxis: yAxis,
+		  valueYField: "GS_GC",
+		  valueXField: "index",
+		  tooltip: am5.Tooltip.new(root4, {
+			labelText: "{valueY}",
+		  }),
+		}));
+	  
+		series.bullets.push(function () {
+		  var bulletCircle = am5.Circle.new(root4, {
+			radius: 5,
+			fill: am5.color(0, 0, 255),
+		  });
+		  return am5.Bullet.new(root4, {
+			sprite: bulletCircle,
+		  });
+		});
+	  
+		const dataWithIndex = GsGc.map((item, index) => ({ ...item, index: index + 1 }));
+		series.data.setAll(dataWithIndex);
+	  
+		chart.appear(1000, 100);
+	  
+		chart.set("scrollbarY", am5.Scrollbar.new(root4, {
+		  orientation: "vertical",
+		  
+		  }));
+		  var scrollbarX = am5.Scrollbar.new(root4, {
+		  orientation: "horizontal"
+		});
+		chart.set("scrollbarX", scrollbarX);
+		chart.bottomAxesContainer.children.push(scrollbarX);
+		return () => {
+		  root4.dispose();
+		};
+	  
+	  },[GsGc])
+
+
+	  //GsGin  graph 
+	  useEffect(()=>{
+		if (!GsGin) return; // Handle cases where gainRate is not yet available
+	  
+		const root4 = am5.Root.new("chartdivGs");
+	  
+		const myTheme = am5.Theme.new(root4);
+		myTheme.rule("AxisLabel", ["minor"]).setAll({
+		  dy: 1,
+		});
+		myTheme.rule("Grid", ["minor"]).setAll({
+		  strokeOpacity: 0.08,
+		});
+	  
+		root4.setThemes([am5themes_Animated.new(root4), myTheme]);
+	  
+		const chart = root4.container.children.push(
+		  am5xy.XYChart.new(root4, {
+			panX: false,
+			panY: false,
+			wheelX: "panX",
+			wheelY: "zoomX",
+			paddingLeft: 0,
+		  })
+		);
+	  
+		const cursor = chart.set("cursor", am5xy.XYCursor.new(root4, { behavior: "zoomX" }));
+		cursor.lineY.set("visible", false);
+	  
+		const xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root4, {
+		  renderer: am5xy.AxisRendererX.new(root4, {
+			minorGridEnabled: true,
+			minGridDistance: 200,
+			minorLabelsEnabled: true,
+		  }),
+		  tooltip: am5.Tooltip.new(root4, {}),
+		}));
+	  
+		const yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root4, { 
+		  renderer: am5xy.AxisRendererY.new(root4, {}),
+		  min: 0,
+		  max: 2,
+		}));
+	  
+		const series = chart.series.push(am5xy.LineSeries.new(root4, {
+		  name: "GsGin",
+		  xAxis: xAxis,
+		  yAxis: yAxis,
+		  valueYField: "GS_inG",
+		  valueXField: "index",
+		  tooltip: am5.Tooltip.new(root4, {
+			labelText: "{valueY}",
+		  }),
+		}));
+	  
+		series.bullets.push(function () {
+		  var bulletCircle = am5.Circle.new(root4, {
+			radius: 5,
+			fill: am5.color(0, 0, 255),
+		  });
+		  return am5.Bullet.new(root4, {
+			sprite: bulletCircle,
+		  });
+		});
+	  
+		const dataWithIndex = GsGin.map((item, index) => ({ ...item, index: index + 1 }));
+		series.data.setAll(dataWithIndex);
+	  
+		chart.appear(1000, 100);
+	  
+		chart.set("scrollbarY", am5.Scrollbar.new(root4, {
+		  orientation: "vertical",
+		  
+		  }));
+		  var scrollbarX = am5.Scrollbar.new(root4, {
+		  orientation: "horizontal"
+		});
+		chart.set("scrollbarX", scrollbarX);
+		chart.bottomAxesContainer.children.push(scrollbarX);
+		return () => {
+		  root4.dispose();
+		};
+	  
+	  },[GsGin])
+   // gc cum 
+   useEffect(()=>{
+	if (!gcCum) return; // Handle cases where gainRate is not yet available
+  
+	const root5 = am5.Root.new("chartdivGcum");
+  
+	const myTheme = am5.Theme.new(root5);
+	myTheme.rule("AxisLabel", ["minor"]).setAll({
+	  dy: 1,
+	});
+	myTheme.rule("Grid", ["minor"]).setAll({
+	  strokeOpacity: 0.08,
+	});
+  
+	root5.setThemes([am5themes_Animated.new(root5), myTheme]);
+  
+	const chart = root5.container.children.push(
+	  am5xy.XYChart.new(root5, {
+		panX: false,
+		panY: false,
+		wheelX: "panX",
+		wheelY: "zoomX",
+		paddingLeft: 0,
+	  })
+	);
+  
+	const cursor = chart.set("cursor", am5xy.XYCursor.new(root5, { behavior: "zoomX" }));
+	cursor.lineY.set("visible", false);
+  
+	const xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root5, {
+	  renderer: am5xy.AxisRendererX.new(root5, {
+		minorGridEnabled: true,
+		minGridDistance: 200,
+		minorLabelsEnabled: true,
+	  }),
+	  tooltip: am5.Tooltip.new(root5, {}),
+	}));
+  
+	const yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root5, { 
+	  renderer: am5xy.AxisRendererY.new(root5, {}),
+	  min: 0,
+	  max: 37,
+	}));
+  
+	const series = chart.series.push(am5xy.LineSeries.new(root5, {
+	  name: "GC cum",
+	  xAxis: xAxis,
+	  yAxis: yAxis,
+	  valueYField: "GC_cum",
+	  valueXField: "index",
+	  tooltip: am5.Tooltip.new(root5, {
+		labelText: "{valueY}",
+	  }),
+	}));
+  
+	series.bullets.push(function () {
+	  var bulletCircle = am5.Circle.new(root5, {
+		radius: 5,
+		fill: am5.color(0, 0, 255),
+	  });
+	  return am5.Bullet.new(root5, {
+		sprite: bulletCircle,
+	  });
+	});
+  
+	const dataWithIndex = gcCum.map((item, index) => ({ ...item, index: index + 1 }));
+	series.data.setAll(dataWithIndex);
+  
+	chart.appear(1000, 100);
+  
+	chart.set("scrollbarY", am5.Scrollbar.new(root5, {
+	  orientation: "vertical",
+	  
+	  }));
+	  var scrollbarX = am5.Scrollbar.new(root5, {
+	  orientation: "horizontal"
+	});
+	chart.set("scrollbarX", scrollbarX);
+	chart.bottomAxesContainer.children.push(scrollbarX);
+	return () => {
+	  root5.dispose();
+	};
+  
+  },[gcCum])
+
 
 	return (
 		<div>
@@ -278,7 +658,7 @@ console.log(getLeagueId);
 													<div class="dropdown-content">
 														{
 															allSeasson.map((data) => {
-																//console.log(data)
+																//console.log(data._id)
 																return (<Link to="" onClick={() => handleButtonClick(data._id,data.season_Title)}>{data.season_Title}</Link>)
 															})
 														}
@@ -347,25 +727,8 @@ console.log(getLeagueId);
 										<div className="chart-opt-table">
 											<h5>23-24 MC Point Gaining Rate</h5>
 											<div className="main-charts">
-												<LineChart
-													className="linechart"
-													width={730}
-													height={250}
-													data={data}
-													margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-													<XAxis dataKey="name" />
-													<YAxis />
-													<CartesianGrid strokeDasharray="3 3" />
-													<Tooltip />
-													<Legend verticalAlign="top" height={0} />
-													<Line
-														name="pv of pages"
-														type="monotone"
-														dataKey="pv"
-														stroke="#040525"
-														fill="#040525"
-													/>
-												</LineChart>
+											<div id="chartdivN" style={{ width: "100%", height: "300px" }} ></div>
+
 											</div>
 										</div>
 									</div>
@@ -373,25 +736,7 @@ console.log(getLeagueId);
 										<div className="chart-opt-table">
 											<h5>23-24 MC GS/GC</h5>
 											<div className="main-charts">
-												<LineChart
-													className="linechart"
-													width={730}
-													height={250}
-													data={data}
-													margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-													<XAxis dataKey="name" />
-													<YAxis />
-													<CartesianGrid strokeDasharray="3 3" />
-													<Tooltip />
-													<Legend verticalAlign="top" height={0} />
-													<Line
-														name="pv of pages"
-														type="monotone"
-														dataKey="pv"
-														stroke="#040525"
-														fill="#040525"
-													/>
-												</LineChart>
+											<div id="chartdivC" style={{ width: "100%", height: "300px" }} ></div>
 											</div>
 										</div>
 									</div>
@@ -399,25 +744,7 @@ console.log(getLeagueId);
 										<div className="chart-opt-table">
 											<h5>23-24 MC GS/g</h5>
 											<div className="main-charts">
-												<LineChart
-													className="linechart"
-													width={730}
-													height={250}
-													data={data}
-													margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-													<XAxis dataKey="name" />
-													<YAxis />
-													<CartesianGrid strokeDasharray="3 3" />
-													<Tooltip />
-													<Legend verticalAlign="top" height={0} />
-													<Line
-														name="pv of pages"
-														type="monotone"
-														dataKey="pv"
-														stroke="#040525"
-														fill="#040525"
-													/>
-												</LineChart>
+											<div id="chartdivGs" style={{ width: "100%", height: "300px" }} ></div>
 											</div>
 										</div>
 									</div>
@@ -425,25 +752,7 @@ console.log(getLeagueId);
 										<div className="chart-opt-table">
 											<h5>23-24 MC GC/g</h5>
 											<div className="main-charts">
-												<LineChart
-													className="linechart"
-													width={730}
-													height={250}
-													data={data}
-													margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-													<XAxis dataKey="name" />
-													<YAxis />
-													<CartesianGrid strokeDasharray="3 3" />
-													<Tooltip />
-													<Legend verticalAlign="top" height={0} />
-													<Line
-														name="pv of pages"
-														type="monotone"
-														dataKey="pv"
-														stroke="#040525"
-														fill="#040525"
-													/>
-												</LineChart>
+											<div id="chartdivGcum" style={{ width: "100%", height: "300px" }} ></div>
 											</div>
 										</div>
 									</div>

@@ -13,7 +13,7 @@ export default function Season() {
   useEffect(() => {
 
     axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getyears')
-      //  axios.get('  http://localhost:5000/getyears')
+     //  axios.get('  http://localhost:5000/getyears')
       .then((response) => {
         const aboutInfo = response.data?.seasonyears
         setAboutData(aboutInfo);
