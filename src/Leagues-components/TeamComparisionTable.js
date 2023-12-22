@@ -129,7 +129,7 @@ console.log(data);
           <td>{data?.point_gap}</td>
           <td>{data?.gs_gc}</td>
           <td>{data?.win}%</td>
-          
+        
         </tr>
       </tbody>
     </Table>
