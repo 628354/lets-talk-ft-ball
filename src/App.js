@@ -112,7 +112,8 @@ function App() {
 		"/uploadMedia",
 		"/User",
 		"/addUser",
-		"/edituser" 
+		"/edituser",
+		"/UploadMedia"
 	];
 
 	const currentRoute = location.pathname;

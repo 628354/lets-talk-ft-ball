@@ -176,3 +176,14 @@ div#basic-navbar-nav {
 }
 
 /* desktop responsive css end  */
+
+/* desktop responsive css start */
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+
+  .right-side-contant {
+    width: calc(90% - 110px) !important;
+}
+
+}
+
+/* desktop responsive css end  */
