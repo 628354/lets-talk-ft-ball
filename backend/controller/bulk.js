@@ -63,10 +63,13 @@ exports.leagedBlukImport = async (req, res) => {
   const workbookTeam = XLSX.readFile(TeamFile);
 
   const sheetNamesTeam = workbookTeam.SheetNames;
-  const sheetsTeamData = [];
+  // console.log(sheetNamesTeam);
+  const allDataTeam = [];
+  const updateData = [];
+ 
   sheetNamesTeam.forEach(async sheetName => {
-
     const sheetsTeamData = [];
+    const udpateRecords = [];
     const worksheetS = workbookTeam.Sheets[sheetName];
     const data = XLSX.utils.sheet_to_json(worksheetS);
 
@@ -98,19 +101,22 @@ exports.leagedBlukImport = async (req, res) => {
           Poverty_Line: myData.Line
         })
       }
+      const teamId = await teamCatlog.findOne({ "en.Team_Name_English": sheetName });
+      if (await teamId?._id) {
+        // console.log(sheetName);
+        // console.log(sheetsTeamData);
+        await saveTeam([{
+          seasonid: req.body.season,
+          leagueid: req.body.league,
+          teamname: teamId?._id,
+          en: sheetsTeamData,
+          ar: sheetsTeamData
+        }])
+      }
     }
 
 
-    const teamId = await teamCatlog.findOne({ "en.Team_Name_English": sheetName });
-    if (await teamId?._id) {
-      await saveTeam([{
-        seasonid: req.body.season,
-        leagueid: req.body.league,
-        teamname: teamId?._id,
-        en: sheetsTeamData,
-        ar: sheetsTeamData
-      }])
-    }
+   
   });
 
   responseHelper[200].data = "Successfully Submited";
@@ -154,7 +160,7 @@ exports.teamBulkImport = async (req, res) => {
   const workbook = XLSX.readFile(filePath);
 
   const sheetNames = workbook.SheetNames;
-  console.log(sheetNames);
+  // console.log(sheetNames);
   const allData = [];
 
   sheetNames.forEach(async sheetName => {

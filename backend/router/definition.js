@@ -20,7 +20,7 @@ const definitionController = require("../controller/definition");
 router.post(
   "/addDefinition",
   upload.single("image"),
-  definitionController.adddefinitions
+  definitionController.addDefinitions
 );
 
 router.post(

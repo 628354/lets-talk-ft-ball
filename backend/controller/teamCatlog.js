@@ -50,7 +50,9 @@ module.exports = {
             }
 
         });
-
+        console.log('====================================');
+        console.log(allData);
+        console.log('====================================');
 
         const addleage = await teamCatlog.create(allData)
         responseHelper[200].data = addleage;
