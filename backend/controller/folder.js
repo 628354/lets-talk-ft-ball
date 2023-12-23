@@ -40,7 +40,6 @@ module.exports = {
             });
         }
     },
-
     folderUpdate: async (req, res) => {
         try {
             const { folderName } = req.body

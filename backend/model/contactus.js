@@ -3,9 +3,9 @@ const validator = require("validator");
 
 const contactusSchema = mongoose.Schema(
   {
-    logo: { type: String, require: true },
-    image: { type: String, require: true },
-    name: { type: String, require: true },
+    logo: { type: String, default: "" },
+    image: { type: String, default: "" },
+    name: { type: String, default: "" },
     email: {
       type: String,
       validate: {
@@ -14,10 +14,11 @@ const contactusSchema = mongoose.Schema(
         isAsync: false,
       },
     },
-    subject: { type: String, require: true },
-    message: { type: String, require: true },
+    subject: { type: String, default: "" },
+    message: { type: String, default: "" },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("contactus", contactusSchema);
+const contactus = mongoose.model('contactus', contactusSchema)
+module.exports = contactus

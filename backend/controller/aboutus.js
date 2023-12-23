@@ -1,13 +1,11 @@
-const aboutus = require("../model/aboutus")
 const aboutusmodel = require("../model/aboutus")
-const checkPermission = require('../controller/permission')
 
 exports.addaboutus = async (req, res) => {
     try {
         const { aboutTitle, aboutText, visionTitle } = req.body
         const files = req.files
         const protocol = req.protocol
-        const host = req.host
+        const host = req.hostname
         const url = `${protocol}//${host}`
         const addaboutus = await aboutusmodel.create({
             bannerImage: req.files.image ? url + "/uploads/" + files.bannerImage[0].filename : "",
@@ -21,7 +19,7 @@ exports.addaboutus = async (req, res) => {
         res.send({ status: true, message: "Successfully add aboutus content", body: addaboutus })
 
     } catch (error) {
-        res.send({ status: false, message: "Something went wrong !!" })
+        console.log(error.message)
     }
 }
 
