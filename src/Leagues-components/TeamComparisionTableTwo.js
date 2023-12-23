@@ -117,7 +117,7 @@ useEffect(()=>{
         <tr>
           <td className='team-imagetext_city'><span className='overimage'><img src={require('../img/manchester-city-logo.png')} alt="earth" className="logo-rearth-table"/></span></td>
          
-          <td>{data?.games}</td>
+          {/* <td>{data?.games}</td> */}
           <td>{data?.games}</td>
           <td>{data?.win}</td>
           <td>{data?.draw}</td>

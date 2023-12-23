@@ -155,6 +155,7 @@ export default function Goalsconchart({ leagueId }) {
 		<h3>2023-24 Goals Con/Game</h3>
 		</div>
 		<div id="chartdiv1" style={{ width: "100%", height: "500px" }}></div>
+		
 		</div>
 
 		</div>
