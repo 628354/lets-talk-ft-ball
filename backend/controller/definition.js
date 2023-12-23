@@ -8,6 +8,7 @@ exports.adddefinitions = async (req, res) => {
         const protocol = req.protocol
         const host = req.hostname
         const url = `${protocol}//${host}`
+
         const adddefinitions = await definitionmodel.create({
             image: req.file ? url + "/uploads/" + req.file.filename : "",
             definition: {

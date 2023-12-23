@@ -38,9 +38,10 @@ exports.leagedBlukImport = async (req, res) => {
           goals_scored: data[i].GS,
           goals_conceded: data[i].GC,
           points: data[i].P,
-          point_gap: (data[i]['POINTS GAIN %']) ? data[i]['POINTS GAIN %'] : " ",
-          gs_gc: (data[i]['GOALS SCORED/GAME']) ? data[i]['GOALS SCORED/GAME'] : " ",
-          win_precent: (data[i]['WIN%']) ? data[i]['WIN%'] : " "
+          point_gap: (data[i]['POINTS GAIN %'] !== undefined) ? data[i]['POINTS GAIN %'] : data[i]['Pgap'],
+          gs_gc: (data[i]['GOALS SCORED/GAME'] !== undefined) ? data[i]['GOALS SCORED/GAME'] : data[i]['GS-GC'],
+          win_precent: (data[i]['WIN%'] !== undefined) ? data[i]['WIN%'] : data[i]['w%']
+          
         })
       }
     }
@@ -62,13 +63,10 @@ exports.leagedBlukImport = async (req, res) => {
   const workbookTeam = XLSX.readFile(TeamFile);
 
   const sheetNamesTeam = workbookTeam.SheetNames;
-  // console.log(sheetNamesTeam);
-  const allDataTeam = [];
-  const updateData = [];
   const sheetsTeamData = [];
   sheetNamesTeam.forEach(async sheetName => {
 
-    const udpateRecords = [];
+    const sheetsTeamData = [];
     const worksheetS = workbookTeam.Sheets[sheetName];
     const data = XLSX.utils.sheet_to_json(worksheetS);
 
@@ -80,7 +78,6 @@ exports.leagedBlukImport = async (req, res) => {
         const words = key.split(' ');
         words.shift();
         const modifiedString = words.join('_');
-        // console.log(modifiedString);
         myData[modifiedString] = data[i][key]
         // data[i][modifiedString]= data[i][key];
       }
@@ -103,12 +100,9 @@ exports.leagedBlukImport = async (req, res) => {
       }
     }
 
-    // console.log(sheetsTeamData);
 
     const teamId = await teamCatlog.findOne({ "en.Team_Name_English": sheetName });
     if (await teamId?._id) {
-      // console.log(sheetName);
-      // console.log(sheetsTeamData);
       await saveTeam([{
         seasonid: req.body.season,
         leagueid: req.body.league,

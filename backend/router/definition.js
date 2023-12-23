@@ -18,23 +18,23 @@ const upload = multer({ storage: storage });
 const definitionController = require("../controller/definition");
 
 router.post(
-  "/addDefinition",authentication,
+  "/addDefinition",
   upload.single("image"),
   definitionController.adddefinitions
 );
 
 router.post(
-  "/adddefinitionInexisting/:id",authentication,
+  "/adddefinitionInexisting/:id",
   definitionController.adddefinitiontype
 );
 
 router.post(
-  "/updatedata/:objectId/:arrayElementId",authentication,
+  "/updatedata/:objectId/:arrayElementId",
   definitionController.updatedata
 );
-router.delete("/definitionDelete/:id",authentication, definitionController.definitionDelete);
+router.delete("/definitionDelete/:id", definitionController.definitionDelete);
 
-router.get("/getAllDefinition",authentication, definitionController.getAllDefinition);
-router.get('/getDefinitionById/:id',authentication, definitionController.getDefinitionById)
+router.get("/getAllDefinition", definitionController.getAllDefinition);
+router.get('/getDefinitionById/:id', definitionController.getDefinitionById)
 
 module.exports = router;

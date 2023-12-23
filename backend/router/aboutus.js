@@ -27,7 +27,7 @@ router.post(
   aboutController.addaboutus
 );
 
-router.get("/getAboutus",authentication, aboutController.getaboutus);
+router.get("/getAboutus", aboutController.getaboutus);
 
 router.post("/updateAboutus/:Id",authentication,  upload.fields([{ name: 'bannerImage' }, { name: 'aboutSectionImage' }, { name: 'visionSectionImage' }]), aboutController.updateAboutus)
 
