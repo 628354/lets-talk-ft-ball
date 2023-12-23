@@ -65,9 +65,9 @@ exports.leagedBlukImport = async (req, res) => {
   // console.log(sheetNamesTeam);
   const allDataTeam = [];
   const updateData = [];
-  const sheetsTeamData = [];
+ 
   sheetNamesTeam.forEach(async sheetName => {
-
+    const sheetsTeamData = [];
     const udpateRecords = [];
     const worksheetS = workbookTeam.Sheets[sheetName];
     const data = XLSX.utils.sheet_to_json(worksheetS);
@@ -101,22 +101,23 @@ exports.leagedBlukImport = async (req, res) => {
           Poverty_Line: myData.Line
         })
       }
+      const teamId = await teamCatlog.findOne({ "en.Team_Name_English": sheetName });
+      if (await teamId?._id) {
+        // console.log(sheetName);
+        // console.log(sheetsTeamData);
+        await saveTeam([{
+          seasonid: req.body.season,
+          leagueid: req.body.league,
+          teamname: teamId?._id,
+          en: sheetsTeamData,
+          ar: sheetsTeamData
+        }])
+      }
     }
 
     // console.log(sheetsTeamData);
 
-    const teamId = await teamCatlog.findOne({ "en.Team_Name_English": sheetName });
-    if (await teamId?._id) {
-      // console.log(sheetName);
-      // console.log(sheetsTeamData);
-      await saveTeam([{
-        seasonid: req.body.season,
-        leagueid: req.body.league,
-        teamname: teamId?._id,
-        en: sheetsTeamData,
-        ar: sheetsTeamData
-      }])
-    }
+   
   });
 
   responseHelper[200].data = "Successfully Submited";
