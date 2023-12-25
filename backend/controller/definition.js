@@ -2,29 +2,32 @@ const definitionmodel = require("../model/definition")
 const mongoose = require("mongoose")
 const ObjectId = mongoose.Types.ObjectId
 
-exports.adddefinitions = async (req, res) => {
+exports.addDefinitions = async (req, res) => {
     try {
-        const { type, content } = req.body
-        const protocol = req.protocol
-        const host = req.hostname
-        const url = `${protocol}//${host}`
-        const adddefinitions = await definitionmodel.create({
-            image: req.file ? url + "/uploads/" + req.file.filename : "",
+        const { type, content } = req.body;
+        const protocol = req.protocol;
+        const host = req.hostname;
+        const url = `${protocol}://${host}`;
+
+        const addDefinitions = await definitionmodel.create({
+            image: req.file ? `${url}/uploads/${req.file.filename}` : '',
             definition: {
                 type: type,
                 content: content
             }
-        })
-        const result = await adddefinitions.save()
-        res.send({ status: true, mesasge: "Successfully add definition", body: result })
-    } catch (error) {
+        });
+
+        const result = await addDefinitions.save();
         res.status(200).send({
-            mesasge: 'Enternal Server Error',
-            success: false,
-            error: error.mesasge
-        })
+            status: true,
+            message: 'Successfully added definition',
+            body: result
+        });
+    } catch (error) {
+        console.error(error.mesasge)
     }
-}
+};
+
 
 exports.adddefinitiontype = async (req, res) => {
     try {

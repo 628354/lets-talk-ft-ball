@@ -153,10 +153,10 @@ console.log();
     //  console.log(goalScore);
     return (
         <div className="graphB chart-border-toll">
-            <div className="premier-textare">
+             <div className="premier-textare">
                 <h3>2023-24 Goals Scored/Game</h3>
-            </div>
-            <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
+             </div>
+              <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
         </div>
     );
 }

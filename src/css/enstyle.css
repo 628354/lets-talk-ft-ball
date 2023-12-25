@@ -965,10 +965,10 @@ td.imagetext_city {
     /* padding-left: 30px; */
     gap: 12px;
 }
-img.logo-rearth-table {
-    width: 60px;
-}
 
+img.logo-rearth-table {
+    width: 45px;
+}
 
 tbody.team_poin {
     background: #f9f9f9;
@@ -1106,13 +1106,19 @@ td.imagelive_city span {
 table.aline_tablel tbody td {
     vertical-align: middle !important;
     text-align: center;
+    font-size: 14px;
 }
+
 table.aline_tablel thead tr th {
     background: var(--text-color);
     border: 2px solid var(--there-color);
     color: var(--there-color);
-    padding: 16px 15px;
+    padding: 20px 5px;
     text-align: center;
+    width: 100px;
+    font-size: 13px;
+    vertical-align: middle;
+    font-weight: 600;
 }
 
 .chart-opt-table h5 {
@@ -1204,13 +1210,17 @@ table.aline_tablel thead tr th {
 
 .team-aline_table thead tr th {
     background: var(--text-color);
-    border: 2px solid var(--there-color);
+    /* border: 2px solid var(--there-color); */
     color: var(--there-color);
     padding: 7px 4px;
     text-align: center;
-    font-size: 13px;
+    font-size: 10px;
+    vertical-align: middle;
+    width: 50px !important;
 }
-
+tbody.team_poin-table tr td {
+    background: #f6f7f8;
+}
 .chart-team-table h5 {
     text-align: center;
     padding-top: 30px;
@@ -1236,9 +1246,10 @@ table.aline_tablel thead tr th {
 table.team-aline_table thead tr th {
     width: 100px;
 }
+
 /* new css by cR 15/12/23 */
 
-/* .graphB{
+/* 
 
 #chartdiv {
     width: 100%;
@@ -1261,113 +1272,28 @@ table.team-aline_table thead tr th {
     border: 1px solid #ebebeb;
 }
 
-/* 23-12-2023 */
+/* 22/12/23 */
 
-/* section {
-    padding: 2rem 0;
-  }
-  
-  label {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px dotted black;
-    border-radius: 20px;
-    width: 10rem;
-    height: 10rem;
-    cursor: pointer;
-    font-size: large;
-  }
-  
-  label span {
-    font-weight: lighter;
-    font-size: small;
-    padding-top: 0.5rem;
-  }
-  
-  input {
-    display: none;
-  }
-  
-  img {
-    padding: 0;
-    margin: 0;
-  }
-  
-  .images {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .image {
-    margin: 1rem 0.5rem;
-    position: relative;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
-  }
-  
-  .image button {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    cursor: pointer;
-    border: none;
-    color: white;
-    background-color: lightcoral;
-  }
-  
-  .image button:hover {
-    background-color: red;
-  }
-  
-  .image p {
-    padding: 0 0.5rem;
-    margin: 0;
-  }
-  
-  .upload-btn {
-    cursor: pointer;
-    display: block;
-    margin: 0 auto;
-    border: none;
-    border-radius: 20px;
-    width: 10rem;
-    height: 3rem;
-    color: white;
-    background-color: green;
-  }
-  
-  label:hover,
-  .upload-btn:hover {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-  }
-  
-  .error {
-    text-align: center;
-  }
-  
-  .error span {
-    color: red;
-  } */
-
-
-
-  /* 23-12-2023 */
-.en_right_border {
-    display: flex;
-    flex-direction: row-reverse !important;
+.dropdown_filter .dropbtn span {
+    font-size: 15px;
 }
 
-.en_about_contant_right h5 {
-    line-height: 37px;
-    width: 545px;
-    border-right: 4px solid var(--border-color);
-    padding-left: 22px;
-    font-weight: 400;
-    
+td.clsexceldata {
+    font-size: 14px;
+}
+
+tr.table-create td {
+    font-size: 14px;
+}
+
+
+.main-charts {
+    padding: 20px 15px 20px 40px;
+}
+tbody.team_poin-table tr td {
+    vertical-align: middle;
+}
+
+.ifm iframe {
+    width: 100%;
 }

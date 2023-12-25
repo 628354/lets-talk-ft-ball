@@ -129,7 +129,7 @@ console.log(data);
           <td>{data?.point_gap}</td>
           <td>{data?.gs_gc}</td>
           <td>{data?.win}%</td>
-          
+        
         </tr>
       </tbody>
     </Table>
@@ -141,7 +141,7 @@ console.log(data);
               }
                    
                     <div className="main-charts">
-                    <div id="chartdivN" style={{ width: "100%", height: "300px" }} ></div>
+                       <div id="chartdivN" style={{ width: "100%", height: "300px" }} ></div>
                     </div>
                 </div>
             </div>

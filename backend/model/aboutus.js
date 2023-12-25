@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
-
 const aboutusSchema = mongoose.Schema(
   {
-    bannerImage: { type: String, require: true },
-    aboutTitle: { type: String, require: true },
-    aboutText: { type: String, require: true },
-    aboutSectionImage: { type: String, require: true },
-    visionSectionImage: { type: String, require: true },
-    visionTitle: { type: String, require: true },
+    bannerImage: { type: String, default: "" },
+    aboutTitle: { type: String, default: "" },
+    aboutText: { type: String, default: "" },
+    aboutSectionImage: { type: String, default: "" },
+    visionSectionImage: { type: String, default: "" },
+    visionTitle: { type: String, default: "" },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("aboutus", aboutusSchema);
+const aboutus = mongoose.model('aboutus', aboutusSchema)
+module.exports = aboutus
