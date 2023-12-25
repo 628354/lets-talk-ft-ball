@@ -78,7 +78,7 @@ const [gcCum2, setGcCum2]=useState([])
 		}
 		try {
 			const response = await apiCall(ALL_SEASON.find, REQUEST_TYPE.POST, obj);
-			// //console.log(response.response.data.data)
+			console.log(response)
 			setSeason(response.response.data.data)
 
 		} catch (error) {
@@ -137,7 +137,7 @@ const [gcCum2, setGcCum2]=useState([])
 
 	const handleClickSeason = (seasonId) => {
 
-		// //console.log(seasonId);
+		console.log(seasonId);
 		setSeasonId(seasonId)
 		//setCurrentLeagueId(seasonId)
 	}
@@ -269,7 +269,7 @@ const [gcCum2, setGcCum2]=useState([])
 		const data1 = []
 		try {
 			const response = await apiCall(GAINING_RATE.gainrate, REQUEST_TYPE.POST, obj)
-			console.log(response.response.data.data?.teamDatas);
+			console.log(response);
 			response.response.data.data?.teamDatas.map((item) => {
 				console.log(item);
 				item?.en.map((data) => {
@@ -520,7 +520,7 @@ const teamSecgc2 = async () => {
 	const data1 = []
 	try {
 		const response = await apiCall(TEAM_SEA_GC.find, REQUEST_TYPE.POST, obj)
-		console.log(response.response.data.data?.teamDatas);
+		console.log(response);
 		response.response.data.data?.teamDatas.map((item) => {
 			console.log(item);
 			item?.en.map((data) => {

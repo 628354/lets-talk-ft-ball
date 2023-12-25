@@ -135,6 +135,15 @@ export const SESSIOND = {
       find: `${SERVER_LINK}sendcontactusToadmin`,
       
       };
+      export const ABOUT_US = {
+        find: `${SERVER_LINK}getaboutus`,
+        
+        };
+        export const DEFINATION = {
+          find: `${SERVER_LINK}getAllDefinition`,
+          
+          };
+
 
   
   export const BASE_URL = "http://localhost:5000/uploads/";

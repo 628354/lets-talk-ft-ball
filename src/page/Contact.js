@@ -6,46 +6,61 @@ import { apiCall } from '../helper/RequestHandler';
 import {CONTACT_FORM, REQUEST_TYPE}  from "../helper/APIInfo";
 export default function Contact() {
 
-const [formData , setFormData]=useState([]  );
 
 
-const handleChange =(e)=>{
-  const {name,value}=e.target;
-  setFormData((prev)=>({
+const [formData, setFormData] = useState({
+  "name": "",
+  "email": "",
+  "subject": "",
+  "message": ""
+});
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFormData((prev) => ({
     ...prev,
-    [name]:value
-  }))
+    [name]: value
+  }));
+};
 
-}
 console.log(formData);
-const getFormData = async(e) =>{
+
+const getFormData = async (e) => {
   e.preventDefault();
-  const obj ={
-    headers:{
-      "Content-Type":"application/json"
+  const obj = {
+    headers: {
+      "Content-Type": "application/json",
     },
-    body:JSON.stringify(formData) 
+    body: JSON.stringify(formData)
+  };
+
+  try {
+    const response = await apiCall(CONTACT_FORM.find, REQUEST_TYPE.POST, obj);
+    console.log(response);
+
+    if (response.status === 200 && response.hasError === false) {
+      console.log("Data successfully sent to the server");
+
+      // Reset the form data
+      setFormData({
+        "name": "",
+        "email": "",
+        "subject": "",
+        "message": ""
+      });
+    }
+
+  } catch (error) {
+    console.error("Error while sending data:", error);
   }
-
-  const response = await apiCall(CONTACT_FORM.find,REQUEST_TYPE.POST,obj)
-  console.log(response)
-  if (response.status === 200 && response.hasError === false) {
-    console.log("Data successfully sent to the server");
-
-   
-  }
-
-  
-
-}
-
-  
+};
   return (
     <div>
       <section className='en_hero_about en_hero_about'>
           <Container>
             <div className='row'>
                 <div className='col-lg-12 col-md-12 col-sm-12'>
+
 
                 </div>
             </div>

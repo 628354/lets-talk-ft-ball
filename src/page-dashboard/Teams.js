@@ -16,7 +16,7 @@ export default function Teams() {
   useEffect(() => {
 
     axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/en/findAll')
-      // axios.get(' http://localhost:5000/getTeams')
+     // axios.get(' http://localhost:5000/getTeams')
       .then((response) => {
         console.log(response.data.data);
         // response.data.data.map((item) => {

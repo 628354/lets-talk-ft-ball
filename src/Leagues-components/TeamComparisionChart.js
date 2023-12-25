@@ -88,7 +88,7 @@ export default function TeamComparisionChart({gcCum2}) {
 	  
 	  },[gcCum2])
    
-  console.log(gcCum2);
+  //console.log(gcCum2);
     return (
         <div>
             <div className='team-main-table chartteamcom'>
