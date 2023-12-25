@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { apiCall } from '../helper/RequestHandler';
 
-
+import {ABOUT_US, REQUEST_TYPE} from '../helper/APIInfo';
 export default function About() {
+
+  const [about,setAbout]=useState([]);
+
+  const getAboutData= async()=>{
+    const res = await apiCall(ABOUT_US.find, REQUEST_TYPE.GET);
+    console.log(res.response.data?.body);
+    res.response.data?.body.map((item)=>{
+      console.log(item);
+    })
+setAbout(res.response.data?.body);
+  }
+
+  useEffect(()=>{
+getAboutData()
+  },[])
+
+
+
+
   return (
 
     <div>
@@ -41,21 +61,21 @@ export default function About() {
             <div className='leagues_cont'>
               <h2>About Us</h2>
               <div className='leagues_slider'>
-                <div className='row'>
-                  <div className='col-lg-6 col-md-6 col-sm-12 en_left_border m-auto'>
-                    <div className='en_about_contant'>
-                      <h5>We are a small team that is passionate about football. We have had many discussions about our 
-                        favorite teams performance but did not have access to solid and easy to use performance data trends.
-                         We have decided to do something about it and that resulted in Lets Talk ft Ball web site</h5>
+            
+                {about.map((item, index) => (
+                    <div className={`row mb-5 ${index  % 2 === 0 ? 'en_left_border' : 'en_right_border'} `} key={index} id={item._id}>
+                      <div className="col-lg-6 col-md-6 col-sm-12">
+                        <div className={`${index  % 2 === 0 ? 'en_about_contant' : 'en_about_contant_right'} `}>
+                          <h5>{item.aboutText}</h5>
+                        </div>
+                      </div>
+                      <div className="col-lg-6 col-md-6 col-sm-12">
+                        <div className='en_about_img'>
+                          <img src={require('../img/about-img.jpg')} alt="earth" className="about" />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className='col-lg-6 col-md-6 col-sm-12 en_right_border'>
-                    <div className='en_about_img'>
-                    <img src={require('../img/about-img.jpg')} alt="earth" className="about"/>
-                    </div>
-                  </div>
-                </div>
-               
+                  ))}
 
               </div>
             </div>
@@ -64,7 +84,7 @@ export default function About() {
       </Container>
      </section>
 
-     <section className='en_Our_section'>
+     {/* <section className='en_Our_section'>
      <Container>
      <div className='row'>
       <div className='col-lg-5 col-md-12 col-sm-12'>
@@ -89,7 +109,7 @@ export default function About() {
      </div>
      </Container>
 
-     </section>
+     </section> */}
 
     </div>
 

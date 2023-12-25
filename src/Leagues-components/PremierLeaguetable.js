@@ -65,7 +65,7 @@ const lang = "en"
 			const data1 = []
 			const apiUrl = `${baseUrl}/${leagueId}`;
 			const response = await apiCall(apiUrl, REQUEST_TYPE.POST, params);
-			//console.log(response.response.data.data[3]?.en)
+			console.log(response)
 			// response.response.data?.data.map((item)=>{
 			// 	console.log(item[lang]);
 			// 	item[lang].map((items)=>{
@@ -78,7 +78,7 @@ const lang = "en"
 			// 	console.log(items)
 			// })
 			try{
-				setLeagueDetails(response.response.data.data[3]?.en);
+				setLeagueDetails(response.response.data?.data[3]?.en);
 
 			}catch(error){
 				console.log("data not found ",error);
@@ -182,7 +182,7 @@ sessionStorage.setItem("teamId",teamId)
 							</td>
 						</tr>
 						{leagueDetails && leagueDetails.map((data, index) => {
-							console.log(data.teamname._id);	
+							console.log(data);	
 							//const tableDAta = data.en[0];
 							return (
 								<tr className="table-create" key={data._id}>
@@ -211,9 +211,9 @@ sessionStorage.setItem("teamId",teamId)
 									<td>{data.goals_scored}</td>
 									<td>{data.goals_conceded}</td>
 									<td>{data.points}</td>
-									<td>{Math.floor(data.point_gap)}</td>
-									<td>{Math.floor(data.gs_gc)}</td>
-									<td>{(data.win_precent * 100).toFixed(2)}%</td>
+									<td>{data.point_gap}</td>
+									<td>{data.gs_gc}</td>
+									<td>{data.win_precent}%</td>
 
 								</tr>
 							);

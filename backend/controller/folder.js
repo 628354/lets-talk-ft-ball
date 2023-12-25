@@ -62,6 +62,18 @@ module.exports = {
 
         }
     },
+    folderGet: async (req, res) => {
+        try {
+            const folders = await folder.find().sort({ createdAt: -1 })
+            res.status(200).send({
+                body: folders,
+                message: 'Get All Folder Sucessfully',
+                success: true
+            })
+        } catch (error) {
+            console.log(error.message)
+        }
+    },
     folderDelete: async (req, res) => {
         try {
             const folders = await folder.findByIdAndDelete({ _id: req.params.id })

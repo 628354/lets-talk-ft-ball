@@ -14,7 +14,7 @@ export default function CahrtGsGc({ leagueId}) {
 	const [seasonId, setSeasonId] = useState();
 	// console.log(leagueId);
 	// console.log(seasonId);
-
+	const sId = sessionStorage.getItem("runningSeason")
 
 	const getYears= async ()=>{
 		try{
@@ -39,7 +39,7 @@ export default function CahrtGsGc({ leagueId}) {
 
 		let data = {
 			leagueId:  leagueId ,
-			season:  seasonId ,
+			season:  sId ,
 		};
 
 		const lang= "en";
@@ -65,7 +65,7 @@ export default function CahrtGsGc({ leagueId}) {
 	console.log(gsGc);
 	useEffect(() => {
 		getGsGc();
-	}, [leagueId,seasonId]);
+	}, [leagueId,sId]);
 
 	useEffect(() => {
 		var root1 = am5.Root.new("chartdiv2");

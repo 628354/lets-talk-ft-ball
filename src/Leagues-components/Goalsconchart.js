@@ -16,6 +16,7 @@ export default function Goalsconchart({ leagueId }) {
 	// console.log(leagueId);
 	// console.log(seasonId);
 	//get season 
+	const sId = sessionStorage.getItem("runningSeason")
 	const getYears = async () => {
 		try {
 			const response = await apiCall(SESSION.year, REQUEST_TYPE.GET);
@@ -36,7 +37,7 @@ export default function Goalsconchart({ leagueId }) {
 		try {
 			let data = {
 				leagueId: leagueId,
-				season: seasonId,
+				season: sId,
 			};
 			const lang = "en";
 			const data1 = []
@@ -62,7 +63,7 @@ export default function Goalsconchart({ leagueId }) {
 	////console.log(goalCons);
 	useEffect(() => {
 		getGoalCons();
-	}, [leagueId, seasonId]);
+	}, [leagueId, sId]);
 
 
 	useEffect(() => {

@@ -12,12 +12,15 @@ import { REQUEST_TYPE, GS, SESSION,BASE_URL } from "../helper/APIInfo";
 export default function Premierchart({ leagueId }) {
     const [goalScore, setGoalScore] = useState([]);
     const [seasonId, setSeasonId] = useState();
-    //console.log(currentLeagueId);
+   console.log(goalScore);
     //console.log(seasonId);
     //get season
+
+    const sId = sessionStorage.getItem("runningSeason")
     const getYears = async () => {
         try {
             const response = await apiCall(SESSION.year, REQUEST_TYPE.GET);
+            console.log(response);
             setSeasonId(response.response.data.seasonyears[0]._id);
         } catch (error) {
             console.log("data not found", error);
@@ -29,21 +32,21 @@ export default function Premierchart({ leagueId }) {
     }, [seasonId])
 
 
-
+    console.log(sId);
     const getGoalScore = async () => {
 
         try {
             // console.log(leagueId);
-            // console.log(seasonId);
+            
 
             let data = {
                 leagueId: leagueId,
-                season: seasonId,
+                season: sId,
             };
             const lang = "en";
             const data1 = []
             const result = await apiCall(GS.find, REQUEST_TYPE.POST, data);
-        //  console.log(result);
+           console.log(result);
             if (result.status === 200) {
                 result.response.data.data?.map((item, index) => {
                     return item[lang].map((results) => {
@@ -75,11 +78,13 @@ export default function Premierchart({ leagueId }) {
 
     useEffect(() => {
         getGoalScore();
-    }, [leagueId, seasonId]);
+    }, [sId]);
+
 console.log();
-    useEffect(() => {
-        getGoalScore();
-    }, [leagueId, seasonId]);
+    // useEffect(() => {
+    //     getGoalScore();
+    // }, [leagueId, sId]);
+
     useEffect(() => {
         var root = am5.Root.new("chartdiv");
         root.setThemes([
@@ -144,6 +149,7 @@ console.log();
             root.dispose();
         };
     }, [goalScore]);
+
     //  console.log(goalScore);
     return (
         <div className="graphB chart-border-toll">
