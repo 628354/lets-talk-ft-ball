@@ -39,7 +39,7 @@ import BotolaPro from "./Leagues-page/BotolaPro";
 import BrazilSerieA from "./Leagues-page/BrazilSerieA";
 import Season from "./page-dashboard/Season";
 import Menubar from "./dashboard/Menubar";
-import Dashboard from "./dashboard/Menubar";
+// import Dashboard from "./dashboard/Menubar";
 import Addseason from "./page-dashboard/Addseason";
 import LeaguesBluk from "./page-dashboard/LeaguesBluk";
 import Editseason from "./page-dashboard/Editseason";
@@ -63,7 +63,7 @@ import ImportBulk from "./page-dashboard/LeaguesBluk";
 import TeamImportBulk from "./page-dashboard/TeamBluk";
 import Catlogs from "./page-dashboard/catLogs";
 import Teams from "./page-dashboard/Teams";
-import DashboardPage from "./page-dashboard/DashboardPage";
+import Dashboard from "./page-dashboard/Dashboard";
 import Addteams from "./page-dashboard/Addteams"
 import EditTeams from "./page-dashboard/EditTeams"
 import { Media } from "reactstrap";
@@ -108,7 +108,7 @@ function App() {
 		"/EditLeagues",
 		"/Addleagues",
 		"/Addseason",
-		"/dashboard",
+		"/Dashboard",
 		"/uploadMedia",
 		"/User",
 		"/addUser",

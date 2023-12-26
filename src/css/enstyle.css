@@ -1272,130 +1272,16 @@ table.team-aline_table thead tr th {
     border: 1px solid #ebebeb;
 }
 
-/* 22/12/23 */
-
-.dropdown_filter .dropbtn span {
-    font-size: 15px;
+.en_right_border {
+    display: flex;
+    flex-direction: row-reverse;
 }
 
-td.clsexceldata {
-    font-size: 14px;
+.en_right_border h5 {
+    line-height: 37px;
+    width: 545px;
+    border-right: 4px solid var(--border-color);
+    padding-right: 22px;
+    font-weight: 400;
+    margin-left: 10px;
 }
-
-tr.table-create td {
-    font-size: 14px;
-}
-
-
-.main-charts {
-    padding: 20px 15px 20px 40px;
-}
-tbody.team_poin-table tr td {
-    vertical-align: middle;
-}
-
-.ifm iframe {
-    width: 100%;
-}
-
-
-.media-ponite-part {
-    background: #dde4eb;
-}
-.npmless li a {
-    color: #222222;
-}
-.folder-main i {
-    color: #68b4f1;
-}
-.left-pad {
-    padding-left: 20px;
-}
-.media-section {
-    padding: 60px 0;
-}
-.up-date-file {
-    background: #dde4eb4f;
-    height: 100%;
-    padding: 20px 30px;
-}
-/* upload img */
-.made-by{
-    text-align: center;
-    padding-top: 50px;
-    color: #896746;
-  }
-  .file-wrapper {
-    width: 100px;
-    height: 100px;
-    border: 1px solid gray;
-    position: relative;
-    /* margin: auto; */
-    margin-top: 15px 
-}
-  .file-wrapper:after{
-    content: '+';
-    position: absolute;
-    top: 0; bottom: 0; left: 0; right: 0;margin: auto;
-    width: max-content; height: max-content; display: block;
-    max-height: 85px;
-    font-size: 20px;
-    font-weight: bolder;
-    color: gray;
-  }
-  .file-wrapper:before {
-    /* content: 'UPLOAD IMAGE'; */
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    bottom: 20px;
-    width: max-content;
-    height: max-content;
-    color: gray;
-    font-size: 11px;
-}
-  .file-wrapper:hover:after{font-size: 73px;}
-  .file-wrapper .close-btn{display: none;}
-  input[type="file"]{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    z-index: 99999;
-    cursor: pointer;
-  }
-  .file-set{
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: transparent;
-    padding: 10px;
-    border-width: 0px;
-  }
-  /* .file-set:hover{
-    transition: all 0.5s ease-out;
-    filter:brightness(110%);
-  } */
-  .file-set:before{color: transparent;}
-  .file-set:after{color: transparent;}
-  .file-set .close-btn{
-    position: absolute;
-    width: 35px;
-    height: 35px;
-    display: block;
-    background: #000;
-    color: #fff;
-    top: 0; right: 0;
-    font-size: 25px;
-    text-align: center;
-    line-height: 1.5;
-    cursor: pointer;
-    opacity: 0.8;
-  }
-  .file-set > input{pointer-events: none;}
-  img.up-date-img {
-    width: 100%;
-}
-/* upload img */
-/* 23-12-2023 */
