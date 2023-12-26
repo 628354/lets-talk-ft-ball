@@ -2,10 +2,11 @@ import React from "react";
 import "../css/Dashboard.css";
 import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Login from "../page/Login";
 import axios from 'axios';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 ///here we get data and store in variable 
 //  const chandn = "https://jsonplaceholder.typicode.com/posts";
@@ -14,7 +15,7 @@ import axios from 'axios';
 
 
 export default function Menubar() {
-
+const  navigate =useNavigate();
   // const [post, setPost] = React.useState([]);
   // React.useEffect(() => {
   //   axios.get(chandn).then((response) => {
@@ -28,6 +29,11 @@ export default function Menubar() {
     setShowDropdown(!showDropdown);
   };
 
+  const handleLogout =()=>{
+    console.log("Logging out...");
+    localStorage.removeItem("token")
+    navigate("/login")
+  }
 
   return (
     <div>
@@ -40,10 +46,35 @@ export default function Menubar() {
               </div>
             </div>
             <div className="col-lg-6 col-md-6 col-6">
+              <div className="profile-drop">
+              <div className="profile-dev">
+              <Dropdown>
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  <span className="image-success"><img
+								src={require("../img/profile-45x45.png")}
+								alt="earth"
+								className="logo-profile"
+							/></span>  nardsub nardsub 
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1"> <span className="image-success-user"><img
+								src={require("../img/profile-45x45.png")}
+								alt="earth"
+								className="logo-profile-user"
+							/></span>  Your Profile</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Stores</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Lets Talk ft Ball</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+
+
               <div className="navmenu_login">
-                <Link to="/Login">
+                <Link to="/login" onClick={handleLogout}>
                   <i class="ri-login-box-line"></i> Logout
                 </Link>
+              </div>
               </div>
             </div>
           </Row>
@@ -59,7 +90,7 @@ export default function Menubar() {
                   id="menu"
                 >
                   <li className="nav-item">
-                    <Link to="/DashboardPage" className="nav-link align-middle px-0">
+                    <Link to="/Dashboard" className="nav-link align-middle px-0">
                       <i class="ri-dashboard-line"></i>{" "}
                       <span className="ms-1 d-none d-sm-inline">Dashboard</span>
                     </Link>

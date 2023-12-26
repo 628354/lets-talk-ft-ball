@@ -7,7 +7,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import { LEAGUES, REQUEST_TYPE, SESSION } from '../helper/APIInfo';
+import { CREATE_TEAM, LEAGUES, REQUEST_TYPE, SESSION } from '../helper/APIInfo';
 import { apiCall } from '../helper/RequestHandler';
 
 
@@ -53,7 +53,8 @@ export default function Addteams() {
       clearMessages();
     } else {
       try {
-        const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/ createTeam', formData);
+        const response = await apiCall(CREATE_TEAM.team,REQUEST_TYPE.POST, formData);
+        console.log(response);
         setSuccessMessage(response.data.message);
         clearMessages();
       } catch (error) {

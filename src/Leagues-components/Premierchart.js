@@ -78,7 +78,7 @@ export default function Premierchart({ leagueId }) {
 
     useEffect(() => {
         getGoalScore();
-    }, [sId]);
+    }, [leagueId,sId]);
 
 console.log();
     // useEffect(() => {

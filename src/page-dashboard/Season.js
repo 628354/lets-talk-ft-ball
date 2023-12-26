@@ -5,19 +5,23 @@ import { Link } from 'react-router-dom';
 import Menubar from '../dashboard/Menubar';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
-
+import { apiCall } from '../helper/RequestHandler';
+import { REQUEST_TYPE,REMOVE_SEASON,SESSIOND,SESSION } from '../helper/APIInfo';
 export default function Season() {
   const [aboutData, setAboutData] = useState([]);
   const [itemId, setItemId] = useState(0);
 
+
+
   useEffect(() => {
 
-    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getyears')
-     //  axios.get('  http://localhost:5000/getyears')
+   apiCall(SESSIOND.year,REQUEST_TYPE.GET)
+     //  axios.get('http://localhost:5000/getyears')
       .then((response) => {
-        const aboutInfo = response.data?.seasonyears
+        console.log(response.response.data?.seasonyears);
+        const aboutInfo = response.response.data?.seasonyears
         setAboutData(aboutInfo);
-        setItemId(aboutInfo._id);
+        setItemId(aboutInfo?._id);
 
 
       })
@@ -26,16 +30,20 @@ export default function Season() {
       });
   }, []);
 
-  const handleDelete = (id) => {
-    axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeyear/${id}`)
-    // axios.delete(`http://localhost:5000/removeyear/${id}`)
-
+const handleDelete = (id) => {
+    const shouldDelete = window.confirm("Are you sure you want to delete this season?");
+  if(shouldDelete){
+    // apiCall(`${REMOVE_SEASON}/${id}`)
+    axios.delete(`${REMOVE_SEASON.remove}/${id}`)
       .then((response) => {
         setAboutData(aboutData.filter(season => season._id !== id));
       })
       .catch((error) => {
         console.error('Error deleting data:', error);
       });
+
+  }
+   
   };
   return (
     <div>
@@ -103,7 +111,7 @@ export default function Season() {
                     </tr>
                   </thead>
                   <tbody className='table-list-one'>
-                    {aboutData.map((season) => (
+                    {aboutData?.map((season) => (
                       <tr key={season._id}>
                         <td><Form.Check aria-label="option 1" /></td>
                         <td>{season.season_Title}</td>
@@ -131,7 +139,7 @@ export default function Season() {
                 </Table>
                 <div className='table-footer-f'>
                   <div className='table-footer-s'>
-                    <p>Showing 1 to {aboutData.length} of {aboutData.length} (1 Pages)</p>
+                    <p>Showing 1 to {aboutData?.length} of {aboutData?.length} (1 Pages)</p>
                   </div>
                 </div>
               </div>

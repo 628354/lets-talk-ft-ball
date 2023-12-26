@@ -49,8 +49,6 @@ export default function Addleagues() {
   const handleSave = async () => {
     try {
       const response =  await apiCall(ADD_LEAGUES.league,REQUEST_TYPE.POST,formData)
-     // const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/addleague', formData);
-     // const response = await axios.post('http://localhost:5000/addleague', formData);
       console.log(response);
     } catch (error) {
       console.error(error);

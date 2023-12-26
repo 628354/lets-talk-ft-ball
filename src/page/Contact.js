@@ -27,27 +27,15 @@ console.log(formData);
 
 const getFormData = async (e) => {
   e.preventDefault();
-  const obj = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData)
-  };
-
   try {
-    const response = await apiCall(CONTACT_FORM.find, REQUEST_TYPE.POST, obj);
+    const response = await apiCall(CONTACT_FORM.find, REQUEST_TYPE.POST, formData);
     console.log(response);
 
     if (response.status === 200 && response.hasError === false) {
       console.log("Data successfully sent to the server");
 
       // Reset the form data
-      setFormData({
-        "name": "",
-        "email": "",
-        "subject": "",
-        "message": ""
-      });
+     
     }
 
   } catch (error) {

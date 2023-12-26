@@ -39,7 +39,7 @@ import BotolaPro from "./Leagues-page/BotolaPro";
 import BrazilSerieA from "./Leagues-page/BrazilSerieA";
 import Season from "./page-dashboard/Season";
 import Menubar from "./dashboard/Menubar";
-import Dashboard from "./dashboard/Menubar";
+// import Dashboard from "./dashboard/Menubar";
 import Addseason from "./page-dashboard/Addseason";
 import LeaguesBluk from "./page-dashboard/LeaguesBluk";
 import Editseason from "./page-dashboard/Editseason";
@@ -63,7 +63,7 @@ import ImportBulk from "./page-dashboard/LeaguesBluk";
 import TeamImportBulk from "./page-dashboard/TeamBluk";
 import Catlogs from "./page-dashboard/catLogs";
 import Teams from "./page-dashboard/Teams";
-import DashboardPage from "./page-dashboard/DashboardPage";
+import Dashboard from "./page-dashboard/Dashboard";
 import Addteams from "./page-dashboard/Addteams"
 import EditTeams from "./page-dashboard/EditTeams"
 import { Media } from "reactstrap";
@@ -72,7 +72,7 @@ import User from "./page-dashboard/User";
 import Adduser from "./page-dashboard/Adduser";
 import EditUser from "./page-dashboard/EditUser";
 import { LeagueProvider } from "./Leagues-components/LeagueContext";
-
+import ProtectedRoute from "./page/ProtectedRoute";
 function App() {
 	// const navigate = useNavigate();
 	const location = useLocation();
@@ -83,7 +83,7 @@ function App() {
 	// };
 	// Array of routes where the Header should not be displayed
 	const noHeaderRoutes = [
-		"/Login",
+		"/login",
 		"/Dashboard",
 		"/Signup",
 		"/Forgot",
@@ -108,7 +108,7 @@ function App() {
 		"/EditLeagues",
 		"/Addleagues",
 		"/Addseason",
-		"/dashboard",
+		"/Dashboard",
 		"/uploadMedia",
 		"/User",
 		"/addUser",
@@ -166,12 +166,12 @@ function App() {
 			{shouldDisplayHeader && HeaderComponent && <HeaderComponent />}
 <LeagueProvider>
 			<Routes>
-				<Route path="/Login" element={<Login />} />
+				{/* <Route path="/Login" element={<Login />} /> */}
 				<Route path="/" element={HomeComponent && <HomeComponent />}></Route>
 				<Route
 					path="/About"
 					element={AboutComponent && <AboutComponent />}></Route>
-				<Route path="/Leagues" element={<Leagues />}></Route>
+				<Route path="/Leagues" element={<ProtectedRoute><Leagues /></ProtectedRoute>}></Route>
 				<Route
 					path="/Cafe"
 					element={CafeComponent && <CafeComponent />}></Route>
@@ -184,70 +184,70 @@ function App() {
 				<Route path="/Signup" element={<Signup />}></Route>
 				<Route path="/Forgot" element={<Forgot />}></Route>
 				<Route path="/blog" element={<Blog />}></Route>
-				<Route path="/Chart" element={<Chart />}></Route>
-				<Route path="/headers" element={<Header />}></Route>
+				{/* <Route path="/Chart" element={<Chart />}></Route> */}
 
+				<Route path="/headers" element={<Header />}></Route>
 				<Route path="/league" element={<PremierLeague />}></Route>
+{/* 
+				
 
 				<Route path="/Laliga" element={<Laliga />}></Route>
 				<Route path="/SerieA" element={<SerieA />}></Route>
 				<Route path="/Bundesliga" element={<Bundesliga />}></Route>
 				<Route path="/Ligue1" element={<Ligue1 />}></Route>
-				<Route
-					path="/NetherlandEredivisie"
-					element={<NetherlandEredivisie />}></Route>
+				<Route path="/NetherlandEredivisie"element={<NetherlandEredivisie />}></Route>
 				<Route path="/LigaPortugal" element={<LigaPortugal />}></Route>
 				<Route path="/SaudiPro" element={<SaudiPro />}></Route>
 				<Route path="/EgyptPL" element={<EgyptPL />}></Route>
 				<Route path="/BotolaPro" element={<BotolaPro />}></Route>
-				<Route path="/BrazilSerieA" element={<BrazilSerieA />}></Route>
-				<Route path="/Dashboard" element={<Dashboard />}></Route>
-				<Route path="/Season" element={<Season />}></Route>
-				<Route path="/Menubar" element={<Menubar />}></Route>
-				<Route path="/Addseason" element={<Addseason />}></Route>
+				<Route path="/BrazilSerieA" element={<BrazilSerieA />}></Route> */}
+				<Route path="/Dashboard" element={<ProtectedRoute> <Dashboard /></ProtectedRoute>}></Route>
+				<Route path="/Season" element={<ProtectedRoute><Season /></ProtectedRoute>}></Route>
+				{/* <Route path="/Menubar" element={<Menubar />}></Route> */}
+				<Route path="/Addseason" element={<ProtectedRoute><Addseason /></ProtectedRoute>}></Route>
 
 				{/* <Route path="/Editseason" element={<Editseason />}></Route> */}
-				<Route path="/Editseason/:id" element={<Editseason />}></Route>
+				<Route path="/Editseason/:id" element={<ProtectedRoute><Editseason /></ProtectedRoute>}></Route>
 				<Route path="/Leagues" element={<Leagues />}></Route>
-				<Route path="/Addleagues" element={<Addleagues />}></Route>
+				<Route path="/Addleagues" element={<ProtectedRoute><Addleagues /></ProtectedRoute>}></Route>
 
-				<Route path="/Bulk-Leagues" element={<ImportBulk />}>
+				<Route path="/Bulk-Leagues" element={<ProtectedRoute><ImportBulk /></ProtectedRoute>}>
 					{" "}
 				</Route>
-				<Route path="/Bulk-teams" element={<TeamImportBulk />}>
+				<Route path="/Bulk-teams" element={<ProtectedRoute><TeamImportBulk /></ProtectedRoute>}>
 					{" "}
 				</Route>
-				<Route path="/cat-logs" element={<Catlogs />}>
+				<Route path="/cat-logs" element={<ProtectedRoute><Catlogs /></ProtectedRoute>}>
 					{" "}
 				</Route>
 
 				{/* <Route path="/Editleagues" element={<Editleagues />}></Route> */}
-				<Route path="/Editleagues/:id" element={<Editleagues />}></Route>
-				<Route path="/Edithome" element={<Edithome />}></Route>
-				<Route path="/Editabout" element={<Editabout />}></Route>
+				<Route path="/Editleagues/:id" element={<ProtectedRoute><Editleagues /></ProtectedRoute>}></Route>
+				<Route path="/Edithome" element={<ProtectedRoute><Edithome /></ProtectedRoute>}></Route>
+				<Route path="/Editabout" element={<ProtectedRoute><Editabout /></ProtectedRoute>}></Route>
 				<Route path="/Privacypolicy" element={<Privacypolicy />}></Route>
 				<Route
 					path="/Editprivacypolicy"
 					element={<Editprivacypolicy />}></Route>
-				<Route path="/Editdefinition" element={<Editdefinition />}></Route>
-				<Route path="/Editcontact" element={<Editcontact />}></Route>
-				<Route path="/Addcafe" element={<Addcafe />}></Route>
+				<Route path="/Editdefinition" element={<ProtectedRoute><Editdefinition /></ProtectedRoute>}></Route>
+				<Route path="/Editcontact" element={<ProtectedRoute><Editcontact /></ProtectedRoute>}></Route>
+				<Route path="/Addcafe" element={<ProtectedRoute><Addcafe /></ProtectedRoute>}></Route>
 
-				<Route path="/Cafeview" element={<Cafeview />}></Route>
-				<Route path="/Dataapi" element={<Dataapi />}></Route>
-				<Route path="/Premierchart" element={<Premierchart />}></Route>
+				<Route path="/Cafeview" element={<ProtectedRoute><Cafeview /></ProtectedRoute>}></Route>
+				{/* <Route path="/Dataapi" element={<Dataapi />}></Route> */}
+				{/* <Route path="/Premierchart" element={<Premierchart />}></Route> */}
 				<Route path="/Teamdetailsl" element={<Teamdetailsl />}></Route>
-				<Route path="/Login" element={<Login />}></Route>
+				<Route path="/login" element={<Login />}></Route>
 				<Route path="/Teamcomparision" element={<Teamcomparision />}></Route>
-				<Route path="/LeaguesBluk" element={<LeaguesBluk />}></Route>
-				<Route path="/Teams" element={<Teams />}></Route>
-				<Route path="/EditTeams/:id" element={<EditTeams />}></Route>
-				<Route path="/Addteams" element={<Addteams />}></Route>
-				<Route path="/DashboardPage" element={<DashboardPage />}></Route>
-				<Route path="/uploadMedia" element={<UploadMedia />}></Route>
-				<Route path="/User" element={<User />}></Route>
-				<Route path="/addUser" element={<Adduser />}></Route>
-				<Route path="/edituser/:id" element={<EditUser />}></Route>
+				<Route path="/LeaguesBluk" element={<ProtectedRoute><LeaguesBluk /></ProtectedRoute>}></Route>
+				<Route path="/Teams" element={<ProtectedRoute><Teams /></ProtectedRoute>}></Route>
+				<Route path="/EditTeams/:id" element={<ProtectedRoute><EditTeams /></ProtectedRoute>}></Route>
+				<Route path="/Addteams" element={<ProtectedRoute><Addteams /></ProtectedRoute>}></Route>
+				{/* <Route path="/DashboardPage" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>}></Route> */}
+				<Route path="/uploadMedia" element={<ProtectedRoute><UploadMedia /></ProtectedRoute>}></Route>
+				<Route path="/User" element={<ProtectedRoute><User /></ProtectedRoute>}></Route>
+				<Route path="/addUser" element={<ProtectedRoute><Adduser /></ProtectedRoute>}></Route>
+				<Route path="/edituser/:id" element={<ProtectedRoute><EditUser /></ProtectedRoute>}></Route>
 
 			</Routes>
 			</LeagueProvider>
