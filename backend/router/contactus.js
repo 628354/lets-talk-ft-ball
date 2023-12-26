@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const {authentication} = require('../middleware/auth')
-const contactusController = require("../controller/contactus");
+const contactus = require('../controller/contactus')
 
-router.post("/sendcontactusToadmin", contactusController.sendContactus);
+router.post("/sendcontactusToadmin", contactus.sendContactus);
 
 module.exports = router;
