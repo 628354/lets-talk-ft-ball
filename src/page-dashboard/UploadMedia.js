@@ -307,8 +307,8 @@ const [flag, setFlag]=useState(false)
                         <Row>
                         <div className="col-lg-2 col-md-2 col-sm-6">
                          <div className='main-media-folder'>
-                         <div class="file-wrapper">
-                          <input type="file" name="upload-img" accept="image/*" />
+                         <div class="file-main-wrapper">
+                          <input className="file-media-poniter" type="file" name="upload-img" accept="image/*" />
                           <div class="close-btn">×</div>
                         </div>
                       </div>
