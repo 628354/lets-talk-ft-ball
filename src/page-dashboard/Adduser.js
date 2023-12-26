@@ -9,10 +9,12 @@ import Form from "react-bootstrap/Form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
-
+import { ADD_USER, REQUEST_TYPE } from "../helper/APIInfo";
+import { apiCall } from "../helper/RequestHandler";
 export default function Adduser() {
     const [imagePreview, setImagePreview] = useState(null);
-
+    const [successMessage, setSuccessMessage] = useState(''); // State to hold success message
+    const [errorMessage, setErrorMessage] = useState('')
 
     const [formData, setFormData] = useState({
         email: "",
@@ -47,12 +49,31 @@ export default function Adduser() {
     const handleSave = async () => {
         try {
             console.log("Sending request with formData:", formData);
-            const response = await axios.post("https://phpstack-1140615-3967632.cloudwaysapps.com/backend/AddUser", formData);
+            const response = await apiCall(ADD_USER.add, REQUEST_TYPE.POST, formData);
             console.log("Response from server:", response);
 
+            const responseData = response.response.data;
+
+
+            if (responseData.success === true) {
+                setSuccessMessage(response.response.data)
+            } else {
+                setErrorMessage(response.response.response.data.error)
+            }
+
+            clearMessages();
         } catch (error) {
-            console.error(error);
+            console.error("error", error);
+
+
         }
+    };
+
+    const clearMessages = () => {
+        setTimeout(() => {
+            setSuccessMessage('');
+            setErrorMessage('');
+        }, 3000); // Clear messages after 3 seconds
     };
     const formats = [
         "header",
@@ -91,7 +112,7 @@ export default function Adduser() {
             ["link", "image", "video"],
         ],
     };
-
+    console.log(errorMessage);
     return (
         <div>
             <Menubar />
@@ -133,6 +154,12 @@ export default function Adduser() {
                                             </Link>
                                         </li>
                                     </ul>
+                                    {successMessage && (
+                                        <div className="alert alert-success">{successMessage?.message}</div>
+                                    )}
+                                    {errorMessage && (
+                                        <div className="alert alert-danger">{errorMessage}</div>
+                                    )}
                                 </div>
                             </div>
                         </Row>
@@ -246,6 +273,7 @@ export default function Adduser() {
                                                     </label>
                                                     <div class="col-sm-10">
                                                         <input
+                                                            required
                                                             type="text"
                                                             name="email"
                                                             placeholder="E-Mail"

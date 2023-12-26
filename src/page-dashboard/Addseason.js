@@ -34,7 +34,7 @@ export default function Addseason() {
     try {
       const response= await apiCall(ADD_SEASON.season,REQUEST_TYPE.POST,formData);
      
-     // console.log(response.response);
+      console.log(response.response);
       setSuccessMessage(response.response.data.message);
       clearMessages(); // Clear messages after 3 seconds
 

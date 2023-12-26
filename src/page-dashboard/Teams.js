@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import Menubar from '../dashboard/Menubar';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
-
+import {FIND_ALL, REQUEST_TYPE,REMOVE_TEAM} from '../helper/APIInfo';
+import { apiCall } from '../helper/RequestHandler';
 
 
 export default function Teams() {
@@ -13,32 +14,72 @@ export default function Teams() {
   const [itemId, setItemId] = useState(0);
 
 
-  useEffect(() => {
+  const getTeams =async()=>{
+    try{
+      const response =await apiCall(FIND_ALL.find,REQUEST_TYPE.GET);
+      console.log(response);
+      const teamsInfo = response.response.data?.data.teamdetails;
+        setTeamsData(response.response.data.data);
+       // setItemId(teamsInfo._id);
 
-    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/en/findAll')
-     // axios.get(' http://localhost:5000/getTeams')
-      .then((response) => {
-        console.log(response.data.data);
-        // response.data.data.map((item) => {
-        //   console.log(item);
+    }catch(error){
+      console.error('Error fetching data:', error);
+    }
+   
+  }
+ 
+  useEffect(()=>{
+    getTeams()
 
-        // })
-        const teamsInfo = response.data?.teamdetails;
-        setTeamsData(response.data.data);
-        setItemId(teamsInfo._id);
+  },[])
+  // useEffect(() => {
 
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
+  //   axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/en/findAll')
+  //    // axios.get(' http://localhost:5000/getTeams')
+  //     .then((response) => {
+  //       console.log(response.data.data);
+  //       // response.data.data.map((item) => {
+  //       //   console.log(item);
 
+  //       // })
+  //       const teamsInfo = response.data?.teamdetails;
+  //       setTeamsData(response.data.data);
+  //       setItemId(teamsInfo._id);
 
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching data:', error);
+  //     });
+  // }, []);
 
+//   const handleelete = async(id) => {
+//     try{
+//       const token = localStorage.getItem('token');
+//       const response = await apiCall(`${REMOVE_TEAM.remove}/${id}`,REQUEST_TYPE.GET,{
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       })
+//       console.log('Delete response:', response);
+//       setTeamsData(teamsData.filter(team => team._id !== id));
+
+//     }catch(error){
+//       console.log('Error Deleting data', error);
+//     }
+   
+//   };
+// useEffect(()=>{
+//   handleelete()
+// },[])
 
   const handleDelete = (id) => {
-    axios.get(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeteam/${id}`)
-      // axios.delete(`http://localhost:5000/removeteam/${id}`)
+    const token = localStorage.getItem('token');
+   // axios.get(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeteam/${id}`)
+       axios.delete(`${REMOVE_TEAM.remove}/${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         console.log('Delete response:', response.data);
         setTeamsData(teamsData.filter(team => team._id !== id));

@@ -2,7 +2,7 @@ import React from "react";
 import "../css/Dashboard.css";
 import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Login from "../page/Login";
 import axios from 'axios';
@@ -14,7 +14,7 @@ import axios from 'axios';
 
 
 export default function Menubar() {
-
+const  navigate =useNavigate();
   // const [post, setPost] = React.useState([]);
   // React.useEffect(() => {
   //   axios.get(chandn).then((response) => {
@@ -28,6 +28,11 @@ export default function Menubar() {
     setShowDropdown(!showDropdown);
   };
 
+  const handleLogout =()=>{
+    console.log("Logging out...");
+    localStorage.removeItem("token")
+    navigate("/login")
+  }
 
   return (
     <div>
@@ -41,7 +46,7 @@ export default function Menubar() {
             </div>
             <div className="col-lg-6 col-md-6 col-6">
               <div className="navmenu_login">
-                <Link to="/Login">
+                <Link to="/login" onClick={handleLogout}>
                   <i class="ri-login-box-line"></i> Logout
                 </Link>
               </div>

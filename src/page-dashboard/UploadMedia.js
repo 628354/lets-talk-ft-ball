@@ -3,8 +3,9 @@ import Menubar from "../dashboard/Menubar";
 import { Container, Row, Modal, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE } from "../helper/APIInfo";
+import { REQUEST_TYPE,GET_IMAGE } from "../helper/APIInfo";
 import ImagePrevDelete from "./ImagePrevDelete";
+import UploadMediaImg from "./UploadMediaImg";
 
 function UploadMedia(props) {
   const [showModal, setShowModal] = useState(false);
@@ -20,9 +21,7 @@ const [flag, setFlag]=useState(false)
   const handleAddFolder = async () => {
     try {
     
-      const response = await apiCall(
-        "http://localhost:5000/createfolder",
-        REQUEST_TYPE.POST,
+      const response = await apiCall(ADD_IMAGE.image, REQUEST_TYPE.POST,
         {
           folderName: folderName,
         }
@@ -34,7 +33,7 @@ const [flag, setFlag]=useState(false)
       } else {
         setFolders((prevFolders) => [...prevFolders, response.data]);
       }
-
+      fetchFolders();
     
       handleCloseModal();
     } catch (error) {
@@ -46,13 +45,10 @@ const [flag, setFlag]=useState(false)
 
   const fetchFolders = async () => {
     try {
-      const response = await apiCall(
-        "http://localhost:5000/folderGet",
-        REQUEST_TYPE.GET
-      );
+      const response = await apiCall( GET_IMAGE.get,REQUEST_TYPE.GET);
 
-      console.log(response.response.data?.body);
-      setFolders(response.response.data?.body);
+      //console.log(response.response.data?.details)
+      setFolders(response.response.data?.details);
      
     } catch (error) {
       console.error("Error fetching folders:", error);
@@ -67,6 +63,8 @@ const [flag, setFlag]=useState(false)
   
     setSelectedFolder(folder);
   };
+
+
 
   return (
     <div>
@@ -139,160 +137,18 @@ const [flag, setFlag]=useState(false)
                      <div className="px-3 pt-2 styt">
                 
                 <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start npmless" id="menu">
-                    
-                    <li>
-                        <a href="#media1" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                        <span className='cat-icon'><i className="ri-arrow-down-s-fill"></i></span> <span className='folder-main'><i className="ri-folder-fill"></i></span> <span className="ms-1 d-none d-sm-inline less_cat">catalog</span> </a>
-                        <ul className="collapse show nav flex-column ms-1 npmless left-pad" id="media1" data-bs-parent="#menu">
-                            <li className="w-100">
-                            <a href="#media2" data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
-                            <span className='cat-icon'><i class="ri-arrow-down-s-fill"></i></span>
-                            <i className="fs-4 bi-bootstrap"></i>  <span className='folder-main'><i className="ri-folder-fill"></i></span> <span className="ms-1 d-none d-sm-inline less_cat">advertikon</span></a>
-                              <ul className="collapse nav flex-column ms-1" id="media2" data-bs-parent="#menu">
-                                  <li className="w-100">
-                                      <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline less_cat">adk_gdpr</span></a>
-                                  </li>
-                              </ul>
-                            </li>
-                            <li>
-                              <a href="#media3" data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
-                              <span className='cat-icon'><i className="ri-arrow-down-s-fill"></i></span>
-                              <span className='folder-main'><i className="ri-folder-fill"></i></span> <span className="ms-1 d-none d-sm-inline less_cat">Articles</span></a>
-                              <ul className="collapse nav flex-column ms-1" id="media3" data-bs-parent="#menu">
-                               <li className="w-100">
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline less_cat">PL</span></a>
-                              </li>
-                              <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline less_cat">S Pro</span></a>
-                            </li>
-                          </ul>
-                         </li>
-                         <li>
-                           <a href="#" className="nav-link px-0 align-middle">
-                            <i className="fs-4 bi-people"></i> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="ms-1 d-none d-sm-inline less_cat">blog</span> </a>
-                       </li>
-                       <li>
-                           <a href="#" className="nav-link px-0 align-middle">
-                            <i className="fs-4 bi-people"></i> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="ms-1 d-none d-sm-inline less_cat">ckeditor</span> </a>
-                       </li>
-                       <li>
-                           <a href="#" className="nav-link px-0 align-middle">
-                            <i className="fs-4 bi-people"></i> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="ms-1 d-none d-sm-inline less_cat">d_gdpr_module</span> </a>
-                       </li>
-                       <li>
-                           <a href="#" className="nav-link px-0 align-middle">
-                             <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="ms-1 d-none d-sm-inline less_cat">demo</span> </a>
-                       </li>
-                       <li>
-                           <a href="#" className="nav-link px-0 align-middle">
-                           <span className='folder-main'><i className="ri-folder-fill"></i></span> <span class="ms-1 d-none d-sm-inline less_cat">leagues</span> </a>
-                       </li>
-                       <li>
-                        <a href="#media4" data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
-                        <span className='cat-icon'><i className="ri-arrow-down-s-fill"></i></span>
-                        <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="ms-1 d-none d-sm-inline less_cat">log</span></a>
-                        <ul className="collapse nav flex-column ms-1 npmless" id="media4" data-bs-parent="#menu">
-                            <li className="w-100">
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Austria</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Belgum</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Botola</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Boundeslega</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Braz</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Croatia</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Czech</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Denmark</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Egy Pro</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">India</span></a>
-                            </li><li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Iraq</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Israel</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Laliga logos</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Legu 1</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Netherland</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Portugal</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Premier L</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Portugal</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Portugal</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Portugal</span></a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Portugal</span></a>
-                            </li>
-                          
-                        </ul>
-                    </li>
-                       <li>
-                            <a href="#media5" data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
-                            <span className='cat-icon'><i className="ri-arrow-down-s-fill"></i></span>
-                            <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="ms-1 d-none d-sm-inline">ocdevwizard</span></a>
-                          <ul className="collapse nav flex-column ms-1 npmless" id="media5" data-bs-parent="#menu">
-                            <li className="w-100">
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Item</span></a>
-                            </li>
-                          <li>
-                                <a href="#" className="nav-link px-0"> <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="d-none d-sm-inline">Item</span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link px-0 align-middle">
-                        <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="ms-1 d-none d-sm-inline">page</span> </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link px-0 align-middle">
-                             <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="ms-1 d-none d-sm-inline">slider</span> </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link px-0 align-middle">
-                             <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="ms-1 d-none d-sm-inline">team</span> </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link px-0 align-middle">
-                             <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="ms-1 d-none d-sm-inline">thumbnail</span> </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link px-0 align-middle">
-                             <span className='folder-main'><i className="ri-folder-fill"></i></span>  <span className="ms-1 d-none d-sm-inline">WORLDCUP</span> </a>
-                    </li>
-                    
-                        </ul>
-                    </li>
+                    {
+                      folders?.map((item)=>{
+                      //  console.log(item);
+                        return(  <li>
+                          <a href="#media1" data-bs-toggle="collapse" className="nav-link px-0 align-middle"onClick={() => handleFolderClick(item?.folderName)}>
+                          <span className='cat-icon'></span> <span className='folder-main'><i className="ri-folder-fill"></i></span> <span className="ms-1 d-none d-sm-inline less_cat">{item?.folderName}</span> </a>
+                         
+                      </li>)
+
+                      })
+                    }
+                  
                     
                     
                    
@@ -303,68 +159,7 @@ const [flag, setFlag]=useState(false)
                    </div>
                   </div>
                   <div className='col-lg-10 col-sm-10 col-sm-10 ps-0'>
-                   <div className="up-date-file">
-                        <Row>
-                        <div className="col-lg-2 col-md-2 col-sm-6">
-                         <div className='main-media-folder'>
-                         <div class="file-wrapper">
-                          <input type="file" name="upload-img" accept="image/*" />
-                          <div class="close-btn">×</div>
-                        </div>
-                      </div>
-                     </div>
-                     <div className="col-lg-2 col-md-2 col-sm-6">
-                         <div className='media-folder-image'>
-                         <img
-                          src={require("../img/Banner-559x363.png")}
-                          alt="earth"
-                          className="up-date-img"
-                        />
-                        
-                      </div>
-                     </div>
-                     <div className="col-lg-2 col-md-2 col-sm-6">
-                         <div className='media-folder-image'>
-                         <img
-                          src={require("../img/_(2)-559x363.png")}
-                          alt="earth"
-                          className="up-date-img"
-                        />
-                        
-                      </div>
-                     </div>
-                     <div className="col-lg-2 col-md-2 col-sm-6">
-                         <div className='media-folder-image'>
-                         <img
-                          src={require("../img/_arsenal-559x363.jpg")}
-                          alt="earth"
-                          className="up-date-img"
-                        />
-                        
-                      </div>
-                     </div>
-                     <div className="col-lg-2 col-md-2 col-sm-6">
-                         <div className='media-folder-image'>
-                         <img
-                          src={require("../img/bigest-transfers-559x363.png")}
-                          alt="earth"
-                          className="up-date-img"
-                        />
-                        
-                      </div>
-                     </div>
-                     <div className="col-lg-2 col-md-2 col-sm-6">
-                         <div className='media-folder-image'>
-                         <img
-                          src={require("../img/ars 1-559x363.png")}
-                          alt="earth"
-                          className="up-date-img"
-                        />
-                        
-                      </div>
-                     </div>
-                        </Row>
-                   </div>
+                 <UploadMediaImg  selectedFolder={selectedFolder}/>
                   </div>
                   
                   </Row>

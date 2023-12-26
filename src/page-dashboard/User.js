@@ -4,8 +4,9 @@ import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Menubar from '../dashboard/Menubar';
 import Table from 'react-bootstrap/Table';
-import Form from 'react-bootstrap/Form';
-
+import Form from 'react-bootstrap/Form'
+import { apiCall } from "../helper/RequestHandler";
+import { REQUEST_TYPE, GET_USER } from "../helper/APIInfo";
 
 export const formatDate = (dateString) => {
   const dateObject = new Date(dateString);
@@ -24,12 +25,14 @@ export default function User() {
   const [itemId, setItemId] = useState(0);
   useEffect(() => {
 
-    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getAllUser', axiosConfig)
-      // axios.get('http://localhost:5000/getAllUser',axiosConfig)
+    // axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getAllUser', axiosConfig)
+     apiCall(GET_USER.find,REQUEST_TYPE.GET,axiosConfig)
+     
       .then((response) => {
-        const aboutInfo = response.data.pageInfo.body
+       // console.log(response.response.data?.pageInfo?.body);
+        const aboutInfo = response.response.data?.pageInfo?.body
         setAboutData(aboutInfo);
-        setItemId(aboutInfo._id);
+        setItemId(aboutInfo?._id);
 
 
       })
@@ -127,7 +130,7 @@ export default function User() {
                     </tr>
                   </thead>
                   <tbody className='table-list-one'>
-                    {aboutData.map((user) => (
+                    {aboutData?.map((user) => (
                       <tr key={user._id}>
                         <td><Form.Check aria-label="option 1" /></td>
                         <td>{user.firstName}</td>
