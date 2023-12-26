@@ -21,7 +21,7 @@ const [flag, setFlag]=useState(false)
     try {
     
       const response = await apiCall(
-        "http://localhost:5000/createfolder",
+        "https://phpstack-1140615-3967632.cloudwaysapps.com/backend/createfolder",
         REQUEST_TYPE.POST,
         {
           folderName: folderName,
@@ -46,10 +46,7 @@ const [flag, setFlag]=useState(false)
 
   const fetchFolders = async () => {
     try {
-      const response = await apiCall(
-        "http://localhost:5000/folderGet",
-        REQUEST_TYPE.GET
-      );
+      const response = await apiCall("https://phpstack-1140615-3967632.cloudwaysapps.com/backend/folderGet", REQUEST_TYPE.GET );
 
       console.log(response.response.data?.body);
       setFolders(response.response.data?.body);

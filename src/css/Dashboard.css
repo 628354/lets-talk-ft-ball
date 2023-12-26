@@ -63,7 +63,7 @@ section.navslide {
 
 section.navheader {
     background-color: black;
-    padding: 20px 0;
+    padding: 14px 0;
     position: fixed;
     top: 0;
     /* margin-bottom: 20px; */
@@ -531,4 +531,99 @@ a.img-thumbnail {
 /* upload img */
 
 /* 23-12-2023 */
+.box-trop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.bord-main-box {
+    background: #1b80c2;
+    padding: 20px;
+    border-radius: 7px;
+    box-shadow: 0px 0px 9px 0px;
+    color: white;
+}
+
+.trophy-num p {
+    color: white;
+    font-size: 20px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid white;
+    margin-bottom: 22px;
+}
+.box-trop span i {
+    font-size: 50px;
+    opacity: 0.6;
+}
+.trophy-num-open {
+    padding-top: 20px;
+}
+
+
+.trophy-num-open a {
+    color: white;
+    
+}
+.box-trop p {
+    font-size: 34px;
+}
+.box-trop p {
+    font-size: 34px;
+    letter-spacing: 8px;
+}
+
+.bord-main-box:hover .box-trop span i {
+    opacity: 0.9;
+}
+
+.profile-drop {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 30px;
+}
+
+.image-success img {
+    border-radius: 55px;
+}
+
+.profile-dev .dropdown .dropdown-toggle {
+    background: no-repeat;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header_text_sid {
+    align-items: center;
+    display: flex;
+    height: 100%;
+}
+
+
+.profile-dev .dropdown .show.dropdown .dropdown .dropdown-toggle {
+    background: no-repeat;
+    border: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.profile-dev .btn-check:active+.btn-success:focus, .btn-check:checked+.btn-success:focus, .btn-success.active:focus, .btn-success:active:focus, .show>.btn-success.dropdown-toggle:focus {
+    box-shadow: none;
+}
+
+.profile-dev .btn-check:focus+.btn-success, .btn-success:focus {
+    color: #fff;
+    background-color: #157347;
+    border-color: #146c43;
+    box-shadow: none;
+}
+
+.image-success-user img {
+    width: 30px;
+    border-radius: 30px;
+}
+
+/* 26-12-2023 */
