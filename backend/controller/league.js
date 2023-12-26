@@ -6,7 +6,6 @@ const Helpers = require('../Helpers/Helpers')
 
 exports.addleague = async (req, res) => {
     try {
-        const { lung } = req.params;
         const { teamId, sessionId, leaguedataId, leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
             sort_Order, status } = req.body;
         const protocol = req.protocol;
@@ -24,7 +23,17 @@ exports.addleague = async (req, res) => {
             teamId: teamId,
             sessionId: sessionId,
             image: req.file ? url + "/uploads/" + req.file.filename : " ",
-            [lung]: {
+            en: {
+                leaguename: leaguename,
+                description: description,
+                meta_Tag_Title: meta_Tag_Title,
+                meta_Tag_Description: meta_Tag_Description,
+                meta_Tag_Keywords: meta_Tag_Keywords,
+                blog_Category: blog_Category,
+                sort_Order: sort_Order,
+                status: status
+            },
+            ar: {
                 leaguename: leaguename,
                 description: description,
                 meta_Tag_Title: meta_Tag_Title,
@@ -38,7 +47,6 @@ exports.addleague = async (req, res) => {
 
         const addLeague = await leaguemodel.create(newLeague);
         const result = await addLeague.save();
-
         res.status(200).send({
             body: result,
             message: 'League Add Successfully',
@@ -59,9 +67,9 @@ exports.addleague = async (req, res) => {
 
 exports.getleagues = async (req, res) => {
     try {
-        const {lung} = req.params
+        const { lung } = req.params
         const getleagues = await leaguemodel.find().populate("leaguedataId")
-            .populate("teamId",  { [lung]: 1 })
+            .populate("teamId", { [lung]: 1 })
             .populate('sessionId')
             .sort({ createdAt: -1 })
         res.send({ status: true, message: "Successfully get leaguedetails", leaguedetails: getleagues })

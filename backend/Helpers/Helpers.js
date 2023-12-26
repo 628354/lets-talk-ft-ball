@@ -58,7 +58,7 @@ const checkValidation = async v => {
   const success =  (res, message = '', body = {}) => {
     return res.status(200).json({
       success: true,
-      code: 200,
+      statusCode: 200,
       message: message,
       body: body,
     });
@@ -83,19 +83,19 @@ const checkValidation = async v => {
     return res.status(code).json({
       success: false,
       message: message,
-      code: code,
+      code: statusCode,
       body: {},
     });
   }
 
- const failed = (res, message = '') => {
+  const failed = (res, message = '') => {
     message = typeof message === 'object'
       ? message.message ? message.message : ''
       : message;
-      
+  
     return res.status(400).json({
       success: false,
-      code: 400,
+      statusCode: 400,
       message: message,
       body: {},
     });

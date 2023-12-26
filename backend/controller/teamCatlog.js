@@ -67,14 +67,67 @@ module.exports = {
         Response.send(responseHelper[200]);
     },
 
-    findAllTeam: async (Request, Response) =>{
+    findAllTeam: async (Request, Response) => {
         const { lung } = Request.params;
-            const data = await teamCatlog.find({},{[lung]: 1}).populate("leagueid");
-            responseHelper[200].data = data;
-            Response.send(responseHelper[200]); 
+        const data = await teamCatlog.find({}, { [lung]: 1 }).populate("leagueid");
+        responseHelper[200].data = data;
+        Response.send(responseHelper[200]);
     },
+
+    createTeam: async (req, res) => {
+        try {
+            const { Team_Name_English, Team_Name_Short_English, Description_English, SEO_URL, Past_teams_logo_file_names_below,status , logo_folder} = req.body;
+
+            const protocol = req.protocol;
+            const host = req.hostname;
+            const url = `${protocol}//${host}`;
+            const addTeam = await teamCatlog.create({
+                leagueid: req.body.leagueid,
+                Image: req.file ? url + "/uploads/" + req.file.filename : " ",
+                logo_folder:logo_folder,
+                Past_teams_logo_file_names_below:Past_teams_logo_file_names_below,
+                SEO_URL:SEO_URL,
+                status: status ,
+                en: {
+                    Team_Name_English: Team_Name_English,
+                    Team_Name_Short_English:Team_Name_Short_English,
+                    Description_English: Description_English,
+                },
+                ar: {
+                    Team_Name_Arabic: Team_Name_English,
+                    Team_Name_Short_Arabic:Team_Name_Short_English,
+                    Description_Arabic: Description_English,
+                   
+                },
+              
+            });
+
+            res.send({ status: true, message: "Successfully add team", teamdetails: addTeam });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({ status: false, message: "Something went wrong!!", error: error.message });
+        }
+    },
+    removeteam : async (req, res) => {
+        try {
+            const removeteam = await teamCatlog.findByIdAndDelete({ _id: req.params.id })
+            if (removeteam) {
+                res.send({ status: true, message: "Successfully remove teams", removedetails: removeteam })
+            } else {
+                res.send({ status: true, message: "Teams Id Not Found", success: false })
+            }
+        } catch (error) {
+            res.send({ status: false, message: "Something went wrong !!" })
+        }
+    },
+    teamdetails: async (Request, Response) => {
+        const { lung } = Request.params;
+        const data = await teamCatlog.findById({ _id:Request.params.id}, { _id: 1, seasonid: 1, datatype: 1, leagueid: 1, [lung]: 1 });
+        responseHelper[200].data = data;
+        Response.send(responseHelper[200]);
+    },
+
     
-   
-};
+}
 
 

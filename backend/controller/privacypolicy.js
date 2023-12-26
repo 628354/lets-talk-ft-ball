@@ -9,7 +9,13 @@ exports.addpolicy = async (req, res) => {
         const url = `${protocol}//${host}`
         const addpolicy = await policymodel.create({
             image: req.file ? url + "/uploads/" + req.file.filename : "",
-            privacy_policy: privacy_policy
+            en: {
+                privacy_policy: privacy_policy
+            },
+            ar: {
+                privacy_policy: privacy_policy
+
+            }
         })
 
         res.send({ status: true, message: "Successfully add policy", policydetails: addpolicy })
@@ -20,6 +26,7 @@ exports.addpolicy = async (req, res) => {
 
 exports.getPolicy = async (req, res) => {
     try {
+        const {lung} = req.params
         const getpolicy = await policymodel.find()
         res.send({ status: true, message: "Successfully get policy", policydetails: getpolicy })
     } catch (error) {

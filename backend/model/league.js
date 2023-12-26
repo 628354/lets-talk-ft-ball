@@ -6,7 +6,7 @@ const leagueSchema = mongoose.Schema(
     leaguedataId: { type: mongoose.Schema.Types.ObjectId, ref: 'leaguedata' },
     teamId: { type: mongoose.Schema.Types.ObjectId, ref: 'team' },
     sessionId: { type: mongoose.Schema.Types.ObjectId, ref: 'season' },
-    en: [{
+    en: {
       leaguename: { type: String, default: "" },
       image: { type: String, default: "" }, 
       description: { type: String, default: "" },
@@ -16,8 +16,8 @@ const leagueSchema = mongoose.Schema(
       blog_Category: { type: String, default: "" },
       sort_Order: { type: String, default: "" },
       status: { type: String, enum: ["active", "inactive"], default: "active" },
-    }],
-    ar: [{
+    },
+    ar: {
       leaguename: { type: String, default: "" },
       image: { type: String, default: "" },
       description: { type: String, default: "" },
@@ -28,7 +28,7 @@ const leagueSchema = mongoose.Schema(
       sort_Order: { type: String, default: "" },
       status: { type: String, enum: ["active", "inactive"], default: "active" },
 
-    }]
+    }
 
   },
   { timestamps: true }
