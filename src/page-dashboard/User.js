@@ -15,14 +15,17 @@ export const formatDate = (dateString) => {
 };
 
 export default function User() {
+  const [aboutData, setAboutData] = useState([]);
+  const [itemId, setItemId] = useState(0);
+  
   let local = localStorage.getItem("token");
   const axiosConfig = {
     headers: {
-      Authorization: `Bearer ${local}`,
+      Token: `Bearer ${local}`,
     },
   };
-  const [aboutData, setAboutData] = useState([]);
-  const [itemId, setItemId] = useState(0);
+  console.log(axiosConfig);
+
   useEffect(() => {
 
     // axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getAllUser', axiosConfig)

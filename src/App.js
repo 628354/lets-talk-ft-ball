@@ -243,7 +243,7 @@ function App() {
 				<Route path="/Teams" element={<ProtectedRoute><Teams /></ProtectedRoute>}></Route>
 				<Route path="/EditTeams/:id" element={<ProtectedRoute><EditTeams /></ProtectedRoute>}></Route>
 				<Route path="/Addteams" element={<ProtectedRoute><Addteams /></ProtectedRoute>}></Route>
-				<Route path="/DashboardPage" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>}></Route>
+				{/* <Route path="/DashboardPage" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>}></Route> */}
 				<Route path="/uploadMedia" element={<ProtectedRoute><UploadMedia /></ProtectedRoute>}></Route>
 				<Route path="/User" element={<ProtectedRoute><User /></ProtectedRoute>}></Route>
 				<Route path="/addUser" element={<ProtectedRoute><Adduser /></ProtectedRoute>}></Route>

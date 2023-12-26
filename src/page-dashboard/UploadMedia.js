@@ -3,7 +3,7 @@ import Menubar from "../dashboard/Menubar";
 import { Container, Row, Modal, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE,GET_IMAGE } from "../helper/APIInfo";
+import { REQUEST_TYPE,GET_IMAGE,ADD_IMAGE } from "../helper/APIInfo";
 import ImagePrevDelete from "./ImagePrevDelete";
 import UploadMediaImg from "./UploadMediaImg";
 
