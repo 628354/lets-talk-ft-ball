@@ -2,13 +2,24 @@ const mongoose = require("mongoose");
 
 const definitionSchema = mongoose.Schema(
   {
-    image: { type: String, required: true, default: "" },
-    definition: [
-      {
-        type: { type: String, required: true, default: "" },
-        content: { type: String, required: true, default: "" },
-      },
-    ],
+    image: { type: String, default: "" },
+    en: {
+      definition: [
+        {
+          type: { type: String, default: "" },
+          content: { type: String, default: "" },
+        },
+      ],
+    },
+    ar: {
+      definition: [
+        {
+          type: { type: String, default: "" },
+          content: { type: String, default: "" },
+        },
+      ],
+    }
+
   },
   {
     timestamps: true,

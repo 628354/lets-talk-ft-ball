@@ -1,6 +1,7 @@
 const definitionmodel = require("../model/definition")
 const mongoose = require("mongoose")
 const ObjectId = mongoose.Types.ObjectId
+const responseHelper = require('../Helpers/Response');
 
 exports.addDefinitions = async (req, res) => {
     try {
@@ -11,9 +12,17 @@ exports.addDefinitions = async (req, res) => {
 
         const addDefinitions = await definitionmodel.create({
             image: req.file ? `${url}/uploads/${req.file.filename}` : '',
-            definition: {
-                type: type,
-                content: content
+            en: {
+                definition: {
+                    type: type,
+                    content: content
+                }
+            },
+            ar: {
+                definition: {
+                    type: type,
+                    content: content
+                }
             }
         });
 
@@ -24,9 +33,15 @@ exports.addDefinitions = async (req, res) => {
             body: result
         });
     } catch (error) {
-        console.error(error.mesasge)
+        console.error(error.message);
+        res.status(500).send({
+            status: false,
+            message: 'Internal Server Error',
+            error: error.message
+        });
     }
 };
+
 
 
 exports.adddefinitiontype = async (req, res) => {
@@ -43,13 +58,25 @@ exports.adddefinitiontype = async (req, res) => {
             return
         }
         const adddefinitionInexisting = await definitionmodel.findByIdAndUpdate(req.params.id, {
-            $push: {
-                definition: {
-                    type: type,
-                    content: content
+            en: {
+                $push: {
+                    definition: {
+                        type: type,
+                        content: content
 
+                    }
+                },
+                ar: {
+                    $push: {
+                        definition: {
+                            type: type,
+                            content: content
+
+                        }
+                    }
                 }
             }
+
         }, { new: true })
 
         await adddefinitionInexisting.save()
@@ -72,10 +99,19 @@ exports.updatedata = async (req, res) => {
         const { type, content } = req.body
         const { objectId, arrayElementId } = req.params;
         const updatedata = await definitionmodel.findOneAndUpdate({ _id: objectId, 'definition._id': arrayElementId }, {
-            $set: {
-                "definition.$.type": type,
-                "definition.$.content": content
+            en: {
+                $set: {
+                    "definition.$.type": type,
+                    "definition.$.content": content
+                }
+            },
+            ar: {
+                $set: {
+                    "definition.$.type": type,
+                    "definition.$.content": content
+                }
             }
+
         }, { new: true })
         await updatedata.save()
         res.send({ status: true, message: "Update definition data successfully", definitiondetails: updatedata })
@@ -106,42 +142,16 @@ exports.definitionDelete = async (req, res) => {
     }
 }
 
-exports.getAllDefinition = async (req, res) => {
-    try {
-        const getAll = await definitionmodel.find()
-        res.status(200).send({
-            body: getAll,
-            message: "Get All Definition Successfully",
-            success: true
-        })
-    } catch (error) {
-        res.status(500).send({
-            message: 'Enternal Server Error',
-            success: true,
-            error: error.mesasge
-        })
+exports.getAllDefinition = async (Request, Response) => {
+    const { lung } = Request.params;
+    const getAll = await definitionmodel.find({}, { [lung]: 1 })
+    responseHelper[200].data = getAll;
+    Response.send(responseHelper[200]);
+},
+    exports.getDefinitionById = async (Request, Response) => {
+        const { lung } = Request.params;
+        const definitions = await definitionmodel.findById({ _id: Request.params.id }, { [lung]: 1 });
+        responseHelper[200].data = definitions;
+        Response.send(responseHelper[200]);
     }
-}
-exports.getDefinitionById = async (req, res) => {
-    try {
-        const definitions = await definitionmodel.findById({ _id: req.params.id })
-        if (definitions) {
-            res.status(200).send({
-                body: definitions,
-                message: 'Definition detatails get Successfully',
-                success: true
-            })
-        } else {
-            res.status(300).send({
-                message: 'Definition Id Not Found',
-                success: false
-            })
-        }
-    } catch (error) {
-        res.status(500).send({
-            message: 'Enternal Server Error',
-            success: true,
-            error: error.mesasge
-        })
-    }
-}
+

@@ -19,21 +19,21 @@ const upload = multer({ storage: storage });
 const cafecontroller = require("../controller/cafe");
 
 router.post(
-  "/addcafedata",authentication,
+  "/addcafedata",
   upload.fields([{ name: "logo" }, { name: "cafe_image" }]),
   cafecontroller.addcafedata
 );
 
 router.post(
-  "/addCafeleaguedata/:cafe_id",authentication,
+  "/:lung/addCafeleaguedata/:cafe_id",
   upload.single("cafe_image"),
   cafecontroller.addcafeleaguesdata
 );
 
-router.get("/cafe_details/:id",authentication, cafecontroller.cafe_details);
+router.get("/:lung/cafe_details/:id", cafecontroller.cafe_details);
 
-router.get("/getAllCafe",authentication, cafecontroller.getAllCafe);
+router.get("/:lung/getAllCafe", cafecontroller.getAllCafe);
 
-router.delete("/deleteCafe/:id",authentication, cafecontroller.deleteCafe);
+router.delete("/deleteCafe/:id", cafecontroller.deleteCafe);
 
 module.exports = router;

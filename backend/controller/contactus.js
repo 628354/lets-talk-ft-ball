@@ -1,7 +1,6 @@
 
 const { sendContactusEmail } = require("../mails/contactus")
 const contactus = require('../model/contactus')
-const contactus = require('../model/contactus')
 
 exports.sendContactus = async (req, res) => {
     try {

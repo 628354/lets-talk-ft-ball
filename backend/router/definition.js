@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {authentication} = require('../middleware/auth')
+const { authentication } = require('../middleware/auth')
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -24,17 +24,17 @@ router.post(
 );
 
 router.post(
-  "/adddefinitionInexisting/:id",
+  "/:lung/adddefinitionInexisting/:id",
   definitionController.adddefinitiontype
 );
 
 router.post(
-  "/updatedata/:objectId/:arrayElementId",
+  "/:lung/updatedata/:objectId/:arrayElementId",
   definitionController.updatedata
 );
 router.delete("/definitionDelete/:id", definitionController.definitionDelete);
 
-router.get("/getAllDefinition", definitionController.getAllDefinition);
-router.get('/getDefinitionById/:id', definitionController.getDefinitionById)
+router.get("/:lung/getAllDefinition", definitionController.getAllDefinition);
+router.get('/:lung/getDefinitionById/:id', definitionController.getDefinitionById)
 
 module.exports = router;
