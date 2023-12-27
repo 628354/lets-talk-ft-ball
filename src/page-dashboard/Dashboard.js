@@ -1,10 +1,51 @@
-import React from 'react'
+
 import Menubar from '../dashboard/Menubar';
 import { Container, Row } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import {FIND_ALL, REQUEST_TYPE,REMOVE_TEAM} from '../helper/APIInfo';
+import { apiCall } from '../helper/RequestHandler';
 
 export default function Dashboard() {
+  const [aboutData, setAboutData] = useState([]);
+  const [teamsData, setTeamsData] = useState([]);
+  useEffect(() => {
+
+    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues')
+    // axios.get('http://localhost:5000/getleagues')
+       .then((response) => {
+         const aboutInfo = response.data?.leaguedetails
+         setAboutData(aboutInfo);
+
+       
+ 
+ 
+       })
+       .catch((error) => {
+         console.error('Error fetching data:', error);
+       });
+   }, []);
+ console.log(aboutData.length);
+ 
+ const getTeams =async()=>{
+  try{
+    const response =await apiCall(FIND_ALL.find,REQUEST_TYPE.GET);
+    console.log(response);
+    const teamsInfo = response.response.data?.data.teamdetails;
+      setTeamsData(response.response.data.data);
+     // setItemId(teamsInfo._id);
+
+  }catch(error){
+    console.error('Error fetching data:', error);
+  }
+ 
+}
+
+useEffect(()=>{
+  getTeams()
+
+},[])
   return (
     <div>
          <Menubar/>
@@ -44,10 +85,10 @@ export default function Dashboard() {
                       </div>
                       <div className='box-trop'>
                       <span><i className="fa fa-trophy" aria-hidden="true"></i></span>
-                      <p>11</p>
+                      <p>{aboutData?.length}</p>
                       </div>
                       <div className='trophy-num-open'>
-                        <Link to=''>View more...</Link>
+                        <Link to='/Leagues'>View more...</Link>
                       </div>
                     </div>
                   </div>
@@ -61,10 +102,10 @@ export default function Dashboard() {
                       </div>
                       <div className='box-trop'>
                       <span><i className="fa fa-futbol-o" aria-hidden="true"></i></span>
-                      <p>340</p>
+                      <p>{teamsData?.length}</p>
                       </div>
                       <div className='trophy-num-open'>
-                        <Link to=''>View more...</Link>
+                        <Link to='/Teams'>View more...</Link>
                       </div>
                     </div>
                   </div>
