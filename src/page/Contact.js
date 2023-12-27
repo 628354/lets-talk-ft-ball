@@ -4,15 +4,16 @@ import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { apiCall } from '../helper/RequestHandler';
 import {CONTACT_FORM, REQUEST_TYPE}  from "../helper/APIInfo";
+
+
+
 export default function Contact() {
 
-
-
 const [formData, setFormData] = useState({
-  "name": "",
-  "email": "",
-  "subject": "",
-  "message": ""
+    "name": "",
+    "email": "",
+    "subject": "",
+    "message": ""
 });
 
 const handleChange = (e) => {
@@ -33,9 +34,7 @@ const getFormData = async (e) => {
 
     if (response.status === 200 && response.hasError === false) {
       console.log("Data successfully sent to the server");
-
-      // Reset the form data
-     
+    
     }
 
   } catch (error) {

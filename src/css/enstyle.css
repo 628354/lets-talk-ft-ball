@@ -1285,3 +1285,10 @@ table.team-aline_table thead tr th {
     font-weight: 400;
     margin-left: 10px;
 }
+
+.section-cetalog {
+    border: 1px solid #d1d1d1;
+    padding: 10px 20px;
+    height: 120px;
+    overflow-y: scroll;
+}
