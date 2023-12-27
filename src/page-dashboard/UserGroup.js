@@ -14,7 +14,7 @@ export const formatDate = (dateString) => {
   return formattedDate;
 };
 
-export default function User() {
+export default function UserGroup() {
   const [aboutData, setAboutData] = useState([]);
   const [itemId, setItemId] = useState(0);
   
@@ -29,8 +29,8 @@ export default function User() {
 
   useEffect(() => {
 
-    // axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getAllUser', axiosConfig)
-     axios.get(GET_USER.find,axiosConfig)
+    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getAllUser', axiosConfig)
+    //  axios.get(GET_USER.find,axiosConfig)
      
       .then((response) => {
        //console.log(response.response.data?.pageInfo?.body);
@@ -53,7 +53,7 @@ export default function User() {
 
     if (confirmDelete) {
       axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/deleteUser/${id}`, axiosConfig)
-      // axios.delete(`http://localhost:5000/deleteUser/${id}`, axiosConfig)
+    //   axios.delete(`http://localhost:5000/deleteUser/${id}`, axiosConfig)
 
         .then((response) => {
 
@@ -81,7 +81,7 @@ export default function User() {
                 <div className='season-us'>
 
                   <div className='season-link-part'>
-                    <h3>User</h3>
+                    <h3>User Groups</h3>
                     <ul className='season-link'>
                       <li>
                         <Link>Home</Link>
@@ -90,7 +90,7 @@ export default function User() {
                         <i className="ri-arrow-right-s-line"></i>
                       </li>
                       <li>
-                        <Link>User</Link>
+                        <Link>User Groups</Link>
                       </li>
                     </ul>
                   </div>
@@ -121,16 +121,15 @@ export default function User() {
             <Row>
               <div className='season_list_table'>
                 <div className='season-table-list'>
-                  <h6><i class="ri-list-check"></i> User List</h6>
+                  <h6><i class="ri-list-check"></i>User Group</h6>
                 </div>
                 <Table bordered hover className='tablepress'>
                   <thead>
                     <tr>
                       <th><Form.Check aria-label="option 1" /></th>
-                      <th>User Name</th>
-                      <th>Status</th>
-                      <th>Date Addded</th>
-                      <th className=''>Action</th>
+                      <th>User Group Name</th>
+                      <th>Action</th>
+                     
                     </tr>
                   </thead>
                   <tbody className='table-list-one'>
@@ -138,8 +137,6 @@ export default function User() {
                       <tr key={user._id}>
                         <td><Form.Check aria-label="option 1" /></td>
                         <td>{user.firstName}</td>
-                        <td>{user.status}</td>
-                        <td>{formatDate(user.createdAt)}</td>
                         <td>
                           <div className='add-button-fis'>
 
