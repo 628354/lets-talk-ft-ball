@@ -17,14 +17,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post("/createTeam", upload.single("image"), teamController.createTeam);
+// router.post("/createTeam", upload.single("image"), teamController.createTeam);
 router.get("/getTeams", teamController.getTeams);
-router.get("/teamdetails/:id", teamController.teamdetails);
 router.post(
   "/updateteams/:id",
   upload.single("image"),
   teamController.updateteams
 );
-router.delete("/removeteam/:id",authentication, teamController.removeteam);
+// router.delete("/removeteam/:id",authentication, teamController.removeteam);
 
 module.exports = router;

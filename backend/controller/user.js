@@ -312,15 +312,16 @@ exports.AddUser = async (req, res) => {
   try {
     const findUser = await usermodel.findOne({ email: req.body.email });
     if (findUser) {
-      return res.status(400).send('Email Already Exists');
+      return Helpers.failed(res, 'Email Already Exists');
     }
     const phoneExist = await usermodel.findOne({ phone: req.body.phone });
     if (phoneExist) {
-      return res.status(400).send('Phone Number Already Exists');
+      return Helpers.failed(res, 'Phone Number Already Exists');
     }
     const protocol = req.protocol;
     const host = req.hostname;
     const url = `${protocol}//${host}`;
+
     const hashPassword = bcrypt.hashSync(req.body.password, 10);
     const addUser = await usermodel.create({
       firstName: req.body.firstName,
@@ -334,16 +335,9 @@ exports.AddUser = async (req, res) => {
       image: req.file ? url + '/uploads/' + req.file.filename : ' ',
     });
     const result = await addUser.save();
-    return res.status(200).send({
-      body: result,
-      message: 'User Add  Successfully',
-      success: true,
-    });
+    return Helpers.success(res, "User Add Successfully", result);
   } catch (error) {
-    res.status(500).send({
-      message: "Enternal Server Error",
-      success: false,
-      error: error.message,
-    });
+    return Helpers.error(res, error.message);
   }
 }
+

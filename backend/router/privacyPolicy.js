@@ -18,7 +18,7 @@ const privacyController = require("../controller/privacypolicy");
 
 router.post("/addpolicy",authentication, upload.single("image"), privacyController.addpolicy);
 
-router.get("/getpolicy",authentication, privacyController.getPolicy);
+router.get("/:lung/getpolicy",authentication, privacyController.getPolicy);
 
 router.post(
   "/updatePolicy/:policyId",authentication,

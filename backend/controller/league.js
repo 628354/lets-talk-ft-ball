@@ -7,54 +7,69 @@ const Helpers = require('../Helpers/Helpers')
 exports.addleague = async (req, res) => {
     try {
         const { teamId, sessionId, leaguedataId, leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
-            sort_Order, status } = req.body
-        const protocol = req.protocol
-        const host = req.hostname
-        const url = `${protocol}//${host}`
+            sort_Order, status } = req.body;
+        const protocol = req.protocol;
+        const host = req.hostname;
+        const url = `${protocol}//${host}`;
 
         const find = await leaguemodel.findOne({ leaguename: leaguename });
         if (find) {
-            res.send({ status: true, message: "league already present" });
+            res.send({ status: true, message: "League already present" });
             return;
         }
 
-        const addleage = await leaguemodel.create({
+        const newLeague = {
             leaguedataId: leaguedataId,
             teamId: teamId,
             sessionId: sessionId,
             image: req.file ? url + "/uploads/" + req.file.filename : " ",
-            leaguename: leaguename,
-            description: description,
-            meta_Tag_Title: meta_Tag_Title,
-            meta_Tag_Description: meta_Tag_Description,
-            meta_Tag_Keywords: meta_Tag_Keywords,
-            blog_Category: blog_Category,
-            sort_Order: sort_Order,
-            status: status
+            en: {
+                leaguename: leaguename,
+                description: description,
+                meta_Tag_Title: meta_Tag_Title,
+                meta_Tag_Description: meta_Tag_Description,
+                meta_Tag_Keywords: meta_Tag_Keywords,
+                blog_Category: blog_Category,
+                sort_Order: sort_Order,
+                status: status
+            },
+            ar: {
+                leaguename: leaguename,
+                description: description,
+                meta_Tag_Title: meta_Tag_Title,
+                meta_Tag_Description: meta_Tag_Description,
+                meta_Tag_Keywords: meta_Tag_Keywords,
+                blog_Category: blog_Category,
+                sort_Order: sort_Order,
+                status: status
+            }
+        };
 
-        })
-        const result = await addleage.save()
+        const addLeague = await leaguemodel.create(newLeague);
+        const result = await addLeague.save();
         res.status(200).send({
             body: result,
             message: 'League Add Successfully',
             success: true
-        })
+        });
     } catch (error) {
         res.status(500).send({
-            message: 'Enternal Server Error',
+            message: 'Internal Server Error',
             success: false,
             error: error.message
-        })
+        });
     }
-}
+};
+
 
 
 // get all leagues details............................................
 
 exports.getleagues = async (req, res) => {
     try {
+        const { lung } = req.params
         const getleagues = await leaguemodel.find().populate("leaguedataId")
-            .populate("teamId")
+            .populate("teamId", { [lung]: 1 })
             .populate('sessionId')
             .sort({ createdAt: -1 })
         res.send({ status: true, message: "Successfully get leaguedetails", leaguedetails: getleagues })
