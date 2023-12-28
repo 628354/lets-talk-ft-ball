@@ -1,30 +1,27 @@
 const aboutusmodel = require("../model/aboutus")
+const responseHelper = require('../Helpers/Response');
 
 exports.addaboutus = async (req, res) => {
     try {
-        const { aboutTitle, aboutText, visionTitle } = req.body
         const files = req.files
         const protocol = req.protocol
         const host = req.hostname
         const url = `${protocol}//${host}`
+        const { en, ar } = req.body
         const addaboutus = await aboutusmodel.create({
+            bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : "",
+            aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
+            visionSectionImage: files && files.visionSectionImage ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
             en: {
-                bannerImage: req.files.image ? url + "/uploads/" + files.bannerImage[0].filename : "",
-                aboutTitle: aboutTitle,
-                aboutText: aboutText,
-                aboutSectionImage: req.files.image1 ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
-                visionSectionImage: req.files.image2 ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
-                visionTitle: visionTitle,
+                aboutTitle: en.aboutTitle || "",
+                aboutText: en.aboutText || "",
+                visionTitle: en.visionTitle || "",
             },
             ar: {
-                bannerImage: req.files.image ? url + "/uploads/" + files.bannerImage[0].filename : "",
-                aboutTitle: aboutTitle,
-                aboutText: aboutText,
-                aboutSectionImage: req.files.image1 ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
-                visionSectionImage: req.files.image2 ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
-                visionTitle: visionTitle,
+                aboutTitle: ar.aboutTitle || "",
+                aboutText: ar.aboutText || "",
+                visionTitle: ar.visionTitle || "",
             }
-
 
         })
         res.send({ status: true, message: "Successfully add aboutus content", body: addaboutus })
@@ -33,45 +30,42 @@ exports.addaboutus = async (req, res) => {
         console.log(error.message)
     }
 }
+exports.getaboutus = async (Request, Response) => {
+    const { lung } = Request.params;
+    const data = await aboutusmodel.find({}, { [lung]: 1 })
+    responseHelper[200].data = data;
+    Response.send(responseHelper[200]);
+},
 
+    exports.updateAboutus = async (req, res) => {
+        try {
+            const files = req.files;
+            const protocol = req.protocol;
+            const host = req.hostname;
+            const url = `${protocol}//${host}`;
+            const { en, ar } = req.body;
 
-exports.getaboutus = async (req, res) => {
-    try {
-        const { lung } = req.params
-        const getaboutus = await aboutusmodel.find({ [lung]: 1 })
-        res.status(200).send({
-            body: getaboutus,
-            message: 'Get Aboutus Successfully',
-            success: true
-        })
-    } catch (error) {
-        console.log(error.message)
-    }
-}
+            const updateaboutus = await aboutusmodel.findByIdAndUpdate({_id:req.params.id}, {
+                bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : "",
+                aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
+                visionSectionImage: files && files.visionSectionImage ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
+                en: {
+                    aboutTitle: en.aboutTitle || "", 
+                    aboutText: en.aboutText || "",
+                    visionTitle: en.visionTitle || "",
+                },
+                ar: {
+                    aboutTitle: ar.aboutTitle || "", 
+                    aboutText: ar.aboutText || "",
+                    visionTitle: ar.visionTitle || "",
+                }
+            }, { new: true });
 
-exports.updateAboutus = async (req, res) => {
-    try {
-        const { aboutTitle, aboutText, visionTitle } = req.body;
-        const files = req.files;
-        const protocol = req.protocol;
-        const host = req.host;
-        const url = `${protocol}//${host}`;
+            await updateaboutus.save();
 
-        const finddata = await aboutusmodel.findById(req.params.Id);
-        const updateaboutus = await aboutusmodel.findByIdAndUpdate(req.params.Id, {
-            bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : finddata.bannerImage,
-            aboutTitle: aboutTitle,
-            aboutText: aboutText,
-            aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : finddata.aboutSectionImage,
-            visionSectionImage: files && files.visionSectionImage ? url + "/uploads/" + files.visionSectionImage[0].filename : finddata.visionSectionImage,
-            visionTitle: visionTitle,
-        }, { new: true });
-
-        await updateaboutus.save();
-
-    } catch (error) {
-        console.log(error);
-        res.send({ status: false, message: "Something went wrong !!" });
-    }
-};
-
+            res.send({ status: true, message: "Aboutus updated successfully", updatedData: updateaboutus });
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ status: false, message: "Something went wrong!!", error: error.message });
+        }
+    };

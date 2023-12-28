@@ -13,7 +13,8 @@ const cafeSchema = mongoose.Schema(
           date: { type: Date, require: true },
           content: { type: String, require: true },
         },
-      ],
+      ]
+
     },
     ar: {
       logo: { type: String, require: true },
@@ -26,7 +27,7 @@ const cafeSchema = mongoose.Schema(
           date: { type: Date, require: true },
           content: { type: String, require: true },
         },
-      ],
+      ]
     }
   },
 

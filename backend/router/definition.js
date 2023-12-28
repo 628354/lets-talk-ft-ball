@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const {authentication} = require('../middleware/auth')
+const { authentication } = require('../middleware/auth')
 const multer = require("multer");
+const definition = require('../controller/definition')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -15,26 +16,29 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const definitionController = require("../controller/definition");
+router.post('/addDefinition', upload.single('image'), definition.addDefinitions)
+router.get('/:lung/getAllDefinition', definition.getAllDefinition)
+router.get('/:lung/getDefinitionById/:id', definition.getDefinitionById)
+router.put('/:lung/updatedefinition/:id', definition.updatedefinition)
+router.delete('/deleteDefinition/:id', definition.deleteDefinition)
+// router.post(
+//   "/addDefinition",
+//   upload.single("image"),
+//   definitionController.addDefinitions
+// );
 
-router.post(
-  "/addDefinition",
-  upload.single("image"),
-  definitionController.addDefinitions
-);
+// router.post(
+//   "/:lung/adddefinitionInexisting/:id",
+//   definitionController.adddefinitiontype
+// );
 
-router.post(
-  "/adddefinitionInexisting/:id",
-  definitionController.adddefinitiontype
-);
+// router.post(
+//   "/:lung/updatedata/:objectId/:arrayElementId",
+//   definitionController.updatedata
+// );
+// router.delete("/definitionDelete/:id", definitionController.definitionDelete);
 
-router.post(
-  "/updatedata/:objectId/:arrayElementId",
-  definitionController.updatedata
-);
-router.delete("/definitionDelete/:id", definitionController.definitionDelete);
-
-router.get("/getAllDefinition", definitionController.getAllDefinition);
-router.get('/getDefinitionById/:id', definitionController.getDefinitionById)
+// router.get("/:lung/getAllDefinition", definitionController.getAllDefinition);
+// router.get('/:lung/getDefinitionById/:id', definitionController.getDefinitionById)
 
 module.exports = router;
