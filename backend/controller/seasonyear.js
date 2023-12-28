@@ -15,16 +15,9 @@ exports.addleagueyear = async (req, res) => {
       return;
     }
     const addleagueyear = await seasonyearmodel.create({
-      en: {
-        season_Title: season_Title,
-        sort_Order: sort_Order,
-        status: status,
-      },
-      ar: {
-        season_Title: season_Title,
-        sort_Order: sort_Order,
-        status: status,
-      }
+      season_Title: season_Title,
+      sort_Order: sort_Order,
+      status: status,
     });
 
     res.send({

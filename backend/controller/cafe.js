@@ -1,36 +1,57 @@
 const cafemodel = require("../model/cafe")
+const responseHelper = require('../Helpers/Response');
+const moment = require('moment')
 
 exports.addcafedata = async (req, res) => {
-
     try {
-        const { details, title, content, league_name } = req.body
-        const finddata = await cafemodel.findOne({ league_name: league_name })
+        const { en, ar } = req.body;
+
+        const finddata = await cafemodel.findOne({ "en.league_name": en.league_name });
         if (finddata) {
-            res.send({ status: true, message: "league data allready present" })
-            return
+            return res.status(400).json({ status: false, message: "League data already present" });
         }
-        const protocol = req.protocol
-        const host = req.hostname
-        const url = `${protocol}//${host}`
-        const date = new Date()
+
+        const protocol = req.protocol;
+        const host = req.hostname;
+        const url = `${protocol}://${host}`;
+        const date = new Date();
 
         const adddcafe = await cafemodel.create({
-            details: details,
-            // logo: req.files || req.files.logo ? url + "/uploads/" + req.files.logo[0].filename : "",
-            league_name: league_name,
-            cafecontent: {
-                title: title,
-                cafe_image: req.files || req.files.cafe_image ? url + "/uploads/" + req.files.cafe_image[0].filename : "",
-                date: date,
-                content: content
+            en: {
+                details: en.details || "",
+                league_name: en.league_name || "",
+                cafecontent: {
+                    title: en.cafecontent.title || "",
+                    cafe_image: req.files && req.files.cafe_image ? url + "/uploads/" + req.files.cafe_image[0].filename : "",
+                    date: moment(en.cafecontent.date, 'DD-MM-YYYY').toDate(), 
+                    content: en.cafecontent.content || ""
+                }
+            },
+            ar: {
+                details: ar.details || "",
+                league_name: ar.league_name || "",
+                cafecontent: {
+                    title: ar.cafecontent.title || "",
+                    cafe_image: req.files && req.files.cafe_image ? url + "/uploads/" + req.files.cafe_image[0].filename : "",
+                    date: moment(ar.cafecontent.date, 'DD-MM-YYYY').toDate(),
+                    content: ar.cafecontent.content || ""
+                }
             }
-        })
-        res.send({ status: true, message: "cafe details added successfully!!", cafedetails: adddcafe })
+        });
+
+        if (adddcafe) {
+            return res.status(200).json({ status: true, message: "Cafe details added successfully!!", cafedetails: adddcafe });
+        } else {
+            return res.status(500).json({ status: false, message: "Failed to add cafe details" });
+        }
 
     } catch (error) {
-        console.log(error.message)
+        console.error(error);
+        return res.status(500).json({ status: false, message: "Internal Server Error", error: error.message });
     }
-}
+};
+
+
 
 //add data in  cafe leagues .....................................................
 
@@ -40,7 +61,7 @@ exports.addcafeleaguesdata = async (req, res) => {
         const { cafe_id } = req.params
 
         const protocol = req.protocol
-        const host = req.host
+        const host = req.hostname
         const url = `${protocol}//${host}`
         const date = new Date()
         const finddata = await cafemodel.findById(cafe_id)
@@ -61,14 +82,44 @@ exports.addcafeleaguesdata = async (req, res) => {
         }
 
         const findAndAddData = await cafemodel.findByIdAndUpdate({ _id: cafe_id }, {
-            $push: {
+            en: {
+                $push: {
+                    cafecontent: {
+                        title: title,
+                        cafe_image: req.file ? url + "/uploads/" + req.file.filename : "",
+                        date: date,
+                        content: content
+                    }
+                },
                 cafecontent: {
                     title: title,
                     cafe_image: req.file ? url + "/uploads/" + req.file.filename : "",
                     date: date,
                     content: content
                 }
+
+            },
+            ar: {
+                $push: {
+
+                    cafecontent: {
+                        title: title,
+                        cafe_image: req.file ? url + "/uploads/" + req.file.filename : "",
+                        date: date,
+                        content: content
+                    },
+
+                    cafecontent: {
+                        title: title,
+                        cafe_image: req.file ? url + "/uploads/" + req.file.filename : "",
+                        date: date,
+                        content: content
+                    }
+
+
+                }
             }
+
         }, { new: true })
         await findAndAddData.save()
         res.send({ status: true, message: "Successfully add cafe content", cafedetails: findAndAddData })
@@ -89,17 +140,23 @@ exports.updatecafecontent = async (req, res) => {
         }
 
         const updatedata = await cafemodel.findOneAndUpdate({ _id: cafe_id, "cafecontent._id": content_id }, {
-            $set: {
-                "cafecontent.title": title,
-                "cafecontent.content": content
+            en: {
+                $set: {
+                    "cafecontent.title": title,
+                    "cafecontent.content": content
+                }
+            },
+            ar: {
+                $set: {
+                    "cafecontent.title": title,
+                    "cafecontent.content": content
+                }
             }
+
         }, { new: true })
 
         await updatedata.save()
-
         res.send({ status: true, message: "Successfully update data", cafedetails: updatedata })
-
-
     } catch (error) {
         console.log(error.message)
     }
@@ -107,34 +164,44 @@ exports.updatecafecontent = async (req, res) => {
 
 exports.cafe_details = async (req, res) => {
     try {
-        const cafe = await cafemodel.findOne({ _id: req.params.id })
+        const { lung } = req.params
+        const cafe = await cafemodel.findById({ _id: req.params.id }, { [lung]: 1 })
         if (cafe) {
             res.status(200).send({
                 body: cafe,
-                message: 'cafe Get By Id successfully',
+                message: 'Get Cafe By Id Successfully',
                 success: true
             })
         } else {
             res.status(300).send({
-                message: 'cafe Id Not Found',
+                message: 'Cafe Id Not Found',
                 success: false
             })
         }
     } catch (error) {
-        console.log(error.message)
+        res.status(500).send({
+            message: "Enternal server Error",
+            success: false,
+            error: error.message
+        })
     }
 }
 
 exports.getAllCafe = async (req, res) => {
     try {
-        const cafe = await cafemodel.find()
+        const { lung } = req.params
+        const cafe = await cafemodel.find({}, { [lung]: 1 })
         res.status(200).send({
             body: cafe,
-            message: 'All Cafe Get Successfully',
+            message: 'Get All Cafe Successfully',
             success: true
         })
     } catch (error) {
-        console.log(error.message)
+        res.status(500).send({
+            message: "Enternal server Error",
+            success: false,
+            error: error.message
+        })
     }
 }
 

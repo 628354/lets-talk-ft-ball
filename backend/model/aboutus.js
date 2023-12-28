@@ -1,22 +1,20 @@
 const mongoose = require("mongoose");
 const aboutusSchema = mongoose.Schema(
   {
-    ar: {
-      bannerImage: { type: String, default: "" },
+   
+    en: {
       aboutTitle: { type: String, default: "" },
       aboutText: { type: String, default: "" },
-      aboutSectionImage: { type: String, default: "" },
-      visionSectionImage: { type: String, default: "" },
       visionTitle: { type: String, default: "" },
     },
-    ar: {
-      bannerImage: { type: String, default: "" },
+    ar:{
       aboutTitle: { type: String, default: "" },
       aboutText: { type: String, default: "" },
-      aboutSectionImage: { type: String, default: "" },
-      visionSectionImage: { type: String, default: "" },
       visionTitle: { type: String, default: "" },
-    }
+    },
+    bannerImage: { type: String, default: "" },
+    aboutSectionImage: { type: String, default: "" },
+    visionSectionImage: { type: String, default: "" },
 
   },
   { timestamps: true }

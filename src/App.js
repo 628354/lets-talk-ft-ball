@@ -73,6 +73,7 @@ import Adduser from "./page-dashboard/Adduser";
 import EditUser from "./page-dashboard/EditUser";
 import { LeagueProvider } from "./Leagues-components/LeagueContext";
 import ProtectedRoute from "./page/ProtectedRoute";
+import Users from "./page-dashboard/Users";
 import UserGroup from "./page-dashboard/UserGroup";
 function App() {
 	// const navigate = useNavigate();
@@ -250,6 +251,7 @@ function App() {
 				<Route path="/User" element={<ProtectedRoute><User /></ProtectedRoute>}></Route>
 				<Route path="/addUser" element={<ProtectedRoute><Adduser /></ProtectedRoute>}></Route>
 				<Route path="/edituser/:id" element={<ProtectedRoute><EditUser /></ProtectedRoute>}></Route>
+				<Route path="/Users" element={<Users />}></Route>
 				<Route path="/user-group" element={<ProtectedRoute><UserGroup /></ProtectedRoute>}></Route>
 
 			</Routes>

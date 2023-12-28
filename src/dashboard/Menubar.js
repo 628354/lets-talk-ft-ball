@@ -101,6 +101,7 @@ const  navigate =useNavigate();
                       data-bs-toggle="collapse"
                       className="nav-link px-0 align-middle "
                     >
+                      <i className="fa fa-file" aria-hidden="true"></i>
                       <span className="ms-1 d-none d-sm-inline">Page</span>
                       <i className="ri-arrow-down-s-line"></i>{" "}
                     </Link>
@@ -165,8 +166,9 @@ const  navigate =useNavigate();
                       data-bs-toggle="collapse"
                       className="nav-link px-0 align-middle"
                     >
+                      <i class="fa fa-life-ring" aria-hidden="true"></i>
                       <span className="ms-1 d-none d-sm-inline"> Cafe</span>{" "}
-                      <i class="ri-arrow-down-s-line"></i>{" "}
+                      <i className="ri-arrow-down-s-line"></i>{" "}
                     </Link>
                     <ul
                       className="collapse nav flex-column ms-5"
@@ -193,6 +195,7 @@ const  navigate =useNavigate();
                       data-bs-toggle="collapse"
                       className="nav-link px-0 align-middle"
                     >
+                       <i className="fa fa-star-half-o" aria-hidden="true"></i>
                       <span className="ms-1 d-none d-sm-inline"> Bulk Upload</span>{" "}
                       <i class="ri-arrow-down-s-line"></i>{" "}
                     </Link>
@@ -223,6 +226,7 @@ const  navigate =useNavigate();
                       data-bs-toggle="collapse"
                       className="nav-link px-0 align-middle"
                     >
+                      <i className="fa fa-area-chart" aria-hidden="true"></i>
                       <span className="ms-1 d-none d-sm-inline"> Catalog</span>{" "}
                       <i class="ri-arrow-down-s-line"></i>{" "}
                     </Link>
@@ -261,6 +265,7 @@ const  navigate =useNavigate();
                   </li>
                   <li>
                     <Link to="/uploadMedia" className="nav-link px-0 align-middle">
+                    <i className="fa fa-medium" aria-hidden="true"></i>
                       <span className="ms-1 d-none d-sm-inline">Media</span>
                     </Link>
                   </li>
@@ -297,11 +302,13 @@ const  navigate =useNavigate();
                   </li>
                   {/* <li>
                     <Link to="/User" className="nav-link px-0 align-middle">
+                    <i className="fa fa-user" aria-hidden="true"></i>
                       <span className="ms-1 d-none d-sm-inline">User</span>
                     </Link>
                   </li> */}
                   <li>
                     <Link to="#" className="nav-link px-0 align-middle">
+                    <i className="fa fa-users" aria-hidden="true"></i>
                       <span className="ms-1 d-none d-sm-inline">Customers</span>
                     </Link>
                   </li>

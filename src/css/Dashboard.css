@@ -627,3 +627,33 @@ a.img-thumbnail {
 }
 
 /* 26-12-2023 */
+
+/* 27/12/2023 */
+.form-group-catalog {
+    height: 150px;
+}
+ul.catalog-cart {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding-top: 8px;
+}
+
+ul.catalog-cart li a {
+    /* color: red; */
+    font-size: 14px;
+}
+.catlog {
+    font-size: 14px;
+    text-transform: capitalize;
+}
+.menuitem_s li a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.menuitem_s li a i {
+    width: 17px;
+}
+
+/* 27/12/2023 */

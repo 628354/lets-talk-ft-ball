@@ -62,8 +62,8 @@ getAboutData()
       <Container>
         <div className='row'>
           <div className='col-lg-12 col-md-12 col-sm-12'>
-            <div className='leagues_cont'>
-              <h3>من نحن</h3>
+            <div className='leagues_cont_ar'>
+              <h2>من نحن</h2>
               <div className='leagues_slider'>
             
                 {about?.map((item, index) => (

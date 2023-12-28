@@ -76,39 +76,38 @@ module.exports = {
 
     createTeam: async (req, res) => {
         try {
-            const { Team_Name_English, Team_Name_Short_English, Description_English, SEO_URL, Past_teams_logo_file_names_below,status , logo_folder} = req.body;
-
+            const { SEO_URL, Past_teams_logo_file_names_below, status, logo_folder, en, ar } = req.body;
+    
             const protocol = req.protocol;
             const host = req.hostname;
             const url = `${protocol}//${host}`;
             const addTeam = await teamCatlog.create({
                 leagueid: req.body.leagueid,
                 Image: req.file ? url + "/uploads/" + req.file.filename : " ",
-                logo_folder:logo_folder,
-                Past_teams_logo_file_names_below:Past_teams_logo_file_names_below,
-                SEO_URL:SEO_URL,
-                status: status ,
+                logo_folder: logo_folder,
+                Past_teams_logo_file_names_below: Past_teams_logo_file_names_below,
+                SEO_URL: SEO_URL,
+                status: status,
                 en: {
-                    Team_Name_English: Team_Name_English,
-                    Team_Name_Short_English:Team_Name_Short_English,
-                    Description_English: Description_English,
+                    Team_Name_English: en.Team_Name_English || "",
+                    Team_Name_Short_English: en.Team_Name_Short_English || "",
+                    Description_English: en.Description_English || "",
                 },
                 ar: {
-                    Team_Name_Arabic: Team_Name_English,
-                    Team_Name_Short_Arabic:Team_Name_Short_English,
-                    Description_Arabic: Description_English,
-                   
+                    Team_Name_Arabic: ar.Team_Name_Arabic || "", 
+                    Team_Name_Short_Arabic: ar.Team_Name_Short_Arabic || "", 
+                    Description_Arabic: ar.Description_Arabic || "",
                 },
-              
             });
-
+    
             res.send({ status: true, message: "Successfully add team", teamdetails: addTeam });
         } catch (error) {
             console.error(error);
             res.status(500).send({ status: false, message: "Something went wrong!!", error: error.message });
         }
     },
-    removeteam : async (req, res) => {
+    
+    removeteam: async (req, res) => {
         try {
             const removeteam = await teamCatlog.findByIdAndDelete({ _id: req.params.id })
             if (removeteam) {
@@ -122,12 +121,12 @@ module.exports = {
     },
     teamdetails: async (Request, Response) => {
         const { lung } = Request.params;
-        const data = await teamCatlog.findById({ _id:Request.params.id}, { _id: 1, seasonid: 1, datatype: 1, leagueid: 1, [lung]: 1 });
+        const data = await teamCatlog.findById({ _id: Request.params.id }, { _id: 1, seasonid: 1, datatype: 1, leagueid: 1, [lung]: 1 });
         responseHelper[200].data = data;
         Response.send(responseHelper[200]);
     },
 
-    
+
 }
 
 
