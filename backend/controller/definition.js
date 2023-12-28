@@ -119,25 +119,25 @@ module.exports = {
             })
         }
     },
-
     updatedefinition: async (req, res) => {
         try {
-            const { definition, type, content } = req.body
             const { lung } = req.params
             const protocol = req.protocol;
             const host = req.hostname;
             const url = `${protocol}://${host}`;
+            const { en, ar } = req.body
+
             const update = await definition.findByIdAndUpdate({ _id: req.params.id }, { [lung]: 1 }, {
                 image: req.file ? `${url}/uploads/${req.file.filename}` : '',
                 en: {
-                    definition: definition,
-                    type: type,
-                    content: content
+                    definition: en.definition || "",
+                    type: en.type || "",
+                    content: en.content || ""
                 },
                 ar: {
-                    definition: definition,
-                    type: type,
-                    content: content
+                    definition: ar.definition || "",
+                    type: ar.type || "",
+                    content: ar.content || ""
                 }
 
             })

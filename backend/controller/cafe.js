@@ -4,12 +4,11 @@ const moment = require('moment')
 
 exports.addcafedata = async (req, res) => {
     try {
-        const { en, ar } = req.body;
-
-        const finddata = await cafemodel.findOne({ "en.league_name": en.league_name });
-        if (finddata) {
-            return res.status(400).json({ status: false, message: "League data already present" });
-        }
+        const { details, en, ar } = req.body;
+        // const finddata = await cafemodel.findOne({ "en.league_name": en.league_name });
+        // if (finddata) {
+        //     return res.status(400).json({ status: false, message: "League data already present" });
+        // }
 
         const protocol = req.protocol;
         const host = req.hostname;
@@ -17,19 +16,16 @@ exports.addcafedata = async (req, res) => {
         const date = new Date();
 
         const adddcafe = await cafemodel.create({
+            details: details,
             en: {
-                details: en.details || "",
-                league_name: en.league_name || "",
                 cafecontent: {
                     title: en.cafecontent.title || "",
                     cafe_image: req.files && req.files.cafe_image ? url + "/uploads/" + req.files.cafe_image[0].filename : "",
-                    date: moment(en.cafecontent.date, 'DD-MM-YYYY').toDate(), 
+                    date: moment(en.cafecontent.date, 'DD-MM-YYYY').toDate(),
                     content: en.cafecontent.content || ""
                 }
             },
             ar: {
-                details: ar.details || "",
-                league_name: ar.league_name || "",
                 cafecontent: {
                     title: ar.cafecontent.title || "",
                     cafe_image: req.files && req.files.cafe_image ? url + "/uploads/" + req.files.cafe_image[0].filename : "",
@@ -57,76 +53,57 @@ exports.addcafedata = async (req, res) => {
 
 exports.addcafeleaguesdata = async (req, res) => {
     try {
-        const { title, content } = req.body
-        const { cafe_id } = req.params
+        let { lung } = req.params
+        const protocol = req.protocol;
+        const host = req.hostname;
+        const url = `${protocol}//${host}`;
+        const date = new Date();
+        const { en, ar } = req.body;
 
-        const protocol = req.protocol
-        const host = req.hostname
-        const url = `${protocol}//${host}`
-        const date = new Date()
-        const finddata = await cafemodel.findById(cafe_id)
+        const finddata = await cafemodel.findById({ _id: req.params.id });
         if (!finddata) {
-            res.send({ status: false, message: "cafe data not found" })
-            return
+            res.send({ status: false, message: "Cafe data not found" });
+            return;
         }
 
         const finddataa = await cafemodel.find({
-            'cafecontent': {
-                $elemMatch: { 'title': title }
-            }
-        })
+            'cafecontent.title': en && en.cafecontent ? en.cafecontent.title : null
+        });
 
         if (finddataa.length > 0) {
-            res.send({ status: false, message: "title allready exist" })
-            return
+            res.send({ status: false, message: "Title already exists" });
+            return;
         }
 
-        const findAndAddData = await cafemodel.findByIdAndUpdate({ _id: cafe_id }, {
-            en: {
+        const updatedCafeData = await cafemodel.findByIdAndUpdate(
+            { _id: req.params.id }, { [lung]: 1 },
+            {
                 $push: {
-                    cafecontent: {
-                        title: title,
-                        cafe_image: req.file ? url + "/uploads/" + req.file.filename : "",
-                        date: date,
-                        content: content
-                    }
-                },
-                cafecontent: {
-                    title: title,
-                    cafe_image: req.file ? url + "/uploads/" + req.file.filename : "",
-                    date: date,
-                    content: content
-                }
-
-            },
-            ar: {
-                $push: {
-
-                    cafecontent: {
-                        title: title,
-                        cafe_image: req.file ? url + "/uploads/" + req.file.filename : "",
-                        date: date,
-                        content: content
+                    'en.cafecontent': {
+                        title: en && en.cafecontent ? en.cafecontent.title || "" : "",
+                        cafe_image: req.files && req.files.cafe_image ? url + "/uploads/" + req.files.cafe_image[0].filename : "",
+                        date: en && en.cafecontent ? moment(en.cafecontent.date, 'DD-MM-YYYY').toDate() : null,
+                        content: en && en.cafecontent ? en.cafecontent.content || "" : ""
                     },
-
-                    cafecontent: {
-                        title: title,
-                        cafe_image: req.file ? url + "/uploads/" + req.file.filename : "",
-                        date: date,
-                        content: content
+                    'ar.cafecontent': {
+                        title: ar && ar.cafecontent ? ar.cafecontent.title || "" : "",
+                        cafe_image: req.files && req.files.cafe_image ? url + "/uploads/" + req.files.cafe_image[0].filename : "",
+                        date: ar && ar.cafecontent ? moment(ar.cafecontent.date, 'DD-MM-YYYY').toDate() : null,
+                        content: ar && ar.cafecontent ? ar.cafecontent.content || "" : ""
                     }
-
-
                 }
-            }
+            },
+            { new: true }
+        );
 
-        }, { new: true })
-        await findAndAddData.save()
-        res.send({ status: true, message: "Successfully add cafe content", cafedetails: findAndAddData })
+        res.send({ status: true, message: "Successfully add cafe content", cafedetails: updatedCafeData });
     } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
+        res.status(500).send({ status: false, message: "Internal Server Error", error: error.message });
     }
-}
+};
+
+
 
 exports.updatecafecontent = async (req, res) => {
     try {
@@ -190,7 +167,8 @@ exports.cafe_details = async (req, res) => {
 exports.getAllCafe = async (req, res) => {
     try {
         const { lung } = req.params
-        const cafe = await cafemodel.find({}, { [lung]: 1 })
+        const cafe = await cafemodel.find({}, { [lung]: 1 }).populate({ path: "userId", select: ["userName "] })
+
         res.status(200).send({
             body: cafe,
             message: 'Get All Cafe Successfully',
