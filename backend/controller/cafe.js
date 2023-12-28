@@ -167,8 +167,7 @@ exports.cafe_details = async (req, res) => {
 exports.getAllCafe = async (req, res) => {
     try {
         const { lung } = req.params
-        const cafe = await cafemodel.find({}, { [lung]: 1 }).populate({ path: "userId", select: ["userName "] })
-
+        const cafe = await cafemodel.find({}, { [lung]: 1 })
         res.status(200).send({
             body: cafe,
             message: 'Get All Cafe Successfully',
