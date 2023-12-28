@@ -39,7 +39,7 @@ getAboutData()
        <div className='en_bread_crumb ar_bread_crumb'>
       
          <Container>
-         <ul className='en_creat_nav ar_creat_nav'>
+         <ul className='en_creat_nav'>
             <li>
               <Link to="/">Home</Link>
             </li>

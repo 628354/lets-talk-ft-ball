@@ -5,6 +5,9 @@
 h2 {
   font-family: var(--nato-font);
 }
+
+
+
 /*  */
 
 
@@ -159,3 +162,11 @@ span.ar_number_pass {
   border-right: 4px solid red;
 }
 
+
+/* ul.ar_creat_nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+ */
