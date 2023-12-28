@@ -41,6 +41,7 @@ const getFormData = async (e) => {
     console.error("Error while sending data:", error);
   }
 };
+
   return (
     <div>
       <section className='en_hero_about en_hero_about'>
