@@ -4,59 +4,44 @@ const mongoose = require('mongoose');
 const Helpers = require('../Helpers/Helpers')
 const responseHelper = require('../Helpers/Response');
 
-
-
-
 exports.addleague = async (req, res) => {
     try {
-        const {
-            teamId,
-            sessionId,
-            leaguedataId,
-            leaguename,
-            description,
-            meta_Tag_Title,
-            meta_Tag_Description,
-            meta_Tag_Keywords,
-            blog_Category,
-            sort_Order,
-            status
-        } = req.body;
-
         const protocol = req.protocol;
         const host = req.hostname;
         const url = `${protocol}://${host}`;
+        const { en, ar } = req.body;
 
-        const find = await leaguemodel.findOne({ leaguename: leaguename });
-        if (!find) {
+        const find = await leaguemodel.findOne({ leaguename: en.leaguename });
+        if (find) {
             res.status(400).send({ status: false, message: "League already present" });
             return;
         }
 
-        const addLeague = await leaguemodel.create({
-            sessionId: sessionId,
-            image: req.file ? url + "/uploads/" + req.file.filename : " ",
+        const addLeague = new leaguemodel({
             en: {
-                leaguename: leaguename,
-                description: description,
-                meta_Tag_Title: meta_Tag_Title,
-                meta_Tag_Description: meta_Tag_Description,
-                meta_Tag_Keywords: meta_Tag_Keywords,
-                blog_Category: blog_Category,
-                sort_Order: sort_Order,
-                status: status
+                leaguename: en.leaguename || '',
+                image: en.image ? `${url}/uploads/${en.image}` : '',
+                description: en.description || '',
+                meta_Tag_Title: en.meta_Tag_Title || '',
+                meta_Tag_Description: en.meta_Tag_Description || '',
+                meta_Tag_Keywords: en.meta_Tag_Keywords || '',
+                blog_Category: en.blog_Category || "",
+                sort_Order: en.sort_Order || "",
+                status: en.status || "active"
             },
             ar: {
-                leaguename: leaguename,
-                description: description,
-                meta_Tag_Title: meta_Tag_Title,
-                meta_Tag_Description: meta_Tag_Description,
-                meta_Tag_Keywords: meta_Tag_Keywords,
-                blog_Category: blog_Category,
-                sort_Order: sort_Order,
-                status: status
+                leaguename: ar.leaguename || '',
+                image: ar.image ? `${url}/uploads/${ar.image}` : '',
+                description: ar.description || '',
+                meta_Tag_Title: ar.meta_Tag_Title || '',
+                meta_Tag_Description: ar.meta_Tag_Description || '',
+                meta_Tag_Keywords: ar.meta_Tag_Keywords || '',
+                blog_Category: ar.blog_Category || "",
+                sort_Order: ar.sort_Order || "",
+                status: ar.status || "active"
             }
-        })
+        });
+
         const result = await addLeague.save();
         res.status(200).send({
             body: result,
@@ -101,7 +86,7 @@ exports.getleagues = async (Request, Response) => {
             const update = await leaguemodel.findByIdAndUpdate(req.params.leagueId, {
                 image: req.file ? url + "/uploads/" + req.file.filename : "",
                 en: {
-                    leaguename:leaguename,
+                    leaguename: leaguename,
                     description: description,
                     meta_Tag_Title: meta_Tag_Title,
                     meta_Tag_Description: meta_Tag_Description,
@@ -111,7 +96,7 @@ exports.getleagues = async (Request, Response) => {
                     status: status
                 },
                 ar: {
-                    leaguename:leaguename,
+                    leaguename: leaguename,
                     description: description,
                     meta_Tag_Title: meta_Tag_Title,
                     meta_Tag_Description: meta_Tag_Description,

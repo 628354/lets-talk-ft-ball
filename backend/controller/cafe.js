@@ -1,11 +1,12 @@
 const cafemodel = require("../model/cafe")
 const responseHelper = require('../Helpers/Response');
+const moment = require('moment')
 
 exports.addcafedata = async (req, res) => {
     try {
-        const { details, title, content, league_name } = req.body;
+        const { en, ar } = req.body;
 
-        const finddata = await cafemodel.findOne({ league_name: league_name });
+        const finddata = await cafemodel.findOne({ "en.league_name": en.league_name });
         if (finddata) {
             return res.status(400).json({ status: false, message: "League data already present" });
         }
@@ -17,26 +18,25 @@ exports.addcafedata = async (req, res) => {
 
         const adddcafe = await cafemodel.create({
             en: {
-                details: details,
-                league_name: league_name,
+                details: en.details || "",
+                league_name: en.league_name || "",
                 cafecontent: {
-                    title: title,
+                    title: en.cafecontent.title || "",
                     cafe_image: req.files && req.files.cafe_image ? url + "/uploads/" + req.files.cafe_image[0].filename : "",
-                    date: date,
-                    content: content
+                    date: moment(en.cafecontent.date, 'DD-MM-YYYY').toDate(), 
+                    content: en.cafecontent.content || ""
                 }
             },
             ar: {
-                details: details,
-                league_name: league_name,
+                details: ar.details || "",
+                league_name: ar.league_name || "",
                 cafecontent: {
-                    title: title,
+                    title: ar.cafecontent.title || "",
                     cafe_image: req.files && req.files.cafe_image ? url + "/uploads/" + req.files.cafe_image[0].filename : "",
-                    date: date,
-                    content: content
+                    date: moment(ar.cafecontent.date, 'DD-MM-YYYY').toDate(),
+                    content: ar.cafecontent.content || ""
                 }
             }
-
         });
 
         if (adddcafe) {
@@ -50,6 +50,7 @@ exports.addcafedata = async (req, res) => {
         return res.status(500).json({ status: false, message: "Internal Server Error", error: error.message });
     }
 };
+
 
 
 //add data in  cafe leagues .....................................................
@@ -160,35 +161,66 @@ exports.updatecafecontent = async (req, res) => {
         console.log(error.message)
     }
 }
-exports.cafe_details = async (Request, Response) => {
-    const { lung } = Request.params;
-    const cafe = await cafemodel.findById({ _id: Request.params.id }, { _id: 1, seasonid: 1, datatype: 1, leagueid: 1, [lung]: 1 }); responseHelper[200].data = cafe;
-    Response.send(responseHelper[200]);
+
+exports.cafe_details = async (req, res) => {
+    try {
+        const { lung } = req.params
+        const cafe = await cafemodel.findById({ _id: req.params.id }, { [lung]: 1 })
+        if (cafe) {
+            res.status(200).send({
+                body: cafe,
+                message: 'Get Cafe By Id Successfully',
+                success: true
+            })
+        } else {
+            res.status(300).send({
+                message: 'Cafe Id Not Found',
+                success: false
+            })
+        }
+    } catch (error) {
+        res.status(500).send({
+            message: "Enternal server Error",
+            success: false,
+            error: error.message
+        })
+    }
 }
 
-exports.getAllCafe = async (Request, Response) => {
-    const { lung } = Request.params;
-    const cafe = await cafemodel.find({}, { [lung]: 1 })
-    responseHelper[200].data = cafe;
-    Response.send(responseHelper[200]);
-},
-
-    exports.deleteCafe = async (req, res) => {
-        try {
-            const deleteCaf = await cafemodel.findByIdAndDelete({ _id: req.params.id })
-            if (deleteCaf) {
-                res.send(200).send({
-                    body: deleteCaf,
-                    message: 'Cafe Deleted Successfully',
-                    success: true
-                })
-            } else {
-                res.send(300).send({
-                    message: 'Cafe Id Not Found',
-                    success: false
-                })
-            }
-        } catch (error) {
-            console.log(error.message)
-        }
+exports.getAllCafe = async (req, res) => {
+    try {
+        const { lung } = req.params
+        const cafe = await cafemodel.find({}, { [lung]: 1 })
+        res.status(200).send({
+            body: cafe,
+            message: 'Get All Cafe Successfully',
+            success: true
+        })
+    } catch (error) {
+        res.status(500).send({
+            message: "Enternal server Error",
+            success: false,
+            error: error.message
+        })
     }
+}
+
+exports.deleteCafe = async (req, res) => {
+    try {
+        const deleteCaf = await cafemodel.findByIdAndDelete({ _id: req.params.id })
+        if (deleteCaf) {
+            res.send(200).send({
+                body: deleteCaf,
+                message: 'Cafe Deleted Successfully',
+                success: true
+            })
+        } else {
+            res.send(300).send({
+                message: 'Cafe Id Not Found',
+                success: false
+            })
+        }
+    } catch (error) {
+        console.log(error.message)
+    }
+}

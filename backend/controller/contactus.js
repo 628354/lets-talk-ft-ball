@@ -12,18 +12,11 @@ exports.sendContactus = async (req, res) => {
             message: message
         }
         const savedContact = await contactus.create({
-            en: {
                 name: name,
                 email: email,
                 subject: subject,
                 message: message
-            },
-            ar: {
-                name: name,
-                email: email,
-                subject: subject,
-                message: message
-            }
+           
         })
         sendContactusEmail(data)
         res.send({ status: true, message: "Successfully send details to admin", details: savedContact })
