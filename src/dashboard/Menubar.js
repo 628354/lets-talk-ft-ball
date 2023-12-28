@@ -15,6 +15,18 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 
 export default function Menubar() {
+
+  const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
+
+  const handleSubMenuToggle = () => {
+    setIsSubMenuVisible(!isSubMenuVisible);
+  };
+
+
+
+
+
+  
 const  navigate =useNavigate();
   // const [post, setPost] = React.useState([]);
   // React.useEffect(() => {
@@ -90,7 +102,8 @@ const  navigate =useNavigate();
                   id="menu"
                 >
                   <li className="nav-item">
-                    <Link to="/Dashboard" className="nav-link align-middle px-0">
+                    <Link to="/Dashboard"
+                     className="nav-link align-middle px-0">
                       <i class="ri-dashboard-line"></i>{" "}
                       <span className="ms-1 d-none d-sm-inline">Dashboard</span>
                     </Link>
@@ -100,6 +113,7 @@ const  navigate =useNavigate();
                       to="#submenu2"
                       data-bs-toggle="collapse"
                       className="nav-link px-0 align-middle "
+                      
                     >
                       <i className="fa fa-file" aria-hidden="true"></i>
                       <span className="ms-1 d-none d-sm-inline">Page</span>
@@ -220,6 +234,7 @@ const  navigate =useNavigate();
 
                     </ul>
                   </li>
+
                   <li>
                     <Link
                       to="#submenu3"
@@ -271,17 +286,18 @@ const  navigate =useNavigate();
                   </li>
                   <li>
                     <Link
-                      to="#submenu3"
+                      to="#submenu23"
                       data-bs-toggle="collapse"
                       className="nav-link px-0 align-middle"
                     >
+                      <i className="fa fa-user" aria-hidden="true"></i>
                       <span className="ms-1 d-none d-sm-inline"> User</span>{" "}
                       <i class="ri-arrow-down-s-line"></i>{" "}
                     </Link>
                     
                     <ul
                       className="collapse nav flex-column ms-5"
-                      id="submenu3"
+                      id="submenu23"
                       data-bs-parent="#menu"
                     >
                       <li className="w-100">
@@ -357,6 +373,8 @@ const  navigate =useNavigate();
                       </li>
                     </ul>
                   </li> */}
+                  
+                   
                 </ul>
                 <hr />
               </div>
