@@ -28,7 +28,7 @@ export const SESSION = {
 };
 
 export const LEAGUES = {
-  league: `${SERVER_LINK}getleagues`,
+  league: `${SERVER_LINK}en/getleagues`,
 };
 
 export const CATLOGS = {
@@ -49,8 +49,10 @@ export const GS_GC = {
 export const FIND_TEAM = {
   find: `${SERVER_LINK}en/scrolldown/find`,
 };
+
 export const GET_TEAM_ID = {
-  find: `${SERVER_LINK}getleagusById`,
+  finden: `${SERVER_LINK}en/getleagusById`,
+  findar: `${SERVER_LINK}ar/getleagusById`,
 };
 export const SESSIOND = {
   year: `${SERVER_LINK}getyears`,
@@ -138,11 +140,14 @@ export const CONTACT_FORM = {
 
 };
 export const ABOUT_US = {
-  find: `${SERVER_LINK}getaboutus`,
+  finden: `${SERVER_LINK}en/getaboutus`,
+  findar:`${SERVER_LINK}ar/getaboutus`
+
 
 };
 export const DEFINATION = {
-  find: `${SERVER_LINK}getAllDefinition`,
+  finden: `${SERVER_LINK}en/getAllDefinition`,
+  findar: `${SERVER_LINK}ar/getAllDefinition`,
 
 };
 export const GET_USER = {
@@ -178,7 +183,11 @@ export const DELETE_USER = {
   delete: `${SERVER_LINK}deleteUser`,
 
 };
+export const GET_CAFE = {
+  cafeen: `${SERVER_LINK}en/getAllCafe`,
+  cafear: `${SERVER_LINK}ar/getAllCafe`,
 
+};
 
 
 

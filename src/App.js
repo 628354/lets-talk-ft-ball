@@ -1,6 +1,6 @@
 /** @format */
 
-// import "./css/arstyle.css";
+import "./css/arstyle.css";
 import "./css/enstyle.css";
 import "./responsive/arstyle.css";
 import "./responsive/enstyle.css";

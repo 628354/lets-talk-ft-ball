@@ -7,21 +7,23 @@ import {DEFINATION, REQUEST_TYPE} from '../helper/APIInfo';
 export default function Definition() {
   
   const [defination,setDefination]=useState([]);
-
+const lang="en"
+const data =[]
   const getDefination= async()=>{
-    const res = await apiCall(DEFINATION.find, REQUEST_TYPE.GET);
-    console.log(res.response.data?.body);
-    res.response.data?.body.map((item)=>{
-      console.log(item.definition);
-      setDefination(item.definition);
+    const res = await apiCall(DEFINATION.finden, REQUEST_TYPE.GET);
+    console.log(res.response?.data?.body);
+    res.response?.data?.body?.map((item)=>{
+      console.log(item[lang]);
+      data.push(item[lang])
+     // setDefination(item.definition);
     })
-  
+  setDefination(data)
   }
 
   useEffect(()=>{
     getDefination()
   },[])
-
+//console.log(defination);
 
   return (
     <div>
@@ -58,7 +60,7 @@ export default function Definition() {
             </div>
             <div className='en_defintion_r ar_defintion_r'>
               <div className='row'>
-              {defination.map((definition, index) => (
+              {defination?.map((definition, index) => (
                     <div className='col-lg-6 col-md-6 col-sm-12' key={index}>
                       <div className='en_defintion_contant ar_defintion_contant'>
                         <h5>

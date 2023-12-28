@@ -11,7 +11,7 @@ import CahrtGsGc from "../Leagues-components/CahrtGsGc";
 
 import { apiCall } from "../helper/RequestHandler";
 import { REQUEST_TYPE, SESSION,FIND_TEAM ,GET_TEAM_ID,SESSIOND} from "../helper/APIInfo";
-export default function PremierLeague() {
+export default function PremierLeagueAr() {
 	
 	
 	const [leagueDecreption, setLeagueDecreption] = useState([]);
@@ -26,7 +26,7 @@ const leagueId = sessionStorage.getItem("selectedLeagueId")
 	
 	const getLeagueDetails=()=>{
 		console.log(leagueId);
-		const baseUrl = GET_TEAM_ID.find;
+		const baseUrl = GET_TEAM_ID.finden;
 		const apiUrl =`${baseUrl}/${leagueId}`
 		try{
 			apiCall(apiUrl,REQUEST_TYPE.GET).then((response)=>{

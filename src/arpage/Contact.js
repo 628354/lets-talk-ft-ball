@@ -1,9 +1,46 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
+import { apiCall } from '../helper/RequestHandler';
+import {CONTACT_FORM, REQUEST_TYPE}  from "../helper/APIInfo";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    "name": "",
+    "email": "",
+    "subject": "",
+    "message": ""
+  });
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+  
+  console.log(formData);
+  
+  const getFormData = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await apiCall(CONTACT_FORM.find, REQUEST_TYPE.POST, formData);
+      console.log(response);
+  
+      if (response.status === 200 && response.hasError === false) {
+        console.log("Data successfully sent to the server");
+  
+        // Reset the form data
+       
+      }
+  
+    } catch (error) {
+      console.error("Error while sending data:", error);
+    }
+  };
+
   return (
     <div>
     <section className='en_hero_about en_hero_about'>
@@ -51,21 +88,21 @@ export default function Contact() {
             <Form>
             <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
                 <Form.Label>الاسم</Form.Label>
-                <Form.Control type="text" placeholder="" />
+                <Form.Control type="text" placeholder="" name="name" onChange={handleChange}/>
               </Form.Group>
               <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
                 <Form.Label>البريد الالكتروني</Form.Label>
-                <Form.Control type="email" placeholder="" />
+                <Form.Control type="email" placeholder="" name="email" onChange={handleChange}/>
               </Form.Group>
               <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
                 <Form.Label>Subject</Form.Label>
-                <Form.Control type="text" placeholder="" />
+                <Form.Control type="text" placeholder=""  name="subject" onChange={handleChange} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
               <Form.Label>الموضوع</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Control as="textarea" rows={3} name="message"onChange={handleChange}/>
             </Form.Group>
-            <button className='en_send_m ar_send_m'>أرسل رسالة</button>
+            <button className='en_send_m ar_send_m' onClick={getFormData}>أرسل رسالة</button>
               
             </Form>
             </div>

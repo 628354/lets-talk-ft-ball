@@ -7,26 +7,44 @@ import Blog from "../components/Blog";
 import sdata from "./Blog_date";
 import Pagination from "react-bootstrap/Pagination";
 import { useEffect, useState } from "react";
-
+import { apiCall } from "../helper/RequestHandler";
+import { REQUEST_TYPE, GET_CAFE} from "../helper/APIInfo";
 export default function Cafe() {
 	const [blogData, setBlogData] = useState([]);
+const [blogDetails,setBlogDetails]=useState([])
+	const getCafe =async()=>{
+		const lang ='en'
+		const data =[]
+		const data1 =[]
+		
+			const response = await apiCall(GET_CAFE.cafeen,REQUEST_TYPE.GET
+			);
+			//console.log(response.response?.data?.data);
+			response.response?.data?.data.map((item)=>{
+				//console.log(item[lang]);
+				
+				data.push(item[lang])
+			})
+			
+				data.map((items)=>{
+					//console.log(items?.cafecontent);
+					return items?.cafecontent.map((item)=>{
+						console.log(item);
+						setBlogData(item)
+					})
+				});
+				//console.log(data1);
+				
+				setBlogDetails(data)
+			// console.log(response)
+			//setBlogData(data1)
+			
+		};
+		
+		console.log(blogData);
 
 	useEffect(() => {
-		const fetchData = async () => {
-			const response = await fetch(
-				`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues`,
-				{ method: "GET" }
-			);
-			if (response.ok) {
-				const jsonData = await response.json();
-				setBlogData(jsonData.leaguedetails);
-				console.log(jsonData);
-			}
-			// console.log(response)
-		};
-		console.log(typeof blogData);
-
-		fetchData();
+		getCafe()
 	}, []);
 	console.log(blogData);
 
@@ -81,13 +99,14 @@ export default function Cafe() {
 					</div>
 					<div className="en_blog_main ar_blog_main container ">
 						<div className="blog-container row ">
-							{blogData.map((data) => {
+							{blogDetails?.map((data) => {
+								console.log(data)
 								return (
-									<div className="col-lg-6 col-md-6 col-sm-12 w-50 mb-3	 "key={data.createdAt} >
-										<Blog blogData={data} />
+									<div className="col-lg-6 col-md-6 col-sm-12 w-50 mb-3	 ">
+										<Blog  blogDetails={data}  blogData={blogData} />
 									</div>
-								);
-							})}
+								 );
+							})} 
 						</div>
 					</div>
 					<div className="en_pagintion ar_pagintion">

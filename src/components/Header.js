@@ -34,10 +34,11 @@ export default function Header() {
 		setShowDropdown(false);
 	};
 	const { language, switchLanguage } = useLanguage();
-	const handleLanguageChange = (newLanguage) => {
-		switchLanguage(newLanguage);
-	};
 
+	const handleLanguageChange = (newLanguage, event) => {
+		event.preventDefault(); // Prevent the default behavior of the link
+		switchLanguage(newLanguage);
+	  };
 	/// get leagus  start
 
 	const getLeagueName = async () => {
@@ -74,17 +75,8 @@ export default function Header() {
 					<Container>
 						<div className="row ar_flex">
 							<div className="col-lg-6 col-md-6 col-6">
-								<div
-									className="ar_icon"
-									onClick={() => handleLanguageChange("ar")}>
-									<Link to="/">
-										<img
-											src={require("../img/earth-icon.png")}
-											alt="earth"
-											className="brand-rearth"
-										/>
-										العربية
-									</Link>
+								<div className="ar_icon">
+									<Link to="#" onClick={(e) => handleLanguageChange("ar", e)}>العربية</Link>
 								</div>
 							</div>
 							<div className="col-lg-6 col-md-6 col-6">

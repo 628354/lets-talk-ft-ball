@@ -5,26 +5,39 @@ import { Link } from 'react-router-dom';
 import Menubar from '../dashboard/Menubar';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
+import { apiCall } from '../helper/RequestHandler';
+import { LEAGUES, REQUEST_TYPE } from '../helper/APIInfo';
 
 
 
 export default function Leagues() {
   const [aboutData, setAboutData] = useState([]);
   const [itemId, setItemId] = useState(0); 
+
+
+  const getAllLeagues=async()=>{
+    const response = await apiCall(LEAGUES.league,REQUEST_TYPE.GET)
+    console.log(response.response.data?.leaguedetails);
+    setAboutData(response.response.data?.leaguedetails);
+    // response.response.data?.leaguedetails?.map((item)=>{
+    //   console.log(item.en);
+    // })
+  }
   useEffect(() => {
-
-   axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues')
+    getAllLeagues()
+  // //  axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues')
   //  axios.get('http://localhost:5000/getleagues')
-      .then((response) => {
-        const aboutInfo = response.data?.leaguedetails
-        setAboutData(aboutInfo);
-        setItemId(aboutInfo._id); 
+  //     .then((response) => {
+  //       const aboutInfo = response.data?.leaguedetails
+  //       console.log(response)
+  //       setAboutData(aboutInfo);
+  //       setItemId(aboutInfo._id); 
 
 
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching data:', error);
+  //     });
   }, []);
 
   const handleDelete = (id) => {
@@ -105,11 +118,13 @@ export default function Leagues() {
                     </tr>
                   </thead>
                   <tbody className='table-list-one'>
-                    {aboutData.map((league) => (
+                    {aboutData.map((league) =>{ 
+                     console.log(league);
+                      return(
                       <tr key={league._id}>
                         <td><Form.Check aria-label="option 1" /></td>
-                        <td>{league.leaguename}</td>
-                        <td>{league.sort_Order}</td>
+                        <td>{league?.en.leaguename}</td>
+                        <td>{league?.en.sort_Order}</td>
                         <td>
                           <div className='add-button-fis'>
                             
@@ -128,7 +143,7 @@ export default function Leagues() {
                           </div>
                         </td>
                       </tr>
-                    ))}
+                    )})}
                   </tbody>
                 </Table>
                 <div className='table-footer-f'>

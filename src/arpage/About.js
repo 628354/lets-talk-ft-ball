@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import { apiCall } from '../helper/RequestHandler';
+import { useLanguage } from '../languages/LanguageContext';
+import {ABOUT_US, REQUEST_TYPE} from '../helper/APIInfo';
 export default function About() {
+  const [about,setAbout]=useState([]);
+  //const { language } = useLanguage(); // Assuming useLanguage hook provides the current language
+  const lang =  'ar';
+  const data =[]
+// const lang ="en"
+  const getAboutData= async()=>{
+    const res = await apiCall(ABOUT_US.findar, REQUEST_TYPE.GET);
+    console.log(res.response.data.data);
+    res.response.data.data?.map((item)=>{
+      data.push(item[lang]);
+    })
+    console.log(data);
+setAbout(data);
+  }
+
+useEffect(()=>{
+getAboutData()
+  },[lang])
+
+
+
+
   return (
     <div>
       <section className='en_hero_about en_hero_about'>
@@ -41,20 +65,21 @@ export default function About() {
             <div className='leagues_cont'>
               <h3>من نحن</h3>
               <div className='leagues_slider'>
-                <div className='row'>
-                <div className='col-lg-6 col-md-6 col-sm-12 en_right_border'>
-                    <div className='ar_about_img'>
-                    <img src={require('../img/about-img.jpg')} alt="earth" className="about"/>
+            
+                {about?.map((item, index) => (
+                    <div className={`row mb-5 ${index  % 2 === 0 ? 'en_left_border' : 'en_right_border'} `} key={index} id={item?._id}>
+                      <div className="col-lg-6 col-md-6 col-sm-12">
+                        <div className={`${index  % 2 === 0 ? 'en_about_contant' : 'en_about_contant_right'} `}>
+                          <h5>{item?.aboutText}</h5>
+                        </div>
+                      </div>
+                      <div className="col-lg-6 col-md-6 col-sm-12">
+                        <div className='en_about_img'>
+                          <img src={require('../img/about-img.jpg')} alt="earth" className="about" />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className='col-lg-6 col-md-6 col-sm-12 en_left_border m-auto'>
-                    <div className='ar_about_contant ' >
-                      <h5 dir="rtl">نحن فريق صغير مغرم بكرة القدم. لقد أجرينا العديد من المناقشات حول أداء فرقنا المفضلة ولكن لم نتمكن من الوصول إلى بيانات أداء قوية وسهلة الاستخدام. لقد قررنا أن نفعل شيئًا حيال ذلك ، وقد أدى ذلك لانشاء موقع Lets Talk ft Ball او يلا نسولف كورة</h5>
-                    </div>
-                  </div>
-                  
-                </div>
-               
+                  ))}
 
               </div>
             </div>
