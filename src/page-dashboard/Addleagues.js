@@ -224,7 +224,7 @@ export default function Addleagues() {
                                 League Name
                               </Form.Label>
                               <Col sm="10">
-                                <Form.Control type="text" placeholder="League Namee" />
+                                <Form.Control type="text" placeholder="League Name3" />
                               </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
@@ -240,7 +240,8 @@ export default function Addleagues() {
                                 League Description
                               </Form.Label>
                               <Col sm="10">
-                                <ReactQuill className='edit-text' value={formData} onChange={handleChange} />
+                                <ReactQuill className='edit-text' value={formData.description}
+                                 onChange={(value) => handleChange('description', value)} />
                               </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">

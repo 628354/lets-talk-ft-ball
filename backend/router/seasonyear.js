@@ -4,7 +4,7 @@ const { authentication } = require('../middleware/auth')
 const seasonyearController = require("../controller/seasonyear");
 
 router.post("/addseasonyear", seasonyearController.addleagueyear);
-router.get("/getyears", seasonyearController.getyears);
+router.get("/:lung/getyears", seasonyearController.getyears);
 router.get("/getseasonById/:id", seasonyearController.getById);
 router.post("/updateSeasonyear/:yearId", seasonyearController.updateyears);
 router.delete("/removeyear/:id", seasonyearController.removeyear);

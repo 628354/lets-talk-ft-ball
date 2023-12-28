@@ -1,18 +1,47 @@
 const mongoose = require("mongoose");
-
-const definitionSchema = mongoose.Schema(
+const definitionSchema = new mongoose.Schema(
   {
-    image: { type: String, required: true, default: "" },
-    definition: [
-      {
-        type: { type: String, required: true, default: "" },
-        content: { type: String, required: true, default: "" },
-      },
-    ],
+    image: { type: String, default: "" },
+    en: {
+      definition: { type: String, default: "" },
+      type: { type: String, default: "" },
+      content: { type: String, default: "" },
+    },
+    ar: {
+      definition: { type: String, default: "" },
+      type: { type: String, default: "" },
+      content: { type: String, default: "" },
+    },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
+const definition = mongoose.model("definition", definitionSchema);
+module.exports = definition;
 
-module.exports = mongoose.model("definition", definitionSchema);
+// const definitionSchema = mongoose.Schema(
+//   {
+//     image: { type: String, default: "" },
+//     en: {
+//       definition: [
+//         {
+//           type: { type: String, default: "" },
+//           content: { type: String, default: "" },
+//         },
+//       ],
+//     },
+//     ar: {
+//       definition: [
+//         {
+//           type: { type: String, default: "" },
+//           content: { type: String, default: "" },
+//         },
+//       ],
+//     }
+
+//   },
+//   {
+//     timestamps: true,
+//   }
+// );
+
+// module.exports = mongoose.model("definition", definitionSchema);

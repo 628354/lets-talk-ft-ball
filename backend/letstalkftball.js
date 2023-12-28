@@ -32,7 +32,6 @@ const path = require('path');
 const admin = require("./router/admin")
 const user = require("./router/user")
 const league = require("./router/league")
-const team = require("./router/team")
 const seasonyear = require("./router/seasonyear")
 const leaguedata = require("./router/leaguedata")
 const aboutus = require("./router/aboutus")
@@ -65,7 +64,6 @@ mongoose.connect(process.env.MONGO_URI,
 
 app.use("/", user)
 app.use("/", league)
-app.use("/", team)
 app.use("/", admin)
 app.use("/", seasonyear)
 app.use("/", leaguedata)

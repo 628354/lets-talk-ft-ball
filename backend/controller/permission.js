@@ -4,14 +4,22 @@ const usermodel = require('../model/user')
 module.exports = {
     create: async (req, res) => {
         try {
-            const finduser = await usermodel.findOne({ _id: req.user.id })
-            if (finduser) {
-                throw new Error('User Not found')
-            }
+            const AdminPermissions = [
+                {
+                    username: "admin",
+                    permissions: [
+                        { route: "/aboutus" },
+                        { route: "/leagues" },
+                        { route: "/teams" },
+                    ],
+                },
+
+            ];
             const permissions = await permission.create(req.body);
             const result = await permissions.save();
             res.status(200).send({
                 body: result,
+                AdminPermissions,
                 message: "Permission Create Successfully",
                 success: true,
             });
@@ -47,9 +55,10 @@ module.exports = {
             });
         }
     },
+
     getAll: async (req, res) => {
         try {
-            const permissions = await permission.find();
+            const permissions = await permission.find().select('userGroup');;
             res.status(200).send({
                 body: permissions,
                 message: "Get All Permission Successfully",
@@ -63,6 +72,7 @@ module.exports = {
             });
         }
     },
+
     update: async (req, res) => {
         try {
             const { id, type } = req.body;

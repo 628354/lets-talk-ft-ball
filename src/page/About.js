@@ -4,22 +4,27 @@ import { Link } from 'react-router-dom';
 import { apiCall } from '../helper/RequestHandler';
 
 import {ABOUT_US, REQUEST_TYPE} from '../helper/APIInfo';
+//import { useLanguage } from '../languages/LanguageContext';
 export default function About() {
 
   const [about,setAbout]=useState([]);
-
+  //const { language } = useLanguage(); // Assuming useLanguage hook provides the current language
+  const lang ='en';
+  const data =[]
+// const lang ="en"
   const getAboutData= async()=>{
-    const res = await apiCall(ABOUT_US.find, REQUEST_TYPE.GET);
-    console.log(res.response.data?.body);
-    // res.response.data?.body?.map((item)=>{
-    //   console.log(item);
-    // })
-setAbout(res.response.data?.body);
+    const res = await apiCall(ABOUT_US.finden, REQUEST_TYPE.GET);
+    console.log(res.response.data.data);
+    res.response.data.data?.map((item)=>{
+      data.push(item[lang]);
+    })
+    console.log(data);
+setAbout(data);
   }
 
 useEffect(()=>{
 getAboutData()
-  },[])
+  },[lang])
 
 
 
@@ -63,10 +68,10 @@ getAboutData()
               <div className='leagues_slider'>
             
                 {about?.map((item, index) => (
-                    <div className={`row mb-5 ${index  % 2 === 0 ? 'en_left_border' : 'en_right_border'} `} key={index} id={item._id}>
+                    <div className={`row mb-5 ${index  % 2 === 0 ? 'en_left_border' : 'en_right_border'} `} key={index} id={item?._id}>
                       <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className={`${index  % 2 === 0 ? 'en_about_contant' : 'en_about_contant_right'} `}>
-                          <h5>{item.aboutText}</h5>
+                          <h5>{item?.aboutText}</h5>
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-12">

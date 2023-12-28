@@ -66,7 +66,7 @@ const  navigate =useNavigate();
 								src={require("../img/profile-45x45.png")}
 								alt="earth"
 								className="logo-profile"
-							/></span>  nardsub nardsub 
+							/></span>nardsub nardsub 
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
