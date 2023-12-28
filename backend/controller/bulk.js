@@ -78,13 +78,15 @@ exports.leagedBlukImport = async (req, res) => {
       const map = new Map(Object.entries(data[i]));
       const keys = map.keys(data[i])
       for (const key of map.keys(data[i])) {
-        const words = key.split(' ');
+        const wordData = key.replace(sheetName, '')
+        const words = wordData.split(' ')
         words.shift();
         const modifiedString = words.join('_');
         myData[modifiedString] = data[i][key]
         // data[i][modifiedString]= data[i][key];
       }
-
+     
+        
       if (myData.POINTS_ACCUMULATED) {
         sheetsTeamData.push({
           NO_OF_GAMES: myData['NO._OF_GAMES'],

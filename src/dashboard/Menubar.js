@@ -270,11 +270,42 @@ const  navigate =useNavigate();
                     </Link>
                   </li>
                   <li>
+                    <Link
+                      to="#submenu3"
+                      data-bs-toggle="collapse"
+                      className="nav-link px-0 align-middle"
+                    >
+                      <span className="ms-1 d-none d-sm-inline"> User</span>{" "}
+                      <i class="ri-arrow-down-s-line"></i>{" "}
+                    </Link>
+                    
+                    <ul
+                      className="collapse nav flex-column ms-5"
+                      id="submenu3"
+                      data-bs-parent="#menu"
+                    >
+                      <li className="w-100">
+                        <Link to="/User" className="nav-link px-0">
+                          {" "}
+                          <span className="d-none d-sm-inline">User</span>
+                        </Link>
+                      </li>
+                      
+                      <li className="w-100">
+                        <Link to="/user-group" className="nav-link px-0">
+                          {" "}
+                          <span className="d-none d-sm-inline">User Group</span>
+                        </Link>
+                      </li>
+                     
+                    </ul>
+                  </li>
+                  {/* <li>
                     <Link to="/User" className="nav-link px-0 align-middle">
                     <i className="fa fa-user" aria-hidden="true"></i>
                       <span className="ms-1 d-none d-sm-inline">User</span>
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link to="#" className="nav-link px-0 align-middle">
                     <i className="fa fa-users" aria-hidden="true"></i>

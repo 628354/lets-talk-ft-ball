@@ -8,18 +8,23 @@ exports.deleteTableRecords = () => {
 
 exports.addleagueyear = async (req, res) => {
   try {
-    const { teamsId, teamdataId, season_Title, status, sort_Order } = req.body;
+    const { season_Title, status, sort_Order } = req.body;
     const find = await seasonyearmodel.findOne({ season_Title: season_Title });
     if (find) {
       res.send({ status: false, message: "season allready added" });
       return;
     }
     const addleagueyear = await seasonyearmodel.create({
-      teamsId: teamsId,
-      teamdataId: teamdataId,
-      season_Title: season_Title,
-      sort_Order: sort_Order,
-      status: status,
+      en: {
+        season_Title: season_Title,
+        sort_Order: sort_Order,
+        status: status,
+      },
+      ar: {
+        season_Title: season_Title,
+        sort_Order: sort_Order,
+        status: status,
+      }
     });
 
     res.send({

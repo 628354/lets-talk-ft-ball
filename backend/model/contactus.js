@@ -3,19 +3,23 @@ const validator = require("validator");
 
 const contactusSchema = mongoose.Schema(
   {
-    logo: { type: String, default: "" },
-    image: { type: String, default: "" },
-    name: { type: String, default: "" },
-    email: {
-      type: String,
-      validate: {
-        validator: validator.isEmail,
-        message: "{VALUE} is not a valid email",
-        isAsync: false,
-      },
+    en: {
+      logo: { type: String, default: "" },
+      image: { type: String, default: "" },
+      name: { type: String, default: "" },
+      email: { type: String, default: "" },
+      subject: { type: String, default: "" },
+      message: { type: String, default: "" },
     },
-    subject: { type: String, default: "" },
-    message: { type: String, default: "" },
+    ar: {
+      logo: { type: String, default: "" },
+      image: { type: String, default: "" },
+      name: { type: String, default: "" },
+      email: { type: String, default: "" },
+      subject: { type: String, default: "" },
+      message: { type: String, default: "" },
+    }
+
   },
   { timestamps: true }
 );

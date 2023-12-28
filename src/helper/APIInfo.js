@@ -174,6 +174,11 @@ export const GET_IMAGE = {
   get: `${SERVER_LINK}GetImage`,
 
 };
+export const DELETE_USER = {
+  delete: `${SERVER_LINK}deleteUser`,
+
+};
+
 
 
 

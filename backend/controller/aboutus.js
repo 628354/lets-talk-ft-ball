@@ -8,12 +8,23 @@ exports.addaboutus = async (req, res) => {
         const host = req.hostname
         const url = `${protocol}//${host}`
         const addaboutus = await aboutusmodel.create({
-            bannerImage: req.files.image ? url + "/uploads/" + files.bannerImage[0].filename : "",
-            aboutTitle: aboutTitle,
-            aboutText: aboutText,
-            aboutSectionImage: req.files.image1 ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
-            visionSectionImage: req.files.image2 ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
-            visionTitle: visionTitle,
+            en: {
+                bannerImage: req.files.image ? url + "/uploads/" + files.bannerImage[0].filename : "",
+                aboutTitle: aboutTitle,
+                aboutText: aboutText,
+                aboutSectionImage: req.files.image1 ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
+                visionSectionImage: req.files.image2 ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
+                visionTitle: visionTitle,
+            },
+            ar: {
+                bannerImage: req.files.image ? url + "/uploads/" + files.bannerImage[0].filename : "",
+                aboutTitle: aboutTitle,
+                aboutText: aboutText,
+                aboutSectionImage: req.files.image1 ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
+                visionSectionImage: req.files.image2 ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
+                visionTitle: visionTitle,
+            }
+
 
         })
         res.send({ status: true, message: "Successfully add aboutus content", body: addaboutus })
@@ -26,7 +37,8 @@ exports.addaboutus = async (req, res) => {
 
 exports.getaboutus = async (req, res) => {
     try {
-        const getaboutus = await aboutusmodel.find()
+        const { lung } = req.params
+        const getaboutus = await aboutusmodel.find({ [lung]: 1 })
         res.status(200).send({
             body: getaboutus,
             message: 'Get Aboutus Successfully',
