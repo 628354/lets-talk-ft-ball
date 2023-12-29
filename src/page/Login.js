@@ -31,13 +31,16 @@ export default function Login(props) {
 		e.preventDefault();
 		try{
 			const response =await apiCall(LOGIN_USER.login,REQUEST_TYPE.POST,formData);
-		if(response.status === 200)
+			console.log(response);
 		if (response.status === 200) {
 			const token = response.response.data?.token;
 			console.log(response.response.data)
 			localStorage.setItem('token', token);
 			setIsLoggedIn(true);
 			navigate("/Dashboard");
+		} else {
+			navigate("/login")
+			console.log(response.response.response)
 		}
 
 		}catch(error){
