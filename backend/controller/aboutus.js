@@ -37,35 +37,47 @@ exports.getaboutus = async (Request, Response) => {
     Response.send(responseHelper[200]);
 },
 
+
     exports.updateAboutus = async (req, res) => {
         try {
             const files = req.files;
             const protocol = req.protocol;
             const host = req.hostname;
             const url = `${protocol}//${host}`;
-            const { en, ar } = req.body;
+            const { en, ar } = req.body
 
-            const updateaboutus = await aboutusmodel.findByIdAndUpdate({_id:req.params.id}, {
+            const updateaboutus = await aboutusmodel.findByIdAndUpdate({ _id: req.params.id }, {
                 bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : "",
                 aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
                 visionSectionImage: files && files.visionSectionImage ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
                 en: {
-                    aboutTitle: en.aboutTitle || "", 
+                    aboutTitle: en.aboutTitle || "",
                     aboutText: en.aboutText || "",
-                    visionTitle: en.visionTitle || "",
+                    visionTitle: en.visionTitle || ""
                 },
                 ar: {
-                    aboutTitle: ar.aboutTitle || "", 
+                    aboutTitle: ar.aboutTitle || "",
                     aboutText: ar.aboutText || "",
-                    visionTitle: ar.visionTitle || "",
+                    visionTitle: ar.visionTitle || ""
                 }
-            }, { new: true });
-
-            await updateaboutus.save();
-
-            res.send({ status: true, message: "Aboutus updated successfully", updatedData: updateaboutus });
+            })
+            if (updateaboutus) {
+                res.status(200).send({
+                    body: updateaboutus,
+                    message: 'Leagues Updated Successfully',
+                    success: true
+                })
+            } else {
+                res.status(300).send({
+                    message: 'Leagues Id Not Found',
+                    success: false
+                })
+            }
         } catch (error) {
-            console.log(error);
-            res.status(500).send({ status: false, message: "Something went wrong!!", error: error.message });
+            res.status(500).send({
+                message: 'Enternal Server Error',
+                success: false,
+                error: error.message
+            })
         }
-    };
+    }

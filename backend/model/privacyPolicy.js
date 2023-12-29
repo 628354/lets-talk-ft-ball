@@ -2,12 +2,11 @@ const mongoose = require("mongoose");
 
 const policySchema = mongoose.Schema(
   {
+    image: { type: String, require: true },
     en: {
-      image: { type: String, require: true },
       privacy_policy: { type: String, require: true },
     },
     ar: {
-      image: { type: String, require: true },
       privacy_policy: { type: String, require: true },
     }
 
