@@ -90,10 +90,6 @@ module.exports = {
     createTeam: async (req, res) => {
         try {
             const {
-                SEO_URL,
-                Past_teams_logo_file_names_below,
-                status,
-                logo_folder,
                 en,
                 ar,
             } = req.body;
@@ -104,19 +100,25 @@ module.exports = {
             const addTeam = await teamCatlog.create({
                 leagueid: req.body.leagueid,
                 Image: req.file ? url + "/uploads/" + req.file.filename : " ",
-                logo_folder: logo_folder,
-                Past_teams_logo_file_names_below: Past_teams_logo_file_names_below,
-                SEO_URL: SEO_URL,
-                status: status,
                 en: {
                     Team_Name_English: en.Team_Name_English || "",
                     Team_Name_Short_English: en.Team_Name_Short_English || "",
                     Description_English: en.Description_English || "",
+                    Team_info: en.Team_info || "",
+                    logo_folder: en.logo_folder || "",
+                    status: en.status || "active",
+                    Past_teams_logo_file_names_below: en.Past_teams_logo_file_names_below || "",
+                    SEO_URL: en.SEO_URL || ""
                 },
                 ar: {
                     Team_Name_Arabic: ar.Team_Name_Arabic || "",
                     Team_Name_Short_Arabic: ar.Team_Name_Short_Arabic || "",
                     Description_Arabic: ar.Description_Arabic || "",
+                    Team_info: ar.Team_info || "",
+                    logo_folder: ar.logo_folder || "",
+                    status: ar.status || "active",
+                    Past_teams_logo_file_names_below: ar.Past_teams_logo_file_names_below || "",
+                    SEO_URL: ar.SEO_URL || ""
                 },
             });
             res.status(200).send({
@@ -189,10 +191,6 @@ module.exports = {
             const host = req.hostname;
             const url = `${protocol}//${host}`;
             const {
-                SEO_URL,
-                Past_teams_logo_file_names_below,
-                status,
-                logo_folder,
                 en,
                 ar,
             } = req.body;
@@ -202,19 +200,25 @@ module.exports = {
                 {
                     leagueid: req.body.leagueid,
                     Image: req.file ? url + "/uploads/" + req.file.filename : " ",
-                    logo_folder: logo_folder,
-                    Past_teams_logo_file_names_below: Past_teams_logo_file_names_below,
-                    SEO_URL: SEO_URL,
-                    status: status,
                     en: {
                         Team_Name_English: en.Team_Name_English || "",
                         Team_Name_Short_English: en.Team_Name_Short_English || "",
                         Description_English: en.Description_English || "",
+                        Team_info: en.Team_info || "",
+                        logo_folder: en.logo_folder || "",
+                        status: en.status || "active",
+                        Past_teams_logo_file_names_below: en.Past_teams_logo_file_names_below || "",
+                        SEO_URL: en.SEO_URL || ""
                     },
                     ar: {
                         Team_Name_Arabic: ar.Team_Name_Arabic || "",
                         Team_Name_Short_Arabic: ar.Team_Name_Short_Arabic || "",
                         Description_Arabic: ar.Description_Arabic || "",
+                        Team_info: ar.Team_info || "",
+                        logo_folder: ar.logo_folder || "",
+                        status: ar.status || "active",
+                        Past_teams_logo_file_names_below: ar.Past_teams_logo_file_names_below || "",
+                        SEO_URL: ar.SEO_URL || ""
                     },
                 },
                 { new: true }
