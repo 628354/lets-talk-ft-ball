@@ -25,12 +25,13 @@ export default function Login(props) {
 			[name]: value,
 		});
 	};
-	
+	console.log(formData);
 
 	const handleSubmit =async(e)=>{
 		e.preventDefault();
 		try{
 			const response =await apiCall(LOGIN_USER.login,REQUEST_TYPE.POST,formData);
+			console.log(response);
 		if(response.status === 200)
 		if (response.status === 200) {
 			const token = response.response.data?.token;

@@ -4,29 +4,43 @@ import { Container, Row } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {FIND_ALL, REQUEST_TYPE,REMOVE_TEAM} from '../helper/APIInfo';
+import {FIND_ALL, REQUEST_TYPE,REMOVE_TEAM,LEAGUES} from '../helper/APIInfo';
 import { apiCall } from '../helper/RequestHandler';
 
 export default function Dashboard() {
   const [aboutData, setAboutData] = useState([]);
   const [teamsData, setTeamsData] = useState([]);
-  useEffect(() => {
 
-    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues')
-    // axios.get('http://localhost:5000/getleagues')
-       .then((response) => {
-         const aboutInfo = response.data?.leaguedetails
-         setAboutData(aboutInfo);
+
+  const getLeague =async()=>{
+    try{
+      const response = await apiCall(LEAGUES.league,REQUEST_TYPE.GET)
+      console.log(response.response.data.body);
+      const aboutInfo = response.response.data.body
+      setAboutData(aboutInfo);
+
+    }catch(error){
+      console.log("data",error);
+    }
+  
+  }
+  useEffect(() => {
+    getLeague();
+    // axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getleagues')
+    // // axios.get('http://localhost:5000/getleagues')
+    //    .then((response) => {
+    //      const aboutInfo = response.data?.leaguedetails
+    //      setAboutData(aboutInfo);
 
        
  
  
-       })
-       .catch((error) => {
-         console.error('Error fetching data:', error);
-       });
+    //    })
+    //    .catch((error) => {
+    //      console.error('Error fetching data:', error);
+    //    });
    }, []);
- console.log(aboutData.length);
+ console.log(aboutData?.length);
  
  const getTeams =async()=>{
   try{
