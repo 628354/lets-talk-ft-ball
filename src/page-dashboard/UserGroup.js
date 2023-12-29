@@ -100,7 +100,7 @@ export default function UserGroup() {
                 <div className='add-part'>
                   <ul className='add-button-min'>
                     <li className='add-button-fis'>
-                      <Link to="/addUser"><i className="ri-add-line"></i></Link>
+                      <Link to="/Users"><i className="ri-add-line"></i></Link>
                     </li>
                     <li class="add-button-cencel"><a href=""><i className="ri-refresh-line"></i></a></li>
                     {/* <li className='add-button-sec'>

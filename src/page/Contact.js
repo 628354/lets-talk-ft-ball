@@ -34,7 +34,6 @@ const getFormData = async (e) => {
 
     if (response.status === 200 && response.hasError === false) {
       console.log("Data successfully sent to the server");
-    
     }
 
   } catch (error) {
@@ -69,17 +68,17 @@ const getFormData = async (e) => {
                <Link to="/DEFINITION">DEFINITION</Link>
              </li>
            </ul>
-           <div className='leagues_cont'>
-              <h2>Contact Us</h2>
-            </div>
+              <div className='leagues_cont'>
+               <h2>Contact Us</h2>
+              </div>
          </Container>
          </div>
          <section className='en_section_contact'>
           <Container>
-          <div className='row'>
+           <div className='row'>
             <div className='col-lg-6 col-md-12 col-sm-12'>
               <div className='en_contact_img'>
-              <img src={require('../img/contact-img.png')} alt="earth" className="en_contantus"/>
+               <img src={require('../img/contact-img.png')} alt="earth" className="en_contantus"/>
               </div>
             </div>
             <div className='col-lg-6 col-md-12 col-sm-12 m-auto'>
@@ -88,24 +87,25 @@ const getFormData = async (e) => {
 
               <div className='en_conact_form'>
               <Form>
-              <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control type="text"  placeholder="" name="name" onChange={handleChange}/>
-                </Form.Group>
-                <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
-                  <Form.Label>E-mail</Form.Label>
-                  <Form.Control type="email" placeholder="" name="email" onChange={handleChange}/>
-                </Form.Group>
-                <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
-                  <Form.Label>Subject</Form.Label>
-                  <Form.Control type="text" placeholder="" name="subject" onChange={handleChange} />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                <Form.Label>Message</Form.Label>
-                <Form.Control as="textarea" rows={3} name="message"onChange={handleChange}/>
-              </Form.Group>
-              <button className='en_send_m ar_send_m' onClick={getFormData}>Send Message</button>
-                
+
+                 <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
+                 <Form.Label>Name</Form.Label>
+                 <Form.Control type="text"  placeholder="" name="name" onChange={handleChange}/>
+                 </Form.Group>
+                 <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
+                 <Form.Label>E-mail</Form.Label>
+                 <Form.Control type="email" placeholder="" name="email" onChange={handleChange}/>
+                 </Form.Group>
+                 <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
+                 <Form.Label>Subject</Form.Label>
+                 <Form.Control type="text" placeholder="" name="subject" onChange={handleChange} />
+                 </Form.Group>
+                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                 <Form.Label>Message</Form.Label>
+                 <Form.Control as="textarea" rows={3} name="message"onChange={handleChange}/>
+                 </Form.Group>
+                 <button className='en_send_m ar_send_m' onClick={getFormData}>Send Message</button>
+
               </Form>
               </div>
               </div>
