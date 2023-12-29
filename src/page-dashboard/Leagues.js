@@ -16,10 +16,15 @@ export default function Leagues() {
 
 
   const getAllLeagues=async()=>{
-    const response = await apiCall(LEAGUES.league,REQUEST_TYPE.GET)
+    try{
+ const response = await apiCall(LEAGUES.league,REQUEST_TYPE.GET)
     // console.log(response.response.data?.leaguedetails);
     console.log(response.response.data?.body);
     setAboutData(response.response.data?.body);
+    }catch(error){
+      console.log("data",error);
+    }
+   
     // response.response.data?.leaguedetails?.map((item)=>{
     //   console.log(item.en);
     // })
