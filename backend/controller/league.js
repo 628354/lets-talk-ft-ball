@@ -11,16 +11,14 @@ exports.addleague = async (req, res) => {
         const url = `${protocol}://${host}`;
         const { en, ar } = req.body;
 
-        const find = await leaguemodel.findOne({ leaguename: en.leaguename });
-        if (!find) {
-            res.status(400).send({ status: false, message: "League already present" });
-            return;
+        const find = await leaguemodel.findOne({ "en.leaguename": en.leaguename });
+        if (find) {
+            return res.status(400).send('League already present');
         }
-
         const addLeague = new leaguemodel({
+            image: req.file ? url + "/uploads/" + req.file.filename : "",
             en: {
                 leaguename: en.leaguename || '',
-                image: en.image ? `${url}/uploads/${en.image}` : '',
                 description: en.description || '',
                 meta_Tag_Title: en.meta_Tag_Title || '',
                 meta_Tag_Description: en.meta_Tag_Description || '',
@@ -31,7 +29,6 @@ exports.addleague = async (req, res) => {
             },
             ar: {
                 leaguename: ar.leaguename || '',
-                image: ar.image ? `${url}/uploads/${ar.image}` : '',
                 description: ar.description || '',
                 meta_Tag_Title: ar.meta_Tag_Title || '',
                 meta_Tag_Description: ar.meta_Tag_Description || '',
@@ -161,9 +158,6 @@ exports.update = async (req, res) => {
         });
     }
 };
-
-//delete data .........................................
-
 exports.delete = async (req, res) => {
     try {
         const remove = await leaguemodel.findByIdAndDelete({ _id: req.params.id })

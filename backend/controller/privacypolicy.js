@@ -18,9 +18,17 @@ exports.addpolicy = async (req, res) => {
             }
         })
 
-        res.send({ status: true, message: "Successfully add policy", policydetails: addpolicy })
+        res.status(200).send({
+            body: addpolicy,
+            message: ' Privacy Policy Created Successfully',
+            success: true
+        })
     } catch (error) {
-        console.log(error.message)
+        res.status(500).send({
+            message: 'Internal Server Error',
+            success: false,
+            error: error.message
+        });
     }
 }
 
@@ -62,13 +70,17 @@ exports.updatepolicy = async (req, res) => {
 
         await updatepolicy.save()
         res.send({
-            status: true,
+            body: updatepolicy,
             message: "Successfully update policy details",
-            policydetails: updatepolicy
+            success: true
         })
 
     } catch (error) {
-        console.log(error.message)
+        res.status(500).send({
+            message: 'Internal Server Error',
+            success: false,
+            error: error.message
+        });
     }
 }
 
@@ -88,6 +100,10 @@ exports.deletePrivacy = async (req, res) => {
             })
         }
     } catch (error) {
-        console.log(error.message)
+        res.status(500).send({
+            message: 'Internal Server Error',
+            success: false,
+            error: error.message
+        });
     }
 }

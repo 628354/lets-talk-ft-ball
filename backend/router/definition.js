@@ -19,26 +19,8 @@ const upload = multer({ storage: storage });
 router.post('/addDefinition', upload.single('image'), definition.addDefinitions)
 router.get('/:lung/getAllDefinition', definition.getAllDefinition)
 router.get('/:lung/getDefinitionById/:id', definition.getDefinitionById)
-router.put('/:lung/updatedefinition/:id', definition.updatedefinition)
+router.put('/updatedefinition/:id', definition.updatedefinition)
 router.delete('/deleteDefinition/:id', definition.deleteDefinition)
-// router.post(
-//   "/addDefinition",
-//   upload.single("image"),
-//   definitionController.addDefinitions
-// );
 
-// router.post(
-//   "/:lung/adddefinitionInexisting/:id",
-//   definitionController.adddefinitiontype
-// );
-
-// router.post(
-//   "/:lung/updatedata/:objectId/:arrayElementId",
-//   definitionController.updatedata
-// );
-// router.delete("/definitionDelete/:id", definitionController.definitionDelete);
-
-// router.get("/:lung/getAllDefinition", definitionController.getAllDefinition);
-// router.get('/:lung/getDefinitionById/:id', definitionController.getDefinitionById)
 
 module.exports = router;
