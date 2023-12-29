@@ -149,19 +149,20 @@ export default function Users() {
                                                     <div class="col-sm-10">
                                                         <div className='section-cetalog'>
                                                        
+                                                        <Form>
 
-                                                                    <Form>
-                                                                            {checkboxData.map((checkbox) => (
-                                                                            <Form.Check
-                                                                            key={checkbox.id}
-                                                                            id={checkbox.id}
-                                                                            label={checkbox.label}
-                                                                            className={'catlog'}
-                                                                            checked={selectedCheckboxes.includes(checkbox.id)}
-                                                                            onChange={() => handleCheckboxChange(checkbox.id)}
-                                                                            />
-                                                                            ))}
-                                                                    </Form>
+                                                            {checkboxData.map((checkbox) => (
+                                                            <Form.Check
+                                                            key={checkbox.id}
+                                                            id={checkbox.id}
+                                                            label={checkbox.label}
+                                                            className={'catlog'}
+                                                            checked={selectedCheckboxes.includes(checkbox.id)}
+                                                            onChange={() => handleCheckboxChange(checkbox.id)}
+                                                            />
+                                                            ))}
+
+                                                        </Form>
 
                                                         </div>
                                                         <div className='catalog-selet'>
@@ -207,17 +208,17 @@ export default function Users() {
                                                                 />
                                                             </Form> */}
 
-                                                            <Form>
-                                                                {checkboxDataBox.map((checkbox) => (
-                                                                    <Form.Check
-                                                                    key={checkbox.id}
-                                                                    id={checkbox.id}
-                                                                    label={checkbox.label}
-                                                                    className={'catlog'}
-                                                                    checked={selectedCheckboxes2.includes(checkbox.id)}
-                                                                    onChange={() => handleCheckboxChangeBox(checkbox.id)}
-                                                                    />
-                                                                ))}
+                                                               <Form>
+                                                                    {checkboxDataBox.map((checkbox) => (
+                                                                        <Form.Check
+                                                                        key={checkbox.id}
+                                                                        id={checkbox.id}
+                                                                        label={checkbox.label}
+                                                                        className={'catlog'}
+                                                                        checked={selectedCheckboxes2.includes(checkbox.id)}
+                                                                        onChange={() => handleCheckboxChangeBox(checkbox.id)}
+                                                                        />
+                                                                    ))}
                                                                 </Form>
 
                                                         </div>

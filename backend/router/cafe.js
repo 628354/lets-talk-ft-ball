@@ -25,7 +25,7 @@ router.post(
 );
 
 router.post(
-  "/:lung/addCafeleaguedata/:cafe_id",
+  "/:lung/addCafeleaguedata/:id",
   upload.single("cafe_image"),
   cafecontroller.addcafeleaguesdata
 );

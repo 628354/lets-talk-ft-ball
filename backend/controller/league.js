@@ -12,7 +12,7 @@ exports.addleague = async (req, res) => {
         const { en, ar } = req.body;
 
         const find = await leaguemodel.findOne({ leaguename: en.leaguename });
-        if (find) {
+        if (!find) {
             res.status(400).send({ status: false, message: "League already present" });
             return;
         }
@@ -58,77 +58,130 @@ exports.addleague = async (req, res) => {
 };
 
 
+exports.getleagues = async (req, res) => {
+    try {
+        const { lung } = req.params
+        const getleagues = await leaguemodel.find({}, { [lung]: 1 })
+        res.status(200).send({
+            body: getleagues,
+            message: 'Get Leagues Successfully',
+            success: true
+        })
+    } catch (error) {
+        res.status(500).send({
+            message: 'Internal Server Error',
+            success: false,
+            error: error.message
+        });
+    }
+}
+exports.getleagusById = async (req, res) => {
+    try {
+        let { lung } = req.params
+        const league = await leaguemodel.findById({ _id: req.params.id }, { [lung]: 1 })
+        if (league) {
+            res.status(200).send({
+                body: league,
+                message: 'Get Leagues By Id Successfully',
+                success: true
+            })
+        } else {
+            res.status(300).send({
+                message: 'Leagues Id Not Found',
+                success: false
+            })
+        }
+    } catch (error) {
+        res.status(300).send({
+            message: 'Leagues Id Not Found',
+            success: false
+        });
+    }
+}
+exports.update = async (req, res) => {
+    try {
+        const files = req.files;
+        const protocol = req.protocol;
+        const host = req.hostname;
+        const url = `${protocol}//${host}`;
+        const { en, ar } = req.body;
 
-// get all leagues details............................................
+        const findleague = await leaguemodel.findById(req.params.id);
+        if (!findleague) {
+            res.send({ status: true, message: "League data not found!!" });
+            return;
+        }
 
-exports.getleagues = async (Request, Response) => {
-    const { lung } = Request.params;
-    const getleagues = await leaguemodel.find({}, { [lung]: 1 })
-    responseHelper[200].data = getleagues;
-    Response.send(responseHelper[200]);
-},
-
-    exports.update = async (req, res) => {
-        try {
-
-            const { leaguename, description, meta_Tag_Title, meta_Tag_Description, meta_Tag_Keywords, blog_Category,
-                sort_Order, status } = req.body
-            const protocol = req.protocol
-            const host = req.hostname
-            const url = `${protocol}//${host}`
-
-            const findleague = await leaguemodel.findById(req.params.leagueId)
-            if (!findleague) {
-                res.send({ status: true, message: "league data not found!!" })
-                return
-            }
-
-            const update = await leaguemodel.findByIdAndUpdate(req.params.leagueId, {
-                image: req.file ? url + "/uploads/" + req.file.filename : "",
+        const update = await leaguemodel.findByIdAndUpdate({ _id: req.params.id },
+            {
+                bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : "",
+                aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
+                visionSectionImage: files && files.visionSectionImage ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
                 en: {
-                    leaguename: leaguename,
-                    description: description,
-                    meta_Tag_Title: meta_Tag_Title,
-                    meta_Tag_Description: meta_Tag_Description,
-                    meta_Tag_Keywords: meta_Tag_Keywords,
-                    blog_Category: blog_Category,
-                    sort_Order: sort_Order,
-                    status: status
+                    leaguename: en.leaguename || "",
+                    description: en.description || "",
+                    meta_Tag_Title: en.meta_Tag_Title || "",
+                    meta_Tag_Description: en.meta_Tag_Description || "",
+                    meta_Tag_Keywords: en.meta_Tag_Keywords || "",
+                    blog_Category: en.blog_Category || "",
+                    sort_Order: en.sort_Order || "",
+                    status: en.status || "active"
                 },
                 ar: {
-                    leaguename: leaguename,
-                    description: description,
-                    meta_Tag_Title: meta_Tag_Title,
-                    meta_Tag_Description: meta_Tag_Description,
-                    meta_Tag_Keywords: meta_Tag_Keywords,
-                    blog_Category: blog_Category,
-                    sort_Order: sort_Order,
-                    status: status
+                    leaguename: ar.leaguename || "",
+                    description: ar.description || "",
+                    meta_Tag_Title: ar.meta_Tag_Title || "",
+                    meta_Tag_Description: ar.meta_Tag_Description || "",
+                    meta_Tag_Keywords: ar.meta_Tag_Keywords || "",
+                    blog_Category: ar.blog_Category || "",
+                    sort_Order: ar.sort_Order || "",
+                    status: ar.status || "active"
                 }
+            },
+            { new: true }
+        );
 
-            }, { new: true })
-
-            await update.save()
-            res.send({ status: true, message: "Successfully Update Details", updatedetails: update })
-        } catch (error) {
-            console.log(error)
-            res.send({ status: false, message: "Something went wrong !!" })
+        if (update) {
+            res.status(200).send({
+                body: update,
+                message: 'Leagues Updated Successfully',
+                success: true
+            });
+        } else {
+            res.status(300).send({
+                message: 'Leagues Id Not Found',
+                success: false
+            });
         }
+    } catch (error) {
+        res.status(500).send({
+            message: 'Internal Server Error',
+            success: false,
+            error: error.message
+        });
     }
+};
 
 //delete data .........................................
 
 exports.delete = async (req, res) => {
     try {
-        const remove = await leaguemodel.findByIdAndDelete(req.params.leagueId)
-        res.send({ status: true, message: "Successfully remove leaguedata", removedetails: remove })
+        const remove = await leaguemodel.findByIdAndDelete({ _id: req.params.id })
+        if (remove) {
+            res.status(200).send({
+                body: remove,
+                message: 'Leagues Deleted Successfully',
+                success: true
+            })
+        } else {
+            res.status(300).send({
+                message: 'Leagues Id Not Found',
+                success: false
+            })
+        }
     } catch (error) {
         res.send({ status: false, message: "Something went wrong !!" })
     }
 }
 
-exports.getleagusById = async (Request, Response) => {
-    const { lung } = Request.params;
-    const league = await leaguemodel.findById({ _id: Request.params.id }, { _id: 1, seasonid: 1, datatype: 1, leagueid: 1, [lung]: 1 }); responseHelper[200].data = league;
-    Response.send(responseHelper[200]);
-}
+
