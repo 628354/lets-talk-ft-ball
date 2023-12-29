@@ -10,58 +10,52 @@ const { Validator } = require("node-input-validator");
 
 exports.register = async (req, res) => {
   try {
-    if (req.body.role == 'admin') {
-      const v = new Validator(req.body, {
-        role: 'string|required',
-        firstName: 'string|required',
-        lastName: 'string|required',
-        email: 'string|required|email',
-        phone: 'integer|required',
-        password: 'string|required',
-      });
+    const v = new Validator(req.body, {
+      role: 'string|required',
+      firstName: 'string|required',
+      lastName: 'string|required',
+      email: 'string|required|email',
+      phone: 'integer|required',
+      password: 'string|required',
+    });
 
-      const errorResponse = await Helpers.checkValidation(v);
-      if (errorResponse) {
-        return Helpers.failed(res, errorResponse);
-      }
-
-      const findUser = await usermodel.findOne({ email: req.body.email });
-      if (findUser) {
-        return res.status(400).send('Email Already Exists');
-      }
-
-      const phoneExist = await usermodel.findOne({ phone: req.body.phone });
-      if (phoneExist) {
-        return res.status(400).send('Phone Number Already Exists');
-      }
-
-      const protocol = req.protocol;
-      const host = req.hostname;
-      const url = `${protocol}//${host}`;
-
-      const hashPassword = bcrypt.hashSync(req.body.password, 10);
-      const addUser = await usermodel.create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        phone: req.body.phone,
-        role: req.body.role,
-        password: hashPassword,
-        image: req.file ? url + '/uploads/' + req.file.filename : ' ',
-      });
-
-      const result = await addUser.save();
-      return res.status(200).send({
-        body: result,
-        message: 'Signup Successfully',
-        success: true,
-      });
-    } else {
-      return res.status(403).send({
-        message: 'Permission Denied',
-        success: false,
-      })
+    const errorResponse = await Helpers.checkValidation(v);
+    if (errorResponse) {
+      return Helpers.failed(res, errorResponse);
     }
+
+    const findUser = await usermodel.findOne({ email: req.body.email });
+    if (findUser) {
+      throw new Error('Email Already Exists');
+    }
+
+    const phoneExist = await usermodel.findOne({ phone: req.body.phone });
+    if (phoneExist) {
+      throw new Error('Phone Number Already Exists');
+    }
+
+    const protocol = req.protocol;
+    const host = req.hostname;
+    const url = `${protocol}//${host}`;
+
+    const hashPassword = bcrypt.hashSync(req.body.password, 10);
+    const addUser = await usermodel.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      phone: req.body.phone,
+      role: req.body.role,
+      password: hashPassword,
+      image: req.file ? url + '/uploads/' + req.file.filename : ' ',
+    });
+
+    const result = await addUser.save();
+    return res.status(200).send({
+      body: result,
+      message: 'Signup Successfully',
+      success: true,
+    });
+
   } catch (error) {
     return res.status(500).send({
       message: 'Internal Server Error',
@@ -82,10 +76,9 @@ exports.login = async (req, res) => {
       return Helpers.failed(res, errorResponse);
     }
 
-    const finduser = await usermodel.findOne({ email: req.body.email });
+    const finduser = await usermodel.findOne({ email: req.body.email })
     if (!finduser) {
-      res.send({ status: false, message: "User not found!!" });
-      return;
+      throw new Error('User not found!!')
     }
     const match = await bcrypt.compare(req.body.password, finduser.password);
     if (match) {
@@ -95,17 +88,24 @@ exports.login = async (req, res) => {
         { expiresIn: "365d" }
       );
       res.set({ token: token });
-      res.send({
-        status: true,
-        message: " Login Successfully",
+      res.status(200).send({
         body: finduser,
         token: token,
-      });
+        message: 'Login Successfully',
+        success: true,
+      })
     } else {
-      res.send({ status: false, message: "Password dont match!!" });
+      res.status(300).send({
+        message: 'Password dont match!!',
+        success: false,
+      })
     }
   } catch (error) {
-    console.log(error.message);
+    res.status(500).send({
+      message: "Enternal Server Error",
+      success: false,
+      error: error.message,
+    })
   }
 
 };

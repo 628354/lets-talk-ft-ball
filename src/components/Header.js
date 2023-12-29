@@ -50,7 +50,8 @@ export default function Header() {
 			},
 		  };
 		  const response = await apiCall(LEAGUES.league, REQUEST_TYPE.GET, obj);
-		  console.log(response);
+		  console.log(response.response.data.data);
+		  //response.response.data.data.map()
 		  setLeagueNames(response.response.data.leaguedetails);
 
 		} catch (error) {
@@ -133,7 +134,7 @@ export default function Header() {
 								<div className="en_dropdown-content">
 									<div className="en_h_drop">
 										<ul className="en_drop_item  row w-100">
-										{leagueNames.map((data) => (
+										{leagueNames?.map((data) => (
 												<li className="col-md-6" key={data?._id}  onClick={() => handleButtonClick(data?._id)}>
 													<Link to="/league"  >
 														<span>

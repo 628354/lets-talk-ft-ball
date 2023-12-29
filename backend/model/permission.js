@@ -5,23 +5,19 @@ const permissionSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ["admin", "author"],
-    default:"admin",
+    default: "admin",
     lowercase: true,
     trim: true,
   },
   userGroup: {
     type: String,
     enum: ["administrator", "Banner", "Cafe", "DataEntry"],
-    default:"administrator"
+    default: "administrator",
   },
-  permission: {
-    view: { type: Boolean, default: false },
-    add: { type: Boolean, default: false },
-    edit: { type: Boolean, default: false },
-    delete: { type: Boolean, default: false },
-    all: { type: Boolean, default: false },
-  },
+  path: { type: [String], default: [] },
+  methods: { type: [String], default: [] },
+
 }, { timestamps: true });
 
-const permission = mongoose.model("permission", permissionSchema);
-module.exports = permission;
+const permission = mongoose.model('permission', permissionSchema)
+module.exports = permission

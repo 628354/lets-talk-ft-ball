@@ -6,9 +6,9 @@ const leagueSchema = mongoose.Schema(
     leaguedataId: { type: mongoose.Schema.Types.ObjectId, ref: 'leaguedata' },
     teamId: { type: mongoose.Schema.Types.ObjectId, ref: 'team' },
     sessionId: { type: mongoose.Schema.Types.ObjectId, ref: 'season' },
+    image: { type: String, default: "" }, 
     en: {
       leaguename: { type: String, default: "" },
-      image: { type: String, default: "" }, 
       description: { type: String, default: "" },
       meta_Tag_Title: { type: String, default: "" },
       meta_Tag_Description: { type: String, default: "" },
@@ -19,7 +19,6 @@ const leagueSchema = mongoose.Schema(
     },
     ar: {
       leaguename: { type: String, default: "" },
-      image: { type: String, default: "" },
       description: { type: String, default: "" },
       meta_Tag_Title: { type: String, default: "" },
       meta_Tag_Description: { type: String, default: "" },
