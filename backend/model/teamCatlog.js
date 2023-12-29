@@ -2,9 +2,7 @@ const mongoose = require("mongoose");
 
 const teamCatlogSchema = mongoose.Schema(
     {
-        Team_info: { type: String,default:""},
         leagueid: { type: mongoose.Schema.Types.ObjectId, ref: 'league' },
-        seasonid: { type: String, default:"" },
         en: {
             Team_Name_English: { type: String, default: "" },
             Team_Name_Short_English: { type: String, default: "" },
@@ -15,6 +13,7 @@ const teamCatlogSchema = mongoose.Schema(
             Team_Name_Short_Arabic: { type: String, default: "" },
             Description_Arabic: { type: String, default: "" }
         },
+        Team_info: { type: String, default: "" },
         Image: { type: String, default: "" },
         SEO_URL: { type: String, default: "" },
         Past_teams_logo_file_names_below: { type: String, default: "" },

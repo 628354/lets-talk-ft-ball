@@ -19,11 +19,18 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const teamCatlog = require('../controller/teamCatlog')
 
+//=============================================admin routes==================================
 router.post("/createTeam", upload.single("image"), teamCatlog.createTeam);
+router.put('/updateTeams/:id', teamCatlog.updateTeams)
+router.delete("/removeteam/:id", teamCatlog.removeteam);
+router.get('/:lung/GetAllTeams', teamCatlog.GetAllTeams)
+router.get('/:lung/getByIdTeams/:id', teamCatlog.getByIdTeams)
+
+
+//============================================website routes====================================
 router.post('/uploadCatLog', upload.single('excelFile'), teamCatlog.CatlogImport);
 router.get('/:lung/find', teamCatlog.findTeam);
-router.get("/:lung/findAll",teamCatlog.findAllTeam);
-router.delete("/removeteam/:id", teamCatlog.removeteam);
+router.get("/:lung/findAll", teamCatlog.findAllTeam);
 router.get("/:lung/teamdetails/:id", teamCatlog.teamdetails);
 
 
