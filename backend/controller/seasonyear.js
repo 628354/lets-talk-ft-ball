@@ -1,11 +1,6 @@
 const seasonyearmodel = require("../model/seasonyear");
 
-exports.deleteTableRecords = () => {
-  seasonyearmodel.deleteMany({});
-  console.log("Successfully delete");
-}
-
-
+//=====================================admin =================================================
 exports.addleagueyear = async (req, res) => {
   try {
     const { season_Title, status, sort_Order } = req.body;
@@ -19,14 +14,17 @@ exports.addleagueyear = async (req, res) => {
       sort_Order: sort_Order,
       status: status,
     });
-
-    res.send({
-      status: true,
-      message: "Successfully add seasonyear",
-      seasonyears: addleagueyear,
-    });
+    res.status(200).send({
+      body: addleagueyear,
+      message: 'Season Add Successfully',
+      success: true
+    })
   } catch (error) {
-    console.log(error.message);
+    res.status(500).send({
+      message: "Enternal server Error",
+      success: false,
+      error: error.message,
+    });
   }
 };
 
@@ -76,13 +74,17 @@ exports.updateyears = async (req, res) => {
     );
 
     await updateyears.save();
-    res.send({
-      status: true,
-      message: "Successfully update details",
-      seasonyear: updateyears,
-    });
+    res.status(200).send({
+      body: addleagueyear,
+      message: 'Season Add Successfully',
+      success: true
+    })
   } catch (error) {
-    console.log(error.message);
+    res.status(500).send({
+      message: "Enternal server Error",
+      success: false,
+      error: error.message,
+    });
   }
 };
 
@@ -95,6 +97,7 @@ exports.removeyear = async (req, res) => {
       res.send(200).send({
         body: remove,
         message: "seasonyear Deleted Sucessfully",
+        success: true
       });
     } else {
       res.status(300).send({
@@ -103,7 +106,11 @@ exports.removeyear = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error.message);
+    res.status(500).send({
+      message: "Enternal server Error",
+      success: false,
+      error: error.message,
+    });
   }
 };
 exports.getsessonYear = async (req, res) => {

@@ -22,7 +22,7 @@ router.post("/addleague", upload.single("image"), leaguecontroller.addleague);
 router.get("/:lung/getleagues", leaguecontroller.getleagues);
 router.get('/:lung/getleagusById/:id', leaguecontroller.getleagusById)
 router.post(
-  "/:lung/updateLeague/:id", authentication, upload.single("image"),
+  "/updateLeague/:id", authentication, upload.single("image"),
   leaguecontroller.update
 );
 router.delete("/removeLeague/:id", authentication, leaguecontroller.delete);

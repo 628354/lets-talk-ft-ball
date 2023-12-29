@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 const { Validator } = require('node-input-validator');
-
+const path = require('path')
 const dotenv = require("dotenv")
 dotenv.config()
 const PORT = process.env.PORT
@@ -22,12 +22,10 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb', extended: true }));
 
-const path = require('path');
 
 const admin = require("./router/admin")
 const user = require("./router/user")
