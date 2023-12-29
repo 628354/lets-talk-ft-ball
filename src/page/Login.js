@@ -25,7 +25,7 @@ export default function Login(props) {
 			[name]: value,
 		});
 	};
-	
+	console.log(formData);
 
 	const handleSubmit =async(e)=>{
 		e.preventDefault();

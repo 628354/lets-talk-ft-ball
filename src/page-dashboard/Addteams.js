@@ -21,23 +21,30 @@ export default function Addteams() {
     status: 'active',
     league: ''
   });
-
-  const handleChange = (e, field) => {
-    if (field) {
-      setFormData((prevState) => ({ ...prevState, [field]: e.target.value }));
-    } else if (e.target && e.target.name) {
-      if (e.target.name === 'league') {
-        setFormData((prevState) => ({ ...prevState, league: e.target.value }));
-      } else {
-        setFormData((prevState) => ({ ...prevState, [e.target.leaguename]: e.target.value }));
-      }
-    }
+  const [formDataAr, setFormDataAr] = useState({
+    teamName: '',
+   
+    
+  });
+  const handleChange = (field, value) => {
+    setFormData({
+      ...formData,
+      [field]: value,
+    });
   };
 
 
+  const handleChangeAr = (field, value) => {
+    setFormDataAr({
+      ...formDataAr,
+      [field]: value,
+    });
+  };
+
   const LeagueCall = () => {
     apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
-      setLeagues(results.response.data.leaguedetails);
+      console.log(results.response.data.body);
+      setLeagues(results.response.data.body);
     });
   };
 
@@ -48,14 +55,19 @@ export default function Addteams() {
 
 
   const handleSave = async () => {
-    if (formData.teamName.trim() === '' || formData.short_name.trim() === '' || formData.league === '' || formData.status === '') {
+    if (formData.teamName.trim() === '' || formData.league === '' ) {
       setErrorMessage('Please fill in all required fields.');
       clearMessages();
     } else {
       try {
-        const response = await apiCall(CREATE_TEAM.team,REQUEST_TYPE.POST, formData);
+          console.log(formData);
+  console.log(formDataAr);
+        const response = await apiCall(CREATE_TEAM.team,REQUEST_TYPE.POST,{
+          en: formData,
+          ar: formDataAr,
+        });
         console.log(response);
-        setSuccessMessage(response.data.message);
+        setSuccessMessage(response.response.data.message);
         clearMessages();
       } catch (error) {
         setErrorMessage('Error occurred. Please try again.');
@@ -155,7 +167,7 @@ export default function Addteams() {
                                     onChange={handleChange} >
                                     <option value={""}>Select League</option>
                                     {getLeagues?.map((row) => (
-                                      <option value={row._id}>{row.leaguename}</option>
+                                      <option key={row.en._id} value={row.en._id}>{row.en.leaguename}</option>
                                     ))}
                                   </Form.Select>
                                 </Col>
@@ -171,32 +183,14 @@ export default function Addteams() {
                                     type="text"
                                     placeholder="team Name"
                                     value={formData.teamName}
-                                    onChange={(e) => handleChange(e, 'teamName')}
+                                    onChange={(e) => handleChange( 'teamName' , e.target.value)}
                                   />
                                 </Col>
                               </Form.Group>
                             </Form>
                           </div>
                         </div>
-                      </Tab>
-                      <Tab eventKey="profile2" title={<span><img src={require('../img/ar.png')} alt="General" /> العربية</span>}>
-                        <div className='sanson-title'>
-                          <Form>
-                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="1">
-                                Team Name
-                              </Form.Label>
-                              <Col sm="11">
-                                <Form.Control type="text" placeholder="Team Name" />
-                              </Col>
-                            </Form.Group>
-                          </Form>
-                        </div>
-                      </Tab>
-                    </Tabs>
-                  </div>
-
-                  <div className='add-genral'>
+                        <div className='add-genral'>
                     <h6>Data</h6>
                   </div>
                   <hr />
@@ -210,7 +204,7 @@ export default function Addteams() {
                           <Col sm="10">
                             <Form.Select
                               value={formData.status}
-                              onChange={(e) => handleChange(e)}
+                              onChange={(e) => handleChange("status",e.target.value)}
                               name="status"
                             >
                               <option value="active">Active</option>
@@ -221,20 +215,42 @@ export default function Addteams() {
 
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                           <Form.Label column sm="2">
-                            Short Name
+                          Sort Order
                           </Form.Label>
                           <Col sm="10">
                             <Form.Control
                               type="text"
                               placeholder="short_name"
                               value={formData.short_name}
-                              onChange={(e) => handleChange(e, 'short_name')}
+                              onChange={(e) => handleChange( 'short_name',e.target.value)}
                             />
                           </Col>
                         </Form.Group>
                       </Form>
                     </div>
                   </div>
+                      </Tab>
+                      <Tab eventKey="profile2" title={<span><img src={require('../img/ar.png')} alt="General" /> العربية</span>}>
+                        <div className='sanson-title'>
+                          <Form>
+                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                              <Form.Label column sm="1">
+                                Team Name
+                              </Form.Label>
+                              <Col sm="11">
+                                <Form.Control type="text" placeholder="Team Name" 
+                                     value={formDataAr.teamName}
+                                     onChange={(e) => handleChangeAr( 'teamName' , e.target.value)}  />
+                              </Col>
+                            </Form.Group>
+                          </Form>
+                        </div>
+                                      
+                      </Tab>
+                    </Tabs>
+                  </div>
+
+                  
                 </div>
               </div>
             </Row>

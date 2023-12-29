@@ -151,8 +151,10 @@ export default function Teams() {
                     </tr>
                   </thead>
                   <tbody className='table-list-one'>
-                    {teamsData.map((team) => (
-                      <tr key={team._id}>
+                    {teamsData.map((team)=>{
+                      console.log(team);
+                      return(
+                        <tr key={team._id}>
                         <td><Form.Check aria-label="option 1" /></td>
                         <td>{team?.leagueid?.leaguename}</td>
                         <td>{team.en.Team_Name_English}</td>
@@ -177,7 +179,10 @@ export default function Teams() {
                           </div>
                         </td>
                       </tr>
-                    ))}
+
+                      )
+                    })}
+                    
                   </tbody>
                 </Table>
                 <div className='table-footer-f'>

@@ -9,7 +9,8 @@ export const REQUEST_TYPE = {
   GET: "GET",
   POST: "POST",
   PUT: "PUT",
-  PATCH:"PATCH"
+  PATCH:"PATCH",
+  DELETE:"DELETE"
  
 };
 export const IMAGES = {
@@ -189,6 +190,11 @@ export const DELETE_USER = {
 export const GET_CAFE = {
   cafeen: `${SERVER_LINK}en/getAllCafe`,
   cafear: `${SERVER_LINK}ar/getAllCafe`,
+
+};
+export const REMOVE_LEAGUE = {
+  remove: `${SERVER_LINK}removeLeague`
+  
 
 };
 

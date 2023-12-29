@@ -15,7 +15,8 @@ import { REQUEST_TYPE,GET_LEAGUE_BY_ID,UPDATE_LEAGUE } from '../helper/APIInfo';
 
 export default function Editleagues() {
   const { id } = useParams();
-
+  const [successMessage, setSuccessMessage] = useState(''); // State to hold success message
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [aboutData, setAboutData] = useState({
     leaguename: '',
@@ -42,6 +43,12 @@ export default function Editleagues() {
 
   const [imageURL, setImageURL] = useState('');
 
+  const clearMessages = () => {
+    setTimeout(() => {
+      setSuccessMessage('');
+      setErrorMessage('');
+    }, 3000); // Clear messages after 3 seconds
+  };
 
   const handleTextChange = (field, value) => {
     setAboutData({
@@ -74,7 +81,7 @@ const getLeagueById =async()=>{
     console.log(response.response?.data?.data?.en)
     const aboutInfo = response.response?.data?.data?.en
     // setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
-     setAboutData(response.response?.data?.data?.en);
+     setAboutData(response.response.data?.body?.en);
 
   }catch(error){
     console.log("get data ",error)
@@ -87,7 +94,7 @@ const getLeagueByIdAr =async()=>{
     const apiUrl =`${baseUrl}/${id}`
     const response=await apiCall(apiUrl,REQUEST_TYPE.GET);
     console.log(response.response?.data?.data?.ar)
-    const aboutInfo = response.response?.data?.data?.ar
+    const aboutInfo =response.response.data?.body?.ar
     // const aboutInfo = response.response.data.body
     // setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
      setAboutDataAr(aboutInfo);
@@ -105,37 +112,48 @@ useEffect(()=>{
 
   const handleUpdateData = async() => {
    
-    const formData = new FormData();
-    formData.append('en[leaguename]', aboutData.leaguename);
-      formData.append('en[description]', aboutData.description);
-      formData.append('en[meta_Tag_Title]', aboutData.meta_Tag_Title);
-      formData.append('en[meta_Tag_Description]', aboutData.meta_Tag_Description);
-      formData.append('en[meta_Tag_Keywords]', aboutData.meta_Tag_Keywords);
-      formData.append('en[blog_Category]', aboutData.blog_Category);
-      formData.append('en[sort_Order]', aboutData.sort_Order);
-      formData.append('en[status]', aboutData.status);
+    // const formData = new FormData();
+    // formData.append('en[leaguename]', aboutData.leaguename);
+    //   formData.append('en[description]', aboutData.description);
+    //   formData.append('en[meta_Tag_Title]', aboutData.meta_Tag_Title);
+    //   formData.append('en[meta_Tag_Description]', aboutData.meta_Tag_Description);
+    //   formData.append('en[meta_Tag_Keywords]', aboutData.meta_Tag_Keywords);
+    //   formData.append('en[blog_Category]', aboutData.blog_Category);
+    //   formData.append('en[sort_Order]', aboutData.sort_Order);
+    //   formData.append('en[status]', aboutData.status);
 
-      // Arabic data
-      formData.append('ar[leaguename]', aboutDataAr.leaguename);
-      formData.append('ar[description]', aboutDataAr.description);
-      formData.append('ar[meta_Tag_Title]', aboutDataAr.meta_Tag_Title);
-      formData.append('ar[meta_Tag_Description]', aboutDataAr.meta_Tag_Description);
-      formData.append('ar[meta_Tag_Keywords]', aboutDataAr.meta_Tag_Keywords);
-      formData.append('ar[blog_Category]', aboutDataAr.blog_Category);
-      formData.append('ar[sort_Order]', aboutDataAr.sort_Order);
-      formData.append('ar[status]', aboutDataAr.status);
-
+    //   // Arabic data
+    //   formData.append('ar[leaguename]', aboutDataAr.leaguename);
+    //   formData.append('ar[description]', aboutDataAr.description);
+    //   formData.append('ar[meta_Tag_Title]', aboutDataAr.meta_Tag_Title);
+    //   formData.append('ar[meta_Tag_Description]', aboutDataAr.meta_Tag_Description);
+    //   formData.append('ar[meta_Tag_Keywords]', aboutDataAr.meta_Tag_Keywords);
+    //   formData.append('ar[blog_Category]', aboutDataAr.blog_Category);
+    //   formData.append('ar[sort_Order]', aboutDataAr.sort_Order);
+    //   formData.append('ar[status]', aboutDataAr.status);
+    const formData = {
+      en: aboutData,
+      ar: aboutDataAr,
+    };
     const baseUrl=UPDATE_LEAGUE.upDate;
     const apiUrl =`${baseUrl}/${id}`
-    console.log(id);
+    //console.log(id);
      const token = localStorage.getItem("token");
-    const response = await apiCall(apiUrl,REQUEST_TYPE.POST,formData,{
-      headers: {
-         'Authorization': `Bearer ${token}`
-      },
-    });
-    console.log(token)
+    
 
+   
+    const response = await apiCall(apiUrl,REQUEST_TYPE.POST,formData,token);
+   console.log(response)
+   if(response.status === 200){
+    console.log("yes----------------");
+   setSuccessMessage(response.response.data?.message);
+    clearMessages(); 
+  }else{
+    setErrorMessage('Error occurred. Please try again.');
+  clearMessages(); 
+
+  }
+   
     
   };
 
@@ -161,15 +179,14 @@ useEffect(()=>{
     <div>
       <Menubar />
       <div className='right-side-contant py-3'>
-        <section className='min-section-one'>
+      <section className="min-section-one">
           <Container fluid>
             <Row>
               <div className="col-lg-6 col-md-6 col-6">
-                <div className='season-us'>
-
-                  <div className='season-link-part'>
+                <div className="season-us">
+                  <div className="season-link-part">
                     <h3> League</h3>
-                    <ul className='season-link'>
+                    <ul className="season-link">
                       <li>
                         <Link>Home</Link>
                       </li>
@@ -179,35 +196,36 @@ useEffect(()=>{
                       <li>
                         <Link>League</Link>
                       </li>
-                      <li>
-                        <i className="ri-arrow-right-s-line"></i>
-                      </li>
-                      <li>
-                        <Link>Botola Pro</Link>
-                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
               <div className="col-lg-6 col-md-6 col-6">
-                <div className='add-part'>
-                  <ul className='add-button-min'>
-                  <li className="add-button-fis">
+                <div className="add-part">
+                  <ul className="add-button-min">
+                    <li className="add-button-fis">
                       <button onClick={handleUpdateData}>
-                        <Link to=""><i className="ri-save-3-line"></i></Link>
+                        <Link to="">
+                          <i className="ri-save-3-line"></i>
+                        </Link>
                       </button>
                     </li>
-                    <li className='add-button-cencel'>
-                      <Link to="/Leagues"><i className="ri-reply-fill"></i></Link>
+                    <li className="add-button-cencel">
+                      <Link to="/Leagues">
+                        <i className="ri-reply-fill"></i>
+                      </Link>
                     </li>
                   </ul>
+                  {successMessage && (
+            <div className="alert alert-success">{successMessage}</div>
+          )}
+           {errorMessage && (
+            <div className="alert alert-danger">{errorMessage}</div>
+          )}
                 </div>
-
               </div>
             </Row>
           </Container>
-
-
         </section>
         <hr />
         <section className='Add-Season-open'>

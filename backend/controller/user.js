@@ -64,7 +64,6 @@ exports.register = async (req, res) => {
     });
   }
 };
-
 exports.login = async (req, res) => {
   try {
     const v = new Validator(req.body, {
@@ -109,7 +108,6 @@ exports.login = async (req, res) => {
   }
 
 };
-
 exports.sendlink = async (req, res) => {
   try {
     const { email } = req.body;
@@ -127,9 +125,6 @@ exports.sendlink = async (req, res) => {
     res.send({ status: false, message: "Something went wrong !!" });
   }
 };
-
-//forget password...........................................................
-
 exports.forgetpassword = async (req, res) => {
   try {
     const { newpassword } = req.body;
@@ -156,7 +151,6 @@ exports.forgetpassword = async (req, res) => {
     res.send({ status: false, message: "something went wrong !!" });
   }
 };
-
 exports.AddUser = async (req, res) => {
   try {
 
@@ -203,7 +197,6 @@ exports.AddUser = async (req, res) => {
     });
   }
 }
-
 exports.getAllUser = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -253,7 +246,6 @@ exports.GetUserById = async (req, res) => {
     });
   }
 }
-
 exports.updateUser = async (req, res) => {
   try {
     const { firstName, lastName, phone, userName, date, userGroup, country, countryCode } = req.body;
@@ -281,7 +273,6 @@ exports.updateUser = async (req, res) => {
     });
   }
 };
-
 exports.deleteUser = async (req, res) => {
   try {
     const deleteUser = await usermodel.findByIdAndDelete({
@@ -307,7 +298,6 @@ exports.deleteUser = async (req, res) => {
     });
   }
 };
-
 exports.AddUser = async (req, res) => {
   try {
     const findUser = await usermodel.findOne({ email: req.body.email });

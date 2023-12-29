@@ -6,7 +6,7 @@ import Menubar from '../dashboard/Menubar';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import { apiCall } from '../helper/RequestHandler';
-import { LEAGUES, REQUEST_TYPE } from '../helper/APIInfo';
+import { LEAGUES, REQUEST_TYPE,REMOVE_LEAGUE } from '../helper/APIInfo';
 
 
 
@@ -18,8 +18,8 @@ export default function Leagues() {
   const getAllLeagues=async()=>{
     const response = await apiCall(LEAGUES.league,REQUEST_TYPE.GET)
     // console.log(response.response.data?.leaguedetails);
-    console.log(response.response.data.data);
-    setAboutData(response.response.data.data);
+    console.log(response.response.data?.body);
+    setAboutData(response.response.data?.body);
     // response.response.data?.leaguedetails?.map((item)=>{
     //   console.log(item.en);
     // })
@@ -40,17 +40,29 @@ export default function Leagues() {
   //       console.error('Error fetching data:', error);
   //     });
   }, []);
-
-  const handleDelete = (id) => {
-    axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeLeague/${id}`)
-        // axios.delete(`http://localhost:5000/removeLeague/${id}`)
-
-      .then((response) => {
-        setAboutData(aboutData.filter(league => league._id !== id));
-      })
-      .catch((error) => {
-        console.error('Error deleting data:', error);
-      });
+  const [legId,lsetLegId]=useState([])
+console.log(aboutData);
+aboutData?.map((item)=>{
+  console.log(item);
+  
+  
+})
+  const handleDelete = async(id) => {
+    const token = localStorage.getItem("token");
+    const apiUrl = `${REMOVE_LEAGUE.remove}/${id}`
+    
+    try {
+      const response = await apiCall(apiUrl, REQUEST_TYPE.DELETE, token);
+  
+      if (response.status === 200) {
+        setAboutData(aboutData.filter((league) => league._id !== id));
+        console.log("League deleted successfully");
+      } else {
+        console.error('Error deleting league:', response.response?.data?.message);
+      }
+    } catch (error) {
+      console.error('Error deleting league:', error);
+    }
   };
 
 
