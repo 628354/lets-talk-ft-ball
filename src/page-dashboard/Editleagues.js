@@ -14,9 +14,6 @@ import { apiCall } from '../helper/RequestHandler';
 import { REQUEST_TYPE,GET_LEAGUE_BY_ID,UPDATE_LEAGUE } from '../helper/APIInfo';
 
 export default function Editleagues() {
-
-
-  
   const { id } = useParams();
 
 
@@ -31,7 +28,19 @@ export default function Editleagues() {
     sort_Order : '' ,
     status :'active'
   });
-  const [imageURL, setImageURL] = useState(''); // State variable to hold the image URL
+
+  const [aboutDataAr, setAboutDataAr] = useState({
+    leaguename: '',
+    description: '',
+    meta_Tag_Title: '' ,
+    meta_Tag_Description : '' ,
+    meta_Tag_Keywords : '' ,
+    blog_Category : '' ,
+    sort_Order : '' ,
+    status :'active'
+  });
+
+  const [imageURL, setImageURL] = useState('');
 
 
   const handleTextChange = (field, value) => {
@@ -40,6 +49,13 @@ export default function Editleagues() {
       [field]: value,
     });
   };
+
+  const handleTextChangeAr =(field,value)=>{
+    setAboutDataAr({
+      ...aboutDataAr,
+      [field]:value
+    })
+  }
 
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
@@ -55,10 +71,26 @@ const getLeagueById =async()=>{
     const baseUrl=GET_LEAGUE_BY_ID.getLeague;
     const apiUrl =`${baseUrl}/${id}`
     const response=await apiCall(apiUrl,REQUEST_TYPE.GET);
-    //console.log(response.response.data.body)
-    const aboutInfo = response.response.data.body
-    setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
-    setAboutData(aboutInfo);
+    console.log(response.response?.data?.data?.en)
+    const aboutInfo = response.response?.data?.data?.en
+    // setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
+     setAboutData(response.response?.data?.data?.en);
+
+  }catch(error){
+    console.log("get data ",error)
+  }
+
+}
+const getLeagueByIdAr =async()=>{
+  try{
+    const baseUrl=GET_LEAGUE_BY_ID.getLeaguear;
+    const apiUrl =`${baseUrl}/${id}`
+    const response=await apiCall(apiUrl,REQUEST_TYPE.GET);
+    console.log(response.response?.data?.data?.ar)
+    const aboutInfo = response.response?.data?.data?.ar
+    // const aboutInfo = response.response.data.body
+    // setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
+     setAboutDataAr(aboutInfo);
 
   }catch(error){
     console.log("get data ",error)
@@ -67,35 +99,48 @@ const getLeagueById =async()=>{
 }
 useEffect(()=>{
   getLeagueById()
+  getLeagueByIdAr()
 },[])
 
- 
-  const handleUpdateData = async() => {
 
+  const handleUpdateData = async() => {
+   
     const formData = new FormData();
-    formData.append('leaguename', aboutData.leaguename);
-    formData.append('image', aboutData.image);
-    formData.append('description', aboutData.description);
-    formData.append('meta_Tag_Title', aboutData.meta_Tag_Title);
-    formData.append('meta_Tag_Description', aboutData.meta_Tag_Description);
-    formData.append('meta_Tag_Keywords', aboutData.meta_Tag_Keywords);
-    formData.append('blog_Category', aboutData.blog_Category);
-    formData.append('sort_Order', aboutData.sort_Order);
-    formData.append('status', aboutData.status);
+    formData.append('en[leaguename]', aboutData.leaguename);
+      formData.append('en[description]', aboutData.description);
+      formData.append('en[meta_Tag_Title]', aboutData.meta_Tag_Title);
+      formData.append('en[meta_Tag_Description]', aboutData.meta_Tag_Description);
+      formData.append('en[meta_Tag_Keywords]', aboutData.meta_Tag_Keywords);
+      formData.append('en[blog_Category]', aboutData.blog_Category);
+      formData.append('en[sort_Order]', aboutData.sort_Order);
+      formData.append('en[status]', aboutData.status);
+
+      // Arabic data
+      formData.append('ar[leaguename]', aboutDataAr.leaguename);
+      formData.append('ar[description]', aboutDataAr.description);
+      formData.append('ar[meta_Tag_Title]', aboutDataAr.meta_Tag_Title);
+      formData.append('ar[meta_Tag_Description]', aboutDataAr.meta_Tag_Description);
+      formData.append('ar[meta_Tag_Keywords]', aboutDataAr.meta_Tag_Keywords);
+      formData.append('ar[blog_Category]', aboutDataAr.blog_Category);
+      formData.append('ar[sort_Order]', aboutDataAr.sort_Order);
+      formData.append('ar[status]', aboutDataAr.status);
 
     const baseUrl=UPDATE_LEAGUE.upDate;
     const apiUrl =`${baseUrl}/${id}`
+    console.log(id);
+     const token = localStorage.getItem("token");
     const response = await apiCall(apiUrl,REQUEST_TYPE.POST,formData,{
       headers: {
-        'Content-Type': 'multipart/form-data',
+         'Authorization': `Bearer ${token}`
       },
     });
-   // console.log(response)
+    console.log(token)
 
     
   };
 
-
+// console.log(aboutData);
+// console.log(aboutDataAr);
   const formats = [
     'header', 'font', 'size',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
@@ -194,7 +239,7 @@ useEffect(()=>{
                                 League Name
                               </Form.Label>
                               <Col sm="10">
-                                <Form.Control type="text" placeholder="League Namee" value={aboutData?.leaguename}
+                                <Form.Control type="text" placeholder="League Name" value={aboutData?.leaguename}
                                   onChange={(e) => handleTextChange('leaguename', e.target.value)} />
                               </Col>
                             </Form.Group>
@@ -271,23 +316,17 @@ useEffect(()=>{
                                 League Name
                               </Form.Label>
                               <Col sm="10">
-                                <Form.Control type="text" placeholder="League Namee" />
+                                <Form.Control type="text" placeholder="League Namee" value={aboutDataAr?.leaguename}
+                                 onChange={(e) => handleTextChangeAr('leaguename', e.target.value)} />
                               </Col>
                             </Form.Group>
+                            
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                               <Form.Label column sm="2">
-                                Image
+                                League Description       
                               </Form.Label>
                               <Col sm="10">
-                                <Form.Control type="file" />
-                              </Col>
-                            </Form.Group>
-                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
-                                League Description
-                              </Form.Label>
-                              <Col sm="10">
-                                <ReactQuill className='edit-text' value={aboutData} onChange={handleTextChange} />
+                                <ReactQuill className='edit-text'  value={aboutDataAr?.description}  onChange={(value) => handleTextChangeAr('description', value)} />
                               </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
@@ -295,7 +334,7 @@ useEffect(()=>{
                                 League Meta Tag Title
                               </Form.Label>
                               <Col sm="10">
-                                <Form.Control type="text" placeholder="Meta Tag Title" />
+                                <Form.Control type="text" placeholder="Meta Tag Title" onChange={(e) => handleTextChangeAr('meta_Tag_Title', e.target.value)}/>
                               </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
@@ -303,7 +342,7 @@ useEffect(()=>{
                                 League Meta Tag Description
                               </Form.Label>
                               <Col sm="10">
-                                <Form.Control as="textarea" rows={3} />
+                                <Form.Control as="textarea" rows={3}  onChange={(e) => handleTextChangeAr('meta_Tag_Keywords', e.target.value)}/>
                               </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">

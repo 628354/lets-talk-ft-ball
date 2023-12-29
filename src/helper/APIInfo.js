@@ -9,6 +9,7 @@ export const REQUEST_TYPE = {
   GET: "GET",
   POST: "POST",
   PUT: "PUT",
+  PATCH:"PATCH"
  
 };
 export const IMAGES = {
@@ -29,6 +30,7 @@ export const SESSION = {
 
 export const LEAGUES = {
   league: `${SERVER_LINK}en/getleagues`,
+  leaguear: `${SERVER_LINK}ar/getleagues`,
 };
 
 export const CATLOGS = {
@@ -75,7 +77,8 @@ export const UPDATE_SEASON_YEAR = {
 
 };
 export const GET_LEAGUE_BY_ID = {
-  getLeague: `${SERVER_LINK}getleagusById`,
+  getLeague: `${SERVER_LINK}en/getleagusById`,
+  getLeaguear: `${SERVER_LINK}ar/getleagusById`,
 
 };
 export const UPDATE_LEAGUE = {

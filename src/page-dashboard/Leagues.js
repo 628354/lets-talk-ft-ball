@@ -17,8 +17,9 @@ export default function Leagues() {
 
   const getAllLeagues=async()=>{
     const response = await apiCall(LEAGUES.league,REQUEST_TYPE.GET)
-    console.log(response.response.data?.leaguedetails);
-    setAboutData(response.response.data?.leaguedetails);
+    // console.log(response.response.data?.leaguedetails);
+    console.log(response.response.data.data);
+    setAboutData(response.response.data.data);
     // response.response.data?.leaguedetails?.map((item)=>{
     //   console.log(item.en);
     // })
@@ -118,13 +119,13 @@ export default function Leagues() {
                     </tr>
                   </thead>
                   <tbody className='table-list-one'>
-                    {aboutData.map((league) =>{ 
+                    {aboutData?.map((league) =>{ 
                      console.log(league);
                       return(
                       <tr key={league._id}>
                         <td><Form.Check aria-label="option 1" /></td>
-                        <td>{league?.en.leaguename}</td>
-                        <td>{league?.en.sort_Order}</td>
+                        <td>{league?.en?.leaguename}</td>
+                        <td>{league?.en?.sort_Order}</td>
                         <td>
                           <div className='add-button-fis'>
                             
@@ -148,7 +149,7 @@ export default function Leagues() {
                 </Table>
                 <div className='table-footer-f'>
                   <div className='table-footer-s'>
-                    <p>Showing 1 to {aboutData.length} of {aboutData.length} (1 Pages)</p>
+                    <p>Showing 1 to {aboutData?.length} of {aboutData?.length} (1 Pages)</p>
                   </div>
                 </div>
               </div>

@@ -20,15 +20,15 @@ const [blogDetails,setBlogDetails]=useState([])
 			const response = await apiCall(GET_CAFE.cafeen,REQUEST_TYPE.GET
 			);
 			//console.log(response.response?.data?.data);
-			response.response?.data?.data.map((item)=>{
+			response.response?.data?.data?.map((item)=>{
 				//console.log(item[lang]);
 				
 				data.push(item[lang])
 			})
 			
-				data.map((items)=>{
+				data?.map((items)=>{
 					//console.log(items?.cafecontent);
-					return items?.cafecontent.map((item)=>{
+					return items?.cafecontent?.map((item)=>{
 						console.log(item);
 						setBlogData(item)
 					})
