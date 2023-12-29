@@ -25,8 +25,8 @@ export default function LeaguesBluk() {
 
 	const LeagueCall = () => {
 		apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
-			// console.log(results.response.data.leaguedetails);
-			setleagues(results.response.data?.leaguedetails)
+			console.log(results.response.data.body);
+			setleagues(results.response.data.body)
 		})
 	}
 
@@ -189,7 +189,7 @@ export default function LeaguesBluk() {
 															onChange={handleChange} >
 															<option value={""}>Select League</option>
 															{getleagues?.map((row) => (
-																<option value={row._id}>{row.leaguename}</option>
+																<option value={row._id}>{row.en.leaguename}</option>
 															))}
 														</Form.Select>
 													</Col>
