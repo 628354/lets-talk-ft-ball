@@ -6,8 +6,8 @@ const leagueSchema = mongoose.Schema(
     leaguedataId: { type: mongoose.Schema.Types.ObjectId, ref: 'leaguedata' },
     teamId: { type: mongoose.Schema.Types.ObjectId, ref: 'team' },
     sessionId: { type: mongoose.Schema.Types.ObjectId, ref: 'season' },
-    image: { type: String, default: "" }, 
     en: {
+      image: { type: String, default: "" }, 
       leaguename: { type: String, default: "" },
       description: { type: String, default: "" },
       meta_Tag_Title: { type: String, default: "" },

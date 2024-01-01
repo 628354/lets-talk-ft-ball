@@ -3,15 +3,29 @@ const routes = require('../model/routes')
 module.exports = {
     routesSave: async (req, res) => {
         try {
-            const routess = await routes.create(req.body)
-            const result = await routess.save()
+            const { routesData } = req.body;
+
+            if (!routesData || !Array.isArray(routesData)) {
+                return res.status(400).send({
+                    message: 'Invalid request body format. Expected an array of routes.',
+                    success: false
+                });
+            }
+
+            const createdRoutes = await routes.create(routesData);
+
             res.status(200).send({
-                body: result,
-                message: 'Routes Save Successfully',
+                body: createdRoutes,
+                message: 'Routes Saved Successfully',
                 success: true
-            })
+            });
         } catch (error) {
-            console.log(error.message)
+            console.error(error.message);
+            res.status(500).send({
+                message: 'Internal Server Error',
+                success: false,
+                error: error.message
+            });
         }
     },
     getroutes: async (req, res) => {
@@ -28,23 +42,31 @@ module.exports = {
     },
     updateRoutes: async (req, res) => {
         try {
-            const { path, methods, permissionsRequired } = req.body
-            const routess = await routes.findByIdAndUpdate({ _id: req.params.id }, { path, methods, permissionsRequired })
-            if (routess) {
+            const { path, methods } = req.body;
+            const updatedRoute = await routes.findByIdAndUpdate(
+                { _id: req.params.id },
+                { path, methods },
+            );
+
+            if (updatedRoute) {
                 res.status(200).send({
-                    body: routess,
+                    body: updatedRoute,
                     message: 'Routes Update Successfully',
                     success: true
-                })
+                });
             } else {
-                res.status(300).send({
+                res.status(404).send({
                     message: 'Routes Id Not found',
                     success: false,
-
-                })
+                });
             }
         } catch (error) {
-            console.log(error.message)
+            console.error(error.message);
+            res.status(500).send({
+                message: 'Internal Server Error',
+                success: false,
+                error: error.message
+            });
         }
     }
 }

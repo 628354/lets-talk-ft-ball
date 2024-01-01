@@ -15,9 +15,9 @@ exports.addleague = async (req, res) => {
         if (find) {
             return res.status(400).send('League already present');
         }
-        const addLeague = new leaguemodel({
-            image: req.file ? url + "/uploads/" + req.file.filename : "",
+        const addLeague = await leaguemodel.create({
             en: {
+                image: req.file ? url + "/uploads/" + req.file.filename : '',
                 leaguename: en.leaguename || '',
                 description: en.description || '',
                 meta_Tag_Title: en.meta_Tag_Title || '',
