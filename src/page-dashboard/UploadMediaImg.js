@@ -1,17 +1,22 @@
 import React from 'react';
 import { Container, Row, Modal, Button, Form } from "react-bootstrap";
+
+
 function UploadMediaImg({selectedFolder}) {
     //console.log(selectedFolder );
     return (
         <div className='row'>
-            <div className='col-lg-10 col-sm-10 col-sm-10 ps-0'>
+            <div className='col-lg-12 col-md-12 col-sm-12 ps-0'>
                    <div className="up-date-file">
                         <Row>
                             {/* <div>{selectedFolder.folderName}</div> */}
                         <div className="col-lg-2 col-md-2 col-sm-6">
                          <div className='main-media-folder'>
-                         <div class="file-wrapper">
-                          <input type="file" name="upload-img" accept="image/*" />
+                         <div class="file-main-wrapper">
+                          <input type="file" name="upload-img" className='file-media-poniter' accept="image/*" />
+                          <div className='btn-poniter-less'>
+                            <h4><i className="fa fa-plus" aria-hidden="true"></i></h4>
+                          </div>
                           <div class="close-btn">×</div>
                         </div>
                       </div>

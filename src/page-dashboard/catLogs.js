@@ -23,8 +23,8 @@ export default function LeaguesBluk() {
 
 	const LeagueCall = () => {
 		apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
-			console.log(results.response.data.body);
-			setleagues(results.response.data.body)
+			console.log(results?.response?.data?.body);
+			setleagues(results?.response?.data?.body)
 		})
 	}
 
@@ -63,7 +63,7 @@ export default function LeaguesBluk() {
 				apiCallFile(CATLOGS.upload, REQUEST_TYPE.POST, formDatas).then((results) => {
 					setSuccessMessage("Successfully import bluk League data");
 					clearMessages();
-				})// Clear messages after 3 seconds
+				}) // Clear messages after 3 seconds
 
 
 			} catch (error) {
@@ -144,7 +144,6 @@ export default function LeaguesBluk() {
 									</div>
 									<hr />
 
-
 									<div className='addsection-open'>
 										<div className='general-part'>
 
@@ -184,24 +183,26 @@ export default function LeaguesBluk() {
 													</Form.Label>
 													<Col sm="10">
 														<Form.Control type="file" name="file" placeholder="Season Title"
-															onChange={handleChangeFile} />
+														onChange={handleChangeFile} />
 													</Col>
 												</Form.Group>
-
 
 											</div>
 
 										</div>
 
-
 									</div>
 
+
 								</div>
+
+
 
 							</Row>
 						</Container>
 					</section>
-				</div></Form>
+				</div>
+			</Form>
 		</div>
 
 	)

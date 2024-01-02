@@ -7,7 +7,7 @@ import { REQUEST_TYPE,GET_IMAGE,ADD_IMAGE } from "../helper/APIInfo";
 import ImagePrevDelete from "./ImagePrevDelete";
 import UploadMediaImg from "./UploadMediaImg";
 
-function UploadMedia(props) {
+export default function UploadMedia(props) {
   const [showModal, setShowModal] = useState(false);
   const [folderName, setFolderName] = useState("");
   const [folders, setFolders] = useState([]); // Ensure that folders is initialized as an array
@@ -245,4 +245,3 @@ const [flag, setFlag]=useState(false)
     );
 }
 
-export default UploadMedia;
