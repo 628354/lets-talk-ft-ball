@@ -16,12 +16,28 @@ export default function LeaguesBluk() {
 	const [getleagues, setleagues] = useState();
 
 	const SessionCall = () => {
-		apiCall(SESSION.year, REQUEST_TYPE.GET).then((results) => {
-			setSession(results.response.data.seasonyears)
-		})
+		try {
+			apiCall(SESSION.year, REQUEST_TYPE.GET).then((results) => {
+				setSession(results.response.data.seasonyears)
+			})
+		} catch (error) {
+			console.log("data ",error);
+			
+		}
+		
 	}
 
 	const LeagueCall = () => {
+		try {
+			apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
+				console.log(results.response.data?.body);
+				setleagues(results.response.data?.body)
+			})
+			
+		} catch (error) {
+			console.log("data",error);
+		}
+		
 		apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
 			console.log(results?.response?.data?.body);
 			setleagues(results?.response?.data?.body)

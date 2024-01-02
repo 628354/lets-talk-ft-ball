@@ -42,10 +42,16 @@ export default function Addteams() {
   };
 
   const LeagueCall = () => {
-    apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
-      console.log(results.response.data.body);
-      setLeagues(results.response.data.body);
-    });
+    try {
+      apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
+        console.log(results.response.data.body);
+        setLeagues(results.response.data.body);
+      });
+      
+    } catch (error) {
+      console.log("data", error);
+    }
+   
   };
 
   useEffect(() => {
