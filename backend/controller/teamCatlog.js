@@ -163,7 +163,11 @@ module.exports = {
             const getByIdTeams = await teamCatlog.findById(
                 { _id: req.params.id },
                 { [lung]: 1 }
-            );
+            )
+            .populate({
+                path: "leagueid",
+                select: ["en.leaguename"],
+            });
             if (getByIdTeams) {
                 res.status(200).send({
                     body: getByIdTeams,

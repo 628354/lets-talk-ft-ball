@@ -1,6 +1,6 @@
 const definition = require('../model/definition')
 const responseHelper = require('../Helpers/Response');
-
+const user = require('../model/user')
 // exports.addDefinitions = async (req, res) => {
 //     try {
 //         const { type, content } = req.body;
@@ -40,43 +40,49 @@ const responseHelper = require('../Helpers/Response');
 //     }
 // };
 module.exports = {
-    addDefinitions: async (req, res) => {
+    addDefinitions : async (req, res) => {
         try {
+            const isAdmin = await checkPermission('admin')(req, res, () => null);
+    
+            if (!isAdmin) {
+                return res.status(403).json({ message: 'Admin permission required', success: false });
+            }
+    
             const protocol = req.protocol;
             const host = req.hostname;
             const url = `${protocol}://${host}`;
-
+    
             const { image, en, ar } = req.body;
-
+    
             const addDefinitions = new definition({
                 image: image ? `${url}/uploads/${image}` : '',
                 en: {
                     definition: en.definition || '',
                     type: en.type || '',
-                    content: en.content || ''
+                    content: en.content || '',
                 },
                 ar: {
                     definition: ar.definition || '',
                     type: ar.type || '',
-                    content: ar.content || ''
-                }
+                    content: ar.content || '',
+                },
             });
-
+    
             const result = await addDefinitions.save();
             res.status(200).send({
                 body: result,
                 message: 'Definition Added Successfully',
-                success: true
+                success: true,
             });
-
         } catch (error) {
             res.status(500).send({
-                message: "Internal Server Error",
+                message: 'Internal Server Error',
                 success: false,
-                error: error.message
+                error: error.message,
             });
         }
     },
+    
     getAllDefinition: async (req, res) => {
         try {
             const { lung } = req.params
@@ -185,7 +191,6 @@ module.exports = {
             })
         }
     }
-
 }
 
 

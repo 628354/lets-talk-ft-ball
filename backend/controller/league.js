@@ -16,8 +16,8 @@ exports.addleague = async (req, res) => {
             return res.status(400).send('League already present');
         }
         const addLeague = await leaguemodel.create({
+            image: req.file ? url + "/uploads/" + req.file.filename : '',
             en: {
-                image: req.file ? url + "/uploads/" + req.file.filename : '',
                 leaguename: en.leaguename || '',
                 description: en.description || '',
                 meta_Tag_Title: en.meta_Tag_Title || '',
@@ -36,9 +36,8 @@ exports.addleague = async (req, res) => {
                 blog_Category: ar.blog_Category || "",
                 sort_Order: ar.sort_Order || "",
                 status: ar.status || "active"
-            }
+            }   
         });
-
         const result = await addLeague.save();
         res.status(200).send({
             body: result,
