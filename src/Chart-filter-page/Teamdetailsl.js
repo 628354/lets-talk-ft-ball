@@ -12,12 +12,13 @@ import { REQUEST_TYPE, TEAM_DETAILS, SESSIOND, GAINING_RATE,TEAM_GS_GC,TEAM_GS_I
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import Cookies from "js-cookie";
 
 export default function Teamdetailsl() {
 	//const { teamId } = useParams()
 	const teamId = sessionStorage.getItem("teamId")
 	//console.log(teamId)
-	
+	const lang = Cookies.get('language')
 	const [teamDetails, setTeamDetails] = useState([])
 	const [tableData, setTableData] = useState([])
 	const [seasonId, setSeasonId] = useState(null);
@@ -39,7 +40,7 @@ export default function Teamdetailsl() {
 		try {
 			const response = await apiCall(apiUrl, REQUEST_TYPE.POST,obj)
 			//console.log(response.response.data.body)
-			setTeamDetails(response.response.data.body?.en)
+			setTeamDetails(response.response.data.body?.[lang])
 
 			// const data = response.response.data?.data[0].en
 			// const filterData = data.filter(item => item.teamname._id === teamId)
@@ -56,9 +57,9 @@ export default function Teamdetailsl() {
 	useEffect(() => {
 
 		getTeamDetails()
-	}, [teamId])
+	}, [teamId,lang])
 
-	//console.log(tableData)
+console.log(teamDetails)
 	// get year 
 	const getLatestYear = async () => {
 		try {
@@ -632,21 +633,32 @@ const teamSecgc = async () => {
 								</div>
 								<div className="col-lg-10 col-md-10 col-sm-12">
 									<div className="en-leagues-text ar-leagues-text ms-4">
-										<h2>{teamDetails.Team_Name_English}</h2>
-										<p>
+										{
+											lang ==="en"?<h2>{teamDetails.Team_Name_English}</h2>:<h2>{teamDetails.Team_Name_Arabic}</h2>
+										}
+										{
+											lang ==="en"?<p>
+											
 											{teamDetails.Description_English}
+										</p>:<p>
+											
+											{teamDetails.Description_Arabic}
 										</p>
+										}
+										
 
 										<div className="livepool">
 											<div className="button_live">
 												<div class="team-btn">
-													{" "}
-													<Link to="/Teamcomparision">Compare Now</Link>{" "}
+												{
+										lang ==="en"? <Link to="/Teamcomparision">Compare Now</Link>:<Link to="/Teamcomparision">قارن الآن</Link>
+									}
 												</div>
 											</div>
 											<div class="inside-filter">
-												{" "}
-												<span>Filter By Season </span>
+											{
+										lang ==="en"? <span>Filter By Season </span>:<span>تصفية حسب الموسم</span>
+									}
 												<div class="dropdown_filter">
 													<button class="dropbtn">
 														{" "}
@@ -679,19 +691,35 @@ const teamSecgc = async () => {
 					<div className="en-table-live ar-table-live">
 						<Table className="aline_tablel">
 							<thead>
-								<tr>
-									<th>TEAM</th>
-									<th>GAMES</th>
-									<th>WIN</th>
-									<th>DRAW</th>
-									<th>LOSE</th>
-									<th>GOALS SCORED</th>
-									<th>GOALS CONCEDED</th>
-									<th>POINTS</th>
-									<th>POINT GAP</th>
-									<th>GS-GC</th>
-									<th>WIN%</th>
-								</tr>
+								{
+							lang==="en"?<tr>
+							
+							<th>TEAM</th>
+							<th>GAMES</th>
+							<th>WIN</th>
+							<th>DRAW</th>
+							<th>LOSE</th>
+							<th>GOALS SCORED</th>
+							<th>GOALS CONCEDED</th>
+							<th>POINTS</th>
+							<th>POINT GAP</th>
+							<th>GS-GC</th>
+							<th>WIN%</th>
+						</tr>:<tr>
+							
+							<th>	الفريق</th>
+							<th>لعب</th>
+							<th>فوز</th>
+							<th>تعادل</th>
+							<th>خسارة</th>
+							<th>له</th>
+							<th>عليه</th>
+							<th>نقاط</th>
+							<th>فرق النقاط </th>
+							<th>نسبة الفوز</th>
+							<th>نسبة الفوز</th>
+						</tr>
+						}
 							</thead>
 							<tbody className="team_poine">
 								<tr>

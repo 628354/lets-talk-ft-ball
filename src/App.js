@@ -75,6 +75,7 @@ import { LeagueProvider } from "./Leagues-components/LeagueContext";
 import ProtectedRoute from "./page/ProtectedRoute";
 import Users from "./page-dashboard/Users";
 import UserGroup from "./page-dashboard/UserGroup";
+import PremierLeagueAr from "./Leagues-page/PremierLeagueAr";
 function App() {
 	// const navigate = useNavigate();
 	const location = useLocation();
@@ -191,6 +192,7 @@ function App() {
 
 				<Route path="/headers" element={<Header />}></Route>
 				<Route path="/league" element={<PremierLeague />}></Route>
+				<Route path="/leagueAr" element={<PremierLeagueAr />}></Route>
 {/* 
 				
 

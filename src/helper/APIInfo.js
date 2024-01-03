@@ -1,10 +1,13 @@
 /** @format */
 
+import Cookies from "js-cookie";
+
 const SERVER_LINK =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/";
 const SERVER_IMAGES =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/"
 // const SERVER_LINK = "http://localhost:5000/";
 // const SERVER_IMAGES = "http://localhost:5000/";
-
+ const lang = Cookies.get('language')
+ console.log(lang);
 export const REQUEST_TYPE = {
   GET: "GET",
   POST: "POST",
@@ -29,10 +32,16 @@ export const SESSION = {
   year: `${SERVER_LINK}getyears`,
 };
 
-export const LEAGUES = {
-  league: `${SERVER_LINK}en/getleagues`,
-  leaguear: `${SERVER_LINK}ar/getleagues`,
-};
+// export const LEAGUES = {
+//   league: `${SERVER_LINK}en/getleagues`,
+//   leaguear: `${SERVER_LINK}ar/getleagues`,
+// };
+export const LEAGUES=(lang)=>{
+  return {
+    league:`${SERVER_LINK}${lang}/getleagues`
+  }
+}
+
 
 export const CATLOGS = {
   upload: `${SERVER_LINK}uploadCatLog`,
@@ -40,23 +49,39 @@ export const CATLOGS = {
 export const TEAM = {
   find: `${SERVER_LINK}en/teamname/find`,
 };
-export const GS = {
-  find: `${SERVER_LINK}en/goals-scored/find`,
-};
-export const GC = {
-  find: `${SERVER_LINK}en/goals-con/find`,
-};
-export const GS_GC = {
-  find: `${SERVER_LINK}en/gs-gc/find`,
-};
-export const FIND_TEAM = {
-  find: `${SERVER_LINK}en/scrolldown/find`,
-};
+// export const GS = {
+//   find: `${SERVER_LINK}en/goals-scored/find`,
+// };
+export const GS=(lang)=>{
+  return {
+    find:`${SERVER_LINK}${lang}/goals-scored/find`
+  }
+}
+export const GC=(lang)=>{
+  return {
+    find:`${SERVER_LINK}${lang}/goals-con/find`
+  }
+}
 
-export const GET_TEAM_ID = {
-  finden: `${SERVER_LINK}en/getleagusById`,
-  findar: `${SERVER_LINK}ar/getleagusById`,
-};
+
+export const GS_GC=(lang)=>{
+  return {
+    find:`${SERVER_LINK}${lang}/gs-gc/find`
+  }
+}
+// export const FIND_TEAM = {
+//   find: `${SERVER_LINK}en/scrolldown/find`,
+// };
+
+// export const GET_LEAGUE_ID = {
+//   finden: `${SERVER_LINK}en/getleagusById`,
+//   findar: `${SERVER_LINK}ar/getleagusById`,
+// };
+export const GET_LEAGUE_ID=(lang)=>{
+  return {
+    find:`${SERVER_LINK}${lang}/getleagusById`
+  }
+}
 export const SESSIOND = {
   year: `${SERVER_LINK}getyears`,
   LatestYears: `${SERVER_LINK}getLatestYears`,
@@ -197,10 +222,39 @@ export const REMOVE_LEAGUE = {
   
 
 };
+export const GET_ROUTS = {
+  getroute: `${SERVER_LINK}getroutes`
+  
 
+};
+export const CREATE = {
+  create: `${SERVER_LINK}create`
+  
 
+};
+export const ADMIN_ALL_TEAM = {
+  team: `${SERVER_LINK}en/GetAllTeams`  
+};
+export const UPDATE_TEAM = {
+  updateTeam: `${SERVER_LINK}updateTeams`  
+};
+export const FIND_TEAM_ID = {
+  teamen: `${SERVER_LINK}en/getByIdTeams` ,
+  teamar: `${SERVER_LINK}ar/getByIdTeams`   
+};
 
+export const TEAM_Q=(lang)=>{
+  return `${SERVER_LINK}/${lang}/getByIdTeams`
+}
+// export const FIND_TEAM = {
+//   find: `${SERVER_LINK}/${lang}/scrolldown/find`,
+// };
 
+export const FIND_TEAM=(lang)=>{
+  return {
+    find:`${SERVER_LINK}${lang}/scrolldown/find`
+  }
+}
 
 export const BASE_URL = "http://localhost:5000/uploads/";
 

@@ -15,7 +15,7 @@ const [flag, setFlag]=useState(false)
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
   const [selectedFolder, setSelectedFolder] = useState(null); 
-
+  const [folderImages, setFolderImages] = useState([]);
   const handleFolderNameChange = (e) => setFolderName(e.target.value);
 
   const handleAddFolder = async () => {
@@ -59,12 +59,29 @@ const [flag, setFlag]=useState(false)
     fetchFolders();
   }, []);
 
-  const handleFolderClick = (folder) => {
-  
+  const handleFolderClick = async (folder) => {
     setSelectedFolder(folder);
+console.log(folder);
+const folderWithoutSpaces = folder.replace(/\s/g, '')
+console.log(folderWithoutSpaces);
+    try {
+      const response = await apiCall(
+        `http://localhost:5000/getImageFolderName/?folderName=${folder}`,
+        REQUEST_TYPE.GET
+      );
+      console.log(response?.response.data?.details);
+      response?.response.data?.details.map((item)=>{
+        console.log(item);
+      })
+      setFolderImages(response.response.data);
+    } catch (error) {
+      console.error("Error fetching folder images:", error);
+    }
   };
 
-
+//  useEffect(()=>{
+// handleFolderClick()
+//  },[])
 
   return (
     <div>
@@ -139,8 +156,8 @@ const [flag, setFlag]=useState(false)
                 <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start npmless" id="menu">
                     {
                       folders?.map((item)=>{
-                      //  console.log(item);
-                        return(  <li>
+                        // console.log(item);
+                        return(  <li >
                           <a href="#media1" data-bs-toggle="collapse" className="nav-link px-0 align-middle"onClick={() => handleFolderClick(item?.folderName)}>
                           <span className='cat-icon'></span> <span className='folder-main'><i className="ri-folder-fill"></i></span> <span className="ms-1 d-none d-sm-inline less_cat">{item?.folderName}</span> </a>
                          

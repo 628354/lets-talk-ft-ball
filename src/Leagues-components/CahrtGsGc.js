@@ -8,8 +8,10 @@ import { REQUEST_TYPE, GS_GC,SESSION } from "../helper/APIInfo";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import Cookies from "js-cookie";
 
 export default function CahrtGsGc({ leagueId}) {
+	const lang = Cookies.get('language')
 	const [gsGc, setGsGc] = useState([]);
 	const [seasonId, setSeasonId] = useState();
 	// console.log(leagueId);
@@ -42,17 +44,31 @@ export default function CahrtGsGc({ leagueId}) {
 			season:  sId ,
 		};
 
-		const lang= "en";
+		
 		const data1 = []
-		apiCall(GS_GC.find, REQUEST_TYPE.POST, data).then((result) => {
+		apiCall(GS_GC(lang).find, REQUEST_TYPE.POST, data).then((result) => {
 			if (result.status === 200) {
-			result.response.data.data?.map((item,index) =>{
+			    result.response.data.data?.map((item,index) =>{
 						return item[lang].map((results)=>{
 							console.log(result)
-							data1.push({
-								"goalsCons" : parseInt(results.gs_gc,10),
-								"name" : results.teamname[lang].Team_Name_Short_English
-							})
+							if(lang === "en"){
+								data1.push({
+									"goalsCons": parseInt(results?.gs_gc, 10),
+									"name": results.teamname?.[lang]?.Team_Name_Short_English,
+									//"goalsScored": results?.goals_scored
+									// "Image": `${BASE_URL}${results?.teamname?.Image.replace(/\s/g, '')}`
+								})
+	
+							}else{
+								data1.push({
+									"goalsCons": parseInt(results?.gs_gc, 10),
+									"name": results.teamname?.[lang]?.Team_Name_Short_Arabic,
+									//"goalsScored": results?.goals_scored
+									// "Image": `${BASE_URL}${results?.teamname?.Image.replace(/\s/g, '')}`
+								})
+	
+							}
+							
 						})
 						
 				})
@@ -65,7 +81,7 @@ export default function CahrtGsGc({ leagueId}) {
 	console.log(gsGc);
 	useEffect(() => {
 		getGsGc();
-	}, [leagueId,sId]);
+	}, [leagueId,sId,lang]);
 
 	useEffect(() => {
 		var root1 = am5.Root.new("chartdiv2");
@@ -151,7 +167,9 @@ export default function CahrtGsGc({ leagueId}) {
 		<div>
 			<div className="chart-border-toll">
 			<div className="premier-textare">
-				<h3>2023-24 GS/GC</h3>
+			{
+                    lang ==="en"? <h3>2023-24 Goals Con/Game</h3>: <h3>2023-24 نسبة التسجيل/الاستقبال</h3>
+                }
 			</div>
 			<div id="chartdiv2" style={{ width: "100%", height: "500px" }}></div>
 			</div>
