@@ -18,7 +18,7 @@ const upload = multer({ storage: storage });
 const aboutController = require("../controller/aboutus");
 
 router.post(
-  "/addAboutus",
+  "/addAboutus", authentication, checkPermission('addAboutus'),
   upload.fields([
     { name: "bannerImage" },
     { name: "aboutSectionImage" },
@@ -29,7 +29,7 @@ router.post(
 
 router.get("/:lung/getAboutus", aboutController.getaboutus);
 
-router.post("/updateAboutus/:id",authentication,  upload.fields([{ name: 'bannerImage' }, { name: 'aboutSectionImage' }, { name: 'visionSectionImage' }]), aboutController.updateAboutus)
+router.post("/updateAboutus/:id", authentication, upload.fields([{ name: 'bannerImage' }, { name: 'aboutSectionImage' }, { name: 'visionSectionImage' }]), aboutController.updateAboutus)
 
 
 

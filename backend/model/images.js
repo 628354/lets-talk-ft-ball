@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 
 const imagesSchema = mongoose.Schema({
-    logo: { type: String },
+    logo: [{ type: String }],
     status: { type: String, enum: ["active", "inactive"], default: "active" },
     folderName: { type: String, default: "" }
 }, {

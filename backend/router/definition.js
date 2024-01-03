@@ -3,6 +3,7 @@ const router = express.Router();
 const { authentication } = require('../middleware/auth')
 const multer = require("multer");
 const definition = require('../controller/definition')
+const checkPermission = require('../middleware/checkPermission')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -16,7 +17,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post('/addDefinition', upload.single('image'), definition.addDefinitions)
+router.post('/addDefinition',authentication,checkPermission('addDefinition'), upload.single('image'), definition.addDefinitions)
 router.get('/:lung/getAllDefinition', definition.getAllDefinition)
 router.get('/:lung/getDefinitionById/:id', definition.getDefinitionById)
 router.put('/updatedefinition/:id', definition.updatedefinition)

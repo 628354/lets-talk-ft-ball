@@ -5,22 +5,34 @@ module.exports = {
     create: async (req, res) => {
         try {
 
-            const permissions = await permission.create(req.body);
-            const result = await permissions.save();
+            const { routesId, userGroup } = req.body;
+            if (!userGroup) {
+                return res.status(400).send({
+                    message: "User group is a required field.",
+                    success: false,
+                });
+            }
+            const newPermission = await permission.create({
+                routesId: routesId || [],
+                userGroup,
+            });
+
+            const result = await newPermission.save();
             res.status(200).send({
                 body: result,
-                message: "Permission Create Successfully",
+                message: "Permission created successfully",
                 success: true,
             });
 
         } catch (error) {
             res.status(500).send({
-                message: "Enternal Server Error",
+                message: "Internal Server Error",
                 success: false,
                 error: error.message,
             });
         }
     },
+
     getById: async (req, res) => {
         try {
             const permissions = await permission.findById({ _id: req.params.id });
@@ -64,34 +76,34 @@ module.exports = {
 
     update: async (req, res) => {
         try {
-          const { userGroup, path, methods } = req.body;
-          const permissions = await permission.findByIdAndUpdate(
-            req.params.id,
-            { userGroup, path, methods },
-            { new: true }
-          );
-      
-          if (permissions) {
-            res.status(200).send({
-              body: permissions,
-              message: "Permission Updated Successfully",
-              success: true,
-            });
-          } else {
-            res.status(404).send({
-              message: "Permission Id Not Found",
-              success: false,
-            });
-          }
+            const { userGroup, path, methods } = req.body;
+            const permissions = await permission.findByIdAndUpdate(
+                req.params.id,
+                { userGroup, path, methods },
+                { new: true }
+            );
+
+            if (permissions) {
+                res.status(200).send({
+                    body: permissions,
+                    message: "Permission Updated Successfully",
+                    success: true,
+                });
+            } else {
+                res.status(404).send({
+                    message: "Permission Id Not Found",
+                    success: false,
+                });
+            }
         } catch (error) {
-          res.status(500).send({
-            message: "Internal Server Error",
-            success: false,
-            error: error.message,
-          });
+            res.status(500).send({
+                message: "Internal Server Error",
+                success: false,
+                error: error.message,
+            });
         }
-      },
-      
+    },
+
     delete: async (req, res) => {
         try {
             const permissions = await permission.findByIdAndDelete({
@@ -117,6 +129,7 @@ module.exports = {
             });
         }
     },
+
     statusUpdate: async (req, res) => {
         try {
             const { type } = req.body;

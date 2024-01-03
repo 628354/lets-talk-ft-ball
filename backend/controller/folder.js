@@ -3,23 +3,39 @@ const path = require('path')
 const fs = require('fs')
 
 module.exports = {
-    folderCreate: async (req, res) => {
+    folderCreate : async (req, res) => {
         try {
-            const folders = await folder.create({
+            const existingFolder = await folder.findOne({ folderName: req.body.folderName });
+            if (existingFolder) {
+                return res.status(400).send({
+                    message: 'Folder with the same name already exists',
+                    success: false
+                });
+            }
+    
+            const newFolder = new folder({
                 folderName: req.body.folderName,
                 status: req.body.status
             });
-            const result = await folders.save();
+    
+            const result = await newFolder.save();
             const uploadPath = path.join(process.cwd(), 'uploads');
-
+    
             try {
                 if (!fs.existsSync(uploadPath)) {
                     fs.mkdirSync(uploadPath, { recursive: true });
                 }
-
+    
                 const folderPath = path.join(uploadPath, req.body.folderName);
-                fs.mkdirSync(folderPath);
-
+                if (!fs.existsSync(folderPath)) {
+                    fs.mkdirSync(folderPath);
+                } else {
+                    return res.status(400).send({
+                        message: 'Folder with the same name already exists in the file system',
+                        success: false
+                    });
+                }
+    
                 res.status(200).send({
                     body: result,
                     message: 'Folder Created Successfully',
@@ -33,7 +49,7 @@ module.exports = {
                 });
             }
         } catch (error) {
-            console.error(error.message);
+            console.error('Error creating folder in the database:', error.message);
             res.status(500).send({
                 message: 'Error creating folder in the database',
                 success: false
