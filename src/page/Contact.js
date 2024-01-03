@@ -57,7 +57,7 @@ const getFormData = async (e) => {
            
          <div className='en_bread_crumb ar_bread_crumb'>
          <Container>
-         <ul className='en_creat_nav ar_creat_nav'>
+         <ul className='en_creat_nav'>
              <li>
                <Link to="/">Home</Link>
              </li>
@@ -65,15 +65,15 @@ const getFormData = async (e) => {
              <i className="ri-arrow-right-s-line"></i>
              </li>
              <li>
-               <Link to="/DEFINITION">DEFINITION</Link>
+               <Link to="/Contact">Contact us</Link>
              </li>
            </ul>
-              <div className='leagues_cont'>
+              <div className='en_leagues_cont'>
                <h2>Contact Us</h2>
               </div>
          </Container>
          </div>
-         <section className='en_section_contact'>
+         <section className='en_section_contact ar_section_contact'>
           <Container>
            <div className='row'>
             <div className='col-lg-6 col-md-12 col-sm-12'>
@@ -104,7 +104,7 @@ const getFormData = async (e) => {
                  <Form.Label>Message</Form.Label>
                  <Form.Control as="textarea" rows={3} name="message"onChange={handleChange}/>
                  </Form.Group>
-                 <button className='en_send_m ar_send_m' onClick={getFormData}>Send Message</button>
+                 <button className='en_send_m' onClick={getFormData}>Send Message</button>
 
               </Form>
               </div>

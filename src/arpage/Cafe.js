@@ -77,7 +77,7 @@ const [blogDetails,setBlogDetails]=useState([])
     <Container>
       <div className='row'>
         <div className='col-lg-12 col-md-12 col-sm-12'>
-          <div className='leagues_cont'>
+          <div className='ar_leagues_cont'>
             <h2>مقهى</h2>
             <div className='en_cafe_contant'>
               <p><strong>انضم الى المناقشة او تابعنا على قنوات السوشال ميديا</strong></p>

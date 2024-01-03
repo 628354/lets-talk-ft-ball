@@ -54,14 +54,14 @@ export default function Definition() {
          <Container>
          <div className='row'>
           <div className='col-lg-12 col-md-12 col-sm-12'>
-            <div className='leagues_cont'>
+            <div className='ar_leagues_cont'>
               <h3>التعريف</h3>
             </div>
             <div className='en_defintion_r ar_defintion_r'>
               <div className='row'>
               {defination?.map((definition, index) => (
                     <div className='col-lg-6 col-md-6 col-sm-12' key={index}>
-                      <div className='en_defintion_contant ar_defintion_contant'>
+                      <div className='ar_defintion_contant'>
                         <h5>
                           <span className='en_number_pass'>{index +1}</span>
                           {definition.type}

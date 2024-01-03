@@ -62,7 +62,7 @@ getAboutData()
       <Container>
         <div className='row'>
           <div className='col-lg-12 col-md-12 col-sm-12'>
-            <div className='leagues_cont_ar'>
+            <div className='ar_leagues_cont'>
               <h2>من نحن</h2>
               <div className='leagues_slider'>
             

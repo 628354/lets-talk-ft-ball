@@ -1,6 +1,6 @@
 /** @format */
 
-// import "./css/arstyle.css";
+import "./css/arstyle.css";
 import "./css/enstyle.css";
 import "./responsive/arstyle.css";
 import "./responsive/enstyle.css";
@@ -255,6 +255,9 @@ function App() {
 				<Route path="/Users" element={<Users />}></Route>
 				<Route path="/user-group" element={<ProtectedRoute><UserGroup /></ProtectedRoute>}></Route>
 				<Route path="/UploadMediaImg" element={<UploadMediaImg />}></Route>
+
+				
+				<Route path="/BotolaPro" element={<BotolaPro />}></Route>
 
 			</Routes>
 			</LeagueProvider>

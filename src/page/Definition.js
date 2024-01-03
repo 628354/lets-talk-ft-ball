@@ -38,7 +38,7 @@ const data =[]
         </section>
          <div className='en_bread_crumb ar_bread_crumb'>
          <Container>
-         <ul className='en_creat_nav ar_creat_nav'>
+         <ul className='en_creat_nav'>
              <li>
                <Link to="/">Home</Link>
              </li>
@@ -55,14 +55,14 @@ const data =[]
          <Container>
          <div className='row'>
           <div className='col-lg-12 col-md-12 col-sm-12'>
-            <div className='leagues_cont'>
+            <div className='en_leagues_cont'>
               <h2>Definition</h2>
             </div>
             <div className='en_defintion_r ar_defintion_r'>
               <div className='row'>
               {defination?.map((definition, index) => (
                     <div className='col-lg-6 col-md-6 col-sm-12' key={index}>
-                      <div className='en_defintion_contant ar_defintion_contant'>
+                      <div className='en_defintion_contant'>
                         <h5>
                           <span className='en_number_pass'>{index +1}</span>
                           {definition.type}

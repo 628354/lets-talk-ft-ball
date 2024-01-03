@@ -56,7 +56,7 @@ export default function Contact() {
          
        <div className='en_bread_crumb ar_bread_crumb'>
        <Container>
-       <ul className='en_creat_nav ar_creat_nav ' dir="rtl">
+       <ul className=' ar_creat_nav ' dir="rtl">
            <li>
              <Link to="/">الرئيسية</Link>
            </li>
@@ -67,12 +67,12 @@ export default function Contact() {
              <Link to="/DEFINITION">اتصل بنا</Link>
            </li>
          </ul>
-         <div className='leagues_cont'>
+         <div className='ar_leagues_cont'>
             <h2>اتصل بنا</h2>
           </div>
        </Container>
        </div>
-       <section className='en_section_contact'>
+       <section className='ar_section_contact'>
         <Container>
         <div className='row' dir="rtl">
           <div className='col-lg-6 col-md-6 col-sm-12'>
@@ -84,7 +84,7 @@ export default function Contact() {
             <div className='en_contact_contant'>
             {/* <h4>Have Some Question or Comment?</h4> */}
 
-            <div className='en_conact_form'>
+            <div className='ar_conact_form'>
             <Form>
             <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
                 <Form.Label>الاسم</Form.Label>
@@ -95,14 +95,14 @@ export default function Contact() {
                 <Form.Control type="email" placeholder="" name="email" onChange={handleChange}/>
               </Form.Group>
               <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
-                <Form.Label>Subject</Form.Label>
+                <Form.Label>موضوع</Form.Label>
                 <Form.Control type="text" placeholder=""  name="subject" onChange={handleChange} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
               <Form.Label>الموضوع</Form.Label>
               <Form.Control as="textarea" rows={3} name="message"onChange={handleChange}/>
             </Form.Group>
-            <button className='en_send_m ar_send_m' onClick={getFormData}>أرسل رسالة</button>
+            <button className='ar_send_m' onClick={getFormData}>أرسل رسالة</button>
               
             </Form>
             </div>

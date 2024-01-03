@@ -26,8 +26,25 @@ ul.ar_creat_nav li a {
   font-family: var(--nato-font)!important;
 
 }
+.ar_leagues_cont h2:after {
+  width: 120px;
+  position: sticky;
+  content: '';
+  background-color: var(--primary-color);
+  height: 3px;
+  text-align: center;
+  clear: both;
+  margin: 10px auto;
+  display: block;
+}
+.ar_leagues_cont h2 {
+  text-align: center;
+  font-weight: 600;
+  padding-bottom: 40px;
+  position: relative;
+}
 
-.leagues_cont h3 {
+.ar_leagues_cont h3 {
   text-align: center;
   font-weight: 600;
   padding-bottom: 40px;
@@ -69,9 +86,9 @@ ul.ar_creat_nav li a {
   padding-top: 140px;
 }
 
-.ar_Our_section h4,p {
+/* .ar_Our_section h4,p {
  font-family: var(--nato-font)!important;
-}
+} */
 /* about page end */
 
 /* definition page start */
@@ -123,16 +140,25 @@ span.ar_number_pass {
 
 /* contact page css */
 
-.en_section_contact {
-  background-image: url("../Ar.img/bback-ar-min.png")!important;
+.ar_section_contact {
+  background-image: url("../Ar.img/bback-ar-min.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   padding: 28px 0;
 }
-.en_conact_form .form-label {
+.ar_conact_form .form-label {
   font-family: var(--nato-font);
+  margin: 0;
+  color: var(--there-color);
+  font-size: 15px;
 }
+
+
+
+
+
+
 .ar_send_m {
   font-family: var(--nato-font);
 }
@@ -146,12 +172,15 @@ span.ar_number_pass {
   font-family: var(--nato-font);
 }
 
-.spc_button {
-  font-family: var(--nato-font);
-}
+
 
 .ar_footer_menu li a {
   font-family: var(--nato-font);
+  color:  var(--there-color);
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 32px;
 }
 .ar_media li {
   font-family: var(--nato-font);
@@ -162,7 +191,124 @@ span.ar_number_pass {
   border-right: 4px solid red;
 }
 
+.ar_footercontantin p {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+  color:  var(--there-color);
+  font-family: var(--nato-font);
+}
 
+button.ar_button_search {
+  background-color:  var(--primary-color);
+  border: none;
+  line-height: 1;
+  color:  var(--there-color);
+  font-size: 14px;
+  padding: 0;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: 0.5s;
+  position: relative;
+  z-index: 9;
+  float: right;
+  margin-top: 0;
+  width: 100px;
+  line-height: 54px;
+  position: absolute;
+  left: 0;
+  font-family: var(--nato-font);
+}
+
+.ar_footer_menu li a {
+  color:  var(--there-color);
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 32px;
+  font-family: var(--nato-font);
+}
+
+.ar_last_footer p {
+  font-size: 13px;
+  text-transform: capitalize;
+  color:  var(--there-color);
+  font-weight: normal;
+  text-align: center;
+}
+.ar_last_footer p a {
+  color:  var(--there-color);
+  position: relative;
+}
+.ar_last_footer p a:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background:  var(--there-color);
+  left: 0;
+  bottom: 0;
+}
+
+.ar_media li a {
+  margin: 0 !important;
+  padding: 0;
+  margin-bottom: 8px !important;
+  font-size: 13px;
+  color: var(--there-color);
+}
+.ar_media{
+  margin: 0 !important;
+  padding: 0;
+  margin-bottom: 8px !important;
+  font-size: 13px;
+  color: var(--there-color);
+}
+
+
+.ar_line {
+  border-left: 1px solid #6a6b89;
+}
+
+.ar_send_m {
+  border: 1px solid #790019;
+  width: 100%;
+  padding: 10px 0;
+  background: #790019;
+  color: var(--there-color);
+  margin-top: 20px;
+  font-family: var(--nato-font);
+}
+
+.ar_more_button {
+  background-color: var(--primary-color);
+  cursor: pointer;
+  color: var(--there-color);
+  padding: 10px 20px;
+  text-transform: capitalize;
+  border: none;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: var(--nato-font);
+}
+
+.ar_spc_button {
+  background-color: var(--there-color);
+  color: var(--primary-color);
+  text-transform: uppercase;
+  width: 244px !important;
+  float: none;
+  text-align: center;
+  padding: 14px 0;
+  border: 2px solid var(--primary-color);
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0 auto;
+  display: block;
+  clear: both;
+  font-family: var(--nato-font);
+}
 /* ul.ar_creat_nav {
   display: flex;
   align-items: center;
