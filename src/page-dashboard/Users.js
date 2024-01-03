@@ -1,15 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Menubar from '../dashboard/Menubar';
 import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import { useState } from "react";
+import { apiCall } from '../helper/RequestHandler';
+import { GET_ROUTS, REQUEST_TYPE,CREATE } from '../helper/APIInfo';
 
 
 export default function Users() {
     const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
     const [selectedCheckboxes2, setSelectedCheckboxes2] = useState([]);
+const [userGroup,setUserGroup]=useState("")
 
+
+
+
+const handleSubmitForm =async(e)=>{
+    e.preventDefault();
+    const token = localStorage.getItem("token")
+   console.log(selectedCheckboxes);
+    const formData = {
+        userGroup: userGroup,
+        selectedCheckboxes: selectedCheckboxes, // Include selected checkbox IDs
+        //selectedCheckboxes2: selectedCheckboxes2, // Include selected checkbox IDs for Modify Permission
+      };
+    console.log("formdata",formData);
+  
+      try {
+        // Make POST request using Axios
+        const response = await apiCall(CREATE.create,REQUEST_TYPE.POST,formData,token)
+  
+        // Log the response
+        console.log(response);
+  
+        // Reset form fields or navigate to another page if needed
+       
+        setSelectedCheckboxes([]);
+        setSelectedCheckboxes2([]);
+      } catch (error) {
+        console.error('Error submitting form data:', error);
+      }
+}
 
     const handleCheckboxChange = (id) => {
         // Toggle the checkbox's presence in the selectedCheckboxes array
@@ -32,28 +64,39 @@ export default function Users() {
           }
         });
       };
+  
+const [checkBoxData,setCheckBoxData]=useState([]);
 
-    const checkboxData = [
-        { id: 'cat1', label: 'catalog' },
-        { id: 'cat2', label: 'catalog/attribute' },
-        { id: 'cat3', label: 'catalog/attribute_group' },
-        { id: 'cat4', label: 'catalog/bulkimport' },
-        { id: 'cat5', label: 'catalog/category' },
-        { id: 'cat6', label: 'catalog/category_28dec2020' },
-        { id: 'cat7', label: 'catalog/definition' },
-        { id: 'cat8', label: 'catalog/download' },
-      ];
+const getData =async()=>{
+    const locarUser = localStorage.getItem("token")
+    console.log(locarUser);
+    try {
+        const response =await  apiCall(GET_ROUTS.getroute,REQUEST_TYPE.GET,null,locarUser)
+        //console.log(response.response?.data?.body);
+        setCheckBoxData(response.response?.data?.body)
+    } catch (error) {
+        console.log("data error",error);
+        
+    }
+}
+console.log(checkBoxData);
+useEffect(()=>{
+getData();
+},[])
+ 
+ // Function to select all checkboxes
+//  const handleSelectAll = () => {
+//     setSelectedCheckboxes(checkBoxData.map((checkbox) => checkbox._id));
+//     setSelectedCheckboxes2(checkBoxData.map((checkbox) => checkbox._id));
+//   };
 
-      const checkboxDataBox = [
-        { id: 'cat11', label: 'catalog' },
-        { id: 'cat12', label: 'catalog/attribute' },
-        { id: 'cat13', label: 'catalog/attribute_group' },
-        { id: 'cat14', label: 'catalog/bulkimport' },
-        { id: 'cat15', label: 'catalog/category' },
-        { id: 'cat16', label: 'catalog/category_28dec2020' },
-        { id: 'cat17', label: 'catalog/definition' },
-        { id: 'cat18', label: 'catalog/download' },
-      ];
+//   // Function to unselect all checkboxes
+//   const handleUnselectAll = () => {
+//     setSelectedCheckboxes([]);
+//     setSelectedCheckboxes2([]);
+//   };
+
+
 
 
   return (
@@ -85,7 +128,7 @@ export default function Users() {
                                 <div className="add-part">
                                     <ul className="add-button-min">
                                         <li className="add-button-fis">
-                                            <button >
+                                            <button onClick={handleSubmitForm}>
                                                 <Link to="">
                                                     <i className="ri-save-3-line"></i>
                                                 </Link>
@@ -134,7 +177,8 @@ export default function Users() {
                                                             placeholder="User Group Name"
                                                             id="input-firstname"
                                                             class="form-control"
-                                                            
+                                                            value={userGroup}
+                                                            onChange={(e)=> setUserGroup(e.target.value)}
                                                         />
                                                     </div>
                                                 </div>
@@ -151,33 +195,33 @@ export default function Users() {
                                                        
                                                         <Form>
 
-                                                            {checkboxData.map((checkbox) => (
+                                                            {checkBoxData.map((checkbox) => (
                                                             <Form.Check
-                                                            key={checkbox.id}
-                                                            id={checkbox.id}
-                                                            label={checkbox.label}
+                                                            key={checkbox._id}
+                                                            id={checkbox._id}
+                                                            label={checkbox.path}
                                                             className={'catlog'}
-                                                            checked={selectedCheckboxes.includes(checkbox.id)}
-                                                            onChange={() => handleCheckboxChange(checkbox.id)}
+                                                            checked={selectedCheckboxes.includes(checkbox._id)}
+                                                            onChange={() => handleCheckboxChange(checkbox._id)}
                                                             />
                                                             ))}
 
                                                         </Form>
 
                                                         </div>
-                                                        <div className='catalog-selet'>
+                                                        {/* <div className='catalog-selet'>
                                                             <ul className='catalog-cart'>
                                                                 <li>
-                                                                    <Link to=''>Select All</Link>
+                                                                    <Link to=''  onClick={handleSelectAll}>Select All</Link>
                                                                 </li>
                                                                 <li>
                                                                     <Link to=''>/</Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link to=''>Unselect All</Link>
+                                                                    <Link to='' onClick={handleUnselectAll}>Unselect All</Link>
                                                                 </li>
                                                             </ul>
-                                                        </div>
+                                                        </div> */}
                                                     </div>
                                                 </div>
                                                 <hr/>
@@ -209,32 +253,32 @@ export default function Users() {
                                                             </Form> */}
 
                                                                <Form>
-                                                                    {checkboxDataBox.map((checkbox) => (
+                                                                    {checkBoxData.map((checkbox) => (
                                                                         <Form.Check
-                                                                        key={checkbox.id}
-                                                                        id={checkbox.id}
-                                                                        label={checkbox.label}
+                                                                        key={checkbox._id}
+                                                                        id={checkbox._id}
+                                                                        label={checkbox.path}
                                                                         className={'catlog'}
-                                                                        checked={selectedCheckboxes2.includes(checkbox.id)}
-                                                                        onChange={() => handleCheckboxChangeBox(checkbox.id)}
+                                                                        checked={selectedCheckboxes2.includes(checkbox._id)}
+                                                                        onChange={() => handleCheckboxChangeBox(checkbox._id)}
                                                                         />
                                                                     ))}
                                                                 </Form>
 
                                                         </div>
-                                                        <div className='catalog-selet'>
+                                                        {/* <div className='catalog-selet'>
                                                             <ul className='catalog-cart'>
                                                                 <li>
-                                                                    <Link to=''>Select All</Link>
+                                                                    <Link to='' onClick={handleSelectAll}>Select All</Link>
                                                                 </li>
                                                                 <li>
                                                                     <Link to=''>/</Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link to=''>Unselect All</Link>
+                                                                    <Link to='' onClick={handleUnselectAll} >Unselect All</Link>
                                                                 </li>
                                                             </ul>
-                                                        </div>
+                                                        </div> */}
                                                     </div>
                                                 </div>
                                                

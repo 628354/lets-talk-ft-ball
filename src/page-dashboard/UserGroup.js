@@ -29,8 +29,8 @@ export default function UserGroup() {
 
   useEffect(() => {
 
-    axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getAllUser', axiosConfig)
-    //  axios.get(GET_USER.find,axiosConfig)
+    // axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/getAllUser', axiosConfig)
+     axios.get(GET_USER.find,axiosConfig)
      
       .then((response) => {
        //console.log(response.response.data?.pageInfo?.body);
@@ -52,8 +52,8 @@ export default function UserGroup() {
 
 
     if (confirmDelete) {
-      axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/deleteUser/${id}`, axiosConfig)
-    //   axios.delete(`http://localhost:5000/deleteUser/${id}`, axiosConfig)
+      // axios.delete(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/deleteUser/${id}`, axiosConfig)
+      axios.delete(`http://localhost:5000/deleteUser/${id}`, axiosConfig)
 
         .then((response) => {
 
@@ -100,7 +100,7 @@ export default function UserGroup() {
                 <div className='add-part'>
                   <ul className='add-button-min'>
                     <li className='add-button-fis'>
-                      <Link to="/addUser"><i className="ri-add-line"></i></Link>
+                      <Link to="/Users"><i className="ri-add-line"></i></Link>
                     </li>
                     <li class="add-button-cencel"><a href=""><i className="ri-refresh-line"></i></a></li>
                     {/* <li className='add-button-sec'>

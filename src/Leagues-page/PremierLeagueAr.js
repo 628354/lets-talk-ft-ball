@@ -11,15 +11,13 @@ import CahrtGsGc from "../Leagues-components/CahrtGsGc";
 
 import { apiCall } from "../helper/RequestHandler";
 import { REQUEST_TYPE, SESSION,FIND_TEAM ,GET_LEAGUE_ID,SESSIOND} from "../helper/APIInfo";
-import Cookies from "js-cookie";
-export default function PremierLeague() {
+export default function PremierLeagueAr() {
 	
 	
 	const [leagueDecreption, setLeagueDecreption] = useState([]);
 	// const { leagueId } = useParams();
 
 const leagueId = localStorage.getItem("selectedLeagueId")
-const lang = Cookies.get('language')
 //console.log(leagueId)
 	// const [currentLeagueId, setCurrentLeagueId] = useState("");
 	// const [seasonId, setSeasonId] = useState();
@@ -27,14 +25,13 @@ const lang = Cookies.get('language')
 	
 	
 	const getLeagueDetails=()=>{
-		console.log(leagueId);
-		const baseUrl = GET_LEAGUE_ID(lang).find;
+		// console.log(leagueId);
+		const baseUrl = GET_LEAGUE_ID;
 		const apiUrl =`${baseUrl}/${leagueId}`
-		console.log(apiUrl);
 		try{
 			apiCall(apiUrl,REQUEST_TYPE.GET).then((response)=>{
-				console.log(response.response?.data?.body)
-				setLeagueDecreption(response.response?.data?.body?.[lang])
+				//console.log(response.response?.data?.body?.en)
+				setLeagueDecreption(response.response?.data?.body?.ar)
 			})
 
 		}catch(error){
@@ -48,12 +45,12 @@ const lang = Cookies.get('language')
 	useEffect(()=>{
 		
 		getLeagueDetails()
-	},[leagueId,lang])
+	},[leagueId])
 	
 	  
 	return (
 		<div>
-			<section className={`${lang ==="en"? 'en_hero_about en_hero_about':'ar_hero_about ar_hero_about'}`}>
+			<section className="en_hero_about en_hero_about">
 				<Container>
 					<Row>
 						<div className="col-lg-12 col-md-12 col-sm-12"></div>
@@ -63,12 +60,8 @@ const lang = Cookies.get('language')
 			<div className="en_bread_crumb ar_bread_crumb">
 				<Container>
 					<ul className="en_creat_nav ar_creat_nav">
-
 						<li>
-							{
-								lang === "en"? <Link to="/">Home</Link>:<Link to="/">بيت</Link>
-							}
-							
+							<Link to="/">Home</Link>
 						</li>
 						<li>
 							<i className="ri-arrow-right-s-line"></i>
@@ -126,10 +119,7 @@ const lang = Cookies.get('language')
 				<Container>
 					<Row>
 						<div className="en_table_text ar_table_text">
-							{
-								lang ==="en"? <h6>Scroll Down To See Charts</h6>:<h6>قم بالتمرير لأسفل لرؤية الرسوم البيانية</h6>
-							}
-							
+							<h6>Scroll Down To See Charts</h6>
 						</div>
 						<div className="en_main_table ar_main_table">
 							<PremierLeaguetable
