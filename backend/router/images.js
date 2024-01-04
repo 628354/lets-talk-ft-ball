@@ -13,12 +13,13 @@ const storage = multer.diskStorage({
     cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + '-' + file.originalname);
+},
 });
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage })
 
-router.post("/addImage", upload.array("image"), imagesController.addimages);
+router.post("/addImage", upload.array("image"), imagesController.addimages);  
 router.get('/GetImage',imagesController.GetImage)
 router.delete('/deleteImage/:id', imagesController.deleteImage)
 router.put('/updateImage/:id', imagesController.updateImage)

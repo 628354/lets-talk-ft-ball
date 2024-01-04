@@ -38,7 +38,7 @@ exports.getaboutus = async (Request, Response) => {
 },
 
 
-    exports.updateAboutus = async (req, res) => {
+exports.updateAboutus = async (req, res) => {
         try {
             const files = req.files;
             const protocol = req.protocol;

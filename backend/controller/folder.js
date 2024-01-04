@@ -90,23 +90,32 @@ module.exports = {
             console.log(error.message)
         }
     },
-    folderDelete: async (req, res) => {
+    folderDelete : async (req, res) => {
         try {
-            const folders = await folder.findByIdAndDelete({ _id: req.params.id })
-            if (folders) {
+            const folderId = req.params.id;
+            const deletedFolder = await folder.findByIdAndDelete(folderId);
+            if (deletedFolder) {
+                const folderPath = path.join(process.cwd(), 'uploads', deletedFolder.folderName);
+    
+                if (fs.existsSync(folderPath)) {
+                    fs.rmdirSync(folderPath, { recursive: true });
+                }
                 res.status(200).send({
-                    body: folders,
+                    body: deletedFolder,
                     message: 'Folder Deleted Successfully',
                     success: true
-                })
+                });
             } else {
-                res.status(300).send({
-                    message: 'Folder Id not Found',
+                res.status(404).send({
+                    message: 'Folder ID not found',
                     success: false
-                })
+                });
             }
         } catch (error) {
-            console.log(error.message)
+            res.status(500).send({
+                message: 'Error deleting folder',
+                success: false
+            });
         }
     }
 }
