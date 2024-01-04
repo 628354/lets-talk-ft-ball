@@ -3,7 +3,7 @@ const path = require('path')
 const fs = require('fs')
 
 module.exports = {
-    folderCreate : async (req, res) => {
+    folderCreate: async (req, res) => {
         try {
             const existingFolder = await folder.findOne({ folderName: req.body.folderName });
             if (existingFolder) {
@@ -12,20 +12,20 @@ module.exports = {
                     success: false
                 });
             }
-    
+
             const newFolder = new folder({
                 folderName: req.body.folderName,
                 status: req.body.status
             });
-    
+
             const result = await newFolder.save();
             const uploadPath = path.join(process.cwd(), 'uploads');
-    
+
             try {
                 if (!fs.existsSync(uploadPath)) {
                     fs.mkdirSync(uploadPath, { recursive: true });
                 }
-    
+
                 const folderPath = path.join(uploadPath, req.body.folderName);
                 if (!fs.existsSync(folderPath)) {
                     fs.mkdirSync(folderPath);
@@ -35,7 +35,7 @@ module.exports = {
                         success: false
                     });
                 }
-    
+
                 res.status(200).send({
                     body: result,
                     message: 'Folder Created Successfully',
@@ -78,6 +78,29 @@ module.exports = {
 
         }
     },
+    foderGetById: async (req, res) => {
+        try {
+            const folders = await folder.findById({ _id: req.params.id })
+            if (folders) {
+                res.status(200).send({
+                    body: folders,
+                    message: 'Folder Get By Id Successfully',
+                    success: true
+                })
+            } else {
+                res.status(300).send({
+                    message: 'Folder Id Not Found',
+                    success: false
+                })
+            }
+        } catch (error) {
+            res.status(500).send({
+                message: 'Enternal Serever Error',
+                success: false,
+                error: error.message
+            })
+        }
+    },
     folderGet: async (req, res) => {
         try {
             const folders = await folder.find().sort({ createdAt: -1 })
@@ -90,13 +113,13 @@ module.exports = {
             console.log(error.message)
         }
     },
-    folderDelete : async (req, res) => {
+    folderDelete: async (req, res) => {
         try {
             const folderId = req.params.id;
             const deletedFolder = await folder.findByIdAndDelete(folderId);
             if (deletedFolder) {
                 const folderPath = path.join(process.cwd(), 'uploads', deletedFolder.folderName);
-    
+
                 if (fs.existsSync(folderPath)) {
                     fs.rmdirSync(folderPath, { recursive: true });
                 }
