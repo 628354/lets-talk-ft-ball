@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Menubar from '../dashboard/Menubar';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
-import {FIND_ALL, REQUEST_TYPE,REMOVE_TEAM} from '../helper/APIInfo';
+import {ADMIN_ALL_TEAM, REQUEST_TYPE,REMOVE_TEAM} from '../helper/APIInfo';
 import { apiCall } from '../helper/RequestHandler';
 
 
@@ -16,10 +16,10 @@ export default function Teams() {
 
   const getTeams =async()=>{
     try{
-      const response =await apiCall(FIND_ALL.find,REQUEST_TYPE.GET);
-      console.log(response);
-      const teamsInfo = response.response.data?.data.teamdetails;
-        setTeamsData(response.response.data.data);
+      const response =await apiCall(ADMIN_ALL_TEAM.team,REQUEST_TYPE.GET);
+      console.log(response.response.data?.body);
+     // const teamsInfo = response.response.data?.data.teamdetails;
+        setTeamsData(response.response.data?.body);
        // setItemId(teamsInfo._id);
 
     }catch(error){
@@ -156,11 +156,11 @@ export default function Teams() {
                       return(
                         <tr key={team._id}>
                         <td><Form.Check aria-label="option 1" /></td>
-                        <td>{team?.leagueid?.leaguename}</td>
-                        <td>{team.en.Team_Name_English}</td>
+                        <td>{team?.leagueid?.en?.leaguename}</td>
+                        <td>{team?.en.Team_Name_English}</td>
                        
-                        <td>{team.en.Team_Name_Short_English}</td>
-                        <td>{team?.leagueid?.status}
+                        <td>{team?.en?.Team_Name_Short_English}</td>
+                        <td>{team?.en?.status}
                         </td>
                         <td>
                           <div className='add-button-fis'>

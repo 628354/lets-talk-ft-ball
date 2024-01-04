@@ -192,6 +192,7 @@ function App() {
 
 				<Route path="/headers" element={<Header />}></Route>
 				<Route path="/league" element={<PremierLeague />}></Route>
+				<Route path="/leagueAr" element={<PremierLeagueAr />}></Route>
 {/* 
 				
 
@@ -256,7 +257,7 @@ function App() {
 				<Route path="/user-group" element={<ProtectedRoute><UserGroup /></ProtectedRoute>}></Route>
 				<Route path="/UploadMediaImg" element={<UploadMediaImg />}></Route>
 
-				
+
 				<Route path="/BotolaPro" element={<BotolaPro />}></Route>
 
 			</Routes>

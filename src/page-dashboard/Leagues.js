@@ -45,6 +45,7 @@ export default function Leagues() {
   //       console.error('Error fetching data:', error);
   //     });
   }, []);
+  
   const [legId,lsetLegId]=useState([])
 console.log(aboutData);
 aboutData?.map((item)=>{
@@ -52,24 +53,39 @@ aboutData?.map((item)=>{
   
   
 })
-  const handleDelete = async(id) => {
-    const token = localStorage.getItem("token");
-    const apiUrl = `${REMOVE_LEAGUE.remove}/${id}`
+  // const handleDelete = async(id) => {
+  //   const token = localStorage.getItem("token");
+  //   const apiUrl = `${REMOVE_LEAGUE.remove}/${id}`
     
-    try {
-      const response = await apiCall(apiUrl, REQUEST_TYPE.DELETE, token);
+  //   try {
+  //     const response = await apiCall(apiUrl, REQUEST_TYPE.DELETE, token);
   
-      if (response.status === 200) {
-        setAboutData(aboutData.filter((league) => league._id !== id));
-        console.log("League deleted successfully");
-      } else {
-        console.error('Error deleting league:', response.response?.data?.message);
-      }
-    } catch (error) {
-      console.error('Error deleting league:', error);
-    }
+  //     if (response.status === 200) {
+  //       setAboutData(aboutData.filter((league) => league._id !== id));
+  //       console.log("League deleted successfully");
+  //     } else {
+  //       console.error('Error deleting league:', response.response?.data?.message);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error deleting league:', error);
+  //   }
+  // };
+  const handleDelete = (id) => {
+    const token = localStorage.getItem('token');
+   // axios.get(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/removeteam/${id}`)
+       axios.delete(`${REMOVE_LEAGUE.remove}/${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log('Delete response:', response.data);
+        setAboutData(aboutData.filter(league => league._id !== id));
+      })
+      .catch((error) => {
+        console.log('Error Deleting data', error);
+      });
   };
-
 
   return (
     <div>

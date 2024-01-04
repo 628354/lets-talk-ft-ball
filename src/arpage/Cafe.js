@@ -19,7 +19,7 @@ const [blogDetails,setBlogDetails]=useState([])
 			const response = await apiCall(GET_CAFE.cafear,REQUEST_TYPE.GET
 			);
 			//console.log(response.response?.data?.data);
-			response.response?.data?.data.map((item)=>{
+			response.response?.data?.body?.map((item)=>{
 				//console.log(item[lang]);
 				
 				data.push(item[lang])

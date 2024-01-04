@@ -10,7 +10,10 @@ import { useLanguage } from "../languages/LanguageContext";
 
 import { apiCall } from "../helper/RequestHandler";
 import { REQUEST_TYPE, LEAGUES } from "../helper/APIInfo";
+import Cookies from "js-cookie";
 export default function Header() {
+	const lang = Cookies.get('language')
+	console.log(lang);
 	const [leagueNames, setLeagueNames] = useState([]);
 
 	window.addEventListener("scroll", function () {
@@ -42,6 +45,7 @@ export default function Header() {
 	/// get leagus  start
 
 	const getLeagueName = async () => {
+		const data =[];
 		try {
 		  const obj = {
 			maxBodyLength: Infinity,
@@ -49,10 +53,16 @@ export default function Header() {
 			  "Content-Type": "application/json",
 			},
 		  };
-		  const response = await apiCall(LEAGUES.league, REQUEST_TYPE.GET, obj);
-		  console.log(response.response.data.data);
-		  //response.response.data.data.map()
-		  setLeagueNames(response.response.data.leaguedetails);
+		  const response = await apiCall(LEAGUES(lang).league, REQUEST_TYPE.GET, obj);
+		  console.log( response.response?.data?.body);
+		  response.response?.data?.body.map((item)=>{
+			console.log(item?.[lang]);
+			data.push({
+				"leagueNames":item?.en?.leaguename,
+				"leagueId":item?._id
+			})
+		  })
+		  setLeagueNames(data);
 
 		} catch (error) {
 		  console.error("An error occurred while fetching league names:", error);
@@ -66,9 +76,9 @@ export default function Header() {
 	const handleButtonClick = (id) => {
 		// Store the id in sessionStorage
 		console.log(id)
-		sessionStorage.setItem("selectedLeagueId", id);
+		localStorage.setItem("selectedLeagueId", id);
 	  };
-
+// console.log(leagueNames);
 	return (
 		<div>
 			<div>
@@ -134,22 +144,26 @@ export default function Header() {
 								<div className="en_dropdown-content">
 									<div className="en_h_drop">
 										<ul className="en_drop_item  row w-100">
-										{leagueNames?.map((data) => (
-												<li className="col-md-6" key={data?._id}  onClick={() => handleButtonClick(data?._id)}>
-													<Link to="/league"  >
-														<span>
-															<img
-																src={
-																	"http://localhost:5000/uploads/" + data.image
-																}
-																alt=""
-																className="logo-navd"
-															/>
-														</span>
-														{data.leaguename}
-													</Link>
-												</li>
-											))}
+											{leagueNames?.map((data)=>{
+												console.log(data);
+												return(<li className="col-md-6" key={data?.leagueId}  onClick={() => handleButtonClick(data?.leagueId)}>
+												<Link to="/league"  >
+													<span>
+														<img
+															src={
+																"http://localhost:5000/uploads/" + data.image
+															}
+															alt=""
+															className="logo-navd"
+														/>
+													</span>
+													{data?.leagueNames}
+												</Link>
+											</li>)
+											})}
+										{/* {leagueNames?.map((data) => (
+												
+											))} */}
 										</ul>
 									</div>
 								</div>

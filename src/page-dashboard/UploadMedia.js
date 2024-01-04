@@ -11,49 +11,83 @@ const [showModal, setShowModal] = useState(false);
 const [folderName, setFolderName] = useState("");
 const [folders, setFolders] = useState([]); // Ensure that folders is initialized as an array
 const [flag, setFlag]=useState(false)
-const handleShowModal = () => setShowModal(true);
-const handleCloseModal = () => setShowModal(false);
-const [selectedFolder, setSelectedFolder] = useState(null); 
-const handleFolderNameChange = (e) => setFolderName(e.target.value);
-const handleAddFolder = async () => {
-try {
-const response = await apiCall(ADD_IMAGE.image, REQUEST_TYPE.POST,
-{
-folderName: folderName,
-}
-);
-if (Array.isArray(response.data)) {
-setFolders((prevFolders) => [...prevFolders, ...response.data]);
-} else {
-setFolders((prevFolders) => [...prevFolders, response.data]);
-}
-fetchFolders();
-handleCloseModal();
-} catch (error) {
-console.error("Error creating folder:", error);
-}
-};
-const fetchFolders = async () => {
-try {
-const response = await apiCall( GET_IMAGE.get,REQUEST_TYPE.GET);
-//console.log(response.response.data?.details)
-setFolders(response.response.data?.details);
-} catch (error) {
-console.error("Error fetching folders:", error);
-}
-};
-useEffect(() => {
-fetchFolders();
-}, []);
-const handleFolderClick = (folder) => {
-setSelectedFolder(folder);
-};
-return (
-<div>
-   <Menubar />
-   <div className="right-side-contant py-3">
-      <section className="min-section-one">
-         <Container fluid>
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+  const [selectedFolder, setSelectedFolder] = useState(null); 
+  const [folderImages, setFolderImages] = useState([]);
+  const handleFolderNameChange = (e) => setFolderName(e.target.value);
+
+  const handleAddFolder = async () => {
+    try {
+    
+      const response = await apiCall(ADD_IMAGE.image, REQUEST_TYPE.POST,
+        {
+          folderName: folderName,
+        }
+      );
+
+      
+      if (Array.isArray(response.data)) {
+        setFolders((prevFolders) => [...prevFolders, ...response.data]);
+      } else {
+        setFolders((prevFolders) => [...prevFolders, response.data]);
+      }
+      fetchFolders();
+    
+      handleCloseModal();
+    } catch (error) {
+      console.error("Error creating folder:", error);
+    
+    }
+  };
+
+
+  const fetchFolders = async () => {
+    try {
+      const response = await apiCall( GET_IMAGE.get,REQUEST_TYPE.GET);
+
+      //console.log(response.response.data?.details)
+      setFolders(response.response.data?.details);
+     
+    } catch (error) {
+      console.error("Error fetching folders:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchFolders();
+  }, []);
+
+  const handleFolderClick = async (folder) => {
+    setSelectedFolder(folder);
+console.log(folder);
+const folderWithoutSpaces = folder.replace(/\s/g, '')
+console.log(folderWithoutSpaces);
+    try {
+      const response = await apiCall(
+        `http://localhost:5000/getImageFolderName/?folderName=${folder}`,
+        REQUEST_TYPE.GET
+      );
+      console.log(response?.response.data?.details);
+      response?.response.data?.details.map((item)=>{
+        console.log(item);
+      })
+      setFolderImages(response.response.data);
+    } catch (error) {
+      console.error("Error fetching folder images:", error);
+    }
+  };
+
+//  useEffect(()=>{
+// handleFolderClick()
+//  },[])
+
+  return (
+    <div>
+      <Menubar />
+      <div className="right-side-contant py-3">
+        <section className="min-section-one">
+          <Container fluid>
             <Row>
                <div className="col-lg-6 col-md-6 col-6">
                   <div className="season-us">
@@ -114,21 +148,27 @@ return (
                <div className='col-lg-2 col-sm-2 col-sm-2 pe-0'>
                   <div className='main-media-ponier'>
                      <div className='media-ponite-part'>
-                        <div className="px-3 pt-2 styt">
-                           <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start npmless" id="menu">
-                              {
-                              folders?.map((item)=>{
-                              //  console.log(item);
-                              return(  
-                              <li>
-                                 <a href="#media1" data-bs-toggle="collapse" className="nav-link px-0 align-middle"onClick={() => handleFolderClick(item?.folderName)}>
-                                 <span className='cat-icon'></span> <span className='folder-main'><i className="ri-folder-fill"></i></span> <span className="ms-1 d-none d-sm-inline less_cat">{item?.folderName}</span> </a>
-                              </li>
-                              )
-                              })
-                              }
-                           </ul>
-                        </div>
+                     <div className="px-3 pt-2 styt">
+                
+                <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start npmless" id="menu">
+                    {
+                      folders?.map((item)=>{
+                      //  console.log(item);
+                        return(  <li>
+                          <a href="#media1" data-bs-toggle="collapse" className="nav-link px-0 align-middle"onClick={() => handleFolderClick(item?.folderName)}>
+                          <span className='cat-icon'></span> <span className='folder-main'><i className="ri-folder-fill"></i></span> <span className="ms-1 d-none d-sm-inline less_cat">{item?.folderName}</span> </a>
+                         
+                      </li>)
+
+                      })
+                    }
+                  
+                    
+                    
+                   
+                </ul>
+                
+            </div>
                      </div>
                   </div>
                </div>

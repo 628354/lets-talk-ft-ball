@@ -7,6 +7,7 @@ import axios from "axios";
 
 import { apiCall } from "../helper/RequestHandler";
 import { REQUEST_TYPE, SESSION, FIND_TEAM, GET_TEAM_ID, SESSIOND } from "../helper/APIInfo";
+import Cookies from "js-cookie";
 
 
 export default function PremierLeaguetable({
@@ -24,7 +25,7 @@ export default function PremierLeaguetable({
 	const [allSeasson, setAllSeasson] = useState([])
 	const [currentSeasson, setCurrentSeasson] = useState(null)
 
-
+	const lang = Cookies.get('language')
 	const getLatestYear = async () => {
 		try {
 			const response = await apiCall(SESSIOND.LatestYears, REQUEST_TYPE.GET);
@@ -53,32 +54,36 @@ export default function PremierLeaguetable({
 	}
 	
 
-console.log(seasonId);
-const lang = "en"
+	// console.log(seasonId);
+
 
 	const getTeamsData = async () => {
+		// console.log(seasonId);
 		try {
-			const baseUrl = FIND_TEAM.find;
+			const baseUrl = FIND_TEAM(lang).find;
 			const params = {
 				season: seasonId
 			}
 			const data1 = []
 			const apiUrl = `${baseUrl}/${leagueId}`;
 			const response = await apiCall(apiUrl, REQUEST_TYPE.POST, params);
-			console.log(response)
-			// response.response.data?.data.map((item)=>{
-			// 	console.log(item[lang]);
-			// 	item[lang].map((items)=>{
-			// 		console.log(items);
-			// 		data1.push(items);
+			// console.log(response)
+			response.response.data?.data.map((item)=>{
+				// console.log(response.response.data?.data[3]?.[lang]);
+				// item[lang].map((items)=>{
+				// 	console.log(items.teamname?.[lang]);
+				// 	data1.push({
+				// 		"score":item,
+				// 		"teamname":item?.teamname?.[lang]
+				// 	});
 					
-			// 	})
-			// })
+				// })
+			})
 			// response.response.data.data.map((items)=>{
-			// 	console.log(items)
+			
 			// })
 			try{
-				setLeagueDetails(response.response.data?.data[3]?.en);
+				setLeagueDetails(response.response.data?.data[3]?.[lang]);
 
 			}catch(error){
 				console.log("data not found ",error);
@@ -93,29 +98,29 @@ const lang = "en"
 	useEffect(() => {
 		getLatestYear()
 		getallYears()
-	}, [])
+	}, [lang])
 
 	useEffect(() => {
 
 		getTeamsData(seasonId);
 
-	}, [seasonId, leagueId]);
+	}, [seasonId, leagueId,lang]);
 
 
-console.log(leagueDetails);
+// console.log(leagueDetails);
 	const handleClick = (runingId, seasonName) => {
 		setSeasonId(runingId)
-		console.log(runingId)
+		// console.log(runingId)
 		setCurrentSeasson(seasonName)
 		sessionStorage.setItem("runningSeason",runingId)
 		getTeamsData()
-		console.log('--------------------------------------------------------')
-		console.log(seasonName)
-		console.log('--------------------------------------------------------')
+		// console.log('--------------------------------------------------------')
+		// console.log(seasonName)
+		// console.log('--------------------------------------------------------')
 
 	}
 const handleButtonClick=(teamId)=>{
-console.log(teamId);
+// console.log(teamId);
 sessionStorage.setItem("teamId",teamId)
 
 }
@@ -126,7 +131,8 @@ sessionStorage.setItem("teamId",teamId)
 			<div className="en-table-deta ar-table-deta">
 				<Table className="aline_table">
 					<thead>
-						<tr>
+						{
+							lang==="en"?<tr>
 							<th></th>
 							<th>TEAM</th>
 							<th>GAMES</th>
@@ -139,14 +145,32 @@ sessionStorage.setItem("teamId",teamId)
 							<th>POINT GAP</th>
 							<th>GS-GC</th>
 							<th>WIN%</th>
+						</tr>:<tr>
+							<th></th>
+							<th>	الفريق</th>
+							<th>لعب</th>
+							<th>فوز</th>
+							<th>تعادل</th>
+							<th>خسارة</th>
+							<th>له</th>
+							<th>عليه</th>
+							<th>نقاط</th>
+							<th>فرق النقاط </th>
+							<th>نسبة الفوز</th>
+							<th>نسبة الفوز</th>
 						</tr>
+						}
+						
 					</thead>
 					<tbody className="team_poin">
 						<tr class="filter">
 							<td colspan="7">
 								<div class="inside-filter">
 									{" "}
-									<span>Filter By Season </span>
+									{
+										lang ==="en"? <span>Filter By Season </span>:<span>تصفية حسب الموسم</span>
+									}
+									
 									<div class="dropdown_filter">
 										<button class="dropbtn">
 											{" "}
@@ -158,7 +182,7 @@ sessionStorage.setItem("teamId",teamId)
 										<div class="dropdown-content">
 											{
 												allSeasson.map((res) => {
-														console.log(res)
+														// console.log(res)
 													return (<Link to="" onClick={() => handleClick(res._id, res.season_Title)} >{res.season_Title}</Link>)
 												})
 											}
@@ -177,12 +201,15 @@ sessionStorage.setItem("teamId",teamId)
 							<td colspan="6">
 								<div class="team-btn">
 									{" "}
-									<Link to="/Teamcomparision">Compare Now</Link>{" "}
+									{
+										lang ==="en"? <Link to="/Teamcomparision">Compare Now</Link>:<Link to="/Teamcomparision">قارن الآن</Link>
+									}
+									
 								</div>
 							</td>
 						</tr>
 						{leagueDetails && leagueDetails.map((data, index) => {
-							console.log(data);	
+							// console.log(data);	
 							//const tableDAta = data.en[0];
 							return (
 								<tr className="table-create" key={data._id}>
@@ -199,9 +226,15 @@ sessionStorage.setItem("teamId",teamId)
 													className="logo-rearth-table"
 												/>
 											</span>{" "}
+											{
+												lang === "en"? <span className="toearth">
+												{data.teamname?.[lang]?.Team_Name_English}
+											</span> :
 											<span className="toearth">
-												{data.teamname.en.Team_Name_English}
-											</span>
+											{data.teamname?.[lang]?.Team_Name_Arabic}
+										</span>
+											}
+											
 										</Link>
 									</td>
 									<td>{data.games}</td>
@@ -223,17 +256,25 @@ sessionStorage.setItem("teamId",teamId)
 							<td colspan="4">
 								<div class="team-btn compare-link">
 									{" "}
-									<Link to="/Teamcomparision">Compare Now</Link>{" "}
+									{
+										lang ==="en"? <Link to="/Teamcomparision">Compare Now</Link>:<Link to="/Teamcomparision">قارن الآن</Link>
+									}
 								</div>
 							</td>
 							<td colspan="9">
 								<div class="inside-footer">
 									<ul className="in-footer ">
-										<li>
-											<p>
+										<li> 
+											{
+												lang ==="en"?<p>
 												League <br />
 												Overall
+											</p>:<p>
+											إجمالي <br />
+												الدوري
 											</p>
+											}
+											
 										</li>
 										<li>
 											<h6>

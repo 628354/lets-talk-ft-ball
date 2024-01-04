@@ -10,4 +10,3 @@ const checkPermission = (requiredPermission) => (req, res, next) => {
   };
   
   module.exports = checkPermission;
-  

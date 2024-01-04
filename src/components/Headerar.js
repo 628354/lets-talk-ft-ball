@@ -7,7 +7,12 @@ import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLanguage } from "../languages/LanguageContext";
+import { apiCall } from "../helper/RequestHandler";
+import { REQUEST_TYPE, LEAGUES } from "../helper/APIInfo";
+import Cookies from "js-cookie";
 export default function Headerar() {
+	const lang = Cookies.get('language')
+	const [leagueNames, setLeagueNames] = useState([]);
 	window.addEventListener("scroll", function () {
 		const header = document.querySelector(".topheader");
 		const scrollY = window.scrollY;
@@ -31,17 +36,52 @@ export default function Headerar() {
 		setShowDropdown(false);
 	};
 	const { language, switchLanguage } = useLanguage();
-	useEffect(() => {
-		// Save language to cookies whenever it changes
-		document.cookie = `language=${language}; path=/; max-age=${
-			60 * 60 * 24 * 365
-		}`;
-	}, [language]);
+	// useEffect(() => {
+	// 	// Save language to cookies whenever it changes
+	// 	document.cookie = `language=${language}; path=/; max-age=${
+	// 		60 * 60 * 24 * 365
+	// 	}`;
+	// }, [language]);
 
 	const handleLanguageChange = (newLanguage, event) => {
 		event.preventDefault(); // Prevent the default behavior of the link
 		switchLanguage(newLanguage);
 	  };
+	  const getLeagueName = async () => {
+		const data =[];
+		try {
+		  const obj = {
+			maxBodyLength: Infinity,
+			headers: {
+			  "Content-Type": "application/json",
+			},
+		  };
+		  const response = await apiCall(LEAGUES(lang).league, REQUEST_TYPE.GET, obj);
+		  console.log( response.response?.data?.body);
+		  response.response?.data?.body.map((item)=>{
+			console.log(item?.[lang]);
+			data.push({
+				"leagueNames":item?.[lang]?.leaguename,
+				"leagueId":item?._id
+			})
+		  })
+		  setLeagueNames(data);
+
+		} catch (error) {
+		  console.error("An error occurred while fetching league names:", error);
+		}
+	  };
+	useEffect(() => {
+		getLeagueName();
+		
+	}, []);
+
+	const handleButtonClick = (id) => {
+		// Store the id in sessionStorage
+		console.log(id)
+		sessionStorage.setItem("selectedLeagueId", id);
+	  };
+// console.log(leagueNames);
 	return (
 		<div>
 			<div>
@@ -105,142 +145,25 @@ export default function Headerar() {
 								الدوريات
 								<div className="en_dropdown-content ar_dropdown_press">
 									<div className="en_h_drop">
-										<ul className="en_drop_item">
-											<li>
-												<Link to="">
-													<span>
-														<img
-															src={require("../img/premier-league-logo-vector.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													الدوري الإنكليزي
-												</Link>
-											</li>
-											<li>
-												<Link to="">
-													<span>
-														<img
-															src={require("../img/Serie_A_logo.jpg")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													الدوري الايطالي{" "}
-												</Link>
-											</li>
-											<li>
-												<Link to="">
-													<span>
-														<img
-															src={require("../img/Ligue_1_Uber_Eats.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													الدوري الفرنسي
-												</Link>
-											</li>
-											<li>
-												<Link to="">
-													<span>
-														<img
-															src={require("../img/Liga Port.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													الدوري البرتغالي
-												</Link>
-											</li>
-											<li>
-												<Link to="">
-													<span>
-														<img
-															src={require("../img/Egypet League cafe logo.jpg")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													الدوري المصري
-												</Link>
-											</li>
-											<li>
-												<Link to="">
-													<span>
-														<img
-															src={require("../img/Bra Serie_A.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													دوري البرازيل
-												</Link>
-											</li>
+										<ul className="en_drop_item row w-100">
+										{leagueNames?.map((data) => (
+												<li className="col-md-6" key={data?.leagueId}  onClick={() => handleButtonClick(data?.leagueId)}>
+													<Link to="/league"  >
+														<span>
+															<img
+																src={
+																	"http://localhost:5000/uploads/" + data.image
+																}
+																alt=""
+																className="logo-navd"
+															/>
+														</span>
+														{data?.leagueNames}
+													</Link>
+												</li>
+											))}
 										</ul>
-										<ul className="en_drop_item">
-											<li>
-												<Link to="">
-													<span>
-														<img
-															src={require("../img/laliga-logo-plain.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>{" "}
-													الدوري الإسباني
-												</Link>
-											</li>
-											<li>
-												<Link to="">
-													<span>
-														<img
-															src={require("../img/Bundesliga-primary.gif")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													الدوري الألماني{" "}
-												</Link>
-											</li>
-											<li>
-												<Link to="">
-													<span>
-														<img
-															src={require("../img/Eredivisie.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													الدوري الهولندي
-												</Link>
-											</li>
-											<li>
-												<Link to="">
-													<span>
-														<img
-															src={require("../img/Roshn_Saud.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													الدوري السعودي
-												</Link>
-											</li>
-											<li>
-												<Link to="">
-													<span>
-														<img
-															src={require("../img/BOTOLAinwi-134x136.png")}
-															alt="earth"
-															className="logo-navd"
-														/>
-													</span>
-													الدوري المغربي
-												</Link>
-											</li>
-										</ul>
+										
 									</div>
 								</div>
 							</Nav.Link>
