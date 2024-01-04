@@ -92,10 +92,10 @@ const [leagueNameAr,setLeagueNameAr]=useState([])
     //console.log(selectedLeague);
     setAllData(selectedLeagueId)
   };
-
+const lang ="en"
   const LeagueCall = () => {
     try {
-      apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
+      apiCall(LEAGUES(lang).league, REQUEST_TYPE.GET).then((results) => {
         // console.log(results.response.data.body);
         setLeagues(results.response.data.body);
       });
@@ -174,7 +174,7 @@ const getLeagueByIdAr =async()=>{
 useEffect(()=>{
   getLeagueById()
   getLeagueByIdAr()
-},[])
+},[id])
   const clearMessages = () => {
     setTimeout(() => {
       setSuccessMessage('');
@@ -266,7 +266,7 @@ useEffect(()=>{
                                     onChange={(e) => handleLeagueChange(e.target.value)} >
                                     <option value={leagueName?.leaguename}>Select League</option>
                                     {getLeagues?.map((row,index) => (
-                                      <option key={index} value={row._id}>
+                                      <option key={index} value={row?._id}>
                                         {row?.en?.leaguename}
                                       </option>
                                     ))}
@@ -286,6 +286,7 @@ useEffect(()=>{
                               <Form.Control
                                 type="text"
                                 placeholder="Team Name"
+                                name="Team_Name_English"
                                 value={formData?.Team_Name_English}
                                 onChange={(e) =>
                                   handleChange("Team_Name_English", e.target.value)

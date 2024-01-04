@@ -29,7 +29,7 @@ getAboutData()
 
   return (
     <div>
-      <section className='en_hero_about en_hero_about'>
+      <section className='en_hero_about en_hero_about'dir="rtl">
           <Container>
             <div className='row'>
                 <div className='col-lg-12 col-md-12 col-sm-12'>

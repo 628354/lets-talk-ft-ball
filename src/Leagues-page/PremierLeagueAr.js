@@ -11,7 +11,8 @@ import CahrtGsGc from "../Leagues-components/CahrtGsGc";
 
 import { apiCall } from "../helper/RequestHandler";
 import { REQUEST_TYPE, SESSION,FIND_TEAM ,GET_LEAGUE_ID,SESSIOND} from "../helper/APIInfo";
-export default function PremierLeagueAr() {
+export default function 
+PremierLeagueAr() {
 	
 	
 	const [leagueDecreption, setLeagueDecreption] = useState([]);

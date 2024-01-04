@@ -18,7 +18,7 @@ export default function Premierchart({ leagueId }) {
     //console.log(seasonId);
     //get season
 
-    const sId = sessionStorage.getItem("runningSeason")
+    const sId = localStorage.getItem("runningSeason")
     const getYears = async () => {
         try {
             const response = await apiCall(SESSION.year, REQUEST_TYPE.GET);
@@ -120,7 +120,7 @@ export default function Premierchart({ leagueId }) {
         // }
     };
 
-    // console.log(goalScore);//
+    console.log(goalScore);
 
     useEffect(() => {
         getGoalScore();

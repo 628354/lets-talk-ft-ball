@@ -16,7 +16,7 @@ import Cookies from "js-cookie";
 
 export default function Teamdetailsl() {
 	//const { teamId } = useParams()
-	const teamId = sessionStorage.getItem("teamId")
+	const teamId = localStorage.getItem("teamId")
 	//console.log(teamId)
 	const lang = Cookies.get('language')
 	const [teamDetails, setTeamDetails] = useState([])
@@ -39,7 +39,7 @@ export default function Teamdetailsl() {
 		}
 		try {
 			const response = await apiCall(apiUrl, REQUEST_TYPE.POST,obj)
-			//console.log(response.response.data.body)
+			// console.log(response.response.data.body)
 			setTeamDetails(response.response.data.body?.[lang])
 
 			// const data = response.response.data?.data[0].en
@@ -59,7 +59,7 @@ export default function Teamdetailsl() {
 		getTeamDetails()
 	}, [teamId,lang])
 
-console.log(teamDetails)
+// console.log(teamDetails)
 	// get year 
 	const getLatestYear = async () => {
 		try {
@@ -94,7 +94,7 @@ console.log(teamDetails)
 	const handleButtonClick = (seasonId,seasonName) => {
 		//console.log(seasonId);
 		///
-		 sessionStorage.setItem("teamId",teamId)
+		localStorage.setItem("teamId",teamId)
 		setCurrentSeasson(seasonName)
 
 	}
@@ -102,13 +102,13 @@ console.log(teamDetails)
 
 
 	//get graph data
-	const getSeasonId = sessionStorage.getItem("runningSeason")
-	const getTeamId = sessionStorage.getItem("teamId")
-	const getLeagueId = sessionStorage.getItem("selectedLeagueId")
+	const getSeasonId = localStorage.getItem("runningSeason")
+	const getTeamId = localStorage.getItem("teamId")
+	const getLeagueId = localStorage.getItem("selectedLeagueId")
 
-console.log(getSeasonId);
-console.log(getTeamId);
-console.log(getLeagueId);
+// console.log(getSeasonId);
+// console.log(getTeamId);
+// console.log(getLeagueId);
 	const gainingRate = async () => {
 		const obj = {
 			season: getSeasonId,
@@ -119,12 +119,12 @@ console.log(getLeagueId);
 		try {
 			
 			const response = await apiCall(GAINING_RATE.gainrate,REQUEST_TYPE.POST, obj)
-				console.log(response.response)
-				setTableData(response.response?.data.data.data1)
-				response.response.data.data?.teamDatas.map((item) => {
+				// console.log(response.response?.data.data.data1)
+				setTableData(response.response?.data?.data?.data1)
+				response.response?.data.data?.teamDatas?.map((item) => {
 					console.log(item);
 					item?.en.map((data) => {
-						console.log(data);
+						// console.log(data);
 						data1.push({
 							GS_rate: parseInt(data.GS_rate, 10)
 						})
@@ -150,11 +150,11 @@ console.log(getLeagueId);
 		const data1 = []
 		try {
 			const response = await apiCall(TEAM_GS_GC.find, REQUEST_TYPE.POST, obj)
-			console.log(response.response.data.data?.teamDatas);
-			response.response.data.data?.teamDatas.map((item) => {
-				console.log(item);
-				item?.en.map((data) => {
-					console.log(data);
+			// console.log(response.response.data.data?.teamDatas);
+			response.response?.data.data?.teamDatas?.map((item) => {
+				// console.log(item);
+				item?.en?.map((data) => {
+					// console.log(data);
 					data1.push({
 						GS_GC: parseInt(data.GS_GC, 10)
 					})
@@ -181,11 +181,11 @@ const gsGin = async () => {
 	const data1 = []
 	try {
 		const response = await apiCall(TEAM_GS_IN_G.find, REQUEST_TYPE.POST, obj)
-		console.log(response.response.data.data?.teamDatas);
-		response.response.data.data?.teamDatas.map((item) => {
-			console.log(item);
-			item?.en.map((data) => {
-				console.log(data);
+		// console.log(response.response.data.data?.teamDatas);
+		response.response.data.data?.teamDatas?.map((item) => {
+			// console.log(item);
+			item?.en?.map((data) => {
+				// console.log(data);
 				data1.push({
 					GS_inG: parseInt(data.GS_inG, 10)
 				})
@@ -211,11 +211,11 @@ const teamSecgc = async () => {
 	const data1 = []
 	try {
 		const response = await apiCall(TEAM_SEA_GC.find, REQUEST_TYPE.POST, obj)
-		console.log(response.response.data.data?.teamDatas);
-		response.response.data.data?.teamDatas.map((item) => {
-			console.log(item);
-			item?.en.map((data) => {
-				console.log(data);
+		// console.log(response.response.data.data?.teamDatas);
+		response.response?.data.data?.teamDatas?.map((item) => {
+			// console.log(item);
+			item?.en?.map((data) => {
+				// console.log(data);
 				data1.push({
 					GC_cum: parseInt(data.GC_cum, 10)
 				})
@@ -598,7 +598,7 @@ const teamSecgc = async () => {
 							<i className="ri-arrow-right-s-line"></i>
 						</li>
 						<li>
-							<Link to="/PremierLeague">Premier League</Link>
+							<Link to="/league">Premier League</Link>
 						</li>
 						<li>
 							<i className="ri-arrow-right-s-line"></i>
@@ -634,15 +634,15 @@ const teamSecgc = async () => {
 								<div className="col-lg-10 col-md-10 col-sm-12">
 									<div className="en-leagues-text ar-leagues-text ms-4">
 										{
-											lang ==="en"?<h2>{teamDetails.Team_Name_English}</h2>:<h2>{teamDetails.Team_Name_Arabic}</h2>
+											lang ==="en"?<h2>{teamDetails?.Team_Name_English}</h2>:<h2>{teamDetails?.Team_Name_Arabic}</h2>
 										}
 										{
 											lang ==="en"?<p>
 											
-											{teamDetails.Description_English}
+											{teamDetails?.Description_English}
 										</p>:<p>
 											
-											{teamDetails.Description_Arabic}
+											{teamDetails?.Description_Arabic}
 										</p>
 										}
 										
@@ -669,9 +669,9 @@ const teamSecgc = async () => {
 													</button>
 													<div class="dropdown-content">
 														{
-															allSeasson.map((data) => {
+															allSeasson?.map((data) => {
 																//console.log(data._id)
-																return (<Link to="" onClick={() => handleButtonClick(data._id,data.season_Title)}>{data.season_Title}</Link>)
+																return (<Link to="" onClick={() => handleButtonClick(data?._id,data?.season_Title)}>{data?.season_Title}</Link>)
 															})
 														}
 
@@ -731,18 +731,18 @@ const teamSecgc = async () => {
 												className="logo-rearth-table"
 											/>
 										</span>{" "}
-										<span className="toearth">{teamDetails.Team_Name_English}</span>
+										<span className="toearth">{teamDetails?.Team_Name_English}</span>
 									</td>
-									<td>{tableData.games}</td>
-									<td>{tableData.win}</td>
-									<td>{tableData.draw}</td>
-									<td>{tableData.lose}</td>
-									<td>{tableData.goals_scored}</td>
-									<td>{tableData.goals_conceded}</td>
-									<td>{tableData.points}</td>
-									<td>{Math.floor(tableData.point_gap)}</td>
-									<td>{Math.floor(tableData.gs_gc)}</td>
-									<td>{(tableData.win_precent * 100).toFixed(2)}%</td>
+									<td>{tableData?.games}</td>
+									<td>{tableData?.win}</td>
+									<td>{tableData?.draw}</td>
+									<td>{tableData?.lose}</td>
+									<td>{tableData?.goals_scored}</td>
+									<td>{tableData?.goals_conceded}</td>
+									<td>{tableData?.points}</td>
+									<td>{Math.floor(tableData?.point_gap)}</td>
+									<td>{Math.floor(tableData?.gs_gc)}</td>
+									<td>{(tableData?.win_precent * 100).toFixed(2)}%</td>
 
 								</tr>
 							</tbody>

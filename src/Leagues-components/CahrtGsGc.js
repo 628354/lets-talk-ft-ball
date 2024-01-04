@@ -16,7 +16,7 @@ export default function CahrtGsGc({ leagueId}) {
 	const [seasonId, setSeasonId] = useState();
 	// console.log(leagueId);
 	// console.log(seasonId);
-	const sId = sessionStorage.getItem("runningSeason")
+	const sId = localStorage.getItem("runningSeason")
 
 	const getYears= async ()=>{
 		try{

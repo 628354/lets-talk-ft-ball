@@ -52,8 +52,9 @@ const lang = Cookies.get('language')
 	
 	  
 	return (
-		<div>
-			<section className={`${lang ==="en"? 'en_hero_about en_hero_about':'ar_hero_about ar_hero_about'}`}>
+		<div >
+			{/* className={`${lang ==="en"? 'en_hero_about en_hero_about':'ar_hero_about ar_hero_about'}`} */}
+			<section className='en_hero_about en_hero_about'	>
 				<Container>
 					<Row>
 						<div className="col-lg-12 col-md-12 col-sm-12"></div>

@@ -79,7 +79,7 @@ export default function Headerar() {
 	const handleButtonClick = (id) => {
 		// Store the id in sessionStorage
 		console.log(id)
-		sessionStorage.setItem("selectedLeagueId", id);
+		localStorage.setItem("selectedLeagueId", id);
 	  };
 // console.log(leagueNames);
 	return (
@@ -146,22 +146,23 @@ export default function Headerar() {
 								<div className="en_dropdown-content ar_dropdown_press">
 									<div className="en_h_drop">
 										<ul className="en_drop_item row w-100">
-										{leagueNames?.map((data) => (
-												<li className="col-md-6" key={data?.leagueId}  onClick={() => handleButtonClick(data?.leagueId)}>
-													<Link to="/league"  >
-														<span>
-															<img
-																src={
-																	"http://localhost:5000/uploads/" + data.image
-																}
-																alt=""
-																className="logo-navd"
-															/>
-														</span>
-														{data?.leagueNames}
-													</Link>
-												</li>
-											))}
+										{leagueNames?.map((data)=>{
+												console.log(data);
+												return(<li className="col-md-6" key={data?.leagueId}  onClick={() => handleButtonClick(data?.leagueId)}>
+													<Link to="/league">
+													<span>
+														<img
+															src={
+																"http://localhost:5000/uploads/" + data.image
+															}
+															alt=""
+															className="logo-navd"
+														/>
+													</span>
+													{data?.leagueNames}
+												</Link>
+											</li>)
+											})}
 										</ul>
 										
 									</div>

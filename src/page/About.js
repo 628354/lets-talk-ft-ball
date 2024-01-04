@@ -13,13 +13,18 @@ export default function About() {
   const data =[]
 // const lang ="en"
   const getAboutData= async()=>{
-    const res = await apiCall(ABOUT_US.finden, REQUEST_TYPE.GET);
-    console.log(res.response.data.data);
-    res.response.data.data?.map((item)=>{
-      data.push(item[lang]);
-    })
-    console.log(data);
-setAbout(data);
+    try {
+      const res = await apiCall(ABOUT_US.finden, REQUEST_TYPE.GET);
+      console.log(res);
+      res.response.data?.data?.map((item)=>{
+        data.push(item[lang]);
+      })
+     // console.log(data);
+  setAbout(data);
+    } catch (error) {
+      console.log("error",error);
+    }
+  
   }
 
 useEffect(()=>{
