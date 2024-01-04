@@ -29,7 +29,7 @@ getAboutData()
 
   return (
     <div>
-      <section className='en_hero_about en_hero_about'dir="rtl">
+      <section className=' ar_hero_about'>
           <Container>
             <div className='row'>
                 <div className='col-lg-12 col-md-12 col-sm-12'>
@@ -38,7 +38,7 @@ getAboutData()
             </div>
           </Container>
         </section>
-       <div className='en_bread_crumb ar_bread_crumb'>
+       <div className=' ar_bread_crumb'>
       
          <Container>
          <ul className='ar_creat_nav'>
@@ -58,18 +58,18 @@ getAboutData()
        </div>
 
 
-       <section className='en_abo_section'>
+       <section className='ar_abo_section'>
       <Container>
         <div className='row'>
           <div className='col-lg-12 col-md-12 col-sm-12'>
             <div className='leagues_cont_ar'>
               <h2>من نحن</h2>
-              <div className='leagues_slider'>
+              <div className='leagues_slider'  dir={lang === 'ar' ? 'rtl' : 'ltr'}>
             
                 {about?.map((item, index) => (
-                    <div className={`row mb-5 ${index  % 2 === 0 ? 'en_left_border' : 'en_right_border'} `} key={index} id={item?._id}>
+                    <div className={`row mb-5 ${index  % 2 === 0 ? 'ar_left_border' : 'ar_right_border'} `} key={index} id={item?._id}>
                       <div className="col-lg-6 col-md-6 col-sm-12">
-                        <div className={`${index  % 2 === 0 ? 'en_about_contant' : 'en_about_contant_right'} `}>
+                        <div className={`${index  % 2 === 0 ? 'ar_about_contant' : 'ar_about_contant_right'} `}>
                           <h5>{item?.aboutText}</h5>
                         </div>
                       </div>
@@ -92,10 +92,10 @@ getAboutData()
      <Container>
      <div className='row'>
       <div className='col-lg-6 col-md-6 col-sm-12'>
-        <div className='en_our_contant ar_our_contant px-4' dir="rtl">
+        <div className='ar_our_contant px-4' dir="rtl">
           <h4>رؤيتنا</h4>
           <p>رؤيتنا هي أن نكون مزوداً لمعلومات وأدوات تحليل فريدة لكرة القدم</p>
-          <div className='en_our_vision'>
+          <div className='ar_our_vision'>
           <h4>مهمتنا</h4>
           <p>مهمتنا هي إنشاء موقع يقدم بيانات أداء وإحصائيات لبطولات كرة القدم بطريقة بسيطة، غنية بالمعلومات وسهلة الوصول إليها. يمكن للزوار استخدام هذه البيانات لفهم أداء الفرق ليس فقط في وقت محدد ولكن أيضًا للحصول على نظرة أعمق حول كيفية تطور اداء الفرق مع مرور الوقت. من خلال حساباتنا على وسائل التواصل الاجتماعي المدمجة في الموقع ومع قسم المقالات في الموقع (نسميه "المقهى")، نوفر منصة لزوارنا للمشاركة والتفاعل.</p>
 

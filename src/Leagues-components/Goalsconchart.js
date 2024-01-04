@@ -168,7 +168,7 @@ export default function Goalsconchart({ leagueId }) {
 		<div>
 
 			<div className="chart-border-toll">
-				<div className="premier-textare">
+				<div className="premier-textare " dir={lang === 'ar' ? 'rtl' : 'ltr'}>
 				{
                     lang ==="en"? <h3>2023-24 Goals Con/Game</h3>: <h3>2023-24 نسبة تسجيل الاهداف</h3>
                 }
