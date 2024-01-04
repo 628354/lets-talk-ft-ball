@@ -128,8 +128,8 @@ sessionStorage.setItem("teamId",teamId)
 
 	return (
 		<div>
-			<div className="en-table-deta ar-table-deta">
-				<Table className="aline_table">
+			<div  >
+				<Table className="aline_table" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
 					<thead>
 						{
 							lang==="en"?<tr>
@@ -199,7 +199,7 @@ sessionStorage.setItem("teamId",teamId)
 								</div>
 							</td>
 							<td colspan="6">
-								<div class="team-btn">
+								<div  className={`${lang ==="en"? 'team-btn':'ar_team-btn'}`}>
 									{" "}
 									{
 										lang ==="en"? <Link to="/Teamcomparision">Compare Now</Link>:<Link to="/Teamcomparision">قارن الآن</Link>
@@ -254,7 +254,7 @@ sessionStorage.setItem("teamId",teamId)
 
 						<tr class="filter-fir">
 							<td colspan="4">
-								<div class="team-btn compare-link">
+								<div  className={`${lang ==="en"? 'team-btn compare-link':'team-btn ar_compare-link'}`}>
 									{" "}
 									{
 										lang ==="en"? <Link to="/Teamcomparision">Compare Now</Link>:<Link to="/Teamcomparision">قارن الآن</Link>
