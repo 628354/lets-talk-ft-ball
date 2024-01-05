@@ -164,10 +164,10 @@ module.exports = {
                 { _id: req.params.id },
                 { [lung]: 1 }
             )
-            .populate({
-                path: "leagueid",
-                select: ["en.leaguename"],
-            });
+                .populate({
+                    path: "leagueid",
+                    select: ["en.leaguename"],
+                });
             if (getByIdTeams) {
                 res.status(200).send({
                     body: getByIdTeams,
@@ -274,4 +274,42 @@ module.exports = {
             });
         }
     },
+    TeamsFilter: async (req, res) => {
+        try {
+            const { Team_Name_English } = req.query;
+            const Team_Name_English_Filter = {};
+            if (Team_Name_English) {
+                Team_Name_English_Filter['en.Team_Name_English'] = new RegExp(Team_Name_English, 'i');
+            }
+            const teamsdata = await teamCatlog.aggregate([
+                {
+                    $match: Team_Name_English_Filter,
+                },
+                {
+                    $lookup: {
+                        from: "leagues",
+                        localField: "leagueid",
+                        foreignField: "_id",
+                        as: "leagues_details"
+                    }
+                },
+                {
+                    $sort: {
+                        createdAt: -1
+                    }
+                }
+            ])
+            res.status(200).send({
+                body: teamsdata,
+                message: `Get Data for teamCatlog  Successfully`,
+                success: true,
+            });
+        } catch (error) {
+            res.status(500).send({
+                message: "Enternal server Error",
+                success: false,
+                error: error.message,
+            });
+        }
+    }
 };

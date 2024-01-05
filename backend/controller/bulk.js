@@ -40,8 +40,8 @@ exports.leagedBlukImport = async (req, res) => {
           points: data[i].P,
           point_gap: (data[i]['POINTS GAIN %'] !== undefined) ? data[i]['POINTS GAIN %'] : data[i]['Pgap'],
           gs_gc: (data[i]['GOALS SCORED/GAME'] !== undefined) ? data[i]['GOALS SCORED/GAME'] : data[i]['GS-GC'],
-          win_precent: (data[i]['WIN%'] !== undefined) ? data[i]['WIN%'] : data[i]['w%']
-          
+          win_precent: (data[i]['WIN%'] !== undefined) ? data[i]['WIN%'] : data[i]['w%'],
+         
         })
       }
     }
@@ -66,7 +66,7 @@ exports.leagedBlukImport = async (req, res) => {
   // console.log(sheetNamesTeam);
   const allDataTeam = [];
   const updateData = [];
- 
+
   sheetNamesTeam.forEach(async sheetName => {
     const sheetsTeamData = [];
     const udpateRecords = [];
@@ -85,8 +85,8 @@ exports.leagedBlukImport = async (req, res) => {
         myData[modifiedString] = data[i][key]
         // data[i][modifiedString]= data[i][key];
       }
-     
-        
+
+
       if (myData.POINTS_ACCUMULATED) {
         sheetsTeamData.push({
           NO_OF_GAMES: myData['NO._OF_GAMES'],
@@ -118,7 +118,7 @@ exports.leagedBlukImport = async (req, res) => {
     }
 
 
-   
+
   });
 
   responseHelper[200].data = "Successfully Submited";

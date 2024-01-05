@@ -1,6 +1,7 @@
 const folder = require('../model/folder')
 const path = require('path')
 const fs = require('fs')
+const imagesModel = require("../model/images")
 
 module.exports = {
     folderCreate: async (req, res) => {
@@ -80,25 +81,27 @@ module.exports = {
     },
     foderGetById: async (req, res) => {
         try {
-            const folders = await folder.findById({ _id: req.params.id })
-            if (folders) {
-                res.status(200).send({
-                    body: folders,
-                    message: 'Folder Get By Id Successfully',
-                    success: true
-                })
-            } else {
-                res.status(300).send({
+            const folderId = req.params.id;
+            const folderInfo = await folder.findById(folderId);
+            if (!folderInfo) {
+                return res.status(404).send({
                     message: 'Folder Id Not Found',
                     success: false
-                })
+                });
             }
+
+            const imagesInFolder = await imagesModel.find({ folderId });
+            res.status(200).send({
+                body: imagesInFolder,
+                message: 'Folder and Images Get By Id Successfully',
+                success: true,
+            });
         } catch (error) {
             res.status(500).send({
-                message: 'Enternal Serever Error',
+                message: 'Internal Server Error',
                 success: false,
-                error: error.message
-            })
+                error: error.message,
+            });
         }
     },
     folderGet: async (req, res) => {
