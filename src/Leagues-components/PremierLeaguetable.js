@@ -34,7 +34,7 @@ export default function PremierLeaguetable({
 				//console.log(year.season_Title)
 				setCurrentSeasson(year.season_Title)
 				setSeasonId(year._id)
-				sessionStorage.setItem("runningSeason",year._id)
+				localStorage.setItem("runningSeason",year._id)
 			})
 		
 		} catch (error) {
@@ -112,7 +112,7 @@ export default function PremierLeaguetable({
 		setSeasonId(runingId)
 		// console.log(runingId)
 		setCurrentSeasson(seasonName)
-		sessionStorage.setItem("runningSeason",runingId)
+		localStorage.setItem("runningSeason",runingId)
 		getTeamsData()
 		// console.log('--------------------------------------------------------')
 		// console.log(seasonName)
@@ -121,12 +121,13 @@ export default function PremierLeaguetable({
 	}
 const handleButtonClick=(teamId)=>{
 // console.log(teamId);
-sessionStorage.setItem("teamId",teamId)
+localStorage.setItem("teamId",teamId)
 
 }
 
 
 	return (
+		
 		<div>
 			<div  >
 				<Table className="aline_table" dir={lang === 'ar' ? 'rtl' : 'ltr'}>

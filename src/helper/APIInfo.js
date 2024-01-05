@@ -2,10 +2,10 @@
 
 import Cookies from "js-cookie";
 
-// const SERVER_LINK =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/";
-// const SERVER_IMAGES =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/"
-const SERVER_LINK = "http://localhost:5000/";
-const SERVER_IMAGES = "http://localhost:5000/";
+const SERVER_LINK =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/";
+const SERVER_IMAGES =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/"
+// const SERVER_LINK = "http://localhost:5000/";
+// const SERVER_IMAGES = "http://localhost:5000/";
  const lang = Cookies.get('language')
  console.log(lang);
 export const REQUEST_TYPE = {
@@ -138,18 +138,23 @@ export const FIND_ALL = {
 
 };
 
-export const GET_ALL_LEAGUE = {
-  find: `${SERVER_LINK}getleagues`,
+// export const GET_ALL_LEAGUE = {
+//   find: `${SERVER_LINK}getleagues`,
 
-};
+// };
 export const ALL_SEASON = {
   find: `${SERVER_LINK}en/teamSeasson/find`,
 
 };
-export const TEAM_NAME = {
-  find: `${SERVER_LINK}en/teamSeassonName/find`,
+// export const TEAM_NAME = {
+//   find: `${SERVER_LINK}en/teamSeassonName/find`,
 
-};
+// };
+export const TEAM_NAME=(lang)=>{
+  return {
+    find:`${SERVER_LINK}${lang}/teamSeassonName/find`
+  }
+}
 export const TEAM_SEA_GC = {
   find: `${SERVER_LINK}en/teamSeassonGC/find`,
 
@@ -171,8 +176,6 @@ export const CONTACT_FORM = {
 export const ABOUT_US = {
   finden: `${SERVER_LINK}en/getaboutus`,
   findar:`${SERVER_LINK}ar/getaboutus`
-
-
 };
 export const DEFINATION = {
   finden: `${SERVER_LINK}en/getAllDefinition`,

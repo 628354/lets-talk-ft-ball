@@ -16,11 +16,12 @@ export default function Leagues() {
 
 
   const getAllLeagues=async()=>{
+    const lang ="en"
     try{
- const response = await apiCall(LEAGUES.league,REQUEST_TYPE.GET)
+ const response = await apiCall(LEAGUES(lang).league,REQUEST_TYPE.GET)
     // console.log(response.response.data?.leaguedetails);
-    console.log(response.response.data?.body);
-    setAboutData(response.response.data?.body);
+    console.log(response.response?.data?.body);
+    setAboutData(response.response?.data?.body);
     }catch(error){
       console.log("data",error);
     }
@@ -79,8 +80,8 @@ aboutData?.map((item)=>{
         },
       })
       .then((response) => {
-        console.log('Delete response:', response.data);
-        setAboutData(aboutData.filter(league => league._id !== id));
+        // console.log('Delete response:', response.data);
+        setAboutData(aboutData?.filter(league => league._id !== id));
       })
       .catch((error) => {
         console.log('Error Deleting data', error);
@@ -155,7 +156,7 @@ aboutData?.map((item)=>{
                     {aboutData?.map((league) =>{ 
                      console.log(league);
                       return(
-                      <tr key={league._id}>
+                      <tr key={league?._id}>
                         <td><Form.Check aria-label="option 1" /></td>
                         <td>{league?.en?.leaguename}</td>
                         <td>{league?.en?.sort_Order}</td>
@@ -164,12 +165,12 @@ aboutData?.map((item)=>{
                             
                             <ul className="but-delet">
                               <li>
-                              <Link to={`/EditLeagues/${league._id}`}>
+                              <Link to={`/EditLeagues/${league?._id}`}>
                               <i className="ri-pencil-fill"></i>
                             </Link>
                              </li>
                              <li className="add-button-sec">
-                             <button onClick={() => handleDelete(league._id)}>
+                             <button onClick={() => handleDelete(league?._id)}>
                               <i className="ri-delete-bin-line"></i>
                             </button>
                              </li>
