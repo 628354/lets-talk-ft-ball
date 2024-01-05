@@ -20,19 +20,16 @@ exports.addimages = async (req, res) => {
             folderId = createdFolder._id;
         }
 
-        const protocol = req.protocol;
-        const host = req.hostname;
-        const url = `${protocol}://${host}`;
-
         const imagesUpload = await imagesModel.create({
-            image: req.files.map((file) => url + "/uploads/" + file.filename),
+            image: req.files.map((file) => file.filename.replace(/\s+/g, '')),
             folderId,
             status: req.body.status,
         });
 
         const uploadPath = path.join(process.cwd(), 'uploads', folderName);
         for (const file of req.files) {
-            const newImagePath = path.join(uploadPath, file.filename);
+            const newFileName = file.filename.replace(/\s+/g, '');
+            const newImagePath = path.join(uploadPath, newFileName);
             fs.renameSync(file.path, newImagePath);
         }
         res.status(200).send({
@@ -48,6 +45,7 @@ exports.addimages = async (req, res) => {
         });
     }
 };
+
 exports.GetImage = async (req, res) => {
     try {
         const data = await imagesModel.find().sort({ createdAt: -1 })
@@ -56,19 +54,8 @@ exports.GetImage = async (req, res) => {
         res.send({ status: false, message: "Something went wrong !!" })
     }
 }
-exports.getImageFolderName = async (req, res) => {
-    try {
-        const { folderName } = req.query;
-        if (!folderName) {
-            return res.status(400).json({ status: false, message: 'Folder name is required for the search.' });
-        }
-        const matchingFolders = await imagesModel.find({ folderName });
-        res.send({ status: true, message: 'Matching folders fetched successfully', details: matchingFolders });
-    } catch (error) {
-        console.error('Error searching for folder names:', error.message);
-        res.send({ status: false, message: 'Something went wrong!' });
-    }
-};
+
+
 exports.updateImage = async (req, res) => {
     try {
         const protocol = req.protocol
