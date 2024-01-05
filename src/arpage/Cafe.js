@@ -49,7 +49,7 @@ const [blogDetails,setBlogDetails]=useState([])
 
   return (
     <div>
-    <section className='en_hero_about en_hero_about'>
+    <section className='ar_hero_about'>
         <Container>
           <div className='row'>
               <div className='col-lg-12 col-md-12 col-sm-12'>
@@ -58,17 +58,18 @@ const [blogDetails,setBlogDetails]=useState([])
           </div>
         </Container>
       </section>
-      <div className='en_bread_crumb ar_bread_crumb'>
+      <div className=' ar_bread_crumb'>
         <Container>
-        <ul className='en_creat_nav ar_creat_nav'>
+        <ul className=' ar_creat_nav'>
+             <li>
+              <Link to="/Cafe">مقهى</Link>
+            </li>
+            <li>
+            <i className="ri-arrow-left-s-line"></i>
+            </li>
+            
             <li>
               <Link to="/">الرئيسية</Link>
-            </li>
-            <li>
-            <i className="ri-arrow-right-s-line"></i>
-            </li>
-            <li>
-              <Link to="/Cafe">مقهى</Link>
             </li>
           </ul>
         </Container>

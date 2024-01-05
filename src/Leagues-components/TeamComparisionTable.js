@@ -3,9 +3,10 @@ import Table from 'react-bootstrap/Table';
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import Cookies from 'js-cookie';
 
 export default function TeamComparisionTable({data,gainRate}) {
-
+  const lang = Cookies.get('language')
 
 useEffect(()=>{
   if (!gainRate) return; // Handle cases where gainRate is not yet available
@@ -100,7 +101,8 @@ console.log(data);
             <div className='en-team-table-deta ar-team-table-deta'>
         <Table  className='team-aline_table'>
       <thead>
-        <tr>
+      {
+          lang==="en"? <tr>
           <th>TEAM</th>
           <th>GAMES</th>
           <th>WIN</th>
@@ -113,6 +115,21 @@ console.log(data);
           <th>GS-GC</th>
           <th>WIN%</th>
         </tr>
+        :
+        <tr>
+        <th>الفريق</th>
+        <th>لعب</th>
+        <th>فوز</th>
+        <th>تعادل</th>
+        <th>خسارة	</th>
+        <th>له</th>
+        <th>عليه	</th>
+        <th>نقاط</th>
+        <th>فرق النقاط </th>
+        <th>فارق الأهداف</th>
+        <th>نسبة الفوز</th>
+      </tr>
+        }
       </thead>
       <tbody className='team_poin-table'>
         <tr>

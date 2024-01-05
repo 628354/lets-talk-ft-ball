@@ -1,7 +1,16 @@
 
  @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+
+ html[lang="en"]{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--nato-font);
+}
+
 /*  */
+
 h2 {
   font-family: var(--nato-font);
 }
@@ -316,3 +325,141 @@ button.ar_button_search {
   gap: 9px;
 }
  */
+ .ar_hero_about {
+  background-image: url(../img/about-header.jpg);
+  height: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.ar_bread_crumb {
+  padding: 20px 0;
+}
+.ar_section-reverse {
+  display: flex;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.ar_main_leagues.one {
+  padding: 50px 0;
+}
+
+.ar_creat_nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ul.ar_creat_nav li a {
+  color: var(--secondary-color);
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.ar-table-deta table.aline_table thead tr th:nth-child(2) {
+  border: none !important;
+  text-align: right;
+  /* padding-left: 40px; */
+}
+
+
+.ar_team-btn a {
+  width: 182px;
+  height: 51px;
+  background: var(--primary-color);
+  float: left;
+  text-align: center;
+  line-height: 51px;
+  color: var(--there-color);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 16px;
+  border: 1px solid transparent;
+}
+.ar_team-btn a:hover {
+  background: var(--there-color);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+
+.ar-table-deta ul.in-footer {
+  display: flex;
+  justify-content: space-around;
+ 
+  text-align: right;
+  padding-right: 50px;
+}
+
+.leagues_cont_ar h2 {
+  text-align: center;
+  font-weight: 600;
+  padding-bottom: 40px;
+  position: relative;
+}
+
+.leagues_cont_ar h2:after {
+  width: 120px;
+  position: sticky;
+  content: '';
+  background-color: var(--primary-color);
+  height: 3px;
+  text-align: center;
+  clear: both;
+  margin: 10px auto;
+  display: block;
+}
+.leagues_cont_ar {
+  padding-top: 12px;
+}
+
+.ar_about_contant h5 {
+  line-height: 37px;
+  width: 545px;
+  border-right: 4px solid var(--border-color);
+  padding-left: 22px;
+  font-weight: 400;
+  margin-left: 10px;
+}
+.ar_defintion_r {
+  padding-bottom: 50px;
+}
+.ar_laelcolor .form-label {
+  margin-bottom: 10px;
+}
+.ar_conact_form .form-label {
+  font-family: var(--nato-font);
+  color: var(--there-color);
+  font-size: 15px;
+}
+
+.ar_conact_form {
+  padding: 40px 0;
+}
+
+.ar_right_border {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.ar_right_border h5 {
+  line-height: 37px;
+  width: 545px;
+  border-right: 4px solid var(--border-color);
+  padding-right: 22px;
+  font-weight: 400;
+  margin-left: 10px;
+  font-family: "Arial","sans-serif"!important;
+}
+.ar_abo_section {
+  padding-bottom: 50px;
+}
+
+.ar_our_contant h4 {
+  color: var(--there-color);
+  font-weight: 600;
+}
+.ar_our_contant p {
+  color: var(--there-color);
+  margin-bottom: 24px;
+  line-height: 25px;
+}

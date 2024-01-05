@@ -20,7 +20,7 @@ export default function LeaguesBluk() {
 			setSession(results.response.data.seasonyears)
 		})
 	}
-
+const lang ="en"
 	const LeagueCall = () => {
 		apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
 			// console.log(results.response.data.leaguedetails);

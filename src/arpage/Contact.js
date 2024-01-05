@@ -43,7 +43,7 @@ export default function Contact() {
 
   return (
     <div>
-    <section className='en_hero_about en_hero_about'>
+    <section className=' ar_hero_about'>
         <Container>
           <div className='row'>
               <div className='col-lg-12 col-md-12 col-sm-12'>
@@ -54,17 +54,17 @@ export default function Contact() {
        </section>
         
          
-       <div className='en_bread_crumb ar_bread_crumb'>
+       <div className=' ar_bread_crumb'>
        <Container>
        <ul className=' ar_creat_nav ' dir="rtl">
            <li>
              <Link to="/">الرئيسية</Link>
            </li>
            <li>
-           <i className="ri-arrow-right-s-line"></i>
+           <i className="ri-arrow-left-s-line"></i>
            </li>
            <li>
-             <Link to="/DEFINITION">اتصل بنا</Link>
+             <Link to="/contact">اتصل بنا</Link>
            </li>
          </ul>
          <div className='ar_leagues_cont'>
@@ -86,19 +86,19 @@ export default function Contact() {
 
             <div className='ar_conact_form'>
             <Form>
-            <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
+            <Form.Group className="mb-3 ar_laelcolor" controlId="formGroupEmail">
                 <Form.Label>الاسم</Form.Label>
                 <Form.Control type="text" placeholder="" name="name" onChange={handleChange}/>
               </Form.Group>
-              <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
+              <Form.Group className="mb-3 ar_laelcolor" controlId="formGroupEmail">
                 <Form.Label>البريد الالكتروني</Form.Label>
                 <Form.Control type="email" placeholder="" name="email" onChange={handleChange}/>
               </Form.Group>
-              <Form.Group className="mb-3 en_laelcolor" controlId="formGroupEmail">
+              <Form.Group className="mb-3 ar_laelcolor" controlId="formGroupEmail">
                 <Form.Label>موضوع</Form.Label>
                 <Form.Control type="text" placeholder=""  name="subject" onChange={handleChange} />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+              <Form.Group className="mb-3 ar_laelcolor" controlId="exampleForm.ControlTextarea1">
               <Form.Label>الموضوع</Form.Label>
               <Form.Control as="textarea" rows={3} name="message"onChange={handleChange}/>
             </Form.Group>

@@ -26,10 +26,10 @@ export default function LeaguesBluk() {
 		}
 		
 	}
-
+const lang ="en"
 	const LeagueCall = () => {
 		try {
-			apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
+			apiCall(LEAGUES(lang).league, REQUEST_TYPE.GET).then((results) => {
 				console.log(results.response.data?.body);
 				setleagues(results.response.data?.body)
 			})

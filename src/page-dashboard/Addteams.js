@@ -87,12 +87,12 @@ const [allData,setAllData]=useState(null)
     //console.log(selectedLeague);
     setAllData(selectedLeagueId)
   };
-
+const lang ='en'
   const LeagueCall = () => {
     try {
-      apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
-        // console.log(results.response.data.body);
-        setLeagues(results.response.data.body);
+      apiCall(LEAGUES(lang).league, REQUEST_TYPE.GET).then((results) => {
+        // console.log(results);
+        setLeagues(results?.response?.data?.body);
       });
 
     } catch (error) {
@@ -109,8 +109,8 @@ const [allData,setAllData]=useState(null)
 
   const handleSave = async (e) => {
     e.preventDefault();
-  console.log(formData.league);
-  console.log(formData.Team_Name_English);
+  console.log(formData?.league);
+  console.log(formData?.Team_Name_English);
   console.log(allData);
     // Check if required fields are filled
     if (!formData.Team_Name_English) {
@@ -127,8 +127,8 @@ const [allData,setAllData]=useState(null)
       
       // console.log('Sending data to the server:', { en: formData, ar: formDataAr });
         const response = await apiCall(CREATE_TEAM.team, REQUEST_TYPE.POST, data);
-        console.log(response);
-        setSuccessMessage(response.response.data.message);
+        // console.log(response);
+        setSuccessMessage(response?.response?.data?.message);
         clearMessages();
       } catch (error) {
         setErrorMessage('Error occurred. Please try again.');

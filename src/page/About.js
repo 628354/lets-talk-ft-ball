@@ -13,13 +13,18 @@ export default function About() {
   const data =[]
 // const lang ="en"
   const getAboutData= async()=>{
-    const res = await apiCall(ABOUT_US.finden, REQUEST_TYPE.GET);
-    console.log(res.response.data.data);
-    res.response.data.data?.map((item)=>{
-      data.push(item[lang]);
-    })
-    console.log(data);
-setAbout(data);
+    try {
+      const res = await apiCall(ABOUT_US.finden, REQUEST_TYPE.GET);
+      console.log(res);
+      res.response.data?.data?.map((item)=>{
+        data.push(item[lang]);
+      })
+     // console.log(data);
+  setAbout(data);
+    } catch (error) {
+      console.log("error",error);
+    }
+  
   }
 
 useEffect(()=>{
@@ -32,7 +37,7 @@ getAboutData()
   return (
 
     <div>
-      <section className='en_hero_about en_hero_about'>
+      <section className='en_hero_about '>
           <Container>
             <div className='row'>
                 <div className='col-lg-12 col-md-12 col-sm-12'>
@@ -41,7 +46,7 @@ getAboutData()
             </div>
           </Container>
         </section>
-       <div className='en_bread_crumb ar_bread_crumb'>
+       <div className='en_bread_crumb '>
       
          <Container>
          <ul className='en_creat_nav'>

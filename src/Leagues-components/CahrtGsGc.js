@@ -16,7 +16,7 @@ export default function CahrtGsGc({ leagueId}) {
 	const [seasonId, setSeasonId] = useState();
 	// console.log(leagueId);
 	// console.log(seasonId);
-	const sId = sessionStorage.getItem("runningSeason")
+	const sId = localStorage.getItem("runningSeason")
 
 	const getYears= async ()=>{
 		try{
@@ -166,7 +166,7 @@ export default function CahrtGsGc({ leagueId}) {
 	return (
 		<div>
 			<div className="chart-border-toll">
-			<div className="premier-textare">
+			<div className="premier-textare" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
 			{
                     lang ==="en"? <h3>2023-24 Goals Con/Game</h3>: <h3>2023-24 نسبة التسجيل/الاستقبال</h3>
                 }

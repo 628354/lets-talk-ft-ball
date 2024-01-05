@@ -52,17 +52,18 @@ const lang = Cookies.get('language')
 	
 	  
 	return (
-		<div>
-			<section className={`${lang ==="en"? 'en_hero_about en_hero_about':'ar_hero_about ar_hero_about'}`}>
+		<div >
+			<section className={`${lang ==="en"? 'en_hero_about':'ar_hero_about'}`}>
 				<Container>
 					<Row>
 						<div className="col-lg-12 col-md-12 col-sm-12"></div>
 					</Row>
 				</Container>
 			</section>
-			<div className="en_bread_crumb ar_bread_crumb">
+			
+			<div className={`${lang ==="en"? 'en_bread_crumb':'ar_bread_crumb'}`}>
 				<Container>
-					<ul className="en_creat_nav ar_creat_nav">
+					<ul className={`${lang ==="en"? 'en_creat_nav':'ar_creat_nav '}`}>
 
 						<li>
 							{
@@ -70,8 +71,8 @@ const lang = Cookies.get('language')
 							}
 							
 						</li>
-						<li>
-							<i className="ri-arrow-right-s-line"></i>
+						<li >
+							<i className="ri-arrow-right-s-line" ></i>
 						</li>
 						
 							<Link to="">{leagueDecreption?.leaguename}</Link>
@@ -82,7 +83,7 @@ const lang = Cookies.get('language')
 
 			<section className="en-premier ar-premier">
 				<Container>
-					<Row>
+					<Row >
 						
 							<Row key={leagueDecreption?._id}>
 								<div className="col-lg-12 col-md-12 col-sm-12">
@@ -92,8 +93,8 @@ const lang = Cookies.get('language')
 										</div>
 									</div>
 								</div>
-								<div className="en_main_leagues one ">
-									<Row>
+								<div  className={`${lang ==="en"? 'en_main_leagues one':'ar_main_leagues one'}`}>
+									<Row className={`${lang ==="en"? 'row':'row ar_section-reverse'}`}>
 										<div className="col-lg-2 col-md-2 col-sm-12 m-auto">
 											<div className="en-leagues-img">
 												<img

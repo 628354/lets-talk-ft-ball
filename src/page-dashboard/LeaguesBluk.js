@@ -20,7 +20,7 @@ export default function LeaguesBluk() {
 		try {
 			apiCall(SESSION.year, REQUEST_TYPE.GET).then((results) => {
 				setSession(results.response.data?.seasonyears)
-				console.log(results.response.data?.seasonyears)
+				// console.log(results.response.data?.seasonyears)
 			})
 		} catch (error) {
 			console.log("data",error);
@@ -28,11 +28,11 @@ export default function LeaguesBluk() {
 		}
 		
 	}
-
+const lang ="en"
 	const LeagueCall = () => {
 		try {
-			apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
-				console.log(results.response.data?.body);
+			apiCall(LEAGUES(lang).league, REQUEST_TYPE.GET).then((results) => {
+				// console.log(results.response.data?.body);
 				setleagues(results.response.data?.body)
 			})
 		} catch (error) {
@@ -89,7 +89,7 @@ export default function LeaguesBluk() {
 				apiCallFile(LEAGUES_BULK_IMPORT.upload, REQUEST_TYPE.POST, formDatas).then((results) => {
 					setSuccessMessage("Successfully import bluk League data");
 					clearMessages();
-					console.log("yes data add")
+					// console.log("yes data add")
 				})// Clear messages after 3 seconds
 
 
@@ -186,7 +186,7 @@ export default function LeaguesBluk() {
 															onChange={handleChange} >
 															<option value={""}>Select Season</option>
 															{getSession?.map((row) => (
-																<option value={row._id}>{row.season_Title}</option>
+																<option value={row?._id}>{row?.season_Title}</option>
 															))}
 														</Form.Select>
 													</Col>
@@ -200,7 +200,7 @@ export default function LeaguesBluk() {
 															onChange={handleChange} >
 															<option value={""}>Select League</option>
 															{getleagues?.map((row) => (
-																<option value={row._id}>{row.en.leaguename}</option>
+																<option value={row?._id}>{row?.en?.leaguename}</option>
 															))}
 														</Form.Select>
 													</Col>
