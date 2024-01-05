@@ -3,7 +3,7 @@ import Menubar from "../dashboard/Menubar";
 import { Container, Row, Modal, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE,GET_IMAGE,ADD_IMAGE } from "../helper/APIInfo";
+import { REQUEST_TYPE,GET_IMAGE,ADD_IMAGE ,CREATE_FOLDER,GET_FOLDER} from "../helper/APIInfo";
 import ImagePrevDelete from "./ImagePrevDelete";
 import UploadMediaImg from "./UploadMediaImg";
 
@@ -19,9 +19,10 @@ const [flag, setFlag]=useState(false)
   const handleFolderNameChange = (e) => setFolderName(e.target.value);
 
   const handleAddFolder = async () => {
+    const folderNameWithoutSpaces = folderName.replace(/\s/g, '')
     try {
     
-      const response = await apiCall(ADD_IMAGE.image, REQUEST_TYPE.POST,
+      const response = await apiCall(CREATE_FOLDER.create, REQUEST_TYPE.POST,
         {
           folderName: folderName,
         }
@@ -45,10 +46,9 @@ const [flag, setFlag]=useState(false)
 
   const fetchFolders = async () => {
     try {
-      const response = await apiCall( GET_IMAGE.get,REQUEST_TYPE.GET);
-
-      //console.log(response.response.data?.details)
-      setFolders(response.response.data?.details);
+      const response = await apiCall( GET_FOLDER.get,REQUEST_TYPE.GET);
+      console.log(response.response?.data?.body)
+      setFolders(response.response?.data?.body);
      
     } catch (error) {
       console.error("Error fetching folders:", error);
@@ -59,21 +59,48 @@ const [flag, setFlag]=useState(false)
     fetchFolders();
   }, []);
 
-  const handleFolderClick = async (folder) => {
+
+
+
+  const handleFolderClick = async (folder,id) => {
     setSelectedFolder(folder);
 console.log(folder);
+console.log(id);
 const folderWithoutSpaces = folder.replace(/\s/g, '')
 console.log(folderWithoutSpaces);
+
+    // try {
+    //   const response = await apiCall(
+    //     `http://localhost:5000/getImageFolderName/?folderName=${folder}`,
+    //     REQUEST_TYPE.GET
+    //   );
+    //   console.log(response?.response.data?.details);
+    //   response?.response.data?.details.map((item)=>{
+    //     console.log(item);
+    //   })
+    //   setFolderImages(response.response.data);
+    // } catch (error) {
+    //   console.error("Error fetching folder images:", error);
+    // }
     try {
+      const data =[]
       const response = await apiCall(
-        `http://localhost:5000/getImageFolderName/?folderName=${folder}`,
-        REQUEST_TYPE.GET
-      );
-      console.log(response?.response.data?.details);
-      response?.response.data?.details.map((item)=>{
+        `http://localhost:5000/foderGetById/${id}`);
+      console.log(response.response?.data?.body);
+      response.response?.data?.body?.map((item)=>{
+        item.image.map((img)=>{
+          console.log(img);
+          data.push({
+            "image":img
+          })
+        })
+       
         console.log(item);
+        
       })
-      setFolderImages(response.response.data);
+      console.log(data);
+      setFolderImages(data)
+     // setFolderImages(response.response.data);
     } catch (error) {
       console.error("Error fetching folder images:", error);
     }
@@ -156,9 +183,9 @@ console.log(folderWithoutSpaces);
                 <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start npmless" id="menu">
                     {
                       folders?.map((item)=>{
-                        // console.log(item);
-                        return(  <li >
-                          <a href="#media1" data-bs-toggle="collapse" className="nav-link px-0 align-middle"onClick={() => handleFolderClick(item?.folderName)}>
+                        console.log(item);
+                        return(  <li key={item?._id}>
+                          <a href="#media1" data-bs-toggle="collapse" className="nav-link px-0 align-middle"onClick={() => handleFolderClick(item?.folderName,item?._id)}>
                           <span className='cat-icon'></span> <span className='folder-main'><i className="ri-folder-fill"></i></span> <span className="ms-1 d-none d-sm-inline less_cat">{item?.folderName}</span> </a>
                          
                       </li>)
@@ -176,7 +203,7 @@ console.log(folderWithoutSpaces);
                    </div>
                   </div>
                   <div className='col-lg-10 col-sm-10 col-sm-10 ps-0'>
-                 <UploadMediaImg  selectedFolder={selectedFolder}/>
+                 <UploadMediaImg  selectedFolder={selectedFolder} folderImages={folderImages}/>
                   </div>
                   
                   </Row>
