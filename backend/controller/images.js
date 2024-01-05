@@ -1,43 +1,51 @@
 const imagesModel = require("../model/images")
 const path = require('path')
 const fs = require('fs')
+const folder = require('../model/folder')
 
 exports.addimages = async (req, res) => {
     try {
+        const folderName = req.body.folderName;
+        const existingFolder = await folder.findOne({ folderName });
+        let folderId;
+        if (existingFolder) {
+            folderId = existingFolder._id;
+        } else {
+            const newFolder = new folder({
+                folderName,
+                status: req.body.status,
+            });
+
+            const createdFolder = await newFolder.save();
+            folderId = createdFolder._id;
+        }
+
         const protocol = req.protocol;
         const host = req.hostname;
         const url = `${protocol}://${host}`;
 
         const imagesUpload = await imagesModel.create({
-            logo: req.file ? url + "/uploads/" + req.file.filename : "",
-            folderName: req.body.folderName
+            image: req.files.map((file) => url + "/uploads/" + file.filename),
+            folderId,
+            status: req.body.status,
         });
 
-        if (req.body.folderName) {
-            const uploadPath = path.join(process.cwd(), 'uploads');
-            const teamFolderPath = path.join(uploadPath, req.body.folderName);
-
-            try {
-                if (!fs.existsSync(teamFolderPath)) {
-                    fs.mkdirSync(teamFolderPath, { recursive: true });
-                }
-
-                const newImagePath = path.join(teamFolderPath, req.file.filename);
-                fs.renameSync(req.file.path, newImagePath);
-            } catch (error) {
-                res.status(500).send({
-                    message: 'Error moving image to team folder',
-                    success: false
-                });
-                return;
-            }
+        const uploadPath = path.join(process.cwd(), 'uploads', folderName);
+        for (const file of req.files) {
+            const newImagePath = path.join(uploadPath, file.filename);
+            fs.renameSync(file.path, newImagePath);
         }
-
-        res.send({ status: true, message: "Successfully add image", details: imagesUpload });
-
+        res.status(200).send({
+            status: true,
+            message: "Successfully added images",
+            details: imagesUpload,
+        });
     } catch (error) {
-        console.error('Error adding image:', error.message);
-        res.send({ status: false, message: "Something went wrong !!" });
+        res.status(500).send({
+            status: false,
+            message: 'Internal Server Error',
+            error: error.message,
+        });
     }
 };
 exports.GetImage = async (req, res) => {
