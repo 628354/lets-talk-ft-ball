@@ -590,21 +590,29 @@ const teamSecgc = async () => {
 			</section>
 			<div className="en_bread_crumb ar_bread_crumb">
 				<Container>
-					<ul className="en_creat_nav ar_creat_nav">
+					<ul className={`${lang ==="en"? 'en_creat_nav':'ar_creat_nav'}`} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
 						<li>
-							<Link to="/">Home</Link>
+							
+							{
+								lang ==="en"? <Link to="/">Home</Link>:<Link to="/">الرئيسية</Link>
+							}
 						</li>
 						<li>
 							<i className="ri-arrow-right-s-line"></i>
 						</li>
 						<li>
-							<Link to="/league">Premier League</Link>
+
+							{
+								lang ==="en"? <Link to="/">Premier League</Link>:<Link to="/">الدوري الإنكليزي</Link>
+							}
 						</li>
 						<li>
 							<i className="ri-arrow-right-s-line"></i>
 						</li>
 						<li>
-							<Link to="/PremierLeague">LIVERPOOL</Link>
+							{
+								lang ==="en"? <Link to="/">LIVERPOOL</Link>:<Link to="/">ليفربول</Link>
+							}
 						</li>
 					</ul>
 				</Container>
@@ -615,14 +623,17 @@ const teamSecgc = async () => {
 					<Row>
 						<div className="col-lg-12 col-md-12 col-sm-12">
 							<div className="en-premier-contant ar-premier-contant">
-								<div className="leagues_cont">
-									<h2>Team Details</h2>
+								<div className={`${lang ==="en"? 'en_leagues_cont':'ar_leagues_cont'}`} >
+									
+									{
+										lang ==="en"? <h2>Team Details</h2>:<h2>تفاصيل الفريق</h2>
+									}
 								</div>
 							</div>
 						</div>
 						<div className="en_main_leagues one ">
-							<Row>
-								<div className="col-lg-2 col-md-2 col-sm-12 m-auto imageline">
+							<Row dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+								<div  className={`${lang ==="en"? 'col-lg-2 col-md-2 col-sm-12 m-auto en_imageline ':'col-lg-2 col-md-2 col-sm-12 m-auto ar_imageline '}`}>
 									<div className="en-leagues-img">
 										<img
 											src={require("../img/Liverpool.1.png")}
@@ -632,7 +643,7 @@ const teamSecgc = async () => {
 									</div>
 								</div>
 								<div className="col-lg-10 col-md-10 col-sm-12">
-									<div className="en-leagues-text ar-leagues-text ms-4">
+									<div className={`${lang ==="en"? 'en-leagues-text ms-4':'ar-leagues-text me-4'}`}>
 										{
 											lang ==="en"?<h2>{teamDetails?.Team_Name_English}</h2>:<h2>{teamDetails?.Team_Name_Arabic}</h2>
 										}
@@ -657,7 +668,7 @@ const teamSecgc = async () => {
 											</div>
 											<div class="inside-filter">
 											{
-										lang ==="en"? <span>Filter By Season </span>:<span>تصفية حسب الموسم</span>
+										lang ==="en"? <span>Filter By Season</span>:<span>تصفية حسب الموسم</span>
 									}
 												<div class="dropdown_filter">
 													<button class="dropbtn">
@@ -753,7 +764,13 @@ const teamSecgc = async () => {
 								<Row>
 									<div className="col-lg-6 col-md-6 col-sm-12 mb-4">
 										<div className="chart-opt-table">
-											<h5>23-24 MC Point Gaining Rate</h5>
+											
+											{
+										lang ==="en"? <h5>23-24 MC Point Gaining Rate</h5>:<h5>23-24 ليفربول - نسبة التسجيل/الاستقبال
+										</h5>
+									}
+
+
 											<div className="main-charts">
 											<div id="chartdivN" style={{ width: "100%", height: "300px" }} ></div>
 
@@ -762,7 +779,11 @@ const teamSecgc = async () => {
 									</div>
 									<div className="col-lg-6 col-md-6 col-sm-12 mb-4">
 										<div className="chart-opt-table">
-											<h5>23-24 MC GS/GC</h5>
+											
+											{
+										     lang ==="en"? <h5>23-24 MC GS/GC</h5>:<h5>23-24 ليفربول - معدل كسب النقاط
+										     </h5>
+									        }
 											<div className="main-charts">
 											<div id="chartdivC" style={{ width: "100%", height: "300px" }} ></div>
 											</div>
@@ -770,15 +791,23 @@ const teamSecgc = async () => {
 									</div>
 									<div className="col-lg-6 col-md-6 col-sm-12 mb-5">
 										<div className="chart-opt-table">
-											<h5>23-24 MC GS/g</h5>
+											
+											{
+										     lang ==="en"? <h5>23-24 MC GS/g</h5>:<h5>23-24 ليفربول - معدل الاستقبال
+										     </h5>
+									        }
 											<div className="main-charts">
 											<div id="chartdivGs" style={{ width: "100%", height: "300px" }} ></div>
 											</div>
 										</div>
 									</div>
-									<div className="col-lg-6 col-md-6 col-sm-12 mb-5">
-										<div className="chart-opt-table">
-											<h5>23-24 MC GC/g</h5>
+									<div className="col-lg-6 col-md-6 col-sm-12 mb-5" >
+										<div className="chart-opt-table " >
+											
+											{
+										     lang ==="en"? <h5>23-24 MC GC/g</h5>:<h5>23-24 ليفربول - معدل التسجيل </h5>
+										     
+									        }
 											<div className="main-charts">
 											<div id="chartdivGcum" style={{ width: "100%", height: "300px" }} ></div>
 											</div>

@@ -10,6 +10,7 @@ import { useLanguage } from "../languages/LanguageContext";
 import { apiCall } from "../helper/RequestHandler";
 import { REQUEST_TYPE, LEAGUES } from "../helper/APIInfo";
 import Cookies from "js-cookie";
+
 export default function Headerar() {
 	const lang = Cookies.get('language')
 	const [leagueNames, setLeagueNames] = useState([]);
@@ -89,8 +90,15 @@ export default function Headerar() {
 					<Container dir="rtl">
 						<div className="row ar_flex">
 							<div className="col-lg-6 col-md-6 col-6">
-							<div className="ar_icon">
-									<Link to="#" onClick={(e) => handleLanguageChange("en", e)}>English</Link>
+							<div className="ar_icon" >
+									<Link className="english-top-icon" to="#" onClick={(e) => handleLanguageChange("en", e)}>
+									<span className="right-logo-top" ><img
+										src={require("../img/earth-icon.png")}
+										alt="earth"
+										className="logo-icon-top"
+									/></span>
+									English
+									</Link>
 								</div>
 							</div>
 							<div className="col-lg-6 col-md-6 col-6">

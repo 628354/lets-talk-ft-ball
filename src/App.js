@@ -192,7 +192,7 @@ function App() {
 
 				<Route path="/headers" element={<Header />}></Route>
 				<Route path="/league" element={<PremierLeague />}></Route>
-				<Route path="/leagueAr" element={<PremierLeagueAr />}></Route>
+				{/* <Route path="/leagueAr" element={<PremierLea />}></Route> */}
 {/* 
 				
 

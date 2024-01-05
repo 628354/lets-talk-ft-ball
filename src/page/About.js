@@ -94,7 +94,7 @@ getAboutData()
       </Container>
      </section>
 
-     {/* <section className='en_Our_section'>
+     <section className='en_Our_section'>
      <Container>
      <div className='row'>
       <div className='col-lg-5 col-md-12 col-sm-12'>
@@ -119,7 +119,7 @@ getAboutData()
      </div>
      </Container>
 
-     </section> */}
+     </section>
 
     </div>
 

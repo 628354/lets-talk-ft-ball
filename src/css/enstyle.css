@@ -1,4 +1,4 @@
-html[lang="en"] {
+html[lang="en"] body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -508,7 +508,6 @@ img.en-sec-image-right-side {
     font-weight: 600;
     padding-bottom: 40px;
     position: relative;
-    font-family: 'Poppins', sans-serif;
 }
 
 .en_leagues_cont h2:after {
@@ -802,7 +801,7 @@ span.en_number_pass {
     font-size: 15px;
     font-family: 'Poppins', sans-serif;
 }
-sss
+
 .en_send_m {
     border: 1px solid #790019;
     width: 100%;
@@ -821,6 +820,13 @@ sss
 /* contact css start */
 
 /* premier league css start */
+.en-leagues-text h2 {
+    font-weight: 500;
+    float: left;
+    width: 100%;
+    color: #06083b;
+    margin-top: 15px;
+}
 .en-leagues-text p {
     font-size: 16px;
     line-height: 23px;
@@ -1093,7 +1099,7 @@ tr.filter-fir {
 
 
 /* team delails */
-.imageline {
+.en_imageline {
     border-right: 1px solid #cdced8;
 }
 .livepool {
@@ -1159,6 +1165,7 @@ table.aline_tablel thead tr th {
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .compari-logo {
     text-align: center;
@@ -1184,6 +1191,7 @@ table.aline_tablel thead tr th {
 /* new css */
 .img-premier-press {
     width: 100%;
+    object-fit: scale-down;
 }
 .en_drop_item li a {
     font-size: 13px !important;
@@ -1302,3 +1310,11 @@ table.team-aline_table thead tr th {
     height: 120px;
     overflow-y: scroll;
 }
+
+/* 05/01/24 start */
+ 
+.dropbtn span {
+    font-size: 16px;
+}
+
+/* 05/01/24 end */

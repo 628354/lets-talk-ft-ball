@@ -8,7 +8,6 @@ import Iframesecttion from "../Leagues-components/Iframesecttion";
 import Premierchart from "../Leagues-components/Premierchart";
 import Goalsconchart from "../Leagues-components/Goalsconchart";
 import CahrtGsGc from "../Leagues-components/CahrtGsGc";
-
 import { apiCall } from "../helper/RequestHandler";
 import { REQUEST_TYPE, SESSION,FIND_TEAM ,GET_LEAGUE_ID,SESSIOND} from "../helper/APIInfo";
 import Cookies from "js-cookie";
@@ -63,7 +62,7 @@ const lang = Cookies.get('language')
 			
 			<div className={`${lang ==="en"? 'en_bread_crumb':'ar_bread_crumb'}`}>
 				<Container>
-					<ul className={`${lang ==="en"? 'en_creat_nav':'ar_creat_nav '}`}>
+					<ul className={`${lang ==="en"? 'en_creat_nav':'ar_creat_nav '}`} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
 
 						<li>
 							{
@@ -71,7 +70,7 @@ const lang = Cookies.get('language')
 							}
 							
 						</li>
-						<li >
+						<li>
 							<i className="ri-arrow-right-s-line" ></i>
 						</li>
 						
@@ -83,12 +82,11 @@ const lang = Cookies.get('language')
 
 			<section className="en-premier ar-premier">
 				<Container>
-					<Row >
 						
 							<Row key={leagueDecreption?._id}>
 								<div className="col-lg-12 col-md-12 col-sm-12">
 									<div className="en-premier-contant ar-premier-contant">
-										<div className="leagues_cont">
+										<div className={`${lang ==="en"? 'en_leagues_cont':'ar_leagues_cont'}`}>
 											<h2>{leagueDecreption?.leaguename}</h2>
 										</div>
 									</div>
@@ -120,7 +118,6 @@ const lang = Cookies.get('language')
 								</div>
 							</div>
 						</div> */}
-					</Row>
 				</Container>
 			</section>
 			<section className="league_table">
