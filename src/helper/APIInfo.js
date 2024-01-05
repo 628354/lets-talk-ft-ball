@@ -207,8 +207,8 @@ export const REMOVE_SEASON = {
   remove: `${SERVER_LINK}removeyear`,
 
 };
-export const GET_IMAGE = {
-  get: `${SERVER_LINK}GetImage`,
+export const GET_FOLDER = {
+  get: `${SERVER_LINK}folderGet`,
 
 };
 export const DELETE_USER = {
@@ -258,7 +258,11 @@ export const FIND_TEAM=(lang)=>{
     find:`${SERVER_LINK}${lang}/scrolldown/find`
   }
 }
+export const CREATE_FOLDER = {
+  create: `${SERVER_LINK}createfolder`
+  
 
+};
 export const BASE_URL = "http://localhost:5000/uploads/";
 
 

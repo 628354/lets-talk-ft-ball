@@ -93,7 +93,7 @@ useEffect(()=>{
 },[gainRate])
    
 
-console.log(data);
+// console.log(data);
   return (
     <div>
         <div className='team-main-table chart-team-com'>
