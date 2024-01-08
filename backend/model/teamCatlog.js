@@ -25,6 +25,7 @@ const teamCatlogSchema = mongoose.Schema(
             logo_folder: { type: String, default: "" },
             status: { type: String, enum: ["active", "inactive"], default: "active" },
         },
+        
 
     },
     { timestamps: true }

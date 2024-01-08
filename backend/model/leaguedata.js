@@ -19,6 +19,8 @@ const leaguedataSchema = mongoose.Schema(
 
     datatype: { type: String, require: true },
 
+
+
     en: [{
       teamname: {
         type: mongoose.Schema.Types.ObjectId,
@@ -43,7 +45,12 @@ const leaguedataSchema = mongoose.Schema(
 
       gs_gc: { type: String, require: true },
 
-      win_precent: { type: String, require: true }
+      win_precent: { type: String, require: true },
+
+      GS_G: { type: String, require: true },
+
+      Points_Stdev: { type: String, require: true },
+
     }],
     ar: [{
       teamname: {
@@ -68,8 +75,18 @@ const leaguedataSchema = mongoose.Schema(
 
       gs_gc: { type: String, require: true },
 
-      win_precent: { type: String, require: true }
-    }]
+      win_precent: { type: String, require: true },
+
+      win_precent: { type: String, require: true },
+
+      GS_G: { type: String, require: true },
+
+      Points_Stdev: { type: String, require: true },
+
+
+    }],
+
+
 
   }, {
   timestamps: true

@@ -7,99 +7,107 @@ const teamdata = require('../model/teamdata');
 
 const ScrollDown = async (Request, Response) => {
 	try {
-	  const { lung, leagueId } = Request.params;
-	  const { season } = Request.body;
-	  const data = await leaguedata
-		.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` }, { [lung]: 1 })
-		.populate(`${lung}.teamname`, { [lung]: 1 });
-	  responseHelper[200].data = data;
-	  Response.send(responseHelper[200]);
+		const { lung, leagueId } = Request.params;
+		const { season } = Request.body;
+		const data = await leaguedata
+			.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` }, { [lung]: 1 })
+			.populate(`${lung}.teamname`, { [lung]: 1 });
+		responseHelper[200].data = data;
+		Response.send(responseHelper[200]);
 	} catch (e) {
-	  sendError(Response, e);
+		sendError(Response, e);
 	}
-  };
+};
 const findByteamName = async (Request, Response) => {
 	try {
-	  const { lung } = Request.params;
-	  const { season, leagueId, teamName } = Request.body;
-	  let t = `${lung}.teamname`;
-	  const data = await leaguedata
-		.find(
-		  { "leagueid": `${leagueId}`, "seasonid": `${season}`, [t]: teamName },
-		  { [lung]: 1, datatype: 1 }
-		)
-		.populate(`${lung}.teamname`, { [lung]: 1 });
-  
-	  console.log(season, leagueId, teamName);
-	  responseHelper[200].data = data;
-	  Response.send(responseHelper[200]);
+		const { lung } = Request.params;
+		const { season, leagueId, teamName } = Request.body;
+		let t = `${lung}.teamname`;
+		const data = await leaguedata
+			.find(
+				{ "leagueid": `${leagueId}`, "seasonid": `${season}`, [t]: teamName },
+				{ [lung]: 1, datatype: 1 }
+			)
+			.populate(`${lung}.teamname`, { [lung]: 1 });
+
+		console.log(season, leagueId, teamName);
+		responseHelper[200].data = data;
+		Response.send(responseHelper[200]);
 	} catch (e) {
-	  sendError(Response, e);
+		sendError(Response, e);
 	}
-  };
+};
 const Goals_Scored = async (Request, Response) => {
 	try {
-	  const { lung } = Request.params;
-	  const { season, leagueId } = Request.body;
-	  let d = `${lung}.goals_scored`;
-	  const data = await leaguedata
-		.find(
-		  { "leagueid": `${leagueId}`, "seasonid": `${season}`, "datatype": "gspg" },
-		  { datatype: 1, [d]: 1 }
-		)
-		.populate({
-		  path: `${lung}.teamname`,
-		  select: [lung, "Image"],
-		});
-  
-	  responseHelper[200].data = data;
-	  Response.send(responseHelper[200]);
+		const { lung } = Request.params;
+		const { season, leagueId } = Request.body;
+		let d = `${lung}.goals_scored`;
+
+		const data = await leaguedata
+			.find(
+				{ "leagueid": `${leagueId}`, "seasonid": `${season}`, "datatype": "gspg" },
+				{ datatype: 1, [d]: 1 }
+			)
+			.populate({
+				path: `${lung}.teamname`,
+				select: [lung, "Image"],
+			})
+			.sort({ [`${lung}.goals_scored`]: -1, [`${lung}.teamname`]: -1 })
+			.exec();
+
+		responseHelper[200].data = data;
+		Response.send(responseHelper[200]);
 	} catch (e) {
-	  sendError(Response, e);
+		sendError(Response, e);
 	}
-  };
+};
 const Goals_Con = async (Request, Response) => {
 	try {
-	  const { lung } = Request.params;
-	  const { season, leagueId } = Request.body;
-	  let d = `${lung}.goals_scored`;
-	  const data = await leaguedata
-		.find(
-		  { "leagueid": `${leagueId}`, "seasonid": `${season}`, "datatype": "gcpg" },
-		  { [d]: 1 }
-		)
-		.populate({
-		  path: `${lung}.teamname`,
-		  select: [lung, "Image"],
-		});
-  
-	  responseHelper[200].data = data;
-	  Response.send(responseHelper[200]);
+		const { lung } = Request.params;
+		const { season, leagueId } = Request.body;
+		let d = `${lung}.goals_scored`;
+
+		const data = await leaguedata
+			.find(
+				{ "leagueid": `${leagueId}`, "seasonid": `${season}`, "datatype": "gcpg" },
+				{ [d]: 1 }
+			)
+			.populate({
+				path: `${lung}.teamname`,
+				select: [lung, "Image"],
+			}).sort({ [`${lung}.goals_scored`]: 1, [`${lung}.teamname`]: 1 })
+
+		responseHelper[200].data = data;
+		Response.send(responseHelper[200]);
 	} catch (e) {
-	  sendError(Response, e);
+		sendError(Response, e);
 	}
-  };
+};
 const gs_gc = async (Request, Response) => {
 	try {
-	  const { lung } = Request.params;
-	  const { season, leagueId } = Request.body;
-	  let d = `${lung}.gs_gc`;
-	  const data = await leaguedata
-		.find(
-		  { "leagueid": `${leagueId}`, "seasonid": `${season}`, "datatype": "pl" },
-		  { [d]: 1 }
-		)
-		.populate({
-		  path: `${lung}.teamname`,
-		  select: [lung, "Image"],
-		});
-  
-	  responseHelper[200].data = data;
-	  Response.send(responseHelper[200]);
+		const { lung } = Request.params;
+		const { season, leagueId } = Request.body;
+		let d = `${lung}.gs_gc`;
+
+		const data = await leaguedata
+			.find(
+				{ "leagueid": `${leagueId}`, "seasonid": `${season}`, "datatype": "pl" },
+				{ [d]: 1 }
+			)
+			.populate({
+				path: `${lung}.teamname`,
+				select: [lung, "Image"],
+			})
+			.sort({ [`${lung}.gs_gc`]: -1, [`${lung}.teamname`]:-1 })
+			.exec();
+
+		const sortedData = data.slice().sort((a, b) => a[lung].gs_gc - b[lung].gs_gc);
+		responseHelper[200].data = sortedData;
+		Response.send(responseHelper[200]);
 	} catch (e) {
-	  sendError(Response, e);
+		sendError(Response, e);
 	}
-  };
+};
 const teamSeasson = async (Request, Response) => {
 	try {
 		const { lung } = Request.params;
@@ -116,7 +124,7 @@ const teamSeassonName = async (Request, Response) => {
 	try {
 		const { lung } = Request.params;
 		const { leagueId, season } = Request.body
-		const data = await teamdata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` },{[lung]:1}, { "season_Title": 1 }).populate("teamname", {[lung]:1})
+		const data = await teamdata.find({ "leagueid": `${leagueId}`, "seasonid": `${season}` }, { [lung]: 1 }, { "season_Title": 1 }).populate("teamname", { [lung]: 1 })
 		responseHelper[200].data = data;
 		Response.send(responseHelper[200]);
 	} catch (e) {
@@ -223,7 +231,6 @@ const teamGS_GC = async (Request, Response) => {
 		sendError(Response, e)
 	}
 }
-
 // const team_details = async (Request, Response) => {
 //     try {
 //         const { lung, teamNameId } = Request.params; 
@@ -244,7 +251,6 @@ const teamGS_GC = async (Request, Response) => {
 //         sendError(Response, e);
 //     }
 // };
-
 const team_details = async (req, res) => {
 	try {
 		const { lung } = req.params;

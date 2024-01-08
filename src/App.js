@@ -88,6 +88,7 @@ function App() {
 	const noHeaderRoutes = [
 		"/login",
 		"/Dashboard",
+		"/Dashboard",
 		"/Signup",
 		"/Forgot",
 		"/Editseason",
@@ -107,11 +108,11 @@ function App() {
 		"/Teams",
 		"/EditTeams",
 		"/Addteams",
-		"/DashboardPage",
+		// "/DashboardPage",
 		"/EditLeagues",
 		"/Addleagues",
 		"/Addseason",
-		"/Dashboard",
+		// "/Dashboard",
 		"/uploadMedia",
 		"/User",
 		"/addUser",
@@ -172,6 +173,7 @@ function App() {
 			<Routes>
 				{/* <Route path="/Login" element={<Login />} /> */}
 				<Route path="/" element={HomeComponent && <HomeComponent />}></Route>
+			
 				<Route
 					path="/About"
 					element={AboutComponent && <AboutComponent />}></Route>
@@ -192,7 +194,7 @@ function App() {
 
 				<Route path="/headers" element={<Header />}></Route>
 				<Route path="/league" element={<PremierLeague />}></Route>
-				{/* <Route path="/leagueAr" element={<PremierLea />}></Route> */}
+				{/* <Route path="/leagueAr" element={<PremierLeagueAr />}></Route> */}
 {/* 
 				
 

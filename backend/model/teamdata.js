@@ -69,6 +69,9 @@ const teamSchema = mongoose.Schema({
 
         Poverty_Line: { type: String, require: true },
     }],
+    win_precent: { type: String, require: true },
+    GS_G: { type: String, require: true },
+    Points_Stdev: { type: String, require: true },
 
     status: { type: String, enum: ["active", "inactive"], default: "active" }
 },

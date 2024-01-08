@@ -306,9 +306,12 @@ try {
 			teamId: teamId
 		}
 		const data1 = []
+		const data2=[]
 		try {
 			const response = await apiCall(GAINING_RATE.gainrate, REQUEST_TYPE.POST, obj)
-			// console.log(response);
+			console.log(response);
+			
+
 			response.response.data.data?.teamDatas.map((item) => {
 				// console.log(item);
 				item?.en.map((data) => {
@@ -583,6 +586,8 @@ try {
 	}, [currentLeagueId2, seasonId2, teamId2])
 
 
+	
+
 	return (
 		<div dir={lang === 'ar' ? 'rtl' : 'ltr'}>
 			<section className="en_hero_about en_hero_about">
@@ -621,7 +626,7 @@ try {
 								<div className="en_leagues_cont">
 								
 									{
-								lang === "en"?	<h2>Team Comparision</h2>:	<h2>مقارنة الفريق</h2>
+								lang === "en"?	<h2>Team Comparison</h2>:	<h2>مقارنة الفريق</h2>
 							}
 								</div>
 							</div>

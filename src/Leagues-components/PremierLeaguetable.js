@@ -247,7 +247,8 @@ localStorage.setItem("teamId",teamId)
 									<td>{data.points}</td>
 									<td>{data.point_gap}</td>
 									<td>{data.gs_gc}</td>
-									<td>{data.win_precent}%</td>
+									<td>{(data.win_precent * 100).toFixed(2)}%</td>
+
 
 								</tr>
 							);

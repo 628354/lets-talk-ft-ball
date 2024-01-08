@@ -580,7 +580,7 @@ const teamSecgc = async () => {
 
 
 	return (
-		<div>
+		<div >
 			<section className="en_hero_about en_hero_about">
 				<Container>
 					<Row>
@@ -642,8 +642,8 @@ const teamSecgc = async () => {
 										/>
 									</div>
 								</div>
-								<div className="col-lg-10 col-md-10 col-sm-12">
-									<div className={`${lang ==="en"? 'en-leagues-text ms-4':'ar-leagues-text me-4'}`}>
+								<div className="col-lg-10 col-md-10 col-sm-12" >
+									<div className="en-leagues-text ar-leagues-text ms-4">
 										{
 											lang ==="en"?<h2>{teamDetails?.Team_Name_English}</h2>:<h2>{teamDetails?.Team_Name_Arabic}</h2>
 										}
