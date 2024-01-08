@@ -20,8 +20,8 @@ router.post("/addpolicy",authentication, upload.single("image"), privacyControll
 
 router.get("/:lung/getpolicy",authentication, privacyController.getPolicy);
 
-router.post(
-  "/updatePolicy/:id",authentication,
+router.put(
+  "/:lung/updatePolicy/:id",authentication,
   upload.single("image"),
   privacyController.updatepolicy
 );

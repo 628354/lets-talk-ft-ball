@@ -22,7 +22,7 @@ module.exports = {
         } catch (error) {
             console.error(error.message);
             res.status(500).send({
-                message: 'Internal Server Error',
+                message: 'Enternal Server Error',
                 success: false,
                 error: error.message
             });
@@ -42,10 +42,10 @@ module.exports = {
     },
     updateRoutes: async (req, res) => {
         try {
-            const { path, methods } = req.body;
+            const { path } = req.body;
             const updatedRoute = await routes.findByIdAndUpdate(
                 { _id: req.params.id },
-                { path, methods },
+                { path },
             );
 
             if (updatedRoute) {
@@ -63,7 +63,7 @@ module.exports = {
         } catch (error) {
             console.error(error.message);
             res.status(500).send({
-                message: 'Internal Server Error',
+                message: 'Enternal Server Error',
                 success: false,
                 error: error.message
             });

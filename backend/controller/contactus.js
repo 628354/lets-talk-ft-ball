@@ -12,11 +12,11 @@ exports.sendContactus = async (req, res) => {
             message: message
         }
         const savedContact = await contactus.create({
-                name: name,
-                email: email,
-                subject: subject,
-                message: message
-           
+            name: name,
+            email: email,
+            subject: subject,
+            message: message
+
         })
         sendContactusEmail(data)
         res.send({ status: true, message: "Successfully send details to admin", details: savedContact })
@@ -25,3 +25,47 @@ exports.sendContactus = async (req, res) => {
     }
 }
 
+exports.createContactUs = async (req, res) => {
+    try {
+        const contactuss = await contactus.create({
+            contact_textarea: req.body.contact_textarea
+        })
+        const result = await contactuss.save()
+        res.status(200).send({
+            body: result,
+            message: 'Create ContactUs Successfully',
+            success: true
+        })
+    } catch (error) {
+        res.status(500).send({
+            message: 'Enternal Server Error',
+            success: false,
+            error: error.message
+        })
+    }
+}
+
+exports.updateContactUs = async (req, res) => {
+    try {
+        const { contact_textarea } = req.body
+        const update = await contactus.findByIdAndUpdate({ _id: req.params.id }, { contact_textarea })
+        if (update) {
+            res.status(200).send({
+                body: update,
+                message: 'update Contactus textarea Successfully',
+                success: true
+            })
+        } else {
+            res.status(300).send({
+                message: 'ContactUs Id Not Found',
+                success: false
+            })
+        }
+    } catch (error) {
+        res.status(500).send({
+            message: 'Enternal Server Error',
+            success: false,
+            error: error.message
+        })
+    }
+}

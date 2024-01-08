@@ -8,13 +8,13 @@ module.exports = {
                 routerId: req.body.routerId,
                 permissionId: req.body.permissionId,
                 permissions: {
-                    add: true, 
-                    delete: true, 
-                    update: true,  
-                    get: routePermissions.get || false, 
+                    add: true,
+                    delete: true,
+                    update: true,
+                    get: routePermissions.get || false,
                 },
             });
-    
+
             const result = await permissions.save();
             res.status(200).send({
                 body: result,
@@ -29,5 +29,22 @@ module.exports = {
             });
         }
     },
-    
+    getPermission: async (req, res) => {
+        try {
+            const permission = await permissionAdmin.find().populate("userId routerId permissionId")
+            res.status(200).send({
+                body: permission,
+                message: 'Get Permission Sucessfully',
+                success: true
+            })
+        } catch (error) {
+            res.status(500).send({
+                message: 'Internal Server Error',
+                success: false,
+                error: error.message,
+            });
+        }
+    },
+
+
 }
