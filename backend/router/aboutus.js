@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const multer = require("multer");
-const checkPermission = require('../middleware/checkPermission')
 const { authentication } = require("../middleware/auth");
 
 const storage = multer.diskStorage({
@@ -18,7 +17,7 @@ const upload = multer({ storage: storage });
 const aboutController = require("../controller/aboutus");
 
 router.post(
-  "/addAboutus", authentication, checkPermission('addAboutus'),
+  "/addAboutus", authentication,
   upload.fields([
     { name: "bannerImage" },
     { name: "aboutSectionImage" },
