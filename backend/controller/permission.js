@@ -1,6 +1,4 @@
-const checkPermission = require("../middleware/checkPermission");
 const permission = require("../model/permission");
-const usermodel = require('../model/user')
 module.exports = {
     create: async (req, res) => {
         try {

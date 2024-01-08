@@ -278,9 +278,11 @@ module.exports = {
         try {
             const { Team_Name_English } = req.query;
             const Team_Name_English_Filter = {};
+    
             if (Team_Name_English) {
-                Team_Name_English_Filter['en.Team_Name_English'] = new RegExp(Team_Name_English, 'i');
+                Team_Name_English_Filter['en.Team_Name_English'] = new RegExp(`^${Team_Name_English}`, 'i');
             }
+    
             const teamsdata = await teamCatlog.aggregate([
                 {
                     $match: Team_Name_English_Filter,
@@ -298,18 +300,21 @@ module.exports = {
                         createdAt: -1
                     }
                 }
-            ])
+            ]);
+    
             res.status(200).send({
                 body: teamsdata,
-                message: `Get Data for teamCatlog  Successfully`,
+                message: 'Get Data for teamCatlog Successfully',
                 success: true,
             });
         } catch (error) {
             res.status(500).send({
-                message: "Enternal server Error",
+                message: 'Internal server Error',
                 success: false,
                 error: error.message,
             });
         }
     }
+    
+    
 };
