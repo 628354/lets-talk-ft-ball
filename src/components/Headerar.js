@@ -172,7 +172,6 @@ export default function Headerar() {
 											</li>)
 											})}
 										</ul>
-										
 									</div>
 								</div>
 							</Nav.Link>

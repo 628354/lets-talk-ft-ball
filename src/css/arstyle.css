@@ -372,6 +372,7 @@ ul.ar_creat_nav li a {
   font-size: 16px;
   border: 1px solid transparent;
 }
+
 .ar_team-btn a:hover {
   background: var(--there-color);
   border: 1px solid var(--primary-color);
