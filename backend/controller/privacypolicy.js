@@ -1,6 +1,5 @@
 const policymodel = require("../model/privacyPolicy")
 
-
 exports.addpolicy = async (req, res) => {
     try {
         const { en, ar } = req.body
@@ -31,7 +30,6 @@ exports.addpolicy = async (req, res) => {
         });
     }
 }
-
 exports.getPolicy = async (req, res) => {
     try {
         const { lung } = req.params
@@ -49,32 +47,31 @@ exports.getPolicy = async (req, res) => {
         });
     }
 }
-
-
 exports.updatepolicy = async (req, res) => {
     try {
+        const { lung } = req.params;
+        const { en, ar } = req.body;
+        const protocol = req.protocol;
+        const host = req.hostname;
+        const url = `${protocol}//${host}`;
 
-        const { en, ar } = req.body
-        const protocol = req.protocol
-        const host = req.host
-        const url = `${protocol}//${host}`
-        const updatepolicy = await policymodel.findByIdAndUpdate({ _id: req.params.id }, { [lung]: 1 }, {
+        const updateFields = {
             image: req.file ? url + "/uploads/" + req.file.filename : "",
-            en: {
-                privacy_policy: en.privacy_policy || ""
-            },
-            ar: {
-                privacy_policy: ar.privacy_policy || ""
-            }
-        }, { new: true })
+            [`${lung}.privacy_policy`]: en.privacy_policy || "",
+            [`ar.privacy_policy`]: ar.privacy_policy || "",
+        };
 
-        await updatepolicy.save()
+        const updatepolicy = await policymodel.findByIdAndUpdate(
+            req.params.id,
+            { $set: updateFields },
+            { new: true }
+        );
+
         res.send({
             body: updatepolicy,
             message: "Successfully update policy details",
             success: true
-        })
-
+        });
     } catch (error) {
         res.status(500).send({
             message: 'Internal Server Error',
@@ -82,8 +79,7 @@ exports.updatepolicy = async (req, res) => {
             error: error.message
         });
     }
-}
-
+};
 exports.deletePrivacy = async (req, res) => {
     try {
         const privacy_policy = await policymodel.findByIdAndDelete({ _id: req.params.id })

@@ -3,7 +3,7 @@ module.exports = {
     create: async (req, res) => {
         try {
 
-            const { routesId, userGroup } = req.body;
+            const { userGroup } = req.body;
             if (!userGroup) {
                 return res.status(400).send({
                     message: "User group is a required field.",
@@ -11,7 +11,6 @@ module.exports = {
                 });
             }
             const newPermission = await permission.create({
-                routesId: routesId || [],
                 userGroup,
             });
 
@@ -74,10 +73,10 @@ module.exports = {
 
     update: async (req, res) => {
         try {
-            const { userGroup, path, methods } = req.body;
+            const { userGroup } = req.body;
             const permissions = await permission.findByIdAndUpdate(
                 req.params.id,
-                { userGroup, path, methods },
+                { userGroup },
                 { new: true }
             );
 
