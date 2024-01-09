@@ -7,14 +7,17 @@ function UploadMediaImg({ selectedFolder, folderImages }) {
 
   const uploadImage = async (e) => {
     const files = e.target.files;
-
+console.log(files);
     const formData = new FormData();
-    formData.append('folderName', folder);
+  
 
-    for (let i = 0; i < files.length; i++) {
-      formData.append('images', files[i]);
+
+
+      for (let i = 0; i < files.length; i++) {
+      formData.append('image', files[i]);
     }
-
+    formData.append('folderName', folder);
+console.log(formData);
     try {
       console.log(formData);
       const response = await axios.post('http://localhost:5000/addImage', formData, {

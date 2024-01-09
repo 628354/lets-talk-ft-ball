@@ -19,7 +19,9 @@ export const REQUEST_TYPE = {
 export const IMAGES = {
   imgs: SERVER_IMAGES + "/uploads/",
 };
-
+export const FILTER_TEAMS = {
+  filter: `${SERVER_LINK}TeamsFilter`,
+};
 export const LEAGUES_BULK_IMPORT = {
   upload: `${SERVER_LINK}leageBluk`,
 };
@@ -260,6 +262,11 @@ export const FIND_TEAM=(lang)=>{
 }
 export const CREATE_FOLDER = {
   create: `${SERVER_LINK}createfolder`
+  
+
+};
+export const GET_POLICY = {
+  policy: `${SERVER_LINK}getpolicy`
   
 
 };

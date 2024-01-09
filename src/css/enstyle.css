@@ -1296,3 +1296,40 @@ table.team-aline_table thead tr th {
     height: 120px;
     overflow-y: scroll;
 }
+
+/* team list admin css  */
+/* Add this CSS to your stylesheets */
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  
+  .pagination li {
+    margin-right: 10px;
+  }
+  
+  .pagination li span,
+  .pagination li a {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .pagination li.active span,
+  .pagination li.active a {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+  }
+  
+  .pagination li a:hover {
+    background-color: #ddd;
+  }
+  
