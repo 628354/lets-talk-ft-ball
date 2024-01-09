@@ -113,11 +113,11 @@ export default function Header() {
 											</Link>
 										</li>
 										<li>
-											<Link
+											 <Link
 												to="https://www.instagram.com/letstalkftball_/"
 												target="_blank">
 												<i className="ri-instagram-line"></i>
-											</Link>
+											 </Link>
 										</li>
 									</ul>
 								</div>
@@ -166,7 +166,7 @@ export default function Header() {
 												</Link>
 											</li>)
 											})}
-										{/* {leagueNames?.map((data) => (
+										 {/* {leagueNames?.map((data) => (
 												
 											))} */}
 										</ul>

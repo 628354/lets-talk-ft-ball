@@ -68,7 +68,9 @@ const leagueId = localStorage.getItem("selectedLeagueId")
 							<i className="ri-arrow-right-s-line"></i>
 						</li>
 						
+							<li>
 							<Link to="">{leagueDecreption?.leaguename}</Link>
+							</li>
 					
 					</ul>
 				</Container>
