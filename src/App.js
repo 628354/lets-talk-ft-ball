@@ -76,6 +76,8 @@ import ProtectedRoute from "./page/ProtectedRoute";
 import Users from "./page-dashboard/Users";
 import UserGroup from "./page-dashboard/UserGroup";
 import UploadMediaImg from "./page-dashboard/UploadMediaImg";
+import DefinationList from "./Dashboard-edit-page/DefinitionList";
+import AddDefination from "./Dashboard-edit-page/AddDefinition";
 function App() {
 	// const navigate = useNavigate();
 	const location = useLocation();
@@ -87,8 +89,9 @@ function App() {
 	// Array of routes where the Header should not be displayed
 	const noHeaderRoutes = [
 		"/login",
-		"/Dashboard",
-		"/Dashboard",
+		"/dashboard",
+		// "/Dashboard",
+		// "/Dashboard",
 		"/Signup",
 		"/Forgot",
 		"/Editseason",
@@ -118,7 +121,10 @@ function App() {
 		"/addUser",
 		"/edituser",
 		"/UploadMedia",
-		"/user-group"
+		"/user-group",
+		"/editdefinition",
+		"/definitionlist",
+		"/AddDefinition"
 	];
 
 	const currentRoute = location.pathname;
@@ -208,7 +214,7 @@ function App() {
 				<Route path="/EgyptPL" element={<EgyptPL />}></Route>
 				<Route path="/BotolaPro" element={<BotolaPro />}></Route>
 				<Route path="/BrazilSerieA" element={<BrazilSerieA />}></Route> */}
-				<Route path="/Dashboard" element={<ProtectedRoute> <Dashboard /></ProtectedRoute>}></Route>
+				<Route path="/dashboard" element={<ProtectedRoute> <Dashboard /></ProtectedRoute>}></Route>
 				<Route path="/Season" element={<ProtectedRoute><Season /></ProtectedRoute>}></Route>
 				{/* <Route path="/Menubar" element={<Menubar />}></Route> */}
 				<Route path="/Addseason" element={<ProtectedRoute><Addseason /></ProtectedRoute>}></Route>
@@ -236,7 +242,9 @@ function App() {
 				<Route
 					path="/Editprivacypolicy"
 					element={<Editprivacypolicy />}></Route>
-				<Route path="/Editdefinition" element={<ProtectedRoute><Editdefinition /></ProtectedRoute>}></Route>
+				<Route path="/Editdefinition/:id" element={<ProtectedRoute><Editdefinition /></ProtectedRoute>}></Route>
+				<Route path="/definitionlist" element={<ProtectedRoute><DefinationList /></ProtectedRoute>}></Route>
+				<Route path="/AddDefinition" element={<ProtectedRoute><AddDefination /></ProtectedRoute>}></Route>
 				<Route path="/Editcontact" element={<ProtectedRoute><Editcontact /></ProtectedRoute>}></Route>
 				<Route path="/Addcafe" element={<ProtectedRoute><Addcafe /></ProtectedRoute>}></Route>
 

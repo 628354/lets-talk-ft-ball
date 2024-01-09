@@ -109,7 +109,7 @@ const lang ="en"
 									<div className='season-us'>
 
 										<div className='season-link-part'>
-											<h3> Catlogs</h3>
+											<h3> Team Data </h3>
 											<ul className='season-link'>
 												<li>
 													<Link>Home</Link>
@@ -118,7 +118,7 @@ const lang ="en"
 													<i className="ri-arrow-right-s-line"></i>
 												</li>
 												<li>
-													<Link>Catlogs</Link>
+													<Link>Team Data </Link>
 												</li>
 											</ul>
 										</div>
@@ -156,7 +156,7 @@ const lang ="en"
 							<Row>
 								<div className='main_add_season'>
 									<div className='main-ad-sea '>
-										<p><i class="ri-pencil-fill"></i>Team Bluk</p>
+										<p><i class="ri-pencil-fill"></i>Team Data</p>
 									</div>
 									<hr />
 
@@ -195,7 +195,7 @@ const lang ="en"
 												</Form.Group>
 												<Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
 													<Form.Label column sm="2">
-														 Catlogs File
+													Team B-Upload
 													</Form.Label>
 													<Col sm="10">
 														<Form.Control type="file" name="file" placeholder="Season Title"
