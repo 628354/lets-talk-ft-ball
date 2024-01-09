@@ -16,13 +16,13 @@ export default function Home() {
       <Container>
         <div className='row'>
           <div className='col-lg-12 col-md-12 col-sm-12'>
-            <div className='leagues_cont'>
+            <div className='en_leagues_cont'>
               <h2>Leagues</h2>
               <div className='leagues_slider'>
                 <LeaguesSlider />
 
                 <div className='sp_botton'>
-                  <button className='spc_button'>MORE LEAGUES WILL BE ADDED</button>
+                  <button className='en_spc_button'>MORE LEAGUES WILL BE ADDED</button>
                 </div>
               </div>
             </div>

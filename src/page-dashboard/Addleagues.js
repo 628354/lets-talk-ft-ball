@@ -235,6 +235,7 @@ export default function Addleagues() {
                               <Form.Label column sm="2">
                                 League Name
                               </Form.Label>
+                              <Col>
                               <Form.Control
                                 type="text"
                                 placeholder="League Name"
@@ -243,6 +244,7 @@ export default function Addleagues() {
                                   handleChange("leaguename", e.target.value)
                                 }
                               />
+                              </Col>
                             </Form.Group>
                             <Form.Group
                               as={Row}

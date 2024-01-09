@@ -216,7 +216,7 @@ tbody.table-list-one tr {
     padding: 30px 25px;
 }
 .date-for-section {
-    padding: 23px 30px 3px 0px;
+    padding: 20px 30px;
 }
 
 .Add-Season-open {
@@ -455,7 +455,7 @@ a.img-thumbnail {
     color: #896746;
   }
   .file-main-wrapper {
-    width: 100px;
+    width: 100%;
     height: 100px;
     border: 1px solid gray;
     position: relative;
@@ -464,7 +464,7 @@ a.img-thumbnail {
 
 }
   .file-main-wrapper:after{
-    content: '+';
+    content: '';
     position: absolute;
     top: 0; bottom: 0; left: 0; right: 0;margin: auto;
     width: max-content; height: max-content; display: block;
@@ -527,6 +527,14 @@ a.img-thumbnail {
 
   img.up-date-img {
     width: 100%;
+}
+.btn-poniter-less {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
 }
 /* upload img */
 

@@ -68,7 +68,7 @@ getAboutData()
       <Container>
         <div className='row'>
           <div className='col-lg-12 col-md-12 col-sm-12'>
-            <div className='leagues_cont'>
+            <div className='en_leagues_cont'>
               <h2>About Us</h2>
               <div className='leagues_slider'>
             
@@ -94,7 +94,7 @@ getAboutData()
       </Container>
      </section>
 
-     {/* <section className='en_Our_section'>
+     <section className='en_Our_section'>
      <Container>
      <div className='row'>
       <div className='col-lg-5 col-md-12 col-sm-12'>
@@ -119,7 +119,7 @@ getAboutData()
      </div>
      </Container>
 
-     </section> */}
+     </section>
 
     </div>
 

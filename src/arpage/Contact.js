@@ -67,7 +67,7 @@ export default function Contact() {
              <Link to="/contact">اتصل بنا</Link>
            </li>
          </ul>
-         <div className='leagues_cont'>
+         <div className='ar_leagues_cont'>
             <h2>اتصل بنا</h2>
           </div>
        </Container>
@@ -95,14 +95,14 @@ export default function Contact() {
                 <Form.Control type="email" placeholder="" name="email" onChange={handleChange}/>
               </Form.Group>
               <Form.Group className="mb-3 ar_laelcolor" controlId="formGroupEmail">
-                <Form.Label>Subject</Form.Label>
+                <Form.Label>موضوع</Form.Label>
                 <Form.Control type="text" placeholder=""  name="subject" onChange={handleChange} />
               </Form.Group>
               <Form.Group className="mb-3 ar_laelcolor" controlId="exampleForm.ControlTextarea1">
               <Form.Label>الموضوع</Form.Label>
               <Form.Control as="textarea" rows={3} name="message"onChange={handleChange}/>
             </Form.Group>
-            <button className='en_send_m ar_send_m' onClick={getFormData}>أرسل رسالة</button>
+            <button className='ar_send_m' onClick={getFormData}>أرسل رسالة</button>
               
             </Form>
             </div>
