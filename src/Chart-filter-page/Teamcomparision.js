@@ -623,7 +623,7 @@ try {
 					<Row>
 						<div className="col-lg-12 col-md-12 col-sm-12">
 							<div className="en-premier-contant ar-premier-contant">
-								<div className="leagues_cont">
+								<div className="en_leagues_cont">
 								
 									{
 								lang === "en"?	<h2>Team Comparison</h2>:	<h2>مقارنة الفريق</h2>

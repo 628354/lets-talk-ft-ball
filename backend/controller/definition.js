@@ -42,11 +42,7 @@ const user = require('../model/user')
 module.exports = {
     addDefinitions : async (req, res) => {
         try {
-            const isAdmin = await checkPermission('admin')(req, res, () => null);
-    
-            if (!isAdmin) {
-                return res.status(403).json({ message: 'Admin permission required', success: false });
-            }
+           
     
             const protocol = req.protocol;
             const host = req.hostname;
@@ -82,7 +78,6 @@ module.exports = {
             });
         }
     },
-    
     getAllDefinition: async (req, res) => {
         try {
             const { lung } = req.params

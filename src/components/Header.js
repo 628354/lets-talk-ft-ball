@@ -87,7 +87,12 @@ export default function Header() {
 						<div className="row ar_flex">
 							<div className="col-lg-6 col-md-6 col-6">
 								<div className="ar_icon">
-									<Link to="#" onClick={(e) => handleLanguageChange("ar", e)}>العربية</Link>
+									<Link to="#" onClick={(e) => handleLanguageChange("ar", e)}>
+										<span><img
+										src={require("../img/earth-icon.png")}
+										alt="earth"
+										className="logo-icon-top"
+									/></span> العربية</Link>
 								</div>
 							</div>
 							<div className="col-lg-6 col-md-6 col-6">

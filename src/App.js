@@ -75,7 +75,7 @@ import { LeagueProvider } from "./Leagues-components/LeagueContext";
 import ProtectedRoute from "./page/ProtectedRoute";
 import Users from "./page-dashboard/Users";
 import UserGroup from "./page-dashboard/UserGroup";
-import PremierLeagueAr from "./Leagues-page/PremierLeagueAr";
+import UploadMediaImg from "./page-dashboard/UploadMediaImg";
 function App() {
 	// const navigate = useNavigate();
 	const location = useLocation();
@@ -257,6 +257,10 @@ function App() {
 				<Route path="/edituser/:id" element={<ProtectedRoute><EditUser /></ProtectedRoute>}></Route>
 				<Route path="/Users" element={<Users />}></Route>
 				<Route path="/user-group" element={<ProtectedRoute><UserGroup /></ProtectedRoute>}></Route>
+				<Route path="/UploadMediaImg" element={<UploadMediaImg />}></Route>
+
+
+				<Route path="/BotolaPro" element={<BotolaPro />}></Route>
 
 			</Routes>
 			</LeagueProvider>

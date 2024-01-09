@@ -1,4 +1,4 @@
-html[lang="en"] {
+html[lang="en"] body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -90,7 +90,7 @@ body::-webkit-scrollbar-thumb {
 
 
 /* button */
-.spc_button {
+.en_spc_button {
     background-color: var(--there-color);
     color: var(--primary-color);
     text-transform: uppercase;
@@ -181,6 +181,7 @@ img.brand-rearth {
     text-transform: uppercase;
 }
 
+
 ul.en_media li a {
     color:  var(--there-color);
     font-size: 13px;
@@ -247,12 +248,13 @@ ul.en_drop_item li a span img {
     padding: 35px 0;
 }
 
-ul.en_footer_menu.ar_footer_menu li a {
+.en_footer_menu li a {
     color:  var(--there-color);
     text-transform: uppercase;
     font-weight: 500;
     font-size: 14px;
     line-height: 32px;
+    font-family: 'Poppins', sans-serif;
 }
 .en_footercontantin p {
     font-size: 14px;
@@ -284,7 +286,7 @@ ul.en_media {
     padding-left: 0 !important;
 }
 
-button.button_search {
+button.en_button_search {
     background-color:  var(--primary-color);
     border: none;
     line-height: 1;
@@ -303,6 +305,7 @@ button.button_search {
     position: absolute;
     right: 0;
 }
+
 input.search_bar_input {
     border-top: 0;
     border-left: 0;
@@ -336,18 +339,18 @@ input.search_bar_input {
     background-color:  var(--primary-color);
     padding: 10px 0;
 }
-.last_footer p {
+.en_last_footer p {
     font-size: 13px;
     text-transform: capitalize;
     color:  var(--there-color);
     font-weight: normal;
     text-align: center;
 }
-.last_footer p a {
+.en_last_footer p a {
     color:  var(--there-color);
     position: relative;
 }
-.last_footer p a:after {
+.en_last_footer p a:after {
     content: "";
     position: absolute;
     width: 100%;
@@ -417,7 +420,7 @@ img.en-fc-image-left-side {
     margin-bottom: 40px;
 }
 
-.more_button {
+.en_more_button {
     background-color:  var(--primary-color);
     cursor: pointer;
     color:  var(--there-color);
@@ -500,14 +503,14 @@ img.en-sec-image-right-side {
     align-items: center;
 }
 
-.leagues_cont h2 {
+.en_leagues_cont h2 {
     text-align: center;
     font-weight: 600;
     padding-bottom: 40px;
     position: relative;
 }
 
-.leagues_cont h2:after {
+.en_leagues_cont h2:after {
     width: 120px;
     position: sticky;
     content: '';
@@ -796,8 +799,9 @@ span.en_number_pass {
     margin: 0;
     color: var(--there-color);
     font-size: 15px;
+    font-family: 'Poppins', sans-serif;
 }
-sss
+
 .en_send_m {
     border: 1px solid #790019;
     width: 100%;
@@ -805,6 +809,7 @@ sss
     background: #790019;
     color: var(--there-color);
     margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .en_send_m:hover {
@@ -815,6 +820,13 @@ sss
 /* contact css start */
 
 /* premier league css start */
+.en-leagues-text h2 {
+    font-weight: 500;
+    float: left;
+    width: 100%;
+    color: #06083b;
+    margin-top: 15px;
+}
 .en-leagues-text p {
     font-size: 16px;
     line-height: 23px;
@@ -1087,7 +1099,7 @@ tr.filter-fir {
 
 
 /* team delails */
-.imageline {
+.en_imageline {
     border-right: 1px solid #cdced8;
 }
 .livepool {
@@ -1153,6 +1165,7 @@ table.aline_tablel thead tr th {
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .compari-logo {
     text-align: center;
@@ -1178,6 +1191,7 @@ table.aline_tablel thead tr th {
 /* new css */
 .img-premier-press {
     width: 100%;
+    object-fit: scale-down;
 }
 .en_drop_item li a {
     font-size: 13px !important;

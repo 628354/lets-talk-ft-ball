@@ -29,7 +29,7 @@ export default function Headerslider() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <button className='en_more_button'>More Info</button>
                     
                     </div>
                 </div>
@@ -57,7 +57,7 @@ export default function Headerslider() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <button className='en_more_button'>More Info</button>
                     
                     </div>
                 </div>
@@ -84,7 +84,7 @@ export default function Headerslider() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <button className='en_more_button'>More Info</button>
                     
                     </div>
                 </div>
@@ -111,7 +111,7 @@ export default function Headerslider() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <button className='en_more_button'>More Info</button>
                     
                     </div>
                 </div>
@@ -138,7 +138,7 @@ export default function Headerslider() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <button className='en_more_button'>More Info</button>
                     
                     </div>
                 </div>
@@ -165,7 +165,7 @@ export default function Headerslider() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <button className='en_more_button'>More Info</button>
                     
                     </div>
                 </div>
@@ -192,7 +192,7 @@ export default function Headerslider() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <button className='en_more_button'>More Info</button>
                     
                     </div>
                 </div>
@@ -219,7 +219,7 @@ export default function Headerslider() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <button className='en_more_button'>More Info</button>
                     
                     </div>
                 </div>
@@ -246,7 +246,7 @@ export default function Headerslider() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <button className='en_more_button'>More Info</button>
                     
                     </div>
                 </div>
@@ -273,7 +273,7 @@ export default function Headerslider() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <button className='en_more_button'>More Info</button>
                     
                     </div>
                 </div>
@@ -299,7 +299,7 @@ export default function Headerslider() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>leader and runner-up</h1>
-                        <button className='more_button'>More Info</button>
+                        <button className='en_more_button'>More Info</button>
                     
                     </div>
                 </div>

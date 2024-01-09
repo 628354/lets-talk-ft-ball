@@ -1,8 +1,10 @@
 import React from 'react';
 import Slider from "react-slick";
 import Container from 'react-bootstrap/Container';
+import Cookies from "js-cookie";
 
 export default function Headersliderar() {
+    const lang = Cookies.get('language')
     const settings = {
         dots: true,
         infinite: true,
@@ -11,11 +13,10 @@ export default function Headersliderar() {
         slidesToScroll: 1,
         autoplay: true,
       
-        
       };
   return (
-    <div className='ft_icon'>
-         <Slider {...settings}>
+    <div className='ft_icon' >
+         <Slider {...settings} >
           <div className='com_slider'>
            <div className='en_fis_slider arfislider image_sty'>
            <Container>
@@ -28,7 +29,7 @@ export default function Headersliderar() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>الزعيم والوصيف</h1>
-                        <button className='more_button'>مزيد من المعلومات</button>
+                        <button className='ar_more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -56,7 +57,7 @@ export default function Headersliderar() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>الزعيم والوصيف</h1>
-                        <button className='more_button'>مزيد من المعلومات</button>
+                        <button className='ar_more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -83,7 +84,7 @@ export default function Headersliderar() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>الزعيم والوصيف</h1>
-                        <button className='more_button'>مزيد من المعلومات</button>
+                        <button className='ar_more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -110,7 +111,7 @@ export default function Headersliderar() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>الزعيم والوصيف</h1>
-                        <button className='more_button'>مزيد من المعلومات</button>
+                        <button className='ar_more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -137,7 +138,7 @@ export default function Headersliderar() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>الزعيم والوصيف</h1>
-                        <button className='more_button'>مزيد من المعلومات</button>
+                        <button className='ar_more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -164,7 +165,7 @@ export default function Headersliderar() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>الزعيم والوصيف</h1>
-                        <button className='more_button'>مزيد من المعلومات</button>
+                        <button className='ar_more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -191,7 +192,7 @@ export default function Headersliderar() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>الزعيم والوصيف</h1>
-                        <button className='more_button'>مزيد من المعلومات</button>
+                        <button className='ar_more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -218,13 +219,13 @@ export default function Headersliderar() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>الزعيم والوصيف</h1>
-                        <button className='more_button'>مزيد من المعلومات</button>
+                        <button className='ar_more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
                 <div className='col-lg-3 col-md-3 col-sm-12'>
                     <div className='en_slider_contant clscomimage clssliderimg2'>
-                    <img src={require('../img/Taawoun_new_logo.png')} alt="Tottemham"/>
+                     <img src={require('../img/Taawoun_new_logo.png')} alt="Tottemham"/>
                     </div>
                 </div>
             </div>
@@ -245,7 +246,7 @@ export default function Headersliderar() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>الزعيم والوصيف</h1>
-                        <button className='more_button'>مزيد من المعلومات</button>
+                        <button className='ar_more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -272,7 +273,7 @@ export default function Headersliderar() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>الزعيم والوصيف</h1>
-                        <button className='more_button'>مزيد من المعلومات</button>
+                        <button className='ar_more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>
@@ -298,7 +299,7 @@ export default function Headersliderar() {
                 <div className='col-lg-6 col-md-6 col-sm-12'>
                     <div className='en_slider_contant_text'>
                         <h1>الزعيم والوصيف</h1>
-                        <button className='more_button'>More Info</button>
+                        <button className='ar_more_button'>مزيد من المعلومات</button>
                     
                     </div>
                 </div>

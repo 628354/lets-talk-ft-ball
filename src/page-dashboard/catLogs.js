@@ -38,6 +38,10 @@ const lang ="en"
 			console.log("data",error);
 		}
 		
+		apiCall(LEAGUES.league, REQUEST_TYPE.GET).then((results) => {
+			console.log(results?.response?.data?.body);
+			setleagues(results?.response?.data?.body)
+		})
 	}
 
 	useEffect(() => {
@@ -75,7 +79,7 @@ const lang ="en"
 				apiCallFile(CATLOGS.upload, REQUEST_TYPE.POST, formDatas).then((results) => {
 					setSuccessMessage("Successfully import bluk League data");
 					clearMessages();
-				})// Clear messages after 3 seconds
+				}) // Clear messages after 3 seconds
 
 
 			} catch (error) {
@@ -156,7 +160,6 @@ const lang ="en"
 									</div>
 									<hr />
 
-
 									<div className='addsection-open'>
 										<div className='general-part'>
 
@@ -196,24 +199,26 @@ const lang ="en"
 													</Form.Label>
 													<Col sm="10">
 														<Form.Control type="file" name="file" placeholder="Season Title"
-															onChange={handleChangeFile} />
+														onChange={handleChangeFile} />
 													</Col>
 												</Form.Group>
-
 
 											</div>
 
 										</div>
 
-
 									</div>
 
+
 								</div>
+
+
 
 							</Row>
 						</Container>
 					</section>
-				</div></Form>
+				</div>
+			</Form>
 		</div>
 
 	)

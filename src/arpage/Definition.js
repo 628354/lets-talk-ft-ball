@@ -54,25 +54,24 @@ export default function Definition() {
          <Container>
          <div className='row'>
           <div className='col-lg-12 col-md-12 col-sm-12'>
-            <div className='leagues_cont'>
-              <h3>التعريف</h3>
+            <div className='ar_leagues_cont'>
+              <h2>التعريف</h2>
             </div>
-            <div  className={`${lang ==="en"? 'en_defintion_r':'ar_defintion_r'}`}>
-              <div  className={`${lang ==="en"? 'row':'row ar_section-reverse'}`}>
-              {defination?.map((definition, index) => (
-                    <div className='col-lg-6 col-md-6 col-sm-12' key={index}>
-                      <div className=' ar_defintion_contant'>
-                        <h5 dir={lang === 'ar' ? 'rtl' : 'ltr'}>
-                          <span className='ar_number_pass'>{index +1}</span>
-                          {definition.type}
-                        </h5>
-                        <p>{definition.content}</p>
+              <div className={`${lang ==="en"? 'en_defintion_r':'ar_defintion_r'}`}>
+                <div className={`${lang ==="en"? 'row':'row ar_section-reverse'}`}>
+                 {defination?.map((definition, index) => (
+                      <div className='col-lg-6 col-md-6 col-sm-12' key={index}>
+                        <div className=' ar_defintion_contant'>
+                          <h5 dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+                            <span className='ar_number_pass'>{index +1}</span>
+                            {definition.type}
+                          </h5>
+                          <p>{definition.content}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                </div>
               </div>
-           
-            </div>
              
                
             </div>
