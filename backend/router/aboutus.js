@@ -28,9 +28,9 @@ router.post(
 
 router.get("/:lung/getAboutus", aboutController.getaboutus);
 
-router.post("/:lung/updateAboutus/:id", authentication, upload.fields([{ name: 'bannerImage' }, { name: 'aboutSectionImage' }, { name: 'visionSectionImage' }]), aboutController.updateAboutus)
+router.post("/updateAboutus/:id", authentication, upload.fields([{ name: 'bannerImage' }, { name: 'aboutSectionImage' }, { name: 'visionSectionImage' }]), aboutController.updateAboutus)
 
-
+router.get('/getAboutUss', aboutController.getAboutUs)
 
 
 module.exports = router;

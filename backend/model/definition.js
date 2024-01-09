@@ -3,12 +3,10 @@ const definitionSchema = new mongoose.Schema(
   {
     image: { type: String, default: "" },
     en: {
-      definition: { type: String, default: "" },
       type: { type: String, default: "" },
       content: { type: String, default: "" },
     },
     ar: {
-      definition: { type: String, default: "" },
       type: { type: String, default: "" },
       content: { type: String, default: "" },
     },
