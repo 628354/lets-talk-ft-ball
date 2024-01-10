@@ -320,7 +320,6 @@ const team_details = async (req, res) => {
     });
   }
 };
-
 const HomeApi = async (Request, Response) => {
   try {
     const { teamsId, lung } = Request.params;
@@ -343,7 +342,6 @@ const HomeApi = async (Request, Response) => {
     sendError(Response, error);
   }
 };
-
 const sendError = (Response, Error) => {
   if (Error.errno === 500) {
     responseHelper[500].data = [];

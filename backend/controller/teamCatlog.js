@@ -6,7 +6,6 @@ const upload = multer({ dest: "uploads" });
 const path = require("path");
 const responseHelper = require("../Helpers/Response");
 
-
 module.exports = {
     CatlogImport: async (req, res) => {
         const filePath = req.file.path;
@@ -89,11 +88,13 @@ module.exports = {
 
     createTeam: async (req, res) => {
         try {
-            const {
-                en,
-                ar,
-            } = req.body;
-
+            const { en, ar } = req.body;
+            const find = await teamCatlog.findOne({
+                "en.Team_Name_English": en.Team_Name_English,
+            });
+            if (find) {
+                return res.status(400).send("Teams already present");
+            }
             const protocol = req.protocol;
             const host = req.hostname;
             const url = `${protocol}//${host}`;
@@ -107,8 +108,9 @@ module.exports = {
                     Team_info: en.Team_info || "",
                     logo_folder: en.logo_folder || "",
                     status: en.status || "active",
-                    Past_teams_logo_file_names_below: en.Past_teams_logo_file_names_below || "",
-                    SEO_URL: en.SEO_URL || ""
+                    Past_teams_logo_file_names_below:
+                        en.Past_teams_logo_file_names_below || "",
+                    SEO_URL: en.SEO_URL || "",
                 },
                 ar: {
                     Team_Name_Arabic: ar.Team_Name_Arabic || "",
@@ -117,8 +119,9 @@ module.exports = {
                     Team_info: ar.Team_info || "",
                     logo_folder: ar.logo_folder || "",
                     status: ar.status || "active",
-                    Past_teams_logo_file_names_below: ar.Past_teams_logo_file_names_below || "",
-                    SEO_URL: ar.SEO_URL || ""
+                    Past_teams_logo_file_names_below:
+                        ar.Past_teams_logo_file_names_below || "",
+                    SEO_URL: ar.SEO_URL || "",
                 },
             });
             res.status(200).send({
@@ -137,12 +140,10 @@ module.exports = {
     GetAllTeams: async (req, res) => {
         try {
             const { lung } = req.params;
-            const allteams = await teamCatlog
-                .find({}, { [lung]: 1 })
-                .populate({
-                    path: "leagueid",
-                    select: ["en.leaguename", "ar.leaguename"],
-                });
+            const allteams = await teamCatlog.find({}, { [lung]: 1 }).populate({
+                path: "leagueid",
+                select: ["en.leaguename", "ar.leaguename"],
+            });
 
             res.status(200).send({
                 body: allteams,
@@ -160,10 +161,8 @@ module.exports = {
     getByIdTeams: async (req, res) => {
         try {
             const { lung } = req.params;
-            const getByIdTeams = await teamCatlog.findById(
-                { _id: req.params.id },
-                { [lung]: 1 }
-            )
+            const getByIdTeams = await teamCatlog
+                .findById({ _id: req.params.id }, { [lung]: 1 })
                 .populate({
                     path: "leagueid",
                     select: ["en.leaguename"],
@@ -194,10 +193,7 @@ module.exports = {
             const protocol = req.protocol;
             const host = req.hostname;
             const url = `${protocol}//${host}`;
-            const {
-                en,
-                ar,
-            } = req.body;
+            const { en, ar } = req.body;
 
             const update = await teamCatlog.findByIdAndUpdate(
                 { _id: req.params.id },
@@ -211,8 +207,9 @@ module.exports = {
                         Team_info: en.Team_info || "",
                         logo_folder: en.logo_folder || "",
                         status: en.status || "active",
-                        Past_teams_logo_file_names_below: en.Past_teams_logo_file_names_below || "",
-                        SEO_URL: en.SEO_URL || ""
+                        Past_teams_logo_file_names_below:
+                            en.Past_teams_logo_file_names_below || "",
+                        SEO_URL: en.SEO_URL || "",
                     },
                     ar: {
                         Team_Name_Arabic: ar.Team_Name_Arabic || "",
@@ -221,8 +218,9 @@ module.exports = {
                         Team_info: ar.Team_info || "",
                         logo_folder: ar.logo_folder || "",
                         status: ar.status || "active",
-                        Past_teams_logo_file_names_below: ar.Past_teams_logo_file_names_below || "",
-                        SEO_URL: ar.SEO_URL || ""
+                        Past_teams_logo_file_names_below:
+                            ar.Past_teams_logo_file_names_below || "",
+                        SEO_URL: ar.SEO_URL || "",
                     },
                 },
                 { new: true }
@@ -278,11 +276,14 @@ module.exports = {
         try {
             const { Team_Name_English } = req.query;
             const Team_Name_English_Filter = {};
-    
+
             if (Team_Name_English) {
-                Team_Name_English_Filter['en.Team_Name_English'] = new RegExp(`^${Team_Name_English}`, 'i');
+                Team_Name_English_Filter["en.Team_Name_English"] = new RegExp(
+                    `^${Team_Name_English}`,
+                    "i"
+                );
             }
-    
+
             const teamsdata = await teamCatlog.aggregate([
                 {
                     $match: Team_Name_English_Filter,
@@ -292,29 +293,27 @@ module.exports = {
                         from: "leagues",
                         localField: "leagueid",
                         foreignField: "_id",
-                        as: "leagues_details"
-                    }
+                        as: "leagues_details",
+                    },
                 },
                 {
                     $sort: {
-                        createdAt: -1
-                    }
-                }
+                        createdAt: -1,
+                    },
+                },
             ]);
-    
+
             res.status(200).send({
                 body: teamsdata,
-                message: 'Get Data for teamCatlog Successfully',
+                message: "Get Data for teamCatlog Successfully",
                 success: true,
             });
         } catch (error) {
             res.status(500).send({
-                message: 'Internal server Error',
+                message: "Internal server Error",
                 success: false,
                 error: error.message,
             });
         }
-    }
-    
-    
+    },
 };
