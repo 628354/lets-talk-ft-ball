@@ -102,7 +102,7 @@ const  navigate =useNavigate();
                   id="menu"
                 >
                   <li className="nav-item">
-                    <Link to="/Dashboard"
+                    <Link to="/dashboard"
                      className="nav-link align-middle px-0">
                       <i class="ri-dashboard-line"></i>{" "}
                       <span className="ms-1 d-none d-sm-inline">Dashboard</span>
