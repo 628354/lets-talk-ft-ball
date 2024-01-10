@@ -21,6 +21,7 @@ export default function Editabout() {
   const [selectedId,setSelectedId]=useState(null)
   const [successMessage, setSuccessMessage] = useState(''); // State to hold success message
   const [errorMessage, setErrorMessage] = useState('');
+  
   const [aboutData, setAboutData] = useState({
   
     aboutTitle:"",
@@ -193,7 +194,7 @@ export default function Editabout() {
 
   const removePTags = (html) => {
     // Remove <p> tags from the HTML string
-    return html.replace(/<\/?p>/g, "");
+    return html?.replace(/<\/?p>/g, "");
   };
   useEffect(() => {
     getAboutData();
@@ -279,6 +280,7 @@ export default function Editabout() {
                                 type="file"
                                 onChange={handleImageChange}
                                 
+                                
                               />
                             </Form.Group>
                             {imagePreview && (
@@ -314,7 +316,7 @@ export default function Editabout() {
                               <Form.Label>About text Area</Form.Label>
                               <ReactQuill
                                 className="edit-text"
-                                value={aboutData.aboutText}
+                                value={aboutData?.aboutText}
                                 onChange={(value) =>
                                   handleTextChange("aboutText", value)
                                 }
@@ -382,7 +384,7 @@ export default function Editabout() {
                               <Form.Label>Our Vision text Area</Form.Label>
                               <ReactQuill
                                 className="edit-text"
-                                value={aboutData.visionText}
+                                value={aboutData?.visionText}
                                 onChange={(value) =>
                                   handleTextChange("visionText", value)
                                 }
@@ -417,7 +419,7 @@ export default function Editabout() {
                               <Form.Label>Our Mision text Area</Form.Label>
                               <ReactQuill
                                 className="edit-text"
-                                value={aboutData.missionText}
+                                value={aboutData?.missionText}
                                 onChange={(value) =>
                                   handleTextChange("missionText", value)
                                 }
@@ -503,7 +505,7 @@ export default function Editabout() {
                               <Form.Label>Our Vision text Area</Form.Label>
                               <ReactQuill
                                 className="edit-text"
-                                value={aboutDataAr.visionText}
+                                value={aboutDataAr?.visionText}
                                 onChange={(value) =>
                                   handleTextChangeAr("visionText", value)
                                 }
@@ -538,7 +540,7 @@ export default function Editabout() {
                               <Form.Label>Our Mision text Area</Form.Label>
                               <ReactQuill
                                 className="edit-text"
-                                value={aboutDataAr.missionText}
+                                value={aboutDataAr?.missionText}
                                 onChange={(value) =>
                                   handleTextChangeAr("missionText", value)
                                 }

@@ -35,7 +35,7 @@ const [blogDetails,setBlogDetails]=useState([])
 			
 		};
 		
-		console.log(blogData);
+		console.log(blogDetails);
 
 	useEffect(() => {
 		getCafe()

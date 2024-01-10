@@ -51,8 +51,8 @@ export default function Teams() {
 
   const handleSearch = async () => {
     try {
-      // const response = await axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/TeamsFilter', {
-      const response = await axios.get('http://localhost:5000/TeamsFilter', {
+      const response = await axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/TeamsFilter', {
+      // const response = await axios.get('http://localhost:5000/TeamsFilter', {
         params: {
           Team_Name_English: searchTerm,
         },

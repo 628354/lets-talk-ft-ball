@@ -32,9 +32,10 @@ export default function Blog({blogDetails,blogData}) {
 // 	// setCafeContent()
 	console.log(blogDetails);
 	console.log(blogData);
-	blogDetails?.cafecontent.map((item)=>{
-		//console.log(item);
-	})
+	// blogDetails?.cafecontent?.map((item)=>{
+	// 	console.log(item);
+		
+	// })
 	return (
 		<div>
 			<div className="en_blog_box ar_blog_box">
@@ -42,7 +43,7 @@ export default function Blog({blogDetails,blogData}) {
 				<div className="en_blog_contant ar_blog_contant">			
 					
 
-					<img src={blogData?.cafe_image} alt="earth" className="en_blog_img mb-3" />
+					<img src={blogDetails?.cafecontent?.[0]?.cafe_image} alt="earth" className="en_blog_img mb-3" />
 					<div className="en_main_contant ar_main_contant">
 						<h6>
 							<Link to=""></Link>
@@ -50,7 +51,7 @@ export default function Blog({blogDetails,blogData}) {
 						<div className="en_bolg_date ar_bolg_date">
 							<p>
 								<i className="ri-calendar-2-line en_date ar_date"> </i>{" "}
-								{blogData?.date}
+								{blogDetails?.date}
 							</p>
 							<p>
 								<i className="ri-user-fill en_date ar_date"></i>{" "}
