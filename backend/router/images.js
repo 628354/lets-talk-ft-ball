@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const imagesController  = require('../controller/images');
+const imagesController = require('../controller/images');
 const path = require('path')
 const fs = require('fs')
 
@@ -13,14 +13,13 @@ const storage = multer.diskStorage({
     cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + '-' + file.originalname);
-},
+    cb(null, file.originalname);
+  },
 });
 const upload = multer({ storage: storage })
 
-router.post("/addImage", upload.array("image"), imagesController.addimages);  
-router.get('/GetImage',imagesController.GetImage)
+router.post("/addImage", upload.array("image"), imagesController.addimages);
+router.get('/GetImage', imagesController.GetImage)
 router.delete('/deleteImage/:id', imagesController.deleteImage)
 router.put('/updateImage/:id', imagesController.updateImage)
 module.exports = router

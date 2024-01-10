@@ -18,5 +18,6 @@ router.post('/:lung/teamSeassonGaneRate/find', GraphController.teamSeassonGaneRa
 router.post('/:lung/teamSeassonGC/find', GraphController.teamSeassonGC)
 router.post('/:lung/teamGS_inG/find', GraphController.teamGS_inG)
 router.post('/:lung/teamGS_GC/find', GraphController.teamGS_GC)
+router.get('/:lung/homeApi/find/:teamsId', GraphController.HomeApi)
 
 module.exports = router;

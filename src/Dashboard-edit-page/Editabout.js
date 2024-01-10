@@ -11,26 +11,37 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import { apiCall } from "../helper/RequestHandler";
-import { ABOUT_US, REQUEST_TYPE } from "../helper/APIInfo";
+import { ABOUT_US_BOTH, REQUEST_TYPE,UPDATE_ABOUT } from "../helper/APIInfo";
 
 export default function Editabout() {
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imagePreview2, setImagePreview2] = useState(null);
+  const [imagePreview3, setImagePreview3] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [selectedId,setSelectedId]=useState(null)
+  const [successMessage, setSuccessMessage] = useState(''); // State to hold success message
+  const [errorMessage, setErrorMessage] = useState('');
   const [aboutData, setAboutData] = useState({
-    aboutTitle: "",
-    aboutText: "",
-    visionTitle: "",
-    bannerImage: "",
+  
+    aboutTitle:"",
+      aboutText: "",
+      visionTitle: "",
+      visionText: "",
+      missionTitle:"",
+      missionText:""
   });
   const [aboutDataAr, setAboutDataAr] = useState({
-    aboutTitle: "",
-    aboutText: "",
-    visionTitle: "",
-    bannerImage: "",
+    aboutTitle:"",
+      aboutText: "",
+      visionTitle: "",
+      visionText: "",
+      missionTitle:"",
+      missionText:""
   });
   const [itemId, setItemId] = useState(0);
 
   const handleTextChange = (field, value) => {
-	setAboutDataAr((prevAboutData) => ({
+	setAboutData((prevAboutData) => ({
 	  ...prevAboutData,
 	  [field]: value,
 	}));
@@ -43,6 +54,43 @@ export default function Editabout() {
 	  [field]: value,
 	}));
   };
+  const handleImageChange = (e) => {
+    const imageFile = e.target.files[0];
+    setAboutData((prev)=>({
+      ...prev,
+      image: imageFile,
+    }))
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImagePreview(reader.result);
+    };
+    reader.readAsDataURL(imageFile);
+  };
+  const handleImageChange2 = (e) => {
+    const imageFile = e.target.files[0];
+    setAboutData((prev)=>({
+      ...prev,
+      image: imageFile,
+    }))
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImagePreview2(reader.result);
+    };
+    reader.readAsDataURL(imageFile);
+  };
+  const handleImageChange3 = (e) => {
+    const imageFile = e.target.files[0];
+    setAboutData((prev)=>({
+      ...prev,
+      image: imageFile,
+    }))
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImagePreview3(reader.result);
+    };
+    reader.readAsDataURL(imageFile);
+  };
+  
   
 
   const handleFileChange = (field, file) => {
@@ -52,12 +100,6 @@ export default function Editabout() {
     });
   };
 
-  const handleFileChangeAr = (field, file) => {
-    setAboutDataAr({
-      ...aboutDataAr,
-      [field]: file,
-    });
-  };
 
   const formats = [
     "header",
@@ -95,82 +137,69 @@ export default function Editabout() {
       ["bold", "italic", "underline", "strike", "blockquote"],
       ["link", "image", "video"],
     ],
+    clipboard: {
+      matchVisual: false,
+    },
+    // Add the following line if you want to remove the default <p> tags
+    // when the editor is empty
+    placeholder: '',
   };
 
   const getAboutData = async () => {
-    const response = await apiCall(ABOUT_US.finden, REQUEST_TYPE.GET);
-    response?.response?.data?.data?.map((item) => {
+    const response = await apiCall(ABOUT_US_BOTH.find, REQUEST_TYPE.GET);
+    console.log(response.response?.data?.body?.[0]);
+    const data = response.response?.data?.body?.[0]
+    setAboutData(data?.en)
+    setAboutDataAr(data?.ar);
+    setSelectedId(data?._id)
+  
+  
+	// console.log(response.response);
+  //     setAboutData(item?.en);
 	
-      setAboutData(item?.en);
-	
-    });
+  //   });
   };
 
-  const getAboutDataAr = async () => {
-    const response = await apiCall(ABOUT_US.findar, REQUEST_TYPE.GET);
-    response?.response?.data?.data?.map((item) => {
-      setAboutDataAr(item?.ar);
-	 
-    });
+  
+
+
+
+  const handleUpdateData = async() => {
+    const token = localStorage.getItem("token");
+    const data = {
+      en: aboutData,
+      ar: aboutDataAr,
+    }
+    const baseUrl=`${UPDATE_ABOUT.update}/${selectedId}`
+    const response =await apiCall(baseUrl,REQUEST_TYPE.POST,data,token)
+    console.log(response.response); 
+    if(response.status === 200){
+      console.log("yes----------------");
+     setSuccessMessage(response.response.data?.message);
+      clearMessages(); 
+    }else{
+      setErrorMessage('Error occurred. Please try again.');
+    clearMessages(); 
+  
+    }
+   
+  };
+  const clearMessages = () => {
+    setTimeout(() => {
+      setSuccessMessage('');
+      setErrorMessage('');
+    }, 3000); // Clear messages after 3 seconds
   };
 
+  const removePTags = (html) => {
+    // Remove <p> tags from the HTML string
+    return html.replace(/<\/?p>/g, "");
+  };
   useEffect(() => {
     getAboutData();
-    getAboutDataAr();
-  }, []);
-
-  const handleUpdateData = () => {
-    const formData = new FormData();
-    formData.append("aboutTitle", aboutData.aboutTitle);
-    formData.append("aboutText", aboutData.aboutText);
-    formData.append("visionTitle", aboutData.visionTitle);
-    formData.append("bannerImage", aboutData.bannerImage);
-
-    axios
-      .post(
-        `https://phpstack-1140615-3967632.cloudwaysapps.com/backend/updateAboutus/${itemId}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
-      .then((response) => {
-        setIsEditing(false);
-        // Handle success, e.g., show a success message
-      })
-      .catch((error) => {
-        console.error("Error updating data:", error);
-      });
-  };
-
-  const handleUpdateDataAr = () => {
-    const formData = new FormData();
-    formData.append("aboutTitle", aboutDataAr.aboutTitle);
-    formData.append("aboutText", aboutDataAr.aboutText);
-    formData.append("visionTitle", aboutDataAr.visionTitle);
-    formData.append("bannerImage", aboutDataAr.bannerImage);
-
-    axios
-      .post(
-        `https://phpstack-1140615-3967632.cloudwaysapps.com/backend/updateAboutus/${itemId}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
-      .then((response) => {
-        setIsEditing(false);
-        // Handle success, e.g., show a success message
-      })
-      .catch((error) => {
-        console.error("Error updating Arabic data:", error);
-      });
-  };
-
+    // getAboutDataAr();
+  },[]);
+// console.log(aboutDataAr);
   return (
     <div>
       <Menubar />
@@ -193,6 +222,12 @@ export default function Editabout() {
                         <Link>Edit Home</Link>
                       </li>
                     </ul>
+                    {successMessage && (
+            <div className="alert alert-success">{successMessage}</div>
+          )}
+           {errorMessage && (
+            <div className="alert alert-danger">{errorMessage}</div>
+          )}
                   </div>
                 </div>
               </div>
@@ -201,7 +236,7 @@ export default function Editabout() {
                   <ul className="add-button-min">
                     <li className="add-button-fis">
                       <Link to="">
-                        <i className="ri-save-3-line"></i>
+                        <i className="ri-save-3-line" onClick={handleUpdateData}></i>
                       </Link>
                     </li>
                     <li className="add-button-cencel">
@@ -242,14 +277,19 @@ export default function Editabout() {
                               <Form.Label>banner upload </Form.Label>
                               <Form.Control
                                 type="file"
-                                onChange={(e) =>
-                                  handleFileChange(
-                                    "bannerImage",
-                                    e.target.files[0]
-                                  )
-                                }
+                                onChange={handleImageChange}
+                                
                               />
                             </Form.Group>
+                            {imagePreview && (
+                              <div>
+                                <img
+                                  src={imagePreview}
+                                  style={{ maxWidth: "10%" }}
+                                  alt="Selected"
+                                />
+                              </div>
+                            )}
                             <Form.Group
                               className="mb-3"
                               controlId="exampleForm.ControlInput1"
@@ -286,51 +326,109 @@ export default function Editabout() {
                               </Form.Label>
                               <Form.Control
                                 type="file"
-                                onChange={(e) =>
-                                  handleFileChange(
-                                    "aboutSectionImage",
-                                    e.target.files[0]
-                                  )
-                                }
+                                onChange={handleImageChange2}
                               />
                             </Form.Group>
+                            {imagePreview2 && (
+                              <div>
+                                <img
+                                  src={imagePreview2}
+                                  style={{ maxWidth: "10%" }}
+                                  alt="Selected"
+                                />
+                              </div>
+                            )}
                             <Form.Group controlId="formFile" className="mb-3">
                               <Form.Label>
                                 Our Vision section image upload{" "}
                               </Form.Label>
                               <Form.Control
                                 type="file"
+                                onChange={handleImageChange3}
+                              />
+                            </Form.Group>
+                            {imagePreview3 && (
+                              <div>
+                                <img
+                                  src={imagePreview3}
+                                  style={{ maxWidth: "10%" }}
+                                  alt="Selected"
+                                />
+                              </div>
+                            )}
+                             <Form.Group
+                              className="mb-3"
+                              controlId="exampleForm.ControlInput1"
+                            >
+                              <Form.Label>Vision Title</Form.Label>
+                              <Form.Control
+                                type="text"
+                                placeholder="Vision Title"
+                                value={removePTags(aboutData?.visionTitle)}
                                 onChange={(e) =>
-                                  handleFileChange(
-                                    "visionSectionImage",
-                                    e.target.files[0]
+                                  handleTextChange(
+                                    "visionTitle",
+                                    e.target.value
                                   )
                                 }
+                              
                               />
+                            </Form.Group>
+                            
+                            <Form.Group
+                              className="mb-3"
+                              controlId="exampleForm.ControlInput1"
+                            >
+                              <Form.Label>Our Vision text Area</Form.Label>
+                              <ReactQuill
+                                className="edit-text"
+                                value={aboutData.visionText}
+                                onChange={(value) =>
+                                  handleTextChange("visionText", value)
+                                }
+                              
+                                
+                              />
+                              
                             </Form.Group>
                             <Form.Group
                               className="mb-3"
                               controlId="exampleForm.ControlInput1"
                             >
-                              <Form.Label>Our Vision Title</Form.Label>
-                              <ReactQuill
-                                className="edit-text"
-                                value={aboutData.visionTitle}
-                                onChange={(value) =>
-                                  handleTextChange("visionTitle", value)
+                              <Form.Label>Vision Title</Form.Label>
+                              <Form.Control
+                                type="text"
+                                placeholder="Mision Title"
+                                value={removePTags(aboutData?.missionTitle)}
+                                onChange={(e) =>
+                                  handleTextChange(
+                                    "missionTitle",
+                                    e.target.value
+                                  )
                                 }
+                              
                               />
                             </Form.Group>
+                            
+                            <Form.Group
+                              className="mb-3"
+                              controlId="exampleForm.ControlInput1"
+                            >
+                              <Form.Label>Our Mision text Area</Form.Label>
+                              <ReactQuill
+                                className="edit-text"
+                                value={aboutData.missionText}
+                                onChange={(value) =>
+                                  handleTextChange("missionText", value)
+                                }
+                              
+                                
+                              />
+                              
+                            </Form.Group>
+                            
                           </Form>
-                          <div className="button-press">
-                            {isEditing ? (
-                              <Button onClick={handleUpdateData}>Save</Button>
-                            ) : (
-                              <Button onClick={() => setIsEditing(true)}>
-                                Edit
-                              </Button>
-                            )}
-                          </div>
+                         
                         </div>
                       </div>
                     </div>
@@ -348,18 +446,7 @@ export default function Editabout() {
                       <div className="edithome">
                         <div className="bannerimage">
                           <Form>
-                            <Form.Group controlId="formFile" className="mb-3">
-                              <Form.Label>banner upload </Form.Label>
-                              <Form.Control
-                                type="file"
-                                onChange={(e) =>
-                                  handleFileChangeAr(
-                                    "bannerImage",
-                                    e.target.files[0]
-                                  )
-                                }
-                              />
-                            </Form.Group>
+                          
                             <Form.Group
                               className="mb-3"
                               controlId="exampleForm.ControlInput1"
@@ -390,54 +477,78 @@ export default function Editabout() {
                                 }
                               />
                             </Form.Group>
-                            <Form.Group controlId="formFile" className="mb-3">
-                              <Form.Label>
-                                About section image upload{" "}
-                              </Form.Label>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="exampleForm.ControlInput1"
+                            >
+                              <Form.Label>Vision Title</Form.Label>
                               <Form.Control
-                                type="file"
+                                type="text"
+                                placeholder="Vision Title"
+                                value={removePTags(aboutDataAr?.visionTitle)}
                                 onChange={(e) =>
-                                  handleFileChangeAr(
-                                    "aboutSectionImage",
-                                    e.target.files[0]
+                                  handleTextChangeAr(
+                                    "visionTitle",
+                                    e.target.value
                                   )
                                 }
+                              
                               />
                             </Form.Group>
-                            <Form.Group controlId="formFile" className="mb-3">
-                              <Form.Label>
-                                Our Vision section image upload{" "}
-                              </Form.Label>
-                              <Form.Control
-                                type="file"
-                                onChange={(e) =>
-                                  handleFileChangeAr(
-                                    "visionSectionImage",
-                                    e.target.files[0]
-                                  )
+                            
+                            <Form.Group
+                              className="mb-3"
+                              controlId="exampleForm.ControlInput1"
+                            >
+                              <Form.Label>Our Vision text Area</Form.Label>
+                              <ReactQuill
+                                className="edit-text"
+                                value={aboutDataAr.visionText}
+                                onChange={(value) =>
+                                  handleTextChangeAr("visionText", value)
                                 }
+                              
+                                
                               />
+                              
                             </Form.Group>
                             <Form.Group
                               className="mb-3"
                               controlId="exampleForm.ControlInput1"
                             >
-                              <Form.Label>Our Vision Title</Form.Label>
-                              <ReactQuill
-                                className="edit-text"
-                                value={aboutDataAr.visionTitle}
-                                onChange={(value) =>
-                                  handleTextChangeAr("visionTitle", value)
+                              <Form.Label>Vision Title</Form.Label>
+                              <Form.Control
+                                type="text"
+                                placeholder="Mision Title"
+                                value={removePTags(aboutDataAr?.missionTitle)}
+                                onChange={(e) =>
+                                  handleTextChangeAr(
+                                    "missionTitle",
+                                    e.target.value
+                                  )
                                 }
+                              
                               />
                             </Form.Group>
+                            
+                            <Form.Group
+                              className="mb-3"
+                              controlId="exampleForm.ControlInput1"
+                            >
+                              <Form.Label>Our Mision text Area</Form.Label>
+                              <ReactQuill
+                                className="edit-text"
+                                value={aboutDataAr.missionText}
+                                onChange={(value) =>
+                                  handleTextChangeAr("missionText", value)
+                                }
+                              
+                                
+                              />
+                              
+                            </Form.Group>
                           </Form>
-                          <div className="button-press">
-                            <Button onClick={() => setIsEditing(true)}>
-                              Edit
-                            </Button>
-                            <Button onClick={handleUpdateDataAr}>Save</Button>
-                          </div>
+                          
                         </div>
                       </div>
                     </div>

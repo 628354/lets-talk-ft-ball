@@ -45,6 +45,35 @@ module.exports = {
             });
         }
     },
+    updatePermission: async (req, res) => {
+        try {
+            const { userId, routerId, permissionId, permissions } = req.body;
+            const updatePermissions = await permissionAdmin.findByIdAndUpdate(
+                { _id: req.params.id },
+                { userId, routerId, permissionId, permissions }
+            );
+
+            if (updatePermissions) {
+                res.status(200).send({
+                    body: updatePermissions,
+                    message: 'Permission Modify Successfully',
+                    success: true
+                });
+            } else {
+                res.status(404).send({
+                    message: 'Permission Id not Found',
+                    success: false
+                });
+            }
+        } catch (error) {
+            res.status(500).send({
+                message: 'Internal Server Error',
+                success: false,
+                error: error.message,
+            });
+        }
+    }
+
 
 
 }

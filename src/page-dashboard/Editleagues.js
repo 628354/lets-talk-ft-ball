@@ -51,25 +51,30 @@ export default function Editleagues() {
   };
 
   const handleTextChange = (field, value) => {
-    setAboutData({
-      ...aboutData,
+    setAboutData((prev)=>({
+      ...prev,
       [field]: value,
-    });
+
+    }))
+    
   };
 
   const handleTextChangeAr =(field,value)=>{
-    setAboutDataAr({
-      ...aboutDataAr,
-      [field]:value
-    })
+    setAboutDataAr((prev)=>({
+      ...prev,
+      [field]: value,
+
+    }))
   }
 
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
-    setAboutData({
-      ...aboutData,
+    setAboutData((prev)=>({
+      ...prev,
       image: imageFile,
-    });
+
+    }))
+    
   };
 
 

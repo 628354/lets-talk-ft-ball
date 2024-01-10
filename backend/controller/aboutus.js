@@ -16,11 +16,17 @@ exports.addaboutus = async (req, res) => {
                 aboutTitle: en.aboutTitle || "",
                 aboutText: en.aboutText || "",
                 visionTitle: en.visionTitle || "",
+                visionText: en.visionText || "",
+                missionTitle: en.missionTitle || "",
+                missionText: en.missionText || ""
             },
             ar: {
                 aboutTitle: ar.aboutTitle || "",
                 aboutText: ar.aboutText || "",
                 visionTitle: ar.visionTitle || "",
+                visionText: ar.visionText || "",
+                missionTitle: ar.missionTitle || "",
+                missionText: ar.missionText || ""
             }
 
         })
@@ -38,7 +44,7 @@ exports.getaboutus = async (Request, Response) => {
 },
 
 
-exports.updateAboutus = async (req, res) => {
+    exports.updateAboutus = async (req, res) => {
         try {
             const files = req.files;
             const protocol = req.protocol;
@@ -53,12 +59,18 @@ exports.updateAboutus = async (req, res) => {
                 en: {
                     aboutTitle: en.aboutTitle || "",
                     aboutText: en.aboutText || "",
-                    visionTitle: en.visionTitle || ""
+                    visionTitle: en.visionTitle || "",
+                    visionText: en.visionText || "",
+                    missionTitle: en.missionTitle || "",
+                    missionText: en.missionText || ""
                 },
                 ar: {
                     aboutTitle: ar.aboutTitle || "",
                     aboutText: ar.aboutText || "",
-                    visionTitle: ar.visionTitle || ""
+                    visionTitle: ar.visionTitle || "",
+                    visionText: ar.visionText || "",
+                    missionTitle: ar.missionTitle || "",
+                    missionText: ar.missionText || ""
                 }
             })
             if (updateaboutus) {
@@ -81,3 +93,19 @@ exports.updateAboutus = async (req, res) => {
             })
         }
     }
+exports.getAboutUs = async (req, res) => {
+    try {
+        const getall = await aboutusmodel.find()
+        res.status(200).send({
+            body: getall,
+            message: 'Get All AboutUs successfully',
+            success: true
+        })
+    } catch (error) {
+        res.status(500).send({
+            mesasge: "Enternal Server Error",
+            success: false,
+            error: error.mesasge
+        })
+    }
+}
