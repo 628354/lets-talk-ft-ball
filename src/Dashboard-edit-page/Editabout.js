@@ -21,6 +21,7 @@ export default function Editabout() {
   const [selectedId,setSelectedId]=useState(null)
   const [successMessage, setSuccessMessage] = useState(''); // State to hold success message
   const [errorMessage, setErrorMessage] = useState('');
+  
   const [aboutData, setAboutData] = useState({
   
     aboutTitle:"",
@@ -278,6 +279,7 @@ export default function Editabout() {
                               <Form.Control
                                 type="file"
                                 onChange={handleImageChange}
+                                
                                 
                               />
                             </Form.Group>

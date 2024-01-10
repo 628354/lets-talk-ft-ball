@@ -64,23 +64,24 @@ export default function Cafeview() {
                       <Table  bordered hover className='tablepress otherview'>
                         <thead>
                           <tr>
-                            <th colspan="2">SQ</th>
-                            <th colspan="2">Title</th>
-                            <th colspan="2">Other</th>
-                            <th colspan="2">Date</th>
-                            <th colspan="2">Action</th>
+                          {/* className='col-sm-2'  */}
+                            <th >SQ</th>
+                            <th >Title</th>
+                            {/* <th >Other</th> */}
+                            <th >Date</th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody className='table-list-one'>
                           
                           <tr>
-                            <td colspan="2">1</td>
-                            <td colspan="2"><p>Top Statistics for players in Major European Leagues</p></td>
-                            <td colspan="2">Top Statistics for players in Major European Leagues</td>
-                            <td colspan="2">2-4-2022</td>
-                            <td colspan="2">
+                            <td >1</td>
+                            <td ><p>Top Statistics for players in Major European Leagues</p></td>
+                            {/* <td >Top Statistics for players in Major European Leagues</td> */}
+                            <td >2-4-2022</td>
+                            <td >
                             <div className='add-button-fis'>
-                                <ul className='editcafe'>
+                                <ul className='but-delet'>
                                     <li><Link to="/Editseason"><i className="ri-pencil-fill"></i></Link></li>
                                     <li className='add-button-sec'>
                                     <button><i className="ri-delete-bin-line"></i></button>
