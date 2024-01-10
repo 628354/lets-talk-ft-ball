@@ -90,7 +90,7 @@ const [blogDetails,setBlogDetails]=useState([])
       </div>
       <div className='en_blog_main ar_blog_main'>
         <div className='row' dir="rtl">
-        {blogDetails?.map((data) => {
+         {blogDetails?.map((data) => {
 								console.log(data)
 								return (
 									<div className="col-lg-6 col-md-6 col-sm-12 w-50 mb-3	 ">
@@ -98,7 +98,6 @@ const [blogDetails,setBlogDetails]=useState([])
 									</div>
 								 );
 							})} 
-        
           </div>
         
        
