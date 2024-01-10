@@ -448,6 +448,7 @@ ul.ar_creat_nav li a {
   margin-left: 10px;
   font-family: "Arial","sans-serif"!important;
 }
+
 .ar_abo_section {
   padding-bottom: 50px;
 }
@@ -456,6 +457,7 @@ ul.ar_creat_nav li a {
   color: var(--there-color);
   font-weight: 600;
 }
+
 .ar_our_contant p {
   color: var(--there-color);
   margin-bottom: 24px;
@@ -477,15 +479,17 @@ ul.ar_creat_nav li a {
   color: #06083b;
   margin-top: 15px;
 }
+
 .ar_imageline {
   border-left: 1px solid #cdced8;
 }
 
-a.english-top-icon {
+.english-top-icon {
   display: flex;
   gap: 10px;
   align-items: center;
 }
+
 /* 05/01/24 */
 
 

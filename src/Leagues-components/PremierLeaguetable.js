@@ -279,24 +279,47 @@ localStorage.setItem("teamId",teamId)
 											
 										</li>
 										<li>
-											<h6>
+											{
+												lang ==="en"? 
+												<h6>
 												<span>3.03</span> <br />
 												GS/G
-											</h6>
+											    </h6>:
+												<h6>
+												<span>3.03</span> <br />
+												معدل تسجيل الأهداف
+											    </h6>
+											}
 										</li>
 										<li>
-											<h6>
+											{
+												lang ==="en"?
+												<h6>
 												<span>39% </span>
 												<br />
 												WIN%
-											</h6>
+											    </h6>:
+											    <h6>
+											    <span>39% </span>
+											    <br />
+											     الفوز
+										        </h6>
+											}
 										</li>
 										<li>
-											<h6>
+											{
+												lang ==="en"?
+												<h6>
 												<span>6.43 </span>
 												<br />
 												Points Stdev
-											</h6>
+											    </h6>:
+											    <h6>
+											    <span>6.43 </span>
+											    <br />
+											     نقاط الانحراف المعياري
+										        </h6>
+											}
 										</li>
 									</ul>
 								</div>
