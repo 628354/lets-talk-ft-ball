@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {authentication} = require('../middleware/auth')
+const { authentication } = require('../middleware/auth')
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -18,22 +18,29 @@ const upload = multer({ storage: storage });
 
 const cafecontroller = require("../controller/cafe");
 
-router.post(
-  "/addcafedata",
-  upload.fields([{ name: "logo" }, { name: "cafe_image" }]),
-  cafecontroller.addcafedata
-);
+// router.post(
+//   "/addcafedata",
+//   upload.fields([{ name: "logo" }, { name: "cafe_image" }]),
+//   cafecontroller.addcafedata
+// );
 
-router.post(
-  "/addCafeleaguedata/:id",
-  upload.single("cafe_image"),
-  cafecontroller.addcafeleaguesdata
-);
+// router.post(
+//   "/addCafeleaguedata/:id",
+//   upload.single("cafe_image"),
+//   cafecontroller.addcafeleaguesdata
+// );
 
-router.get("/:lung/cafe_details/:id", cafecontroller.cafe_details);
+// router.get("/:lung/cafe_details/:id", cafecontroller.cafe_details);
 
-router.get("/:lung/getAllCafe", cafecontroller.getAllCafe);
+// router.get("/:lung/getAllCafe", cafecontroller.getAllCafe);
 
-router.delete("/deleteCafe/:id", cafecontroller.deleteCafe);
+// router.delete("/deleteCafe/:id", cafecontroller.deleteCafe);
 
+
+ //===============================================Admin Routes============================================
+router.post('/addcafedata', upload.fields([{ name: "logo" }, { name: "cafe_image" }]), cafecontroller.addcafedata)
+router.put('/updateCafe/:id', upload.fields([{ name: "logo" }, { name: "cafe_image" }]), cafecontroller.updateCafe)
+router.get('/:lung/getAllCafe',cafecontroller.getAllCafe )
+router.get('/:lung/cafe_details/:id', cafecontroller.cafe_details)
+router.delete('/deleteCafe/:id', cafecontroller.deleteCafe)
 module.exports = router;

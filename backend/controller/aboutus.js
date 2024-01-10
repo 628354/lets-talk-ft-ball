@@ -42,9 +42,7 @@ exports.getaboutus = async (Request, Response) => {
     responseHelper[200].data = data;
     Response.send(responseHelper[200]);
 },
-
-
-    exports.updateAboutus = async (req, res) => {
+exports.updateAboutus = async (req, res) => {
         try {
             const files = req.files;
             const protocol = req.protocol;
