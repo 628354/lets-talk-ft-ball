@@ -23,10 +23,12 @@ export default function Editseason() {
   });
 
   const handleTextChange = (field, value) => {
-    setAboutData({
-      ...aboutData,
+    setAboutData((prev)=>({
+      ...prev,
       [field]: value,
-    });
+
+    }))
+  
   };
 
   const getSeasonById = async () => {

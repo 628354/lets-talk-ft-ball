@@ -19,7 +19,9 @@ export const REQUEST_TYPE = {
 export const IMAGES = {
   imgs: SERVER_IMAGES + "/uploads/",
 };
-
+export const FILTER_TEAMS = {
+  filter: `${SERVER_LINK}TeamsFilter`,
+};
 export const LEAGUES_BULK_IMPORT = {
   upload: `${SERVER_LINK}leageBluk`,
 };
@@ -177,6 +179,14 @@ export const ABOUT_US = {
   finden: `${SERVER_LINK}en/getaboutus`,
   findar:`${SERVER_LINK}ar/getaboutus`
 };
+export const ABOUT_US_BOTH = {
+ 
+  find:`${SERVER_LINK}getAboutUss`
+};
+export const UPDATE_ABOUT = {
+  update: `${SERVER_LINK}updateAboutus`
+};
+
 export const DEFINATION = {
   finden: `${SERVER_LINK}en/getAllDefinition`,
   findar: `${SERVER_LINK}ar/getAllDefinition`,
@@ -263,6 +273,29 @@ export const CREATE_FOLDER = {
   
 
 };
+export const ADD_DEFINITION = {
+  add: `${SERVER_LINK}addDefinition`
+  
+
+};
+export const GET_DEF_BY_ID = {
+  get: `${SERVER_LINK}getDefinitionById`
+  
+
+};
+export const UPDATE_DEF = {
+  update: `${SERVER_LINK}updatedefinition`
+};
+
+export const DELETE_DEF= {
+  delete: `${SERVER_LINK}deleteDefinition`
+};
+export const GET_POLICY = {
+  policy: `${SERVER_LINK}getpolicy`
+  
+
+};
+
 export const BASE_URL = "http://localhost:5000/uploads/";
 
 

@@ -149,7 +149,7 @@ const  navigate =useNavigate();
                         </Link>
                       </li> */}
                       <li>
-                        <Link to="/Editdefinition" className="nav-link px-0">
+                        <Link to="/definitionlist" className="nav-link px-0">
                           {" "}
                           <span className="d-none d-sm-inline">
                             Definition{" "}
@@ -221,7 +221,7 @@ const  navigate =useNavigate();
                       <li className="w-100">
                         <Link to="/LeaguesBluk" className="nav-link px-0">
                           {" "}
-                          <span className="d-none d-sm-inline">Bulk Leagues</span>
+                          <span className="d-none d-sm-inline">League Team Bulk Import</span>
                         </Link>
                       </li>
                       {/* <li className="w-100">
@@ -273,7 +273,7 @@ const  navigate =useNavigate();
                       <li className="w-100">
                         <Link to="/cat-logs" className="nav-link px-0">
                           {" "}
-                          <span className="d-none d-sm-inline">Catalogs</span>
+                          <span className="d-none d-sm-inline">Team B-Upload</span>
                         </Link>
                       </li>
                     </ul>
@@ -322,12 +322,12 @@ const  navigate =useNavigate();
                       <span className="ms-1 d-none d-sm-inline">User</span>
                     </Link>
                   </li> */}
-                  <li>
+                  {/* <li>
                     <Link to="#" className="nav-link px-0 align-middle">
                     <i className="fa fa-users" aria-hidden="true"></i>
                       <span className="ms-1 d-none d-sm-inline">Customers</span>
                     </Link>
-                  </li>
+                  </li> */}
                   {/* <li>
                     <Link
                       to="#submenu4"

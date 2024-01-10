@@ -48,10 +48,11 @@ const [leagueNameAr,setLeagueNameAr]=useState([])
   });
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
-    setFormData({
-      ...formData,
+    setFormData((prev)=>({
+      ...prev,
       image: imageFile,
-    });
+
+    }))
     const reader = new FileReader();
     reader.onload = () => {
       setImagePreview(reader.result);
@@ -63,19 +64,22 @@ const [leagueNameAr,setLeagueNameAr]=useState([])
 
   const handleChange = (field, value) => {
     console.log(`Updating ${field} with value: ${value}`);
-    setFormData({
-      ...formData,
+    setFormData((prev)=>({
+      ...prev,
       [field]: value,
-    });
+
+    }))
+   
   };
 
 
   const handleChangeAr = (field, value) => {
     console.log(`Updating ${field} with value: ${value}`);
-    setFormDataAr({
-      ...formDataAr,
+    setFormDataAr((prev)=>({
+      ...prev,
       [field]: value,
-    });
+
+    }))
   };
 
 
@@ -147,6 +151,7 @@ const getLeagueById =async()=>{
     console.log(response.response?.data?.body?.en)
     const aboutInfo = response.response?.data?.data?.en
     // setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
+    console.log(response.response?.data?.body?.leagueid?.en);
     setLeagueName(response.response?.data?.body?.leagueid?.en)
     setFormData(response.response?.data?.body?.en)
 

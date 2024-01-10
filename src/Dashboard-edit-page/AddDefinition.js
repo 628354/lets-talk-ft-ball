@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Menubar from "../dashboard/Menubar";
 import { Container, Row } from 'react-bootstrap';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import {ADD_DEFINITION, GET_DEF_BY_ID, REQUEST_TYPE, UPDATE_DEF} from '../helper/APIInfo';
+import {ADD_DEFINITION, REQUEST_TYPE} from '../helper/APIInfo';
 import { apiCall } from '../helper/RequestHandler';
 import ReactQuill from "react-quill";
 
-export default function Editdefinition() {
-const {id}=useParams();
+export default function AddDefination() {
+
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [getLeagues, setLeagues] = useState([]);
@@ -32,47 +32,41 @@ const {id}=useParams();
   
     const handleChange = (field, value) => {
       console.log(`Updating ${field} with value: ${value}`);
-      setFormData((prev)=>({
-        ...prev,
+      setFormData({
+        ...formData,
         [field]: value,
-      }))
+      });
     };
   
   
     const handleChangeAr = (field, value) => {
       console.log(`Updating ${field} with value: ${value}`);
-      setFormDataAr((prev)=>({
-        ...prev,
+      setFormDataAr({
+        ...formDataAr,
         [field]: value,
-      }))
+      });
     };
-  const getDefById=async()=>{
-    const baseUrl=`${GET_DEF_BY_ID.get}/${id}`
-    // console.log(baseUrl);
-    const response=await apiCall(baseUrl,REQUEST_TYPE.GET);
-    console.log(response.response.data.body);
-    setFormData(response.response?.data?.body?.en)
-    setFormDataAr(response.response?.data?.body?.ar)
-  }
   
-  useEffect(()=>{
-    getDefById();
-
-  },[id])
+  
   
     const handleSave = async (e) => {
       e.preventDefault();
-  
-   const baseUrl =`${UPDATE_DEF.update}/${id}`
+   const token = localStorage.getItem("token")
+      // Check if required fields are filled
+      if (!formData.type) {
+        setErrorMessage('Please fill in all required fields.');
+        clearMessages();
+      } else {
         try {
           let data = {
+           
             en: formData,
             ar: formDataAr,
           };
           
         
-        console.log('Sending data to the server:', { en: formData, ar: formDataAr });
-          const response = await apiCall(baseUrl, REQUEST_TYPE.PUT,data);
+        // console.log('Sending data to the server:', { en: formData, ar: formDataAr });
+          const response = await apiCall(ADD_DEFINITION.add, REQUEST_TYPE.POST, data,token);
           // console.log(response);
           setSuccessMessage(response?.response?.data?.message);
           clearMessages();
@@ -80,8 +74,10 @@ const {id}=useParams();
           setErrorMessage('Error occurred. Please try again.');
           clearMessages();
         }
-      
+      }
     };
+    
+  
     const clearMessages = () => {
       setTimeout(() => {
         setSuccessMessage('');
@@ -99,7 +95,7 @@ const {id}=useParams();
                 <div className="col-lg-6 col-md-6 col-6">
                   <div className='season-us'>
                     <div className='season-link-part'>
-                      <h3>Edit Defination</h3>
+                      <h3>Add Defination</h3>
                       <ul className='season-link'>
                         <li>
                           <Link to="/">Home</Link>
@@ -108,7 +104,7 @@ const {id}=useParams();
                           <i className="ri-arrow-right-s-line"></i>
                         </li>
                         <li>
-                          <Link to="/Teams">Edit Defination</Link>
+                          <Link to="/Teams">Add Defination</Link>
                         </li>
                       </ul>
                     </div>
@@ -143,7 +139,7 @@ const {id}=useParams();
               <Row>
                 <div className='main_add_teams'>
                   <div className='main-ad-sea'>
-                    <p><i className="ri-pencil-fill"></i>Edit Defination</p>
+                    <p><i className="ri-pencil-fill"></i>Add Defination</p>
                   </div>
                   <hr />
                   <div className='addsection-open'>
@@ -177,7 +173,7 @@ const {id}=useParams();
                                 <Form.Control
                                   type="text"
                                   placeholder="Defination Titile "
-                                  value={formData?.type}
+                                //   value={formData.Team_Name_English}
                                   onChange={(e) =>
                                     handleChange("type", e.target.value)
                                   }
@@ -197,7 +193,7 @@ const {id}=useParams();
                                 <Col sm="9">
                                   <ReactQuill
                                     className="edit-text"
-                                    value={formData?.content}
+                                    // value={formData.Description_English}
                                     onChange={(value) =>
                                       handleChange("content",value)
                                     }
@@ -233,7 +229,7 @@ const {id}=useParams();
                                 <Form.Control
                                   type="text"
                                   placeholder=" Defination Titile Arabic"
-                                  value={formDataAr?.type}
+                                //   value={formDataAr.Team_Name_Arabic}
                                   onChange={(e) =>
                                     handleChangeAr("type", e.target.value)
                                   }
@@ -253,7 +249,7 @@ const {id}=useParams();
                                 <Col sm="9">
                                   <ReactQuill
                                     className="edit-text"
-                                    value={formDataAr?.content}
+                                    // value={formDataAr.Description_Arabic}
                                     onChange={(value) =>
                                       handleChangeAr("content",value)
                                     }
