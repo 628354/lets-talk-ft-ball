@@ -104,7 +104,7 @@ export default function Addseason() {
 
 
         </section>
-        <hr />
+        
         <section className='Add-Season-open'>
           <Container fluid>
             <Row>
@@ -112,14 +112,14 @@ export default function Addseason() {
                 <div className='main-ad-sea'>
                   <p><i class="ri-pencil-fill"></i>  Add Season</p>
                 </div>
-                <hr />
+                
 
 
                 <div className='addsection-open'>
                   <div className='add-genral'>
-                    <h6>General</h6>
+                    {/* <h6>General</h6> */}
                   </div>
-                  <hr />
+                 
                   <div className='general-part'>
                     <Tabs
                       defaultActiveKey="profile"
@@ -130,10 +130,10 @@ export default function Addseason() {
                         <div className='sanson-title'>
                           <Form>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="1">
+                              <Form.Label column sm="2" className='season-coll'>
                                 Season Title
                               </Form.Label>
-                              <Col sm="11">
+                              <Col sm="10">
                                 <Form.Control type="text" placeholder="Season Title" value={formData.season_Title}
                                   onChange={(e) => handleChange('season_Title', e.target.value)} />
                               </Col>
@@ -146,10 +146,10 @@ export default function Addseason() {
                         <div className='sanson-title'>
                           <Form>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="1">
+                              <Form.Label column sm="2" className='season-coll'>
                                 Season Title
                               </Form.Label>
-                              <Col sm="11">
+                              <Col sm="10">
                                 <Form.Control type="text" placeholder="Season Title" />
                               </Col>
                             </Form.Group>
@@ -167,7 +167,7 @@ export default function Addseason() {
                     <div className='sanson-title'>
                       <Form>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                          <Form.Label column sm="2">
+                          <Form.Label column sm="2" className='season-coll'>
                             Status
                           </Form.Label>
                           <Col sm="10">
@@ -183,7 +183,7 @@ export default function Addseason() {
                         </Form.Group>
 
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                          <Form.Label column sm="2">
+                          <Form.Label column sm="2"  className='season-coll'>
                             Sort Order
                           </Form.Label>
                           <Col sm="10">
