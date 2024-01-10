@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const permissionAdminSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
-    routerId: { type: mongoose.Schema.Types.ObjectId, ref: 'routes', required: true },
+    routerId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'routes', required: true }],
     permissionId: { type: mongoose.Schema.Types.ObjectId, ref: 'permission', required: true },
     visible: { type: String, require: true },
     invisible: { type: String, require: true },

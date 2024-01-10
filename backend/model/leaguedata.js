@@ -2,25 +2,15 @@ const mongoose = require("mongoose");
 
 const leaguedataSchema = mongoose.Schema(
   {
-    team: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "team",
-    },
-
     seasonid: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "season"
     },
-
     leagueid: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "league",
     },
-
     datatype: { type: String, require: true },
-
-
-
     en: [{
       teamname: {
         type: mongoose.Schema.Types.ObjectId,
