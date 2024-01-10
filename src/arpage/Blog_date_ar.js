@@ -12,6 +12,7 @@ import React from 'react';
            sparagraph:" ترتيب هدافي الدوريات الكبرى حسب معدل الأهداف اللاعب النادي معدل الأهداف الاهداف ...",
            link:"#",
         },
+
         {
           
            imgsrc:"https://www.letstalkftball.com/image/cache/catalog/Find%20Our%20(2)-559x363.jpg",
@@ -34,6 +35,7 @@ import React from 'react';
             sparagraph:" استهل آرسنال موسمهم الحالي بمستوى أداء جد عالي متصدرا قائمة ترتيب الدوري الإنجليزي منذ البداية، حيث حقق الفريق 16 انتصاراً في أول 19 جول...",
             link:"#",
          },
+
          {
             imgsrc:"https://www.letstalkftball.com/image/cache/catalog/123-559x363.jpg",
             title:"أرقام ديربي الهلال و النصر",
@@ -44,6 +46,7 @@ import React from 'react';
             sparagraph:" يحتضن ملعب الملك فهد الدولي بالرياض المباراة المرتقبة التي تجمع ديربي الهلال والنصر في لقاء مقدم ضمن منافست الجولة 25 من دوري روشن السع...",
             link:"#",
          },
+
          {
             imgsrc:"https://www.letstalkftball.com/image/cache/catalog/Untitled%20design-559x363.jpg",
             title:"ما السر وراء صفقات تشيلسي الطويلة الأمد؟",
@@ -54,6 +57,7 @@ import React from 'react';
             sparagraph:" ما السر وراء صفقات تشيلسي الطويلة الأمد؟  أنفق فريق تشيلسي الإنجليزي  أكثر من 329 مليون يورو في الميركاتو الشتوي لضم العديد من ...",
             link:"#",
          },
+
          {
             imgsrc:"https://www.letstalkftball.com/image/cache/catalog/WORLDCUP/ars%201-559x363.png",
             title:"هل يعيد الغانرز موسم ’’اللاهزيمة ‘‘ 2003-2004 ؟",
@@ -86,6 +90,7 @@ import React from 'react';
             sparagraph:"نتائج قرعة ملحق دور خروج المغلوب من الدوري الأوروبي شهد هذا الموسم غياب أندية كبيرة من دور 16 من دوري أبطال أوروبا كأمثال النادي الكاتالوني، برشلون...",
             link:"#",
          },
+
          {
             imgsrc:"https://www.letstalkftball.com/image/cache/catalog/Articles/photo_6012669995395430773_y-559x363.jpg",
             title:"مباريات دور الـ16 في دوري أبطال أوروبا 2022-23 ",
@@ -96,6 +101,7 @@ import React from 'react';
             sparagraph:" مباريات دور الـ16 في دوري أبطال أوروبا  2022-23 أعلن الاتحاد الأوروبي لكرة القدم عن نتائج قرعة ثمن نهائي دوري أبطال أوروبا لموسم 23-2022 ...",
             link:"#",
          },
+
          {
             imgsrc:"https://www.letstalkftball.com/image/cache/catalog/12-–-1-559x363.png",
             title:"جدول مباريات الدوري الإسباني 2022-23",
@@ -106,6 +112,7 @@ import React from 'react';
             sparagraph:" جدول مباريات الدوري الإسباني 2022-23 كشفت رابطة الدوري الإسباني عن انطلاق جدول مباريات الدوري للموسم الجديد 2022/ 2023 في نسختها الثانية والتسع...",
             link:"#",
          },
+
          {
             imgsrc:"https://www.letstalkftball.com/image/cache/catalog/bigest-transfers-559x363.png",
             title:"الدوري الإسباني: هل ستمنعه ديونه من دخول سوق الانتقالات؟",
@@ -116,6 +123,7 @@ import React from 'react';
             sparagraph:" الدوري الإسباني: هل ستمنعه ديونه من دخول سوق الانتقالات؟ فتحت أسواق الانتقالات نوافذها و بدأ كبار القارة العجوز يتنافسون حول الأوراق الرابحة لل...",
             link:"#",
          },
+
          {
             imgsrc:"https://www.letstalkftball.com/image/cache/catalog/Banner-559x363.png",
             title:"جدول مباريات الدوري الإنجليزي 23-2022",
@@ -126,6 +134,7 @@ import React from 'react';
             sparagraph:"جدول مباريات الدوري الإنجليزي 23-2022 أعلنت رابطة الدوري الإنجليزي الممتاز عن جدول مباريات البريميرليغ لموسم 23/2022 و المكونة من 38 جولة سيتنافس خ...",
             link:"#",
          },
+
          {
             imgsrc:"https://www.letstalkftball.com/image/cache/catalog/Banner-559x363.png",
             title:"Premier league fixtures",
@@ -136,6 +145,7 @@ import React from 'react';
             sparagraph:":Premier league fixtures 2022-23   جدول مباريات الدوري الإنجليزي 2023 - الجولة الأولى المباراة الموعد ...",
             link:"#",
          },
+
          {
             imgsrc:"https://www.letstalkftball.com/image/cache/catalog/bigest-transfers-559x363.png",
             title:"الستي و ليفربول",
@@ -146,6 +156,7 @@ import React from 'react';
             sparagraph:"...",
             link:"#",
          },
+
          {
             imgsrc:"https://www.letstalkftball.com/image/cache/catalog/logo/Saudi%20Pro/nasir_hillal%20logo-559x363.png",
             title:"من الافضل في اوروبا؟",
@@ -156,6 +167,7 @@ import React from 'react';
             sparagraph:"...",
             link:"#",
          },
+
          {
             imgsrc:"https://www.letstalkftball.com/image/cache/catalog/WORLDCUP/ars%201-559x363.png",
             title:" مقهى الهلال والنصر",
@@ -166,6 +178,7 @@ import React from 'react';
             sparagraph:"مقهى الهلال والنصر هو المكان الذي يجتمع فيه مشجعين الناديين العريقين لكي يتناقشوا ويتمازحوا. هذا المقهى هو المكان المناسب للمشجعين لان المعلومات المطل...",
             link:"#",
          },
+         
          
        
    ];
