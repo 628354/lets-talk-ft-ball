@@ -9,14 +9,14 @@ import Premierchart from "../Leagues-components/Premierchart";
 import Goalsconchart from "../Leagues-components/Goalsconchart";
 import CahrtGsGc from "../Leagues-components/CahrtGsGc";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, SESSION,FIND_TEAM ,GET_LEAGUE_ID,SESSIOND} from "../helper/APIInfo";
+import { REQUEST_TYPE, SESSION,FIND_TEAM ,GET_LEAGUE_ID,SESSIOND, BASE_URL} from "../helper/APIInfo";
 import Cookies from "js-cookie";
 export default function PremierLeague() {
 	
 	
 	const [leagueDecreption, setLeagueDecreption] = useState([]);
 	// const { leagueId } = useParams();
-
+const folderName = localStorage.getItem("foldername")
 const leagueId = localStorage.getItem("selectedLeagueId")
 const lang = Cookies.get('language')
 //console.log(leagueId)
@@ -30,11 +30,18 @@ const lang = Cookies.get('language')
 		const baseUrl = GET_LEAGUE_ID(lang).find;
 		const apiUrl =`${baseUrl}/${leagueId}`
 		console.log(apiUrl);
+		const data =[]
 		try{
 			apiCall(apiUrl,REQUEST_TYPE.GET).then((response)=>{
 				console.log(response.response?.data?.body)
-				setLeagueDecreption(response.response?.data?.body?.[lang])
+				// setLeagueDecreption(response.response?.data?.body?.[lang])
+				setLeagueDecreption({
+					"image":response.response?.data?.body.image,
+					"LeagueData":response.response?.data?.body?.[lang],
+					"leagueId":response.response?.data?.body?._id
+				})
 			})
+			console.log(data);
 
 		}catch(error){
 			console.log("data not ",error)
@@ -42,14 +49,19 @@ const lang = Cookies.get('language')
 
 	}
 
-
+console.log(leagueDecreption);
 
 	useEffect(()=>{
 		
 		getLeagueDetails()
 	},[leagueId,lang])
 	
-	  
+
+	function removeHtmlTags(input) {
+		return input?.replace(/<[^>]*>/g, '')?.replace(/&nbsp;/g, '');
+	  }
+
+	  console.log(`${BASE_URL}${folderName}/${leagueDecreption?.image}`);
 	return (
 		<div >
 			<section className={`${lang ==="en"? 'en_hero_about':'ar_hero_about'}`}>
@@ -74,7 +86,7 @@ const lang = Cookies.get('language')
 							<i className="ri-arrow-right-s-line" ></i>
 						</li>
 						<li>
-							<Link to="">{leagueDecreption?.leaguename}</Link>
+							<Link to="">{leagueDecreption?.LeagueData?.leaguename}</Link>
 						</li>
 					
 					</ul>
@@ -84,11 +96,11 @@ const lang = Cookies.get('language')
 			<section className="en-premier ar-premier">
 				<Container>
 						
-							<Row key={leagueDecreption?._id}>
+							<Row key={leagueDecreption?.leagueId}>
 								<div className="col-lg-12 col-md-12 col-sm-12">
 									<div className="en-premier-contant ar-premier-contant">
 										<div className={`${lang ==="en"? 'en_leagues_cont':'ar_leagues_cont'}`}>
-											<h2>{leagueDecreption?.leaguename}</h2>
+											<h2>{leagueDecreption?.LeagueData?.leaguename}</h2>
 										</div>
 									</div>
 								</div>
@@ -97,7 +109,7 @@ const lang = Cookies.get('language')
 										<div className="col-lg-2 col-md-2 col-sm-12 m-auto">
 											<div className="en-leagues-img">
 												<img
-													src={"http://localhost:5000/uploads/" + leagueDecreption?.image}
+													src={`${BASE_URL}${folderName}/${leagueDecreption?.image}` }
 													alt="earth"
 													className="img-premier-press"
 												/> 
@@ -105,7 +117,7 @@ const lang = Cookies.get('language')
 										</div>
 										<div className="col-lg-10 col-md-10 col-sm-12">
 											<div className="en-leagues-text ar-leagues-text">
-												<p>{leagueDecreption?.description}</p>
+												<p>{removeHtmlTags(leagueDecreption?.LeagueData?.description)}</p>
 											</div>
 										</div>
 									</Row>

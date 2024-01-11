@@ -64,6 +64,7 @@ const [flag, setFlag]=useState(false)
   const handleFolderClick = async (folder,id) => {
     setSelectedFolder(folder);
 console.log(folder);
+
 console.log(id);
 const folderWithoutSpaces = folder.replace(/\s/g, '')
 console.log(folderWithoutSpaces);
@@ -212,7 +213,7 @@ console.log(folderWithoutSpaces);
 
             </div>
 
-{/* <Modal show={showModal} onHide={handleCloseModal}>
+<Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Add Folder</Modal.Title>
         </Modal.Header>
@@ -237,7 +238,7 @@ console.log(folderWithoutSpaces);
          Add Folder
          </Button>
       </Modal.Footer>
-   </Modal> */}
+   </Modal>
   
   
 </div>

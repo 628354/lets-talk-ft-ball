@@ -3,12 +3,14 @@ import { Modal, Button, Form,Container, Row, } from "react-bootstrap";
 import { apiCall } from "../helper/RequestHandler";
 import { REQUEST_TYPE,GET_IMAGE,ADD_IMAGE ,CREATE_FOLDER,GET_FOLDER} from "../helper/APIInfo";
 import UploadMediaImg from "./UploadMediaImg";
+import UploadMediaComp from "./UploadMediaComp";
 
 const MediaModal = ({ show, onHide, onUpload }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedFolder, setSelectedFolder] = useState(null); 
   const [folderImages, setFolderImages] = useState([]);
   const [folders, setFolders] = useState([]); 
+
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
@@ -80,6 +82,13 @@ console.log(folderWithoutSpaces);
     }
   };
 
+  const handleSelectedImage = (imageName) => {
+    // Perform actions with the selected image name (e.g., save it in the database)
+    console.log('Selected Image Name in MediaModal:', imageName);
+    onUpload(imageName); // Pass the selected image name to onUpload
+    onHide(); // Close the modal after media upload
+  };
+
   return (
     <Modal show={show} onHide={onHide} size="xl">
     <Modal.Header closeButton>
@@ -127,9 +136,10 @@ console.log(folderWithoutSpaces);
               </div>
             </div>
             <div className="col-lg-10 col-sm-10 col-sm-10 ps-0">
-              <UploadMediaImg
+              <UploadMediaComp
                 selectedFolder={selectedFolder}
                 folderImages={folderImages}
+                onImageSelect={handleSelectedImage} 
               />
             </div>
           </Row>

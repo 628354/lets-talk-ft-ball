@@ -43,8 +43,6 @@ export const LEAGUES=(lang)=>{
     league:`${SERVER_LINK}${lang}/getleagues`
   }
 }
-
-
 export const CATLOGS = {
   upload: `${SERVER_LINK}uploadCatLog`,
 };

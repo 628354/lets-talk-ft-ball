@@ -10,16 +10,19 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, ADD_LEAGUES } from "../helper/APIInfo";
+import { REQUEST_TYPE, ADD_LEAGUES, BASE_URL } from "../helper/APIInfo";
 import MediaModal from "./MediaModal";
 export default function Addleagues() {
   const [successMessage, setSuccessMessage] = useState(''); // State to hold success message
   const [errorMessage, setErrorMessage] = useState('');
   const [imagePreview, setImagePreview] = useState(null);
   const [mediaModalShow, setMediaModalShow] = useState(false);
+
+
+  const [image,setImage]=useState(null)
+  
   const [formData, setFormData] = useState({
     leaguename: "",
-    image: "",
     description: "",
     meta_Tag_Title: "",
     meta_Tag_Description: "",
@@ -28,6 +31,7 @@ export default function Addleagues() {
     sort_Order: "",
     status: "active",
   });
+
   const [arFormData, setArFormData] = useState({
     leaguename: "",
     description: "",
@@ -45,6 +49,7 @@ export default function Addleagues() {
       [field]: value,
     });
   };
+
   const handleChangeArabic = (field, value) => {
     setArFormData({
       ...arFormData,
@@ -54,26 +59,8 @@ export default function Addleagues() {
   const handleImageChange = (e) => {
     e.preventDefault();
     setMediaModalShow(true);
-    const imageFile = e.target.files[0];
-
     // Check if the selected file is an image
-    if (imageFile && imageFile.type.startsWith('image/')) {
-      setFormData({
-        ...formData,
-        image: imageFile,
-      });
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImagePreview(reader.result);
-      };
-      reader.readAsDataURL(imageFile);
-    } else {
-      // Handle the case where a non-image file is selected
-      console.error("Invalid file format. Please select an image.");
-      setErrorMessage("Invalid file format. Please select an image.");
-      clearMessages();
-    }
+   
   };
 
   // const handleImageChange = (e) => {
@@ -96,10 +83,16 @@ export default function Addleagues() {
     setTimeout(() => {
       setSuccessMessage('');
       setErrorMessage('');
-    }, 3000); // Clear messages after 3 seconds
+    }, 3000);
   };
 
   const handleSave = async () => {
+    const obj ={
+      "image":image,
+      en:formData,
+      ar: arFormData,
+
+    }
     if( !formData.leaguename || !arFormData.leaguename ||  !formData.meta_Tag_Title ||  !arFormData.meta_Tag_Title ){
       {
         setErrorMessage('All fields are required.');
@@ -108,12 +101,9 @@ export default function Addleagues() {
       }
     }
     try {
-      const response = await apiCall(ADD_LEAGUES.league, REQUEST_TYPE.POST, {
-        en: formData,
-        ar: arFormData,
-      });
+      const response = await apiCall(ADD_LEAGUES.league, REQUEST_TYPE.POST, obj);
       // const data1 =response.response.data
-      // console.log(response);
+      console.log(obj);
       if(response.status === 200){
         console.log("yes----------------");
        setSuccessMessage(response.response.data?.message);
@@ -129,6 +119,9 @@ export default function Addleagues() {
       console.error(error);
     }
   };
+
+
+
   const formats = [
     "header",
     "font",
@@ -167,11 +160,15 @@ export default function Addleagues() {
     ],
   };
   const handleMediaUpload = (selectedFile) => {
-    // Handle media upload logic here
-    console.log("Media uploaded:", selectedFile);
-    setMediaModalShow(false); // Close the modal after media upload
-  };
 
+    console.log("Media uploaded:", selectedFile);
+    
+    setImage(selectedFile)
+    setMediaModalShow(false); // Close the modal after media upload
+
+  };
+  const folderName = localStorage.getItem("foldername")
+console.log(folderName);
   return (
     <div>
       <Menubar />
@@ -294,15 +291,9 @@ export default function Addleagues() {
                                 />
                               </Col>
                             </Form.Group>
-                            {imagePreview && (
-                              <div>
-                                <img
-                                  src={imagePreview}
-                                  style={{ maxWidth: "10%" }}
-                                  alt="Selected"
-                                />
-                              </div>
-                            )}
+                            {image === null? "" : <img className="logo_im" src={`${BASE_URL}${folderName}/${image}`}/> }
+                           
+                           
                            <MediaModal
        show={mediaModalShow}
        onHide={() => setMediaModalShow(false)}
