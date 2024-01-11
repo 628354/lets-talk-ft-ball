@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Cookies from "js-cookie";
+import { apiCall } from '../helper/RequestHandler';
+import { GET_POLICY, REQUEST_TYPE } from '../helper/APIInfo';
 
 
 export default function Privacypolicy() {
+  const [leagueDecreption, setLeagueDecreption] = useState([]);
 	const lang = Cookies.get('language')
+
+  const getLeagueDetails=()=>{
+	
+
+		try{
+			apiCall(GET_POLICY(lang).find,REQUEST_TYPE.GET).then((response)=>{
+				console.log(response.response)
+				setLeagueDecreption(response.response?.data?.body?.[lang])
+			})
+
+		}catch(error){
+			console.log("data not ",error)
+		}
+
+	}
+
+
+
+	useEffect(()=>{
+		
+		getLeagueDetails()
+	},[])
+	
 
   return (
     <div>

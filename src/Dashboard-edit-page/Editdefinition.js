@@ -17,7 +17,7 @@ const {id}=useParams();
     const [errorMessage, setErrorMessage] = useState('');
     const [getLeagues, setLeagues] = useState([]);
     const [imagePreview, setImagePreview] = useState(null);
-  const [allData,setAllData]=useState(null)
+    const [allData,setAllData]=useState(null)
     const [formData, setFormData] = useState({
         type: '',
         content: '',

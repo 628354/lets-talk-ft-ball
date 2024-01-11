@@ -209,7 +209,7 @@ useEffect(()=>{
                 <div className="add-part">
                   <ul className="add-button-min">
                     <li className="add-button-fis">
-                      <button onClick={handleUpdateData}>
+                      <button >
                         <Link to="">
                           <i className="ri-save-3-line"></i>
                         </Link>

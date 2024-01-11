@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Menubar from '../dashboard/Menubar';
 import { Button, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -7,9 +7,22 @@ import Tabs from 'react-bootstrap/Tabs';
 import 'react-quill/dist/quill.snow.css';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
+import { apiCall } from '../helper/RequestHandler';
+import { GET_CAFE, REQUEST_TYPE } from '../helper/APIInfo';
 
 export default function Cafeview() {
+const [getCafe,setCafe]=useState([])
+const getAllCafe =async()=>{
+const response =await apiCall(GET_CAFE.cafeen,REQUEST_TYPE.GET)
+console.log(response.response.data.body);
+response.response.data.body?.map((item)=>{
+  console.log(item.en.cafec);
+})
 
+}
+useEffect(()=>{
+getAllCafe()
+},[])
   return (
     <div>
     <Menubar/>

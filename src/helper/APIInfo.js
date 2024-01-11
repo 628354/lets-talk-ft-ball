@@ -43,8 +43,6 @@ export const LEAGUES=(lang)=>{
     league:`${SERVER_LINK}${lang}/getleagues`
   }
 }
-
-
 export const CATLOGS = {
   upload: `${SERVER_LINK}uploadCatLog`,
 };
@@ -290,11 +288,17 @@ export const UPDATE_DEF = {
 export const DELETE_DEF= {
   delete: `${SERVER_LINK}deleteDefinition`
 };
-export const GET_POLICY = {
-  policy: `${SERVER_LINK}getpolicy`
-  
 
+export const GET_POLICY=(lang)=>{
+  return {
+    find:`${SERVER_LINK}${lang}/getpolicy`
+  }
+}
+
+export const ADD_CAFE = {
+  cafe: `${SERVER_LINK}addcafedata`
 };
+
 
 export const BASE_URL = "http://localhost:5000/uploads/";
 

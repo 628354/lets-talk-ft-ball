@@ -699,3 +699,28 @@ section.min-section-one {
 }
 /* 10-01-2024 */
 
+
+/* 11-01-24 */
+.add-button-min li button {
+    border: none;
+    background: no-repeat;
+}
+
+.main-media-ponier {
+    height: 100%;
+}
+
+
+.media-ponite-part {
+    background: #dde4eb;
+    height: 100%;
+}
+.main-ad-sea {
+    background: #f6f6f6;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+/* 11-01-24 */.logo_im{
+    width: 150px;
+    height:150px;
+}

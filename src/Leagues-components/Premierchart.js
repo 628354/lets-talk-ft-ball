@@ -14,7 +14,7 @@ export default function Premierchart({ leagueId }) {
     const [goalScore, setGoalScore] = useState([]);
     const [seasonId, setSeasonId] = useState();
     const lang = Cookies.get('language')
-    // console.log(goalScore);
+    console.log(goalScore);
     //console.log(seasonId);
     //get season
 
@@ -56,6 +56,8 @@ export default function Premierchart({ leagueId }) {
                                         data1.push({
                                             "goalsScored": parseInt(results?.goals_scored, 10),
                                             "name": results.teamname?.[lang]?.Team_Name_Short_English,
+                                            "icon": `${BASE_URL}${results.teamname?.[lang]?.Image}`
+
                                             //"goalsScored": results?.goals_scored
                                             // "Image": `${BASE_URL}${results?.teamname?.Image.replace(/\s/g, '')}`
                                         })
@@ -64,6 +66,7 @@ export default function Premierchart({ leagueId }) {
                                         data1.push({
                                             "goalsScored": parseInt(results?.goals_scored, 10),
                                             "name": results.teamname?.[lang]?.Team_Name_Short_Arabic,
+                                            "icon": `${BASE_URL}${results.teamname?.[lang]?.Image}`
                                             //"goalsScored": results?.goals_scored
                                             // "Image": `${BASE_URL}${results?.teamname?.Image.replace(/\s/g, '')}`
                                         })
@@ -136,6 +139,7 @@ export default function Premierchart({ leagueId }) {
         root.setThemes([
             am5themes_Animated.new(root)
         ]);
+
         let chart = root.container.children.push(
             am5xy.XYChart.new(root, {
                 panX: false,
@@ -146,10 +150,12 @@ export default function Premierchart({ leagueId }) {
                 layout: root.verticalLayout,
             })
         );
+        
         let xRenderer = am5xy.AxisRendererX.new(root, {
             minGridDistance: 30,
             minorGridEnabled: true,
         });
+
         let yAxis = chart.yAxes.push(
             am5xy.ValueAxis.new(root, {
                 renderer: am5xy.AxisRendererY.new(root, {
@@ -157,12 +163,35 @@ export default function Premierchart({ leagueId }) {
                 }),
             })
         );
+
         let xAxis = chart.xAxes.push(
             am5xy.CategoryAxis.new(root, {
                 categoryField: "name",
                 renderer: xRenderer,
+                bullet: function (root, axis, dataItem) {
+                    return am5xy.AxisBullet.new(root, {
+                      location: 0.5,
+                      sprite: am5.Picture.new(root, {
+                        width: 35,
+                        height: 35,
+                        centerY: am5.p50,
+                        centerX: am5.p50,
+                        src: dataItem.dataContext.icon
+                      })
+                    });
+                  }
             })
         );
+        xRenderer.grid.template.setAll({
+            location: 1
+          })
+          
+          xRenderer.labels.template.setAll({
+            paddingTop: 20
+          });
+          xAxis.data.setAll(goalScore);
+
+
         chart.set("scrollbarY", am5.Scrollbar.new(root, {
             orientation: "vertical",
         }));
@@ -172,17 +201,19 @@ export default function Premierchart({ leagueId }) {
         chart.set("scrollbarX", scrollbarX);
         chart.bottomAxesContainer.children.push(scrollbarX);
 
-        xAxis.data.setAll(goalScore);
+       
 
         let series = chart.series.push(
             am5xy.ColumnSeries.new(root, {
                 xAxis: xAxis,
                 yAxis: yAxis,
                 valueYField: "goalsScored",
-                categoryXField: "name",
+                categoryXField: "name", 
             })
         );
         series.set("fill", am5.color("#FF0151"));
+        
+        series.columns.template.set("width", am5.percent(50))
         series.columns.template.setAll({
             tooltipText: "{categoryX}: {valueY}",
             tooltipY: 0,

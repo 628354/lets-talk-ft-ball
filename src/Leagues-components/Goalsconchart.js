@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, GC, SESSION } from "../helper/APIInfo";
+import { REQUEST_TYPE, GC, SESSION, BASE_URL } from "../helper/APIInfo";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
@@ -50,6 +50,7 @@ export default function Goalsconchart({ leagueId }) {
 							data1.push({
 								"goalsCons": parseInt(results?.goals_scored, 10),
 								"name": results.teamname?.[lang]?.Team_Name_Short_English,
+								"icon": `${BASE_URL}${results.teamname?.[lang]?.Image}`
 								//"goalsScored": results?.goals_scored
 								// "Image": `${BASE_URL}${results?.teamname?.Image.replace(/\s/g, '')}`
 							})
@@ -58,6 +59,7 @@ export default function Goalsconchart({ leagueId }) {
 							data1.push({
 								"goalsCons": parseInt(results?.goals_scored, 10),
 								"name": results.teamname?.[lang]?.Team_Name_Short_Arabic,
+								"icon": `${BASE_URL}${results.teamname?.[lang]?.Image}`
 								//"goalsScored": results?.goals_scored
 								// "Image": `${BASE_URL}${results?.teamname?.Image.replace(/\s/g, '')}`
 							})
@@ -119,9 +121,29 @@ export default function Goalsconchart({ leagueId }) {
 			am5xy.CategoryAxis.new(root, {
 				categoryField: "name",
 				renderer: xRenderer,
+				bullet: function (root, axis, dataItem) {
+                    return am5xy.AxisBullet.new(root, {
+                      location: 0.5,
+                      sprite: am5.Picture.new(root, {
+                        width: 35,
+                        height: 35,
+                        centerY: am5.p50,
+                        centerX: am5.p50,
+                        src: dataItem.dataContext.icon
+                      })
+                    });
+                  }
 
 			})
 		);
+		xRenderer.grid.template.setAll({
+            location: 1
+          })
+          
+          xRenderer.labels.template.setAll({
+            paddingTop: 20
+          });
+
 		chart.set("scrollbarY", am5.Scrollbar.new(root, {
 			orientation: "vertical",
 
@@ -143,6 +165,7 @@ export default function Goalsconchart({ leagueId }) {
 		);
 
 		series.set("fill", am5.color("#04073E"));
+		series.columns.template.set("width", am5.percent(50))
 		series.columns.template.setAll({
 			tooltipText: "{categoryX}: {valueY}",
 			tooltipY: 0,

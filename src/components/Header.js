@@ -9,10 +9,11 @@ import { useState } from "react";
 import { useLanguage } from "../languages/LanguageContext";
 
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, LEAGUES } from "../helper/APIInfo";
+import { REQUEST_TYPE, LEAGUES, BASE_URL } from "../helper/APIInfo";
 import Cookies from "js-cookie";
 export default function Header() {
 	const lang = Cookies.get('language')
+	const folderName =localStorage.getItem("foldername")
 	console.log(lang);
 	const [leagueNames, setLeagueNames] = useState([]);
 
@@ -56,8 +57,9 @@ export default function Header() {
 		  const response = await apiCall(LEAGUES(lang).league, REQUEST_TYPE.GET, obj);
 		  console.log( response.response?.data?.body);
 		  response.response?.data?.body.map((item)=>{
-			console.log(item?.[lang]);
+			console.log(item);
 			data.push({
+				"image":item?.image,
 				"leagueNames":item?.en?.leaguename,
 				"leagueId":item?._id
 			})
@@ -156,7 +158,7 @@ export default function Header() {
 													<span>
 														<img
 															src={
-																"http://localhost:5000/uploads/" + data.image
+																`${BASE_URL}${folderName}/${data?.image}`
 															}
 															alt=""
 															className="logo-navd"

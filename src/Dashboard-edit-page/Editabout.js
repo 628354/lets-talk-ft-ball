@@ -55,6 +55,8 @@ export default function Editabout() {
 	  [field]: value,
 	}));
   };
+
+  
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
     setAboutData((prev)=>({
@@ -67,6 +69,9 @@ export default function Editabout() {
     };
     reader.readAsDataURL(imageFile);
   };
+
+
+
   const handleImageChange2 = (e) => {
     const imageFile = e.target.files[0];
     setAboutData((prev)=>({
@@ -153,7 +158,6 @@ export default function Editabout() {
     setAboutData(data?.en)
     setAboutDataAr(data?.ar);
     setSelectedId(data?._id)
-  
   
 	// console.log(response.response);
   //     setAboutData(item?.en);

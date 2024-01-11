@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import { Row } from 'react-bootstrap';
 import axios from 'axios';
+import { BASE_URL } from '../helper/APIInfo';
 
-function UploadMediaImg({ selectedFolder, folderImages, }) {
+function UploadMediaComp({ selectedFolder, folderImages,onImageSelect  }) {
   const folder = selectedFolder?.replace(/\s/g, '');
-
+  console.log(folder);
+  localStorage.setItem("foldername",folder)
+  const [selectedImage, setSelectedImage] = useState(null);
+  
   const uploadImage = async (e) => {
     const files = e.target.files;
 console.log(files);
     const formData = new FormData();
+  
+
+
+
       for (let i = 0; i < files.length; i++) {
       formData.append('image', files[i]);
     }
@@ -16,8 +24,7 @@ console.log(files);
 console.log(formData);
     try {
       console.log(formData);
-      const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/addImage', formData, {
-      // const response = await axios.post('http://localhost:5000/addImage', formData, {
+      const response = await axios.post('http://localhost:5000/addImage', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -28,12 +35,20 @@ console.log(formData);
       console.error('Error:', error);
     }
   };
-
+  const handleImageClick = (imageName) => {
+    setSelectedImage(imageName);
+    console.log('Clicked Image Name:', imageName);
+    // Add logic to handle the clicked image name as needed
+    // Call the parent callback function with the selected image name
+    if (onImageSelect) {
+        onImageSelect(imageName);
+      }
+  };
   return (
     <div className="row">
-      <div className="col-lg-12 col-sm-12 col-sm-12 pe-0">
+      <div className="col-lg-10 col-sm-10 col-sm-10 ps-0">
         <div className="up-date-file">
-          <Row>
+          {/* <Row>
             <div className="col-lg-2 col-md-2 col-sm-6">
               <div className="main-media-folder">
                 <div className="file-main-wrapper">
@@ -42,16 +57,17 @@ console.log(formData);
                 </div>
               </div>
             </div>
-          </Row>
+          </Row> */}
 
           <Row>
             {folderImages?.map((item, index) => (
               <div className="col-lg-2 col-md-2 col-sm-6" key={index}>
                 <div className="media-folder-image">
                   <img
-                    src={`http://localhost:5000/uploads/${folder}/${item.image}`}
+                    src={`${BASE_URL}${folder}/${item.image}`}
                     alt="earth"
                     className="up-date-img"
+                    onClick={() => handleImageClick(item.image)}
                   />
                 </div>
               </div>
@@ -63,4 +79,4 @@ console.log(formData);
   );
 }
 
-export default UploadMediaImg;
+export default UploadMediaComp;

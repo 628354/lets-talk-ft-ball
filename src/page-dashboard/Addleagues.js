@@ -10,15 +10,19 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, ADD_LEAGUES } from "../helper/APIInfo";
+import { REQUEST_TYPE, ADD_LEAGUES, BASE_URL } from "../helper/APIInfo";
+import MediaModal from "./MediaModal";
 export default function Addleagues() {
   const [successMessage, setSuccessMessage] = useState(''); // State to hold success message
   const [errorMessage, setErrorMessage] = useState('');
   const [imagePreview, setImagePreview] = useState(null);
+  const [mediaModalShow, setMediaModalShow] = useState(false);
 
+
+  const [image,setImage]=useState(null)
+  
   const [formData, setFormData] = useState({
     leaguename: "",
-    image: "",
     description: "",
     meta_Tag_Title: "",
     meta_Tag_Description: "",
@@ -27,6 +31,7 @@ export default function Addleagues() {
     sort_Order: "",
     status: "active",
   });
+
   const [arFormData, setArFormData] = useState({
     leaguename: "",
     description: "",
@@ -44,35 +49,50 @@ export default function Addleagues() {
       [field]: value,
     });
   };
+
   const handleChangeArabic = (field, value) => {
     setArFormData({
       ...arFormData,
       [field]: value,
     });
   };
-
   const handleImageChange = (e) => {
-    const imageFile = e.target.files[0];
-    setFormData({
-      ...formData,
-      image: imageFile,
-    });
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImagePreview(reader.result);
-    };
-    reader.readAsDataURL(imageFile);
+    e.preventDefault();
+    setMediaModalShow(true);
+    // Check if the selected file is an image
+   
   };
 
-  console.log(formData);
+  // const handleImageChange = (e) => {
+  //   setMediaModalShow(true);
+  //   const imageFile = e.target.files[0];
+  //   setFormData({
+  //     ...formData,
+  //     image: imageFile,
+  //   });
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     setImagePreview(reader.result);
+  //   };
+  //   reader.readAsDataURL(imageFile);
+  
+  // };
+
+  console.log(mediaModalShow);
   const clearMessages = () => {
     setTimeout(() => {
       setSuccessMessage('');
       setErrorMessage('');
-    }, 3000); // Clear messages after 3 seconds
+    }, 3000);
   };
 
   const handleSave = async () => {
+    const obj ={
+      "image":image,
+      en:formData,
+      ar: arFormData,
+
+    }
     if( !formData.leaguename || !arFormData.leaguename ||  !formData.meta_Tag_Title ||  !arFormData.meta_Tag_Title ){
       {
         setErrorMessage('All fields are required.');
@@ -81,12 +101,9 @@ export default function Addleagues() {
       }
     }
     try {
-      const response = await apiCall(ADD_LEAGUES.league, REQUEST_TYPE.POST, {
-        en: formData,
-        ar: arFormData,
-      });
+      const response = await apiCall(ADD_LEAGUES.league, REQUEST_TYPE.POST, obj);
       // const data1 =response.response.data
-      // console.log(response);
+      console.log(obj);
       if(response.status === 200){
         console.log("yes----------------");
        setSuccessMessage(response.response.data?.message);
@@ -102,6 +119,9 @@ export default function Addleagues() {
       console.error(error);
     }
   };
+
+
+
   const formats = [
     "header",
     "font",
@@ -139,7 +159,16 @@ export default function Addleagues() {
       ["link", "image", "video"],
     ],
   };
+  const handleMediaUpload = (selectedFile) => {
 
+    console.log("Media uploaded:", selectedFile);
+    
+    setImage(selectedFile)
+    setMediaModalShow(false); // Close the modal after media upload
+
+  };
+  const folderName = localStorage.getItem("foldername")
+console.log(folderName);
   return (
     <div>
       <Menubar />
@@ -257,19 +286,19 @@ export default function Addleagues() {
                               <Col sm="10">
                                 <Form.Control
                                   type="file"
-                                  onChange={handleImageChange}
+                                  onClick={handleImageChange}
+                                  
                                 />
                               </Col>
                             </Form.Group>
-                            {imagePreview && (
-                              <div>
-                                <img
-                                  src={imagePreview}
-                                  style={{ maxWidth: "10%" }}
-                                  alt="Selected"
-                                />
-                              </div>
-                            )}
+                            {image === null? "" : <img className="logo_im" src={`${BASE_URL}${folderName}/${image}`}/> }
+                           
+                           
+                           <MediaModal
+       show={mediaModalShow}
+       onHide={() => setMediaModalShow(false)}
+       onUpload={handleMediaUpload}
+      />
                             <Form.Group
                               as={Row}
                               className="mb-3"

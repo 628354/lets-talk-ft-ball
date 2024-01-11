@@ -64,6 +64,7 @@ const [flag, setFlag]=useState(false)
   const handleFolderClick = async (folder,id) => {
     setSelectedFolder(folder);
 console.log(folder);
+
 console.log(id);
 const folderWithoutSpaces = folder.replace(/\s/g, '')
 console.log(folderWithoutSpaces);
@@ -104,6 +105,7 @@ console.log(folderWithoutSpaces);
       console.error("Error fetching folder images:", error);
     }
   };
+  
 
 //  useEffect(()=>{
 // handleFolderClick()
@@ -172,7 +174,7 @@ console.log(folderWithoutSpaces);
                </div>
             </Row>
             <Row>
-               <div className='col-lg-2 col-sm-2 col-sm-2 pe-0'>
+               <div className='col-lg-2 col-sm-2 col-sm-2 p-0'>
                   <div className='main-media-ponier'>
                      <div className='media-ponite-part'>
                      <div className="px-3 pt-2 styt">

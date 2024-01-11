@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, SESSION, FIND_TEAM, GET_TEAM_ID, SESSIOND } from "../helper/APIInfo";
+import { REQUEST_TYPE, SESSION, FIND_TEAM, GET_TEAM_ID, SESSIOND, BASE_URL } from "../helper/APIInfo";
 import Cookies from "js-cookie";
 
 
@@ -14,7 +14,7 @@ export default function PremierLeaguetable({
 	leagueId
 
 }) {
-
+	const folderName =localStorage.getItem("foldername")
 	// //console.log(teamId);
 	// const { teamdetailsData, getTeamsData, setSelectedTeamId } =
 	// 	useContext(LeagueContext); 	  
@@ -69,7 +69,7 @@ export default function PremierLeaguetable({
 			const response = await apiCall(apiUrl, REQUEST_TYPE.POST, params);
 			// console.log(response)
 			response.response.data?.data.map((item)=>{
-				// console.log(response.response.data?.data[3]?.[lang]);
+				console.log(response.response.data?.data);
 				// item[lang].map((items)=>{
 				// 	console.log(items.teamname?.[lang]);
 				// 	data1.push({
@@ -124,6 +124,7 @@ const handleButtonClick=(teamId)=>{
 localStorage.setItem("teamId",teamId)
 
 }
+
 
 
 	return (
@@ -210,7 +211,8 @@ localStorage.setItem("teamId",teamId)
 							</td>
 						</tr>
 						{leagueDetails && leagueDetails.map((data, index) => {
-							// console.log(data);	
+							console.log(data);	
+							console.log(`${BASE_URL}${data.teamname?.[lang]?.Image}`);
 							//const tableDAta = data.en[0];
 							return (
 								<tr className="table-create" key={data._id}>
@@ -222,7 +224,7 @@ localStorage.setItem("teamId",teamId)
 										>
 											<span className="overimage">
 												<img
-													src={require("../img/tottenham-hotspur-fc-logo.png")}
+													src={`${BASE_URL}${data.teamname?.[lang]?.Image}`}
 													alt="earth"
 													className="logo-rearth-table"
 												/>
