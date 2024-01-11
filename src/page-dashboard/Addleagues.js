@@ -224,7 +224,7 @@ export default function Addleagues() {
             </Row>
           </Container>
         </section>
-        <hr />
+        
         <section className="Add-Season-open">
           <Container fluid>
             <Row>
@@ -234,13 +234,13 @@ export default function Addleagues() {
                     <i class="ri-pencil-fill"></i> Add League
                   </p>
                 </div>
-                <hr />
+                
 
                 <div className="addsection-open">
-                  <div className="add-genral">
+                  {/* <div className="add-genral">
                     <h6>General</h6>
-                  </div>
-                  <hr />
+                  </div> */}
+                 
                   <div className="general-part">
                     <Tabs
                       defaultActiveKey="profile"
@@ -264,7 +264,7 @@ export default function Addleagues() {
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className='season-coll'>
                                 League Name
                               </Form.Label>
                               <Col>
@@ -283,7 +283,7 @@ export default function Addleagues() {
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className='season-coll'>
                                 Image
                               </Form.Label>
                               <Col sm="10">
@@ -313,7 +313,7 @@ export default function Addleagues() {
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className='season-coll'>
                                 League Description
                               </Form.Label>
                               <Col sm="10">
@@ -331,7 +331,7 @@ export default function Addleagues() {
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className='season-coll'>
                                 League Meta Tag Title
                               </Form.Label>
                               <Col sm="10">
@@ -353,7 +353,7 @@ export default function Addleagues() {
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className='season-coll'>
                                 League Meta Tag Description
                               </Form.Label>
                               <Col sm="10">
@@ -375,7 +375,7 @@ export default function Addleagues() {
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className='season-coll'>
                                 League Meta Tag Keywords
                               </Form.Label>
                               <Col sm="10">
@@ -397,7 +397,7 @@ export default function Addleagues() {
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className='season-coll'>
                                 League Blog Category
                               </Form.Label>
                               <Col sm="10">
@@ -427,7 +427,7 @@ export default function Addleagues() {
                             className="mb-3"
                             controlId="formPlaintextPassword"
                           >
-                            <Form.Label column sm="2">
+                            <Form.Label column sm="2" className='season-coll'>
                               League Name
                             </Form.Label>
                             <Col sm="10">
@@ -451,7 +451,7 @@ export default function Addleagues() {
                             className="mb-3"
                             controlId="formPlaintextPassword"
                           >
-                            <Form.Label column sm="2">
+                            <Form.Label column sm="2" className='season-coll'>
                               League Description
                             </Form.Label>
                             <Col sm="10">
@@ -469,7 +469,7 @@ export default function Addleagues() {
                             className="mb-3"
                             controlId="formPlaintextPassword"
                           >
-                            <Form.Label column sm="2">
+                            <Form.Label column sm="2" className='season-coll'>
                               League Meta Tag Title
                             </Form.Label>
                             <Col sm="10">
@@ -491,7 +491,7 @@ export default function Addleagues() {
                             className="mb-3"
                             controlId="formPlaintextPassword"
                           >
-                            <Form.Label column sm="2">
+                            <Form.Label column sm="2" className='season-coll'>
                               League Meta Tag Description
                             </Form.Label>
                             <Col sm="10">
@@ -513,7 +513,7 @@ export default function Addleagues() {
                             className="mb-3"
                             controlId="formPlaintextPassword"
                           >
-                            <Form.Label column sm="2">
+                            <Form.Label column sm="2" className='season-coll'>
                               League Meta Tag Keywords
                             </Form.Label>
                             <Col sm="10">
@@ -535,7 +535,7 @@ export default function Addleagues() {
                             className="mb-3"
                             controlId="formPlaintextPassword"
                           >
-                            <Form.Label column sm="2">
+                            <Form.Label column sm="2" className='season-coll'>
                               League Blog Category
                             </Form.Label>
                             <Col sm="10">
@@ -564,7 +564,7 @@ export default function Addleagues() {
                           className="mb-3"
                           controlId="formPlaintextPassword"
                         >
-                          <Form.Label column sm="2">
+                          <Form.Label column sm="2" className='season-coll'>
                             Status
                           </Form.Label>
                           <Col sm="10">
@@ -584,7 +584,7 @@ export default function Addleagues() {
                           className="mb-3"
                           controlId="formPlaintextPassword"
                         >
-                          <Form.Label column sm="2">
+                          <Form.Label column sm="2" className='season-coll'>
                             Sort Order
                           </Form.Label>
                           <Col sm="10">

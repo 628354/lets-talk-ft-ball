@@ -150,7 +150,7 @@ const lang ="en"
 
 
 					</section>
-					<hr />
+					
 					<section className='Add-Season-open'>
 						<Container fluid>
 							<Row>
@@ -158,7 +158,6 @@ const lang ="en"
 									<div className='main-ad-sea '>
 										<p><i class="ri-pencil-fill"></i>Team Data</p>
 									</div>
-									<hr />
 
 									<div className='addsection-open'>
 										<div className='general-part'>
@@ -180,7 +179,7 @@ const lang ="en"
 													</Col> */}
 												</Form.Group>
 												<Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-													<Form.Label column sm="2">
+													<Form.Label column sm="2" className='season-coll'>
 														League
 													</Form.Label>
 													<Col sm="10">
@@ -194,7 +193,7 @@ const lang ="en"
 													</Col>
 												</Form.Group>
 												<Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-													<Form.Label column sm="2">
+													<Form.Label column sm="2" className='season-coll'>
 													Team B-Upload
 													</Form.Label>
 													<Col sm="10">
