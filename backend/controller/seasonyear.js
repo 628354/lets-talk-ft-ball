@@ -27,9 +27,6 @@ exports.addleagueyear = async (req, res) => {
     });
   }
 };
-
-
-
 exports.getyears = async (req, res) => {
   try {
     const getyears = await seasonyearmodel.find().sort({ season_Title: -1 });
@@ -42,7 +39,6 @@ exports.getyears = async (req, res) => {
     res.send({ status: false, message: "Something went wrong !!" });
   }
 };
-
 exports.getById = async (req, res) => {
   try {
     const getById = await seasonyearmodel.findById({ _id: req.params.id });
@@ -59,7 +55,6 @@ exports.getById = async (req, res) => {
     console.log(error.message);
   }
 };
-
 exports.updateyears = async (req, res) => {
   try {
     const { season_Title, status, sort_Order } = req.body;
@@ -87,7 +82,6 @@ exports.updateyears = async (req, res) => {
     });
   }
 };
-
 exports.removeyear = async (req, res) => {
   try {
     const remove = await seasonyearmodel.findByIdAndDelete({

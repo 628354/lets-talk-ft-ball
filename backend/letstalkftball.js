@@ -33,7 +33,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
 
-const admin = require("./router/admin");
 const user = require("./router/user");
 const league = require("./router/league");
 const seasonyear = require("./router/seasonyear");
@@ -66,7 +65,7 @@ async function connectToDatabase() {
 }
 connectToDatabase();
 
-const routess = [user, league, admin, seasonyear, leaguedata, aboutus, privacy_policy, contactus, definition, cafe, imagesRoute, blukImportRouter, TableRoute, permission, routes, teamCatlog, bannerImage, folder, permissionAdmin];
+const routess = [user, league, seasonyear, leaguedata, aboutus, privacy_policy, contactus, definition, cafe, imagesRoute, blukImportRouter, TableRoute, permission, routes, teamCatlog, bannerImage, folder, permissionAdmin];
 routess.forEach(route => app.use("/", route));
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

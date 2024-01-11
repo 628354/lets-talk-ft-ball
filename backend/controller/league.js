@@ -9,14 +9,14 @@ exports.addleague = async (req, res) => {
         const protocol = req.protocol;
         const host = req.hostname;
         const url = `${protocol}://${host}`;
-        const { en, ar } = req.body;
+        const { image, en, ar } = req.body;
 
         const find = await leaguemodel.findOne({ "en.leaguename": en.leaguename });
         if (find) {
             return res.status(400).send('League already present');
         }
         const addLeague = await leaguemodel.create({
-            image: req.file ? url + "/uploads/" + req.file.filename : '',
+            image: image,
             en: {
                 leaguename: en.leaguename || '',
                 description: en.description || '',
@@ -36,7 +36,7 @@ exports.addleague = async (req, res) => {
                 blog_Category: ar.blog_Category || "",
                 sort_Order: ar.sort_Order || "",
                 status: ar.status || "active"
-            }   
+            }
         });
         const result = await addLeague.save();
         res.status(200).send({
@@ -57,7 +57,7 @@ exports.addleague = async (req, res) => {
 exports.getleagues = async (req, res) => {
     try {
         const { lung } = req.params
-        const getleagues = await leaguemodel.find({}, { [lung]: 1 })
+        const getleagues = await leaguemodel.find({}, { [lung]: 1, image: 1 })
         res.status(200).send({
             body: getleagues,
             message: 'Get Leagues Successfully',
@@ -74,7 +74,7 @@ exports.getleagues = async (req, res) => {
 exports.getleagusById = async (req, res) => {
     try {
         let { lung } = req.params
-        const league = await leaguemodel.findById({ _id: req.params.id }, { [lung]: 1 })
+        const league = await leaguemodel.findById({ _id: req.params.id }, { [lung]: 1, image: 1 })
         if (league) {
             res.status(200).send({
                 body: league,
@@ -100,7 +100,7 @@ exports.update = async (req, res) => {
         const protocol = req.protocol;
         const host = req.hostname;
         const url = `${protocol}//${host}`;
-        const { en, ar } = req.body;
+        const { image, en, ar } = req.body;
 
         const findleague = await leaguemodel.findById(req.params.id);
         if (!findleague) {
@@ -110,9 +110,7 @@ exports.update = async (req, res) => {
 
         const update = await leaguemodel.findByIdAndUpdate({ _id: req.params.id },
             {
-                bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : "",
-                aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
-                visionSectionImage: files && files.visionSectionImage ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
+                image: image,
                 en: {
                     leaguename: en.leaguename || "",
                     description: en.description || "",

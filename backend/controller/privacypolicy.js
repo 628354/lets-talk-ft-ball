@@ -2,12 +2,13 @@ const policymodel = require("../model/privacyPolicy")
 
 exports.addpolicy = async (req, res) => {
     try {
-        const { en, ar } = req.body
+        const { image, en, ar } = req.body
         const protocol = req.protocol
         const host = req.host
         const url = `${protocol}//${host}`
         const addpolicy = await policymodel.create({
-            image: req.file ? url + "/uploads/" + req.file.filename : "",
+            // image: req.file ? url + "/uploads/" + req.file.filename : "",
+            image: image,
             en: {
                 privacy_policy: en.privacy_policy || ""
             },

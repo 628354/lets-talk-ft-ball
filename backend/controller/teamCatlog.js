@@ -33,30 +33,32 @@ module.exports = {
                         Team_Name_English: myData.Team_Name_English,
                         Team_Name_Short_English: myData.Team_Name_Short_English,
                         Description_English: myData.Description_English,
+                        Image: myData.Image,
+                        SEO_URL: myData.SEO_URL,
+                        Past_teams_logo_file_names_below: myData.Past_teams_logo_file_names_below,
+                        logo_folder: myData.logo_folder,
+                        Team_info: myData.Team_info,
+                        Team_info: myData.Team_info
                     },
                     ar: {
                         Team_Name_Arabic: myData.Team_Name_Arabic,
                         Team_Name_Short_Arabic: myData.Team_Name_Short_Arabic,
                         Description_Arabic: myData.Description_Arabic,
+                        Image: myData.Image,
+                        SEO_URL: myData.SEO_URL,
+                        Past_teams_logo_file_names_below: myData.Past_teams_logo_file_names_below,
+                        logo_folder: myData.logo_folder,
+                        Team_info: myData.Team_info,
+                        Team_info: myData.Team_info
                     },
-                    Image: myData.Image,
-                    SEO_URL: myData.SEO_URL,
-                    Past_teams_logo_file_names_below:
-                        myData.Past_teams_logo_file_names_below,
-                    logo_folder: myData.logo_folder,
-                    Team_info: myData["Team info BU"],
                 });
             }
         });
-        console.log("====================================");
-        console.log(allData);
-        console.log("====================================");
 
         const addleage = await teamCatlog.create(allData);
         responseHelper[200].data = addleage;
         res.send(responseHelper[200]);
     },
-
     findTeam: async (Request, Response) => {
         const { lung } = Request.params;
         const { leagueId } = Request.body;
@@ -67,7 +69,6 @@ module.exports = {
         responseHelper[200].data = data;
         Response.send(responseHelper[200]);
     },
-
     findAllTeam: async (Request, Response) => {
         const { lung } = Request.params;
         const data = await teamCatlog.find({}, { [lung]: 1 }).populate("leagueid");
@@ -88,7 +89,7 @@ module.exports = {
 
     createTeam: async (req, res) => {
         try {
-            const { en, ar } = req.body;
+            const { image, en, ar } = req.body;
             const find = await teamCatlog.findOne({
                 "en.Team_Name_English": en.Team_Name_English,
             });
@@ -100,11 +101,12 @@ module.exports = {
             const url = `${protocol}//${host}`;
             const addTeam = await teamCatlog.create({
                 leagueid: req.body.leagueid,
-                Image: req.file ? url + "/uploads/" + req.file.filename : " ",
+                // Image: req.file ? url + "/uploads/" + req.file.filename : " ",
                 en: {
                     Team_Name_English: en.Team_Name_English || "",
                     Team_Name_Short_English: en.Team_Name_Short_English || "",
                     Description_English: en.Description_English || "",
+                    Image: en.Image || "",
                     Team_info: en.Team_info || "",
                     logo_folder: en.logo_folder || "",
                     status: en.status || "active",
@@ -116,6 +118,7 @@ module.exports = {
                     Team_Name_Arabic: ar.Team_Name_Arabic || "",
                     Team_Name_Short_Arabic: ar.Team_Name_Short_Arabic || "",
                     Description_Arabic: ar.Description_Arabic || "",
+                    Image: ar.Image,
                     Team_info: ar.Team_info || "",
                     logo_folder: ar.logo_folder || "",
                     status: ar.status || "active",
@@ -193,17 +196,18 @@ module.exports = {
             const protocol = req.protocol;
             const host = req.hostname;
             const url = `${protocol}//${host}`;
-            const { en, ar } = req.body;
+            const { image, en, ar } = req.body;
 
             const update = await teamCatlog.findByIdAndUpdate(
                 { _id: req.params.id },
                 {
                     leagueid: req.body.leagueid,
-                    Image: req.file ? url + "/uploads/" + req.file.filename : " ",
+                    // Image: req.file ? url + "/uploads/" + req.file.filename : " ",
                     en: {
                         Team_Name_English: en.Team_Name_English || "",
                         Team_Name_Short_English: en.Team_Name_Short_English || "",
                         Description_English: en.Description_English || "",
+                        Image: en.Image || "",
                         Team_info: en.Team_info || "",
                         logo_folder: en.logo_folder || "",
                         status: en.status || "active",
@@ -215,6 +219,7 @@ module.exports = {
                         Team_Name_Arabic: ar.Team_Name_Arabic || "",
                         Team_Name_Short_Arabic: ar.Team_Name_Short_Arabic || "",
                         Description_Arabic: ar.Description_Arabic || "",
+                        Image: ar.Image,
                         Team_info: ar.Team_info || "",
                         logo_folder: ar.logo_folder || "",
                         status: ar.status || "active",
@@ -246,7 +251,6 @@ module.exports = {
             });
         }
     },
-
     removeteam: async (req, res) => {
         try {
             const removeteam = await teamCatlog.findByIdAndDelete({

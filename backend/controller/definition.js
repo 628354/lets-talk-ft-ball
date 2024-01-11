@@ -51,7 +51,8 @@ module.exports = {
             const { image, en, ar } = req.body;
 
             const addDefinitions = new definition({
-                image: image ? `${url}/uploads/${image}` : '',
+                // image: image ? `${url}/uploads/${image}` : '',
+                image: image,
                 en: {
                     type: en.type || '',
                     content: en.content || '',
@@ -123,10 +124,11 @@ module.exports = {
             const protocol = req.protocol;
             const host = req.hostname;
             const url = `${protocol}://${host}`;
-            const { en, ar } = req.body
+            const { image, en, ar } = req.body
 
             const update = await definition.findByIdAndUpdate({ _id: req.params.id }, {
-                image: req.file ? `${url}/uploads/${req.file.filename}` : '',
+                // image: req.file ? `${url}/uploads/${req.file.filename}` : '',
+                image: image,
                 en: {
                     type: en.type || "",
                     content: en.content || ""
