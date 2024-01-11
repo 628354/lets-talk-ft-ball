@@ -9,9 +9,12 @@ exports.addaboutus = async (req, res) => {
         const url = `${protocol}//${host}`
         const { en, ar } = req.body
         const addaboutus = await aboutusmodel.create({
-            bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : "",
-            aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
-            visionSectionImage: files && files.visionSectionImage ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
+            // bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : "",
+            // aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
+            // visionSectionImage: files && files.visionSectionImage ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
+            bannerImage:bannerImage,
+            aboutSectionImage:aboutSectionImage,
+            visionSectionImage:visionSectionImage,
             en: {
                 aboutTitle: en.aboutTitle || "",
                 aboutText: en.aboutText || "",
@@ -48,12 +51,13 @@ exports.updateAboutus = async (req, res) => {
             const protocol = req.protocol;
             const host = req.hostname;
             const url = `${protocol}//${host}`;
-            const { en, ar } = req.body
-
+            const { bannerImage, aboutSectionImage, visionSectionImage, en, ar } = req.body
             const updateaboutus = await aboutusmodel.findByIdAndUpdate({ _id: req.params.id }, {
-                bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : "",
-                aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
-                visionSectionImage: files && files.visionSectionImage ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
+                // bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : "",
+                // aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
+                bannerImage: bannerImage,
+                aboutSectionImage: aboutSectionImage,
+                visionSectionImage: visionSectionImage,
                 en: {
                     aboutTitle: en.aboutTitle || "",
                     aboutText: en.aboutText || "",

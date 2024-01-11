@@ -197,8 +197,10 @@ module.exports = {
             const { logo, cafe_image, en, ar } = req.body;
 
             const AddCafe = new cafemodel({
-                cafe_image: cafe_image ? `${url}/uploads/${cafe_image}` : "",
-                logo: logo ? `${url}/uploads/${logo}` : "",
+                // cafe_image: cafe_image ? `${url}/uploads/${cafe_image}` : "",
+                // logo: logo ? `${url}/uploads/${logo}` : "",
+                logo: logo,
+                cafe_image: cafe_image,
                 en: {
                     details: en.details || "",
                     title: en.title || "",
@@ -237,8 +239,10 @@ module.exports = {
             const update = await cafemodel.findByIdAndUpdate(
                 { _id: req.params.id },
                 {
-                    cafe_image: cafe_image ? `${url}/uploads/${cafe_image}` : "",
-                    logo: logo ? `${url}/uploads/${logo}` : "",
+                    logo: logo,
+                    cafe_image: cafe_image,
+                    // cafe_image: cafe_image ? `${url}/uploads/${cafe_image}` : "",
+                    // logo: logo ? `${url}/uploads/${logo}` : "",
                     en: {
                         details: en.details || "",
                         title: en.title || "",

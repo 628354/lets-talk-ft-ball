@@ -10,25 +10,17 @@ const teamdata = require('../model/teamdata');
 const teamCatlog = require('../model/teamCatlog')
 
 exports.leagedBlukImport = async (req, res) => {
-
-  // const filePath = req.file.path;//
   const languageFile = req.files['excelFile'][0].path;
-
-
   const workbook = XLSX.readFile(languageFile);
   const sheetNames = workbook.SheetNames;
-
   const allData = [];
-
   sheetNames.forEach(async sheetName => {
     const sheetsData = [];
     const worksheet = workbook.Sheets[sheetName];
     const data = XLSX.utils.sheet_to_json(worksheet);
     for (let i = 0; i < data.length; i++) {
       const teamId = await teamCatlog.findOne({ "en.Team_Name_English": data[i].TEAM });
-      // console.log(teamId);
       if (await teamId?._id) {
-
         sheetsData.push({
           teamname: await teamId?._id,
           games: data[i].GP,
@@ -45,7 +37,6 @@ exports.leagedBlukImport = async (req, res) => {
         })
       }
     }
-    // console.log({sheetsData});
     await saveLeague([{
       seasonid: req.body.season,
       leagueid: req.body.league,
@@ -61,18 +52,14 @@ exports.leagedBlukImport = async (req, res) => {
 
   const TeamFile = req.files['teamexcelFile'][0].path;
   const workbookTeam = XLSX.readFile(TeamFile);
-
   const sheetNamesTeam = workbookTeam.SheetNames;
-  // console.log(sheetNamesTeam);
   const allDataTeam = [];
   const updateData = [];
-
   sheetNamesTeam.forEach(async sheetName => {
     const sheetsTeamData = [];
     const udpateRecords = [];
     const worksheetS = workbookTeam.Sheets[sheetName];
     const data = XLSX.utils.sheet_to_json(worksheetS);
-
     for (let i = 0; i < data.length; i++) {
       let myData = [];
       const map = new Map(Object.entries(data[i]));
@@ -105,8 +92,6 @@ exports.leagedBlukImport = async (req, res) => {
       }
       const teamId = await teamCatlog.findOne({ "en.Team_Name_English": sheetName });
       if (await teamId?._id) {
-        // console.log(sheetName);
-        // console.log(sheetsTeamData);
         await saveTeam([{
           seasonid: req.body.season,
           leagueid: req.body.league,
@@ -131,7 +116,6 @@ const saveLeague = async (body) => {
   body.map(async (rows) => {
     const getByIds = await leaguedata.findOne({ "seasonid": rows.seasonid, "leagueid": rows.leagueid, "datatype": rows.datatype })
     let addleage
-    // console.log(getByIds);
     if (await getByIds) {
       addleage = await leaguedata.findByIdAndUpdate({ _id: getByIds.id }, { $set: rows });
     } else {
@@ -156,15 +140,10 @@ const saveTeam = async (allDataTeam) => {
 //---------------------------------- TEAM BULK IMPORT -------------------------------------
 
 exports.teamBulkImport = async (req, res) => {
-
   const filePath = req.file.path;
-
   const workbook = XLSX.readFile(filePath);
-
   const sheetNames = workbook.SheetNames;
-  // console.log(sheetNames);
   const allData = [];
-
   sheetNames.forEach(async sheetName => {
     const sheetsTeamData = [];
     const worksheet = workbook.Sheets[sheetName];
@@ -219,15 +198,10 @@ exports.teamBulkImport = async (req, res) => {
 
 
 exports.catLogImport = async (req, res) => {
-
   const filePath = req.file.path;
-
   const workbook = XLSX.readFile(filePath);
-
   const sheetNames = workbook.SheetNames;
-  console.log(sheetNames);
   const allData = [];
-
   sheetNames.forEach(async sheetName => {
     const sheetsTeamData = [];
     const worksheet = workbook.Sheets[sheetName];
@@ -240,7 +214,6 @@ exports.catLogImport = async (req, res) => {
         const words = key.split(' ');
         words.shift();
         const modifiedString = words.join('_');
-
         myData[modifiedString] = data[i][key]
         // data[i][modifiedString]= data[i][key];
       }
@@ -268,26 +241,10 @@ exports.catLogImport = async (req, res) => {
     })
 
   });
-
-
   const addleage = await teadData.create(allData)
   responseHelper[200].data = addleage;
   res.send(responseHelper[200]);
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const sendError = (Response, Error) => {
   if (Error.errno === 500) {
