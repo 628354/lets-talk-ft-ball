@@ -21,9 +21,9 @@ const [blogDetails,setBlogDetails]=useState([])
 			);
 			console.log(response.response?.data?.body);
 			response.response?.data?.body?.map((item)=>{
-				console.log(item[lang]);
+				console.log(item[lang]?.cafecontent);
 				
-				data.push(item[lang])
+				data.push(item[lang]?.cafecontent)
 			})
 			
 				
@@ -93,11 +93,11 @@ const [blogDetails,setBlogDetails]=useState([])
 					</div>
 					<div className="en_blog_main ar_blog_main container ">
 						<div className="blog-container row ">
-							{blogDetails?.map((data) => {
+							{blogDetails?.map((data,index) => {
 								console.log(data)
 								return (
 									<div className="col-lg-6 col-md-6 col-sm-12 w-50 mb-3	 ">
-										<Blog  blogDetails={data}  blogData={blogData} />
+										<Blog  blogDetails={data}  blogData={blogData} key={index} />
 									</div>
 								 );
 							})} 

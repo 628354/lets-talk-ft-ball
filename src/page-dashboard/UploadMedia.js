@@ -104,6 +104,7 @@ console.log(folderWithoutSpaces);
       console.error("Error fetching folder images:", error);
     }
   };
+  
 
 //  useEffect(()=>{
 // handleFolderClick()
@@ -211,7 +212,7 @@ console.log(folderWithoutSpaces);
 
             </div>
 
-<Modal show={showModal} onHide={handleCloseModal}>
+{/* <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Add Folder</Modal.Title>
         </Modal.Header>
@@ -236,7 +237,7 @@ console.log(folderWithoutSpaces);
          Add Folder
          </Button>
       </Modal.Footer>
-   </Modal>
+   </Modal> */}
   
   
 </div>

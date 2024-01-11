@@ -11,11 +11,12 @@ import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import { apiCall } from "../helper/RequestHandler";
 import { REQUEST_TYPE, ADD_LEAGUES } from "../helper/APIInfo";
+import MediaModal from "./MediaModal";
 export default function Addleagues() {
   const [successMessage, setSuccessMessage] = useState(''); // State to hold success message
   const [errorMessage, setErrorMessage] = useState('');
   const [imagePreview, setImagePreview] = useState(null);
-
+  const [mediaModalShow, setMediaModalShow] = useState(false);
   const [formData, setFormData] = useState({
     leaguename: "",
     image: "",
@@ -50,21 +51,47 @@ export default function Addleagues() {
       [field]: value,
     });
   };
-
   const handleImageChange = (e) => {
+    e.preventDefault();
+    setMediaModalShow(true);
     const imageFile = e.target.files[0];
-    setFormData({
-      ...formData,
-      image: imageFile,
-    });
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImagePreview(reader.result);
-    };
-    reader.readAsDataURL(imageFile);
+
+    // Check if the selected file is an image
+    if (imageFile && imageFile.type.startsWith('image/')) {
+      setFormData({
+        ...formData,
+        image: imageFile,
+      });
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(imageFile);
+    } else {
+      // Handle the case where a non-image file is selected
+      console.error("Invalid file format. Please select an image.");
+      setErrorMessage("Invalid file format. Please select an image.");
+      clearMessages();
+    }
   };
 
-  console.log(formData);
+  // const handleImageChange = (e) => {
+  //   setMediaModalShow(true);
+  //   const imageFile = e.target.files[0];
+  //   setFormData({
+  //     ...formData,
+  //     image: imageFile,
+  //   });
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     setImagePreview(reader.result);
+  //   };
+  //   reader.readAsDataURL(imageFile);
+  
+  // };
+
+  console.log(mediaModalShow);
   const clearMessages = () => {
     setTimeout(() => {
       setSuccessMessage('');
@@ -138,6 +165,11 @@ export default function Addleagues() {
       ["bold", "italic", "underline", "strike", "blockquote"],
       ["link", "image", "video"],
     ],
+  };
+  const handleMediaUpload = (selectedFile) => {
+    // Handle media upload logic here
+    console.log("Media uploaded:", selectedFile);
+    setMediaModalShow(false); // Close the modal after media upload
   };
 
   return (
@@ -257,7 +289,8 @@ export default function Addleagues() {
                               <Col sm="10">
                                 <Form.Control
                                   type="file"
-                                  onChange={handleImageChange}
+                                  onClick={handleImageChange}
+                                  
                                 />
                               </Col>
                             </Form.Group>
@@ -270,6 +303,11 @@ export default function Addleagues() {
                                 />
                               </div>
                             )}
+                           <MediaModal
+       show={mediaModalShow}
+       onHide={() => setMediaModalShow(false)}
+       onUpload={handleMediaUpload}
+      />
                             <Form.Group
                               as={Row}
                               className="mb-3"

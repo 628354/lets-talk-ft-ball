@@ -10,6 +10,7 @@ import Tabs from "react-bootstrap/Tabs";
 import Form from "react-bootstrap/Form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { apiCall } from "../helper/RequestHandler";
 
 export default function Editprivacypolicy() {
 	const [aboutData, setAboutData] = useState({
@@ -41,6 +42,11 @@ export default function Editprivacypolicy() {
 		// };
 		// reader.readAsDataURL(imageFile);
 	};
+
+	const getpolicy =async()=>{
+		const response = apiCall()
+	}
+
 
 	useEffect(() => {
 		axios
