@@ -34,7 +34,7 @@ console.log(formData);
 
   return (
     <div className="row">
-      <div className="col-lg-10 col-sm-10 col-sm-10 ps-0">
+      <div className="col-lg-12 col-sm-12 col-sm-12 pe-0">
         <div className="up-date-file">
           <Row>
             <div className="col-lg-2 col-md-2 col-sm-6">

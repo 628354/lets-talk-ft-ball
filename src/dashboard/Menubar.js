@@ -120,7 +120,7 @@ const  navigate =useNavigate();
                       <i className="ri-arrow-down-s-line"></i>{" "}
                     </Link>
                     <ul
-                      className="collapse nav flex-column ms-5"
+                      className="collapse nav flex-column ms-4"
                       id="submenu2"
                       data-bs-parent="#menu"
                     >
@@ -185,7 +185,7 @@ const  navigate =useNavigate();
                       <i className="ri-arrow-down-s-line"></i>{" "}
                     </Link>
                     <ul
-                      className="collapse nav flex-column ms-5"
+                      className="collapse nav flex-column ms-4"
                       id="submenu33"
                       data-bs-parent="#menu"
                     >
@@ -214,7 +214,7 @@ const  navigate =useNavigate();
                       <i class="ri-arrow-down-s-line"></i>{" "}
                     </Link>
                     <ul
-                      className="collapse nav flex-column ms-5"
+                      className="collapse nav flex-column ms-4"
                       id="bulkimp"
                       data-bs-parent="#menu"
                     >
@@ -247,7 +247,7 @@ const  navigate =useNavigate();
                     </Link>
                     
                     <ul
-                      className="collapse nav flex-column ms-5"
+                      className="collapse nav flex-column ms-4"
                       id="submenu3"
                       data-bs-parent="#menu"
                     >
@@ -296,7 +296,7 @@ const  navigate =useNavigate();
                     </Link>
                     
                     <ul
-                      className="collapse nav flex-column ms-5"
+                      className="collapse nav flex-column ms-4"
                       id="submenu23"
                       data-bs-parent="#menu"
                     >
