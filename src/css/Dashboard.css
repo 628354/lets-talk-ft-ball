@@ -204,25 +204,25 @@ tbody.table-list-one tr {
     color: #a5a5a5;
 }
 
-.general-part {
-    padding: 20px 30px;
-}
+
 
 /* .tab-content {
     padding: 20px 0px 10px 80px;
 } */
 
-.addsection-open {
-    padding: 30px 25px;
-}
-.date-for-section {
-    padding: 20px 30px;
-}
+
+
+
 
 .Add-Season-open {
-    padding: 20px;
-    box-shadow: 0px 0px 10px -3px;
-    border-radius: 10px;
+    /* box-shadow: 0px 0px 10px -3px; */
+    /* border-radius: 10px; */
+    border: 1px solid #ddd;
+}
+
+
+.main_add_season {
+    padding: 0;
 }
 /* add season css strat */
 
@@ -665,3 +665,37 @@ ul.catalog-cart li a {
 }
 
 /* 27/12/2023 */
+
+
+
+
+/* 10-01-2024 */
+.season-coll {
+    text-align: end;
+}
+
+
+.main-ad-sea {
+    background: #f6f6f6;
+    padding: 20px;
+}
+.general-part {
+    padding: 20px 0px;
+}
+.date-for-section {
+    padding: 20px 0px;
+}
+section.min-section-one {
+    padding-bottom: 20px;
+}
+
+.addsection-open {
+    padding: 0px 25px;
+}
+
+.main_add_teams {
+    margin: 0;
+    padding: 0;
+}
+/* 10-01-2024 */
+

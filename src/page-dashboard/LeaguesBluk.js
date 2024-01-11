@@ -161,7 +161,7 @@ const lang ="en"
 
 
 					</section>
-					<hr />
+					
 					<section className='Add-Season-open'>
 						<Container fluid>
 							<Row>
@@ -169,7 +169,6 @@ const lang ="en"
 									<div className='main-ad-sea'>
 										<p><i class="ri-pencil-fill"></i>Bulk Leagues</p>
 									</div>
-									<hr />
 
 
 									<div className='addsection-open'>
@@ -178,7 +177,7 @@ const lang ="en"
 											<div className='sanson-title'>
 
 												<Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-													<Form.Label column sm="2">
+													<Form.Label column sm="2" className='season-coll'>
 														Season
 													</Form.Label>
 													<Col sm="10">
@@ -192,7 +191,7 @@ const lang ="en"
 													</Col>
 												</Form.Group>
 												<Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-													<Form.Label column sm="2">
+													<Form.Label column sm="2" className='season-coll'>
 														League
 													</Form.Label>
 													<Col sm="10">
@@ -206,7 +205,7 @@ const lang ="en"
 													</Col>
 												</Form.Group>
 												<Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-													<Form.Label column sm="2">
+													<Form.Label column sm="2" className='season-coll'>
 														League File Name
 													</Form.Label>
 													<Col sm="10">
@@ -215,7 +214,7 @@ const lang ="en"
 													</Col>
 												</Form.Group>
 												<Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-													<Form.Label column sm="2">
+													<Form.Label column sm="2" className='season-coll'>
 													Team File Name
 													</Form.Label>
 													<Col sm="10">

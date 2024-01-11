@@ -193,20 +193,19 @@ const lang ='en'
             </Row>
           </Container>
         </section>
-        <hr />
-        <section className='Add-Teams-open'>
+
+        <section className='Add-Teams-open Add-Season-open'>
           <Container fluid>
             <Row>
               <div className='main_add_teams'>
                 <div className='main-ad-sea'>
                   <p><i className="ri-pencil-fill"></i>  Add Teams</p>
                 </div>
-                <hr />
                 <div className='addsection-open'>
                   <div className='add-genral'>
-                    <h6>General</h6>
+                    {/* <h6>General</h6> */}
                   </div>
-                  <hr />
+                  
                   <div className='general-part'>
                     <Tabs
                       defaultActiveKey="profile"
@@ -214,14 +213,13 @@ const lang ='en'
                       className="mb-3 generalone"
                     >
                       <Tab className='tabevent' eventKey="profile" title={<span><img src={require('../img/en.png')} alt="General" /> General</span>}>
-                        <div className='sanson-title'></div>
+                        
                         <div className='date-for-section'>
-                          <div className='sanson-title'>
-                          </div>
+                          
                           <div className='sanson-title'>
                             <Form>
                               <Form.Group as={Row} className="mb-5" controlId="formPlaintextPassword">
-                                <Form.Label column sm="1">
+                                <Form.Label column sm="2" className='season-coll'>
                                   League Name
                                 </Form.Label>
                                 <Col sm="10">
@@ -243,25 +241,30 @@ const lang ='en'
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Col  sm="2" className='season-coll'>
+                              <Form.Label>
                               Team Name
                               </Form.Label>
+                              </Col>
+                              <Col sm="10">
                               <Form.Control
                                 type="text"
                                 placeholder="Team Name"
                                 value={formData.Team_Name_English}
                                 onChange={(e) =>
                                   handleChange("Team_Name_English", e.target.value)
+                                  
                                 }
                                 
                               />
+                              </Col>
                             </Form.Group>
                             <Form.Group
                               as={Row}
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className='season-coll'>
                               Team Image
                               </Form.Label>
                               <Col sm="10">
@@ -285,7 +288,7 @@ const lang ='en'
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className='season-coll'>
                               Team Description
                               </Form.Label>
                               <Col sm="10">
@@ -303,7 +306,7 @@ const lang ='en'
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className='season-coll'>
                               Team Name Short English
                               </Form.Label>
                               <Col sm="10">
@@ -378,7 +381,7 @@ const lang ='en'
                           <div className='team Name'>
                             <Form>
                               <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                <Form.Label column sm="2">
+                                <Form.Label column sm="2" className='season-coll'>
                                   Status
                                 </Form.Label>
                                 <Col sm="10">
@@ -425,9 +428,10 @@ const lang ='en'
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className='season-coll'>
                               Team Name
                               </Form.Label>
+                              <Col sm="10">
                               <Form.Control
                                 type="text"
                                 placeholder="Team Name Arabic"
@@ -436,7 +440,7 @@ const lang ='en'
                                   handleChangeAr("Team_Name_Arabic", e.target.value)
                                 }
                                 
-                              />
+                              /></Col>
                             </Form.Group>
                             
                             <Form.Group
@@ -444,7 +448,7 @@ const lang ='en'
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className='season-coll'>
                               Team Description
                               </Form.Label>
                               <Col sm="10">
@@ -462,7 +466,7 @@ const lang ='en'
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className='season-coll'>
                               Team Name Short Arabic
                               </Form.Label>
                               <Col sm="10">

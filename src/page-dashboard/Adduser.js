@@ -165,8 +165,7 @@ export default function Adduser() {
                         </Row>
                     </Container>
                 </section>
-                <hr />
-                <section className="Add-Season-open">
+                <section className="">
                     <Container fluid>
                         <Row>
                             <div className="main_add_season">
