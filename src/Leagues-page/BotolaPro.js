@@ -48,7 +48,6 @@ export default function BotolaPro() {
                    <div className='col-lg-2 col-md-2 col-sm-12 m-auto'>
                            <div className='en-leagues-img'>
                             <img src={require('../img/BOTOLAinwi-134x136.png')} alt="earth" className="img-premier-press"/>
-
                            </div>
                        </div>
                        <div className='col-lg-10 col-md-10 col-sm-12'>

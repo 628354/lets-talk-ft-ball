@@ -129,7 +129,6 @@ const [defination,setDefination]=useState([]);
           </Row>
         </Container>
       </section>
-      <hr />
       <section className='teams-List'>
         <Container fluid>
           <Row>
@@ -140,10 +139,10 @@ const [defination,setDefination]=useState([]);
               <Table bordered hover className='tablepress'>
                 <thead>
                   <tr>
-                   <th>SQ</th>
-                    <th>Definition Title</th>
-                    <th>Content</th>
-                    <th>Action</th>
+                   <th width="2%">SQ</th>
+                    <th width="20%">Definition Title</th>
+                    <th width="30%">Content</th>
+                    <th width="2%">Action</th>
                   </tr>
                 </thead>
                 <tbody className='table-list-one'>

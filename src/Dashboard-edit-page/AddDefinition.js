@@ -133,20 +133,17 @@ export default function AddDefination() {
               </Row>
             </Container>
           </section>
-          <hr />
-          <section className='Add-Teams-open'>
+          <section className='Add-Teams-open Add-Season-open'>
             <Container fluid>
               <Row>
                 <div className='main_add_teams'>
                   <div className='main-ad-sea'>
                     <p><i className="ri-pencil-fill"></i>Add Defination</p>
                   </div>
-                  <hr />
                   <div className='addsection-open'>
                     <div className='add-genral'>
-                      <h6>General</h6>
+                      {/* <h6>General</h6> */}
                     </div>
-                    <hr />
                     <div className='general-part'>
                       <Tabs
                         defaultActiveKey="profile"
@@ -154,10 +151,9 @@ export default function AddDefination() {
                         className="mb-3 generalone"
                       >
                         <Tab className='tabevent' eventKey="profile" title={<span><img src={require('../img/en.png')} alt="General" /> General</span>}>
-                          <div className='sanson-title'></div>
+                          
                           <div className='date-for-section'>
-                            <div className='sanson-title'>
-                            </div>
+                            
                             <div className='sanson-title'>
                              
                               <Form>
@@ -166,10 +162,10 @@ export default function AddDefination() {
                                 className="mb-3"
                                 controlId="formPlaintextPassword"
                               >
-                                <Form.Label column sm="3">
+                                <Form.Label column sm="2" className="season-coll">
                                Defination Titile 
                                 </Form.Label>
-                                <Col sm="9">
+                                <Col sm="10">
                                 <Form.Control
                                   type="text"
                                   placeholder="Defination Titile "
@@ -187,10 +183,10 @@ export default function AddDefination() {
                                 className="mb-3"
                                 controlId="formPlaintextPassword"
                               >
-                                <Form.Label column sm="3">
+                                <Form.Label column sm="2" className="season-coll">
                                 Defination Description
                                 </Form.Label>
-                                <Col sm="9">
+                                <Col sm="10">
                                   <ReactQuill
                                     className="edit-text"
                                     // value={formData.Description_English}
@@ -219,13 +215,13 @@ export default function AddDefination() {
                           <div className="sanson-title">
                           <Form.Group
                                 as={Row}
-                                className="mb-3"
+                                className="mb-2"
                                 controlId="formPlaintextPassword"
                               >
-                                <Form.Label column sm="3">
+                                <Form.Label column sm="2" className="season-coll">
                                 Defination Titile 
                                 </Form.Label>
-                                <Col sm="9">
+                                <Col sm="10">
                                 <Form.Control
                                   type="text"
                                   placeholder=" Defination Titile Arabic"
@@ -243,10 +239,10 @@ export default function AddDefination() {
                                 className="mb-3"
                                 controlId="formPlaintextPassword"
                               >
-                                <Form.Label column sm="3">
+                                <Form.Label column sm="2" className="season-coll">
                                 Defination Description
                                 </Form.Label>
-                                <Col sm="9">
+                                <Col sm="10">
                                   <ReactQuill
                                     className="edit-text"
                                     // value={formDataAr.Description_Arabic}
