@@ -13,8 +13,7 @@ import { REQUEST_TYPE, LEAGUES, BASE_URL } from "../helper/APIInfo";
 import Cookies from "js-cookie";
 export default function Header() {
 	const lang = Cookies.get('language')
-	const folderName =localStorage.getItem("foldername")
-	console.log(lang);
+		const { language, switchLanguage } = useLanguage();
 	const [leagueNames, setLeagueNames] = useState([]);
 
 	window.addEventListener("scroll", function () {
@@ -37,7 +36,7 @@ export default function Header() {
 	const handleMouseLeave = () => {
 		setShowDropdown(false);
 	};
-	const { language, switchLanguage } = useLanguage();
+
 
 	const handleLanguageChange = (newLanguage, event) => {
 		event.preventDefault(); // Prevent the default behavior of the link
@@ -73,7 +72,7 @@ export default function Header() {
 	useEffect(() => {
 		getLeagueName();
 		
-	}, []);
+	}, [lang]);
 
 	const handleButtonClick = (id) => {
 		// Store the id in sessionStorage
@@ -152,13 +151,13 @@ export default function Header() {
 									<div className="en_h_drop">
 										<ul className="en_drop_item  row w-100">
 											{leagueNames?.map((data)=>{
-												console.log(data);
+												console.log(`${BASE_URL}${data?.image}`);
 												return(<li className="col-md-6" key={data?.leagueId}  onClick={() => handleButtonClick(data?.leagueId)}>
 												<Link to="/league"  >
 													<span>
 														<img
 															src={
-																`${BASE_URL}${folderName}/${data?.image}`
+																`${BASE_URL}${data?.image}`
 															}
 															alt=""
 															className="logo-navd"

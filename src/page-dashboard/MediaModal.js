@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button, Form,Container, Row, } from "react-bootstrap";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE,GET_IMAGE,ADD_IMAGE ,CREATE_FOLDER,GET_FOLDER} from "../helper/APIInfo";
+import { REQUEST_TYPE,GET_IMAGE,ADD_IMAGE ,CREATE_FOLDER,GET_FOLDER, GET_FOLDER_BY_ID} from "../helper/APIInfo";
 import UploadMediaImg from "./UploadMediaImg";
 import UploadMediaComp from "./UploadMediaComp";
 
@@ -60,8 +60,9 @@ console.log(folderWithoutSpaces);
     // }
     try {
       const data =[]
-      const response = await apiCall(
-        `http://localhost:5000/foderGetById/${id}`);
+      
+      const response = await apiCall(`${GET_FOLDER_BY_ID.get}/${id}`);
+      // const response = await apiCall(`http://localhost:5000/foderGetById/${id}`);
       console.log(response.response?.data?.body);
       response.response?.data?.body?.map((item)=>{
         item.image.map((img)=>{
@@ -108,7 +109,7 @@ console.log(folderWithoutSpaces);
                       id="menu"
                     >
                       {folders?.map((item) => {
-                        console.log(item);
+                        // console.log(item);
                         return (
                           <li key={item?._id}>
                             <a

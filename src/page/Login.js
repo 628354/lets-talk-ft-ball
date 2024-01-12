@@ -37,7 +37,7 @@ export default function Login(props) {
 			console.log(response.response.data)
 			localStorage.setItem('token', token);
 			setIsLoggedIn(true);
-			navigate("/Dashboard");
+			navigate("/dashboard");
 		} else {
 			navigate("/login")
 			console.log(response.response.response)
