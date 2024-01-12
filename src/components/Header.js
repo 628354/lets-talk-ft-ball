@@ -54,8 +54,8 @@ export default function Header() {
 			},
 		  };
 		  const response = await apiCall(LEAGUES(lang).league, REQUEST_TYPE.GET, obj);
-		  console.log( response.response?.data?.body);
-		  response.response?.data?.body.map((item)=>{
+		  console.log( response);
+		  response.response?.data?.body?.map((item)=>{
 			console.log(item);
 			data.push({
 				"image":item?.image,
