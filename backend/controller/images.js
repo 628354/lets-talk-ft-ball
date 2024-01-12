@@ -21,7 +21,8 @@ exports.addimages = async (req, res) => {
         }
 
         const imagesUpload = await imagesModel.create({
-            image: req.files.map((file) => file.filename.replace(/\s+/g, "")),
+            image: req.files.map((file) => `${folderName}/${file.filename.replace(/\s+/g, "")}`),
+            folderName,
             folderId,
             status: req.body.status,
         });

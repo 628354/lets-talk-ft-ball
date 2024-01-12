@@ -33,7 +33,6 @@ module.exports = {
                         Team_Name_English: myData.Team_Name_English,
                         Team_Name_Short_English: myData.Team_Name_Short_English,
                         Description_English: myData.Description_English,
-                        Image: myData.Image,
                         SEO_URL: myData.SEO_URL,
                         Past_teams_logo_file_names_below: myData.Past_teams_logo_file_names_below,
                         logo_folder: myData.logo_folder,
@@ -44,13 +43,13 @@ module.exports = {
                         Team_Name_Arabic: myData.Team_Name_Arabic,
                         Team_Name_Short_Arabic: myData.Team_Name_Short_Arabic,
                         Description_Arabic: myData.Description_Arabic,
-                        Image: myData.Image,
                         SEO_URL: myData.SEO_URL,
                         Past_teams_logo_file_names_below: myData.Past_teams_logo_file_names_below,
                         logo_folder: myData.logo_folder,
                         Team_info: myData.Team_info,
                         Team_info: myData.Team_info
                     },
+                    Image: myData.Image,
                 });
             }
         });
@@ -89,7 +88,7 @@ module.exports = {
 
     createTeam: async (req, res) => {
         try {
-            const { image, en, ar } = req.body;
+            const { Image, en, ar } = req.body;
             const find = await teamCatlog.findOne({
                 "en.Team_Name_English": en.Team_Name_English,
             });
@@ -101,15 +100,14 @@ module.exports = {
             const url = `${protocol}//${host}`;
             const addTeam = await teamCatlog.create({
                 leagueid: req.body.leagueid,
-                // Image: req.file ? url + "/uploads/" + req.file.filename : " ",
+                Image: Image,
                 en: {
                     Team_Name_English: en.Team_Name_English || "",
                     Team_Name_Short_English: en.Team_Name_Short_English || "",
                     Description_English: en.Description_English || "",
-                    Image: en.Image || "",
                     Team_info: en.Team_info || "",
                     logo_folder: en.logo_folder || "",
-                    status: en.status || "active",
+                    status: en.status || "enable",
                     Past_teams_logo_file_names_below:
                         en.Past_teams_logo_file_names_below || "",
                     SEO_URL: en.SEO_URL || "",
@@ -118,10 +116,9 @@ module.exports = {
                     Team_Name_Arabic: ar.Team_Name_Arabic || "",
                     Team_Name_Short_Arabic: ar.Team_Name_Short_Arabic || "",
                     Description_Arabic: ar.Description_Arabic || "",
-                    Image: ar.Image,
                     Team_info: ar.Team_info || "",
                     logo_folder: ar.logo_folder || "",
-                    status: ar.status || "active",
+                    status: ar.status || "enable",
                     Past_teams_logo_file_names_below:
                         ar.Past_teams_logo_file_names_below || "",
                     SEO_URL: ar.SEO_URL || "",
@@ -143,7 +140,7 @@ module.exports = {
     GetAllTeams: async (req, res) => {
         try {
             const { lung } = req.params;
-            const allteams = await teamCatlog.find({}, { [lung]: 1 }).populate({
+            const allteams = await teamCatlog.find({}, { [lung]: 1, Image: 1 }).populate({
                 path: "leagueid",
                 select: ["en.leaguename", "ar.leaguename"],
             });
@@ -165,7 +162,7 @@ module.exports = {
         try {
             const { lung } = req.params;
             const getByIdTeams = await teamCatlog
-                .findById({ _id: req.params.id }, { [lung]: 1 })
+                .findById({ _id: req.params.id }, { [lung]: 1, Image: 1 })
                 .populate({
                     path: "leagueid",
                     select: ["en.leaguename"],
@@ -196,21 +193,20 @@ module.exports = {
             const protocol = req.protocol;
             const host = req.hostname;
             const url = `${protocol}//${host}`;
-            const { image, en, ar } = req.body;
+            const { Image, en, ar } = req.body;
 
             const update = await teamCatlog.findByIdAndUpdate(
                 { _id: req.params.id },
                 {
                     leagueid: req.body.leagueid,
-                    // Image: req.file ? url + "/uploads/" + req.file.filename : " ",
+                    Image: Image,
                     en: {
                         Team_Name_English: en.Team_Name_English || "",
                         Team_Name_Short_English: en.Team_Name_Short_English || "",
                         Description_English: en.Description_English || "",
-                        Image: en.Image || "",
                         Team_info: en.Team_info || "",
                         logo_folder: en.logo_folder || "",
-                        status: en.status || "active",
+                        status: en.status || "enable",
                         Past_teams_logo_file_names_below:
                             en.Past_teams_logo_file_names_below || "",
                         SEO_URL: en.SEO_URL || "",
@@ -219,10 +215,9 @@ module.exports = {
                         Team_Name_Arabic: ar.Team_Name_Arabic || "",
                         Team_Name_Short_Arabic: ar.Team_Name_Short_Arabic || "",
                         Description_Arabic: ar.Description_Arabic || "",
-                        Image: ar.Image,
                         Team_info: ar.Team_info || "",
                         logo_folder: ar.logo_folder || "",
-                        status: ar.status || "active",
+                        status: ar.status || "enable",
                         Past_teams_logo_file_names_below:
                             ar.Past_teams_logo_file_names_below || "",
                         SEO_URL: ar.SEO_URL || "",
@@ -320,4 +315,42 @@ module.exports = {
             });
         }
     },
-};
+    updateStatus: async (req, res) => {
+        try {
+            const { en, ar } = req.body;
+
+            const updatedPermission = await teamCatlog.findByIdAndUpdate(
+                { _id: req.params.id },
+                {
+                    $set: {
+                        "en.status": (en && en.status) || "enable",
+                        "ar.status": (ar && ar.status) || "enable",
+                    }
+                },
+                { new: true, lean: true }
+            );
+
+            if (!updatedPermission) {
+                return res.status(404).send({
+                    message: 'Status not found',
+                    success: false
+                });
+            }
+
+            res.status(200).send({
+                body: updatedPermission,
+                message: 'Status Updated successfully',
+                success: true
+            });
+
+        } catch (error) {
+            res.status(500).send({
+                message: 'Internal Server Error',
+                success: false,
+                error: error.message
+            });
+        }
+    }
+
+
+}

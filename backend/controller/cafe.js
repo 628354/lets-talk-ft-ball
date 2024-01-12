@@ -195,7 +195,6 @@ module.exports = {
             const host = req.hostname;
             const url = `${protocol}://${host}`;
             const { logo, cafe_image, en, ar } = req.body;
-
             const AddCafe = new cafemodel({
                 // cafe_image: cafe_image ? `${url}/uploads/${cafe_image}` : "",
                 // logo: logo ? `${url}/uploads/${logo}` : "",

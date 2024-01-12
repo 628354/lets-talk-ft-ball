@@ -25,6 +25,7 @@ router.delete("/removeteam/:id", teamCatlog.removeteam);
 router.get('/:lung/GetAllTeams', teamCatlog.GetAllTeams)
 router.get('/:lung/getByIdTeams/:id', teamCatlog.getByIdTeams)
 router.get('/TeamsFilter', teamCatlog.TeamsFilter)
+router.put('/updateStatus/:id', teamCatlog.updateStatus)
 
 
 //============================================website routes====================================
