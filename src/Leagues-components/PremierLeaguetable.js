@@ -67,7 +67,7 @@ export default function PremierLeaguetable({
 			const data1 = []
 			const apiUrl = `${baseUrl}/${leagueId}`;
 			const response = await apiCall(apiUrl, REQUEST_TYPE.POST, params);
-			// console.log(response)
+			console.log(response.response.data?.data[3]?.[lang]);
 			response.response.data?.data.map((item)=>{
 				console.log(response.response.data?.data);
 				// item[lang].map((items)=>{
@@ -211,8 +211,8 @@ localStorage.setItem("teamId",teamId)
 							</td>
 						</tr>
 						{leagueDetails && leagueDetails.map((data, index) => {
-							console.log(data);	
-							console.log(`${BASE_URL}${data.teamname?.[lang]?.Image}`);
+							// console.log(data);	
+							// console.log(`${BASE_URL}${data.teamname?.Image}`);
 							//const tableDAta = data.en[0];
 							return (
 								<tr className="table-create" key={data._id}>
@@ -224,7 +224,7 @@ localStorage.setItem("teamId",teamId)
 										>
 											<span className="overimage">
 												<img
-													src={`${BASE_URL}${data.teamname?.[lang]?.Image}`}
+													src={`${BASE_URL}${data.teamname?.Image}`}
 													alt="earth"
 													className="logo-rearth-table"
 												/>

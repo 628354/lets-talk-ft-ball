@@ -88,7 +88,7 @@ export default function TeamComparisionChartThree({GsGc2}) {
 	  
 	  },[GsGc2])
     
-	  console.log(GsGc2)
+	//   console.log(GsGc2)
 
    
     return (

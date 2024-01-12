@@ -33,7 +33,9 @@ export const TEAM_BULK_IMPORT = {
 export const SESSION = {
   year: `${SERVER_LINK}getyears`,
 };
-
+export const GET_FOLDER_BY_ID = {
+  get: `${SERVER_LINK}foderGetById`,
+};
 // export const LEAGUES = {
 //   league: `${SERVER_LINK}en/getleagues`,
 //   leaguear: `${SERVER_LINK}ar/getleagues`,
@@ -111,10 +113,12 @@ export const UPDATE_LEAGUE = {
   upDate: `${SERVER_LINK}updateLeague`,
 
 };
-export const TEAM_DETAILS = {
-  details: `${SERVER_LINK}en/team_details`,
 
-};
+export const TEAM_DETAILS=(lang)=>{
+  return {
+    find:`${SERVER_LINK}${lang}/team_details`
+  }
+}
 export const ADD_IMAGE = {
   image: `${SERVER_LINK}addImage`,
 

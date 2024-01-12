@@ -20,6 +20,8 @@ export default function EditTeams() {
 const [allData,setAllData]=useState(null)
 const [leagueName,setLeagueName]=useState([])
 const [leagueNameAr,setLeagueNameAr]=useState([])
+const [mediaModalShow, setMediaModalShow] = useState(false);
+const [image,setImage]=useState(null);
   const [formData, setFormData] = useState({
     Team_Name_English: '',
     Team_Name_Short_English: '',
@@ -28,7 +30,6 @@ const [leagueNameAr,setLeagueNameAr]=useState([])
     SEO_URL: '',
     Past_teams_logo_file_names_below: '',
     logo_folder: '',
-    Image: '',
     status: 'active',
     league: ''
   });
@@ -40,30 +41,19 @@ const [leagueNameAr,setLeagueNameAr]=useState([])
     SEO_URL: '',
     Past_teams_logo_file_names_below: '',
     logo_folder: '',
-    Image: '',
     status: 'active',
-    league: ''
+
 
 
   });
   const handleImageChange = (e) => {
-    const imageFile = e.target.files[0];
-    setFormData((prev)=>({
-      ...prev,
-      image: imageFile,
-
-    }))
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImagePreview(reader.result);
+    e.preventDefault();
+    setMediaModalShow(true);
     };
-    reader.readAsDataURL(imageFile);
-  };
 
 
 
   const handleChange = (field, value) => {
-    console.log(`Updating ${field} with value: ${value}`);
     setFormData((prev)=>({
       ...prev,
       [field]: value,
@@ -74,7 +64,6 @@ const [leagueNameAr,setLeagueNameAr]=useState([])
 
 
   const handleChangeAr = (field, value) => {
-    console.log(`Updating ${field} with value: ${value}`);
     setFormDataAr((prev)=>({
       ...prev,
       [field]: value,

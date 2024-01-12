@@ -9,13 +9,14 @@ import TeamComparisionChart from "../Leagues-components/TeamComparisionChart";
 import TeamComparisionTable from "../Leagues-components/TeamComparisionTable";
 import Iframesecttion from "../Leagues-components/Iframesecttion";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, LEAGUES, ALL_SEASON, TEAM_NAME, GAINING_RATE, TEAM_SEA_GC, TEAM_GS_GC, TEAM_GS_IN_G, } from "../helper/APIInfo";
+import { REQUEST_TYPE, LEAGUES, ALL_SEASON, TEAM_NAME, GAINING_RATE, TEAM_SEA_GC, TEAM_GS_GC, TEAM_GS_IN_G, BASE_URL, } from "../helper/APIInfo";
 import TeamComparisionTableTwo from "../Leagues-components/TeamComparisionTableTwo";
 import TeamComparisionChartTwo from "../Leagues-components/TeamComparisionChartTwo";
 import TeamComparisionChartThree from "../Leagues-components/TeamComparisionChartThree";
 import TeamComparisionChartFour from "../Leagues-components/TeamComparisionChartFour";
 import TeamComparisionChartFive from "../Leagues-components/TeamComparisionChartFive";
 import TeamComparisionChartSix from "../Leagues-components/TeamComparisionChartSix";
+import noImage from '../img/no_image.png'
 import Cookies from "js-cookie";
 export default function Teamcomparision() {
 	const lang = Cookies.get('language')
@@ -23,7 +24,6 @@ export default function Teamcomparision() {
 	const [leagueNames2, setLeagueNames2] = useState([]);
 	const [season, setSeason] = useState([]);
 	const [teamName, setTeamName] = useState([]);
-
 	const [currentLeagueId, setCurrentLeagueId] = useState(null)
 	const [seasonId, setSeasonId] = useState(null)
 	const [teamId, setTeamId] = useState(null)
@@ -31,7 +31,9 @@ export default function Teamcomparision() {
 	const [gainRate2, setGainRate2] = useState([])
 	const [data, setData] = useState([])
 	const [data2, setData2] = useState([])
-
+    const [imageEn,setImageEn]=useState([])
+    const [imageAr,setImageAr]=useState([])
+    const [flag,setFlag]=useState(false)
 	/// 2nd side 
 
 
@@ -64,7 +66,7 @@ export default function Teamcomparision() {
 try {
 	const data = []
 	apiCall(LEAGUES(lang).league, REQUEST_TYPE.GET).then((response) => {
-		console.log(response);
+		// console.log(response);
 		response.response?.data?.body?.map((item) => {
 			console.log(item);
 			data.push({
@@ -74,7 +76,7 @@ try {
 			})
 
 		})
-		console.log(data);
+		// console.log(data);
 		setLeagueNames(data)
 	})
 } catch (error) {
@@ -122,7 +124,7 @@ try {
 
 		try {
 			const response = await apiCall(TEAM_NAME(lang).find, REQUEST_TYPE.POST, obj);
-			console.log(response);
+			// console.log(response);
 			setTeamName(response.response.data.data);
 
 
@@ -185,7 +187,7 @@ try {
 	apiCall(LEAGUES(lang).league, REQUEST_TYPE.GET).then((response) => {
 		console.log(response);
 		response.response?.data?.body?.map((item) => {
-			console.log(item);
+			// console.log(item);
 			data.push({
 				'leaguename': item?.[lang]?.leaguename,
 				'leagueId': item?._id
@@ -193,7 +195,7 @@ try {
 			})
 
 		})
-		console.log(data);
+		// console.log(data);
 		setLeagueNames2(data)
 	})
 } catch (error) {
@@ -309,9 +311,9 @@ try {
 		const data2=[]
 		try {
 			const response = await apiCall(GAINING_RATE.gainrate, REQUEST_TYPE.POST, obj)
-			console.log(response);
-			
-
+			// console.log(response.response?.data?.data?.teamname1);
+			setImageEn(response.response?.data?.data?.teamname1)
+			setFlag(true)
 			response.response.data.data?.teamDatas.map((item) => {
 				// console.log(item);
 				item?.en.map((data) => {
@@ -649,8 +651,8 @@ try {
 											}
 											{
 												leagueNames?.map((item) => {
-													console.log("=======================================================================");
-													console.log(item)
+													// console.log("=======================================================================");
+													// console.log(item)
 													return (<option key={item?.leagueId} value={item?.leagueId}>{item?.leaguename}</option>)
 												})
 											}
@@ -694,8 +696,9 @@ try {
 									</div>
 								</div>
 								<div className="compari-logo">
-									<img
-										src={require("../img/no_image.png")}
+								
+									<img									
+										src={flag? `${BASE_URL}${imageEn?.Image}`: {noImage}}
 										alt="earth"
 										className="img-comp"
 									/>
@@ -739,7 +742,7 @@ try {
 											}
 											{
 												leagueNames2?.map((item) => {
-													console.log(item)
+													// console.log(item)
 													return (<option key={item?.leagueId} value={item?.leagueId}>{item?.leaguename}</option>)
 												})
 											}
@@ -753,7 +756,7 @@ try {
 											}
 											{
 												season2?.map((item) => {
-													console.log(item.seasonid._id)
+													// console.log(item.seasonid._id)
 													return (<option key={item?.seasonid?._id} value={item?.seasonid?._id}>{item?.seasonid?.season_Title}</option>)
 												})
 											}

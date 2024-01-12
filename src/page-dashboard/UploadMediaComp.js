@@ -24,6 +24,8 @@ console.log(files);
 console.log(formData);
     try {
       console.log(formData);
+      
+      // const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/addImage', formData, {
       const response = await axios.post('http://localhost:5000/addImage', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -64,7 +66,7 @@ console.log(formData);
               <div className="col-lg-2 col-md-2 col-sm-6" key={index}>
                 <div className="media-folder-image">
                   <img
-                    src={`${BASE_URL}${folder}/${item.image}`}
+                    src={`${BASE_URL}/${item.image}`}
                     alt="earth"
                     className="up-date-img"
                     onClick={() => handleImageClick(item.image)}

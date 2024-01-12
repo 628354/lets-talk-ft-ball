@@ -7,9 +7,10 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import { CREATE_TEAM, LEAGUES, REQUEST_TYPE, SESSION } from '../helper/APIInfo';
+import { BASE_URL, CREATE_TEAM, LEAGUES, REQUEST_TYPE, SESSION } from '../helper/APIInfo';
 import { apiCall } from '../helper/RequestHandler';
 import ReactQuill from "react-quill";
+import MediaModal from "./MediaModal";
 
 export default function Addteams() {
 
@@ -18,6 +19,10 @@ export default function Addteams() {
   const [getLeagues, setLeagues] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
 const [allData,setAllData]=useState(null)
+
+const [mediaModalShow, setMediaModalShow] = useState(false);
+
+const [image,setImage]=useState(null)
   const [formData, setFormData] = useState({
     Team_Name_English: '',
     Team_Name_Short_English: '',
@@ -26,9 +31,9 @@ const [allData,setAllData]=useState(null)
     SEO_URL: '',
     Past_teams_logo_file_names_below: '',
     logo_folder: '',
-    Image: '',
     status: 'active',
-    league: ''
+    league: '',
+
   });
   const [formDataAr, setFormDataAr] = useState({
     Team_Name_Arabic: '',
@@ -38,28 +43,14 @@ const [allData,setAllData]=useState(null)
     SEO_URL: '',
     Past_teams_logo_file_names_below: '',
     logo_folder: '',
-    Image: '',
-    status: 'active',
-    league: ''
+
 
 
   });
-  const handleImageChange = (e) => {
-    const imageFile = e.target.files[0];
-    setFormData({
-      ...formData,
-      image: imageFile,
-    });
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImagePreview(reader.result);
-    };
-    reader.readAsDataURL(imageFile);
-  };
 
 
   const handleChange = (field, value) => {
-    console.log(`Updating ${field} with value: ${value}`);
+   
     setFormData({
       ...formData,
       [field]: value,
@@ -68,12 +59,17 @@ const [allData,setAllData]=useState(null)
 
 
   const handleChangeAr = (field, value) => {
-    console.log(`Updating ${field} with value: ${value}`);
+ 
     setFormDataAr({
       ...formDataAr,
       [field]: value,
     });
   };
+  const handleImageChange = (e) => {
+    e.preventDefault();
+    setMediaModalShow(true);
+  };
+
   const handleLeagueChange = (selectedLeagueId) => {
    console.log(selectedLeagueId);
   //  getLeagues.find((item)=> console.log(item._id ===selectedLeagueId )   )
@@ -109,24 +105,27 @@ const lang ='en'
 
   const handleSave = async (e) => {
     e.preventDefault();
-  console.log(formData?.league);
-  console.log(formData?.Team_Name_English);
-  console.log(allData);
+  // console.log(formData?.league);
+  // console.log(formData?.Team_Name_English);
+  // console.log(allData);
     // Check if required fields are filled
     if (!formData.Team_Name_English) {
       setErrorMessage('Please fill in all required fields.');
       clearMessages();
     } else {
       try {
+        console.log(image);
         let data = {
+         
           leagueid: allData,
+          "Image":image,
           en: formData,
           ar: formDataAr,
         };
         
       
       // console.log('Sending data to the server:', { en: formData, ar: formDataAr });
-        const response = await apiCall(CREATE_TEAM.team, REQUEST_TYPE.POST, data);
+        const response = await apiCall(CREATE_TEAM.team, REQUEST_TYPE.POST,data);
         // console.log(response);
         setSuccessMessage(response?.response?.data?.message);
         clearMessages();
@@ -137,6 +136,15 @@ const lang ='en'
     }
   };
   
+  const handleMediaUpload = (selectedFile) => {
+
+    console.log("Media uploaded:", selectedFile);
+    
+    setImage(selectedFile)
+    setMediaModalShow(false); // Close the modal after media upload
+
+  };
+
 
   const clearMessages = () => {
     setTimeout(() => {
@@ -270,19 +278,16 @@ const lang ='en'
                               <Col sm="10">
                                 <Form.Control
                                   type="file"
-                                  onChange={handleImageChange}
+                                  onClick={handleImageChange}
                                 />
                               </Col>
                             </Form.Group>
-                            {imagePreview && (
-                              <div>
-                                <img
-                                  src={imagePreview}
-                                  style={{ maxWidth: "10%" }}
-                                  alt="Selected"
-                                />
-                              </div>
-                            )}
+                            {image === null? "" : <img className="logo_im" src={`${BASE_URL}/${image}`}/> }
+                            <MediaModal
+        show={mediaModalShow}
+        onHide={() => setMediaModalShow(false)}
+        onUpload={handleMediaUpload}
+        />
                             <Form.Group
                               as={Row}
                               className="mb-3"

@@ -21,15 +21,20 @@ const [blogDetails,setBlogDetails]=useState([])
 			);
 			console.log(response.response?.data?.body);
 			response.response?.data?.body?.map((item)=>{
-				console.log(item[lang]?.cafecontent);
+				console.log(item[lang]);
 				
-				data.push(item[lang]?.cafecontent)
+				data.push({
+					"cafeContent":item[lang]?.content,
+					"date":item[lang]?.date,
+					"title":item[lang]?.title,
+					"Id":item?._id,
+				})
 			})
 			
 				
 				
 				
-				setBlogDetails(data)
+			setBlogDetails(data)
 			// console.log(response)
 			//setBlogData(data1)
 			

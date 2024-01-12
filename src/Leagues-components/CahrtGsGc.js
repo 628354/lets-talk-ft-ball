@@ -55,7 +55,7 @@ export default function CahrtGsGc({ leagueId}) {
 								data1.push({
 									"goalsCons": parseInt(results?.gs_gc, 10),
 									"name": results.teamname?.[lang]?.Team_Name_Short_English,
-									"icon": `${BASE_URL}${results.teamname?.[lang]?.Image}`
+									"icon": `${BASE_URL}${results.teamname?.Image}`
 									//"goalsScored": results?.goals_scored
 									// "Image": `${BASE_URL}${results?.teamname?.Image.replace(/\s/g, '')}`
 								})
@@ -64,7 +64,7 @@ export default function CahrtGsGc({ leagueId}) {
 								data1.push({
 									"goalsCons": parseInt(results?.gs_gc, 10),
 									"name": results.teamname?.[lang]?.Team_Name_Short_Arabic,
-									"icon": `${BASE_URL}${results.teamname?.[lang]?.Image}`
+									"icon": `${BASE_URL}${results.teamname?.Image}`
 									//"goalsScored": results?.goals_scored
 									// "Image": `${BASE_URL}${results?.teamname?.Image.replace(/\s/g, '')}`
 								})
