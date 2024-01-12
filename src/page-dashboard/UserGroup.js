@@ -126,9 +126,9 @@ export default function UserGroup() {
                 <Table bordered hover className='tablepress'>
                   <thead>
                     <tr>
-                      <th><Form.Check aria-label="option 1" /></th>
-                      <th>User Group Name</th>
-                      <th>Action</th>
+                      <th width="1%"><Form.Check aria-label="option 1" /></th>
+                      <th width="20%">User Group Name</th>
+                      <th width="2%">Action</th>
                      
                     </tr>
                   </thead>

@@ -126,11 +126,11 @@ export default function User() {
                 <Table bordered hover className='tablepress'>
                   <thead>
                     <tr>
-                      <th><Form.Check aria-label="option 1" /></th>
-                      <th>User Name</th>
-                      <th>Status</th>
-                      <th>Date Addded</th>
-                      <th className=''>Action</th>
+                      <th width="1%"><Form.Check aria-label="option 1" /></th>
+                      <th width="20%">User Name</th>
+                      <th width="20%">Status</th>
+                      <th width="20%">Date Addded</th>
+                      <th className='' width="2%">Action</th>
                     </tr>
                   </thead>
                   <tbody className='table-list-one'>

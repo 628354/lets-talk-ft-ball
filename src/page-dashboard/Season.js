@@ -104,10 +104,10 @@ const handleDelete = (id) => {
                 <Table bordered hover className='tablepress'>
                   <thead>
                     <tr>
-                      <th><Form.Check aria-label="option 1" /></th>
-                      <th>League Name</th>
-                      <th>Sort Order</th>
-                      <th>Action</th>
+                      <th width="1%"><Form.Check aria-label="option 1" /></th>
+                      <th width="20%">League Name</th>
+                      <th width="20%">Sort Order</th>
+                      <th width="2%">Action</th>
                     </tr>
                   </thead>
                   <tbody className='table-list-one'>

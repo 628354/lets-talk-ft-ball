@@ -38,6 +38,7 @@ console.log(formData);
               <div className="main-media-folder">
                 <div className="file-main-wrapper">
                   <input type="file" name="images" className="file-media-poniter" multiple onChange={uploadImage} />
+                  <p className="file_icon"><i className="fa fa-cloud-upload" aria-hidden="true"></i></p>
                   <div className="close-btn">×</div>
                 </div>
               </div>

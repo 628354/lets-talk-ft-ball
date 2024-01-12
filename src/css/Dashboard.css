@@ -103,7 +103,7 @@ ul.add-button-min {
 li.add-button-fis a {
     background: #1e91cf;
     color: white;
-    /* padding: 4px 8px; */
+    padding: 0px 12px;
     display: inline-block;
     font-size: 15px;
     font-weight: bold;
@@ -228,7 +228,7 @@ tbody.table-list-one tr {
 
 /* edit home css */
 .general-part-home {
-    margin-top: 60px;
+    margin-top: 30px;
     box-shadow: 0px 0px 15px -2px;
     padding: 45px 60px;
     border-radius: 7px;
@@ -441,7 +441,6 @@ a.img-thumbnail {
 }
 
 .up-date-file {
-    background: #dde4eb4f;
     height: 100%;
     padding: 20px 30px;
 }
@@ -454,15 +453,29 @@ a.img-thumbnail {
     padding-top: 50px;
     color: #896746;
   }
+ 
+
   .file-main-wrapper {
     width: 100%;
     height: 100px;
     border: 1px solid gray;
     position: relative;
     /* margin: auto; */
-    margin-top: 15px 
-
+    /* margin-top: 15px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    box-shadow: 0px 0px 12px -5px;
 }
+
+.file_icon {
+    font-size: 40px;
+    color: #585a5a94;
+}
+
+
+
   .file-main-wrapper:after{
     content: '';
     position: absolute;
@@ -496,6 +509,7 @@ a.img-thumbnail {
     z-index: 99999;
     cursor: pointer;
   }
+
   .file-set{
     background-size: cover;
     background-repeat: no-repeat;
@@ -720,7 +734,44 @@ section.min-section-one {
     padding: 20px;
     border-bottom: 1px solid #ddd;
 }
-/* 11-01-24 */.logo_im{
+/* 11-01-24 */
+.logo_im{
     width: 150px;
     height:150px;
 }
+
+/* 12-01-24 */
+.folder-color {
+    background: #dde4eb4f;
+}
+
+.search-button button {
+    border: none;
+    background: #1e91cf;
+    padding: 9px 8px;
+    color: white;
+    font-size: 14px;
+    border-radius: 0px 6px 6px 0px;
+}
+.search-button input {
+    padding: 6px 10px;
+    border-radius: 6px 0px 0px 6px;
+    border: 1px solid #c5c5c5;
+}
+
+.add-button-fis button {
+    background: #1e91cf;
+    color: white;
+    /* padding: 4px 8px; */
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+}
+/* 12-01-24 */
+
