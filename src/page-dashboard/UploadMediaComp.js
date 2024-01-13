@@ -25,8 +25,8 @@ console.log(formData);
     try {
       console.log(formData);
       
-      // const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/addImage', formData, {
-      const response = await axios.post('http://localhost:5000/addImage', formData, {
+      const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/addImage', formData, {
+      // const response = await axios.post('http://localhost:5000/addImage', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

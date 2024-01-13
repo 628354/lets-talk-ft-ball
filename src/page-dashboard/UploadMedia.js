@@ -84,8 +84,8 @@ console.log(folderWithoutSpaces);
     // }
     try {
       const data =[]
-      // const response = await apiCall(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/foderGetById/${id}`);
-      const response = await apiCall(`http://localhost:5000/foderGetById/${id}`);
+      const response = await apiCall(`https://phpstack-1140615-3967632.cloudwaysapps.com/backend/foderGetById/${id}`);
+      // const response = await apiCall(`http://localhost:5000/foderGetById/${id}`);
       console.log(response.response?.data?.body);
       response.response?.data?.body?.map((item)=>{
         item.image.map((img)=>{

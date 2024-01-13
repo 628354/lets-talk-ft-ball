@@ -10,6 +10,7 @@ const SERVER_IMAGES =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backen
 
 // export const BASE_URL = "http://localhost:5000/uploads/";
 export const BASE_URL = "https://phpstack-1140615-3967632.cloudwaysapps.com/backend/uploads/";
+
  const lang = Cookies.get('language')
  console.log(lang);
 export const REQUEST_TYPE = {
