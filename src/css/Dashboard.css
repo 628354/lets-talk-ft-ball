@@ -456,8 +456,8 @@ a.img-thumbnail {
  
 
   .file-main-wrapper {
-    width: 100%;
-    height: 100px;
+    width: 70%;
+    height: 80px;
     border: 1px solid gray;
     position: relative;
     /* margin: auto; */
@@ -467,12 +467,14 @@ a.img-thumbnail {
     align-items: center;
     border-radius: 6px;
     box-shadow: 0px 0px 12px -5px;
+    margin: auto;
 }
 
 .file_icon {
-    font-size: 40px;
+    font-size: 30px;
     color: #585a5a94;
 }
+
 
 
 
@@ -540,7 +542,7 @@ a.img-thumbnail {
   .file-set > input{pointer-events: none;}
 
   img.up-date-img {
-    width: 100%;
+    width: 50%;
 }
 .btn-poniter-less {
     width: 100%;

@@ -96,7 +96,6 @@ const getLeagueById =async()=>{
      'sort_Order' :response.response.data?.body?.en?.sort_Order,
      'image':response.response.data?.body?.image,
 
-
     });
     
 console.log(data);
