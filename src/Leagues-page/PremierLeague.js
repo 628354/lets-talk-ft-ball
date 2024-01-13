@@ -16,7 +16,7 @@ export default function PremierLeague() {
 	
 	const [leagueDecreption, setLeagueDecreption] = useState([]);
 	// const { leagueId } = useParams();
-const folderName = localStorage.getItem("foldername")
+
 const leagueId = localStorage.getItem("selectedLeagueId")
 const lang = Cookies.get('language')
 //console.log(leagueId)
@@ -61,7 +61,7 @@ console.log(leagueDecreption);
 		return input?.replace(/<[^>]*>/g, '')?.replace(/&nbsp;/g, '');
 	  }
 
-	  console.log(`${BASE_URL}${folderName}/${leagueDecreption?.image}`);
+	  console.log(`${BASE_URL}${leagueDecreption?.image}`);
 	return (
 		<div >
 			<section className={`${lang ==="en"? 'en_hero_about':'ar_hero_about'}`}>
@@ -109,7 +109,7 @@ console.log(leagueDecreption);
 										<div className="col-lg-2 col-md-2 col-sm-12 m-auto">
 											<div className="en-leagues-img">
 												<img
-													src={`${BASE_URL}${folderName}/${leagueDecreption?.image}` }
+													src={`${BASE_URL}${leagueDecreption?.image}` }
 													alt="earth"
 													className="img-premier-press"
 												/> 

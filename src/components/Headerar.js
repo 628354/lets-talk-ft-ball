@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLanguage } from "../languages/LanguageContext";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, LEAGUES } from "../helper/APIInfo";
+import { REQUEST_TYPE, LEAGUES, BASE_URL } from "../helper/APIInfo";
 import Cookies from "js-cookie";
 
 export default function Headerar() {
@@ -51,19 +51,15 @@ export default function Headerar() {
 	  const getLeagueName = async () => {
 		const data =[];
 		try {
-		  const obj = {
-			maxBodyLength: Infinity,
-			headers: {
-			  "Content-Type": "application/json",
-			},
-		  };
-		  const response = await apiCall(LEAGUES(lang).league, REQUEST_TYPE.GET, obj);
+		 
+		  const response = await apiCall(LEAGUES(lang).league, REQUEST_TYPE.GET);
 		  console.log( response.response?.data?.body);
 		  response.response?.data?.body.map((item)=>{
 			console.log(item?.[lang]);
 			data.push({
 				"leagueNames":item?.[lang]?.leaguename,
-				"leagueId":item?._id
+				"leagueId":item?._id,
+				"image":item?.image,
 			})
 		  })
 		  setLeagueNames(data);
@@ -160,9 +156,7 @@ export default function Headerar() {
 													<Link to="/league">
 													<span>
 														<img
-															src={
-																"http://localhost:5000/uploads/" + data.image
-															}
+															src={`${BASE_URL}/${data?.image}`}
 															alt=""
 															className="logo-navd"
 														/>

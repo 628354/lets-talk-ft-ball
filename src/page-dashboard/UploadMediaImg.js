@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Row } from 'react-bootstrap';
 import axios from 'axios';
+import { BASE_URL } from '../helper/APIInfo';
 
 function UploadMediaImg({ selectedFolder, folderImages, }) {
   const folder = selectedFolder?.replace(/\s/g, '');
@@ -16,8 +17,8 @@ console.log(files);
 console.log(formData);
     try {
       console.log(formData);
-      const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/addImage', formData, {
-      // const response = await axios.post('http://localhost:5000/addImage', formData, {
+      // const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/addImage', formData, {
+      const response = await axios.post('http://localhost:5000/addImage', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -50,7 +51,7 @@ console.log(formData);
               <div className="col-lg-2 col-md-2 col-sm-6" key={index}>
                 <div className="media-folder-image">
                   <img
-                    src={`http://localhost:5000/uploads/${folder}/${item.image}`}
+                    src={`${BASE_URL}${item.image}`}
                     alt="earth"
                     className="up-date-img"
                   />

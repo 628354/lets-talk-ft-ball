@@ -62,7 +62,7 @@ export default function Blog({blogDetails,blogData}) {
 								<i className="ri-message-2-fill en_date ar_date"></i>{" "}
 							</p>
 						</div>
-						<p className="description mb-3">{blogDetails?.content}</p>
+						<p className="description mb-3">{blogDetails?.cafeContent}</p>
 						<div className="en_red_button ar_red_button">
 							{/* <Link to={props.link}>{props.sname} </Link> */}
 							<i className="ri-arrow-right-s-line en_arrow_line ar_arrow_line">

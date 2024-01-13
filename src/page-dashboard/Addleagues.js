@@ -291,14 +291,14 @@ console.log(folderName);
                                 />
                               </Col>
                             </Form.Group>
-                            {image === null? "" : <img className="logo_im" src={`${BASE_URL}${folderName}/${image}`}/> }
+                            {image === null? "" : <img className="logo_im" src={`${BASE_URL}/${image}`}/> }
                            
                            
-                           <MediaModal
-       show={mediaModalShow}
-       onHide={() => setMediaModalShow(false)}
-       onUpload={handleMediaUpload}
-      />
+                            <MediaModal
+        show={mediaModalShow}
+        onHide={() => setMediaModalShow(false)}
+        onUpload={handleMediaUpload}
+        />
                             <Form.Group
                               as={Row}
                               className="mb-3"

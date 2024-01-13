@@ -89,7 +89,7 @@ export default function TeamComparisionChartTwo({GsGc}) {
 	  
 	  },[GsGc])
     
-	  console.log(GsGc)
+	//   console.log(GsGc)
     return (
         <div>
             <div className='team-main-table chartteamcom'>

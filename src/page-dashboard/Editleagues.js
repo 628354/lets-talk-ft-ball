@@ -11,16 +11,17 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useParams } from 'react-router-dom';
 import { apiCall } from '../helper/RequestHandler';
-import { REQUEST_TYPE,GET_LEAGUE_BY_ID,UPDATE_LEAGUE } from '../helper/APIInfo';
-
+import { REQUEST_TYPE,GET_LEAGUE_BY_ID,UPDATE_LEAGUE, BASE_URL } from '../helper/APIInfo';
+import MediaModal from "./MediaModal";
 export default function Editleagues() {
   const { id } = useParams();
   const [successMessage, setSuccessMessage] = useState(''); // State to hold success message
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [mediaModalShow, setMediaModalShow] = useState(false);
+  const [image,setImage]=useState(null);
+  
   const [aboutData, setAboutData] = useState({
     leaguename: '',
-    image: '',
     description: '',
     meta_Tag_Title: '' ,
     meta_Tag_Description : '' ,
@@ -68,26 +69,38 @@ export default function Editleagues() {
   }
 
   const handleImageChange = (e) => {
-    const imageFile = e.target.files[0];
-    setAboutData((prev)=>({
-      ...prev,
-      image: imageFile,
-
-    }))
+    e.preventDefault();
+    setMediaModalShow(true);
     
   };
 
 
 const getLeagueById =async()=>{
   try{
+    const data ={}
     const baseUrl=GET_LEAGUE_BY_ID.getLeague;
     const apiUrl =`${baseUrl}/${id}`
     const response=await apiCall(apiUrl,REQUEST_TYPE.GET);
-    console.log(response.response?.data?.data?.en)
+    console.log(response.response.data?.body?.en)
     const aboutInfo = response.response?.data?.data?.en
     // setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
-     setAboutData(response.response.data?.body?.en);
+    //  setAboutData(response.response.data?.body?.en);
+    setImage(response.response.data?.body?.image)
+     Object.assign(data, {
+      "leaguename":response.response.data?.body?.en?.leaguename,
+      "description":response.response.data?.body?.en?.description,
+      'meta_Tag_Title': response.response.data?.body?.en?.meta_Tag_Title ,
+      'meta_Tag_Description' : response.response.data?.body?.en?.meta_Tag_Description,
+     'meta_Tag_Keywords ':response.response.data?.body?.en?.meta_Tag_Keywords,
+     'blog_Category' : response.response.data?.body?.en?.blog_Category ,
+     'sort_Order' :response.response.data?.body?.en?.sort_Order,
+     'image':response.response.data?.body?.image,
 
+
+    });
+    
+console.log(data);
+setAboutData(data)
   }catch(error){
     console.log("get data ",error)
   }
@@ -116,6 +129,12 @@ useEffect(()=>{
 
 
   const handleUpdateData = async() => {
+    const obj ={
+      "image":image,
+      en:aboutData,
+      ar:aboutDataAr,
+
+    }
    
     // const formData = new FormData();
     // formData.append('en[leaguename]', aboutData.leaguename);
@@ -147,7 +166,7 @@ useEffect(()=>{
     
 
    
-    const response = await apiCall(apiUrl,REQUEST_TYPE.POST,formData,token);
+    const response = await apiCall(apiUrl,REQUEST_TYPE.POST,obj,token);
    console.log(response)
    if(response.status === 200){
     console.log("yes----------------");
@@ -179,7 +198,15 @@ useEffect(()=>{
       ['link', 'image', 'video'],
     ],
   };
+  const handleMediaUpload = (selectedFile) => {
 
+    console.log("Media uploaded:", selectedFile);
+    
+    setImage(selectedFile)
+    setMediaModalShow(false); // Close the modal after media upload
+
+  };
+  // console.log(`${BASE_URL}${aboutData?.image}`);
   return (
     <div>
       <Menubar />
@@ -211,7 +238,7 @@ useEffect(()=>{
                     <li className="add-button-fis">
                       <button >
                         <Link to="">
-                          <i className="ri-save-3-line"></i>
+                          <i className="ri-save-3-line" onClick={handleUpdateData}></i>
                         </Link>
                       </button>
                     </li>
@@ -266,11 +293,7 @@ useEffect(()=>{
                                   onChange={(e) => handleTextChange('leaguename', e.target.value)} />
                               </Col>
                             </Form.Group>
-                            {imageURL && (
-                              <div>
-                                <img src={imageURL}  style={{ maxWidth: '20%' }} />
-                              </div>
-                            )}
+                           
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                               <Form.Label column sm="2" className="season-coll">
                                 Image
@@ -279,6 +302,12 @@ useEffect(()=>{
                                 <Form.Control type="file"  onChange={handleImageChange} />
                               </Col>
                             </Form.Group>
+                            {image ? <img className="logo_im" src={`${BASE_URL}${image}`}/> : null }
+                            <MediaModal
+       show={mediaModalShow}
+       onHide={() => setMediaModalShow(false)}
+       onUpload={handleMediaUpload}
+      />
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                               <Form.Label column sm="2" className="season-coll">
                                 League Description

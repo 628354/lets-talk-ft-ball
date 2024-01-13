@@ -6,7 +6,7 @@ const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
 	const [language, setLanguage] = useState(getInitialLanguage);
-
+const [langFlag,setLangFlag]=useState(false)
 	function getInitialLanguage() {
 		// Check if language is stored in cookies, otherwise use a default language
 		const languageCookie = document.cookie.replace(
@@ -16,15 +16,22 @@ export const LanguageProvider = ({ children }) => {
 		return languageCookie || "en";
 	}
 
-	const switchLanguage = (newLanguage) => {
-		setLanguage(newLanguage);
-		document.cookie = `language=${newLanguage}; path=/; max-age=${
-			60 * 60 * 24 * 365
-		}`;
-	};
+	useEffect(() => {
+		if (!langFlag) {
+		  setLanguage("en");
+		  document.cookie = `language=${language}; path=/; max-age=${60 * 60 * 24 * 365}`;
+		}
+	  }, [langFlag]);
+	
 
+	  const switchLanguage = (newLanguage) => {
+		setLanguage(newLanguage);
+		document.cookie = `language=${newLanguage}; path=/; max-age=${60 * 60 * 24 * 365}`;
+	  };
+	
+	
 	return (
-		<LanguageContext.Provider value={{ language, switchLanguage }}>
+		<LanguageContext.Provider value={{ language, switchLanguage,langFlag }}>
 			{children}
 		</LanguageContext.Provider>
 	);

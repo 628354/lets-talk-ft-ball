@@ -11,7 +11,10 @@ const ScrollDown = async (Request, Response) => {
     const { season } = Request.body;
     const data = await leaguedata
       .find({ leagueid: `${leagueId}`, seasonid: `${season}` }, { [lung]: 1 })
-      .populate(`${lung}.teamname`, { [lung]: 1 });
+      .populate({
+        path: `${lung}.teamname`,
+        select: [lung, "Image"],
+      })
     responseHelper[200].data = data;
     Response.send(responseHelper[200]);
   } catch (e) {
@@ -28,7 +31,10 @@ const findByteamName = async (Request, Response) => {
         { leagueid: `${leagueId}`, seasonid: `${season}`, [t]: teamName },
         { [lung]: 1, datatype: 1 }
       )
-      .populate(`${lung}.teamname`, { [lung]: 1 });
+      .populate({
+        path: `${lung}.teamname`,
+        select: [lung, "Image"],
+      })
 
     console.log(season, leagueId, teamName);
     responseHelper[200].data = data;
@@ -52,7 +58,7 @@ const Goals_Scored = async (Request, Response) => {
         path: `${lung}.teamname`,
         select: [lung, "Image"],
       })
-      .sort({ [d]: -1, [`${lung}.teamname`]: -1 })
+      .sort({ [d]: -1, [`${lung}.teamname`]: -1, _id: -1 })
       .exec();
 
     responseHelper[200].data = data;
@@ -61,6 +67,7 @@ const Goals_Scored = async (Request, Response) => {
     sendError(Response, e);
   }
 };
+
 const Goals_Con = async (Request, Response) => {
   try {
     const { lung } = Request.params;
@@ -133,7 +140,10 @@ const teamSeassonName = async (Request, Response) => {
         { [lung]: 1 },
         { season_Title: 1 }
       )
-      .populate("teamname", { [lung]: 1 });
+      .populate({
+        path: "teamname",
+        select: [lung, "Image"], 
+      });
     responseHelper[200].data = data;
     Response.send(responseHelper[200]);
   } catch (e) {
@@ -298,7 +308,11 @@ const team_details = async (req, res) => {
     const { teamId } = req.body;
     const data = await teamCatlog
       .findOne({ _id: teamId })
-      .populate("leagueid", { [lung]: 1 });
+      .select({ [lung]: 1, Image: 1 })
+      .populate({
+        path: "leagueid", select: [lung],
+      })
+
     if (data) {
       res.status(200).send({
         body: data,

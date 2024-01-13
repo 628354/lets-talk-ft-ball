@@ -88,7 +88,7 @@ export default function TeamComparisionChartFour({GsGin2}) {
 	  
 	  },[GsGin2])
    
-  console.log(GsGin2);
+//   console.log(GsGin2);
     return (
         <div>
             <div className='team-main-table chartteamcom'>

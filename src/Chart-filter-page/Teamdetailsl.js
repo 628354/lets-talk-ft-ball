@@ -7,7 +7,7 @@ import Table from "react-bootstrap/Table";
 import Iframesecttion from "../Leagues-components/Iframesecttion";
 import { LineChart } from "recharts";
 import { apiCall } from "../helper/RequestHandler";
-import { REQUEST_TYPE, TEAM_DETAILS, SESSIOND, GAINING_RATE,TEAM_GS_GC,TEAM_GS_IN_G,TEAM_SEA_GC } from "../helper/APIInfo";
+import { REQUEST_TYPE, TEAM_DETAILS, SESSIOND, GAINING_RATE,TEAM_GS_GC,TEAM_GS_IN_G,TEAM_SEA_GC, BASE_URL } from "../helper/APIInfo";
 
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
@@ -20,6 +20,7 @@ export default function Teamdetailsl() {
 	//console.log(teamId)
 	const lang = Cookies.get('language')
 	const [teamDetails, setTeamDetails] = useState([])
+	const [leagueDetails, setLeagueDetails] = useState([])
 	const [tableData, setTableData] = useState([])
 	const [seasonId, setSeasonId] = useState(null);
 	const [allSeasson, setAllSeasson] = useState([])
@@ -31,7 +32,7 @@ export default function Teamdetailsl() {
 	const [gcCum, setGcCum]=useState([])
 	const getTeamDetails = async () => {
 		//console.log(teamId)
-		const baseUrl = TEAM_DETAILS.details;
+		const baseUrl = TEAM_DETAILS(lang).find;
 		const apiUrl = `${baseUrl}`
 
 		const obj= {
@@ -39,9 +40,9 @@ export default function Teamdetailsl() {
 		}
 		try {
 			const response = await apiCall(apiUrl, REQUEST_TYPE.POST,obj)
-			// console.log(response.response.data.body)
-			setTeamDetails(response.response.data.body?.[lang])
-
+			console.log(response.response.data.body)
+			setTeamDetails(response.response.data?.body)
+			setLeagueDetails(response.response.data?.body?.leagueid?.[lang])
 			// const data = response.response.data?.data[0].en
 			// const filterData = data.filter(item => item.teamname._id === teamId)
 			// console.log(filterData[0])
@@ -578,7 +579,7 @@ const teamSecgc = async () => {
   
   },[gcCum])
 
-
+console.log(teamDetails);
 	return (
 		<div >
 			<section className="en_hero_about en_hero_about">
@@ -603,7 +604,7 @@ const teamSecgc = async () => {
 						<li>
 
 							{
-								lang ==="en"? <Link to="/">Premier League</Link>:<Link to="/">الدوري الإنكليزي</Link>
+								lang ==="en"? <Link to="/">{leagueDetails?.leaguename}</Link>:<Link to="/">{leagueDetails?.leaguename}</Link>
 							}
 						</li>
 						<li>
@@ -611,7 +612,7 @@ const teamSecgc = async () => {
 						</li>
 						<li>
 							{
-								lang ==="en"? <Link to="/">LIVERPOOL</Link>:<Link to="/">ليفربول</Link>
+								lang ==="en"? <Link to="/">{teamDetails?.[lang]?.Team_Name_English}</Link>:<Link to="/">{teamDetails?.[lang]?.Team_Name_Arabic}</Link>
 							}
 						</li>
 					</ul>
@@ -636,7 +637,7 @@ const teamSecgc = async () => {
 								<div  className={`${lang ==="en"? 'col-lg-2 col-md-2 col-sm-12 m-auto en_imageline ':'col-lg-2 col-md-2 col-sm-12 m-auto ar_imageline '}`}>
 									<div className="en-leagues-img">
 										<img
-											src={require("../img/Liverpool.1.png")}
+											src={`${BASE_URL}${teamDetails?.Image}`}
 											alt="earth"
 											className="img-premier-press"
 										/>
@@ -645,15 +646,15 @@ const teamSecgc = async () => {
 								<div className="col-lg-10 col-md-10 col-sm-12" >
 									<div className="en-leagues-text ar-leagues-text ms-4">
 										{
-											lang ==="en"?<h2>{teamDetails?.Team_Name_English}</h2>:<h2>{teamDetails?.Team_Name_Arabic}</h2>
+											lang ==="en"?<h2>{teamDetails?.[lang]?.Team_Name_English}</h2>:<h2>{teamDetails?.[lang]?.Team_Name_Arabic}</h2>
 										}
 										{
 											lang ==="en"?<p>
 											
-											{teamDetails?.Description_English}
+											{teamDetails?.[lang]?.Description_English}
 										</p>:<p>
 											
-											{teamDetails?.Description_Arabic}
+											{teamDetails?.[lang]?.Description_Arabic}
 										</p>
 										}
 										
@@ -737,12 +738,15 @@ const teamSecgc = async () => {
 									<td className="imagelive_city">
 										<span className="overimage">
 											<img
-												src={require("../img/Liverpool.1.png")}
+												src={`${BASE_URL}${teamDetails?.Image}`}
 												alt="earth"
 												className="logo-rearth-table"
 											/>
 										</span>{" "}
-										<span className="toearth">{teamDetails?.Team_Name_English}</span>
+										{
+											lang ==="en"?<span className="toearth">{teamDetails?.[lang]?.Team_Name_English}</span>:<span className="toearth">{teamDetails?.[lang]?.Team_Name_Arabic}</span>
+										}
+										
 									</td>
 									<td>{tableData?.games}</td>
 									<td>{tableData?.win}</td>
