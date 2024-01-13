@@ -4,8 +4,12 @@ import Cookies from "js-cookie";
 
 const SERVER_LINK =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/";
 const SERVER_IMAGES =	"https://phpstack-1140615-3967632.cloudwaysapps.com/backend/"
+
 // const SERVER_LINK = "http://localhost:5000/";
 // const SERVER_IMAGES = "http://localhost:5000/";
+
+// export const BASE_URL = "http://localhost:5000/uploads/";
+export const BASE_URL = "https://phpstack-1140615-3967632.cloudwaysapps.com/backend/uploads/";
  const lang = Cookies.get('language')
  console.log(lang);
 export const REQUEST_TYPE = {
@@ -304,7 +308,6 @@ export const ADD_CAFE = {
 };
 
 
-export const BASE_URL = "http://localhost:5000/uploads/";
 
 
 
