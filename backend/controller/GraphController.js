@@ -58,7 +58,7 @@ const Goals_Scored = async (Request, Response) => {
         path: `${lung}.teamname`,
         select: [lung, "Image"],
       })
-      .sort({ [d]: -1, [`${lung}.teamname`]: -1, _id: -1 })
+      .sort({ [d]: -1, [`${lung}.teamname`]: -1 })
       .exec();
 
     responseHelper[200].data = data;
@@ -107,15 +107,20 @@ const gs_gc = async (Request, Response) => {
         path: `${lung}.teamname`,
         select: [lung, "Image"],
       })
-      .sort({ [d]: -1, [`${lung}.teamname`]: -1 })
       .exec();
 
-    responseHelper[200].data = data;
+    const povertyLines = await teamdata.findOne({}, { [`${lung}.Poverty_Line`]: 1 });
+    const api = {
+      povertyLines,
+      data
+    };
+    responseHelper[200].data = api;
     Response.send(responseHelper[200]);
   } catch (e) {
     sendError(Response, e);
   }
 };
+
 const teamSeasson = async (Request, Response) => {
   try {
     const { lung } = Request.params;
@@ -142,7 +147,7 @@ const teamSeassonName = async (Request, Response) => {
       )
       .populate({
         path: "teamname",
-        select: [lung, "Image"], 
+        select: [lung, "Image"],
       });
     responseHelper[200].data = data;
     Response.send(responseHelper[200]);
@@ -271,7 +276,9 @@ const teamGS_GC = async (Request, Response) => {
       });
     });
     let teamname1 = await teamCatlog.findOne({ _id: data1.teamname });
+    const povertyLines = await teamdata.findOne({}, { [`${lung}.Poverty_Line`]: 1 });
     const api = {
+      povertyLines,
       teamDatas,
       data1,
       teamname1,
