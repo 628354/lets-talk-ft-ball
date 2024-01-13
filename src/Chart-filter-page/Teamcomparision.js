@@ -311,7 +311,7 @@ try {
 		const data2=[]
 		try {
 			const response = await apiCall(GAINING_RATE.gainrate, REQUEST_TYPE.POST, obj)
-			// console.log(response.response?.data?.data?.teamname1);
+			console.log(response.response?.data?.data);
 			setImageEn(response.response?.data?.data?.teamname1)
 			setFlag(true)
 			response.response.data.data?.teamDatas.map((item) => {

@@ -70,7 +70,10 @@ export default function Goalsconchart({ leagueId }) {
 					})
 
 				})
-
+				// console.log("Data Before Sorting:", data1);
+				data1.sort((a, b) => a.goalsCons - b.goalsCons);
+				// console.log("Data Before Sorting:", data1);
+				
 				setGoalCons(data1)
 			}
 

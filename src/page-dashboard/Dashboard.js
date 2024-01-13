@@ -15,8 +15,8 @@ export default function Dashboard() {
   const getLeague =async()=>{
     try{
       const response = await apiCall(LEAGUES.league,REQUEST_TYPE.GET)
-      console.log(response.response.data.body);
-      const aboutInfo = response.response.data.body
+      console.log(response?.response?.data?.body);
+      const aboutInfo = response?.response?.data?.body
       setAboutData(aboutInfo);
 
     }catch(error){
@@ -46,8 +46,8 @@ export default function Dashboard() {
   try{
     const response =await apiCall(FIND_ALL.find,REQUEST_TYPE.GET);
     console.log(response);
-    const teamsInfo = response.response.data?.data.teamdetails;
-      setTeamsData(response.response.data.data);
+    const teamsInfo = response.response?.data?.data?.teamdetails;
+      setTeamsData(response.response?.data?.data);
      // setItemId(teamsInfo._id);
 
   }catch(error){

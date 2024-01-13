@@ -155,12 +155,12 @@ console.log(folderWithoutSpaces);
       </Form> */}
     </Modal.Body>
     <Modal.Footer>
-      <Button variant="secondary" onClick={onHide}>
+      {/* <Button variant="secondary" onClick={onHide}>
         Close
       </Button>
       <Button variant="primary" onClick={handleUpload}>
         Upload
-      </Button>
+      </Button> */}
     </Modal.Footer>
   </Modal>
   );

@@ -7,9 +7,10 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import { UPDATE_TEAM, LEAGUES, REQUEST_TYPE, FIND_TEAM_ID } from '../helper/APIInfo';
+import { UPDATE_TEAM, LEAGUES, REQUEST_TYPE, FIND_TEAM_ID, BASE_URL } from '../helper/APIInfo';
 import { apiCall } from '../helper/RequestHandler';
 import ReactQuill from "react-quill";
+import MediaModal from "./MediaModal";
 
 export default function EditTeams() {
   const { id } = useParams();
@@ -103,7 +104,7 @@ const lang ="en"
     LeagueCall();
   }, []);
 
-console.log();
+// console.log(leagueName);
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -114,6 +115,7 @@ console.log();
       try {
         let data ={
           leagueid: allData,
+          "Image":image,
           en:formData ,
           ar: formDataAr,
         }
@@ -137,7 +139,8 @@ const getLeagueById =async()=>{
     const baseUrl=FIND_TEAM_ID.teamen;
     const apiUrl =`${baseUrl}/${id}`
     const response=await apiCall(apiUrl,REQUEST_TYPE.GET);
-    console.log(response.response?.data?.body?.en)
+    console.log(response.response?.data)
+    setImage(response.response?.data?.body?.Image)
     const aboutInfo = response.response?.data?.data?.en
     // setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
     console.log(response.response?.data?.body?.leagueid?.en);
@@ -176,6 +179,15 @@ useEffect(()=>{
     }, 3000);
   };
 
+
+  const handleMediaUpload = (selectedFile) => {
+
+    console.log("Media uploaded:", selectedFile);
+    
+    setImage(selectedFile)
+    setMediaModalShow(false); 
+
+  };
   return (
     <div>
       <Menubar />
@@ -256,9 +268,12 @@ useEffect(()=>{
                                   League Name
                                 </Form.Label>
                                 <Col sm="10">
-                                  <Form.Select name="league"
+                                  <Form.Select 
+                                  name="league"
+                                  value={leagueName.leaguename}
+                                 
                                     onChange={(e) => handleLeagueChange(e.target.value)} >
-                                    <option value={leagueName?.leaguename}>Select League</option>
+                                    <option  >Select League</option>
                                     {getLeagues?.map((row,index) => (
                                       <option key={index} value={row?._id}>
                                         {row?.en?.leaguename}
@@ -299,19 +314,16 @@ useEffect(()=>{
                               <Col sm="10">
                                 <Form.Control
                                   type="file"
-                                  onChange={handleImageChange}
+                                  onClick={handleImageChange}
                                 />
                               </Col>
                             </Form.Group>
-                            {imagePreview && (
-                              <div>
-                                <img
-                                  src={imagePreview}
-                                  style={{ maxWidth: "10%" }}
-                                  alt="Selected"
-                                />
-                              </div>
-                            )}
+                            {image === null? "" : <img className="logo_im" src={`${BASE_URL}/${image}`}/> }
+                            <MediaModal
+        show={mediaModalShow}
+        onHide={() => setMediaModalShow(false)}
+        onUpload={handleMediaUpload}
+        />
                             <Form.Group
                               as={Row}
                               className="mb-3"
