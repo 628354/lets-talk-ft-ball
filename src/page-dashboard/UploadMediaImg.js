@@ -35,7 +35,7 @@ console.log(formData);
       <div className="col-lg-12 col-sm-12 col-sm-12 pe-0">
         <div className="up-date-file">
           <Row>
-            <div className="col-lg-2 col-md-2 col-sm-6">
+            <div className="col-lg-1 col-md-1 col-sm-2">
               <div className="main-media-folder">
                 <div className="file-main-wrapper">
                   <input type="file" name="images" className="file-media-poniter" multiple onChange={uploadImage} />
@@ -44,9 +44,21 @@ console.log(formData);
                 </div>
               </div>
             </div>
+
+            {folderImages?.map((item, index) => (
+              <div className="col-lg-1 col-md-1 col-sm-2" key={index}>
+                <div className="media-folder-image">
+                  <img
+                    src={`${BASE_URL}${item.image}`}
+                    alt="earth"
+                    className="up-date-img"
+                  />
+                </div>
+              </div>
+            ))}
           </Row>
 
-          <Row>
+          {/* <Row>
             {folderImages?.map((item, index) => (
               <div className="col-lg-2 col-md-2 col-sm-6" key={index}>
                 <div className="media-folder-image">
@@ -58,7 +70,7 @@ console.log(formData);
                 </div>
               </div>
             ))}
-          </Row>
+          </Row> */}
         </div>
       </div>
     </div>
