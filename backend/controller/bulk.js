@@ -33,7 +33,9 @@ exports.leagedBlukImport = async (req, res) => {
           point_gap: (data[i]['POINTS GAIN %'] !== undefined) ? data[i]['POINTS GAIN %'] : data[i]['Pgap'],
           gs_gc: (data[i]['GOALS SCORED/GAME'] !== undefined) ? data[i]['GOALS SCORED/GAME'] : data[i]['GS-GC'],
           win_precent: (data[i]['WIN%'] !== undefined) ? data[i]['WIN%'] : data[i]['w%'],
-         
+          // GS_G: data[i]['GS/G'] || '',
+          // win_precent: data[i]['W%'] || '',
+          // Points_Stdev: data[i]['Points Stdev'] || ''
         })
       }
     }
@@ -49,15 +51,12 @@ exports.leagedBlukImport = async (req, res) => {
 
 
 
-
   const TeamFile = req.files['teamexcelFile'][0].path;
   const workbookTeam = XLSX.readFile(TeamFile);
   const sheetNamesTeam = workbookTeam.SheetNames;
   const allDataTeam = [];
-  const updateData = [];
   sheetNamesTeam.forEach(async sheetName => {
     const sheetsTeamData = [];
-    const udpateRecords = [];
     const worksheetS = workbookTeam.Sheets[sheetName];
     const data = XLSX.utils.sheet_to_json(worksheetS);
     for (let i = 0; i < data.length; i++) {
@@ -101,8 +100,6 @@ exports.leagedBlukImport = async (req, res) => {
         }])
       }
     }
-
-
 
   });
 
