@@ -54,17 +54,16 @@ export default function Premierchart({ leagueId }) {
                                     console.log(results)
                                     if(lang === "en"){
                                         data1.push({
-                                            "goalsScored": parseInt(results?.goals_scored, 10),
+                                            "goalsScored": parseInt(results?.goals_scored, 10) || 0,
                                             "name": results.teamname?.[lang]?.Team_Name_Short_English,
                                             "icon": `${BASE_URL}${results.teamname?.Image}`
 
                                             //"goalsScored": results?.goals_scored
                                             // "Image": `${BASE_URL}${results?.teamname?.Image.replace(/\s/g, '')}`
                                         })
-
                                     }else{
                                         data1.push({
-                                            "goalsScored": parseInt(results?.goals_scored, 10),
+                                            "goalsScored": parseInt(results?.goals_scored, 10) || 0,
                                             "name": results.teamname?.[lang]?.Team_Name_Short_Arabic,
                                             "icon": `${BASE_URL}${results.teamname?.Image}`
                                             //"goalsScored": results?.goals_scored
@@ -76,7 +75,10 @@ export default function Premierchart({ leagueId }) {
                                 })
                                 
                         })
-        
+                        console.log("Data Before Sorting:", data1);
+                        data1.sort((a, b) => b.goalsScored - a.goalsScored);
+                        console.log("Data Before Sorting:", data1);
+                        
                         setGoalScore(data1)
                     }
                 });
@@ -123,7 +125,7 @@ export default function Premierchart({ leagueId }) {
         // }
     };
 
-    console.log(goalScore);
+      console.log(goalScore);
 
     useEffect(() => {
         getGoalScore();
@@ -182,6 +184,8 @@ export default function Premierchart({ leagueId }) {
                   }
             })
         );
+        xAxis.data.setAll(goalScore);
+        
         xRenderer.grid.template.setAll({
             location: 1
           })
@@ -189,7 +193,7 @@ export default function Premierchart({ leagueId }) {
           xRenderer.labels.template.setAll({
             paddingTop: 20
           });
-          xAxis.data.setAll(goalScore);
+          
 
 
         chart.set("scrollbarY", am5.Scrollbar.new(root, {
@@ -221,6 +225,8 @@ export default function Premierchart({ leagueId }) {
             templateField: "columnSettings"
             //fill: am5.color("#F20032"),
         });
+        // console.log(goalScore);
+        console.log("Sorted Goal Score Data:", goalScore);
         series.data.setAll(goalScore);
         series.appear();
         chart.appear(1000, 100);

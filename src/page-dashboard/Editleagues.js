@@ -86,6 +86,7 @@ const getLeagueById =async()=>{
     // setImageURL(aboutInfo?.image); // Set the imageURL state with the fetched image URL
     //  setAboutData(response.response.data?.body?.en);
     setImage(response.response.data?.body?.image)
+    console.log(response.response.data?.body);
      Object.assign(data, {
       "leaguename":response.response.data?.body?.en?.leaguename,
       "description":response.response.data?.body?.en?.description,
