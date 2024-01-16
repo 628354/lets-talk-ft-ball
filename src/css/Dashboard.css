@@ -542,7 +542,7 @@ a.img-thumbnail {
   .file-set > input{pointer-events: none;}
 
   img.up-date-img {
-    width: 50%;
+    width: 100%;
 }
 .btn-poniter-less {
     width: 100%;
@@ -777,3 +777,19 @@ section.min-section-one {
 }
 /* 12-01-24 */
 
+/* 16/01/24 */
+
+.media-folder-image {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.main-media-folder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+/* 16/01/24 */
