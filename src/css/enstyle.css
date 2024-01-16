@@ -667,6 +667,7 @@ ul.en_creat_nav li a {
     text-align: center;
     padding: 0px 85px 0 85px;
 }
+
 .en_cafe_contant p {
     padding-bottom: 30px;
 }
@@ -698,10 +699,12 @@ ul.en_creat_nav li a {
     gap: 26px;
     padding: 20px 0;
 }
+
 .en_bolg_date p i {
     color: var(--primary-color);
     font-size: 19px;
 }
+
 .en_red_button a {
     font-size: 14px;
     color: var(--primary-color);
@@ -755,7 +758,6 @@ span.en_number_pass {
     align-items: center;
 }
 
-
 .en_defintion_contant {
     padding-bottom: 50px;
     border-bottom: 1px solid #ccc;;
@@ -763,6 +765,7 @@ span.en_number_pass {
     margin: 0px 50px;
     padding-top: 50px;
 }
+
 .en_defintion_contant p{
     font-family: 'Poppins', sans-serif!important;
 }
@@ -983,7 +986,8 @@ td.imagetext_city {
 }
 
 img.logo-rearth-table {
-    width: 45px;
+    width: 35px;
+    height: 35px;
 }
 
 tbody.team_poin {
@@ -1075,6 +1079,7 @@ tr.filter-fir {
 
 
 /* chart css 16-11-23  start*/
+
 .chart-areaa {
     display: flex;
     justify-content: center;
@@ -1088,11 +1093,11 @@ tr.filter-fir {
 .recharts-default-legend {
     display: none;
 }
+
 .premier-textare h3 {
     text-align: center;
     padding-bottom: 20px;
 }
-
 
 
 /* chart css 16-11-23  start*/
@@ -1145,6 +1150,7 @@ table.aline_tablel thead tr th {
 .linechart svg {
     width: 100%;
 }
+
 .linechart {
     width: 100% !important;
 }
@@ -1177,14 +1183,17 @@ table.aline_tablel thead tr th {
     border-right: 1px solid #bfbaba;
 }
 
+
 /* .form-select {
     width: 520px;
     max-width: 520px;
     min-width: 520px;
 } */
+
 .chart-compari {
     padding-bottom: 60px;
 }
+
 /*Team Comparision css end  */
 
 
@@ -1204,10 +1213,12 @@ table.aline_tablel thead tr th {
     align-items: center;
     gap: 20px;
 }
+
 .custom-select select {
     width: 250px;
     padding: 6px 6px;
 }
+
 .data-filter p {
     margin: 0;
     padding: 0;

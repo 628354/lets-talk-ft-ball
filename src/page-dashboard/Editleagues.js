@@ -97,7 +97,6 @@ const getLeagueById =async()=>{
      'sort_Order' :response.response.data?.body?.en?.sort_Order,
      'image':response.response.data?.body?.image,
 
-
     });
     
 console.log(data);
@@ -268,14 +267,14 @@ useEffect(()=>{
                 <div className='main-ad-sea'>
                   <p><i class="ri-pencil-fill"></i> Edit League</p>
                 </div>
-                <hr />
+                
 
 
                 <div className='addsection-open'>
                   <div className='add-genral'>
-                    <h6>General</h6>
+                    {/* <h6>General</h6> */}
                   </div>
-                  <hr />
+
                   <div className='general-part'>
                     <Tabs
                       defaultActiveKey="profile"
@@ -286,7 +285,7 @@ useEffect(()=>{
                         <div className='sanson-title'>
                           <Form>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                                 League Name
                               </Form.Label>
                               <Col sm="10">
@@ -296,16 +295,11 @@ useEffect(()=>{
                             </Form.Group>
                            
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                                 Image
                               </Form.Label>
-                              <Col sm="20">
-                              <Form.Control
-                                  type="file"
-                                  onClick={handleImageChange}
-                                  // value={aboutData?.image}
-                                  
-                                />
+                              <Col sm="10">
+                                <Form.Control type="file"  onChange={handleImageChange} />
                               </Col>
                             </Form.Group>
                             {image ? <img className="logo_im" src={`${BASE_URL}${image}`}/> : null }
@@ -315,7 +309,7 @@ useEffect(()=>{
        onUpload={handleMediaUpload}
       />
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                                 League Description
                               </Form.Label>
                               <Col sm="10">
@@ -324,7 +318,7 @@ useEffect(()=>{
                               </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                                 League Meta Tag Title
                               </Form.Label>
                               <Col sm="10">
@@ -333,7 +327,7 @@ useEffect(()=>{
                               </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                                 League Meta Tag Description
                               </Form.Label>
                               <Col sm="10">
@@ -342,7 +336,7 @@ useEffect(()=>{
                               </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                                 League Meta Tag Keywords
                               </Form.Label>
                               <Col sm="10">
@@ -351,7 +345,7 @@ useEffect(()=>{
                               </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                                 League Blog Category
                               </Form.Label>
                               <Col sm="10">
@@ -370,7 +364,7 @@ useEffect(()=>{
                         <div className='sanson-title'>
                           <Form>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                                 League Name
                               </Form.Label>
                               <Col sm="10">
@@ -380,7 +374,7 @@ useEffect(()=>{
                             </Form.Group>
                             
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                                 League Description       
                               </Form.Label>
                               <Col sm="10">
@@ -388,7 +382,7 @@ useEffect(()=>{
                               </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                                 League Meta Tag Title
                               </Form.Label>
                               <Col sm="10">
@@ -396,7 +390,7 @@ useEffect(()=>{
                               </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                                 League Meta Tag Description
                               </Form.Label>
                               <Col sm="10">
@@ -404,7 +398,7 @@ useEffect(()=>{
                               </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                                 League Meta Tag Keywords
                               </Form.Label>
                               <Col sm="10">
@@ -412,7 +406,7 @@ useEffect(()=>{
                               </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                                 League Blog Category
                               </Form.Label>
                               <Col sm="10">
@@ -438,7 +432,7 @@ useEffect(()=>{
                     <div className='sanson-title'>
                       <Form>
                       <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                          <Form.Label column sm="2">
+                          <Form.Label column sm="2" className="season-coll">
                             Status
                           </Form.Label>
                           <Col sm="10">
@@ -454,7 +448,7 @@ useEffect(()=>{
                         </Form.Group>
 
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                          <Form.Label column sm="2">
+                          <Form.Label column sm="2" className="season-coll">
                             Sort Order
                           </Form.Label>
                           <Col sm="10">

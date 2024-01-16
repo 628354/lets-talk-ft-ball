@@ -236,20 +236,20 @@ useEffect(()=>{
             </Row>
           </Container>
         </section>
-        <hr />
-        <section className='Add-Teams-open'>
+
+        <section className='Add-Teams-open Add-Season-open'>
           <Container fluid>
             <Row>
               <div className='main_add_teams'>
                 <div className='main-ad-sea'>
                   <p><i className="ri-pencil-fill"></i>  Add Teams</p>
                 </div>
-                <hr />
+
                 <div className='addsection-open'>
-                  <div className='add-genral'>
+                  {/* <div className='add-genral'>
                     <h6>General</h6>
-                  </div>
-                  <hr />
+                  </div> */}
+                
                   <div className='general-part'>
                     <Tabs
                       defaultActiveKey="profile"
@@ -257,14 +257,13 @@ useEffect(()=>{
                       className="mb-3 generalone"
                     >
                       <Tab className='tabevent' eventKey="profile" title={<span><img src={require('../img/en.png')} alt="General" /> General</span>}>
-                        <div className='sanson-title'></div>
+                        
                         <div className='date-for-section'>
-                          <div className='sanson-title'>
-                          </div>
+                          
                           <div className='sanson-title'>
                             <Form>
-                              <Form.Group as={Row} className="mb-5" controlId="formPlaintextPassword">
-                                <Form.Label column sm="1">
+                              <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Label column sm="2" className="season-coll">
                                   League Name
                                 </Form.Label>
                                 <Col sm="10">
@@ -289,9 +288,10 @@ useEffect(()=>{
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                               Team Name
                               </Form.Label>
+                              <Col sm-10>
                               <Form.Control
                                 type="text"
                                 placeholder="Team Name"
@@ -302,13 +302,14 @@ useEffect(()=>{
                                 }
                                 
                               />
+                              </Col>
                             </Form.Group>
                             <Form.Group
                               as={Row}
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                               Team Image
                               </Form.Label>
                               <Col sm="10">
@@ -329,7 +330,7 @@ useEffect(()=>{
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                               Team Description
                               </Form.Label>
                               <Col sm="10">
@@ -347,7 +348,7 @@ useEffect(()=>{
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                               Team Name Short English
                               </Form.Label>
                               <Col sm="10">
@@ -422,7 +423,7 @@ useEffect(()=>{
                           <div className='team Name'>
                             <Form>
                               <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                <Form.Label column sm="2">
+                                <Form.Label column sm="2" className="season-coll">
                                   Status
                                 </Form.Label>
                                 <Col sm="10">
@@ -469,10 +470,11 @@ useEffect(()=>{
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                               Team Name
                               </Form.Label>
-                              <Form.Control
+                             <Col sm="10">
+                             <Form.Control
                                 type="text"
                                 placeholder="Team Name Arabic"
                                 value={formDataAr?.Team_Name_Arabic}
@@ -481,6 +483,7 @@ useEffect(()=>{
                                 }
                                 
                               />
+                             </Col>
                             </Form.Group>
                             
                             <Form.Group
@@ -488,7 +491,7 @@ useEffect(()=>{
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                               Team Description
                               </Form.Label>
                               <Col sm="10">
@@ -506,7 +509,7 @@ useEffect(()=>{
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2">
+                              <Form.Label column sm="2" className="season-coll">
                               Team Name Short Arabic
                               </Form.Label>
                               <Col sm="10">

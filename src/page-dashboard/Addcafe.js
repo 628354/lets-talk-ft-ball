@@ -145,8 +145,9 @@ export default function Addcafe() {
             </Row>
           </Container>
         </section>
+        <hr/>
         <section className="tab-section">
-          <Container>
+          <Container fluid>
             <Row>
               <div className="general-part-home">
                 <Tabs
@@ -220,7 +221,7 @@ export default function Addcafe() {
                         العربية
                       </span>
                     }
-                  >
+                   >
                     <div className="sanson-title">
                       <div className="edithome">
                         <div className="bannerimage">

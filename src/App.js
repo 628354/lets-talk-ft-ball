@@ -89,7 +89,7 @@ function App() {
 	// Array of routes where the Header should not be displayed
 	const noHeaderRoutes = [
 		"/login",
-		"/dashboard",
+		"/Dashboard",
 		// "/Dashboard",
 		// "/Dashboard",
 		"/Signup",

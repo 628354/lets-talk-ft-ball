@@ -67,6 +67,7 @@ getAllCafe()
             </Container>
            
            </section>
+           <hr/>
            <section className='cafe-view-List'>
                 <Container fluid>
                   <Row>
@@ -78,11 +79,11 @@ getAllCafe()
                         <thead>
                           <tr>
                           {/* className='col-sm-2'  */}
-                            <th >SQ</th>
-                            <th >Title</th>
+                            <th width="1%">SQ</th>
+                            <th width="20%">Title</th>
                             {/* <th >Other</th> */}
-                            <th >Date</th>
-                            <th>Action</th>
+                            <th width="20%">Date</th>
+                            <th width="2%">Action</th>
                           </tr>
                         </thead>
                         <tbody className='table-list-one'>

@@ -736,7 +736,7 @@ console.log(teamDetails);
 			<section className="table-live">
 				<Container>
 					<div className="en-table-live ar-table-live">
-						<Table className="aline_tablel">
+						<Table className="aline_tablel"  dir={lang === 'ar' ? 'rtl' : 'ltr'}>
 							<thead>
 								{
 							lang==="en"?<tr>

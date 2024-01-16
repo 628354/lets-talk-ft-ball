@@ -121,7 +121,7 @@ export default function Teams() {
               <div className="col-lg-6 col-md-6 col-6">
                 <div className='add-part'>
                   <ul className='add-button-min'>
-                    <div className="search-bar">
+                    <div className="search-bar search-button">
                       <input
                         type="text"
                         placeholder="Search teams..."
@@ -152,12 +152,12 @@ export default function Teams() {
                 <Table bordered hover className='tablepress'>
                   <thead>
                     <tr>
-                      <th><Form.Check aria-label="option 1" /></th>
-                      <th>League Name</th>
-                      <th>Teams Name</th>
-                      <th>Sort Name</th>
-                      <th>Status</th>
-                      <th>Action</th>
+                      <th width="1%"><Form.Check aria-label="option 1" /></th>
+                      <th width="20%">League Name</th>
+                      <th width="20%">Teams Name</th>
+                      <th width="20%">Sort Name</th>
+                      <th width="20%">Status</th>
+                      <th width="10%">Action</th>
                     </tr>
                   </thead>
                   <tbody className='table-list-one'>

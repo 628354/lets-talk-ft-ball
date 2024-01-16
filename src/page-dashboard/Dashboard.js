@@ -79,7 +79,7 @@ useEffect(()=>{
                         <i className="ri-arrow-right-s-line"></i>
                       </li>
                       <li>
-                        <Link>Dashboard11</Link>
+                        <Link>Dashboard</Link>
                       </li>
                     </ul>
                   </div>

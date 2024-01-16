@@ -163,7 +163,6 @@ console.log(folderWithoutSpaces);
             </Row>
          </Container>
       </section>
-      <hr />
       <section className='Add-Season-open'>
          <Container fluid>
             <Row>
@@ -201,7 +200,7 @@ console.log(folderWithoutSpaces);
                      </div>
                   </div>
                   </div>
-                  <div className='col-lg-10 col-sm-10 col-sm-10 ps-0'>
+                  <div className='col-lg-10 col-sm-10 col-sm-10 ps-0 folder-color'>
                  <UploadMediaImg  selectedFolder={selectedFolder} folderImages={folderImages}/>
                   </div>
                   
