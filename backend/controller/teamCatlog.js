@@ -5,7 +5,7 @@ const XLSX = require("xlsx");
 const upload = multer({ dest: "uploads" });
 const path = require("path");
 const responseHelper = require("../Helpers/Response");
-
+const league = require('../model/league')
 module.exports = {
     CatlogImport: async (req, res) => {
         const filePath = req.file.path;
@@ -107,7 +107,7 @@ module.exports = {
                     Description_English: en.Description_English || "",
                     Team_info: en.Team_info || "",
                     logo_folder: en.logo_folder || "",
-                    status: en.status || "enable",
+                    status: en.status || "active",
                     Past_teams_logo_file_names_below:
                         en.Past_teams_logo_file_names_below || "",
                     SEO_URL: en.SEO_URL || "",
@@ -118,7 +118,7 @@ module.exports = {
                     Description_Arabic: ar.Description_Arabic || "",
                     Team_info: ar.Team_info || "",
                     logo_folder: ar.logo_folder || "",
-                    status: ar.status || "enable",
+                    status: ar.status || "active",
                     Past_teams_logo_file_names_below:
                         ar.Past_teams_logo_file_names_below || "",
                     SEO_URL: ar.SEO_URL || "",
@@ -206,7 +206,7 @@ module.exports = {
                         Description_English: en.Description_English || "",
                         Team_info: en.Team_info || "",
                         logo_folder: en.logo_folder || "",
-                        status: en.status || "enable",
+                        status: en.status || "active",
                         Past_teams_logo_file_names_below:
                             en.Past_teams_logo_file_names_below || "",
                         SEO_URL: en.SEO_URL || "",
@@ -217,7 +217,7 @@ module.exports = {
                         Description_Arabic: ar.Description_Arabic || "",
                         Team_info: ar.Team_info || "",
                         logo_folder: ar.logo_folder || "",
-                        status: ar.status || "enable",
+                        status: ar.status || "active",
                         Past_teams_logo_file_names_below:
                             ar.Past_teams_logo_file_names_below || "",
                         SEO_URL: ar.SEO_URL || "",
@@ -273,19 +273,18 @@ module.exports = {
     },
     TeamsFilter: async (req, res) => {
         try {
-            const { Team_Name_English } = req.query;
-            const Team_Name_English_Filter = {};
+            const { Team_Name_English, leaguename } = req.query;
+            const filter = {};
 
             if (Team_Name_English) {
-                Team_Name_English_Filter["en.Team_Name_English"] = new RegExp(
-                    `^${Team_Name_English}`,
-                    "i"
-                );
+                filter["en.Team_Name_English"] = new RegExp(`^${Team_Name_English}`, "i");
             }
+
+            if (leaguename) {
+                filter["leagues_details.en.leaguename"] = new RegExp(`^${leaguename}`, "i");
+            }
+
             const teamsdata = await teamCatlog.aggregate([
-                {
-                    $match: Team_Name_English_Filter,
-                },
                 {
                     $lookup: {
                         from: "leagues",
@@ -293,6 +292,9 @@ module.exports = {
                         foreignField: "_id",
                         as: "leagues_details",
                     },
+                },
+                {
+                    $match: filter,
                 },
                 {
                     $sort: {

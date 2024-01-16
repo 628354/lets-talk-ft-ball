@@ -3,13 +3,19 @@ const validator = require("validator");
 
 const contactusSchema = mongoose.Schema(
   {
-    logo: { type: String },
-    image: { type: String },
     name: { type: String },
     email: { type: String },
     subject: { type: String },
     message: { type: String },
-    contact_textarea: { type: String }
+    bannerImage: { type: String, default: "" },
+    contactusImage: { type: String, default: "" },
+    en: {
+      contact_textarea: { type: String, default: "" },
+    },
+    ar: {
+      contact_textarea: { type: String, default: "" }
+    }
+
   },
   { timestamps: true }
 );

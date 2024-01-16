@@ -11,12 +11,12 @@ const leaguedataSchema = mongoose.Schema(
       ref: "league",
     },
     datatype: { type: String, require: true },
+
     en: [{
       teamname: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "teamCatlog"
       },
-
       games: { type: String, require: true },
 
       win: { type: String, require: true },
@@ -36,6 +36,8 @@ const leaguedataSchema = mongoose.Schema(
       gs_gc: { type: String, require: true },
 
       win_precent: { type: String, require: true },
+
+      win_precents: { type: String, require: true },
 
       GS_G: { type: String, require: true },
 
@@ -47,6 +49,7 @@ const leaguedataSchema = mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "teamCatlog"
       },
+
       games: { type: String, require: true },
 
       win: { type: String, require: true },
@@ -67,13 +70,11 @@ const leaguedataSchema = mongoose.Schema(
 
       win_precent: { type: String, require: true },
 
-      win_precent: { type: String, require: true },
+      win_precents: { type: String, require: true },
 
       GS_G: { type: String, require: true },
 
       Points_Stdev: { type: String, require: true },
-
-
     }],
 
 
