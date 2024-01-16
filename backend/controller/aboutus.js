@@ -7,14 +7,11 @@ exports.addaboutus = async (req, res) => {
         const protocol = req.protocol
         const host = req.hostname
         const url = `${protocol}//${host}`
-        const { en, ar } = req.body
+        const { bannerImage, aboutSectionImage, visionSectionImage, en, ar } = req.body
         const addaboutus = await aboutusmodel.create({
-            // bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : "",
-            // aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
-            // visionSectionImage: files && files.visionSectionImage ? url + "/uploads/" + files.visionSectionImage[0].filename : "",
-            bannerImage:bannerImage,
-            aboutSectionImage:aboutSectionImage,
-            visionSectionImage:visionSectionImage,
+            bannerImage: bannerImage,
+            aboutSectionImage: aboutSectionImage,
+            visionSectionImage: visionSectionImage,
             en: {
                 aboutTitle: en.aboutTitle || "",
                 aboutText: en.aboutText || "",
@@ -41,11 +38,11 @@ exports.addaboutus = async (req, res) => {
 }
 exports.getaboutus = async (Request, Response) => {
     const { lung } = Request.params;
-    const data = await aboutusmodel.find({}, { [lung]: 1 })
+    const data = await aboutusmodel.find({}, { [lung]: 1, bannerImage: 1, aboutSectionImage: 1, visionSectionImage: 1 })
     responseHelper[200].data = data;
     Response.send(responseHelper[200]);
 },
-exports.updateAboutus = async (req, res) => {
+    exports.updateAboutus = async (req, res) => {
         try {
             const files = req.files;
             const protocol = req.protocol;

@@ -10,6 +10,15 @@ const teamdata = require('../model/teamdata');
 const teamCatlog = require('../model/teamCatlog')
 
 exports.leagedBlukImport = async (req, res) => {
+
+  const leaguesname = await teamCatlog.findOne({ _id: req.body.league });
+  if (leaguesname) {
+    responseHelper[400].data = `League with id ${req.body.league} not found`;
+    res.status(400).send(responseHelper[400]);
+    return;
+  }
+  let isFieldsAdded = false;
+
   const languageFile = req.files['excelFile'][0].path;
   const workbook = XLSX.readFile(languageFile);
   const sheetNames = workbook.SheetNames;
@@ -18,6 +27,14 @@ exports.leagedBlukImport = async (req, res) => {
     const sheetsData = [];
     const worksheet = workbook.Sheets[sheetName];
     const data = XLSX.utils.sheet_to_json(worksheet);
+    if (!isFieldsAdded) {
+      sheetsData.push({
+        GS_G: data['GS/G'] || '',
+        win_precents: data['W%'] || '',
+        Points_Stdev: data['Points Stdev'] || ''
+      });
+      isFieldsAdded = true;
+    }
     for (let i = 0; i < data.length; i++) {
       const teamId = await teamCatlog.findOne({ "en.Team_Name_English": data[i].TEAM });
       if (await teamId?._id) {
@@ -33,9 +50,6 @@ exports.leagedBlukImport = async (req, res) => {
           point_gap: (data[i]['POINTS GAIN %'] !== undefined) ? data[i]['POINTS GAIN %'] : data[i]['Pgap'],
           gs_gc: (data[i]['GOALS SCORED/GAME'] !== undefined) ? data[i]['GOALS SCORED/GAME'] : data[i]['GS-GC'],
           win_precent: (data[i]['WIN%'] !== undefined) ? data[i]['WIN%'] : data[i]['w%'],
-          // GS_G: data[i]['GS/G'] || '',
-          // win_precent: data[i]['W%'] || '',
-          // Points_Stdev: data[i]['Points Stdev'] || ''
         })
       }
     }
@@ -44,12 +58,10 @@ exports.leagedBlukImport = async (req, res) => {
       leagueid: req.body.league,
       datatype: sheetName,
       en: sheetsData,
-      ar: sheetsData
+      ar: sheetsData,
     }])
 
   });
-
-
 
   const TeamFile = req.files['teamexcelFile'][0].path;
   const workbookTeam = XLSX.readFile(TeamFile);

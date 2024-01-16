@@ -12,7 +12,7 @@ const teamCatlogSchema = mongoose.Schema(
             SEO_URL: { type: String, default: "" },
             Past_teams_logo_file_names_below: { type: String, default: "" },
             logo_folder: { type: String, default: "" },
-            status: { type: String, enum: ["enable", "disable"], default: "enable" }
+            status: { type: String, enum: ["active", "inactive"], default: "active" }
         },
         ar: {
             Team_Name_Arabic: { type: String, default: "" },
@@ -22,7 +22,7 @@ const teamCatlogSchema = mongoose.Schema(
             SEO_URL: { type: String, default: "" },
             Past_teams_logo_file_names_below: { type: String, default: "" },
             logo_folder: { type: String, default: "" },
-            status: { type: String, enum: ["enable", "disable"], default: "enable" }
+            status: { type: String, enum: ["active", "inactive"], default: "active" }
         }
     },
     { timestamps: true }
