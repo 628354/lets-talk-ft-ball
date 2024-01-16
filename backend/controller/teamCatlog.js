@@ -282,7 +282,6 @@ module.exports = {
                     "i"
                 );
             }
-
             const teamsdata = await teamCatlog.aggregate([
                 {
                     $match: Team_Name_English_Filter,

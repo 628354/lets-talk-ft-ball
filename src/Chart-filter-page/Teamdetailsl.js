@@ -120,7 +120,7 @@ export default function Teamdetailsl() {
 		try {
 			
 			const response = await apiCall(GAINING_RATE.gainrate,REQUEST_TYPE.POST, obj)
-				// console.log(response.response?.data.data.data1)
+				console.log(response.response?.data.data.data1)
 				setTableData(response.response?.data?.data?.data1)
 				response.response?.data.data?.teamDatas?.map((item) => {
 					console.log(item);
@@ -150,14 +150,21 @@ export default function Teamdetailsl() {
 		}
 		const data1 = []
 		try {
+			
 			const response = await apiCall(TEAM_GS_GC.find, REQUEST_TYPE.POST, obj)
-			// console.log(response.response.data.data?.teamDatas);
+			console.log(response.response.data.data);
+			const povertyLines = response.response.data.data?.povertyLines?.[lang]?.map((item) => ({
+				poverty: item?.Poverty_Line
+			}));
+			console.log(povertyLines);
+
 			response.response?.data.data?.teamDatas?.map((item) => {
 				// console.log(item);
 				item?.en?.map((data) => {
 					// console.log(data);
 					data1.push({
-						GS_GC: parseInt(data.GS_GC, 10)
+						GS_GC: parseInt(data.GS_GC, 10),
+						poverty: povertyLines && povertyLines?.length > 0 ? povertyLines.shift()?.poverty : undefined
 					})
 				})
 			}
@@ -165,7 +172,7 @@ export default function Teamdetailsl() {
 			//   setTeamName(response.response.data.data?.teamname1?.en)
 			//setData(response.response?.data?.data?.data1)
 			setGsGc(data1)
-			//console.log(data1);
+			console.log(data1);
 		} catch (error) {
 			console.log("data errror ", error)
 		}
@@ -369,7 +376,7 @@ const teamSecgc = async () => {
 		}));
 	  
 		const series = chart.series.push(am5xy.LineSeries.new(root4, {
-		  name: "GS GC",
+		 
 		  xAxis: xAxis,
 		  yAxis: yAxis,
 		  valueYField: "GS_GC",
@@ -403,6 +410,32 @@ const teamSecgc = async () => {
 		});
 		chart.set("scrollbarX", scrollbarX);
 		chart.bottomAxesContainer.children.push(scrollbarX);
+
+
+		var series2 = chart.series.push(
+			am5xy.LineSeries.new(root4, {
+				xAxis: xAxis,
+				yAxis: yAxis,
+				valueYField: "poverty",
+				valueXField: "index",
+			  tooltip: am5.Tooltip.new(root4, {
+				pointerOrientation: "horizontal",
+				
+			  }),
+			
+			  
+			})
+		  );
+		  series2.set("stroke", am5.color("#FF6600"))
+		  
+		  series2.strokes.template.setAll({
+			  strokeWidth: 3,
+			  templateField: "strokeSettings",
+		  });
+		  
+		  series2.data.setAll(dataWithIndex);
+		  
+		 
 		return () => {
 		  root4.dispose();
 		};
@@ -573,6 +606,8 @@ const teamSecgc = async () => {
 	});
 	chart.set("scrollbarX", scrollbarX);
 	chart.bottomAxesContainer.children.push(scrollbarX);
+	
+	  
 	return () => {
 	  root5.dispose();
 	};

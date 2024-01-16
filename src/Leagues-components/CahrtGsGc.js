@@ -46,16 +46,30 @@ export default function CahrtGsGc({ leagueId}) {
 
 		
 		const data1 = []
+		
 		apiCall(GS_GC(lang).find, REQUEST_TYPE.POST, data).then((result) => {
+			console.log(result?.response?.data?.data);
+			result?.response?.data?.data?.povertyLines?.[lang]?.map((item)=>{
+				console.log(item);
+				// data1.push({
+				// 	"poverty":item?.Poverty_Line
+				// })
+			})
+			const povertyLines = result?.response?.data?.data?.povertyLines?.[lang]?.map((item) => ({
+				poverty: item?.Poverty_Line
+			}));
+			// console.log(povertyLines);
 			if (result.status === 200) {
-			    result.response.data.data?.map((item,index) =>{
+			    result?.response?.data?.data?.data?.map((item,index)=>{
+					console.log(item);
 						return item[lang].map((results)=>{
 							console.log(result)
 							if(lang === "en"){
 								data1.push({
 									"goalsCons": parseInt(results?.gs_gc, 10),
 									"name": results.teamname?.[lang]?.Team_Name_Short_English,
-									"icon": `${BASE_URL}${results.teamname?.Image}`
+									"icon": `${BASE_URL}${results.teamname?.Image}`,
+									"poverty": povertyLines && povertyLines?.length > 0 ? povertyLines.shift()?.poverty : undefined
 									//"goalsScored": results?.goals_scored
 									// "Image": `${BASE_URL}${results?.teamname?.Image.replace(/\s/g, '')}`
 								})
@@ -74,7 +88,9 @@ export default function CahrtGsGc({ leagueId}) {
 						})
 						
 				})
-
+				console.log(data1);
+				data1.sort((a, b) => b.goalsCons - a.goalsCons);
+				
 				setGsGc(data1)
 			}
 		});
@@ -160,8 +176,10 @@ export default function CahrtGsGc({ leagueId}) {
 		  am5xy.ColumnSeries.new(root1, {
 			xAxis: xAxis,
 			yAxis: yAxis,
+			valueYField: "poverty",
 			valueYField: "goalsCons",
 			categoryXField: "name",
+			
 		  })
 		);
 		series.set("fill", am5.color("#FF7E00"));
@@ -177,8 +195,31 @@ export default function CahrtGsGc({ leagueId}) {
 		series.data.setAll(gsGc);
 		series.appear();
 		chart.appear(1000, 100);
-	
-	
+
+		var series2 = chart.series.push(
+			am5xy.LineSeries.new(root1, {
+			  name: "poverty",
+			  xAxis: xAxis,
+			  yAxis: yAxis,
+			  valueYField: "poverty",
+			  categoryXField: "name",
+			  tooltip: am5.Tooltip.new(root1, {
+				pointerOrientation: "horizontal",
+				labelText: "{name} in {categoryXField}: {valueYField} {info}"
+			  }),
+			
+			  
+			})
+		  );
+		  series2.strokes.template.setAll({
+			strokeWidth: 3,
+			templateField: "strokeSettings"
+		  });
+		//   series2.strokes.template.set("stroke", am5.color("#06083B"));
+		  series2.set("stroke", am5.color("#06083B"))
+		  series2.data.setAll(gsGc);
+		  
+		 
 		return () => {
 		  root1.dispose();
 		};

@@ -90,7 +90,7 @@ export default function Teams() {
 
   const indexOfLastTeam = currentPage * teamsPerPage;
   const indexOfFirstTeam = indexOfLastTeam - teamsPerPage;
-  const currentTeams = teamsData.slice(indexOfFirstTeam, indexOfLastTeam);
+  const currentTeams = teamsData?.slice(indexOfFirstTeam, indexOfLastTeam);
 
   return (
     <div>
