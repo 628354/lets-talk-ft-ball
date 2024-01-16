@@ -151,7 +151,7 @@ console.log(folderWithoutSpaces);
                            <i className="ri-refresh-line"></i>
                            </a>
                         </li>
-                        <li class="add-button-cencel"><a href=""><i className="ri-refresh-line"></i></a></li>
+                        {/* <li class="add-button-cencel"><a href=""><i className="ri-refresh-line"></i></a></li> */}
                         {/* 
                         <li className='add-button-sec'>
                            <button><i className="ri-delete-bin-line"></i></button>
