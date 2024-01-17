@@ -29,9 +29,22 @@ exports.leagedBlukImport = async (req, res) => {
     const data = XLSX.utils.sheet_to_json(worksheet);
     if (!isFieldsAdded) {
       sheetsData.push({
-        GS_G: data[2][`GS/G`] || '',
-        win_precents: data[2][`W%`] || '',
-        Points_Stdev: data[2][`Points Stdev`] || ''
+        GS_G: '',
+        win_precents: '',
+        Points_Stdev: '',
+      });
+      data.forEach((entry) => {
+        switch (entry.TEAM) {
+          case 'GS/G':
+            sheetsData[0].GS_G = entry.GP || '';
+            break;
+          case 'W%':
+            sheetsData[0].win_precents = entry.GP || '';
+            break;
+          case 'Points Stdev':
+            sheetsData[0].Points_Stdev = entry.GP || '';
+            break;
+        }
       });
       isFieldsAdded = true;
     }

@@ -37,9 +37,9 @@ const leaguedataSchema = mongoose.Schema(
 
       win_precent: { type: String, require: true },
 
-      win_precents: { type: String, require: true },
-
       GS_G: { type: String, require: true },
+
+      win_precents: { type: String, require: true },
 
       Points_Stdev: { type: String, require: true },
 
@@ -70,9 +70,9 @@ const leaguedataSchema = mongoose.Schema(
 
       win_precent: { type: String, require: true },
 
-      win_precents: { type: String, require: true },
-
       GS_G: { type: String, require: true },
+
+      win_precents: { type: String, require: true },
 
       Points_Stdev: { type: String, require: true },
     }],

@@ -174,5 +174,38 @@ exports.delete = async (req, res) => {
         res.send({ status: false, message: "Something went wrong !!" })
     }
 }
+exports.updateleagueStatus = async (req, res) => {
+    try {
+        const { en, ar } = req.body
+        const updateLeague = await leaguemodel.findByIdAndUpdate(
+            { _id: req.params.id },
+            {
+                $set: {
+                    "en.status": (en && en.status) || "inactive",
+                    "ar.status": (ar && ar.status) || "inactive",
+                    is_Deleted: true
+                }
+            },
+            { new: true, lean: true }
+        );
 
+        if (!updateLeague) {
+            return res.status(404).send({
+                message: 'Status not found',
+                success: false
+            });
+        }
 
+        res.status(200).send({
+            body: updateLeague,
+            message: 'Status Updated successfully',
+            success: true
+        });
+    } catch (error) {
+        res.status(200).send({
+            message: "Enternal Server Error",
+            success: false,
+            error: error.message
+        })
+    }
+}

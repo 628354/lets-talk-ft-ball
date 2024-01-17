@@ -273,7 +273,7 @@ module.exports = {
     },
     TeamsFilter: async (req, res) => {
         try {
-            const { Team_Name_English, leaguename } = req.query;
+            const { Team_Name_English, leaguename, status } = req.query;
             const filter = {};
 
             if (Team_Name_English) {
@@ -283,6 +283,11 @@ module.exports = {
             if (leaguename) {
                 filter["leagues_details.en.leaguename"] = new RegExp(`^${leaguename}`, "i");
             }
+
+            if (status) {
+                filter["en.status"] = new RegExp(`^${status}`, "i")
+            }
+
 
             const teamsdata = await teamCatlog.aggregate([
                 {
@@ -326,6 +331,7 @@ module.exports = {
                     $set: {
                         "en.status": (en && en.status) || "enable",
                         "ar.status": (ar && ar.status) || "enable",
+                        is_Deleted: true
                     }
                 },
                 { new: true, lean: true }
