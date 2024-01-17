@@ -14,8 +14,9 @@ module.exports = {
                 });
             }
 
+            const sanitizedFolderName = req.body.folderName.replace(/\s+/g, '_');
             const newFolder = new folder({
-                folderName: req.body.folderName,
+                folderName: sanitizedFolderName,
                 status: req.body.status
             });
 
@@ -27,7 +28,7 @@ module.exports = {
                     fs.mkdirSync(uploadPath, { recursive: true });
                 }
 
-                const folderPath = path.join(uploadPath, req.body.folderName);
+                const folderPath = path.join(uploadPath, sanitizedFolderName);
                 if (!fs.existsSync(folderPath)) {
                     fs.mkdirSync(folderPath);
                 } else {
@@ -57,6 +58,7 @@ module.exports = {
             });
         }
     },
+
     folderUpdate: async (req, res) => {
         try {
             const { folderName } = req.body

@@ -142,7 +142,7 @@ export default function Addseason() {
                        
                         </div>
                       </Tab>
-                      <Tab eventKey="profile2" title={<span><img src={require('../img/ar.png')} alt="General" /> العربية</span>}>
+                      {/* <Tab eventKey="profile2" title={<span><img src={require('../img/ar.png')} alt="General" /> العربية</span>}>
                         <div className='sanson-title'>
                           <Form>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
@@ -155,7 +155,7 @@ export default function Addseason() {
                             </Form.Group>
                           </Form>
                         </div>
-                      </Tab>
+                      </Tab> */}
                     </Tabs>
                   </div>
 

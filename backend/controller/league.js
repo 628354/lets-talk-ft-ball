@@ -23,7 +23,6 @@ exports.addleague = async (req, res) => {
                 meta_Tag_Title: en.meta_Tag_Title || '',
                 meta_Tag_Description: en.meta_Tag_Description || '',
                 meta_Tag_Keywords: en.meta_Tag_Keywords || '',
-                blog_Category: en.blog_Category || "",
                 sort_Order: en.sort_Order || "",
                 status: en.status || "active"
             },
@@ -33,7 +32,6 @@ exports.addleague = async (req, res) => {
                 meta_Tag_Title: ar.meta_Tag_Title || '',
                 meta_Tag_Description: ar.meta_Tag_Description || '',
                 meta_Tag_Keywords: ar.meta_Tag_Keywords || '',
-                blog_Category: ar.blog_Category || "",
                 sort_Order: ar.sort_Order || "",
                 status: ar.status || "active"
             }
@@ -117,7 +115,6 @@ exports.update = async (req, res) => {
                     meta_Tag_Title: en.meta_Tag_Title || "",
                     meta_Tag_Description: en.meta_Tag_Description || "",
                     meta_Tag_Keywords: en.meta_Tag_Keywords || "",
-                    blog_Category: en.blog_Category || "",
                     sort_Order: en.sort_Order || "",
                     status: en.status || "active"
                 },
@@ -127,7 +124,6 @@ exports.update = async (req, res) => {
                     meta_Tag_Title: ar.meta_Tag_Title || "",
                     meta_Tag_Description: ar.meta_Tag_Description || "",
                     meta_Tag_Keywords: ar.meta_Tag_Keywords || "",
-                    blog_Category: ar.blog_Category || "",
                     sort_Order: ar.sort_Order || "",
                     status: ar.status || "active"
                 }
@@ -174,5 +170,38 @@ exports.delete = async (req, res) => {
         res.send({ status: false, message: "Something went wrong !!" })
     }
 }
+exports.updateleagueStatus = async (req, res) => {
+    try {
+        const { en, ar } = req.body
+        const updateLeague = await leaguemodel.findByIdAndUpdate(
+            { _id: req.params.id },
+            {
+                $set: {
+                    "en.status": (en && en.status) || "inactive",
+                    "ar.status": (ar && ar.status) || "inactive",
+                    is_Deleted: true
+                }
+            },
+            { new: true, lean: true }
+        );
 
+        if (!updateLeague) {
+            return res.status(404).send({
+                message: 'Status not found',
+                success: false
+            });
+        }
 
+        res.status(200).send({
+            body: updateLeague,
+            message: 'Status Updated successfully',
+            success: true
+        });
+    } catch (error) {
+        res.status(200).send({
+            message: "Enternal Server Error",
+            success: false,
+            error: error.message
+        })
+    }
+}

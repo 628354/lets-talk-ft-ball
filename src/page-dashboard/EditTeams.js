@@ -32,6 +32,10 @@ const [image,setImage]=useState(null);
     Past_teams_logo_file_names_below: '',
     logo_folder: '',
     status: 'active',
+    Graph_Title1:'',
+    Graph_Title2:'',
+    Graph_Title3:'',
+    Graph_Title4:'',
     league: ''
   });
   const [formDataAr, setFormDataAr] = useState({
@@ -43,6 +47,10 @@ const [image,setImage]=useState(null);
     Past_teams_logo_file_names_below: '',
     logo_folder: '',
     status: 'active',
+    Graph_Title1:'',
+    Graph_Title2:'',
+    Graph_Title3:'',
+    Graph_Title4:'',
 
 
 
@@ -62,7 +70,13 @@ const [image,setImage]=useState(null);
     }))
    
   };
+  const handleTextChangeAr =(field,value)=>{
+    setFormDataAr((prev)=>({
+      ...prev,
+      [field]: value,
 
+    }))
+  }
 
   const handleChangeAr = (field, value) => {
     setFormDataAr((prev)=>({
@@ -348,7 +362,7 @@ useEffect(()=>{
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2" className="season-coll">
+                              <Form.Label column sm="2" className="season-coll mb-3" >
                               Team Name Short English
                               </Form.Label>
                               <Col sm="10">
@@ -358,6 +372,58 @@ useEffect(()=>{
                                   value={formData?.Team_Name_Short_English}
                                   onChange={(e) =>
                                     handleChange("Team_Name_Short_English", e.target.value)
+                                  }
+                                />
+                              </Col>
+                              <Form.Label column sm="2" className="season-coll mb-3">
+                              Graph Title1
+                              </Form.Label>
+                              <Col sm="10">
+                                <Form.Control
+                                  type="text"
+                                  placeholder="Graph Title1"
+                                  value={formData?.Graph_Title1}
+                                  onChange={(e) =>
+                                    handleChange("Graph_Title1", e.target.value)
+                                  }
+                                />
+                              </Col>
+                              <Form.Label column sm="2" className="season-coll mb-3">
+                              Graph Title2
+                              </Form.Label>
+                              <Col sm="10">
+                                <Form.Control
+                                  type="text"
+                                  placeholder="Graph Title2"
+                                  value={formData?.Graph_Title2}
+                                  onChange={(e) =>
+                                    handleChange("Graph_Title2", e.target.value)
+                                  }
+                                />
+                              </Col>
+                              <Form.Label column sm="2" className="season-coll mb-3 ">
+                              Graph Title3
+                              </Form.Label>
+                              <Col sm="10">
+                                <Form.Control
+                                  type="text"
+                                  placeholder="Graph Title3"
+                                  value={formData?.Graph_Title3}
+                                  onChange={(e) =>
+                                    handleChange("Graph_Title3", e.target.value)
+                                  }
+                                />
+                              </Col>
+                              <Form.Label column sm="2" className="season-coll">
+                              Graph Title4
+                              </Form.Label>
+                              <Col sm="10">
+                                <Form.Control
+                                  type="text"
+                                  placeholder=" Graph Title4"
+                                  value={formData?.Graph_Title4}
+                                  onChange={(e) =>
+                                    handleChange("Graph_Title4", e.target.value)
                                   }
                                 />
                               </Col>
@@ -415,45 +481,7 @@ useEffect(()=>{
                           </Form>
                           </div>
                         </div>
-                        <div className='add-genral'>
-                          <h6>Data</h6>
-                        </div>
-                        <hr />
-                        <div className='date-for-section'>
-                          <div className='team Name'>
-                            <Form>
-                              <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                <Form.Label column sm="2" className="season-coll">
-                                  Status
-                                </Form.Label>
-                                <Col sm="10">
-                                  <Form.Select
-                                    value={formData.status}
-                                    onChange={(e) => handleChange("status", e.target.value)}
-                                    name="status"
-                                  >
-                                    <option value="active">Active</option>
-                                    <option value="inactive">Inactive</option>
-                                  </Form.Select>
-                                </Col>
-                              </Form.Group>
-
-                              {/* <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                <Form.Label column sm="2">
-                                  Sort Order
-                                </Form.Label>
-                                <Col sm="10">
-                                  <Form.Control
-                                    type="text"
-                                    placeholder="short_name"
-                                    value={formData.short_name}
-                                    onChange={(e) => handleChange('short_name', e.target.value)}
-                                  />
-                                </Col>
-                              </Form.Group> */}
-                            </Form>
-                          </div>
-                        </div>
+        
                       </Tab>
                       <Tab
                         eventKey="profile2"
@@ -509,7 +537,7 @@ useEffect(()=>{
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2" className="season-coll">
+                              <Form.Label column sm="2" className="season-coll mb-3">
                               Team Name Short Arabic
                               </Form.Label>
                               <Col sm="10">
@@ -519,6 +547,58 @@ useEffect(()=>{
                                   value={formDataAr?.Team_Name_Short_Arabic}
                                   onChange={(e) =>
                                     handleChangeAr("Team_Name_Short_Arabic", e.target.value)
+                                  }
+                                />
+                              </Col>
+                              <Form.Label column sm="2" className="season-coll mb-3">
+                              Graph Title1
+                              </Form.Label>
+                              <Col sm="10">
+                                <Form.Control
+                                  type="text"
+                                  placeholder="Graph Title1"
+                                  value={formDataAr?.Graph_Title1}
+                                  onChange={(e) =>
+                                    handleChangeAr("Graph_Title1", e.target.value)
+                                  }
+                                />
+                              </Col>
+                              <Form.Label column sm="2" className="season-coll mb-3">
+                              Graph Title2
+                              </Form.Label>
+                              <Col sm="10">
+                                <Form.Control
+                                  type="text"
+                                  placeholder="Graph Title2"
+                                  value={formDataAr?.Graph_Title2}
+                                  onChange={(e) =>
+                                    handleChangeAr("Graph_Title2", e.target.value)
+                                  }
+                                />
+                              </Col>
+                              <Form.Label column sm="2" className="season-coll mb-3">
+                              Graph Title3
+                              </Form.Label>
+                              <Col sm="10">
+                                <Form.Control
+                                  type="text"
+                                  placeholder="Graph Title3"
+                                  value={formDataAr?.Graph_Title3}
+                                  onChange={(e) =>
+                                    handleChangeAr("Graph_Title3", e.target.value)
+                                  }
+                                />
+                              </Col>
+                              <Form.Label column sm="2" className="season-coll">
+                              Graph Title4
+                              </Form.Label>
+                              <Col sm="10">
+                                <Form.Control
+                                  type="text"
+                                  placeholder=" Graph Title4"
+                                  value={formDataAr?.Graph_Title4}
+                                  onChange={(e) =>
+                                    handleChangeAr("Graph_Title4", e.target.value)
                                   }
                                 />
                               </Col>
@@ -541,11 +621,49 @@ useEffect(()=>{
                             </Col>
                           </Form.Group> */}
                         </div>
+                        
                       </Tab>
+                      
                     </Tabs>
+                    <div className='add-genral'>
+                          <h6>Data</h6>
+                        </div>
+                        <hr />
+                        <div className='date-for-section'>
+                          <div className='team Name'>
+                            <Form>
+                              <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Label column sm="2" className="season-coll">
+                                  Status
+                                </Form.Label>
+                                <Col sm="10">
+                                  <Form.Select
+                                    value={formData.status}
+                                    onChange={(e) => handleChange("status", e.target.value)}
+                                    name="status"
+                                  >
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                  </Form.Select>
+                                </Col>
+                              </Form.Group>
+                              {/* <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+                                <Form.Label column sm="2">
+                                  Sort Order
+                                </Form.Label>
+                                <Col sm="10">
+                                  <Form.Control
+                                    type="text"
+                                    placeholder="short_name"
+                                    value={formData.short_name}
+                                    onChange={(e) => handleChange('short_name', e.target.value)}
+                                  />
+                                </Col>
+                              </Form.Group> */}
+                            </Form>
+                          </div>
+                        </div>
                   </div>
-
-
                 </div>
               </div>
             </Row>

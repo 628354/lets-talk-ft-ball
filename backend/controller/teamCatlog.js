@@ -108,6 +108,10 @@ module.exports = {
                     Team_info: en.Team_info || "",
                     logo_folder: en.logo_folder || "",
                     status: en.status || "active",
+                    Graph_Title1: en.Graph_Title1 || "",
+                    Graph_Title2: en.Graph_Title2 || "",
+                    Graph_Title3: en.Graph_Title3 || "",
+                    Graph_Title4: en.Graph_Title4 || "",
                     Past_teams_logo_file_names_below:
                         en.Past_teams_logo_file_names_below || "",
                     SEO_URL: en.SEO_URL || "",
@@ -119,6 +123,10 @@ module.exports = {
                     Team_info: ar.Team_info || "",
                     logo_folder: ar.logo_folder || "",
                     status: ar.status || "active",
+                    Graph_Title1: ar.Graph_Title1 || "",
+                    Graph_Title2: ar.Graph_Title2 || "",
+                    Graph_Title3: ar.Graph_Title3 || "",
+                    Graph_Title4: ar.Graph_Title4 || "",
                     Past_teams_logo_file_names_below:
                         ar.Past_teams_logo_file_names_below || "",
                     SEO_URL: ar.SEO_URL || "",
@@ -207,8 +215,12 @@ module.exports = {
                         Team_info: en.Team_info || "",
                         logo_folder: en.logo_folder || "",
                         status: en.status || "active",
+                        Graph_Title1: en.Graph_Title1 || "",
+                        Graph_Title2: en.Graph_Title2 || "",
+                        Graph_Title3: en.Graph_Title3 || "",
+                        Graph_Title4: en.Graph_Title4 || "",
                         Past_teams_logo_file_names_below:
-                            en.Past_teams_logo_file_names_below || "",
+                        en.Past_teams_logo_file_names_below || "",
                         SEO_URL: en.SEO_URL || "",
                     },
                     ar: {
@@ -218,8 +230,12 @@ module.exports = {
                         Team_info: ar.Team_info || "",
                         logo_folder: ar.logo_folder || "",
                         status: ar.status || "active",
+                        Graph_Title1: ar.Graph_Title1 || "",
+                        Graph_Title2: ar.Graph_Title2 || "",
+                        Graph_Title3: ar.Graph_Title3 || "",
+                        Graph_Title4: ar.Graph_Title4 || "",
                         Past_teams_logo_file_names_below:
-                            ar.Past_teams_logo_file_names_below || "",
+                        ar.Past_teams_logo_file_names_below || "",
                         SEO_URL: ar.SEO_URL || "",
                     },
                 },
@@ -273,7 +289,7 @@ module.exports = {
     },
     TeamsFilter: async (req, res) => {
         try {
-            const { Team_Name_English, leaguename } = req.query;
+            const { Team_Name_English, leaguename, status } = req.query;
             const filter = {};
 
             if (Team_Name_English) {
@@ -283,6 +299,11 @@ module.exports = {
             if (leaguename) {
                 filter["leagues_details.en.leaguename"] = new RegExp(`^${leaguename}`, "i");
             }
+
+            if (status) {
+                filter["en.status"] = new RegExp(`^${status}`, "i")
+            }
+
 
             const teamsdata = await teamCatlog.aggregate([
                 {
@@ -326,6 +347,7 @@ module.exports = {
                     $set: {
                         "en.status": (en && en.status) || "enable",
                         "ar.status": (ar && ar.status) || "enable",
+                        is_Deleted: true
                     }
                 },
                 { new: true, lean: true }

@@ -344,19 +344,6 @@ useEffect(()=>{
                                   onChange={(e) => handleTextChange('meta_Tag_Keywords', e.target.value)}/>
                               </Col>
                             </Form.Group>
-                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2" className="season-coll">
-                                League Blog Category
-                              </Form.Label>
-                              <Col sm="10">
-                                <Form.Select aria-label="Default select example">
-                                  <option>Open this select menu</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
-                                </Form.Select>
-                              </Col>
-                            </Form.Group>
                           </Form>
                         </div>
                       </Tab>
@@ -403,19 +390,6 @@ useEffect(()=>{
                               </Form.Label>
                               <Col sm="10">
                                 <Form.Control as="textarea" rows={3} />
-                              </Col>
-                            </Form.Group>
-                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                              <Form.Label column sm="2" className="season-coll">
-                                League Blog Category
-                              </Form.Label>
-                              <Col sm="10">
-                                <Form.Select aria-label="Default select example">
-                                  <option>Open this select menu</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
-                                </Form.Select>
                               </Col>
                             </Form.Group>
                           </Form>

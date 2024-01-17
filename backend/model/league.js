@@ -13,7 +13,6 @@ const leagueSchema = mongoose.Schema(
       meta_Tag_Title: { type: String, default: "" },
       meta_Tag_Description: { type: String, default: "" },
       meta_Tag_Keywords: { type: String, default: "" },
-      blog_Category: { type: String, default: "" },
       sort_Order: { type: String, default: "" },
       status: { type: String, enum: ["active", "inactive"], default: "active" },
     },
@@ -23,11 +22,11 @@ const leagueSchema = mongoose.Schema(
       meta_Tag_Title: { type: String, default: "" },
       meta_Tag_Description: { type: String, default: "" },
       meta_Tag_Keywords: { type: String, default: "" },
-      blog_Category: { type: String, default: "" },
       sort_Order: { type: String, default: "" },
-      status: { type: String, enum: ["active", "inactive"], default: "active" },
+      status: { type: String, enum: ["active", "  "], default: "active" },
+    },
+    is_Deleted: { type: Boolean, default: false },
 
-    }
 
   },
   { timestamps: true }

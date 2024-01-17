@@ -26,6 +26,7 @@ router.post(
   leaguecontroller.update
 );
 router.delete("/removeLeague/:id", authentication, leaguecontroller.delete);
+router.put('/updateleagueStatus/:id', leaguecontroller.updateleagueStatus)
 
 const storages = multer.memoryStorage();
 const uploads = multer({ storage: storages });
