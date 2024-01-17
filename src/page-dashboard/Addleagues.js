@@ -27,7 +27,6 @@ export default function Addleagues() {
     meta_Tag_Title: "",
     meta_Tag_Description: "",
     meta_Tag_Keywords: "",
-    blog_Category: "",
     sort_Order: "",
     status: "active",
   });
@@ -38,7 +37,6 @@ export default function Addleagues() {
     meta_Tag_Title: "",
     meta_Tag_Description: "",
     meta_Tag_Keywords: "",
-    blog_Category: "",
     sort_Order: "",
     status: "active",
   });
@@ -388,17 +386,6 @@ console.log(folderName);
                               className="mb-3"
                               controlId="formPlaintextPassword"
                             >
-                              <Form.Label column sm="2" className='season-coll'>
-                                League Blog Category
-                              </Form.Label>
-                              <Col sm="10">
-                                <Form.Select aria-label="Default select example">
-                                  <option>Open this select menu</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
-                                </Form.Select>
-                              </Col>
                             </Form.Group>
                           </Form>
                         </div>
@@ -526,17 +513,6 @@ console.log(folderName);
                             className="mb-3"
                             controlId="formPlaintextPassword"
                           >
-                            <Form.Label column sm="2" className='season-coll'>
-                              League Blog Category
-                            </Form.Label>
-                            <Col sm="10">
-                              <Form.Select aria-label="Default select example">
-                                <option>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                              </Form.Select>
-                            </Col>
                           </Form.Group>
                         </div>
                       </Tab>

@@ -20,7 +20,7 @@ const teamCatlog = require('../controller/teamCatlog')
 
 //=============================================admin routes==================================
 router.post("/createTeam", upload.single("image"), teamCatlog.createTeam);
-router.put('/updateTeams/:id', teamCatlog.updateTeams)
+router.put('/:lung/updateTeams/:id', teamCatlog.updateTeams)
 router.delete("/removeteam/:id", teamCatlog.removeteam);
 router.get('/:lung/GetAllTeams', teamCatlog.GetAllTeams)
 router.get('/:lung/getByIdTeams/:id', teamCatlog.getByIdTeams)

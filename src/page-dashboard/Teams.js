@@ -153,9 +153,10 @@ export default function Teams() {
                   <thead>
                     <tr>
                       <th width="1%"><Form.Check aria-label="option 1" /></th>
-                      <th width="20%">League Name</th>
+                      <th width="20%">Image</th>
                       <th width="20%">Teams Name</th>
                       <th width="20%">Sort Name</th>
+                      <th width="20%">Leagues</th>
                       <th width="20%">Status</th>
                       <th width="10%">Action</th>
                     </tr>
@@ -164,9 +165,10 @@ export default function Teams() {
                     {currentTeams.map((team) => (
                       <tr key={team._id}>
                         <td><Form.Check aria-label="option 1" /></td>
-                        <td>{searchClicked ? team?.leagues_details[0].en.leaguename : team?.leagueid?.en?.leaguename}</td>
+                        <td>{team.Image}</td>
                         <td>{team?.en.Team_Name_English}</td>
                         <td>{team?.en?.Team_Name_Short_English}</td>
+                        <td>{searchClicked ? team?.leagues_details[0].en.leaguename : team?.leagueid?.en?.leaguename}</td>
                         <td>{team?.en?.status}</td>
                         <td>
                           <div className='add-button-fis'>
