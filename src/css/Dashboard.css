@@ -719,7 +719,7 @@ section.min-section-one {
 /* 11-01-24 */
 .add-button-min li button {
     border: none;
-    background: no-repeat;
+    background:#1e91cf;
 }
 
 .main-media-ponier {
@@ -762,7 +762,7 @@ section.min-section-one {
 }
 
 .add-button-fis button {
-    background: #1e91cf;
+    background: #fc544b;
     color: white;
     /* padding: 4px 8px; */
     display: inline-block;
