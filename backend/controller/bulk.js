@@ -29,9 +29,9 @@ exports.leagedBlukImport = async (req, res) => {
     const data = XLSX.utils.sheet_to_json(worksheet);
     if (!isFieldsAdded) {
       sheetsData.push({
-        GS_G: data[0]['GS/G'] || '',
-        win_precents: data[0]['W%'] || '',
-        Points_Stdev: data[0]['Points Stdev'] || ''
+        GS_G: data[2][`GS/G`] || '',
+        win_precents: data[2][`W%`] || '',
+        Points_Stdev: data[2][`Points Stdev`] || ''
       });
       isFieldsAdded = true;
     }

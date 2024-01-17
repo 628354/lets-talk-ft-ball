@@ -42,7 +42,7 @@ exports.getaboutus = async (Request, Response) => {
     responseHelper[200].data = data;
     Response.send(responseHelper[200]);
 },
-    exports.updateAboutus = async (req, res) => {
+exports.updateAboutus = async (req, res) => {
         try {
             const files = req.files;
             const protocol = req.protocol;
@@ -50,8 +50,6 @@ exports.getaboutus = async (Request, Response) => {
             const url = `${protocol}//${host}`;
             const { bannerImage, aboutSectionImage, visionSectionImage, en, ar } = req.body
             const updateaboutus = await aboutusmodel.findByIdAndUpdate({ _id: req.params.id }, {
-                // bannerImage: files && files.bannerImage ? url + "/uploads/" + files.bannerImage[0].filename : "",
-                // aboutSectionImage: files && files.aboutSectionImage ? url + "/uploads/" + files.aboutSectionImage[0].filename : "",
                 bannerImage: bannerImage,
                 aboutSectionImage: aboutSectionImage,
                 visionSectionImage: visionSectionImage,
