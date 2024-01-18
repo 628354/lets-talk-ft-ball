@@ -8,7 +8,8 @@ import Menubar from '../dashboard/Menubar';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 
-import { ADMIN_ALL_TEAM, REQUEST_TYPE, REMOVE_TEAM,FILTER_TEAMS } from '../helper/APIInfo';
+import { ADMIN_ALL_TEAM, REQUEST_TYPE, REMOVE_TEAM, FILTER_TEAMS, BASE_URL } from '../helper/APIInfo';
+
 import { apiCall } from '../helper/RequestHandler';
 
 export default function Teams() {
@@ -18,6 +19,7 @@ export default function Teams() {
   const [searchClicked, setSearchClicked] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [teamsPerPage] = useState(10); // Adjust the number of teams per page as needed
+
 
   const getTeams = async () => {
     try {
@@ -51,8 +53,8 @@ export default function Teams() {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/TeamsFilter', {
-      // const response = await axios.get('http://localhost:5000/TeamsFilter', {
+      // const response = await axios.get('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/TeamsFilter', {
+      const response = await axios.get('http://localhost:5000/TeamsFilter', {
         params: {
           Team_Name_English: searchTerm,
         },
@@ -165,8 +167,14 @@ export default function Teams() {
                     {currentTeams.map((team) => (
                       <tr key={team._id}>
                         <td><Form.Check aria-label="option 1" /></td>
-                        <td>{team.Image}</td>
-                        <td>{team?.en.Team_Name_English}</td>
+                        <td>
+                          <img
+                            src={`${BASE_URL}/${team.Image}`}
+                            alt={`${team?.en?.Team_Name_English}`}
+                            style={{ width: '80px', height: '80px' }} needed
+                          />
+                        </td>
+                        <td>{team?.en?.Team_Name_English}</td>
                         <td>{team?.en?.Team_Name_Short_English}</td>
                         <td>{searchClicked ? team?.leagues_details[0].en.leaguename : team?.leagueid?.en?.leaguename}</td>
                         <td>{team?.en?.status}</td>
@@ -189,6 +197,7 @@ export default function Teams() {
                       </tr>
                     ))}
                   </tbody>
+
                 </Table>
                 {renderPageNumbers()}
               </div>
