@@ -10,7 +10,7 @@ const ScrollDown = async (Request, Response) => {
     const { lung, leagueId } = Request.params;
     const { season } = Request.body;
     const data = await leaguedata
-      .find({ leagueid: `${leagueId}`, seasonid: `${season}`, datatype: "Main" }, { [lung]: 1, datatype: 1 })
+      .find({ leagueid: `${leagueId}`, seasonid: `${season}`}, { [lung]: 1 })
       .populate({
         path: `${lung}.teamname`,
         select: [lung, "Image"],
