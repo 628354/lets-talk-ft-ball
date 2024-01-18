@@ -7,6 +7,7 @@ const path = require("path");
 const responseHelper = require("../Helpers/Response");
 const league = require('../model/league')
 module.exports = {
+    //===========================================website====================================================
     CatlogImport: async (req, res) => {
         const filePath = req.file.path;
         const workbook = XLSX.readFile(filePath);
@@ -112,8 +113,7 @@ module.exports = {
                     Graph_Title2: en.Graph_Title2 || "",
                     Graph_Title3: en.Graph_Title3 || "",
                     Graph_Title4: en.Graph_Title4 || "",
-                    Past_teams_logo_file_names_below:
-                        en.Past_teams_logo_file_names_below || "",
+                    Past_teams_logo_file_names_below: en.Past_teams_logo_file_names_below || "",
                     SEO_URL: en.SEO_URL || "",
                 },
                 ar: {
@@ -127,8 +127,7 @@ module.exports = {
                     Graph_Title2: ar.Graph_Title2 || "",
                     Graph_Title3: ar.Graph_Title3 || "",
                     Graph_Title4: ar.Graph_Title4 || "",
-                    Past_teams_logo_file_names_below:
-                        ar.Past_teams_logo_file_names_below || "",
+                    Past_teams_logo_file_names_below: ar.Past_teams_logo_file_names_below || "",
                     SEO_URL: ar.SEO_URL || "",
                 },
             });
@@ -219,8 +218,7 @@ module.exports = {
                         Graph_Title2: en.Graph_Title2 || "",
                         Graph_Title3: en.Graph_Title3 || "",
                         Graph_Title4: en.Graph_Title4 || "",
-                        Past_teams_logo_file_names_below:
-                        en.Past_teams_logo_file_names_below || "",
+                        Past_teams_logo_file_names_below: en.Past_teams_logo_file_names_below || "",
                         SEO_URL: en.SEO_URL || "",
                     },
                     ar: {
@@ -234,8 +232,7 @@ module.exports = {
                         Graph_Title2: ar.Graph_Title2 || "",
                         Graph_Title3: ar.Graph_Title3 || "",
                         Graph_Title4: ar.Graph_Title4 || "",
-                        Past_teams_logo_file_names_below:
-                        ar.Past_teams_logo_file_names_below || "",
+                        Past_teams_logo_file_names_below: ar.Past_teams_logo_file_names_below || "",
                         SEO_URL: ar.SEO_URL || "",
                     },
                 },
@@ -278,6 +275,29 @@ module.exports = {
                     message: "Teams Id Not Found",
                     success: false,
                 });
+            }
+        } catch (error) {
+            res.status(500).send({
+                message: "Enternal server Error",
+                success: false,
+                error: error.message,
+            });
+        }
+    },
+    deleteAllTeam: async (req, res) => {
+        try {
+            const deleteTeams = await teamCatlog.deleteMany({})
+            if (deleteTeams) {
+                res.status(200).send({
+                    body: deleteTeams,
+                    message: 'All Teams Deleted Successfully',
+                    success: true
+                })
+            } else {
+                res.status(300).send({
+                    message: 'Data Not Found',
+                    success: false
+                })
             }
         } catch (error) {
             res.status(500).send({
@@ -374,6 +394,4 @@ module.exports = {
             });
         }
     }
-
-
 }

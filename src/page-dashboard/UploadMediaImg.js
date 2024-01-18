@@ -8,15 +8,12 @@ function UploadMediaImg({ selectedFolder, folderImages, }) {
 
   const uploadImage = async (e) => {
     const files = e.target.files;
-console.log(files);
     const formData = new FormData();
-      for (let i = 0; i < files.length; i++) {
+    for (let i = 0; i < files.length; i++) {
       formData.append('image', files[i]);
     }
     formData.append('folderName', folder);
-console.log(formData);
     try {
-      console.log(formData);
       const response = await axios.post('https://phpstack-1140615-3967632.cloudwaysapps.com/backend/addImage', formData, {
       // const response = await axios.post('http://localhost:5000/addImage', formData, {
         headers: {
@@ -24,7 +21,6 @@ console.log(formData);
         },
       });
 
-      console.log('Response:', response.data);
     } catch (error) {
       console.error('Error:', error);
     }

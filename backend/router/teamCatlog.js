@@ -22,6 +22,7 @@ const teamCatlog = require('../controller/teamCatlog')
 router.post("/createTeam", upload.single("image"), teamCatlog.createTeam);
 router.put('/:lung/updateTeams/:id', teamCatlog.updateTeams)
 router.delete("/removeteam/:id", teamCatlog.removeteam);
+router.delete('/deleteAllTeam', teamCatlog.deleteAllTeam)
 router.get('/:lung/GetAllTeams', teamCatlog.GetAllTeams)
 router.get('/:lung/getByIdTeams/:id', teamCatlog.getByIdTeams)
 router.get('/TeamsFilter', teamCatlog.TeamsFilter)
