@@ -14,7 +14,7 @@ module.exports = {
                 });
             }
 
-            const sanitizedFolderName = req.body.folderName.replace(/\s+/g, '_');
+            const sanitizedFolderName = req.body.folderName
             const newFolder = new folder({
                 folderName: sanitizedFolderName,
                 status: req.body.status
